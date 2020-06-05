@@ -1,7 +1,7 @@
 cTab
 ====
 **Commander's Tablet - FBCB2, Blue Force Tracker, UAV, Helmet Cam and Messaging Interface**
-*Initially created by Riouken, currently maintained by Gundy*
+*Created by Riouken*
 
 Thanks to
 ---------
@@ -13,6 +13,7 @@ Thanks to
 + Raspu - Tablet, TAD, Android and MicroDAGR day / night mode interface graphics and 3D models
 + Killzone_Kid - for his many excellent tutorials
 + Everyone else in the 15th MEU SOC and C-L-F for help with support and testing.
++ Gundy - Prior maintenance
 
 + BI - for ArmA 3 and all the opportunities to mod for this game.
 
