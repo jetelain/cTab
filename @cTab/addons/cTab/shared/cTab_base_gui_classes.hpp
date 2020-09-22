@@ -1557,6 +1557,14 @@ class cTab_RscMapControl
 	SizeEx = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
 	//size = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
 
+	class LineMarker
+	{
+		lineWidthThin = 0.0080000004;
+		lineWidthThick = 0.014;
+		lineLengthMin = 5;
+		lineDistanceMin = 2.9999999e-005;
+		textureComboBoxColor = "#(argb,8,8,3)color(1,1,1,1)";
+	};
 	class Legend
 	{
 		x = "SafeZoneX + 					(			((safezoneW / safezoneH) min 1.2) / 40)";
@@ -1865,9 +1873,6 @@ class cTab_RscMapControl
 		coefMax = 1;
 		color[] = {0,0,0,1};
 	};
-
-
-
 };
 
 class cTab_MenuItem: cTab_ActiveText
