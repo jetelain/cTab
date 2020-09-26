@@ -72,7 +72,7 @@ class cTab_Android_dlg {
 			{
 				class menuBackground: cTab_IGUIBack
 				{
-					IDC_COUNTER
+					idc=9;
 					x = 0;
 					y = 0;
 					w = pxToScreen_W(cTab_GUI_android_OSD_MENU_W);
@@ -80,7 +80,7 @@ class cTab_Android_dlg {
 				};
 				class btnTextonoff: cTab_RscButton
 				{
-					IDC_COUNTER
+					idc=10;
 					text = "Text On/Off"; //--- ToDo: Localize;
 					sizeEx = pxToScreen_H(cTab_GUI_android_OSD_TEXT_STD_SIZE);
 					x = pxToMenu_X(cTab_GUI_android_OSD_MENU_ELEMENT_X);
@@ -92,7 +92,7 @@ class cTab_Android_dlg {
 				};
 				class btnIcnSizeup: btnTextonoff
 				{
-					IDC_COUNTER
+					idc=11;
 					text = "Icon Size +"; //--- ToDo: Localize;
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(2));
 					tooltip = "Increase Icon/Text Size"; //--- ToDo: Localize;
@@ -100,7 +100,7 @@ class cTab_Android_dlg {
 				};
 				class btnIconSizedwn: btnTextonoff
 				{
-					IDC_COUNTER
+					idc=12;
 					text = "Icon Size -"; //--- ToDo: Localize;
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(3));
 					tooltip = "Decrease Icon/Text Size"; //--- ToDo: Localize;
@@ -108,7 +108,7 @@ class cTab_Android_dlg {
 				};
 				class btnF5: btnTextonoff
 				{
-					IDC_COUNTER
+					idc=13;
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(7));
 					text = "Map Tools";
 					tooltip = "Toggle Map Tools (F5)";
@@ -116,7 +116,7 @@ class cTab_Android_dlg {
 				};
 				class btnF6: btnTextonoff
 				{
-					IDC_COUNTER
+					idc=14;
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(5));
 					text = "Map Textures";
 					tooltip = "Toggle Map Textures (F6)";
@@ -124,7 +124,7 @@ class cTab_Android_dlg {
 				};
 				class btnF7: btnTextonoff
 				{
-					IDC_COUNTER
+					idc=15;
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(6));
 					text = "Center Map";
 					action = "['cTab_Android_dlg'] call cTab_fnc_centerMapOnPlayerPosition;";
@@ -158,7 +158,7 @@ class cTab_Android_dlg {
 				};
 				class msgframe: cTab_RscFrame
 				{
-					IDC_COUNTER
+					idc=16;
 					text = "Read Message"; //--- ToDo: Localize;
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_MESSAGETEXT_FRAME_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_MESSAGETEXT_FRAME_Y);
@@ -192,7 +192,7 @@ class cTab_Android_dlg {
 				};
 				class toCompose: cTab_RscButton
 				{
-					IDC_COUNTER
+					idc=17;
 					text = "Compose >>"; //--- ToDo: Localize;
 					tooltip = "Compose Messages";
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_BUTTON_MODE_X);
@@ -218,7 +218,7 @@ class cTab_Android_dlg {
 			{
 				class composeFrame: cTab_RscFrame
 				{
-					IDC_COUNTER
+					idc=18;
 					text = "Compose Message"; //--- ToDo: Localize;
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_COMPOSE_FRAME_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_COMPOSE_FRAME_Y);
@@ -260,7 +260,7 @@ class cTab_Android_dlg {
 				};
 				class toRead: cTab_RscButton
 				{
-					IDC_COUNTER
+					idc=19;
 					text = "Read >>"; //--- ToDo: Localize;
 					tooltip = "Read Messages";
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_BUTTON_MODE_X);

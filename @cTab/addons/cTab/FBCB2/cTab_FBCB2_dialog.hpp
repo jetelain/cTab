@@ -101,7 +101,7 @@ class cTab_FBCB2_dlg {
 		};
 		class btnF7: cTab_FBCB2_btnF7
 		{
-			IDC_COUNTER
+			idc=5;
 			action = "['cTab_FBCB2_dlg'] call cTab_fnc_centerMapOnPlayerPosition;";
 			tooltip = "Center Map On Current Position (F7)";
 		};

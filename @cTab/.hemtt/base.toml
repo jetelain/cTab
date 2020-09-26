@@ -1,0 +1,10 @@
+name = "cTab"
+prefix = "ctab"
+author = "cTab Authors, see https://github.com/jetelain/cTab"
+template = "cba"
+mainprefix = "z"
+folder_optionals = true
+sig_version = 3
+files = [
+    "mod.cpp"
+]

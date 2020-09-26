@@ -157,19 +157,19 @@ class cTab_Tablet_dlg {
 			{
 				class UAVListBG: cTab_Tablet_window_back_TL
 				{
-					IDC_COUNTER
+					idc=9;
 					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_L_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
 				};
 				class UAVVidBG1: cTab_Tablet_window_back_TR
 				{
-					IDC_COUNTER
+					idc=10;
 					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_R_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
 				};
 				class UAVVidBG2: cTab_Tablet_window_back_BR
 				{
-					IDC_COUNTER
+					idc=11;
 					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_R_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_B_Y);
 				};
@@ -217,13 +217,13 @@ class cTab_Tablet_dlg {
 			{
 				class HcamListBG: cTab_Tablet_window_back_TL
 				{
-					IDC_COUNTER
+					idc=12;
 					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_L_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
 				};
 				class HcamVidBG: cTab_Tablet_window_back_TR
 				{
-					IDC_COUNTER
+					idc=13;
 					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_R_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
 				};
@@ -262,7 +262,7 @@ class cTab_Tablet_dlg {
 			{
 				class msgframe: cTab_RscFrame
 				{
-					IDC_COUNTER
+					idc=14;
 					text = "Read Message"; //--- ToDo: Localize;
 					x = pxToGroup_X(cTab_GUI_tablet_MESSAGE_MESSAGETEXT_FRAME_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_MESSAGE_MESSAGETEXT_FRAME_Y);
@@ -294,7 +294,7 @@ class cTab_Tablet_dlg {
 				};
 				class composeFrame: cTab_RscFrame
 				{
-					IDC_COUNTER
+					idc=15;
 					text = "Compose Message"; //--- ToDo: Localize;
 					x = pxToGroup_X(cTab_GUI_tablet_MESSAGE_COMPOSE_FRAME_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_MESSAGE_COMPOSE_FRAME_Y);
@@ -418,7 +418,7 @@ class cTab_Tablet_dlg {
 		};
 		class btnF7: cTab_Tablet_btnTrackpad
 		{
-			IDC_COUNTER
+			idc=16;
 			action = "['cTab_Tablet_dlg'] call cTab_fnc_centerMapOnPlayerPosition;";
 			tooltip = "Center Map On Current Position (F7)";
 		};
