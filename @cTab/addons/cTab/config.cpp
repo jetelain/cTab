@@ -24,7 +24,7 @@ class CfgPatches
 			units[] = {Box_cTab_items};
 			weapons[] = {ItemcTab,ItemAndroid,ItemMicroDAGR,ItemcTabHCam};
 			requiredVersion = REQUIRED_VERSION;
-			requiredAddons[] = {"CBA_MAIN","ctab_main"};
+			requiredAddons[] = {"CBA_MAIN","ctab_main","ctab_core"};
 			versionDesc = "cTab";
 			VERSION_CONFIG;
 			author = "cTab";
@@ -66,7 +66,6 @@ class CfgMods {
 	};
 };
 
-#include "\cTab\CfgFunctions.h"
 #include "\userconfig\ctab\ctab_settings.hpp"
 
 class Extended_PostInit_EventHandlers
