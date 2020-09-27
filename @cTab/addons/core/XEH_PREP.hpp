@@ -48,3 +48,38 @@ PREPMAIN(updateInterface);
 PREPMAIN(updateLists);
 PREPMAIN(updateUserMarkerList);
 PREPMAIN(userMenuSelect);
+if ( hasInterface ) then {
+	// Migrated from player_init.sqf
+	PREPMAIN(decBrightness);
+	PREPMAIN(iconText_toggle);
+	PREPMAIN(incBrightness);
+	PREPMAIN(mapType_toggle);
+	PREPMAIN(mode_toggle);
+	PREPMAIN(msg_delete_all);
+	PREPMAIN(msg_get_mailTxt);
+	PREPMAIN(msg_gui_load);
+	PREPMAIN(msg_Send);
+	PREPMAIN(onDrawbft);
+	PREPMAIN(onDrawbftAndroid);
+	PREPMAIN(onDrawbftAndroidDsp);
+	PREPMAIN(onDrawbftMicroDAGRdlg);
+	PREPMAIN(onDrawbftmicroDAGRdsp);
+	PREPMAIN(onDrawbftTAD);
+	PREPMAIN(onDrawbftTADdialog);
+	PREPMAIN(onDrawbftVeh);
+	PREPMAIN(onDrawHCam);
+	PREPMAIN(onDrawUAV);
+	PREPMAIN(onIfMainPressed);
+	PREPMAIN(onIfSecondaryPressed);
+	PREPMAIN(onIfTertiaryPressed);
+	PREPMAIN(onMsgBtnDelete);
+	PREPMAIN(onZoomInPressed);
+	PREPMAIN(onZoomOutPressed);
+	PREPMAIN(showMenu_toggle);
+	PREPMAIN(tablet_btnACT);
+	PREPMAIN(toggleNightMode);
+	PREPMAIN(txt_size_dec);
+	PREPMAIN(txt_size_inc);
+	PREPMAIN(update_txt_size);
+	// End
+};
