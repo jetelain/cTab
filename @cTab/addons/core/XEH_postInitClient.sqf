@@ -5,7 +5,7 @@
 // You may re-use any of this work as long as you provide credit back to me.
 
 // keys.sqf parses the userconfig
-#include "functions\keys.sqf"
+#include "keys.sqf"
 #include "\cTab\shared\cTab_gui_macros.hpp"
 
 // Exit if this is machine has no interface, i.e. is a headless client (HC)

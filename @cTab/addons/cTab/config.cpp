@@ -67,17 +67,6 @@ class CfgMods {
 };
 
 #include "\userconfig\ctab\ctab_settings.hpp"
-
-class Extended_PostInit_EventHandlers
-{
-	class PREFIX
-	{
-		clientInit = QUOTE(call COMPILE_FILE2(\cTab\player_init.sqf));
-
-		serverInit = QUOTE(call COMPILE_FILE2(\cTab\server_init.sqf));
-	};
-};
-
 #include "\cTab\shared\cTab_gui_macros.hpp"
 #include "\cTab\shared\cTab_base_gui_classes.hpp"
 
