@@ -81,4 +81,6 @@ if ( hasInterface ) then {
 	PREPMAIN(txt_size_inc);
 	PREPMAIN(update_txt_size);
 	// End
+	PREP(aceSelfActions);
+	PREP(toggleInterface);
 };
