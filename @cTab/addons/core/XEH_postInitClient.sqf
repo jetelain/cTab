@@ -4,8 +4,7 @@
 // http://forums.bistudio.com/member.php?64032-Riouken
 // You may re-use any of this work as long as you provide credit back to me.
 
-// keys.sqf parses the userconfig
-#include "keys.sqf"
+#include "\a3\editor_f\Data\Scripts\dikCodes.h"
 #include "\cTab\shared\cTab_gui_macros.hpp"
 
 // Exit if this is machine has no interface, i.e. is a headless client (HC)
@@ -363,31 +362,13 @@ cTab_msg_Send = ctab_fnc_msg_Send;
 cTab_msg_delete_all = ctab_fnc_msg_delete_all;
 cTab_Tablet_btnACT = ctab_fnc_tablet_btnACT;
 
-//Main loop to add the key handler to the unit.
-[] spawn {
-	waitUntil {sleep 0.1;!(IsNull (findDisplay 46))};
-	
-	["cTab","ifMain",["Toggle Main Interface","Open cTab device in small overlay mode if available"],{call cTab_fnc_onIfMainPressed},"",[cTab_key_if_main_scancode,cTab_key_if_main_modifiers],false] call cba_fnc_addKeybind;
-	["cTab","ifSecondary",["Toggle Secondary Interface","Open cTab device in interactable mode"],{call cTab_fnc_onIfSecondaryPressed},"",[cTab_key_if_secondary_scancode,cTab_key_if_secondary_modifiers],false] call cba_fnc_addKeybind;
-	["cTab","ifTertiary",["Toggle Tertiary Interface","Open private cTab device when in a vehicle with its own cTab device, or to open Tablet while also carrying a MicroDAGR"],{call cTab_fnc_onIfTertiaryPressed},"",[cTab_key_if_tertiary_scancode,cTab_key_if_tertiary_modifiers],false] call cba_fnc_addKeybind;
-	["cTab","zoomIn",["Zoom In","Zoom In on map while cTab is in small overlay mode"],{call cTab_fnc_onZoomInPressed},"",[cTab_key_zoom_in_scancode,cTab_key_zoom_in_modifiers],false] call cba_fnc_addKeybind;
-	["cTab","zoomOut",["Zoom Out","Zoom Out on map while cTab is in small overlay mode"],{call cTab_fnc_onZoomOutPressed},"",[cTab_key_zoom_out_scancode,cTab_key_zoom_out_modifiers],false] call cba_fnc_addKeybind;
-	["cTab","toggleIfPosition",["Toggle Interface Position","Toggle overlay mode interface position from left to right or reset interactive mode interface position to default"],{[] call cTab_fnc_toggleIfPosition},"",[cTab_key_toggleIfPosition_scancode,cTab_key_toggleIfPosition_modifiers],false] call cba_fnc_addKeybind;
-	
-	// if player is curator (ZEUS), setup key handlers
-	waitUntil {sleep 0.1;!(isNull player)};
-	sleep 2;
-	if (player in (call BIS_fnc_listCuratorPlayers)) then {	
-		[] spawn {
-			while {true} do {
-				waitUntil {sleep 0.1;!(isNull (findDisplay 312))};			
-				(findDisplay 312) displayAddEventHandler ["KeyDown","[_this,'keydown'] call cTab_fnc_processCuratorKey"];
-				(findDisplay 312) displayAddEventHandler ["KeyUp","[_this,'keyup'] call cTab_fnc_processCuratorKey"];
-				waitUntil {sleep 0.1;isNull (findDisplay 312)};
-			};
-		};
-	};
-};
+// Setup keybindings
+["cTab","ifMain",["Toggle Main Interface","Open cTab device in small overlay mode if available"],{call cTab_fnc_onIfMainPressed},"",[DIK_H,[false,false,false]],false] call cba_fnc_addKeybind;
+["cTab","ifSecondary",["Toggle Secondary Interface","Open cTab device in interactable mode"],{call cTab_fnc_onIfSecondaryPressed},"",[DIK_H,[false,true,false]],false] call cba_fnc_addKeybind;
+["cTab","ifTertiary",["Toggle Tertiary Interface","Open private cTab device when in a vehicle with its own cTab device, or to open Tablet while also carrying a MicroDAGR"],{call cTab_fnc_onIfTertiaryPressed},"",[DIK_H,[false,false,true]],false] call cba_fnc_addKeybind;
+["cTab","zoomIn",["Zoom In","Zoom In on map while cTab is in small overlay mode"],{call cTab_fnc_onZoomInPressed},"",[DIK_PGUP,[true,true,false]],false] call cba_fnc_addKeybind;
+["cTab","zoomOut",["Zoom Out","Zoom Out on map while cTab is in small overlay mode"],{call cTab_fnc_onZoomOutPressed},"",[DIK_PGDN,[true,true,false]],false] call cba_fnc_addKeybind;
+["cTab","toggleIfPosition",["Toggle Interface Position","Toggle overlay mode interface position from left to right or reset interactive mode interface position to default"],{[] call cTab_fnc_toggleIfPosition},"",[DIK_HOME,[true,true,false]],false] call cba_fnc_addKeybind;
 
 ["cTab_msg_receive",
 	{

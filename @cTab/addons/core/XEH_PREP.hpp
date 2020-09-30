@@ -34,7 +34,6 @@ PREPMAIN(onIfKeyDown);
 PREPMAIN(onIfOpen);
 PREPMAIN(onPlayerInventoryChanged);
 PREPMAIN(open);
-PREPMAIN(processCuratorKey);
 PREPMAIN(processNotifications);
 PREPMAIN(remoteControlUav);
 PREPMAIN(setInterfacePosition);
