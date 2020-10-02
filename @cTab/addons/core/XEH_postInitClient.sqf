@@ -48,26 +48,8 @@ cTabBFTvehicles = [];
 cTabUAVlist = [];
 cTabHcamlist = [];
 cTabNotificationCache = [];
-
-// set current player object in cTab_player and run a check on every frame to see if there is a change
 cTab_player = objNull;
-["cTab_checkForPlayerChange", "onEachFrame", {
-	if !(cTab_player isEqualTo (missionNamespace getVariable ["BIS_fnc_moduleRemoteControl_unit",player])) then {
-		cTab_player = missionNamespace getVariable ["BIS_fnc_moduleRemoteControl_unit",player];
-		// close any interface that might still be open
-		call cTab_fnc_close;
-		//prep the arrays that will hold ctab data
-		cTabBFTmembers = [];
-		cTabBFTgroups = [];
-		cTabBFTvehicles = [];
-		cTabUAVlist = [];
-		cTabHcamlist = [];
-		call cTab_fnc_updateLists;
-		call cTab_fnc_updateUserMarkerList;
-		// remove msg notification
-		cTabRscLayerMailNotification cutText ["", "PLAIN"];
-	};
-}] call BIS_fnc_addStackedEventHandler;
+
 
 /*
 Figure out the scaling factor based on the current map (island) being played
@@ -310,9 +292,6 @@ _classNames = [];
 } forEach _classNames;
 cTab_helmetClass_has_HCam = [] + _classNames;
 
-// add cTab_updatePulse event handler triggered periodically by the server
-["cTab_updatePulse",cTab_fnc_updateLists] call CBA_fnc_addEventHandler;
-
 // Beginning text and icon size
 cTabTxtFctr = 12;
 call cTab_fnc_update_txt_size;
@@ -397,3 +376,29 @@ cTab_Tablet_btnACT = ctab_fnc_tablet_btnACT;
 		};
 	}
 ] call CBA_fnc_addLocalEventHandler;
+
+["CBA_settingsInitialized", {
+
+	// set current player object in cTab_player and run a check on every frame to see if there is a change
+	["cTab_checkForPlayerChange", "onEachFrame", {
+		if !(cTab_player isEqualTo (missionNamespace getVariable ["BIS_fnc_moduleRemoteControl_unit",player])) then {
+			cTab_player = missionNamespace getVariable ["BIS_fnc_moduleRemoteControl_unit",player];
+			// close any interface that might still be open
+			call cTab_fnc_close;
+			//prep the arrays that will hold ctab data
+			cTabBFTmembers = [];
+			cTabBFTgroups = [];
+			cTabBFTvehicles = [];
+			cTabUAVlist = [];
+			cTabHcamlist = [];
+			call cTab_fnc_updateLists;
+			call cTab_fnc_updateUserMarkerList;
+			// remove msg notification
+			cTabRscLayerMailNotification cutText ["", "PLAIN"];
+		};
+	}] call BIS_fnc_addStackedEventHandler;
+
+	// add cTab_updatePulse event handler triggered periodically by the server
+	["cTab_updatePulse",cTab_fnc_updateLists] call CBA_fnc_addEventHandler;
+
+}] call CBA_fnc_addEventHandler;

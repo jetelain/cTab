@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 // cTab - Commander's Tablet with FBCB2 Blue Force Tracking
 // Battlefield tablet to access real time intel and blue force tracker.
 // By - Riouken
@@ -31,12 +32,16 @@ publicVariable "cTab_helmetClass_has_HCam_server";
 cTab_userMarkerLists = [];
 cTab_userMarkerTransactionId = -1;
 
-[] spawn {
-	waituntil {time > 0};
-	sleep .1;
+["CBA_settingsInitialized", {
 	
-	while {true} do {
-		["cTab_updatePulse"] call CBA_fnc_globalEvent;
-		sleep 30;
+	[] spawn {
+		waituntil {time > 0};
+		sleep .1;
+		
+		while {true} do {
+			["cTab_updatePulse"] call CBA_fnc_globalEvent;
+			sleep GVAR(sync_time);
+		};
 	};
-};
+
+}] call CBA_fnc_addEventHandler;
