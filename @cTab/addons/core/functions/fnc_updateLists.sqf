@@ -51,7 +51,7 @@ if (GVAR(bft_mode) > 0) then {
 	cTabBFTmembers --- GROUP MEMBERS
 	*/
 	{
-		if ((_x != cTab_player) && {[_x,["ItemcTab","ItemAndroid","ItemMicroDAGR"]] call cTab_fnc_checkGear}) then {
+		if ((_x != cTab_player) && {[_x,GVAR(personnelDevices)] call cTab_fnc_checkGear}) then {
 			0 = _cTabBFTmembers pushBack [_x,_x call cTab_fnc_getInfMarkerIcon,"",name _x,str([_x] call CBA_fnc_getGroupIndex), getPosASL _x, direction _x];
 		};
 	} count units cTab_player;
