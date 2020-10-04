@@ -23,7 +23,7 @@ class MainSubmenu: cTab_RscControlsGroup
 		class op4btn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_OP4BTN;
-			text = "Enemy SALUTE"; //--- ToDo: Localize;
+			text = $STR_ctab_core_EnemyMenu;
 			x = 0;
 			y = MENU_elementY(1);
 			w = MENU_W;
@@ -34,7 +34,7 @@ class MainSubmenu: cTab_RscControlsGroup
 		class medbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_MEDBTN;
-			text = "Medical"; //--- ToDo: Localize;
+			text = $STR_ctab_core_MedicalMenu;
 			x = 0;
 			y = MENU_elementY(2);
 			w = MENU_W;
@@ -45,7 +45,7 @@ class MainSubmenu: cTab_RscControlsGroup
 		class genbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_GENBTN;
-			text = "General"; //--- ToDo: Localize;
+			text = $STR_ctab_core_GeneralMenu;
 			x = 0;
 			y = MENU_elementY(3);
 			w = MENU_W;
@@ -57,8 +57,8 @@ class MainSubmenu: cTab_RscControlsGroup
 			class lockUavCam: cTab_MenuItem
 			{
 				idc = -1;
-				text = "Lock UAV Cam"; //--- ToDo: Localize;
-				toolTip = "Lock UAV Cam to this position, a UAV has to be previously selected";
+				text = $STR_ctab_core_UAVLockMenu;
+				toolTip = $STR_ctab_core_UAVLockHint;
 				x = 0;
 				y = MENU_elementY(4);
 				w = MENU_W;
@@ -70,7 +70,7 @@ class MainSubmenu: cTab_RscControlsGroup
 		class exit: cTab_MenuExit
 		{
 			idc = -1;
-			text = "Exit"; //--- ToDo: Localize;
+			text = $STR_ctab_core_MenuExit;
 			x = 0;
 			y = MENU_elementY(cTab_MENU_MAX_ELEMENTS);
 			w = MENU_W;
@@ -102,7 +102,7 @@ class EnemySub1: cTab_RscControlsGroup
 		class infbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_INFBTN;
-			text = "Infantry"; //--- ToDo: Localize;
+			text = $STR_ctab_core_InfantryMenu;
 			x = 0;
 			y = MENU_elementY(1);
 			w = MENU_W;
@@ -113,8 +113,8 @@ class EnemySub1: cTab_RscControlsGroup
 		class mecinfbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_MECINFBTN;
-			text = "Mechanized Inf"; //--- ToDo: Localize;
-			toolTip = "Equipped with APCs/IFVs";
+			text = $STR_ctab_core_MechInfMenu;
+			toolTip = $STR_ctab_core_MechInfHint;
 			x = 0;
 			y = MENU_elementY(2);
 			w = MENU_W;
@@ -126,8 +126,8 @@ class EnemySub1: cTab_RscControlsGroup
 		class motrinfbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_MOTRINFBTN;
-			text = "Motorized Inf"; //--- ToDo: Localize;
-			toolTip = "Equipped with un-protected vehicles";
+			text = $STR_ctab_core_MotoInfMenu;
+			toolTip = $STR_ctab_core_MotoInfHint;
 			x = 0;
 			y = MENU_elementY(3);
 			w = MENU_W;
@@ -138,7 +138,7 @@ class EnemySub1: cTab_RscControlsGroup
 		class amrbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_AMRBTN;
-			text = "Armor"; //--- ToDo: Localize;
+			text = $STR_ctab_core_ArmorMenu;
 			x = 0;
 			y = MENU_elementY(4);
 			w = MENU_W;
@@ -149,7 +149,7 @@ class EnemySub1: cTab_RscControlsGroup
 		class helibtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_HELIBTN;
-			text = "Helicopter"; //--- ToDo: Localize;
+			text = $STR_ctab_core_HelicopterMenu;
 			x = 0;
 			y = MENU_elementY(5);
 			w = MENU_W;
@@ -160,7 +160,7 @@ class EnemySub1: cTab_RscControlsGroup
 		class plnbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_PLNBTN;
-			text = "Plane"; //--- ToDo: Localize;
+			text = $STR_ctab_core_PlaneMenu;
 			x = 0;
 			y = MENU_elementY(6);
 			w = MENU_W;
@@ -171,7 +171,7 @@ class EnemySub1: cTab_RscControlsGroup
 		class uknbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_UKNBTN;
-			text = "Unknown"; //--- ToDo: Localize;
+			text = $STR_ctab_core_UnknownMenu;
 			x = 0;
 			y = MENU_elementY(7);
 			w = MENU_W;
@@ -182,7 +182,7 @@ class EnemySub1: cTab_RscControlsGroup
 		class exit: cTab_MenuExit
 		{
 			idc = -1;
-			text = "Exit"; //--- ToDo: Localize;
+			text = $STR_ctab_core_MenuExit;
 			x = 0;
 			y = MENU_elementY(cTab_MENU_MAX_ELEMENTS);
 			w = MENU_W;
@@ -214,7 +214,7 @@ class EnemySub2: cTab_RscControlsGroup
 		class ftbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_FTBTN;
-			text = "Singular"; //--- ToDo: Localize;
+			text = $STR_ctab_core_SingularMenu;
 			x = 0;
 			y = MENU_elementY(1);
 			w = MENU_W;
@@ -225,7 +225,8 @@ class EnemySub2: cTab_RscControlsGroup
 		class patbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_PATBTN;
-			text = "Patrol"; //--- ToDo: Localize;
+			text = $STR_ctab_core_TeamMenu;
+			toolTip = $STR_ctab_core_TeamHint;
 			x = 0;
 			y = MENU_elementY(2);
 			w = MENU_W;
@@ -236,7 +237,8 @@ class EnemySub2: cTab_RscControlsGroup
 		class sqdbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_SQDBTN;
-			text = "Squad"; //--- ToDo: Localize;
+			text = $STR_ctab_core_SquadMenu;
+			toolTip = $STR_ctab_core_SquadHint;
 			x = 0;
 			y = MENU_elementY(3);
 			w = MENU_W;
@@ -247,7 +249,8 @@ class EnemySub2: cTab_RscControlsGroup
 		class sctbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_SCTBTN;
-			text = "Section"; //--- ToDo: Localize;
+			text = $STR_ctab_core_SectionMenu;
+			toolTip = $STR_ctab_core_SectionHint;
 			x = 0;
 			y = MENU_elementY(4);
 			w = MENU_W;
@@ -258,7 +261,8 @@ class EnemySub2: cTab_RscControlsGroup
 		class pltnbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_PLTNBTN;
-			text = "Platoon"; //--- ToDo: Localize;
+			text = $STR_ctab_core_PlatoonMenu;
+			toolTip = $STR_ctab_core_PlatoonHint;
 			x = 0;
 			y = MENU_elementY(5);
 			w = MENU_W;
@@ -269,7 +273,7 @@ class EnemySub2: cTab_RscControlsGroup
 		class exit: cTab_MenuExit
 		{
 			idc = -1;
-			text = "Exit"; //--- ToDo: Localize;
+			text = $STR_ctab_core_MenuExit;
 			x = 0;
 			y = MENU_elementY(cTab_MENU_MAX_ELEMENTS);
 			w = MENU_W;
@@ -301,7 +305,7 @@ class EnemySub3: cTab_RscControlsGroup
 		class stnbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_STNBTN;
-			text = "Stationary"; //--- ToDo: Localize;
+			text = $STR_ctab_core_StationaryMenu;
 			x = 0;
 			y = MENU_elementY(1);
 			w = MENU_W;
@@ -312,7 +316,7 @@ class EnemySub3: cTab_RscControlsGroup
 		class nthbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_NTHBTN;
-			text = "N"; //--- ToDo: Localize;
+			text = $STR_ctab_core_North;
 			x = 0;
 			y = MENU_elementY(2);
 			w = MENU_W;
@@ -323,7 +327,7 @@ class EnemySub3: cTab_RscControlsGroup
 		class nebtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_NEBTN;
-			text = "NE"; //--- ToDo: Localize;
+			text = $STR_ctab_core_NorthEast;
 			x = 0;
 			y = MENU_elementY(3);
 			h = MENU_elementH;
@@ -333,7 +337,7 @@ class EnemySub3: cTab_RscControlsGroup
 		class ebtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_EBTN;
-			text = "E"; //--- ToDo: Localize;
+			text = $STR_ctab_core_East;
 			x = 0;
 			y = MENU_elementY(4);
 			w = MENU_W;
@@ -344,7 +348,7 @@ class EnemySub3: cTab_RscControlsGroup
 		class sebtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_SEBTN;
-			text = "SE"; //--- ToDo: Localize;
+			text = $STR_ctab_core_SouthEast;
 			x = 0;
 			y = MENU_elementY(5);
 			w = MENU_W;
@@ -355,7 +359,7 @@ class EnemySub3: cTab_RscControlsGroup
 		class sbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_SBTN;
-			text = "S"; //--- ToDo: Localize;
+			text = $STR_ctab_core_South;
 			x = 0;
 			y = MENU_elementY(6);
 			w = MENU_W;
@@ -366,7 +370,7 @@ class EnemySub3: cTab_RscControlsGroup
 		class swbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_SWBTN;
-			text = "SW"; //--- ToDo: Localize;
+			text = $STR_ctab_core_SouthWest;
 			x = 0;
 			y = MENU_elementY(7);
 			w = MENU_W;
@@ -377,7 +381,7 @@ class EnemySub3: cTab_RscControlsGroup
 		class wbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_WBTN;
-			text = "W"; //--- ToDo: Localize;
+			text = $STR_ctab_core_West;
 			x = 0;
 			y = MENU_elementY(8);
 			w = MENU_W;
@@ -388,7 +392,7 @@ class EnemySub3: cTab_RscControlsGroup
 		class RscText_1022: cTab_MenuItem
 		{
 			idc = IDC_USRMN_RSCTEXT_1022;
-			text = "NW"; //--- ToDo: Localize;
+			text = $STR_ctab_core_NorthWest;
 			x = 0;
 			y = MENU_elementY(9);
 			w = MENU_W;
@@ -399,7 +403,7 @@ class EnemySub3: cTab_RscControlsGroup
 		class exit: cTab_MenuExit
 		{
 			idc = -1;
-			text = "Exit"; //--- ToDo: Localize;
+			text = $STR_ctab_core_MenuExit;
 			x = 0;
 			y = MENU_elementY(cTab_MENU_MAX_ELEMENTS);
 			w = MENU_W;
@@ -431,7 +435,7 @@ class EnemySub4: cTab_RscControlsGroup
 		class rifle_btn: cTab_MenuItem
 		{
 			idc = -1;
-			text = "Rifle"; //--- ToDo: Localize;
+			text = $STR_ctab_core_RifleMenu;
 			x = 0;
 			y = MENU_elementY(1);
 			w = MENU_W;
@@ -442,7 +446,7 @@ class EnemySub4: cTab_RscControlsGroup
 		class lmg_btn: cTab_MenuItem
 		{
 			idc = -1;
-			text = "MG"; //--- ToDo: Localize;
+			text = $STR_ctab_core_MGMenu;
 			x = 0;
 			y = MENU_elementY(2);
 			w = MENU_W;
@@ -453,7 +457,7 @@ class EnemySub4: cTab_RscControlsGroup
 		class at_btn: cTab_MenuItem
 		{
 			idc = -1;
-			text = "AT"; //--- ToDo: Localize;
+			text = $STR_ctab_core_ATMenu;
 			x = 0;
 			y = MENU_elementY(3);
 			w = MENU_W;
@@ -464,7 +468,7 @@ class EnemySub4: cTab_RscControlsGroup
 		class mmg_btn: cTab_MenuItem
 		{
 			idc = -1;
-			text = "Static MG"; //--- ToDo: Localize;
+			text = $STR_ctab_core_StaticMGMenu;
 			x = 0;
 			y = MENU_elementY(4);
 			w = MENU_W;
@@ -475,7 +479,7 @@ class EnemySub4: cTab_RscControlsGroup
 		class mat_btn: cTab_MenuItem
 		{
 			idc = -1;
-			text = "Static AT"; //--- ToDo: Localize;
+			text = $STR_ctab_core_StaticATMenu;
 			x = 0;
 			y = MENU_elementY(5);
 			w = MENU_W;
@@ -486,7 +490,7 @@ class EnemySub4: cTab_RscControlsGroup
 		class aa_btn: cTab_MenuItem
 		{
 			idc = -1;
-			text = "Static AA"; //--- ToDo: Localize;
+			text = $STR_ctab_core_StaticAAMenu;
 			x = 0;
 			y = MENU_elementY(6);
 			w = MENU_W;
@@ -497,7 +501,7 @@ class EnemySub4: cTab_RscControlsGroup
 		class mmortar_btn: cTab_MenuItem
 		{
 			idc = -1;
-			text = "Mortar"; //--- ToDo: Localize;
+			text = $STR_ctab_core_MortarMenu;
 			x = 0;
 			y = MENU_elementY(7);
 			w = MENU_W;
@@ -508,7 +512,7 @@ class EnemySub4: cTab_RscControlsGroup
 		class exit: cTab_MenuExit
 		{
 			idc = -1;
-			text = "Exit"; //--- ToDo: Localize;
+			text = $STR_ctab_core_MenuExit;
 			x = 0;
 			y = MENU_elementY(cTab_MENU_MAX_ELEMENTS);
 			w = MENU_W;
@@ -540,7 +544,7 @@ class CasulSub1: cTab_RscControlsGroup
 		class casltybtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_CASLTYBTN;
-			text = "Casualty"; //--- ToDo: Localize;
+			text = $STR_ctab_core_CasualtyMenu;
 			x = 0;
 			y = MENU_elementY(1);
 			w = MENU_W;
@@ -551,8 +555,8 @@ class CasulSub1: cTab_RscControlsGroup
 		class ccpbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_CCPBTN;
-			text = "CCP"; //--- ToDo: Localize;
-			toolTip = "Casualty Collection Point";
+			text = $STR_ctab_core_CCPMenu;
+			toolTip = $STR_ctab_core_CCPHint;
 			x = 0;
 			y = MENU_elementY(2);
 			w = MENU_W;
@@ -563,8 +567,8 @@ class CasulSub1: cTab_RscControlsGroup
 		class basbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_BASBTN;
-			text = "BAS"; //--- ToDo: Localize;
-			toolTip = "Battalion Aid Station";
+			text = $STR_ctab_core_BASMenu;
+			toolTip = $STR_ctab_core_BASHint;
 			x = 0;
 			y = MENU_elementY(3);
 			w = MENU_W;
@@ -576,8 +580,8 @@ class CasulSub1: cTab_RscControlsGroup
 		class mcibtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_MCIBTN;
-			text = "MCI"; //--- ToDo: Localize;
-			toolTip = "Mass Casualty Incident";
+			text = $STR_ctab_core_MCIMenu;
+			toolTip = $STR_ctab_core_MCIHint;
 			x = 0;
 			y = MENU_elementY(4);
 			w = MENU_W;
@@ -588,7 +592,7 @@ class CasulSub1: cTab_RscControlsGroup
 		class exit: cTab_MenuExit
 		{
 			idc = -1;
-			text = "Exit"; //--- ToDo: Localize;
+			text = $STR_ctab_core_MenuExit;
 			x = 0;
 			y = MENU_elementY(cTab_MENU_MAX_ELEMENTS);
 			w = MENU_W;
@@ -620,8 +624,8 @@ class GenSub1: cTab_RscControlsGroup
 		class hqbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_HQBTN;
-			text = "HQ"; //--- ToDo: Localize;
-			toolTip = "Headquaters";
+			text = $STR_ctab_core_HQMenu;
+			toolTip = $STR_ctab_core_HQHint;
 			x = 0;
 			y = MENU_elementY(1);
 			w = MENU_W;
@@ -632,8 +636,8 @@ class GenSub1: cTab_RscControlsGroup
 		class lzbtn: cTab_MenuItem
 		{
 			idc = IDC_USRMN_LZBTN;
-			text = "LZ"; //--- ToDo: Localize;
-			toolTip = "Landing Zone";
+			text = $STR_ctab_core_LZMenu;
+			toolTip = $STR_ctab_core_LZHint;
 			x = 0;
 			y = MENU_elementY(2);
 			w = MENU_W;
@@ -644,7 +648,7 @@ class GenSub1: cTab_RscControlsGroup
 		class exit: cTab_MenuExit
 		{
 			idc = -1;
-			text = "Exit"; //--- ToDo: Localize;
+			text = $STR_ctab_core_MenuExit;
 			x = 0;
 			y = MENU_elementY(cTab_MENU_MAX_ELEMENTS);
 			w = MENU_W;

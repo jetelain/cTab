@@ -344,12 +344,12 @@ cTab_msg_delete_all = ctab_fnc_msg_delete_all;
 cTab_Tablet_btnACT = ctab_fnc_tablet_btnACT;
 
 // Setup keybindings
-["cTab","ifMain",["Toggle Main Interface","Open cTab device in small overlay mode if available"],{call cTab_fnc_onIfMainPressed},"",[DIK_H,[false,false,false]],false] call cba_fnc_addKeybind;
-["cTab","ifSecondary",["Toggle Secondary Interface","Open cTab device in interactable mode"],{call cTab_fnc_onIfSecondaryPressed},"",[DIK_H,[false,true,false]],false] call cba_fnc_addKeybind;
-["cTab","ifTertiary",["Toggle Tertiary Interface","Open private cTab device when in a vehicle with its own cTab device, or to open Tablet while also carrying a MicroDAGR"],{call cTab_fnc_onIfTertiaryPressed},"",[DIK_H,[false,false,true]],false] call cba_fnc_addKeybind;
-["cTab","zoomIn",["Zoom In","Zoom In on map while cTab is in small overlay mode"],{call cTab_fnc_onZoomInPressed},"",[DIK_PGUP,[true,true,false]],false] call cba_fnc_addKeybind;
-["cTab","zoomOut",["Zoom Out","Zoom Out on map while cTab is in small overlay mode"],{call cTab_fnc_onZoomOutPressed},"",[DIK_PGDN,[true,true,false]],false] call cba_fnc_addKeybind;
-["cTab","toggleIfPosition",["Toggle Interface Position","Toggle overlay mode interface position from left to right or reset interactive mode interface position to default"],{[] call cTab_fnc_toggleIfPosition},"",[DIK_HOME,[true,true,false]],false] call cba_fnc_addKeybind;
+["cTab","ifMain",[LLSTRING(ifMain),LLSTRING(ifMainDetails)],{call cTab_fnc_onIfMainPressed},"",[DIK_H,[false,false,false]],false] call cba_fnc_addKeybind;
+["cTab","ifSecondary",[LLSTRING(ifSecondary),LLSTRING(ifSecondaryDetails)],{call cTab_fnc_onIfSecondaryPressed},"",[DIK_H,[false,true,false]],false] call cba_fnc_addKeybind;
+["cTab","ifTertiary",[LLSTRING(ifTertiary),LLSTRING(ifTertiaryDetails)],{call cTab_fnc_onIfTertiaryPressed},"",[DIK_H,[false,false,true]],false] call cba_fnc_addKeybind;
+["cTab","zoomIn",[LLSTRING(zoomIn),LLSTRING(zoomInDetails)],{call cTab_fnc_onZoomInPressed},"",[DIK_PGUP,[true,true,false]],false] call cba_fnc_addKeybind;
+["cTab","zoomOut",[LLSTRING(zoomOut),LLSTRING(zoomOutDetails)],{call cTab_fnc_onZoomOutPressed},"",[DIK_PGDN,[true,true,false]],false] call cba_fnc_addKeybind;
+["cTab","toggleIfPosition",[LLSTRING(toggleIfPosition),LLSTRING(toggleIfPositionDetails)],{[] call cTab_fnc_toggleIfPosition},"",[DIK_HOME,[true,true,false]],false] call cba_fnc_addKeybind;
 
 ["cTab_msg_receive",
 	{
@@ -371,7 +371,7 @@ cTab_Tablet_btnACT = ctab_fnc_tablet_btnACT;
 				_nop = [] call cTab_msg_gui_load;
 				
 				// add a notification
-				["MSG",format ["New message from %1",name _sender],6] call cTab_fnc_addNotification;
+				["MSG",format [LLSTRING(newMessage),name _sender],6] call cTab_fnc_addNotification;
 			} else {
 				cTabRscLayerMailNotification cutRsc ["cTab_Mail_ico_disp", "PLAIN"]; //show
 			};

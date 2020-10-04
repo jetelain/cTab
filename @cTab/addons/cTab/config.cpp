@@ -81,9 +81,9 @@ class CfgWeapons
 	class ItemCore;
  	class InventoryItem_Base_F;
 	class ItemcTab: ItemCore {
-		descriptionshort = "DK10 Rugged Tablet PC";
+		descriptionshort = $STR_ctab_core_TabletShort;
 		descriptionuse = "<t color='#9cf953'>Use: </t>Show Commander's Tablet";
-		displayname = "Rugged Tablet";
+		displayname = $STR_ctab_core_Tablet;
 		picture = "\cTab\img\icon_dk10.paa";
 		model = "\ctab\data\itemDK10.p3d";
 		scope = 2;
@@ -95,9 +95,9 @@ class CfgWeapons
 	};
 	
 	class ItemAndroid: ItemcTab {
-		descriptionshort = "GD300 Rugged Wearable Computer";
+		descriptionshort = $STR_ctab_core_AndroidShort;
 		descriptionuse = "<t color='#9cf953'>Use: </t>Show Android Based BFT";
-		displayname = "GD300 Android";
+		displayname = $STR_ctab_core_Android;
 		picture = "\cTab\img\icon_Android.paa";
 		model = "\ctab\data\itemAndroid.p3d";
 		class ItemInfo {
@@ -107,9 +107,9 @@ class CfgWeapons
 	};
 
 	class ItemMicroDAGR: ItemcTab {
-		descriptionshort = "HNV-2930 Micro Defense Advanced GPS Receiver";
+		descriptionshort = $STR_ctab_core_MicroDAGRShort;
 		descriptionuse = "<t color='#9cf953'>Use: </t>Show Android Based BFT";
-		displayname = "MicroDAGR";
+		displayname = $STR_ctab_core_MicroDAGR;
 		picture = "\cTab\img\icon_MicroDAGR.paa";
 		model = "\ctab\data\itemMicroDAGR.p3d";
 		class ItemInfo {
@@ -119,9 +119,9 @@ class CfgWeapons
 	};
 	
 	class ItemcTabHCam: ItemCore {
-		descriptionshort = "HD Helmet Mounted Camera";
+		descriptionshort = $STR_ctab_core_HCamShort;
 		descriptionuse = "<t color='#9cf953'>Use: </t>Used to record and stream video";
-		displayname = "Helmet Camera";
+		displayname = $STR_ctab_core_HCam;
 		picture = "\cTab\img\cTab_helmetCam_ico.paa";
 		scope = 2;
 		simulation = "ItemMineDetector";
@@ -167,7 +167,7 @@ class CfgNotifications
 		iconPicture = "\cTab\img\icoUnopenedmail.paa";
 		iconText = "";
 		color[] = {1,1,1,1};
-		description = "Your message has been sent.";
+		description = $STR_ctab_core_MessageSent;
 		duration = 4;
 		priority = 7;
 		difficulty[] = {};

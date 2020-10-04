@@ -12,7 +12,7 @@ private _subactions = {
 	[
 		[[
 			"dsp",
-			"Display/hide",
+			LLSTRING(DisplayHide),
 			"",
 			{
 				params ["", "", "_params"];
@@ -33,7 +33,7 @@ private _toggleInterface = {
 if ([_player,_vehicle,"TAD"] call cTab_fnc_unitInEnabledVehicleSeat) then {
 	_actions pushBack [[
         "cTab_TAD",
-        "Configure TAD",
+        LLSTRING(ConfigureTAD),
         "",
         _toggleInterface,
         {true},
@@ -45,7 +45,7 @@ if ([_player,_vehicle,"TAD"] call cTab_fnc_unitInEnabledVehicleSeat) then {
 if ([_player,["ItemAndroid"]] call cTab_fnc_checkGear) then {
 	_actions pushBack [[
         "cTab_Android",
-        "Configure GD300 Android",
+        LLSTRING(ConfigureAndroid),
         "\cTab\img\icon_Android.paa",
         _toggleInterface,
         {true},
@@ -57,7 +57,7 @@ if ([_player,["ItemAndroid"]] call cTab_fnc_checkGear) then {
 if ([_player,["ItemMicroDAGR"]] call cTab_fnc_checkGear) then {
 	_actions pushBack [[
         "cTab_microDAGR",
-        "Configure MicroDAGR",
+        LLSTRING(ConfigureMicroDAGR),
         "\cTab\img\icon_Android.paa",
         _toggleInterface,
         {true},
@@ -69,7 +69,7 @@ if ([_player,["ItemMicroDAGR"]] call cTab_fnc_checkGear) then {
 if ([_player,_vehicle,"FBCB2"] call cTab_fnc_unitInEnabledVehicleSeat) then {
 	_actions pushBack [[
         "cTab_FBCB2",
-        "FBCB2",
+        LLSTRING(FBCB2),
         "",
         _toggleInterface,
         {true},
@@ -81,7 +81,7 @@ if ([_player,_vehicle,"FBCB2"] call cTab_fnc_unitInEnabledVehicleSeat) then {
 if ([_player,["ItemcTab"]] call cTab_fnc_checkGear) then {
     _actions pushBack [[
         "cTab_Tablet",
-        "Rugged Tablet",
+        LLSTRING(Tablet),
         "\cTab\img\icon_dk10.paa",
         _toggleInterface,
         {true},

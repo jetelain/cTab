@@ -67,43 +67,43 @@ class cTab_FBCB2_dlg {
 		{
 			idc = IDC_CTAB_BTNOFF;
 			action = "closeDialog 0;";
-			tooltip = "Close Interface";
+			tooltip = $STR_ctab_core_CloseInterfaceHint;
 		};
 		class btnbrtpls: cTab_FBCB2_btnBRTplus
 		{
 			idc = IDC_CTAB_BTNUP;
 			action = "call cTab_fnc_txt_size_inc;";
-			tooltip = "Increase Font";
+			tooltip = $STR_ctab_core_IncreaseFontHint;
 		};
 		class btnbrtmns: cTab_FBCB2_btnBRTminus
 		{
 			idc = IDC_CTAB_BTNDWN;
 			action = "call cTab_fnc_txt_size_dec;";
-			tooltip = "Decrease Font";
+			tooltip = $STR_ctab_core_DecreaseFontHint;
 		};
 		class btnfunction: cTab_FBCB2_btnFCN
 		{
 			idc = IDC_CTAB_BTNFN;
 			action = "['cTab_FBCB2_dlg'] call cTab_fnc_iconText_toggle;";
-			tooltip = "Toggle Text on/off";
+			tooltip = $STR_ctab_core_TextOnOffHint;
 		};
 		class btnF5: cTab_FBCB2_btnF5
 		{
 			idc = IDC_CTAB_BTNF5;
-			tooltip = "Toggle Map Tools (F5)";
+			tooltip = $STR_ctab_core_MapToolsHint;
 			action = "['cTab_FBCB2_dlg'] call cTab_fnc_toggleMapTools;";
 		};
 		class btnF6: cTab_FBCB2_btnF6
 		{
 			idc = IDC_CTAB_BTNF6;
-			tooltip = "Toggle Map Textures";
+			tooltip = $STR_ctab_core_MapTexturesHint;
 			action = "['cTab_FBCB2_dlg'] call cTab_fnc_mapType_toggle;";
 		};
 		class btnF7: cTab_FBCB2_btnF7
 		{
 			idc=5;
 			action = "['cTab_FBCB2_dlg'] call cTab_fnc_centerMapOnPlayerPosition;";
-			tooltip = "Center Map On Current Position (F7)";
+			tooltip = $STR_ctab_core_CenterMapHint;
 		};
 		class hookGrid: cTab_FBCB2_on_screen_hookGrid {};
 		class hookElevation: cTab_FBCB2_on_screen_hookElevation {};

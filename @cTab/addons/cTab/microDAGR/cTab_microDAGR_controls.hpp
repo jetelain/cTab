@@ -173,34 +173,34 @@ class cTab_microDAGR_cursor: cTab_RscPicture
 class cTab_microDAGR_btnF7: cTab_RscButton_microDAGR_LeftBtn
 {
 	idc=4;
-	tooltip = "Center Map On Current Position (F7)";
+	tooltip = $STR_ctab_core_CenterMapHint;
 };
 class cTab_microDAGR_btnbrtpls: cTab_RscButton_microDAGR_RightUp
 {
 	idc = IDC_CTAB_BTNUP;
 	action = "call cTab_fnc_txt_size_inc;";
-	tooltip = "Increase Font";
+	tooltip = $STR_ctab_core_IncreaseFontHint;
 };
 class cTab_microDAGR_btnbrtmns: cTab_RscButton_microDAGR_RightDown
 {
 	idc = IDC_CTAB_BTNDWN;
 	action = "call cTab_fnc_txt_size_dec;";
-	tooltip = "Decrease Font";
+	tooltip = $STR_ctab_core_DecreaseFontHint;
 };
 class cTab_microDAGR_btnfunction: cTab_RscButton_microDAGR_RightBtn
 {
 	idc = IDC_CTAB_BTNFN;
-	tooltip = "Toggle Text on/off";
+	tooltip = $STR_ctab_core_TextOnOffHint;
 };
 class cTab_microDAGR_btnMapType: cTab_RscButton_microDAGR_LeftUp
 {
 	idc=5;
-	tooltip = "Toggle Map Type (F6)";
+	tooltip = $STR_ctab_core_MapTexturesHint;
 };
 class cTab_microDAGR_btnMapTools: cTab_RscButton_microDAGR_LeftDown
 {
 	idc=6;
-	tooltip = "Toggle Map Tools (F5)";
+	tooltip = $STR_ctab_core_MapToolsHint;
 };
 class cTab_microDAGR_on_screen_battery: cTab_RscPicture
 {
@@ -280,7 +280,7 @@ class cTab_microDAGR_loadingtxt: cTab_RscText_microDAGR
 {
 	idc = IDC_CTAB_LOADINGTXT;
 	style = ST_CENTER;
-	text = "Loading"; //--- ToDo: Localize;
+	text = $STR_ctab_core_Loading;
 	x = pxToScreen_X(cTab_GUI_microDAGR_SCREEN_CONTENT_X);
 	y = pxToScreen_Y(cTab_GUI_microDAGR_SCREEN_CONTENT_Y);
 	w = pxToScreen_W(cTab_GUI_microDAGR_SCREEN_CONTENT_W);

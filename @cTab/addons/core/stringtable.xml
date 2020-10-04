@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="ctab">
+    <Package name="core">
+        <Key ID="STR_ctab_core_DisplayHide">
+            <English>Display/Hide</English>
+            <French>Afficher/Masquer</French>
+        </Key>
+        <Key ID="STR_ctab_core_TAD">
+            <English>TAD</English>
+            <French>TAD</French>
+        </Key>
+        <Key ID="STR_ctab_core_ConfigureTAD">
+            <English>Configure TAD</English>
+            <French>Configurer TAD</French>
+        </Key>
+        <Key ID="STR_ctab_core_Android">
+            <English>GD300 Android</English>
+            <French>GD300 Android</French>
+        </Key>
+        <Key ID="STR_ctab_core_AndroidShort">
+            <English>GD300 Rugged Wearable Computer</English>
+            <French>Téléphone endurci GD300</French>
+        </Key>
+        <Key ID="STR_ctab_core_ConfigureAndroid">
+            <English>Configure GD300 Android</English>
+            <French>Configurer GD300 Android</French>
+        </Key>
+        <Key ID="STR_ctab_core_MicroDAGR">
+            <English>MicroDAGR</English>
+            <French>MicroDAGR</French>
+        </Key>
+        <Key ID="STR_ctab_core_MicroDAGRShort">
+            <English>HNV-2930 Micro Defense Advanced GPS Receiver</English>
+            <French>HNV-2930 Micro Defense Advanced GPS Receiver</French>
+        </Key>
+        <Key ID="STR_ctab_core_ConfigureMicroDAGR">
+            <English>Configure MicroDAGR</English>
+            <French>Configurer MicroDAGR</French>
+        </Key>
+        <Key ID="STR_ctab_core_FBCB2">
+            <English>FBCB2</English>
+            <French>FBCB2</French>
+        </Key>
+        <Key ID="STR_ctab_core_Tablet">
+            <English>Rugged Tablet</English>
+            <French>Tablette endurcie</French>
+        </Key>
+        <Key ID="STR_ctab_core_TabletShort">
+            <English>DK10 Rugged Tablet PC</English>
+            <French>Tablette endurcie DK10</French>
+        </Key>
+        <Key ID="STR_ctab_core_HCam">
+            <English>Helmet Camera</English>
+            <French>Caméra pour casque</French>
+        </Key>
+        <Key ID="STR_ctab_core_HCamShort">
+            <English>HD Helmet Mounted Camera</English>
+            <French>Caméra HD montée sur casque</French>
+        </Key>
+        <Key ID="STR_ctab_core_MessageSent">
+            <English>Your message has been sent.</English>
+            <French>Votre message a été envoyé.</French>
+        </Key>
+        <Key ID="STR_ctab_core_Loading">
+            <English>Loading...</English>
+            <French>Chargement...</French>
+        </Key>
+        <Key ID="STR_ctab_core_TextOnOff">
+            <!-- Button : Limited space -->
+            <English>Text On/Off</English>
+            <French>Texte On/Off</French>
+        </Key>
+        <Key ID="STR_ctab_core_TextOnOffHint">
+            <English>Toggle Text on/off</English>
+            <French>Permetuer l'affichage du texte</French>
+        </Key>
+        <Key ID="STR_ctab_core_SizeUp">
+            <!-- Button : Limited space -->
+            <English>Icon Size +</English>
+            <French>Taille +</French>
+        </Key>
+        <Key ID="STR_ctab_core_SizeUpHint">
+            <English>Increase Icon/Text Size</English>
+            <French>Augmenter la taille du texte/des icones</French>
+        </Key>
+        <Key ID="STR_ctab_core_SizeDown">
+            <!-- Button : Limited space -->
+            <English>Icon Size -</English>
+            <French>Taille -</French>
+        </Key>
+        <Key ID="STR_ctab_core_SizeDownHint">
+            <English>Decrease Icon/Text Size</English>
+            <French>Réduire la taille du texte/des icones</French>
+        </Key>
+        <Key ID="STR_ctab_core_InboxTitle">
+            <!-- Should be Inbox ?-->
+            <English>Read Message</English>
+            <French>Boite de reception</French>
+        </Key>
+        <Key ID="STR_ctab_core_ComposeMessageTitle">
+            <English>Compose Message</English>
+            <French>Ecrire un message</French>
+        </Key>
+        <Key ID="STR_ctab_core_NoMessageSelected">
+            <English>No Message Selected</English>
+            <French>Aucun message sélectionné</French>
+        </Key>
+        <Key ID="STR_ctab_core_DeleteMessage">
+            <English>Delete</English>
+            <French>Supprimer</French>
+        </Key>
+        <Key ID="STR_ctab_core_DeleteMessageHint">
+            <English>Delete Selected Message(s)</English>
+            <French>Supprimer le(s) message(s) sélectionné(s)</French>
+        </Key>
+        <Key ID="STR_ctab_core_ComposeMessage">
+            <English>Compose &gt;&gt;</English>
+            <French>Ecrire &gt;&gt;</French>
+        </Key>
+        <Key ID="STR_ctab_core_ComposeMessageHint">
+            <English>Compose Messages</English>
+            <French>Ecrire des messages</French>
+        </Key>
+        <Key ID="STR_ctab_core_ReadMessages">
+            <English>Read &gt;&gt;</English>
+            <French>Lire &gt;&gt;</French>
+        </Key>
+        <Key ID="STR_ctab_core_ReadMessagesHint">
+            <English>Read Messages</English>
+            <French>Afficher la boite de reception</French>
+        </Key>
+        <Key ID="STR_ctab_core_SendMessage">
+            <English>Send</English>
+            <French>Envoyer</French>
+        </Key>
+        <Key ID="STR_ctab_core_MapOptionsHint">
+            <English>Map Options</English>
+            <French>Options de la carte</French>
+        </Key>
+        <Key ID="STR_ctab_core_CloseInterfaceHint">
+            <English>Close Interface</English>
+            <French>Fermer l'interface</French>
+        </Key>
+        <Key ID="STR_ctab_core_HomeAndroidHint">
+            <English>Toggle Map (F1) / Messages (F4)</English>
+            <French>Basculer entre Carte (F1) / Messages (F4)</French>
+        </Key>
+        <Key ID="STR_ctab_core_MapTools">
+            <!-- Button : Limited space -->
+            <English>Map Tools</English>
+            <French>Outils carte</French>
+        </Key>
+        <Key ID="STR_ctab_core_MapToolsHint">
+            <English>Toggle Map Tools (F5)</English>
+            <French>Afficher/masquer outils carte (F5)</French>
+        </Key>
+        <Key ID="STR_ctab_core_MapTextures">
+            <!-- Button : Limited space -->
+            <English>Map Textures</English>
+            <French>Vue satellite</French>
+        </Key>
+        <Key ID="STR_ctab_core_MapTexturesHint">
+            <English>Toggle Map Textures (F6)</English>
+            <French>Afficher/masquer vue satellite (F6)</French>
+        </Key>
+        <Key ID="STR_ctab_core_CenterMap">
+            <!-- Button : Limited space -->
+            <English>Center Map</English>
+            <French>Centrer carte</French>
+        </Key>
+        <Key ID="STR_ctab_core_CenterMapHint">
+            <English>Center Map On Current Position (F7)</English>
+            <French>Centrer la carte sur la position actuelle (F7)</French>
+        </Key>
+        <Key ID="STR_ctab_core_IncreaseFontHint">
+            <English>Increase Font</English>
+            <French>Augmenter la taille du texte</French>
+        </Key>
+        <Key ID="STR_ctab_core_DecreaseFontHint">
+            <English>Decrease Font</English>
+            <French>Réduire la taille du texte</French>
+        </Key>
+        <Key ID="STR_ctab_core_IncreaseBrightnessHint">
+            <English>Increase Brightness</English>
+            <French>Augmenter la luminosité</French>
+        </Key>
+        <Key ID="STR_ctab_core_DecreaseBrightnessHint">
+            <English>Decrease Brightness</English>
+            <French>Réduire la luminosité</French>
+        </Key>
+        <Key ID="STR_ctab_core_HomeTADHint">
+            <English>left-click: Toggle DAY / NIGHT mode; right-click: Close interface</English>
+            <French>clic gauche: Bascule mode jour / nuit; clic droit : Fermer l'interface</French>
+        </Key>
+        <Key ID="STR_ctab_core_HomeTabletHint">
+            <English>Main Menu</English>
+            <French>Menu principal</French>
+        </Key>
+        <Key ID="STR_ctab_core_BFTF1Hint">
+            <English>Blue Force Tracker - Quick Key</English>
+            <French>Blue Force Tracker - Accès rapide</French>
+        </Key>
+        <Key ID="STR_ctab_core_UAVF2Hint">
+            <English>UAV Intel Live Feed - Quick Key</English>
+            <French>Flux vidéo drones - Accès rapide</French>
+        </Key>
+        <Key ID="STR_ctab_core_HelmetCamF3Hint">
+            <English>Helmet Cam Live Feed - Quick Key</English>
+            <French>Flux vidéo caméra casque - Accès rapide</French>
+        </Key>
+        <Key ID="STR_ctab_core_MessageF4Hint">
+            <English>Text Message Application - Quick Key</English>
+            <French>Application messagerie - Accès rapide</French>
+        </Key>
+        <Key ID="STR_ctab_core_BFTIconHint">
+            <English>FBCB2 - Blue Force Tracker</English>
+            <French>FBCB2 - Blue Force Tracker</French>
+        </Key>
+        <Key ID="STR_ctab_core_UAVIconHint">
+            <English>UAV Video Feeds</English>
+            <French>Flux vidéo drones</French>
+        </Key>
+        <Key ID="STR_ctab_core_HelmetCamIconHint">
+            <English>Live Helmet Cam Video Feeds</English>
+            <French>Flux vidéo caméra casque</French>
+        </Key>
+        <Key ID="STR_ctab_core_MessageIconHint">
+            <English>Text Messaging System</English>
+            <French>Application messagerie</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_EnemyMenu">
+            <English>Enemy SALUTE</English>
+            <French>Position Ennemi</French>
+        </Key>
+        <Key ID="STR_ctab_core_MedicalMenu">
+            <English>Medical</English>
+            <French>Médical</French>
+        </Key>
+        <Key ID="STR_ctab_core_GeneralMenu">
+            <English>General</English>
+            <French>Général</French>
+        </Key>
+        <Key ID="STR_ctab_core_UAVLockMenu">
+            <English>Lock UAV Cam</English>
+            <French>Vérouiller caméra drone</French>
+        </Key>
+        <Key ID="STR_ctab_core_UAVLockHint">
+            <English>Lock UAV Cam to this position, a UAV has to be previously selected</English>
+            <French>Vérouille la caméra du drone sur cette position, un drone doit avoir été selectionné précédemment</French>
+        </Key>
+        <Key ID="STR_ctab_core_MenuExit">
+            <English>[Cancel]</English>
+            <French>[Annuler]</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_InfantryMenu">
+            <English>Infantry</English>
+            <French>Infanterie</French>
+        </Key>
+        <Key ID="STR_ctab_core_MechInfMenu">
+            <English>Mechanized Inf</English>
+            <French>Inf. mécanisée</French>
+        </Key>
+        <Key ID="STR_ctab_core_MechInfHint">
+            <English>Equipped with APCs/IFVs</English>
+            <French>Equippée avec VTTs/VCIs</French>
+        </Key>
+        <Key ID="STR_ctab_core_MotoInfMenu">
+            <English>Motorized Inf</English>
+            <French>Inf. motorisée</French>
+        </Key>
+        <Key ID="STR_ctab_core_MotoInfHint">
+            <English>Equipped with un-protected vehicles</English>
+            <French>Equippée avec des véhicules non blindés</French>
+        </Key>
+        <Key ID="STR_ctab_core_ArmorMenu">
+            <English>Armor</English>
+            <French>Blindé/Cavalerie</French>
+        </Key>
+        <Key ID="STR_ctab_core_HelicopterMenu">
+            <English>Helicopter</English>
+            <French>Hélicoptère</French>
+        </Key>
+        <Key ID="STR_ctab_core_PlaneMenu">
+            <English>Plane</English>
+            <French>Avion</French>
+        </Key>
+        <Key ID="STR_ctab_core_UnknownMenu">
+            <English>Unknown</English>
+            <French>Iconnu</French>
+        </Key>
+        <!-- 
+            Translators: Please ensure NATO APP-6 compliance
+        -->
+        <Key ID="STR_ctab_core_SingularMenu">
+            <English>Singular</English>
+            <French>1 Personnel</French>
+        </Key>
+        <Key ID="STR_ctab_core_TeamMenu">
+            <English>Fireteam Ø</English>
+            <French>Equipe Ø</French>
+        </Key>
+        <Key ID="STR_ctab_core_TeamHint">
+            <English>3–5 personnels</English>
+            <French>3–5 personnels</French>
+        </Key>
+        <Key ID="STR_ctab_core_SquadMenu">
+            <English>Squad •</English>
+            <French>Groupe •</French>
+        </Key>
+        <Key ID="STR_ctab_core_SquadHint">
+            <English>5–10 personnels</English>
+            <French>5–10 personnels</French>
+        </Key>
+        <Key ID="STR_ctab_core_SectionMenu">
+            <English>Section ••</English>
+            <French>Groupe ••</French>
+        </Key>
+        <Key ID="STR_ctab_core_SectionHint">
+            <English>7–13 personnels</English>
+            <French>7–13 personnels</French>
+        </Key>
+        <Key ID="STR_ctab_core_PlatoonMenu">
+            <English>Platoon •••</English>
+            <French>Section •••</French>
+        </Key>
+        <Key ID="STR_ctab_core_PlatoonHint">
+            <English>25–40 personnels</English>
+            <French>25–40 personnels</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_StationaryMenu">
+            <English>Stationary</English>
+            <French>Immobile</French>
+        </Key>
+        <Key ID="STR_ctab_core_North">
+            <English>N </English>
+            <French>N </French>
+        </Key>
+        <Key ID="STR_ctab_core_NorthEast">
+            <English>NE</English>
+            <French>NE</French>
+        </Key>
+        <Key ID="STR_ctab_core_East">
+            <English>E </English>
+            <French>E </French>
+        </Key>
+        <Key ID="STR_ctab_core_SouthEast">
+            <English>SE</English>
+            <French>SE</French>
+        </Key>
+        <Key ID="STR_ctab_core_South">
+            <English>S </English>
+            <French>S </French>
+        </Key>
+        <Key ID="STR_ctab_core_SouthWest">
+            <English>SW</English>
+            <French>SO</French>
+        </Key>
+        <Key ID="STR_ctab_core_West">
+            <English>W </English>
+            <French>O </French>
+        </Key>
+        <Key ID="STR_ctab_core_NorthWest">
+            <English>NW</English>
+            <French>NO</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_RifleMenu">
+            <English>Rifle</English>
+            <French>ALI / Fusil</French>
+        </Key>
+        <Key ID="STR_ctab_core_MGMenu">
+            <English>MG</English>
+            <French>MG</French>
+        </Key>
+        <Key ID="STR_ctab_core_ATMenu">
+            <English>AT</English>
+            <French>ABL / AT</French>
+        </Key>
+        <Key ID="STR_ctab_core_StaticMGMenu">
+            <English>Static MG</English>
+            <French>MG fixe</French>
+        </Key>
+        <Key ID="STR_ctab_core_StaticATMenu">
+            <English>Static AT</English>
+            <French>ABL / AT fixe</French>
+        </Key>
+        <Key ID="STR_ctab_core_StaticAAMenu">
+            <English>Static AA</English>
+            <French>AA fixe</French>
+        </Key>
+        <Key ID="STR_ctab_core_MortarMenu">
+            <English>Mortar</English>
+            <French>Mortier</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_CasualtyMenu">
+            <English>Casualty</English>
+            <French>Casualty</French>
+        </Key>
+        <Key ID="STR_ctab_core_CCPMenu">
+            <English>CCP</English>
+            <French>CCP</French>
+        </Key>
+        <Key ID="STR_ctab_core_CCPHint">
+            <English>Casualty Collection Point</English>
+            <French>Casualty Collection Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_BASMenu">
+            <English>BAS</English>
+            <French>BAS</French>
+        </Key>
+        <Key ID="STR_ctab_core_BASHint">
+            <English>Battalion Aid Station</English>
+            <French>Battalion Aid Station</French>
+        </Key>
+        <Key ID="STR_ctab_core_MCIMenu">
+            <English>MCI</English>
+            <French>MCI</French>
+        </Key>
+        <Key ID="STR_ctab_core_MCIHint">
+            <English>Mass Casualty Incident</English>
+            <French>Mass Casualty Incident</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_HQMenu">
+            <English>HQ</English>
+            <French>HQ</French>
+        </Key>
+        <Key ID="STR_ctab_core_HQHint">
+            <English>Headquaters</English>
+            <French>Headquaters</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZMenu">
+            <English>LZ</English>
+            <French>ZP</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZHint">
+            <English>Landing Zone</English>
+            <French>Zone de Posée</French>
+        </Key>
+
+
+        <Key ID="STR_ctab_core_ifMain">
+            <English>Toggle Main Interface</English>
+            <French>Permuter l'interface principale</French>
+        </Key>
+        <Key ID="STR_ctab_core_ifMainDetails">
+            <English>Open cTab device in small overlay mode if available</English>
+            <French>Ouvre l'appareil cTab en sur-impression petit si disponible</French>
+        </Key>
+        <Key ID="STR_ctab_core_ifSecondary">
+            <English>Toggle Secondary Interface</English>
+            <French>Permuter l'interface secondaire</French>
+        </Key>
+        <Key ID="STR_ctab_core_ifSecondaryDetails">
+            <English>Open cTab device in interactable mode (fullscreen)</English>
+            <French>Ouvre l'appareil cTab en mode interactif (plein écran)</French>
+        </Key>
+        <Key ID="STR_ctab_core_ifTertiary">
+            <English>Toggle Main Tertiary</English>
+            <French>Permuter l'interface tertiaire</French>
+        </Key>
+        <Key ID="STR_ctab_core_ifTertiaryDetails">
+            <English>Open private cTab device when in a vehicle with its own cTab device, or to open Tablet while also carrying a MicroDAGR</English>
+            <French>Ouvre l'appareil cTab personnel quand le véhicule possède son propre appareil cTab, ou pour ouvrir la tablette lorsque un MicroDAGR est porté</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_zoomIn">
+            <English>Zoom In</English>
+            <French>Zoomer</French>
+        </Key>
+        <Key ID="STR_ctab_core_zoomInDetails">
+            <English>Zoom In on map while cTab is in small overlay mode</English>
+            <French>Augmente le zoom lorsque cTab est en sur-impression petit</French>
+        </Key>
+        <Key ID="STR_ctab_core_zoomOut">
+            <English>Zoom Out</English>
+            <French>Dézoomer</French>
+        </Key>
+        <Key ID="STR_ctab_core_zoomOutDetails">
+            <English>Zoom Out on map while cTab is in small overlay mode</English>
+            <French>Réduit le zoom lorsque cTab est en sur-impression petit</French>
+        </Key>
+        <Key ID="STR_ctab_core_toggleIfPosition">
+            <English>Toggle Interface Position</English>
+            <French>Permuter la position de l'interface</French>
+        </Key>
+        <Key ID="STR_ctab_core_toggleIfPositionDetails">
+            <English>Toggle overlay mode interface position from left to right or reset interactive mode interface position to default</English>
+            <French>Permute la sur-impression petit entre la droite et la gauche de l'écran</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_sync_time">
+            <English>Synchronization rate</English>
+            <French>Fréquence de synchronisation</French>
+        </Key>
+        <Key ID="STR_ctab_core_sync_timeDetails">
+            <English>Time required to discover new devices and units</English>
+            <French>Temps requis pour la prise en compte des nouveaux appareils et unitées</French>
+        </Key>
+        <Key ID="STR_ctab_core_bft_mode">
+            <English>Blue Force Tracking</English>
+            <French>Blue Force Tracking</French>
+        </Key>
+        <Key ID="STR_ctab_core_bft_modeDetails">
+            <English>Allow tracking of units equiped with cTab items. Position may be updated at each synchronization, or can be real time</English>
+            <French>Permet le suivi des unités équipés avec des appareils cTab. La position peut être actualisée à chaque synchronisation ou être temps réel</French>
+        </Key>
+        <Key ID="STR_ctab_core_helmetcam_mode">
+            <English>Helmet cam</English>
+            <French>Caméra casque</French>
+        </Key>
+        <Key ID="STR_ctab_core_helmetcam_modeDetails">
+            <English>Allow usage of helmet cam on tablet</English>
+            <French>Autorise l'utilisation des caméra casque depuis la tablette</French>
+        </Key>
+        <Key ID="STR_ctab_core_uav_mode">
+            <English>UAV feed</English>
+            <French>Caméra drone</French>
+        </Key>
+        <Key ID="STR_ctab_core_uav_modeDetails">
+            <English>Allow usage of UAV feed on tablet</English>
+            <French>Autorise l'utilisation des flux vidéo des drones sur la tablette</French>
+        </Key>
+        <Key ID="STR_ctab_core_disabled">
+            <English>Disabled</English>
+            <French>Désactivé</French>
+        </Key>
+        <Key ID="STR_ctab_core_enabled">
+            <English>Enabled</English>
+            <French>Active</French>
+        </Key>
+        <Key ID="STR_ctab_core_realTime">
+            <English>Real time</English>
+            <French>Temp réel</French>
+        </Key>
+        <Key ID="STR_ctab_core_atSync">
+            <English>At each synchronization</English>
+            <French>A chaque synchronisation</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_useAceMicroDagr">
+            <English>Add Blue Force Tracking to ACE MicroDAGR</English>
+            <French>Ajouter Blue Force Tracking au MicroDAGR de ACE</French>
+        </Key>
+        <Key ID="STR_ctab_core_useAceMicroDagrDetails">
+            <English>Display Blue Force Tracking informatos on ACE MicroDAGR, and includes personnels equiped with it to tracking</English>
+            <French>Affiche les informations Blue Force Tracking sur le MicroDAGR de ACE, et inclus les personnels qui en sont équipés dans le suivi</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_newMessage">
+            <English>New message from %1</English>
+            <French>Nouveau message de %1</French>
+        </Key>
+        <Key ID="STR_ctab_core_newMarker">
+            <English>New marker at #%1</English>
+            <French>Nouveau marqueur à #%1</French>
+        </Key>
+        <Key ID="STR_ctab_core_markerAdded">
+            <English>Marker added succesfully</English>
+            <French>Marqueur ajouté avec succès</French>
+        </Key>
+        <Key ID="STR_ctab_core_toggleFullscreen">
+            <English>Toggle Fullscreen</English>
+            <French>Bascule plein écran</French>
+        </Key>
+        <Key ID="STR_ctab_core_viewGunnerOptics">
+            <English>View Gunner Optics</English>
+            <French>Voir optique tireur</French>
+        </Key>
+        <Key ID="STR_ctab_core_aceMenu">
+            <English>Blue Force Tracking</English>
+            <French>Blue Force Tracking</French>
+        </Key>
+
+    </Package>
+</Project>

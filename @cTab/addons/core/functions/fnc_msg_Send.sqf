@@ -1,6 +1,7 @@
 /*
 	(previously cTab_msg_Send in player_init.sqf)
 */
+#include "script_component.hpp"
 #include "\cTab\shared\cTab_gui_macros.hpp"
 
 private ["_return","_display","_plrLBctrl","_msgBodyctrl","_plrList","_indices","_time","_msgTitle","_msgBody","_recip","_recipientNames","_msgArray","_playerEncryptionKey"];
@@ -51,7 +52,7 @@ if (_recipientNames != "") then {
 	};
 	
 	// add a notification
-	["MSG","Message sent successfully",3] call cTab_fnc_addNotification;
+	["MSG",LLSTRING(MessageSent),3] call cTab_fnc_addNotification;
 	playSound "cTab_mailSent";
 	// remove message body
 	_msgBodyctrl ctrlSetText "";

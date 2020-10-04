@@ -81,54 +81,54 @@ class cTab_Android_dlg {
 				class btnTextonoff: cTab_RscButton
 				{
 					idc=10;
-					text = "Text On/Off"; //--- ToDo: Localize;
+					text = $STR_ctab_core_TextOnOff;
 					sizeEx = pxToScreen_H(cTab_GUI_android_OSD_TEXT_STD_SIZE);
 					x = pxToMenu_X(cTab_GUI_android_OSD_MENU_ELEMENT_X);
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(1));
 					w = pxToScreen_W(cTab_GUI_android_OSD_MENU_ELEMENT_W);
 					h = pxToScreen_H(cTab_GUI_android_OSD_MENU_ELEMENT_H);
-					tooltip = "Toggle Text on/off"; //--- ToDo: Localize;
+					tooltip = $STR_ctab_core_TextOnOffHint;
 					action = "['cTab_Android_dlg'] call cTab_fnc_iconText_toggle;";
 				};
 				class btnIcnSizeup: btnTextonoff
 				{
 					idc=11;
-					text = "Icon Size +"; //--- ToDo: Localize;
+					text = $STR_ctab_core_SizeUp;
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(2));
-					tooltip = "Increase Icon/Text Size"; //--- ToDo: Localize;
+					tooltip = $STR_ctab_core_SizeUpHint;
 					action = "call cTab_fnc_txt_size_inc;";
 				};
 				class btnIconSizedwn: btnTextonoff
 				{
 					idc=12;
-					text = "Icon Size -"; //--- ToDo: Localize;
+					text = $STR_ctab_core_SizeDown;
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(3));
-					tooltip = "Decrease Icon/Text Size"; //--- ToDo: Localize;
+					tooltip = $STR_ctab_core_SizeDownHint;
 					action = "call cTab_fnc_txt_size_dec;";
 				};
 				class btnF5: btnTextonoff
 				{
 					idc=13;
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(7));
-					text = "Map Tools";
-					tooltip = "Toggle Map Tools (F5)";
+					text = $STR_ctab_core_MapTools;
+					tooltip = $STR_ctab_core_MapToolsHint;
 					action = "['cTab_Android_dlg'] call cTab_fnc_toggleMapTools;";
 				};
 				class btnF6: btnTextonoff
 				{
 					idc=14;
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(5));
-					text = "Map Textures";
-					tooltip = "Toggle Map Textures (F6)";
+					text = $STR_ctab_core_MapTextures;
+					tooltip = $STR_ctab_core_MapTexturesHint;
 					action = "['cTab_Android_dlg'] call cTab_fnc_mapType_toggle;";
 				};
 				class btnF7: btnTextonoff
 				{
 					idc=15;
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(6));
-					text = "Center Map";
+					text = $STR_ctab_core_CenterMap;
 					action = "['cTab_Android_dlg'] call cTab_fnc_centerMapOnPlayerPosition;";
-					tooltip = "Center Map On Current Position (F7)";
+					tooltip = $STR_ctab_core_CenterMapHint;
 				};
 			};
 		};
@@ -159,7 +159,7 @@ class cTab_Android_dlg {
 				class msgframe: cTab_RscFrame
 				{
 					idc=16;
-					text = "Read Message"; //--- ToDo: Localize;
+					text = $STR_ctab_core_InboxTitle;
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_MESSAGETEXT_FRAME_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_MESSAGETEXT_FRAME_Y);
 					w = pxToScreen_W(cTab_GUI_android_MESSAGE_MESSAGETEXT_FRAME_W);
@@ -171,7 +171,7 @@ class cTab_Android_dlg {
 					htmlControl = true;
 					style = ST_MULTI;
 					lineSpacing = 0.2;
-					text = "No Message Selected"; //--- ToDo: Localize;
+					text = $STR_ctab_core_NoMessageSelected;
 					sizeEx = pxToScreen_H(cTab_GUI_android_OSD_TEXT_STD_SIZE);
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_MESSAGETEXT_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_MESSAGETEXT_Y);
@@ -182,8 +182,8 @@ class cTab_Android_dlg {
 				class deletebtn: cTab_RscButton
 				{
 					idc = IDC_CTAB_MSG_BTNDELETE;
-					text = "Delete"; //--- ToDo: Localize;
-					tooltip = "Delete Selected Message(s)";
+					text = $STR_ctab_core_DeleteMessage;
+					tooltip = $STR_ctab_core_DeleteMessageHint;
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_BUTTON_DELETE_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_BUTTON_DELETE_Y);
 					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_W);
@@ -193,8 +193,8 @@ class cTab_Android_dlg {
 				class toCompose: cTab_RscButton
 				{
 					idc=17;
-					text = "Compose >>"; //--- ToDo: Localize;
-					tooltip = "Compose Messages";
+					text = $STR_ctab_core_ComposeMessage;
+					tooltip = $STR_ctab_core_ComposeMessageHint;
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_BUTTON_MODE_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_BUTTON_MODE_Y);
 					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_W);
@@ -219,7 +219,7 @@ class cTab_Android_dlg {
 				class composeFrame: cTab_RscFrame
 				{
 					idc=18;
-					text = "Compose Message"; //--- ToDo: Localize;
+					text = $STR_ctab_core_ComposeMessageTitle;
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_COMPOSE_FRAME_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_COMPOSE_FRAME_Y);
 					w = pxToScreen_W(cTab_GUI_android_MESSAGE_COMPOSE_FRAME_W);
@@ -238,7 +238,7 @@ class cTab_Android_dlg {
 				class sendbtn: cTab_RscButton
 				{
 					idc = IDC_CTAB_MSG_BTNSEND;
-					text = "Send"; //--- ToDo: Localize;
+					text = $STR_ctab_core_SendMessage;
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_BUTTON_SEND_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_BUTTON_SEND_Y);
 					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_W);
@@ -251,7 +251,7 @@ class cTab_Android_dlg {
 					htmlControl = true;
 					style = ST_MULTI;
 					lineSpacing = 0.2;
-					text = ""; //--- ToDo: Localize;
+					text = "";
 					sizeEx = pxToScreen_H(cTab_GUI_android_OSD_TEXT_STD_SIZE);
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_COMPOSE_TEXT_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_COMPOSE_TEXT_Y);
@@ -261,8 +261,8 @@ class cTab_Android_dlg {
 				class toRead: cTab_RscButton
 				{
 					idc=19;
-					text = "Read >>"; //--- ToDo: Localize;
-					tooltip = "Read Messages";
+					text = $STR_ctab_core_ReadMessages;
+					tooltip = $STR_ctab_core_ReadMessagesHint;
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_BUTTON_MODE_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_BUTTON_MODE_Y);
 					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_W);
@@ -298,19 +298,19 @@ class cTab_Android_dlg {
 		{
 			idc = IDC_CTAB_BTNFN;
 			action = "['cTab_Android_dlg'] call cTab_fnc_showMenu_toggle;";
-			tooltip = "Map Options";
+			tooltip = $STR_ctab_core_MapOptionsHint;
 		};
 		class btnPower: cTab_android_btnPower
 		{
 			idc = IDC_CTAB_BTNOFF;
 			action = "closeDialog 0;";
-			tooltip = "Close Interface";
+			tooltip = $STR_ctab_core_CloseInterfaceHint;
 		};
 		class btnHome: cTab_android_btnHome
 		{
 			idc = IDC_CTAB_BTNF1;
 			action = "['cTab_Android_dlg'] call cTab_fnc_mode_toggle;";
-			tooltip = "Toggle Map (F1) / Messages (F4)";
+			tooltip = $STR_ctab_core_HomeAndroidHint;
 		};
 	};
 };

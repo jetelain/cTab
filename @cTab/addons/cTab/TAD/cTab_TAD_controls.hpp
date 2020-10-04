@@ -717,7 +717,7 @@ class cTab_TAD_loadingtxt: cTab_RscText_TAD
 {
 	idc = IDC_CTAB_LOADINGTXT;
 	style = ST_CENTER;
-	text = "Loading"; //--- ToDo: Localize;
+	text = $STR_ctab_core_Loading;
 	x = pxToScreen_X(cTab_GUI_TAD_MAP_X);
 	y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y);
 	w = pxToScreen_W(cTab_GUI_TAD_MAP_W);

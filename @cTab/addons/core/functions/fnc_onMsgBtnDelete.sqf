@@ -5,6 +5,7 @@
 
 	(previously in player_init.sqf)
 */
+#include "script_component.hpp"
 #include "\cTab\shared\cTab_gui_macros.hpp"
 
 private _displayName = _this select 0;
@@ -23,6 +24,6 @@ for "_i" from (count _msgLbSelection) to 0 step -1 do {
 cTab_player setVariable [format ["cTab_messages_%1",_playerEncryptionKey],_msgArray];
 
 private _msgTextCtrl = _display displayCtrl IDC_CTAB_MSG_CONTENT;
-_msgTextCtrl ctrlSetText "No Message Selected";
+_msgTextCtrl ctrlSetText LLSTRING(NoMessageSelected);
 private _nop = [] call cTab_msg_gui_load;
 true

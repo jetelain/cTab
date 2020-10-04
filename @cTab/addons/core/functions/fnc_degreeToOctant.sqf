@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  	Name: cTab_fnc_degreeToOctant
  	
@@ -22,4 +23,12 @@ private ["_dir","_octant"];
 _dir = _this select 0;
 _octant = round (_dir / 45);
 
-["N ","NE","E ","SE","S ","SW","W ","NW","N "] select _octant
+[LLSTRING(North),
+LLSTRING(NorthEast),
+LLSTRING(East),
+LLSTRING(SouthEast),
+LLSTRING(South),
+LLSTRING(SouthWest),
+LLSTRING(West),
+LLSTRING(NorthWest),
+LLSTRING(North)] select _octant

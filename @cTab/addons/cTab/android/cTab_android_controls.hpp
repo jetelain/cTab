@@ -296,7 +296,7 @@ class cTab_android_loadingtxt: cTab_RscText_android
 {
 	idc = IDC_CTAB_LOADINGTXT;
 	style = ST_CENTER;
-	text = "Loading"; //--- ToDo: Localize;
+	text = $STR_ctab_core_Loading;
 	x = pxToScreen_X(cTab_GUI_android_SCREEN_CONTENT_X);
 	y = pxToScreen_Y(cTab_GUI_android_SCREEN_CONTENT_Y);
 	w = pxToScreen_W(cTab_GUI_android_SCREEN_CONTENT_W);

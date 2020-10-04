@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  	Name: cTab_fnc_updateInterface
  	
@@ -254,7 +255,7 @@ if (isNil "_mode") then {
 							IDC_CTAB_MINIMAPBG,
 							IDC_CTAB_CTABUAVMAP
 						];
-						_btnActCtrl ctrlSetTooltip "View Gunner Optics";
+						_btnActCtrl ctrlSetTooltip LLSTRING(viewGunnerOptics);
 						_settings pushBack ["uavListUpdate",true];
 						if (!_interfaceInit) then {
 							_settings pushBack ["uavCam",[_displayName,"uavCam"] call cTab_fnc_getSettings];
@@ -267,7 +268,7 @@ if (isNil "_mode") then {
 							IDC_CTAB_MINIMAPBG,
 							IDC_CTAB_CTABHCAMMAP
 						];
-						_btnActCtrl ctrlSetTooltip "Toggle Fullscreen";
+						_btnActCtrl ctrlSetTooltip LLSTRING(toggleFullscreen);
 						_settings pushBack ["hCamListUpdate",true];
 						if (!_interfaceInit) then {
 							_settings pushBack ["hCam",[_displayName,"hCam"] call cTab_fnc_getSettings];
@@ -289,7 +290,7 @@ if (isNil "_mode") then {
 					if (_mode == "HCAM_FULL") exitWith {
 						_displayItemsToShow = [IDC_CTAB_HCAM_FULL];
 						_data = [_displayName,"hCam"] call cTab_fnc_getSettings;
-						_btnActCtrl ctrlSetTooltip "Toggle Fullscreen";
+						_btnActCtrl ctrlSetTooltip LLSTRING(toggleFullscreen); 
 						['rendertarget13',_data] spawn cTab_fnc_createHelmetCam;
 					};
 				};
