@@ -695,6 +695,7 @@ class cTab_TAD_OSD_hookToggleText2: cTab_TAD_OSD_hookToggleText1
 class cTab_TAD_OSD_currentDirection: cTab_RscText_TAD
 {
 	idc = IDC_CTAB_OSD_DIR_DEGREE;
+	style = ST_RIGHT;
 	x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB14_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 4 / 2);
 	y = pxToScreen_Y(cTab_GUI_TAD_OSD_EDGE_B - cTab_GUI_TAD_OSD_ELEMENT_STD_H * 2);
 	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 4);

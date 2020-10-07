@@ -253,7 +253,7 @@ class cTab_android_on_screen_satellite: cTab_android_on_screen_battery
 class cTab_android_on_screen_dirDegree: cTab_android_on_screen_time
 {
 	idc = IDC_CTAB_OSD_DIR_DEGREE;
-	style = ST_LEFT;
+	style = ST_RIGHT;
 	x = pxToScreen_X(cTab_GUI_android_OSD_X(2));
 };
 class cTab_android_on_screen_grid: cTab_android_on_screen_dirDegree

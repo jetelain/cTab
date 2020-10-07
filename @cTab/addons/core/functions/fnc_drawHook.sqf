@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  	Name: cTab_fnc_drawHook
 
@@ -45,11 +46,11 @@ call {
 	if (_this select 5) exitWith {
 		(_display displayCtrl IDC_CTAB_OSD_HOOK_GRID) ctrlSetText format ["%1",mapGridPosition _secondPos];
 		(_display displayCtrl IDC_CTAB_OSD_HOOK_ELEVATION) ctrlSetText format ["%1m",[round getTerrainHeightASL _secondPos,3] call CBA_fnc_formatNumber];
-		(_display displayCtrl IDC_CTAB_OSD_HOOK_DIR) ctrlSetText format ["%1°/%2m",[_dirToSecondPos,3] call CBA_fnc_formatNumber,[_dstToSecondPos,1] call CBA_fnc_formatNumber];
+		(_display displayCtrl IDC_CTAB_OSD_HOOK_DIR) ctrlSetText format ["%1/%2m",[_dirToSecondPos] call FUNC(formatHeading), [_dstToSecondPos,1] call CBA_fnc_formatNumber];
 	};
 	(_display displayCtrl IDC_CTAB_OSD_HOOK_GRID) ctrlSetText format ["%1",mapGridPosition _secondPos];
 	(_display displayCtrl IDC_CTAB_OSD_HOOK_ELEVATION) ctrlSetText format ["%1m",round getTerrainHeightASL _secondPos];
-	(_display displayCtrl IDC_CTAB_OSD_HOOK_DIR) ctrlSetText format ["%1° %2",[_dirToSecondPos,3] call CBA_fnc_formatNumber,[_dirToSecondPos] call cTab_fnc_degreeToOctant];
+	(_display displayCtrl IDC_CTAB_OSD_HOOK_DIR) ctrlSetText format ["%1 %2",[_dirToSecondPos] call FUNC(formatHeading), [_dirToSecondPos] call cTab_fnc_degreeToOctant];
 	(_display displayCtrl IDC_CTAB_OSD_HOOK_DST) ctrlSetText format ["%1m",[_dstToSecondPos,1] call CBA_fnc_formatNumber];
 };
 

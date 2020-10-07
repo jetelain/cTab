@@ -576,5 +576,21 @@
             <French>Blue Force Tracking</French>
         </Key>
 
+        <Key ID="STR_ctab_core_useMils">
+            <English>Unit of heading/compass</English>
+            <French>Unité de la boussole</French>
+        </Key>
+        <Key ID="STR_ctab_core_useMilsDetails">
+            <English>Unit of heading/compass displayed in cTab devices</English>
+            <French>Unité de la boussole affichée dans les appareils cTab</French>
+        </Key>
+        <Key ID="STR_ctab_core_useMils_true">
+            <English>Mils (0-6400)</English>
+            <French>Milièmes (0-6400)</French>
+        </Key>
+        <Key ID="STR_ctab_core_useMils_false">
+            <English>Degrees (0-360)</English>
+            <French>Degrés (0-360)</French>
+        </Key>
     </Package>
 </Project>

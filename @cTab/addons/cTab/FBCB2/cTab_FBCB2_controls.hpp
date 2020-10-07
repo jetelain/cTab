@@ -161,7 +161,7 @@ class cTab_FBCB2_on_screen_satellite: cTab_FBCB2_on_screen_battery
 class cTab_FBCB2_on_screen_dirDegree: cTab_FBCB2_on_screen_time
 {
 	idc = IDC_CTAB_OSD_DIR_DEGREE;
-	style = ST_LEFT;
+	style = ST_RIGHT;
 	x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(2));
 };
 class cTab_FBCB2_on_screen_grid: cTab_FBCB2_on_screen_dirDegree

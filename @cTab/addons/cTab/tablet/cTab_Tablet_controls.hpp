@@ -226,7 +226,7 @@ class cTab_Tablet_OSD_satellite: cTab_Tablet_OSD_battery
 class cTab_Tablet_OSD_dirDegree: cTab_Tablet_OSD_time
 {
 	idc = IDC_CTAB_OSD_DIR_DEGREE;
-	style = ST_LEFT;
+	style = ST_RIGHT;
 	x = pxToScreen_X(cTab_GUI_tablet_OSD_X(2));
 };
 class cTab_Tablet_OSD_grid: cTab_Tablet_OSD_dirDegree

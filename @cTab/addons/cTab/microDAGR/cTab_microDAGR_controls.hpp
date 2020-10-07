@@ -236,7 +236,7 @@ class cTab_microDAGR_on_screen_satellite: cTab_microDAGR_on_screen_battery
 class cTab_microDAGR_on_screen_dirDegree: cTab_RscText_microDAGR
 {
 	idc = IDC_CTAB_OSD_DIR_DEGREE;
-	style = ST_LEFT;
+	style = ST_RIGHT;
 	y = pxToScreen_Y(cTab_GUI_microDAGR_OSD_EDGE_B);
 	x = pxToScreen_X(cTab_GUI_microDAGR_OSD_LEFT_X);
 };

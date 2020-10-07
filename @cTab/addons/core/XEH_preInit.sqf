@@ -13,3 +13,5 @@ if (isClass (configFile >> "CfgWeapons" >> "ACE_microDAGR")) then {
 } else {
 	GVAR(useAceMicroDagr) = false;
 };
+
+[QGVAR(useMils),       "LIST", [LLSTRING(useMils), LLSTRING(useMilsDetails)], "cTab", [[false, true], [LLSTRING(useMils_false), LLSTRING(useMils_true)], 0]] call CBA_fnc_addSetting;

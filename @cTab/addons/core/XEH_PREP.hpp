@@ -83,4 +83,5 @@ if ( hasInterface ) then {
 	// End
 	PREP(aceSelfActions);
 	PREP(toggleInterface);
+	PREP(formatHeading);
 };
