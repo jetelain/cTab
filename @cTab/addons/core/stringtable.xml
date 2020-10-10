@@ -592,5 +592,16 @@
             <English>Degrees (0-360)</English>
             <French>Degrés (0-360)</French>
         </Key>
+
+
+        <Key ID="STR_ctab_core_techData">
+            <English>Technical Data</English>
+            <French>Données techniques</French>
+        </Key>
+        <Key ID="STR_ctab_core_callSign">
+            <English>Group call sign</English>
+            <French>Identifiant du groupe</French>
+        </Key>
+
     </Package>
 </Project>

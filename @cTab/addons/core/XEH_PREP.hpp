@@ -84,4 +84,6 @@ if ( hasInterface ) then {
 	PREP(aceSelfActions);
 	PREP(toggleInterface);
 	PREP(formatHeading);
+	PREP(onTechnicalDataClose);
+	PREP(onTechnicalDataOpen);
 };

@@ -5,6 +5,7 @@ params ["_target"];
 private _actions = [];
 private _player = cTab_player;
 private _vehicle = vehicle _player;
+private _hasItem = false;
 
 private _subactions = {
 	params ["_target","","_params"];
@@ -40,6 +41,7 @@ if ([_player,_vehicle,"TAD"] call cTab_fnc_unitInEnabledVehicleSeat) then {
         _subactions,
         [1, "cTab_TAD_dlg", _player, _vehicle]
     ] call ace_interact_menu_fnc_createAction, [], _target];
+    _hasItem = true;
 };
 
 if ([_player,["ItemAndroid"]] call cTab_fnc_checkGear) then {
@@ -52,6 +54,7 @@ if ([_player,["ItemAndroid"]] call cTab_fnc_checkGear) then {
         _subactions,
         [1, "cTab_Android_dlg", _player,_vehicle]
     ] call ace_interact_menu_fnc_createAction, [], _target];
+    _hasItem = true;
 };
 
 if ([_player,["ItemMicroDAGR"]] call cTab_fnc_checkGear) then {
@@ -76,6 +79,7 @@ if ([_player,_vehicle,"FBCB2"] call cTab_fnc_unitInEnabledVehicleSeat) then {
         {},
         [1, "cTab_FBCB2_dlg", _player,_vehicle]
     ] call ace_interact_menu_fnc_createAction, [], _target];
+    _hasItem = true;
 };
 
 if ([_player,["ItemcTab"]] call cTab_fnc_checkGear) then {
@@ -88,6 +92,21 @@ if ([_player,["ItemcTab"]] call cTab_fnc_checkGear) then {
         {},
         [1, "cTab_Tablet_dlg", _player,_vehicle]
     ] call ace_interact_menu_fnc_createAction, [], _target];
+    _hasItem = true;
+};
+
+if (_hasItem && {(leader _player) == _player}) then {
+
+    _actions pushBack [[
+        "cTab_TechData",
+        LLSTRING(techData),
+        "",
+        { createDialog "cTab_TechnicalData_dlg"; },
+        {true},
+        {},
+        []
+    ] call ace_interact_menu_fnc_createAction, [], _target];
+
 };
 
 _actions
