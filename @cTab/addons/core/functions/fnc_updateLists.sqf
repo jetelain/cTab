@@ -176,6 +176,8 @@ if (count _updateInterface > 0) then {
 	[_updateInterface] call cTab_fnc_updateInterface;
 };
 
+[QGVARMAIN(listsUpdated)] call CBA_fnc_localEvent;
+
 TRACE_5("lists", count cTabBFTmembers, count cTabBFTgroups, count cTabBFTvehicles, count cTabUAVlist, count cTabHcamlist);
 
 true

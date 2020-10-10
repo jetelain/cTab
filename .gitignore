@@ -1,4 +1,16 @@
 texHeaders.bin
 /.vs
-/@cTab/hemtt.exe
 *.pbo
+/cTabIRL/.vs/cTabExtension
+/cTabIRL/cTabExtension/bin
+/cTabIRL/cTabExtension/obj
+/cTabIRL/cTabExtensionTester/bin
+/cTabIRL/cTabExtensionTester/obj
+/cTabIRL/cTabWebApp/bin
+/cTabIRL/cTabWebApp/obj
+*.user
+appsettings.Development.json
+/cTabIRL/packages
+*.dll
+*.pdb
+*.exe
