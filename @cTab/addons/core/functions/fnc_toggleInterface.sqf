@@ -15,6 +15,14 @@ if !(isNil "cTabIfOpen") then {
 	call cTab_fnc_close;
 };
 
+if (_interfaceName == "cTab_TAD_dsp" || _interfaceName == "cTab_TAD_dlg") then {
+	cTabPlayerVehicleIcon = getText (configFile/"CfgVehicles"/typeOf _vehicle/"Icon");
+} else {
+	if (_interfaceName == "cTab_microDAGR_dsp" || _interfaceName == "cTab_microDAGR_dlg") then {
+		cTabMicroDAGRmode = if ([_player,["ItemcTab"]] call cTab_fnc_checkGear) then {0} else {2};
+	};
+};
+
 if (_interfaceName != "" && _interfaceName != _previousInterface) exitWith {
 	// queue the start up of the interface as we might still have one closing down
 	[{
