@@ -1,3 +1,3 @@
-name = "CTab IRL";
+name = "cTab IRL";
 dir = "@cTabIRL";
 author = "GrueArbre";

@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace cTabWebApp.Models
 {
-    public class HomeVM
+    public class HowToConnectVM
     {
+        public string Uri { get; set; }
     }
 }

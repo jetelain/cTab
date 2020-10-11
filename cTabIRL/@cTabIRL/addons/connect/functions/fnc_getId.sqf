@@ -3,7 +3,7 @@
 params ["_unit"];
 private _id = _unit getVariable [QGVAR(id),""];
 if (_id == "") then {
-	_id = format ['id%1',GVAR(nextId)];
+	_id = format ['o%1',GVAR(nextId)];
 	GVAR(nextId) = GVAR(nextId) + 1;
 	_unit setVariable [QGVAR(id), _id];
 };

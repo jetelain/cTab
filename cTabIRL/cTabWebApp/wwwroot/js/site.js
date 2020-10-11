@@ -1,11 +1,15 @@
 ﻿L.Control.OverlayButton = L.Control.extend({
     options: {
         position: 'bottomright',
+        initialClass: 'btn-outline-secondary',
         content: 'A'
     },
 
+    previousClass: '',
+
     onAdd: function (map) {
-        this._container = L.DomUtil.create('button', 'btn btn-outline-secondary');
+        this.previousClass = this.options.initialClass;
+        this._container = L.DomUtil.create('button', 'btn ' + this.options.initialClass);
         L.DomEvent.disableClickPropagation(this._container);
         this._container.innerHTML = this.options.content;
         return this._container;
@@ -17,6 +21,11 @@
 
     j: function () {
         return $(this._container);
+    },
+    setClass: function (name) {
+        $(this._container).removeClass(this.previousClass);
+        $(this._container).addClass(name);
+        this.previousClass = name;
     }
 });
 
@@ -31,16 +40,18 @@ var selfMarker = null;
 var existingMarkers = {};
 var centerOnPosition = true;
 var centerOnPositionButton;
-var fullScreenButton;
+var fullScreenButton = null;
 
 function updateButtons() {
-    centerOnPositionButton.j().removeClass('btn-secondary');
-    centerOnPositionButton.j().removeClass('btn-outline-secondary');
-    centerOnPositionButton.j().addClass(centerOnPosition ? 'btn-secondary' : 'btn-outline-secondary');
+    centerOnPositionButton.setClass(centerOnPosition ? 'btn-primary' : 'btn-outline-secondary');
 
-    fullScreenButton.j().removeClass('btn-secondary');
-    fullScreenButton.j().removeClass('btn-outline-secondary');
-    fullScreenButton.j().addClass(document.fullscreenElement ? 'btn-secondary' : 'btn-outline-secondary');
+    if (fullScreenButton) {
+        fullScreenButton.setClass(document.fullscreenElement ? 'btn-primary' : 'btn-outline-secondary');
+
+        fullScreenButton.j().find('i').removeClass('fa-expand');
+        fullScreenButton.j().find('i').removeClass('fa-compress');
+        fullScreenButton.j().find('i').addClass(document.fullscreenElement ? 'fa-compress' : 'fa-expand');
+    }
 }
 
 function fullScreenToggle() {
@@ -81,13 +92,20 @@ function initMap(mapInfos) {
     map.on('mousedown', function () { setCenterOnPosition(false); });
     map.on('touchstart', function () { setCenterOnPosition(false); });
 
-    (centerOnPositionButton = L.control.overlayButton({content:'Auto Center'})).addTo(map);
+    (centerOnPositionButton = L.control.overlayButton({ content:'<i class="fas fa-location-arrow"></i>'})).addTo(map);
     centerOnPositionButton.j().on('click', function () { setCenterOnPosition(!centerOnPosition); });
 
-    (fullScreenButton = L.control.overlayButton({ content: 'Fullscreen' })).addTo(map);
-    fullScreenButton.j().on('click', fullScreenToggle);
+    if (document.documentElement.requestFullscreen) {
+        (fullScreenButton = L.control.overlayButton({ content: '<i class="fas fa-expand"></i>' })).addTo(map);
+        fullScreenButton.j().on('click', fullScreenToggle);
+    }
 
-    L.latlngGraticule().addTo(map);
+    (L.control.overlayButton({ position: 'topright', content: '<i class="fas fa-inbox"></i>&nbsp;<span class="badge badge-secondary">0</span>' })).addTo(map);
+
+    L.latlngGraticule({
+        zoomInterval: [
+            { start: 0, end: 10, interval: 1000 }
+        ]}).addTo(map);
     L.control.scale({ maxWidth: 200, imperial: false }).addTo(map);
     currentMap = map;
     currentMapInfos = mapInfos;
@@ -141,14 +159,10 @@ function createIcon(marker) {
 
 function updateMarkers(makers) {
 
+    var markersToKeep = [];
+
     makers.forEach(function (marker) {
-        if (marker.vehicle && existingMarkers[marker.vehicle]) {
-            var existing = existingMarkers[marker.id];
-            if (existing) {
-                existing.remove();
-            }
-        }
-        else {
+        if (!marker.vehicle || !existingMarkers[marker.vehicle]) {
             var existing = existingMarkers[marker.id];
             if (existing) {
                 existing.setLatLng([marker.y, marker.x]);
@@ -159,7 +173,18 @@ function updateMarkers(makers) {
             }
             else {
                 existingMarkers[marker.id] = L.marker([marker.y, marker.x], { icon: createIcon(marker), marker: marker }).addTo(currentMap);
+                if (marker.kind == 'u') {
+                    // TODO: Notify
+                }
             }
+            markersToKeep.push(marker.id);
+        }
+    });
+
+    Object.getOwnPropertyNames(existingMarkers).forEach(function (id) {
+        if (markersToKeep.indexOf(id) == -1) {
+            existingMarkers[id].remove();
+            delete existingMarkers[id];
         }
     });
 }
@@ -168,6 +193,21 @@ $(function () {
 
 
     initMap(Arma3Map.Maps.altis); // Starts on altis by default
+
+    function connectionLost(e) {
+        if (e) {
+            $('#status').text('Disconnected');
+            $('#statusbadge').attr('class', 'badge badge-danger');
+        }
+    }
+    function connected() {
+        $('#status').text('Wait for cTab');
+        $('#statusbadge').attr('class', 'badge badge-warning');
+    }
+    function started() {
+        $('#status').text('Connected');
+        $('#statusbadge').attr('class', 'badge badge-success');
+    }
 
     var connection = new signalR.HubConnectionBuilder()
         .withUrl("/hub")
@@ -184,6 +224,7 @@ $(function () {
             // TODO !
         }
         updateClock(missionData.date);
+        started();
     });
 
 
@@ -196,17 +237,16 @@ $(function () {
     });
 
 
-    function connectionLost(e) {
-        if (e) {
-            $('#connectionlost').show();
-        }
-    }
+
 
     connection.start().then(function () {
         connection.invoke("WebHello", {});
-        $('#connecting').hide();
+        connected();
     }).catch(connectionLost);
 
     connection.onreconnecting(connectionLost);
-    connection.onreconnected(function () { connection.invoke("WebHello", {}); $('#connectionlost').hide(); });
+    connection.onreconnected(function () {
+        connection.invoke("WebHello", {});
+        connected();
+    });
 });

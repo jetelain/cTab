@@ -6,33 +6,46 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using cTabWebApp.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using QRCoder;
 
 namespace cTabWebApp.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IServerAddressesFeature addresses;
+
+        public HomeController(IServer host)
+        {
+            addresses = host.Features.Get<IServerAddressesFeature>();
+        }
+
         public IActionResult Index()
         {
             return View();
         }
         public IActionResult HowToConnect()
         {
-            return View();
+            return base.View(new HowToConnectVM() { Uri = GetPublicAdress() });
+        }
+
+        private string GetPublicAdress()
+        {
+            return addresses.Addresses.FirstOrDefault(a => !a.Contains("localhost"));
         }
 
         public ActionResult QrCode()
         {
-            var localEntry = Dns.GetHostEntry("");
-            var ipv4 = localEntry.AddressList.Where(e => e.AddressFamily == AddressFamily.InterNetwork && !IPAddress.IsLoopback(e)).ToList();
-            var http = $"http://{ipv4.FirstOrDefault()}:5000/";
-            var generator = new PayloadGenerator.Url(http);
-
+            var generator = new PayloadGenerator.Url(GetPublicAdress());
             var qrGenerator = new QRCodeGenerator();
             var qrCodeData = qrGenerator.CreateQrCode(generator.ToString(), QRCodeGenerator.ECCLevel.Q);
             var qrCode = new QRCode(qrCodeData);
-            var qrCodeImage = qrCode.GetGraphic(10);
+            var qrCodeImage = qrCode.GetGraphic(5);
             var bitmapBytes = BitmapToBytes(qrCodeImage); //Convert bitmap into a byte array
             return File(bitmapBytes, "image/png"); //Return as file result
         }

@@ -15,3 +15,6 @@ header {
     background: black;
     color: white;
 }
+#status {
+    font-size: 10px;
+}

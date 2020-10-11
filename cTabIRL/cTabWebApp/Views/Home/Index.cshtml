@@ -10,22 +10,20 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="alert alert-danger" role="alert" id="connectionlost" style="display:none;">
-        Connection lost with server. Trying to reconnect...
-    </div>
-    <div class="alert alert-info" role="alert" id="connecting">
-        Connecting...
-    </div>
     <header>
         <div class="row">
+            <div class="col-2 text-left">
+                <span class="badge badge-warning" id="statusbadge">&nbsp;&nbsp;</span>
+                <span id="status">Connecting...</span>
+            </div>
             <div class="col-3 text-center" id="heading">
                 -----
             </div>
-            <div class="col-6 text-center" id="position">
-                ----- - -----
-            </div>
-            <div class="col-3 text-center" id="date">
+            <div class="col-2 text-center" id="date">
                 --:--
+            </div>
+            <div class="col-5 text-center" id="position">
+                ----- - -----
             </div>
         </div>
     </header>

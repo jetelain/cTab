@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Primitives;
 
 namespace cTabWebApp
 {
@@ -17,7 +18,7 @@ namespace cTabWebApp
 
         public async Task WebHello(WebHelloMessage message)
         {
-            Console.WriteLine("WebHello");
+            //Console.WriteLine("WebHello");
             await Groups.AddToGroupAsync(Context.ConnectionId, "WebUI");
             if (lastMission != null)
             {
@@ -35,13 +36,13 @@ namespace cTabWebApp
 
         public async Task ArmaHello(ArmaHelloMessage message)
         {
-            Console.WriteLine("ArmaHello");
+            //Console.WriteLine("ArmaHello");
             await Groups.AddToGroupAsync(Context.ConnectionId, "Arma");
         }
 
         public async Task ArmaStartMission(ArmaMessage message)
         {
-            Console.WriteLine("ArmaStartMission " + string.Join(", ", message.Args));
+            //Console.WriteLine("ArmaStartMission " + string.Join(", ", message.Args));
             var worldName = JsonSerializer.Deserialize<string>(message.Args[0]);
             var size = double.Parse(message.Args[1], CultureInfo.InvariantCulture);
             var date = JsonSerializer.Deserialize<int[]>(message.Args[2]);
@@ -64,7 +65,7 @@ namespace cTabWebApp
 
         public async Task ArmaUpdatePosition(ArmaMessage message)
         {
-            Console.WriteLine("ArmaUpdatePosition " + string.Join(", ",message.Args));
+            //Console.WriteLine("ArmaUpdatePosition " + string.Join(", ",message.Args));
 
             if (message.Timestamp < DateTime.UtcNow.AddMinutes(-1))
             {
@@ -97,7 +98,7 @@ namespace cTabWebApp
 
         public async void ArmaUpdateMarkers(ArmaMessage message)
         {
-            Console.WriteLine("ArmaUpdateMarkers " + string.Join(", ", message.Args));
+            //Console.WriteLine("ArmaUpdateMarkers " + string.Join(", ", message.Args));
 
             var msg = new UpdateMarkersMessage()
             {
@@ -152,27 +153,57 @@ namespace cTabWebApp
             return "00";
         }
 
+        private static Dictionary<string, string> icons = new Dictionary<string, string>()
+        {
+            // BLUE
+            { "\\cTab\\img\\b_mech_inf_wheeled.paa"                  , "10031000001211020051" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\b_support.paa"  , "10031000000000000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\b_motor_inf.paa", "10031000000000000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\b_uav.paa"      , "10031000000000000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\b_air.paa"      , "10031000001206000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\b_plane.paa"    , "10031000000000000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\b_mech_inf.paa" , "10031000001211020000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\b_art.paa"      , "10031000000000000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\b_armor.paa"    , "10031000001205000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\b_mortar.paa"   , "10031000000000000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\b_hq.paa"       , "10031000000000000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\military\\end_CA.paa" , "10031000000000000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\b_inf.paa"      , "10031000001211000000" },
+
+            // GREEN
+            { "\\A3\\ui_f\\data\\map\\markers\\military\\join_CA.paa"   , "10031000000000000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\military\\circle_CA.paa" , "10031000000000000000" },
+            { "\\A3\\ui_f\\data\\map\\mapcontrol\\Hospital_CA.paa"      , "10031000000000000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\military\\warning_CA.paa", "10031000000000000000" },
+
+            // RED 
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\o_inf.paa"      , "10061000001211000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\o_mech_inf.paa" , "10061000001211020000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\o_motor_inf.paa", "10061000000000000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\o_armor.paa"    , "10061000001205000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\o_air.paa"      , "10061000001206000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\o_plane.paa"    , "10061000000000000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\nato\\o_unknown.paa"  , "10061000000000000000" },
+            { "\\cTab\\img\\o_inf_rifle.paa"                         , "10061000000000000000" },
+            { "\\cTab\\img\\o_inf_mg.paa"                            , "10061000000000000000" },
+            { "\\cTab\\img\\o_inf_at.paa"                            , "10061000000000000000" },
+            { "\\cTab\\img\\o_inf_mmg.paa"                           , "10061000000000000000" },
+            { "\\cTab\\img\\o_inf_mat.paa"                           , "10061000000000000000" },
+            { "\\cTab\\img\\o_inf_mmortar.paa"                       , "10061000000000000000" },
+            { "\\cTab\\img\\o_inf_aa.paa"                            , "10061000000000000000" }
+        };
+
         private string GetMilSymbol(string iconA, string iconB)
         {
             var size = GetUnitSize(iconB);
-            switch (iconA)
+            string symbol;
+            if (icons.TryGetValue(iconA, out symbol))
             {
-                case "\\A3\\ui_f\\data\\map\\markers\\nato\\b_armor.paa":
-                    return $"10031000{size}1205000000";
-
-                case "\\cTab\\img\\b_mech_inf_wheeled.paa":
-                    return $"10031000{size}1211020051";
-
-                case "\\A3\\ui_f\\data\\map\\markers\\nato\\b_air.paa":
-                    switch(iconB)
-                    {
-                        case "\\cTab\\img\\icon_air_contact_ca.paa":
-                            return $"10031000{size}1206000000";
-                    }
-                    break;
-
-                case "\\A3\\ui_f\\data\\map\\markers\\nato\\b_inf.paa":
-                    return $"10031000{size}1211000000";
+                if (size == "00")
+                {
+                    return symbol;
+                }
+                return $"{symbol.Substring(0,8)}{size}{symbol.Substring(10)}";
             }
             return $"10031000{size}0000000000";
         }
@@ -187,7 +218,6 @@ namespace cTabWebApp
         public void ArmaDevices(ArmaMessage message)
         {
             Console.WriteLine("ArmaDevices " + string.Join(", ", message.Args));
-
         }
     }
 }

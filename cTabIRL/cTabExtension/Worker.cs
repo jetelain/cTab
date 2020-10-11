@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace cTabExtension
@@ -140,19 +141,24 @@ namespace cTabExtension
         private static async Task<HubConnection> ConnectToServer(string server, string steamId, string name, string key, CancellationToken token)
         {
             Extension.DebugMessage($"server={server}, steamId={steamId}, name={name}, key={key}");
-            HubConnection connection = new HubConnectionBuilder()
-                .WithUrl(new Uri(server))
+
+            var uri = new Uri(server);
+            var connection = new HubConnectionBuilder()
+                .WithUrl(uri, options =>
+                {
+                    options.Headers.Add("User-Agent", "cTabExtension/1.0");
+                })
                 .WithAutomaticReconnect()
                 .Build();
 
             connection.On<string, string>("Callback", Extension.Callback);
-            connection.Reconnecting += _ => { Extension.DebugMessage($"Reconnecting..."); return Task.CompletedTask; };
+            connection.Reconnecting += async _ => {
+                Extension.DebugMessage($"Reconnecting...");
+                await Extension.Callback("reconnecting", "");
+            };
             connection.Reconnected += async _ => { 
-
                 Extension.DebugMessage($"Reconnected !");  
-
                 await SayHello(steamId, name, key, connection);
-
                 foreach(var send in replay)
                 {
                     await send.Item2(connection);
@@ -167,8 +173,7 @@ namespace cTabExtension
                     await connection.StartAsync(token);
                     Extension.DebugMessage($"Connected.");
 
-                    await SayHello(steamId, name, key, connection);
-
+                    await SayHello(steamId, name, HashKeyForHost(key, uri.DnsSafeHost), connection);
                     return connection;
                 }
                 catch
@@ -187,6 +192,21 @@ namespace cTabExtension
             Extension.DebugMessage($"Send Hello...");
             await connection.InvokeAsync("ArmaHello", new ArmaHelloMessage() { Timestamp = DateTime.UtcNow, SteamId = steamId, PlayerName = name, Key = key });
             Extension.DebugMessage($"Hello done.");
+            await Extension.Callback("connected", "");
+        }
+
+        private static string HashKeyForHost(string key, string hostname)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                return string.Empty;
+            }
+            return Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                            password: key,
+                            salt: Encoding.UTF8.GetBytes(hostname),
+                            prf: KeyDerivationPrf.HMACSHA256,
+                            iterationCount: 10000,
+                            numBytesRequested: 256 / 8));
         }
     }
 }

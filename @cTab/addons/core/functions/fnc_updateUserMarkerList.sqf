@@ -28,4 +28,5 @@ _tempList = [];
 
 cTabUserMarkerList = _tempList;
 
+[QGVARMAIN(userMarkerListUpdated)] call CBA_fnc_localEvent;
 true

@@ -39,24 +39,5 @@ INFO_1("%1 elapsed in callExtension",diag_tickTime - _start);
 	INFO_1("%1 elapsed in callExtension",diag_tickTime - _start);
 }, 0.25] call CBA_fnc_addPerFrameHandler;
 
-
-["ctab_listsUpdated", {
-	// UpdateMarkers
-	private _data = [];
-
-	{
-		_data pushBack ['veh', [_x select 0] call FUNC(getId), _x select 1, _x select 2, _x select 3, _x select 4, _x select 5, _x select 6];
-	} forEach cTabBFTvehicles;
-
-	{
-		private _leader = (_x select 0);
-		private _vehicle = vehicle _leader;
-		private _vehicleId = '';
-		if ( _vehicle != _leader ) then {
-			_vehicleId = [vehicle (_x select 0)] call FUNC(getId);
-		};
-		_data pushBack ['grp', [group _leader] call FUNC(getId), _x select 1, _x select 2, _x select 3, _x select 4, _x select 5, 0, _vehicleId];
-	} forEach cTabBFTgroups;
-
-	"cTabExtension" callExtension ["UpdateMarkers", _data];
-}] call CBA_fnc_addEventHandler;
+["ctab_listsUpdated", FUNC(updateMarkers)] call CBA_fnc_addEventHandler;
+["ctab_userMarkerListUpdated", FUNC(updateMarkers)] call CBA_fnc_addEventHandler;
