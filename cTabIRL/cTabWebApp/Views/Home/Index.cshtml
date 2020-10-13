@@ -39,6 +39,9 @@
     <script src="https://unpkg.com/milstd@0.1.6/milstd.js"></script>
     <script src="https://jetelain.github.io/Arma3Map/js/mapUtils.js"></script>
     <script src="https://jetelain.github.io/Arma3Map/maps/all.js"></script>
+    <script>
+        var menus = @Json.Serialize(Menu.CreateMenus().ToDictionary(e => e.MenuId.ToString(), e => e.Items));
+    </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>

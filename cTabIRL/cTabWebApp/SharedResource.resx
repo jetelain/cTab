@@ -1,0 +1,552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="STR_ctab_core_DisplayHide" xml:space="preserve">
+    <value>Display/Hide</value>
+  </data>
+  <data name="STR_ctab_core_TAD" xml:space="preserve">
+    <value>TAD</value>
+  </data>
+  <data name="STR_ctab_core_ConfigureTAD" xml:space="preserve">
+    <value>Configure TAD</value>
+  </data>
+  <data name="STR_ctab_core_Android" xml:space="preserve">
+    <value>GD300 Android</value>
+  </data>
+  <data name="STR_ctab_core_AndroidShort" xml:space="preserve">
+    <value>GD300 Rugged Wearable Computer</value>
+  </data>
+  <data name="STR_ctab_core_ConfigureAndroid" xml:space="preserve">
+    <value>Configure GD300 Android</value>
+  </data>
+  <data name="STR_ctab_core_MicroDAGR" xml:space="preserve">
+    <value>MicroDAGR</value>
+  </data>
+  <data name="STR_ctab_core_MicroDAGRShort" xml:space="preserve">
+    <value>HNV-2930 Micro Defense Advanced GPS Receiver</value>
+  </data>
+  <data name="STR_ctab_core_ConfigureMicroDAGR" xml:space="preserve">
+    <value>Configure MicroDAGR</value>
+  </data>
+  <data name="STR_ctab_core_FBCB2" xml:space="preserve">
+    <value>FBCB2</value>
+  </data>
+  <data name="STR_ctab_core_Tablet" xml:space="preserve">
+    <value>Rugged Tablet</value>
+  </data>
+  <data name="STR_ctab_core_TabletShort" xml:space="preserve">
+    <value>DK10 Rugged Tablet PC</value>
+  </data>
+  <data name="STR_ctab_core_HCam" xml:space="preserve">
+    <value>Helmet Camera</value>
+  </data>
+  <data name="STR_ctab_core_HCamShort" xml:space="preserve">
+    <value>HD Helmet Mounted Camera</value>
+  </data>
+  <data name="STR_ctab_core_MessageSent" xml:space="preserve">
+    <value>Your message has been sent.</value>
+  </data>
+  <data name="STR_ctab_core_Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="STR_ctab_core_TextOnOff" xml:space="preserve">
+    <value>Text On/Off</value>
+  </data>
+  <data name="STR_ctab_core_TextOnOffHint" xml:space="preserve">
+    <value>Toggle Text on/off</value>
+  </data>
+  <data name="STR_ctab_core_SizeUp" xml:space="preserve">
+    <value>Icon Size +</value>
+  </data>
+  <data name="STR_ctab_core_SizeUpHint" xml:space="preserve">
+    <value>Increase Icon/Text Size</value>
+  </data>
+  <data name="STR_ctab_core_SizeDown" xml:space="preserve">
+    <value>Icon Size -</value>
+  </data>
+  <data name="STR_ctab_core_SizeDownHint" xml:space="preserve">
+    <value>Decrease Icon/Text Size</value>
+  </data>
+  <data name="STR_ctab_core_InboxTitle" xml:space="preserve">
+    <value>Read Message</value>
+  </data>
+  <data name="STR_ctab_core_ComposeMessageTitle" xml:space="preserve">
+    <value>Compose Message</value>
+  </data>
+  <data name="STR_ctab_core_NoMessageSelected" xml:space="preserve">
+    <value>No Message Selected</value>
+  </data>
+  <data name="STR_ctab_core_DeleteMessage" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="STR_ctab_core_DeleteMessageHint" xml:space="preserve">
+    <value>Delete Selected Message(s)</value>
+  </data>
+  <data name="STR_ctab_core_ComposeMessage" xml:space="preserve">
+    <value>Compose &gt;&gt;</value>
+  </data>
+  <data name="STR_ctab_core_ComposeMessageHint" xml:space="preserve">
+    <value>Compose Messages</value>
+  </data>
+  <data name="STR_ctab_core_ReadMessages" xml:space="preserve">
+    <value>Read &gt;&gt;</value>
+  </data>
+  <data name="STR_ctab_core_ReadMessagesHint" xml:space="preserve">
+    <value>Read Messages</value>
+  </data>
+  <data name="STR_ctab_core_SendMessage" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="STR_ctab_core_MapOptionsHint" xml:space="preserve">
+    <value>Map Options</value>
+  </data>
+  <data name="STR_ctab_core_CloseInterfaceHint" xml:space="preserve">
+    <value>Close Interface</value>
+  </data>
+  <data name="STR_ctab_core_HomeAndroidHint" xml:space="preserve">
+    <value>Toggle Map (F1) / Messages (F4)</value>
+  </data>
+  <data name="STR_ctab_core_MapTools" xml:space="preserve">
+    <value>Map Tools</value>
+  </data>
+  <data name="STR_ctab_core_MapToolsHint" xml:space="preserve">
+    <value>Toggle Map Tools (F5)</value>
+  </data>
+  <data name="STR_ctab_core_MapTextures" xml:space="preserve">
+    <value>Map Textures</value>
+  </data>
+  <data name="STR_ctab_core_MapTexturesHint" xml:space="preserve">
+    <value>Toggle Map Textures (F6)</value>
+  </data>
+  <data name="STR_ctab_core_CenterMap" xml:space="preserve">
+    <value>Center Map</value>
+  </data>
+  <data name="STR_ctab_core_CenterMapHint" xml:space="preserve">
+    <value>Center Map On Current Position (F7)</value>
+  </data>
+  <data name="STR_ctab_core_IncreaseFontHint" xml:space="preserve">
+    <value>Increase Font</value>
+  </data>
+  <data name="STR_ctab_core_DecreaseFontHint" xml:space="preserve">
+    <value>Decrease Font</value>
+  </data>
+  <data name="STR_ctab_core_IncreaseBrightnessHint" xml:space="preserve">
+    <value>Increase Brightness</value>
+  </data>
+  <data name="STR_ctab_core_DecreaseBrightnessHint" xml:space="preserve">
+    <value>Decrease Brightness</value>
+  </data>
+  <data name="STR_ctab_core_HomeTADHint" xml:space="preserve">
+    <value>left-click: Toggle DAY / NIGHT mode; right-click: Close interface</value>
+  </data>
+  <data name="STR_ctab_core_HomeTabletHint" xml:space="preserve">
+    <value>Main Menu</value>
+  </data>
+  <data name="STR_ctab_core_BFTF1Hint" xml:space="preserve">
+    <value>Blue Force Tracker - Quick Key</value>
+  </data>
+  <data name="STR_ctab_core_UAVF2Hint" xml:space="preserve">
+    <value>UAV Intel Live Feed - Quick Key</value>
+  </data>
+  <data name="STR_ctab_core_HelmetCamF3Hint" xml:space="preserve">
+    <value>Helmet Cam Live Feed - Quick Key</value>
+  </data>
+  <data name="STR_ctab_core_MessageF4Hint" xml:space="preserve">
+    <value>Text Message Application - Quick Key</value>
+  </data>
+  <data name="STR_ctab_core_BFTIconHint" xml:space="preserve">
+    <value>FBCB2 - Blue Force Tracker</value>
+  </data>
+  <data name="STR_ctab_core_UAVIconHint" xml:space="preserve">
+    <value>UAV Video Feeds</value>
+  </data>
+  <data name="STR_ctab_core_HelmetCamIconHint" xml:space="preserve">
+    <value>Live Helmet Cam Video Feeds</value>
+  </data>
+  <data name="STR_ctab_core_MessageIconHint" xml:space="preserve">
+    <value>Text Messaging System</value>
+  </data>
+  <data name="STR_ctab_core_EnemyMenu" xml:space="preserve">
+    <value>Enemy SALUTE</value>
+  </data>
+  <data name="STR_ctab_core_MedicalMenu" xml:space="preserve">
+    <value>Medical</value>
+  </data>
+  <data name="STR_ctab_core_GeneralMenu" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="STR_ctab_core_UAVLockMenu" xml:space="preserve">
+    <value>Lock UAV Cam</value>
+  </data>
+  <data name="STR_ctab_core_UAVLockHint" xml:space="preserve">
+    <value>Lock UAV Cam to this position, a UAV has to be previously selected</value>
+  </data>
+  <data name="STR_ctab_core_MenuExit" xml:space="preserve">
+    <value>[Cancel]</value>
+  </data>
+  <data name="STR_ctab_core_InfantryMenu" xml:space="preserve">
+    <value>Infantry</value>
+  </data>
+  <data name="STR_ctab_core_MechInfMenu" xml:space="preserve">
+    <value>Mechanized Inf</value>
+  </data>
+  <data name="STR_ctab_core_MechInfHint" xml:space="preserve">
+    <value>Equipped with APCs/IFVs</value>
+  </data>
+  <data name="STR_ctab_core_MotoInfMenu" xml:space="preserve">
+    <value>Motorized Inf</value>
+  </data>
+  <data name="STR_ctab_core_MotoInfHint" xml:space="preserve">
+    <value>Equipped with un-protected vehicles</value>
+  </data>
+  <data name="STR_ctab_core_ArmorMenu" xml:space="preserve">
+    <value>Armor</value>
+  </data>
+  <data name="STR_ctab_core_HelicopterMenu" xml:space="preserve">
+    <value>Helicopter</value>
+  </data>
+  <data name="STR_ctab_core_PlaneMenu" xml:space="preserve">
+    <value>Plane</value>
+  </data>
+  <data name="STR_ctab_core_UnknownMenu" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="STR_ctab_core_SingularMenu" xml:space="preserve">
+    <value>Singular</value>
+  </data>
+  <data name="STR_ctab_core_TeamMenu" xml:space="preserve">
+    <value>Fireteam Ø</value>
+  </data>
+  <data name="STR_ctab_core_TeamHint" xml:space="preserve">
+    <value>3–5 personnels</value>
+  </data>
+  <data name="STR_ctab_core_SquadMenu" xml:space="preserve">
+    <value>Squad •</value>
+  </data>
+  <data name="STR_ctab_core_SquadHint" xml:space="preserve">
+    <value>5–10 personnels</value>
+  </data>
+  <data name="STR_ctab_core_SectionMenu" xml:space="preserve">
+    <value>Section ••</value>
+  </data>
+  <data name="STR_ctab_core_SectionHint" xml:space="preserve">
+    <value>7–13 personnels</value>
+  </data>
+  <data name="STR_ctab_core_PlatoonMenu" xml:space="preserve">
+    <value>Platoon •••</value>
+  </data>
+  <data name="STR_ctab_core_PlatoonHint" xml:space="preserve">
+    <value>25–40 personnels</value>
+  </data>
+  <data name="STR_ctab_core_StationaryMenu" xml:space="preserve">
+    <value>Stationary</value>
+  </data>
+  <data name="STR_ctab_core_North" xml:space="preserve">
+    <value>N </value>
+  </data>
+  <data name="STR_ctab_core_NorthEast" xml:space="preserve">
+    <value>NE</value>
+  </data>
+  <data name="STR_ctab_core_East" xml:space="preserve">
+    <value>E </value>
+  </data>
+  <data name="STR_ctab_core_SouthEast" xml:space="preserve">
+    <value>SE</value>
+  </data>
+  <data name="STR_ctab_core_South" xml:space="preserve">
+    <value>S </value>
+  </data>
+  <data name="STR_ctab_core_SouthWest" xml:space="preserve">
+    <value>SW</value>
+  </data>
+  <data name="STR_ctab_core_West" xml:space="preserve">
+    <value>W </value>
+  </data>
+  <data name="STR_ctab_core_NorthWest" xml:space="preserve">
+    <value>NW</value>
+  </data>
+  <data name="STR_ctab_core_RifleMenu" xml:space="preserve">
+    <value>Rifle</value>
+  </data>
+  <data name="STR_ctab_core_MGMenu" xml:space="preserve">
+    <value>MG</value>
+  </data>
+  <data name="STR_ctab_core_ATMenu" xml:space="preserve">
+    <value>AT</value>
+  </data>
+  <data name="STR_ctab_core_StaticMGMenu" xml:space="preserve">
+    <value>Static MG</value>
+  </data>
+  <data name="STR_ctab_core_StaticATMenu" xml:space="preserve">
+    <value>Static AT</value>
+  </data>
+  <data name="STR_ctab_core_StaticAAMenu" xml:space="preserve">
+    <value>Static AA</value>
+  </data>
+  <data name="STR_ctab_core_MortarMenu" xml:space="preserve">
+    <value>Mortar</value>
+  </data>
+  <data name="STR_ctab_core_CasualtyMenu" xml:space="preserve">
+    <value>Casualty</value>
+  </data>
+  <data name="STR_ctab_core_CCPMenu" xml:space="preserve">
+    <value>CCP</value>
+  </data>
+  <data name="STR_ctab_core_CCPHint" xml:space="preserve">
+    <value>Casualty Collection Point</value>
+  </data>
+  <data name="STR_ctab_core_BASMenu" xml:space="preserve">
+    <value>BAS</value>
+  </data>
+  <data name="STR_ctab_core_BASHint" xml:space="preserve">
+    <value>Battalion Aid Station</value>
+  </data>
+  <data name="STR_ctab_core_MCIMenu" xml:space="preserve">
+    <value>MCI</value>
+  </data>
+  <data name="STR_ctab_core_MCIHint" xml:space="preserve">
+    <value>Mass Casualty Incident</value>
+  </data>
+  <data name="STR_ctab_core_HQMenu" xml:space="preserve">
+    <value>HQ</value>
+  </data>
+  <data name="STR_ctab_core_HQHint" xml:space="preserve">
+    <value>Headquaters</value>
+  </data>
+  <data name="STR_ctab_core_LZMenu" xml:space="preserve">
+    <value>LZ</value>
+  </data>
+  <data name="STR_ctab_core_LZHint" xml:space="preserve">
+    <value>Landing Zone</value>
+  </data>
+  <data name="STR_ctab_core_ifMain" xml:space="preserve">
+    <value>Toggle Main Interface</value>
+  </data>
+  <data name="STR_ctab_core_ifMainDetails" xml:space="preserve">
+    <value>Open cTab device in small overlay mode if available</value>
+  </data>
+  <data name="STR_ctab_core_ifSecondary" xml:space="preserve">
+    <value>Toggle Secondary Interface</value>
+  </data>
+  <data name="STR_ctab_core_ifSecondaryDetails" xml:space="preserve">
+    <value>Open cTab device in interactable mode (fullscreen)</value>
+  </data>
+  <data name="STR_ctab_core_ifTertiary" xml:space="preserve">
+    <value>Toggle Main Tertiary</value>
+  </data>
+  <data name="STR_ctab_core_ifTertiaryDetails" xml:space="preserve">
+    <value>Open private cTab device when in a vehicle with its own cTab device, or to open Tablet while also carrying a MicroDAGR</value>
+  </data>
+  <data name="STR_ctab_core_zoomIn" xml:space="preserve">
+    <value>Zoom In</value>
+  </data>
+  <data name="STR_ctab_core_zoomInDetails" xml:space="preserve">
+    <value>Zoom In on map while cTab is in small overlay mode</value>
+  </data>
+  <data name="STR_ctab_core_zoomOut" xml:space="preserve">
+    <value>Zoom Out</value>
+  </data>
+  <data name="STR_ctab_core_zoomOutDetails" xml:space="preserve">
+    <value>Zoom Out on map while cTab is in small overlay mode</value>
+  </data>
+  <data name="STR_ctab_core_toggleIfPosition" xml:space="preserve">
+    <value>Toggle Interface Position</value>
+  </data>
+  <data name="STR_ctab_core_toggleIfPositionDetails" xml:space="preserve">
+    <value>Toggle overlay mode interface position from left to right or reset interactive mode interface position to default</value>
+  </data>
+  <data name="STR_ctab_core_sync_time" xml:space="preserve">
+    <value>Synchronization rate</value>
+  </data>
+  <data name="STR_ctab_core_sync_timeDetails" xml:space="preserve">
+    <value>Time required to discover new devices and units</value>
+  </data>
+  <data name="STR_ctab_core_bft_mode" xml:space="preserve">
+    <value>Blue Force Tracking</value>
+  </data>
+  <data name="STR_ctab_core_bft_modeDetails" xml:space="preserve">
+    <value>Allow tracking of units equiped with cTab items. Position may be updated at each synchronization, or can be real time</value>
+  </data>
+  <data name="STR_ctab_core_helmetcam_mode" xml:space="preserve">
+    <value>Helmet cam</value>
+  </data>
+  <data name="STR_ctab_core_helmetcam_modeDetails" xml:space="preserve">
+    <value>Allow usage of helmet cam on tablet</value>
+  </data>
+  <data name="STR_ctab_core_uav_mode" xml:space="preserve">
+    <value>UAV feed</value>
+  </data>
+  <data name="STR_ctab_core_uav_modeDetails" xml:space="preserve">
+    <value>Allow usage of UAV feed on tablet</value>
+  </data>
+  <data name="STR_ctab_core_disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="STR_ctab_core_enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="STR_ctab_core_realTime" xml:space="preserve">
+    <value>Real time</value>
+  </data>
+  <data name="STR_ctab_core_atSync" xml:space="preserve">
+    <value>At each synchronization</value>
+  </data>
+  <data name="STR_ctab_core_useAceMicroDagr" xml:space="preserve">
+    <value>Add Blue Force Tracking to ACE MicroDAGR</value>
+  </data>
+  <data name="STR_ctab_core_useAceMicroDagrDetails" xml:space="preserve">
+    <value>Display Blue Force Tracking informatos on ACE MicroDAGR, and includes personnels equiped with it to tracking</value>
+  </data>
+  <data name="STR_ctab_core_newMessage" xml:space="preserve">
+    <value>New message from %1</value>
+  </data>
+  <data name="STR_ctab_core_newMarker" xml:space="preserve">
+    <value>New marker at #%1</value>
+  </data>
+  <data name="STR_ctab_core_markerAdded" xml:space="preserve">
+    <value>Marker added succesfully</value>
+  </data>
+  <data name="STR_ctab_core_toggleFullscreen" xml:space="preserve">
+    <value>Toggle Fullscreen</value>
+  </data>
+  <data name="STR_ctab_core_viewGunnerOptics" xml:space="preserve">
+    <value>View Gunner Optics</value>
+  </data>
+  <data name="STR_ctab_core_aceMenu" xml:space="preserve">
+    <value>Blue Force Tracking</value>
+  </data>
+  <data name="STR_ctab_core_useMils" xml:space="preserve">
+    <value>Unit of heading/compass</value>
+  </data>
+  <data name="STR_ctab_core_useMilsDetails" xml:space="preserve">
+    <value>Unit of heading/compass displayed in cTab devices</value>
+  </data>
+  <data name="STR_ctab_core_useMils_true" xml:space="preserve">
+    <value>Mils (0-6400)</value>
+  </data>
+  <data name="STR_ctab_core_useMils_false" xml:space="preserve">
+    <value>Degrees (0-360)</value>
+  </data>
+  <data name="STR_ctab_core_techData" xml:space="preserve">
+    <value>Technical Data</value>
+  </data>
+  <data name="STR_ctab_core_callSign" xml:space="preserve">
+    <value>Group call sign</value>
+  </data>
+</root>

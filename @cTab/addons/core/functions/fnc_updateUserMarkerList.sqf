@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
 	Name: cTab_fnc_updateUserMarkerList
 	
@@ -29,4 +30,5 @@ _tempList = [];
 cTabUserMarkerList = _tempList;
 
 [QGVARMAIN(userMarkerListUpdated)] call CBA_fnc_localEvent;
+
 true

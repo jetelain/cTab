@@ -96,7 +96,7 @@ namespace cTabWebApp
             await Clients.Group("WebUI").SendAsync("SetPosition", lastSetPosition);
         }
 
-        public async void ArmaUpdateMarkers(ArmaMessage message)
+        public async Task ArmaUpdateMarkers(ArmaMessage message)
         {
             //Console.WriteLine("ArmaUpdateMarkers " + string.Join(", ", message.Args));
 
@@ -218,6 +218,12 @@ namespace cTabWebApp
         public void ArmaDevices(ArmaMessage message)
         {
             Console.WriteLine("ArmaDevices " + string.Join(", ", message.Args));
+        }
+
+        public async Task WebAddUserMarker(WebAddUserMarkerMessage message)
+        {
+            string data = FormattableString.Invariant($"[[{message.X},{message.Y}],{message.Data[0]},{message.Data[1]},{message.Data[2]}]");
+            await Clients.Group("Arma").SendAsync("Callback", "AddUserMarker", data);
         }
     }
 }

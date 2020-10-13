@@ -12,7 +12,13 @@ addMissionEventHandler ["ExtensionCallback", {
 			LOG(_data);
 		};
 #endif
-
+		if( _function == "AddUserMarker" ) exitWith {
+			cTabUserSelIcon = parseSimpleArray _data;
+			cTabUserSelIcon pushBack (call cTab_fnc_currentTime);
+			cTabUserSelIcon pushBack cTab_player;
+			TRACE_2("AddUserMarker", _data, cTabUserSelIcon);
+			[call cTab_fnc_getPlayerEncryptionKey, cTabUserSelIcon] call cTab_fnc_addUserMarker;
+		};
 	};
 }];
 

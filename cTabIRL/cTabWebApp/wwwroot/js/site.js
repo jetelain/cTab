@@ -41,6 +41,9 @@ var existingMarkers = {};
 var centerOnPosition = true;
 var centerOnPositionButton;
 var fullScreenButton = null;
+var tempUserPopup = null;
+var userMarkerData = {};
+var connection = null;
 
 function updateButtons() {
     centerOnPositionButton.setClass(centerOnPosition ? 'btn-primary' : 'btn-outline-secondary');
@@ -67,6 +70,40 @@ function setCenterOnPosition(value) {
     updateButtons();
 }
 
+function generateMenu(id) {
+    if (id == 0) {
+        userMarkerData = {};
+    }
+    var div = $('<div></div>');
+    menus['' + id].forEach(function (entry) {
+        var a = $('<a class="dropdown-item" href="#"></a>');
+        a.text(entry.label);
+        a.attr('title', entry.tooltip);
+        a.on('click', function () {
+            if (entry.select1 !== null) userMarkerData.d1 = entry.select1;
+            if (entry.select2 !== null) userMarkerData.d2 = entry.select2;
+            if (entry.select3 !== null) userMarkerData.d3 = entry.select3;
+            if (entry.nextMenu) {
+                tempUserPopup.setContent(generateMenu(entry.nextMenu));
+            } else {
+                tempUserPopup.remove();
+                console.log(userMarkerData);
+
+                connection.invoke('WebAddUserMarker',
+                    {
+                        x: Math.trunc(tempUserPopup.getLatLng().lng),
+                        y: Math.trunc(tempUserPopup.getLatLng().lat),
+                        data: [userMarkerData.d1 || 0, userMarkerData.d2 || 0, userMarkerData.d3 || 0]
+                    });
+            }
+        });
+        a.appendTo(div);
+    });
+
+    //'<div><a class="dropdown-item" href="#">Position ennemie</a><a class="dropdown-item"  href="#">Bléssés</a><a class="dropdown-item"  href="#">Autre</a></div>'
+
+    return div.get(0);
+}
 
 function initMap(mapInfos) {
     if (mapInfos == currentMapInfos) {
@@ -81,7 +118,8 @@ function initMap(mapInfos) {
         minZoom: mapInfos.minZoom,
         maxZoom: mapInfos.maxZoom + 2,
         maxNativeZoom: mapInfos.maxZoom,
-        crs: mapInfos.CRS
+        crs: mapInfos.CRS,
+        doubleClickZoom: false
     });
     L.tileLayer('https://jetelain.github.io/Arma3Map' + mapInfos.tilePattern, {
         attribution: mapInfos.attribution,
@@ -91,7 +129,15 @@ function initMap(mapInfos) {
     map.setView(mapInfos.center, mapInfos.maxZoom);
     map.on('mousedown', function () { setCenterOnPosition(false); });
     map.on('touchstart', function () { setCenterOnPosition(false); });
-
+    map.on('dblclick contextmenu', function (e) {
+        if (!tempUserPopup) {
+            tempUserPopup = L.popup({ className: 'menupopup'});
+        }
+        tempUserPopup.setLatLng(e.latlng);
+        tempUserPopup.setContent(generateMenu(0));
+        tempUserPopup.openOn(map);
+    });
+    /**/
     (centerOnPositionButton = L.control.overlayButton({ content:'<i class="fas fa-location-arrow"></i>'})).addTo(map);
     centerOnPositionButton.j().on('click', function () { setCenterOnPosition(!centerOnPosition); });
 
@@ -209,7 +255,7 @@ $(function () {
         $('#statusbadge').attr('class', 'badge badge-success');
     }
 
-    var connection = new signalR.HubConnectionBuilder()
+    connection = new signalR.HubConnectionBuilder()
         .withUrl("/hub")
         .withAutomaticReconnect()
         .build();
