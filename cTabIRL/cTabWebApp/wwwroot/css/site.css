@@ -22,3 +22,12 @@ header {
     margin:5px;
     margin-right:20px;
 }
+.text-marker-content {
+    height: 24px;
+    width: max-content;
+    font-size: 10px;
+    vertical-align: middle;
+}
+#statusbar {
+    cursor: pointer;
+}

@@ -41,7 +41,7 @@ namespace cTabWebApp.Models
                         new MenuItem
                         {
                             Label = SharedResource.STR_ctab_core_InfantryMenu,
-                            Select1 = 0, NextMenu = 12
+                            Select1 = 0, NextMenu = 121
                         },
                         new MenuItem
                         {
@@ -82,6 +82,42 @@ namespace cTabWebApp.Models
                 new Menu()
                 {
                     MenuId = 12,
+                    Items = new [] {
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_SingularMenu,
+                            NextMenu = 13
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_TeamMenu,
+                            Tooltip = SharedResource.STR_ctab_core_TeamHint,
+                            Select2 = 1, NextMenu = 13
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_SquadMenu,
+                            Tooltip = SharedResource.STR_ctab_core_SquadHint,
+                            Select2 = 2, NextMenu = 13
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_SectionMenu,
+                            Tooltip = SharedResource.STR_ctab_core_SectionHint,
+                            Select2 = 3, NextMenu = 13
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PlatoonMenu,
+                            Tooltip = SharedResource.STR_ctab_core_PlatoonHint,
+                            Select2 = 4, NextMenu = 13
+                        }
+                    }
+                },
+
+                new Menu()
+                {
+                    MenuId = 121,
                     Items = new [] {
                         new MenuItem
                         {

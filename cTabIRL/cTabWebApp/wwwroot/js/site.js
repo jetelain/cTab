@@ -45,6 +45,11 @@ var tempUserPopup = null;
 var userMarkerData = {};
 var connection = null;
 
+function pad(n, width) {
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+}
+
 function updateButtons() {
     centerOnPositionButton.setClass(centerOnPosition ? 'btn-primary' : 'btn-outline-secondary');
 
@@ -70,11 +75,40 @@ function setCenterOnPosition(value) {
     updateButtons();
 }
 
+var octants = ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO', 'N'];
+
+function toHeadingUnit(degrees) {
+    var text = '' + Math.trunc(degrees * 6400 / 360);
+
+    text += ' ' + octants[Math.round(degrees / 45)];
+
+    return text;
+}
+
+function bearing(latlng1, latlng2) {
+    return ((Math.atan2(latlng2.lng - latlng1.lng, latlng2.lat - latlng1.lat) * 180 / Math.PI) + 360) % 360;
+}
+//             return Math.Atan2(dy, dx) * 180d / Math.PI;
+
 function generateMenu(id) {
     if (id == 0) {
         userMarkerData = {};
     }
     var div = $('<div></div>');
+
+    if (id == 0) {
+        var a = $('<div class="text-center"></div>');
+        var infos = pad(Math.trunc(tempUserPopup.getLatLng().lng), 5) + ' - ' + pad(Math.trunc(tempUserPopup.getLatLng().lat), 5);
+        if (selfMarker) {
+            var pos1 = tempUserPopup.getLatLng();
+            var pos2 = selfMarker.getLatLng();
+            infos += '<br />' + Math.trunc(currentMap.distance(pos1, pos2)) + 'm ' + toHeadingUnit(Math.trunc(bearing(pos2, pos1)));
+        }
+        a.html(infos);
+        a.appendTo(div);
+        }
+
+
     menus['' + id].forEach(function (entry) {
         var a = $('<a class="dropdown-item" href="#"></a>');
         a.text(entry.label);
@@ -107,11 +141,24 @@ function generateMenu(id) {
 
 function initMap(mapInfos) {
     if (mapInfos == currentMapInfos) {
+        Object.getOwnPropertyNames(existingMarkers).forEach(function (id) {
+            existingMarkers[id].remove();
+        });
+        existingMarkers = {};
+        if (selfMarker) {
+            selfMarker.remove();
+            selfMarker = null;
+        }
+        if (tempUserPopup) {
+            tempUserPopup.remove();
+            tempUserPopup = null;
+        }
         return;
     }
     if (currentMap != null) {
         existingMarkers = {};
         selfMarker = null;
+        tempUserPopup = null;
         currentMap.remove();
     }
     var map = L.map('map', {
@@ -159,10 +206,6 @@ function initMap(mapInfos) {
     updateButtons();
 };
 
-function pad(n, width) {
-    n = n + '';
-    return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
-}
 
 function updateClock(date) {
     var dateObj = new Date(date);
@@ -172,7 +215,7 @@ function updateClock(date) {
 
 function updatePosition(x, y, heading, grp, veh) {
     $('#position').text(pad(Math.trunc(x), 5) + ' - ' + pad(Math.trunc(y), 5));
-    $('#heading').text('' + Math.trunc(heading * 6400 / 360));
+    $('#heading').text(toHeadingUnit(heading));
 
     var marker = existingMarkers[veh || grp];
     if (marker) {
@@ -195,6 +238,22 @@ function updatePosition(x, y, heading, grp, veh) {
 }
 
 function createIcon(marker) {
+
+    if (/^img:/.test(marker.symbol)) {
+        var iconHtml = $('<div></div>').append(
+            $('<div></div>')
+                .addClass('text-marker-content')
+                .text(marker.name)
+                .prepend($('<img src="/img/' + marker.symbol.substr(4) + '" width="32" height="32" />&nbsp;')))
+            .html();
+
+        return new L.DivIcon({
+            className: 'text-marker',
+            html: iconHtml,
+            iconAnchor: [16, 16]
+        });
+    }
+
     var sym = new ms.Symbol(marker.symbol, { size: 24, additionalInformation: marker.name });
     return L.icon({
         iconUrl: sym.asCanvas(window.devicePixelRatio).toDataURL(),
@@ -237,6 +296,7 @@ function updateMarkers(makers) {
 
 $(function () {
 
+    $('#statusbar').on('click', function () { if (connection.state === signalR.HubConnectionState.Disconnected) { connection.start(); } });
 
     initMap(Arma3Map.Maps.altis); // Starts on altis by default
 
@@ -286,13 +346,13 @@ $(function () {
 
 
     connection.start().then(function () {
-        connection.invoke("WebHello", {});
         connected();
+        connection.invoke("WebHello", {});
     }).catch(connectionLost);
 
     connection.onreconnecting(connectionLost);
     connection.onreconnected(function () {
-        connection.invoke("WebHello", {});
         connected();
+        connection.invoke("WebHello", {});
     });
 });

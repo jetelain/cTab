@@ -12,12 +12,12 @@
 <body>
     <header>
         <div class="row">
-            <div class="col-2 text-left">
+            <div class="col-2 text-left" id="statusbar">
                 <span class="badge badge-warning" id="statusbadge">&nbsp;&nbsp;</span>
                 <span id="status">Connecting...</span>
             </div>
             <div class="col-3 text-center" id="heading">
-                -----
+                ----- -
             </div>
             <div class="col-2 text-center" id="date">
                 --:--
@@ -40,6 +40,18 @@
     <script src="https://jetelain.github.io/Arma3Map/js/mapUtils.js"></script>
     <script src="https://jetelain.github.io/Arma3Map/maps/all.js"></script>
     <script>
+        var octants = @Json.Serialize(
+            new[] {
+                SharedResource.STR_ctab_core_North,
+                SharedResource.STR_ctab_core_NorthEast,
+                SharedResource.STR_ctab_core_East,
+                SharedResource.STR_ctab_core_SouthEast,
+                SharedResource.STR_ctab_core_South,
+                SharedResource.STR_ctab_core_SouthWest,
+                SharedResource.STR_ctab_core_West,
+                SharedResource.STR_ctab_core_NorthWest,
+                SharedResource.STR_ctab_core_North
+            });
         var menus = @Json.Serialize(Menu.CreateMenus().ToDictionary(e => e.MenuId.ToString(), e => e.Items));
     </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
