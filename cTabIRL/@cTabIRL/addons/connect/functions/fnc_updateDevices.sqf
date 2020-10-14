@@ -20,5 +20,5 @@ if ( GVAR(deviceLevel) != _deviceLevel ) then {
 	GVAR(deviceLevel) = _deviceLevel;
 	INFO_1("Device level changed to %1", _deviceLevel);
 
-	"cTabExtension" callExtension ["Devices", _deviceLevel, ctab_core_useMils];
+	"cTabExtension" callExtension ["Devices", [_deviceLevel, ctab_core_useMils]];
 };

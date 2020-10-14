@@ -104,7 +104,7 @@ namespace cTabExtension
             {
                 DebugMessage($"{e.GetType().Name} {e.Message}.");
             }
-            DebugMessage($"{function}: {sw.ElapsedMilliseconds} msec in RvExtensionArgs.");
+            DebugMessage($"{function}: {sw.ElapsedTicks} ticks in RvExtensionArgs.");
             return 0;
         }
 
