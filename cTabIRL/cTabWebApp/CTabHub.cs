@@ -15,6 +15,7 @@ namespace cTabWebApp
         private static MissionMessage lastMission = null;
         private static SetPositionMessage lastSetPosition = null;
         private static UpdateMarkersMessage lastUpdateMarkers = null;
+        private static DevicesMessage lastDevices = null;
 
         public async Task WebHello(WebHelloMessage message)
         {
@@ -24,13 +25,17 @@ namespace cTabWebApp
             {
                 await Clients.Caller.SendAsync("Mission", lastMission);
             }
-            if (lastSetPosition != null)
+            if (lastDevices != null)
             {
-                await Clients.Caller.SendAsync("SetPosition", lastSetPosition);
+                await Clients.Caller.SendAsync("Devices", lastDevices);
             }
             if (lastUpdateMarkers != null)
             {
                 await Clients.Caller.SendAsync("UpdateMarkers", lastUpdateMarkers);
+            }
+            if (lastSetPosition != null)
+            {
+                await Clients.Caller.SendAsync("SetPosition", lastSetPosition);
             }
         }
 
@@ -215,9 +220,19 @@ namespace cTabWebApp
             lastMission = null;
         }
 
-        public void ArmaDevices(ArmaMessage message)
+        public async Task ArmaDevices(ArmaMessage message)
         {
             Console.WriteLine("ArmaDevices " + string.Join(", ", message.Args));
+            var deviceLevel = int.Parse(message.Args[0], CultureInfo.InvariantCulture);
+            var useMils = bool.Parse(message.Args[1]);
+
+            lastDevices = new DevicesMessage()
+            {
+                Level = deviceLevel,
+                UseMils = useMils
+            };
+
+            await Clients.Group("WebUI").SendAsync("Devices", lastDevices);
         }
 
         public async Task WebAddUserMarker(WebAddUserMarkerMessage message)

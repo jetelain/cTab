@@ -33,6 +33,27 @@ L.control.overlayButton = function (options) {
     return new L.Control.OverlayButton(options);
 };
 
+L.Control.OverlayNotify = L.Control.extend({
+    options: {
+        position: 'bottomleft',
+        text: ''
+    },
+    onAdd: function (map) {
+        this._container = L.DomUtil.create('div', 'notify-message');
+        $(this._container).text(this.options.text);
+        L.DomEvent.disableClickPropagation(this._container);
+        return this._container;
+    },
+    onRemove: function (map) {
+    },
+    text: function (value) {
+        $(this._container).text(value);
+    }
+});
+
+L.control.overlayNotify = function (options) {
+    return new L.Control.OverlayNotify(options);
+};
 
 var currentMap = null;
 var currentMapInfos = null;

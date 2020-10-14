@@ -31,3 +31,14 @@ header {
 #statusbar {
     cursor: pointer;
 }
+
+.notify-message {
+    font-size: 14px;
+    background: #fff8;
+    padding: 0.5em 1em;
+    margin: 0;
+    font-weight: bold;
+    width: 60vw;
+    text-align: center;
+    left: 20vw;
+}

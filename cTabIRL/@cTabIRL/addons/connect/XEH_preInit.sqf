@@ -23,3 +23,4 @@ addMissionEventHandler ["ExtensionCallback", {
 }];
 
 GVAR(nextId) = 1;
+GVAR(deviceLevel) = 0;

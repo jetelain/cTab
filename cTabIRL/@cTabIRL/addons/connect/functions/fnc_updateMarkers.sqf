@@ -1,5 +1,7 @@
 #include "script_component.hpp"
 
+if ( GVAR(deviceLevel) == 0 ) exitWith { };
+
 private _data = [];
 
 {
