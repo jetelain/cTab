@@ -12,21 +12,35 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		DebugCloud|Any CPU = DebugCloud|Any CPU
 		Release|Any CPU = Release|Any CPU
+		ReleaseCloud|Any CPU = ReleaseCloud|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9161C2CC-F6F3-471E-8F5C-122395215DAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9161C2CC-F6F3-471E-8F5C-122395215DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9161C2CC-F6F3-471E-8F5C-122395215DAF}.DebugCloud|Any CPU.ActiveCfg = Debug|Any CPU
+		{9161C2CC-F6F3-471E-8F5C-122395215DAF}.DebugCloud|Any CPU.Build.0 = Debug|Any CPU
 		{9161C2CC-F6F3-471E-8F5C-122395215DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9161C2CC-F6F3-471E-8F5C-122395215DAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9161C2CC-F6F3-471E-8F5C-122395215DAF}.ReleaseCloud|Any CPU.ActiveCfg = Release|Any CPU
+		{9161C2CC-F6F3-471E-8F5C-122395215DAF}.ReleaseCloud|Any CPU.Build.0 = Release|Any CPU
 		{C5FC3CB9-569B-4E96-921F-79BBDC31CDCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C5FC3CB9-569B-4E96-921F-79BBDC31CDCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5FC3CB9-569B-4E96-921F-79BBDC31CDCB}.DebugCloud|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5FC3CB9-569B-4E96-921F-79BBDC31CDCB}.DebugCloud|Any CPU.Build.0 = Debug|Any CPU
 		{C5FC3CB9-569B-4E96-921F-79BBDC31CDCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5FC3CB9-569B-4E96-921F-79BBDC31CDCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5FC3CB9-569B-4E96-921F-79BBDC31CDCB}.ReleaseCloud|Any CPU.ActiveCfg = Release|Any CPU
+		{C5FC3CB9-569B-4E96-921F-79BBDC31CDCB}.ReleaseCloud|Any CPU.Build.0 = Release|Any CPU
 		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.DebugCloud|Any CPU.ActiveCfg = DebugCloud|Any CPU
+		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.DebugCloud|Any CPU.Build.0 = DebugCloud|Any CPU
 		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.ReleaseCloud|Any CPU.ActiveCfg = ReleaseCloud|Any CPU
+		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.ReleaseCloud|Any CPU.Build.0 = ReleaseCloud|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

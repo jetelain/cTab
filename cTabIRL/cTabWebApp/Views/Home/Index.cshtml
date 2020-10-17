@@ -1,59 +1,92 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no" />
-    <title>cTab</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <div class="row">
-            <div class="col-2 text-left" id="statusbar">
-                <span class="badge badge-warning" id="statusbadge">&nbsp;&nbsp;</span>
-                <span id="status">Connecting...</span>
-            </div>
-            <div class="col-3 text-center" id="heading">
-                ----- -
-            </div>
-            <div class="col-2 text-center" id="date">
-                --:--
-            </div>
-            <div class="col-5 text-center" id="position">
-                ----- - -----
-            </div>
-        </div>
-    </header>
-    <div class="map" id="map">
-    </div>
+﻿@model HomeVM
+@inject IViewLocalizer Localizer
+@inject CommunautyInfos Communauty
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = SharedResource.Home;
+}
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/@@microsoft/signalr@3.1.4/dist/browser/signalr.min.js"></script>
-    <script src="https://unpkg.com/milsymbol@2.0.0/dist/milsymbol.js"></script>
-    <script src="https://unpkg.com/milstd@0.1.6/milstd.js"></script>
-    <script src="https://jetelain.github.io/Arma3Map/js/mapUtils.js"></script>
-    <script src="https://jetelain.github.io/Arma3Map/maps/all.js"></script>
-    <script>
-        var octants = @Json.Serialize(
-            new[] {
-                SharedResource.STR_ctab_core_North,
-                SharedResource.STR_ctab_core_NorthEast,
-                SharedResource.STR_ctab_core_East,
-                SharedResource.STR_ctab_core_SouthEast,
-                SharedResource.STR_ctab_core_South,
-                SharedResource.STR_ctab_core_SouthWest,
-                SharedResource.STR_ctab_core_West,
-                SharedResource.STR_ctab_core_NorthWest,
-                SharedResource.STR_ctab_core_North
-            });
-        var menus = @Json.Serialize(Menu.CreateMenus().ToDictionary(e => e.MenuId.ToString(), e => e.Items));
-    </script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-</body>
-</html>
+@if (Model.Error != null)
+{
+    <p class="alert alert-danger" role="alert">@Model.Error</p>
+}
+
+<h1 class="text-center">@Localizer["cTab on mobile device"]</h1>
+@if (!string.IsNullOrEmpty(Communauty.Name))
+{
+    <p class="text-center">
+        <a href="@Communauty.Home">
+            @Localizer["Hosted by {0}", Communauty.Name]
+        </a>
+    </p>
+}
+<div class="row mt-4">
+
+    @if (Model.Providers.Length > 0)
+    {
+        <div class="col-md-6">
+            <h2>@Localizer["Connect with Steam and cTab Key"]</h2>
+            <ol>
+                <li>@Localizer["Open {0} with the mobile browser.", Model.PublicUri]</li>
+                <li>@Localizer["Signin with steam."]</li>
+                <li>@Localizer["In-game, once the message 'cTab connected to {0}.' appears, open map with key <kbd>m</kbd> (qwerty keyboard).", Model.PublicUri]</li>
+                <li>@Localizer["Go into 'cTab IRL', 'Connect to mobile device', locate the key displayed (6 digits)."]
+                <li>@Localizer["Type here the key and validate."]</li>
+            </ol>
+
+            @if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                <form method="post" asp-action="EnterKey" class="form-inline justify-content-center mb-4">
+                    <div class="input-group mr-sm-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-key"></i></div>
+                        </div>
+                        <input type="text" class="form-control" id="key" name="key" placeholder="@Localizer["Key"]" />
+                        <div class="input-group-append">
+                            <button class="btn btn-success" type="submit">@Localizer["Validate"]</button>
+                        </div>
+                    </div>
+
+                </form>
+            }
+            else
+            {
+                @foreach (var scheme in Model.Providers.OrderBy(p => p.DisplayName))
+                {
+                    <form method="post" asp-action="SignIn">
+                        <input type="hidden" name="Provider" value="@scheme.Name" />
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="isPersistent" name="isPersistent">
+                                <label class="form-check-label" for="isPersistent">
+                                    @Localizer["Rember me"]
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-success m-1" type="submit">@Localizer["Connect with {0}", scheme.DisplayName]</button>
+                    </form>
+                }
+            }
+        </div>
+    }
+    else
+    {
+        <div class="col-md-6">
+            <h2>@Localizer["Connect with Steam and cTab Key"]</h2>
+            <p>@Localizer["Unavailable"]</p>
+        </div>
+    }
+    <div class="col-md-6">
+        <h2>@Localizer["Connect with QR Code (easier)"]</h2>
+        <ol>
+            <li>@Localizer["In-game, once the message 'cTab connected to {0}.' appears, open map with key <kbd>m</kbd> (qwerty keyboard).", Model.PublicUri]</li>
+            <li>@Localizer["Go into 'cTab IRL', 'Connect a mobile device', then scan the code with your mobile device."]</li>
+        </ol>
+        TODO: Screenshot
+    </div>
+</div>
+
+<div class="mt-4">
+    <h2>@Localizer["Self-hosting"]</h2>
+    <p>@Localizer["You can host the cTab IRL Server on your computer or on your communauty server. It needs some technical skills, follow instructions on the <a href=\"{0}\">GitHub documentation page</a>.", "https://github.com/jetelain/cTab"]</p>
+</div>

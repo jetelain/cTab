@@ -61,6 +61,78 @@ namespace cTabWebApp {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Arma is not yet connected. Please wait for key to be available in-game..
+        /// </summary>
+        public static string ArmaNotYetConnected {
+            get {
+                return ResourceManager.GetString("ArmaNotYetConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Contact.
+        /// </summary>
+        public static string Contact {
+            get {
+                return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Disconnect.
+        /// </summary>
+        public static string Disconnect {
+            get {
+                return ResourceManager.GetString("Disconnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Go back to {0}.
+        /// </summary>
+        public static string GoBackTo {
+            get {
+                return ResourceManager.GetString("GoBackTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Home.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Provided key is invalid. Please check again key displayed in-game..
+        /// </summary>
+        public static string InvalidKey {
+            get {
+                return ResourceManager.GetString("InvalidKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Code has expired. Please scan again QR Code available in-game..
+        /// </summary>
+        public static string InvalidQrCode {
+            get {
+                return ResourceManager.GetString("InvalidQrCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Privacy.
+        /// </summary>
+        public static string Privacy {
+            get {
+                return ResourceManager.GetString("Privacy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Blue Force Tracking.
         /// </summary>
         public static string STR_ctab_core_aceMenu {

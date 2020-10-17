@@ -17,7 +17,7 @@ namespace cTabExtensionTester
             Extension.RVExtensionRegisterCallback(Callback);
             Extension.RvExtension(sb, int.MaxValue, "Warmup");
             Extension.RvExtension(sb, int.MaxValue, "Debug");
-            Extension.RvExtensionArgs(sb, int.MaxValue, "Connect", new [] { "\"http://localhost:5000/hub\"", "\"PlayerUID\"", "\"Player\"", "\"Key\"" }, 4);
+            Extension.RvExtensionArgs(sb, int.MaxValue, "Connect", new [] { "\"http://localhost:5000/hub\"", "\"PlayerUID\"", "\"Player\"", "\"584642\"" }, 4);
             Extension.RvExtensionArgs(sb, int.MaxValue, "StartMission", new[] { "\"Malden\"", "12800", "[2035,6,24,12,0]" }, 3);
 
             while (true)

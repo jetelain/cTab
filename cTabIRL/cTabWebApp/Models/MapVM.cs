@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace cTabWebApp.Models
 {
-    public class HowToConnectVM
+    public class MapVM
     {
-        public string Uri { get; set; }
+        public string Token { get; set; }
+        public string InitialMap { get; set; } = "altis";
     }
 }

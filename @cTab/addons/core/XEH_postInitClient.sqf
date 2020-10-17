@@ -364,6 +364,8 @@ cTab_Tablet_btnACT = ctab_fnc_tablet_btnACT;
 		
 		_msgRecipient setVariable [format ["cTab_messages_%1",_msgEncryptionKey],_msgArray];
 		
+		[QGVARMAIN(messagesUpdated)] call CBA_fnc_localEvent;
+
 		if (_msgRecipient == cTab_player && _sender != cTab_player && {_playerEncryptionKey == _msgEncryptionKey} && {[cTab_player,["ItemcTab","ItemAndroid"]] call cTab_fnc_checkGear}) then {
 			playSound "cTab_phoneVibrate";
 			

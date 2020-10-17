@@ -67,6 +67,7 @@ namespace cTabExtension
                 case "StartMission":
                 case "EndMission":
                 case "Devices":
+                case "UpdateMessages":
                 case "UpdateMarkers":
                     Send(function, srv => srv.InvokeAsync("Arma" + function, new ArmaMessage() { Timestamp = DateTime.UtcNow, Args = args }), true);
                     break;
@@ -86,6 +87,10 @@ namespace cTabExtension
         {
             serverConnection.ContinueWith(async srv =>
             {
+                if (srv.Result.State == HubConnectionState.Disconnected)
+                {
+                    return;
+                }
                 if (srv.Result.State == HubConnectionState.Reconnecting)
                 {
                     if (needsReplayLast)
@@ -108,12 +113,12 @@ namespace cTabExtension
                 {
                     foreach(var e in ae.InnerExceptions)
                     {
-                        Extension.DebugMessage($"{name} failed with {e.GetType().Name} {e.Message}.");
+                        Extension.ErrorMessage($"{name} failed with {e.GetType().Name} {e.Message}.");
                     }
                 }
                 catch (Exception e)
                 {
-                    Extension.DebugMessage($"{name} failed with {e.GetType().Name} {e.Message}.");
+                    Extension.ErrorMessage($"{name} failed with {e.GetType().Name} {e.Message}.");
                 }
             }).Unwrap();
         }
@@ -140,9 +145,10 @@ namespace cTabExtension
 
         private static async Task<HubConnection> ConnectToServer(string server, string steamId, string name, string key, CancellationToken token)
         {
-            Extension.DebugMessage($"server={server}, steamId={steamId}, name={name}, key={key}");
-
             var uri = new Uri(server);
+
+            Extension.DebugMessage($"server={server}, steamId={steamId}, name={name}, key={key}, hostname={uri.DnsSafeHost}");
+
             var connection = new HubConnectionBuilder()
                 .WithUrl(uri, options =>
                 {
@@ -154,7 +160,7 @@ namespace cTabExtension
             connection.On<string, string>("Callback", Extension.Callback);
             connection.Reconnecting += async _ => {
                 Extension.DebugMessage($"Reconnecting...");
-                await Extension.Callback("reconnecting", "");
+                await Extension.Callback("Reconnecting", "");
             };
             connection.Reconnected += async _ => { 
                 Extension.DebugMessage($"Reconnected !");  
@@ -162,6 +168,13 @@ namespace cTabExtension
                 foreach(var send in replay)
                 {
                     await send.Item2(connection);
+                }
+            };
+            connection.Closed += async e => {
+                if (e != null)
+                {
+                    Extension.ErrorMessage($"Closed with {e.GetType().Name} {e.Message}.");
+                    await Extension.Callback("Disconnected", "");
                 }
             };
 
@@ -192,7 +205,6 @@ namespace cTabExtension
             Extension.DebugMessage($"Send Hello...");
             await connection.InvokeAsync("ArmaHello", new ArmaHelloMessage() { Timestamp = DateTime.UtcNow, SteamId = steamId, PlayerName = name, Key = key });
             Extension.DebugMessage($"Hello done.");
-            await Extension.Callback("connected", "");
         }
 
         private static string HashKeyForHost(string key, string hostname)

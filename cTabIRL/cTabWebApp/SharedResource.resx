@@ -549,4 +549,28 @@
   <data name="STR_ctab_core_callSign" xml:space="preserve">
     <value>Group call sign</value>
   </data>
+  <data name="InvalidQrCode" xml:space="preserve">
+    <value>Code has expired. Please scan again QR Code available in-game.</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="ArmaNotYetConnected" xml:space="preserve">
+    <value>Arma is not yet connected. Please wait for key to be available in-game.</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="GoBackTo" xml:space="preserve">
+    <value>Go back to {0}</value>
+  </data>
+  <data name="InvalidKey" xml:space="preserve">
+    <value>Provided key is invalid. Please check again key displayed in-game.</value>
+  </data>
 </root>

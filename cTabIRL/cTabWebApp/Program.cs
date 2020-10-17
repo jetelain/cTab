@@ -23,18 +23,11 @@ namespace cTabWebApp
 
         public static void Main(string[] args)
         {
-            var urls = GetUrls();
-            var host = CreateHostBuilder(args, urls).Build();
-            host.Start();
-            Thread.Sleep(1000);
-            Console.WriteLine($"=========================================================");
-            Console.WriteLine($" Open your mobile browser on {urls.FirstOrDefault()}");
-            Console.WriteLine($"=========================================================");
-            if (!Debugger.IsAttached)
-            {
-                Process.Start(new ProcessStartInfo($"{localUri}Home/HowToConnect") { UseShellExecute = true });
-            }
-            host.WaitForShutdown();
+#if CLOUD && !DEBUG
+            CreateHostBuilder(args, null).Build().Run();
+#else
+            CreateHostBuilder(args, GetUrls()).Build().Run();
+#endif
         }
 
         private static string[] GetUrls()

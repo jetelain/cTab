@@ -86,4 +86,6 @@ if ( hasInterface ) then {
 	PREP(formatHeading);
 	PREP(onTechnicalDataClose);
 	PREP(onTechnicalDataOpen);
+	PREP(sendMessage);
+	PREP(deleteMessages);
 };

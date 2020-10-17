@@ -549,4 +549,28 @@
   <data name="STR_ctab_core_callSign" xml:space="preserve">
     <value>Identifiant du groupe</value>
   </data>
+  <data name="InvalidQrCode" xml:space="preserve">
+    <value>Le code a expiré. Merci de scanner de nouveau le QR Code disponible en jeu.</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Se déconnecter</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Accueil</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Mentions légales</value>
+  </data>
+  <data name="ArmaNotYetConnected" xml:space="preserve">
+    <value>Arma n'est pas encore connecté. Veuillez attendre que la clé soit disponible en jeu.</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="GoBackTo" xml:space="preserve">
+    <value>Retourner à {0}</value>
+  </data>
+  <data name="InvalidKey" xml:space="preserve">
+    <value>La clé saisie est invalide. Veuillez vérifier la clé affichée en jeu.</value>
+  </data>
 </root>

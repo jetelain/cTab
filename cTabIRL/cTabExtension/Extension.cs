@@ -97,12 +97,12 @@ namespace cTabExtension
             {
                 foreach (var e in ae.InnerExceptions)
                 {
-                    DebugMessage($"{e.GetType().Name} {e.Message}.");
+                    ErrorMessage($"{e.GetType().Name} {e.Message}.");
                 }
             }
             catch (Exception e)
             {
-                DebugMessage($"{e.GetType().Name} {e.Message}.");
+                ErrorMessage($"{e.GetType().Name} {e.Message}.");
             }
             DebugMessage($"{function}: {sw.ElapsedTicks} ticks in RvExtensionArgs.");
             return 0;
@@ -110,6 +110,14 @@ namespace cTabExtension
 
         public static Task Callback(string function, string data)
         {
+            if (data == null)
+            {
+                data = "";
+            }
+            if (function.Length > 64 || data.Length > 20000)
+            {
+                return Task.CompletedTask;
+            }
             if (callback != null)
             {
                 return Task.Factory.StartNew(() => callback("ctab", function, data));
@@ -119,10 +127,18 @@ namespace cTabExtension
 
         public static void DebugMessage(string message)
         {
-            Debug.WriteLine(message);
+            Trace.WriteLine(message);
             if (callback != null && debugCallback)
             {
                 callback("ctab", "Debug", message);
+            }
+        }
+        public static void ErrorMessage(string message)
+        {
+            Trace.TraceError("%1", message);
+            if (callback != null)
+            {
+                callback("ctab", "Error", message);
             }
         }
     }

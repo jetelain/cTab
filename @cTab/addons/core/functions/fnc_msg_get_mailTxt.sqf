@@ -1,6 +1,7 @@
 /*
 	(previously cTab_msg_get_mailTxt in player_init.sqf)
 */
+#include "script_component.hpp"
 #include "\cTab\shared\cTab_gui_macros.hpp"
 
 disableSerialization;
@@ -15,6 +16,7 @@ _msgState = (_msgArray select _index) select 2;
 if (_msgState == 0) then {
     _msgArray set [_index,[_msgName,_msgtxt,1]];
     cTab_player setVariable [format ["cTab_messages_%1",_playerEncryptionKey],_msgArray];
+    [QGVARMAIN(messagesUpdated)] call CBA_fnc_localEvent;
 };
 
 _nop = [] call cTab_msg_gui_load;

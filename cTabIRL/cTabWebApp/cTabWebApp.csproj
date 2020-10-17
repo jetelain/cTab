@@ -4,9 +4,23 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>a57b2a12-9f96-46b6-9f83-1d3d6d4e3c22</UserSecretsId>
     <OutputType>Exe</OutputType>
+    <Configurations>Debug;Release;DebugCloud;ReleaseCloud</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugCloud|AnyCPU'">
+    <DefineConstants>TRACE;CLOUD; DEBUG</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseCloud|AnyCPU'">
+    <DefineConstants>TRACE;CLOUD</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNet.Security.OpenId.Steam" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="QRCoder" Version="1.3.9" />
   </ItemGroup>
