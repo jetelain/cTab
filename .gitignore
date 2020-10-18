@@ -1,7 +1,7 @@
 texHeaders.bin
 /.vs
 *.pbo
-/cTabIRL/.vs/cTabExtension
+/cTabIRL/.vs
 /cTabIRL/cTabExtension/bin
 /cTabIRL/cTabExtension/obj
 /cTabIRL/cTabExtensionTester/bin
@@ -14,3 +14,5 @@ appsettings.Development.json
 *.dll
 *.pdb
 *.exe
+/cTabIRL/QrFontBuilder/obj
+/cTabIRL/QrFontBuilder/bin

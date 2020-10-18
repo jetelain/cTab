@@ -34,7 +34,17 @@ class CfgFontFamilies
 			"z\ctab_irl\addons\connect\data\qrfont16",
 			"z\ctab_irl\addons\connect\data\qrfont17",
 			"z\ctab_irl\addons\connect\data\qrfont18",
-			"z\ctab_irl\addons\connect\data\qrfont19"
+			"z\ctab_irl\addons\connect\data\qrfont19",
+			"z\ctab_irl\addons\connect\data\qrfont20",
+			"z\ctab_irl\addons\connect\data\qrfont21",
+			"z\ctab_irl\addons\connect\data\qrfont22",
+			"z\ctab_irl\addons\connect\data\qrfont23",
+			"z\ctab_irl\addons\connect\data\qrfont24",
+			"z\ctab_irl\addons\connect\data\qrfont25",
+			"z\ctab_irl\addons\connect\data\qrfont26",
+			"z\ctab_irl\addons\connect\data\qrfont27",
+			"z\ctab_irl\addons\connect\data\qrfont28",
+			"z\ctab_irl\addons\connect\data\qrfont29"
 		};
 	};
 };
