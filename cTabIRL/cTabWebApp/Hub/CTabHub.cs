@@ -318,7 +318,7 @@ namespace cTabWebApp
 
                 var title = (string)data[0];
                 var body = (string)data[1];
-                var msgState = (int)data[2];
+                var msgState = (int)((double?)data[2]);
                 var id = (string)data[3];
 
                 msg.Messages.Add(new Message()
