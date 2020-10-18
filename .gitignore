@@ -16,3 +16,5 @@ appsettings.Development.json
 *.exe
 /cTabIRL/QrFontBuilder/obj
 /cTabIRL/QrFontBuilder/bin
+/cTabIRL/cTabWebAppTests/obj
+/cTabIRL/cTabWebAppTests/bin

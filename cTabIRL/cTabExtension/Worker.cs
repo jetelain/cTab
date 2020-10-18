@@ -29,7 +29,7 @@ namespace cTabExtension
             i++;
             if (i % 100 == 0)
             {
-                File.WriteAllText(@"C:\Users\Julien\source\repos\jetelain\ctab.txt", sb.ToString());
+                File.WriteAllText(Path.Combine(Path.GetTempPath(),"ctab.txt"), sb.ToString());
             }*/
 
             if (function == "Connect")

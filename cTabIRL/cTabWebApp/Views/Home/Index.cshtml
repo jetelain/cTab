@@ -20,6 +20,12 @@
         </a>
     </p>
 }
+
+<div class="mt-4">
+    <h2>@Localizer["Install cTab IRL mod"]</h2>
+    <p>@Localizer["Download the mod from the <a href=\"{0}\">Steam Workshop</a>, or from <a href=\"{1}\">GitHub</a>.","TODO", "https://github.com/jetelain/cTab"]</p>
+</div>
+
 <div class="row mt-4">
 
     @if (Model.Providers.Length > 0)
@@ -82,7 +88,9 @@
             <li>@Localizer["In-game, once the message 'cTab connected to {0}.' appears, open map with key <kbd>m</kbd> (qwerty keyboard).", Model.PublicUri]</li>
             <li>@Localizer["Go into 'cTab IRL', 'Connect a mobile device', then scan the code with your mobile device."]</li>
         </ol>
-        TODO: Screenshot
+        <p class="text-center">
+            <img src="~/img/qrcode.png" style="max-width:95%;" />
+        </p>
     </div>
 </div>
 

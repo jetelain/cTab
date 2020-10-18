@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using cTabWebApp.Hubs;
 using cTabWebApp.Services;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
@@ -115,9 +116,9 @@ namespace cTabWebApp
                 return;
             }
 
-            var worldName = JsonSerializer.Deserialize<string>(message.Args[0]);
-            var size = double.Parse(message.Args[1], CultureInfo.InvariantCulture);
-            var date = JsonSerializer.Deserialize<int[]>(message.Args[2]);
+            var worldName = ArmaSerializer.ParseString(message.Args[0]);
+            var size = ArmaSerializer.ParseDouble(message.Args[1]) ?? 0d;
+            var date = ArmaSerializer.ParseIntegerArray(message.Args[2]);
 
             state.LastMission = new MissionMessage()
             {
@@ -150,13 +151,13 @@ namespace cTabWebApp
                 return;
             }
 
-            var x = double.Parse(message.Args[0], CultureInfo.InvariantCulture);
-            var y = double.Parse(message.Args[1], CultureInfo.InvariantCulture);
-            var z = double.Parse(message.Args[2], CultureInfo.InvariantCulture);
-            var dir = double.Parse(message.Args[3], CultureInfo.InvariantCulture);
-            var date = JsonSerializer.Deserialize<int[]>(message.Args[4]);
-            var grp = JsonSerializer.Deserialize<string>(message.Args[5]);
-            var vehicle = message.Args.Length > 6 ? JsonSerializer.Deserialize<string>(message.Args[6]) : null;
+            var x = ArmaSerializer.ParseDouble(message.Args[0]) ?? 0d;
+            var y = ArmaSerializer.ParseDouble(message.Args[1]) ?? 0d;
+            var z = ArmaSerializer.ParseDouble(message.Args[2]) ?? 0d;
+            var dir = ArmaSerializer.ParseDouble(message.Args[3]) ?? 0d;
+            var date = ArmaSerializer.ParseIntegerArray(message.Args[4]);
+            var grp = ArmaSerializer.ParseString(message.Args[5]);
+            var vehicle = message.Args.Length > 6 ? ArmaSerializer.ParseString(message.Args[6]) : null; 
 
             state.LastSetPosition = new SetPositionMessage()
             {
@@ -192,24 +193,24 @@ namespace cTabWebApp
 
             foreach (var entry in message.Args)
             {
-                var data = JsonSerializer.Deserialize<JsonElement[]>(entry.Replace("\\","\\\\"));
+                var data = ArmaSerializer.ParseMixedArray(entry);
 
-                var kind = data[0].GetString();
-                var id = data[1].GetString();
-                var iconA = data[2].GetString();
-                var iconB = data[3].GetString();
-                var text = data[4].GetString();
-                var textDetail = data[5].GetString();
-                var pos = data[6].EnumerateArray().Select(a => a.GetDouble()).ToArray();
-                var dir = data[7].GetDouble();
-                var vehicle = data.Length > 8 ? data[8].GetString() : null;
+                var kind = (string)data[0];
+                var id = (string)data[1];
+                var iconA = (string)data[2];
+                var iconB = (string)data[3];
+                var text = (string)data[4];
+                var textDetail = (string)data[5];
+                var pos = ((object[])data[6]).Cast<double?>().ToArray();
+                var dir = (double)data[7];
+                var vehicle = data.Length > 8 ? (string)data[8] : null;
 
                 msg.Makers.Add(new Marker()
                 {
                     Kind = kind,
                     Id = id,
-                    X = pos[0],
-                    Y = pos[1],
+                    X = pos[0] ?? 0,
+                    Y = pos[1] ?? 0,
                     Heading = dir,
                     Symbol = GetMilSymbol(iconA, iconB),
                     Name = text,
@@ -313,12 +314,12 @@ namespace cTabWebApp
 
             foreach (var entry in message.Args)
             {
-                var data = JsonSerializer.Deserialize<JsonElement[]>(entry.Replace("\\", "\\\\"));
+                var data = ArmaSerializer.ParseMixedArray(entry);
 
-                var title = data[0].GetString();
-                var body = data[1].GetString();
-                var msgState = data[2].GetInt32();
-                var id = data[3].GetString();
+                var title = (string)data[0];
+                var body = (string)data[1];
+                var msgState = (int)data[2];
+                var id = (string)data[3];
 
                 msg.Messages.Add(new Message()
                 {
@@ -383,11 +384,7 @@ namespace cTabWebApp
         }
         private static string ToData(IdMessage message)
         {
-            return FormattableString.Invariant($"[\"{Escape(message.Id)}\"]");
-        }
-        private static string Escape(string str)
-        {
-            return str.Replace("\"", "\"\"");
+            return FormattableString.Invariant($"[\"{ArmaSerializer.Escape(message.Id)}\"]");
         }
 
         public async Task WebSendMessage(WebSendMessageMessage message)
@@ -402,7 +399,7 @@ namespace cTabWebApp
             {
                 return;
             }
-            string data = FormattableString.Invariant($"[\"{Escape(message.To)}\",\"{Escape(message.Body)}\"]");
+            string data = FormattableString.Invariant($"[\"{ArmaSerializer.Escape(message.To)}\",\"{ArmaSerializer.Escape(message.Body)}\"]");
             await Clients.Group(state.ArmaChannelName).SendAsync("Callback", "SendMessage", data);
         }
 

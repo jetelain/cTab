@@ -13,8 +13,6 @@ if ( _groupIndex != -1 ) then {
 	_recipList = [(cTabBFTgroups select _groupIndex) select 0];
 };
 
-INFO_4("sendMessage %1 %2 %3 %4", _targetId, _groupIndex, _recipList, _msgTitle);
-
 if ( count _recipList > 0 ) then {
 	[_msgBody, _recipList] call ctab_core_fnc_sendMessage;
 };

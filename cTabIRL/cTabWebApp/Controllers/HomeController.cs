@@ -135,5 +135,11 @@ namespace cTabWebApp.Controllers
         }
 
         public IActionResult Denied() => View("Denied");
+
+        [HttpGet]
+        public IActionResult Privacy()
+        {
+            return View();
+        }
     }
 }

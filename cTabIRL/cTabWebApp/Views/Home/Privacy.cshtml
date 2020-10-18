@@ -1,0 +1,50 @@
+﻿@inject IViewLocalizer Localizer
+@inject CommunautyInfos Communauty
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = SharedResource.Privacy;
+}
+@section Styles
+{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" />
+}
+
+<a class="github-fork-ribbon" href="https://github.com/jetelain/cTab" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+
+<h2>Contacts</h2>
+<ul>
+    <li>Publication Director and Data Controller : @Communauty.PublicationDirector, <a href="@Communauty.Contact">Contact</a></li>
+    <li>Data Protection Officier (DPO) : @Communauty.DPO, <a href="@Communauty.Contact">Contact</a></li>
+    <li>Host (web site) : @Communauty.Host</li>
+    <li>Host (maps) : GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107.</li>
+</ul>
+
+<h2>Data processing</h2>
+<p>This site, and the associated service, does not collect any data. It only transfer data between Arma3 game and devices connected on the site.</p>
+<p>Data is not transfered to any third party service. It's only transfered between user devices.</p>
+
+<h2>Cookies</h2>
+<ul>
+    <li>This site uses only technical cookies required for the authentication of logged-in users and for input forms security.</li>
+    <li>You can refuse those cookies using the configuration of your browser, please refer to the documentation provided by its publisher. However, it will not be possible to use all features in that case.</li>
+</ul>
+<dl>
+    <dt><code>.AspNetCore.Cookies</code></dt>
+    <dd>User identity if signed-in with Steam. Kept until disconnection, within a limit of 2 weeks.</dd>
+    <dt><code>.AspNetCore.Antiforgery.(random value)</code></dt>
+    <dd>Input forms security token. Kept until browser window is closed.</dd>
+</dl>
+
+<h2>Licenses and copyright notices</h2>
+<p>Mods cTab and cTab IRL are under GPLv2 license &copy; Riouken and other cTab authors</p>
+<p>cTab IRL web software, images, and stylesheet are under MIT license &copy; Julien Etelain, except the following contents and softwares :</p>
+<ul>
+    <li>Maps, icons, screenshots, artworks from Arma 3 are under license <a href="https://www.bohemia.net/community/licenses/arma-public-license" target="_blank">Arma Public Licence (APL)</a>. &copy; Bohemia Interactive.</li>
+    <li>Additional maps under various licenses (APL, APL-SA, public domain, etc.), see <a href="https://jetelain.github.io/Arma3Map/" target="_blank">Arma3Map for details</a>. &copy; Various authors.</li>
+    <li><a href="https://getbootstrap.com/">Bootstrap</a> under MIT license. &copy; Bootstrap team.</li>
+    <li><a href="https://bootswatch.com/">Bootswatch</a> under MIT license. &copy; Thomas Park.</li>
+    <li><a href="https://fontawesome.com/">Font Awesome</a> under <a href="https://fontawesome.com/license/free">SIL Open Font License (OFL)</a> license. &copy; Fonticons, Inc.</li>
+    <li><a href="https://github.com/Leaflet/Leaflet">Leaflet</a> under BSD license. &copy; CloudMade, Vladimir Agafonkin.</li>
+    <li><a href="https://github.com/spatialillusions/milsymbol/">milsymbol</a> under MIT license. &copy; Måns Beckman - www.spatialillusions.com</li>
+    <li><a href="https://github.com/spatialillusions/milstd">milstd</a> under MIT license. &copy; Måns Beckman - www.spatialillusions.com</li>
+</ul>

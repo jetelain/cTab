@@ -15,8 +15,6 @@ addMissionEventHandler ["ExtensionCallback", {
 		};
 #endif
 		TRACE_2("ExtensionCallback", _function, _data);
-INFO_2("%1: %2",_function,_data);
-
 		if( _function == "AddUserMarker" ) exitWith {
 			cTabUserSelIcon = parseSimpleArray _data;
 			cTabUserSelIcon pushBack (call cTab_fnc_currentTime);
@@ -25,14 +23,11 @@ INFO_2("%1: %2",_function,_data);
 		};
 		if( _function == "DeleteUserMarker" ) exitWith {
 			(parseSimpleArray _data) params ['_markerId'];
-			TRACE_2("DeleteUserMarker", _data, _markerId);
 			if (_markerId select [0,1] == "m") then {
 				private _markerIndex = parseNumber (_markerId select [1]);
-				TRACE_1("call deleteUserMarker", _markerIndex);
 				[call cTab_fnc_getPlayerEncryptionKey, _markerIndex] call cTab_fnc_deleteUserMarker;
 			};
 		};
-		
 		if( _function == "SendMessage" ) exitWith {
 			(parseSimpleArray _data) call FUNC(sendMessage);
 		};
@@ -63,5 +58,9 @@ GVAR(nextMessageId) = 1;
 GVAR(deviceLevel) = 0;
 
 [QGVAR(enabled), "CHECKBOX", [LLSTRING(enabled), LLSTRING(enabledDetails)], ["cTab",LLSTRING(modName)], true, 0, {}, true] call CBA_fnc_addSetting;
+#ifdef DEBUG_BACKEND
 [QGVAR(uri),     "EDITBOX",  [LLSTRING(uri),     LLSTRING(uriDetails)],     ["cTab",LLSTRING(modName)], "http://localhost:5000/hub", 0, {}, true] call CBA_fnc_addSetting;
+#else
+[QGVAR(uri),     "EDITBOX",  [LLSTRING(uri),     LLSTRING(uriDetails)],     ["cTab",LLSTRING(modName)], "http://ctab.plan-ops.fr/hub", 0, {}, true] call CBA_fnc_addSetting;
+#endif
 [QGVAR(key),     "EDITBOX",  [LLSTRING(key),     LLSTRING(keyDetails)],     ["cTab",LLSTRING(modName)], "", 0, {}, true] call CBA_fnc_addSetting;

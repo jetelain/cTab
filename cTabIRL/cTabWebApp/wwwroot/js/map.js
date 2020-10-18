@@ -319,14 +319,14 @@ function updatePosition(x, y, heading, grp, veh) {
 
     var marker = existingMarkers[veh || grp];
     if (marker) {
-        if (selfMarker) {
+        if (selfMarker && !selfMarker.options.marker) {
             selfMarker.remove();
-            selfMarker.delete();
         }
+        selfMarker = marker;
         marker.setLatLng([y, x]);
     }
     else {
-        if (selfMarker) {
+        if (selfMarker && !selfMarker.options.marker) {
             selfMarker.setLatLng([y, x]);
         } else {
             selfMarker = L.marker([y, x], { icon: createIcon({ symbol: '10031000001211000000' }) }).addTo(currentMap);
@@ -382,7 +382,7 @@ function updateMarkers(makers) {
                 newMarker.on('click', function () { showMarkerMenu(newMarker); });
                 existingMarkers[marker.id] = newMarker;
                 if (marker.kind == 'u') {
-                    // TODO: Notify
+                    // TODO: Notify New Marker
                 }
             }
             markersToKeep.push(marker.id);
@@ -444,6 +444,11 @@ function updateInbox(messages) {
                 li.appendTo($('#outbox-list'));
             }
             existingMessages[message.id] = li;
+            if (message.state == 0) {
+                // TODO: Notify New Mail
+            } else if (message.state == 2) {
+                // TODO: Notify Mail Sent
+            }
         } else {
             if (message.state == 1) {
                 li.find('i').removeClass('fa fa-envelope');
@@ -468,16 +473,9 @@ function updateInbox(messages) {
 
 $(function () {
 
-
     $('#statusbar').on('click', function () { if (connection.state === signalR.HubConnectionState.Disconnected) { connection.start(); } });
 
     initMap(Arma3Map.Maps[vm.initialMap || 'altis']); // Starts on altis by default
-
-    /*updateInbox([
-        { id: 'msg1', title: '12:01 SP01:1 - [1eGTD] Cne. Starlight', body: 'Body Message #1', state: 0 },
-        { id: 'msg2', title: '12:02 SP01:1 - [1eGTD] Cne. Starlight', body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas viverra tortor vitae est pellentesque luctus. Integer nec viverra urna. Ut tincidunt in metus vel vulputate. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam eu hendrerit nibh. Ut dignissim turpis consequat nibh pretium interdum. Aliquam tempor libero vel ipsum varius mollis.', state: 0 },
-        { id: 'msg3', title: '12:03 SP01:1 - [1eGTD] Cne. Starlight', body: 'In malesuada sollicitudin imperdiet. Pellentesque dignissim mauris et mi dapibus consequat. Praesent in ex lobortis erat lobortis sodales. Phasellus enim erat, lacinia vitae nunc a, tempus feugiat sem. Praesent eu est in erat consectetur vestibulum et vitae felis. Nulla eget magna pellentesque, malesuada ante in, rutrum velit. Aliquam erat volutpat. Vestibulum non quam et magna dapibus varius et a ex. Curabitur ultricies, nisi non elementum vestibulum, erat quam ullamcorper risus, eu condimentum felis urna pretium tellus. Duis pretium augue sit amet sapien accumsan rutrum. Praesent at ultrices massa. ', state: 0 }
-    ]);*/
 
     clearMessage();
 

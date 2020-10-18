@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cTabWebApp", "cTabWebApp\cTabWebApp.csproj", "{5ABCA27C-EFCC-4515-8577-CF0120D36409}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cTabWebAppTests", "cTabWebAppTests\cTabWebAppTests.csproj", "{AD5021BD-0AA5-4838-B218-79CC5D5C2322}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DebugCloud|Any CPU = DebugCloud|Any CPU
+		Release|Any CPU = Release|Any CPU
+		ReleaseCloud|Any CPU = ReleaseCloud|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.DebugCloud|Any CPU.ActiveCfg = DebugCloud|Any CPU
+		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.DebugCloud|Any CPU.Build.0 = DebugCloud|Any CPU
+		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.ReleaseCloud|Any CPU.ActiveCfg = ReleaseCloud|Any CPU
+		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.ReleaseCloud|Any CPU.Build.0 = ReleaseCloud|Any CPU
+		{AD5021BD-0AA5-4838-B218-79CC5D5C2322}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD5021BD-0AA5-4838-B218-79CC5D5C2322}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD5021BD-0AA5-4838-B218-79CC5D5C2322}.DebugCloud|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD5021BD-0AA5-4838-B218-79CC5D5C2322}.DebugCloud|Any CPU.Build.0 = Debug|Any CPU
+		{AD5021BD-0AA5-4838-B218-79CC5D5C2322}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD5021BD-0AA5-4838-B218-79CC5D5C2322}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD5021BD-0AA5-4838-B218-79CC5D5C2322}.ReleaseCloud|Any CPU.ActiveCfg = Release|Any CPU
+		{AD5021BD-0AA5-4838-B218-79CC5D5C2322}.ReleaseCloud|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E55209F-55C7-44AE-B0FE-B159211F4A7F}
+	EndGlobalSection
+EndGlobal

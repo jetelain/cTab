@@ -19,7 +19,7 @@ namespace cTabWebApp.Services
         }
         public string GetPublicAdress(HttpRequest request)
         {
-            var uri = addresses.Addresses.FirstOrDefault(a => !a.Contains("localhost"));
+            var uri = addresses.Addresses.FirstOrDefault(a => !a.Contains("localhost") && !a.Contains("127.0.0.1"));
             if (uri == null)
             {
                 return new Uri(new Uri(request.GetEncodedUrl()), "/").AbsoluteUri;

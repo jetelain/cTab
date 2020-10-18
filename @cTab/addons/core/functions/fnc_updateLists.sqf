@@ -62,7 +62,7 @@ if (GVAR(bft_mode) > 0) then {
 	Else, search through the group and use the first member we find equipped with a Tablet or Android for positioning.
 	*/
 	{
-		if ((side _x in _validSides) && {_x != _playerGroup}) then {
+		if ((side _x in _validSides) /*&& {_x != _playerGroup}*/) then {
 			_leader = objNull;
 			call {
 				if ([leader _x,["ItemcTab","ItemAndroid"]] call cTab_fnc_checkGear) exitWith {_leader = leader _x;};
@@ -87,7 +87,7 @@ if (GVAR(bft_mode) > 0) then {
 	Vehciles on our side, that are not empty and that player is not sitting in.
 	*/
 	{
-		if ((side _x in _validSides) && {count (crew _x) > 0} && {_x != _playerVehicle}) then {
+		if ((side _x in _validSides) && {count (crew _x) > 0} /*&& {_x != _playerVehicle}*/) then {
 			_groupID = "";
 			_name = "";
 			_customName = _x getVariable ["cTab_groupId",""];
