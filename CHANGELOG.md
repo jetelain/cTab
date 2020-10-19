@@ -8,9 +8,11 @@ Changelog
   * Synchronisation rate : 30 seconds by default
   * Helmet Cam : Disabled or Enabled (default)
   * UAV feeds : Disabled or Enabled (default)
+  * Use mils or degrees for heading (degrees by default)
 * Added ACE integration
   * cTab devices are available from self-interaction menu (Ctrl + Windows by defaut)
   * ACE MicroDAGR as Blue Force Tracking device (can be disabled). It provides a great replacement for cTab MicroDAGR as it provides more features.
+* Change group name in-game with ACE Menu
 * Fixes from Bamse andspyderblack723
 * Fixed key bindings list in journal CBA entry
 * Removed key bindings from ctab_settings.hpp : You now have to use CBA settings to setup key bindings.
