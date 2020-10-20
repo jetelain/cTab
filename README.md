@@ -1,5 +1,5 @@
-cTab
-====
+cTab+
+=====
 **Commander's Tablet - FBCB2, Blue Force Tracker, UAV, Helmet Cam and Messaging Interface**
 *Created by Riouken*
 
@@ -25,6 +25,8 @@ Features
 + Tactical Awareness Display (TAD) for air vehicles, Blue Force Tracking
 + This system is available to only one side at a time, there is a mission configurable parameter to choose sides
 + None of the markers or icons show on maps, need one of the devices to view
++ Settings for mission makers to adjust features, and make them more realistic
++ cTab on your mobile device with additional [cTab IRL](docs/cTabIRL/README.md) mod
 
 Known Issues
 ------------
@@ -62,7 +64,8 @@ Media
 Download / Links
 ----------------
 New version :
-* [Steam Workshop](TODO)
+* [cTab+ on Steam Workshop](https://steamcommunity.com/workshop/filedetails/?id=2262006564)
+* [cTab IRL on Steam Workshop](https://steamcommunity.com/workshop/filedetails/?id=2262009445)
 
 Previous versions from Riouken
 * [Armaholic](http://www.armaholic.com/page.php?id=22992)
