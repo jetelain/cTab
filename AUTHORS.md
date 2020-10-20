@@ -1,6 +1,6 @@
-Thanks to
----------
-+ Riouken - cTab creator
+Authors, and thanks
+-------------------
++ [Riouken](https://github.com/Riouken) - cTab creator
 + SpectreRSG - Graphic Design
 + Capt Drumheller / Jester814 - Technical advisor / Ideas / Media
 + LCpl C. Johnston - Technical advisor
@@ -9,7 +9,9 @@ Thanks to
 + Raspu - Tablet, TAD, Android and MicroDAGR day / night mode interface graphics and 3D models
 + Killzone_Kid - for his many excellent tutorials
 + Everyone else in the 15th MEU SOC and C-L-F for help with support and testing.
-+ Gundy - Prior maintenance
++ [Gundy](https://github.com/nsgundy) - Prior maintenance
++ [jetelain aka GrueArbre](https://github.com/jetelain) - cTab maintenance, cTab IRL
++ [1er GTD members](http://www.1ergtd-reality.fr/) - for help with testing and support
 
 + Bamse - Fixes
 + spyderblack723 - Fixes

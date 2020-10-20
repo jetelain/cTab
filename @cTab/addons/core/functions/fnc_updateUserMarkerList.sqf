@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
 	Name: cTab_fnc_updateUserMarkerList
 	
@@ -27,5 +28,7 @@ _tempList = [];
 } count ([cTab_userMarkerLists,_playerEncryptionKey,[]] call cTab_fnc_getFromPairs);
 
 cTabUserMarkerList = _tempList;
+
+[QGVARMAIN(userMarkerListUpdated)] call CBA_fnc_localEvent;
 
 true

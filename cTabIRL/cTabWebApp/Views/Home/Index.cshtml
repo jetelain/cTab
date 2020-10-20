@@ -1,0 +1,100 @@
+﻿@model HomeVM
+@inject IViewLocalizer Localizer
+@inject CommunautyInfos Communauty
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = SharedResource.Home;
+}
+
+@if (Model.Error != null)
+{
+    <p class="alert alert-danger" role="alert">@Model.Error</p>
+}
+
+<h1 class="text-center">@Localizer["cTab on mobile device"]</h1>
+@if (!string.IsNullOrEmpty(Communauty.Name))
+{
+    <p class="text-center">
+        <a href="@Communauty.Home">
+            @Localizer["Hosted by {0}", Communauty.Name]
+        </a>
+    </p>
+}
+
+<div class="mt-4">
+    <h2>@Localizer["Install cTab IRL mod"]</h2>
+    <p>@Localizer["Download the mod from the <a href=\"{0}\">Steam Workshop</a>, or from <a href=\"{1}\">GitHub</a>.", "https://steamcommunity.com/workshop/filedetails/?id=2262009445", "https://github.com/jetelain/cTab"]</p>
+</div>
+
+<div class="row mt-4">
+
+    @if (Model.Providers.Length > 0)
+    {
+        <div class="col-md-6">
+            <h2>@Localizer["Connect with Steam and cTab Key"]</h2>
+            <ol>
+                <li>@Localizer["Open {0} with the mobile browser.", Model.PublicUri]</li>
+                <li>@Localizer["Signin with steam."]</li>
+                <li>@Localizer["In-game, once the message 'cTab connected to {0}.' appears, open map with key <kbd>m</kbd> (qwerty keyboard).", Model.PublicUri]</li>
+                <li>@Localizer["Go into 'cTab IRL', 'Connect to mobile device', locate the key displayed (6 digits)."]
+                <li>@Localizer["Type here the key and validate."]</li>
+            </ol>
+
+            @if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                <form method="post" asp-action="EnterKey" class="form-inline justify-content-center mb-4">
+                    <div class="input-group mr-sm-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-key"></i></div>
+                        </div>
+                        <input type="text" class="form-control" id="key" name="key" placeholder="@Localizer["Key"]" />
+                        <div class="input-group-append">
+                            <button class="btn btn-success" type="submit">@Localizer["Validate"]</button>
+                        </div>
+                    </div>
+
+                </form>
+            }
+            else
+            {
+                @foreach (var scheme in Model.Providers.OrderBy(p => p.DisplayName))
+                {
+                    <form method="post" asp-action="SignIn">
+                        <input type="hidden" name="Provider" value="@scheme.Name" />
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="isPersistent" name="isPersistent">
+                                <label class="form-check-label" for="isPersistent">
+                                    @Localizer["Rember me"]
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-success m-1" type="submit">@Localizer["Connect with {0}", scheme.DisplayName]</button>
+                    </form>
+                }
+            }
+        </div>
+    }
+    else
+    {
+        <div class="col-md-6">
+            <h2>@Localizer["Connect with Steam and cTab Key"]</h2>
+            <p>@Localizer["Unavailable"]</p>
+        </div>
+    }
+    <div class="col-md-6">
+        <h2>@Localizer["Connect with QR Code (easier)"]</h2>
+        <ol>
+            <li>@Localizer["In-game, once the message 'cTab connected to {0}.' appears, open map with key <kbd>m</kbd> (qwerty keyboard).", Model.PublicUri]</li>
+            <li>@Localizer["Go into 'cTab IRL', 'Connect a mobile device', then scan the code with your mobile device."]</li>
+        </ol>
+        <p class="text-center">
+            <img src="~/img/qrcode.png" style="max-width:95%;" />
+        </p>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h2>@Localizer["Self-hosting"]</h2>
+    <p>@Localizer["You can host the cTab IRL Server on your computer or on your communauty server. It needs some technical skills, follow instructions on the <a href=\"{0}\">GitHub documentation page</a>.", "https://github.com/jetelain/cTab"]</p>
+</div>

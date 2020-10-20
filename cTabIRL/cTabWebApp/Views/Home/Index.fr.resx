@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Connect with QR Code (easier)" xml:space="preserve">
+    <value>Connecter avec QR Code (le plus facile)</value>
+  </data>
+  <data name="Connect with Steam and cTab Key" xml:space="preserve">
+    <value>Connecter avec Steam et la clé cTab</value>
+  </data>
+  <data name="Connect with {0}" xml:space="preserve">
+    <value>Se connecter avec {0}</value>
+  </data>
+  <data name="cTab on mobile device" xml:space="preserve">
+    <value>cTab sur appareil mobile</value>
+  </data>
+  <data name="Download the mod from the &lt;a href=&quot;{0}&quot;&gt;Steam Workshop&lt;/a&gt;, or from &lt;a href=&quot;{1}&quot;&gt;GitHub&lt;/a&gt;." xml:space="preserve">
+    <value>Télécharger le mod depuis le &lt;a href="{0}"&gt;Workshop Steam&lt;/a&gt;, ou depuis &lt;a href="{1}"&gt;GitHub&lt;/a&gt;.</value>
+  </data>
+  <data name="Go into 'cTab IRL', 'Connect a mobile device', then scan the code with your mobile device." xml:space="preserve">
+    <value>Aller dans 'cTab IRL', 'Connecter un appareil mobile', puis scanner le code avec votre appareil mobile.</value>
+  </data>
+  <data name="Go into 'cTab IRL', 'Connect to mobile device', locate the key displayed (6 digits)." xml:space="preserve">
+    <value>Aller dans 'cTab IRL', 'Connecter un appareil mobile', puis identifier la clé affichée (6 chiffres).</value>
+  </data>
+  <data name="Hosted by {0}" xml:space="preserve">
+    <value>Hébergé par {0}</value>
+  </data>
+  <data name="In-game, once the message 'cTab connected to {0}.' appears, open map with key &lt;kbd&gt;m&lt;/kbd&gt; (qwerty keyboard)." xml:space="preserve">
+    <value>En jeu, lorsque le message 'cTab connecté à {0}.' apparait, ouvrir la carte du jeu avec &lt;kbd&gt;,&lt;/kbd&gt; (clavier azerty).</value>
+  </data>
+  <data name="Install cTab IRL mod" xml:space="preserve">
+    <value>Installer le mod cTab IRL</value>
+  </data>
+  <data name="Key" xml:space="preserve">
+    <value>Clé</value>
+  </data>
+  <data name="Open {0} with the mobile browser." xml:space="preserve">
+    <value>Ouvrir {0} avec le navigateur mobile.</value>
+  </data>
+  <data name="Rember me" xml:space="preserve">
+    <value>Se rappeler de moi</value>
+  </data>
+  <data name="Self-hosting" xml:space="preserve">
+    <value>Auto hébergement</value>
+  </data>
+  <data name="Signin with steam." xml:space="preserve">
+    <value>S'identifier avec Steam</value>
+  </data>
+  <data name="Type here the key and validate." xml:space="preserve">
+    <value>Saisir ici la clé et valider.</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>Indisponible</value>
+  </data>
+  <data name="Validate" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="You can host the cTab IRL Server on your computer or on your communauty server. It needs some technical skills, follow instructions on the &lt;a href=&quot;{0}&quot;&gt;GitHub documentation page&lt;/a&gt;." xml:space="preserve">
+    <value>Vous pouvez héberger le serveur cTab IRL sur votre ordinateur, ou sur votre serveur communautaire. Cela nécessite quelques compétences techniques, suivre les instructions sur la &lt;a href="{0}"&gt;page de documentation GitHub&lt;/a&gt;.</value>
+  </data>
+</root>

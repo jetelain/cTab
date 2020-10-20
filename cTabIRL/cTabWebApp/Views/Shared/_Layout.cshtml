@@ -1,0 +1,86 @@
+﻿@inject CommunautyInfos Communauty
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @if (ViewData["Description"] != null)
+    {
+        <meta name="description" content="@ViewData["Description"]" />
+    }
+    <title>
+        @ViewData["Title"] - cTab IRL 
+        @if (!string.IsNullOrEmpty(Communauty.Name))
+        {
+            @:- @Communauty.Name
+        }
+    </title>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/slate/bootstrap.min.css" rel="stylesheet" integrity="sha384-G9YbB4o4U6WS4wCthMOpAeweY4gQJyyx0P3nZbEBHyz+AtNoeasfRChmek1C2iqV" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.6/css/all.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">cTab IRL</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index"><i class="fas fa-sign-in-alt"></i> @SharedResource.Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://steamcommunity.com/workshop/filedetails/?id=2262009445" target="_blank"><i class="fas fa-download"></i> @SharedResource.Download</i></a>
+                        </li>
+                        @if (!string.IsNullOrEmpty(Communauty.Home))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Communauty.Home">@string.Format(SharedResource.GoBackTo, Communauty.Name)</a>
+                            </li>
+                        }
+                    </ul>
+                    @if (User?.Identity?.IsAuthenticated ?? false)
+                    {
+                        <span class="mr-sm-2" style="font-size:80%">@User.Identity.Name</span>
+                        <a asp-controller="Home" asp-action="SignOut" class="btn btn-sm btn-secondary" title="@User.Identity.Name">
+                            @SharedResource.Disconnect
+                        </a>
+                    }
+                    </div>
+            </div>
+        </nav>
+    </header>
+    <div class="title">
+        <div class="container">
+            @RenderSection("Title", required: false)
+        </div>
+    </div>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderSection("NavBar", required: false)
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer text-muted">
+        <div class="container">
+            &copy; 2020 - <a asp-controller="Home" asp-action="Privacy">@SharedResource.Privacy</a> 
+            @if (!string.IsNullOrEmpty(Communauty.Contact))
+            {
+                @:- <a href="@Communauty.Contact">@SharedResource.Contact</a>
+            }
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    @*<script src="~/js/site.js" asp-append-version="true"></script>*@
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

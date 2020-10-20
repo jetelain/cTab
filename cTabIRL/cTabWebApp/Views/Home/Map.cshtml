@@ -1,0 +1,146 @@
+﻿@model MapVM
+@inject IViewLocalizer Localizer
+@inject CommunautyInfos Communauty
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no" />
+    <title>cTab</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" />
+    <link rel="stylesheet" href="~/css/map.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <div class="row">
+            <div class="col-2 text-left" id="statusbar">
+                <span class="badge badge-warning" id="statusbadge">&nbsp;&nbsp;</span>
+                <span id="status">@Localizer["Connecting..."]</span>
+            </div>
+            <div class="col-3 text-center" id="heading">
+                ----- -
+            </div>
+            <div class="col-2 text-center" id="date">
+                --:--
+            </div>
+            <div class="col-5 text-center" id="position">
+                ----- - -----
+            </div>
+        </div>
+    </header>
+    <div class="map" id="map">
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="inbox">
+        <div class="modal-dialog mb-0 mt-4 modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row h-100">
+                        <div class="col-4 pr-2">
+                            <div class="text-muted" style="font-size: 10px;">@Localizer["Inbox"]</div>
+                            <ul class="nav flex-column nav-pills" id="inbox-list">
+                            </ul>
+                            <div class="border-top mt-1 text-muted" style="font-size: 10px;">@Localizer["Sent"]</div>
+                            <ul class="nav flex-column nav-pills" id="outbox-list">
+                            </ul>
+                        </div>
+                        <div class="col-8 pl-2 border-left">
+                            <h6 id="inbox-title" class="font-weight-bold">
+                            </h6>
+                            <p id="inbox-message">
+
+                            </p>
+                            <div class="text-center"><button type="button" class="btn btn-sm btn-danger" id="inbox-delete">@Localizer["Delete"]</button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer p-2">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="compose">
+        <div class="modal-dialog mb-0 mt-4">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div>
+                        <div class="form-group row">
+                            <label for="compose-to" class="control-label col-2">@Localizer["To"]</label>
+                            <div class="col-10">
+                                <select id="compose-to" class="form-control form-control-sm">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group mb-0">
+                            <textarea id="compose-text" class="form-control" rows="4" placeholder="@Localizer["Message Content"]" maxlength="5000"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer p-2">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Cancel"]</button>
+                    <button type="button" class="btn btn-sm btn-success" id="compose-send">@Localizer["Send"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="help">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h3>@Localizer["User manual"]</h3>
+                    <p>@Localizer["Top bar displays connectivity, heading, clock time and MGRS position (meter precision)."]</p>
+                    <p>@Localizer["To add a marker on a position: right click/long tap or double click/double tap."]</p>
+                    <p>@Localizer["Buttons"]</p>
+                    <ul>
+                        <li><i class="fas fa-inbox"></i> @Localizer["Inbox with received messages, and sent messages"]</li>
+                        <li><i class="far fa-envelope"></i> @Localizer["Compose a new text message"]</li>
+                        <li><i class="fas fa-location-arrow"></i> @Localizer["Center map on current position, and follow position"]</li>
+                        <li><i class="fas fa-expand"></i> @Localizer["Full-screen display (on supported devices)"]</li>
+                    </ul>
+                    <p><a href="@Localizer["https://github.com/jetelain/cTab/blob/master/docs/cTabIRL/endUser.md"]">@Localizer["Full user manual on GitHub"]</a></p>
+                </div>
+                <div class="modal-footer p-2">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@@microsoft/signalr@3.1.4/dist/browser/signalr.min.js"></script>
+    <script src="https://unpkg.com/milsymbol@2.0.0/dist/milsymbol.js"></script>
+    <script src="https://unpkg.com/milstd@0.1.6/milstd.js"></script>
+    <script src="https://jetelain.github.io/Arma3Map/js/mapUtils.js"></script>
+    <script src="https://jetelain.github.io/Arma3Map/maps/all.js"></script>
+    <script>
+        var vm = @Json.Serialize(Model);
+        var texts = @Json.Serialize(new
+               {
+                   Waiting = Localizer["Wait for cTab"].Value,
+                   Disconnected = Localizer["Disconnected"].Value,
+                   Connected = Localizer["Connected"].Value,
+                   DeleteMarker = Localizer["Delete"].Value,
+                   NoMessageSelected = SharedResource.STR_ctab_core_NoMessageSelected
+               });
+        var octants = @Json.Serialize(
+            new[] {
+                SharedResource.STR_ctab_core_North,
+                SharedResource.STR_ctab_core_NorthEast,
+                SharedResource.STR_ctab_core_East,
+                SharedResource.STR_ctab_core_SouthEast,
+                SharedResource.STR_ctab_core_South,
+                SharedResource.STR_ctab_core_SouthWest,
+                SharedResource.STR_ctab_core_West,
+                SharedResource.STR_ctab_core_NorthWest,
+                SharedResource.STR_ctab_core_North
+            });
+        var menus = @Json.Serialize(Menu.CreateMenus().ToDictionary(e => e.MenuId.ToString(), e => e.Items));
+    </script>
+    <script src="~/js/map.js" asp-append-version="true"></script>
+</body>
+</html>
