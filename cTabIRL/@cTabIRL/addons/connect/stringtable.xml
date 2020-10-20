@@ -44,13 +44,17 @@
             <French>Connecter un appareil mobile</French>
         </Key>
 
-        <Key ID="STR_ctab_irl_connect_diaryEntryMultiplayer">
+        <Key ID="STR_ctab_irl_connect_diaryEntryMP">
             <English>You can open your mobile web browser on %1, sign in with Steam and use key %2.</English>
             <French>Vous pouvez ouvrir votre navigateur mobile sur %1, se connecter avec Steam et saisir la clé %2.</French>
         </Key>
-        <Key ID="STR_ctab_irl_connect_diaryEntryScanQrCode">
+        <Key ID="STR_ctab_irl_connect_diaryEntryScanQrCodeMP">
             <English>Or, you can scan the following QR Code</English>
             <French>Ou, vous pouvez scanner le QR Code suivant</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_diaryEntryScanQrCodeSP">
+            <English>Scan the following QR Code (Key is not available in single-player)</English>
+            <French>Scanner le QR Code suivant (La clé n'est pas disponible en jeu solo)</French>
         </Key>
         <Key ID="STR_ctab_irl_connect_diaryEntryNote">
             <English>The key and QR Code must remain confidential, do not share with freinds.</English>

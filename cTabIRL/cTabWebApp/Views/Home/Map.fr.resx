@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Buttons" xml:space="preserve">
-    <value>Bouttons</value>
+    <value>Boutons</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
@@ -149,6 +149,9 @@
   </data>
   <data name="Full-screen display (on supported devices)" xml:space="preserve">
     <value>Affiche en plein écran (sur appareils compatibles).</value>
+  </data>
+  <data name="https://github.com/jetelain/cTab/blob/master/docs/cTabIRL/endUser.md" xml:space="preserve">
+    <value>https://github.com/jetelain/cTab/blob/master/docs/cTabIRL/endUser.fr.md</value>
   </data>
   <data name="Inbox" xml:space="preserve">
     <value>Boite de réception</value>

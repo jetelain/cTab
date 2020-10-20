@@ -11,6 +11,7 @@ namespace cTabWebApp
     internal class PlayerStateService : IPlayerStateService
     {
         private static readonly List<PlayerState> players = new List<PlayerState>();
+        private static readonly string[] notASteamId = new[] { "_SP_PLAYER_", "_SP_AI_", "" };
         private static int nextId = 1;
 
         public PlayerState GetStateByToken(string token)
@@ -46,20 +47,24 @@ namespace cTabWebApp
 
         public PlayerState GetOrCreateStateBySteamIdAndKey(string steamId, string hashedKey, string keyHostname)
         {
-            PlayerState state;
-            lock (players)
+            PlayerState state = null;
+            if (!notASteamId.Contains(steamId))
             {
-                state = players.FirstOrDefault(p => p.SteamId == steamId && p.HashedKey == hashedKey && p.KeyHostname == keyHostname);
+                lock (players)
+                {
+                    state = players.FirstOrDefault(p => p.SteamId == steamId && p.HashedKey == hashedKey && p.KeyHostname == keyHostname);
+                }
             }
             if (state == null)
             {
+                var id = Interlocked.Increment(ref nextId);
                 state = new PlayerState()
                 {
-                    Id = Interlocked.Increment(ref nextId),
+                    Id = id,
                     HashedKey = hashedKey,
                     SteamId = steamId,
                     KeyHostname = keyHostname,
-                    Token = GenerateToken(),
+                    Token = GenerateToken(id),
                     LastActivityUtc = DateTime.UtcNow
                 };
                 lock (players)
@@ -85,12 +90,13 @@ namespace cTabWebApp
                             numBytesRequested: 256 / 8));
         }
 
-        private static string GenerateToken()
+        private string GenerateToken(int id)
         {
             var random = new byte[32];
             var rng = new RNGCryptoServiceProvider();
             rng.GetBytes(random);
-            return Convert.ToBase64String(random).Replace("+", "-").Replace("/", "_").TrimEnd('=');
+            // Includes id to avoid collision
+            return id.ToString("X") + "x" + Convert.ToBase64String(random).Replace("+", "-").Replace("/", "_").TrimEnd('=');
         }
     }
 }

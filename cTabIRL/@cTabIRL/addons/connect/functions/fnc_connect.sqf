@@ -7,7 +7,7 @@ if ( GVAR(key) == "" ) then {
 	[QGVAR(key), _key, 0, "client", true] call CBA_settings_fnc_set;
 };
 
-INFO_2("Connect to %1 with key %2", GVAR(uri), GVAR(key));
+INFO_1("Connect to %1", GVAR(uri));
 
 // Connects to server
 "cTabExtension" callExtension ["Connect", [GVAR(uri), getPlayerUID player, profileName, GVAR(key)]];
