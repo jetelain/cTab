@@ -130,7 +130,7 @@
     <value>cTab sur appareil mobile</value>
   </data>
   <data name="Download the mod from the &lt;a href=&quot;{0}&quot;&gt;Steam Workshop&lt;/a&gt;, or from &lt;a href=&quot;{1}&quot;&gt;GitHub&lt;/a&gt;." xml:space="preserve">
-    <value>Télécharger le mode depuis le &lt;a href="{0}"&gt;Workshop Steam&lt;/a&gt;, ou depuis &lt;a href="{1}"&gt;GitHub&lt;/a&gt;.</value>
+    <value>Télécharger le mod depuis le &lt;a href="{0}"&gt;Workshop Steam&lt;/a&gt;, ou depuis &lt;a href="{1}"&gt;GitHub&lt;/a&gt;.</value>
   </data>
   <data name="Go into 'cTab IRL', 'Connect a mobile device', then scan the code with your mobile device." xml:space="preserve">
     <value>Aller dans 'cTab IRL', 'Connecter un appareil mobile', puis scanner le code avec votre appareil mobile.</value>
@@ -142,7 +142,7 @@
     <value>Hébergé par {0}</value>
   </data>
   <data name="In-game, once the message 'cTab connected to {0}.' appears, open map with key &lt;kbd&gt;m&lt;/kbd&gt; (qwerty keyboard)." xml:space="preserve">
-    <value>En jeu, lorsque le message 'cTab connecté à {0}.' apparait, ouvrir la carte du jeu avec &lt;kbd&gt;;&lt;/kbd&gt; (clavier azerty).</value>
+    <value>En jeu, lorsque le message 'cTab connecté à {0}.' apparait, ouvrir la carte du jeu avec &lt;kbd&gt;,&lt;/kbd&gt; (clavier azerty).</value>
   </data>
   <data name="Install cTab IRL mod" xml:space="preserve">
     <value>Installer le mod cTab IRL</value>

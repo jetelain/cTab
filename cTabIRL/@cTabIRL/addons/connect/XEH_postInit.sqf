@@ -19,6 +19,8 @@ if (!hasInterface) exitWith { };
 	// Connect to server
 	call FUNC(connect);
 
+	GVAR(nextMPU) = diag_tickTime + 1.5; // Next Marker Position Update if real time tracking is enabled
+
 	// Update loadout each time required
 	["loadout", FUNC(updateDevices)] call CBA_fnc_addPlayerEventHandler;
 	["unit", FUNC(updateDevices)] call CBA_fnc_addPlayerEventHandler;

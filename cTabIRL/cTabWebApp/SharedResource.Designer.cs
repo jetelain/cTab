@@ -88,6 +88,15 @@ namespace cTabWebApp {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Download mod.
+        /// </summary>
+        public static string Download {
+            get {
+                return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Go back to {0}.
         /// </summary>
         public static string GoBackTo {
@@ -97,7 +106,7 @@ namespace cTabWebApp {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Home.
+        ///   Recherche une chaîne localisée semblable à Connect.
         /// </summary>
         public static string Home {
             get {

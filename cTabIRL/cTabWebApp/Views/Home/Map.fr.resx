@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Buttons" xml:space="preserve">
+    <value>Bouttons</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
   </data>
+  <data name="Center map on current position, and follow position" xml:space="preserve">
+    <value>Centre la carte sur la position actuelle et suit la position</value>
+  </data>
   <data name="Close" xml:space="preserve">
     <value>Fermer</value>
+  </data>
+  <data name="Compose a new text message" xml:space="preserve">
+    <value>Composer un nouveau message.</value>
   </data>
   <data name="Connected" xml:space="preserve">
     <value>Connecté</value>
@@ -135,8 +144,17 @@
   <data name="Disconnected" xml:space="preserve">
     <value>Déconnecté</value>
   </data>
+  <data name="Full user manual on GitHub" xml:space="preserve">
+    <value>Manuel utilisateur complet sur GitHub</value>
+  </data>
+  <data name="Full-screen display (on supported devices)" xml:space="preserve">
+    <value>Affiche en plein écran (sur appareils compatibles).</value>
+  </data>
   <data name="Inbox" xml:space="preserve">
     <value>Boite de réception</value>
+  </data>
+  <data name="Inbox with received messages, and sent messages" xml:space="preserve">
+    <value>Boite de reception et messages envoyés.</value>
   </data>
   <data name="Message Content" xml:space="preserve">
     <value>Contenu du message</value>
@@ -149,6 +167,15 @@
   </data>
   <data name="To" xml:space="preserve">
     <value>À</value>
+  </data>
+  <data name="To add a marker on a position: right click/long tap or double click/double tap." xml:space="preserve">
+    <value>Pour ajouter un marqueur sur une position : clic droit/appui long, ou double clic/double tape.</value>
+  </data>
+  <data name="Top bar displays connectivity, heading, clock time and MGRS position (meter precision)." xml:space="preserve">
+    <value>La barre haute affiche la connectivité, la boussole numérique, l'heure, et la position MGRS (précision métrique).</value>
+  </data>
+  <data name="User manual" xml:space="preserve">
+    <value>Manuel utilisateur</value>
   </data>
   <data name="Wait for cTab" xml:space="preserve">
     <value>En attente de cTab</value>

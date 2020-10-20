@@ -224,6 +224,57 @@ namespace cTabWebApp
             await Clients.Group(state.WebChannelName).SendAsync("UpdateMarkers", state.LastUpdateMarkers);
         }
 
+
+        public async Task ArmaUpdateMarkersPosition(ArmaMessage message)
+        {
+            var state = GetState();
+            if (state == null)
+            {
+                Console.WriteLine($"No state for ArmaUpdateMarkersPosition");
+                return;
+            }
+
+            var msg = new UpdateMarkersMessagePosition()
+            {
+                Timestamp = message.Timestamp,
+                Makers = new List<MarkerPosition>()
+            };
+
+            foreach (var entry in message.Args)
+            {
+                var data = ArmaSerializer.ParseMixedArray(entry);
+
+                var id = (string)data[0];
+                var pos = ((object[])data[1]).Cast<double?>().ToArray();
+                var dir = (double)data[2];
+
+                msg.Makers.Add(new MarkerPosition()
+                {
+                    Id = id,
+                    X = pos[0] ?? 0,
+                    Y = pos[1] ?? 0,
+                    Heading = dir
+                });
+            }
+
+            var lastUpdate = state.LastUpdateMarkers;
+            if (lastUpdate != null)
+            {
+                foreach(var marker in lastUpdate.Makers)
+                {
+                    var updated = msg.Makers.FirstOrDefault(m => m.Id == marker.Id);
+                    if (updated != null)
+                    {
+                        marker.X = updated.X;
+                        marker.Y = updated.Y;
+                        marker.Heading = updated.Heading;
+                    }
+                }
+            }
+
+            await Clients.Group(state.WebChannelName).SendAsync("UpdateMarkersPosition", msg);
+        }
+
         private string GetUnitSize(string iconB)
         {
             switch (iconB)

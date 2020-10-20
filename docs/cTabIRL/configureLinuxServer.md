@@ -46,7 +46,10 @@ Edit cTabWebApp settings `nano /var/www/ctab/appsettings.json`
   "Communauty": {
     "Name": "Your communauty name here",
     "Home": "http:/yourhostname.com",
-    "Contact": "https://discord.gg/yourDiscordHere or contact form"
+    "Contact": "https://discord.gg/yourDiscordHere or contact form (a way to contact you, legal obligation)",
+    "PublicationDirector": "Your name or pseudonym (legal obligation)",
+    "DPO": "Your name or pseudonym (legal obligation)",
+    "Host": "Address and phone number of your Linux Server host company (legal obligation)"
   }
 }
 ```

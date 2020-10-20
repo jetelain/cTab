@@ -12,3 +12,9 @@ if ( _vehicle != player ) then {
 };
 
 "cTabExtension" callExtension ["UpdatePosition", _data];
+
+if ( ctab_core_bft_mode == 1 && { diag_tickTime > GVAR(nextMPU) } ) then {
+	GVAR(nextMPU) = diag_tickTime + 1.5;
+	[true] call FUNC(updateMarkersPosition);
+};
+

@@ -556,7 +556,7 @@
     <value>Se déconnecter</value>
   </data>
   <data name="Home" xml:space="preserve">
-    <value>Accueil</value>
+    <value>Connecter</value>
   </data>
   <data name="Privacy" xml:space="preserve">
     <value>Mentions légales</value>
@@ -572,5 +572,8 @@
   </data>
   <data name="InvalidKey" xml:space="preserve">
     <value>La clé saisie est invalide. Veuillez vérifier la clé affichée en jeu.</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Télécharger le mod</value>
   </data>
 </root>

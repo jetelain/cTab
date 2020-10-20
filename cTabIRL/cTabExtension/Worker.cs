@@ -58,6 +58,7 @@ namespace cTabExtension
             switch (function)
             {
                 case "UpdatePosition":
+                case "UpdateMarkersPosition":
                     if (!serverConnection.IsCompleted) // Those messages can be dropped if connection is still in progress
                     {
                         return;

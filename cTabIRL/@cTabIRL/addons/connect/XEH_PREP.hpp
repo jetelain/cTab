@@ -1,5 +1,6 @@
 PREP(getId);
 PREP(updateMarkers);
+PREP(updateMarkersPosition);
 PREP(updateDevices);
 PREP(updatePosition);
 PREP(onConnected);

@@ -2,6 +2,11 @@
 
 if ( GVAR(deviceLevel) == 0 ) exitWith { };
 
+if ( ctab_core_bft_mode == 1 ) then {
+	// If real-time markers, update position before broadcast
+	[false] call FUNC(updateMarkersPosition);
+};
+
 private _data = [];
 
 {

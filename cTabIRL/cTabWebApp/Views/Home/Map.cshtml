@@ -47,7 +47,6 @@
                         </div>
                         <div class="col-8 pl-2 border-left">
                             <h6 id="inbox-title" class="font-weight-bold">
-
                             </h6>
                             <p id="inbox-message">
 
@@ -86,7 +85,28 @@
             </div>
         </div>
     </div>
-
+    <div class="modal" tabindex="-1" role="dialog" id="help">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h3>@Localizer["User manual"]</h3>
+                    <p>@Localizer["Top bar displays connectivity, heading, clock time and MGRS position (meter precision)."]</p>
+                    <p>@Localizer["To add a marker on a position: right click/long tap or double click/double tap."]</p>
+                    <p>@Localizer["Buttons"]</p>
+                    <ul>
+                        <li><i class="fas fa-inbox"></i> @Localizer["Inbox with received messages, and sent messages"]</li>
+                        <li><i class="far fa-envelope"></i> @Localizer["Compose a new text message"]</li>
+                        <li><i class="fas fa-location-arrow"></i> @Localizer["Center map on current position, and follow position"]</li>
+                        <li><i class="fas fa-expand"></i> @Localizer["Full-screen display (on supported devices)"]</li>
+                    </ul>
+                    <p><a href="@Localizer["https://github.com/jetelain/cTab/blob/master/docs/irl/EndUser.md"]">@Localizer["Full user manual on GitHub"]</a></p>
+                </div>
+                <div class="modal-footer p-2">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

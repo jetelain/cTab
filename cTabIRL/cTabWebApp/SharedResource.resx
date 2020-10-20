@@ -556,7 +556,7 @@
     <value>Disconnect</value>
   </data>
   <data name="Home" xml:space="preserve">
-    <value>Home</value>
+    <value>Connect</value>
   </data>
   <data name="Privacy" xml:space="preserve">
     <value>Privacy</value>
@@ -572,5 +572,8 @@
   </data>
   <data name="InvalidKey" xml:space="preserve">
     <value>Provided key is invalid. Please check again key displayed in-game.</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download mod</value>
   </data>
 </root>

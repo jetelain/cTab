@@ -300,6 +300,13 @@ function initMap(mapInfos) {
             { start: 0, end: 10, interval: 1000 }
         ]}).addTo(map);
     L.control.scale({ maxWidth: 200, imperial: false }).addTo(map);
+
+    L.control.overlayButton({
+        content: '<i class="fas fa-question"></i>',
+        click: function () { $('#help').modal('show'); },
+        position: 'bottomleft'
+    }).addTo(map);
+
     currentMap = map;
     currentMapInfos = mapInfos;
     selfMarker = null;
@@ -323,11 +330,17 @@ function updatePosition(x, y, heading, grp, veh) {
             selfMarker.remove();
         }
         selfMarker = marker;
-        marker.setLatLng([y, x]);
+        var latLng = marker.getLatLng();
+        if (latLng.lat != y || latLng.lng != x) {
+            marker.setLatLng([y, x]);
+        }
     }
     else {
         if (selfMarker && !selfMarker.options.marker) {
-            selfMarker.setLatLng([y, x]);
+            var latLng = selfMarker.getLatLng();
+            if (latLng.lat != y || latLng.lng != x) {
+                selfMarker.setLatLng([y, x]);
+            }
         } else {
             selfMarker = L.marker([y, x], { icon: createIcon({ symbol: '10031000001211000000' }) }).addTo(currentMap);
         }
@@ -410,6 +423,18 @@ function updateMarkers(makers) {
     });
 }
 
+function updateMarkersPosition(makers) {
+    makers.forEach(function (marker) {
+        var existing = existingMarkers[marker.id];
+        if (existing) {
+            var latLng = existing.getLatLng();
+            if (latLng.lat != marker.y || latLng.lng != marker.x) {
+                existing.setLatLng([marker.y, marker.x]);
+            }
+        }
+    });
+}
+
 function displayMessage(link, message) {
     $('#inbox-list a').removeClass('active');
     $('#outbox-list a').removeClass('active');
@@ -451,8 +476,8 @@ function updateInbox(messages) {
             }
         } else {
             if (message.state == 1) {
-                li.find('i').removeClass('fa fa-envelope');
-                li.find('i').addClass('far fa-envelope-open');
+                existing.find('i').removeClass('fa fa-envelope');
+                existing.find('i').addClass('far fa-envelope-open');
             }
         }
         messagesToKeep.push(message.id);
@@ -521,7 +546,21 @@ $(function () {
     });
 
     connection.on("UpdateMarkers", function (data) {
-        updateMarkers(data.makers);
+        try {
+            updateMarkers(data.makers);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+
+    connection.on("UpdateMarkersPosition", function (data) {
+        try {
+            updateMarkersPosition(data.makers);
+        }
+        catch (e) {
+            console.error(e);
+        }
     });
 
     connection.on("Devices", function (data) {
@@ -540,7 +579,12 @@ $(function () {
     });
 
     connection.on("UpdateMessages", function (data) {
-        updateInbox(data.messages);
+        try {
+            updateInbox(data.messages);
+        }
+        catch (e) {
+            console.error(e);
+        }
     });
 
     connection.start().then(function () {

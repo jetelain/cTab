@@ -32,7 +32,10 @@
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Index">@SharedResource.Home</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Index"><i class="fas fa-sign-in-alt"></i> @SharedResource.Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://steamcommunity.com/workshop/filedetails/?id=2262009445" target="_blank"><i class="fas fa-download"></i> @SharedResource.Download</i></a>
                         </li>
                         @if (!string.IsNullOrEmpty(Communauty.Home))
                         {
