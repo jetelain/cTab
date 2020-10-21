@@ -426,8 +426,11 @@ function updateMarkers(makers) {
             markersToKeep.push(marker.id);
         }
         if (marker.kind == 'g') {
-            if (!knownTo[marker.id]) {
+            var to = knownTo[marker.id];
+            if (!to) {
                 knownTo[marker.id] = $('<option value="' + marker.id + '"></option>').text(marker.name).appendTo('#compose-to');
+            } else if (to.text() != marker.name) {
+                to.text(marker.name);
             }
             toToKeep.push(marker.id);
         }
