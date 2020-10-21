@@ -75,6 +75,9 @@ var composeButton = null;
 var knownTo = {};
 var existingMessages = {};
 var displayedMessage = null;
+var noSleepButton = null;
+var isNoSleep = false;
+var noSleep = null;
 
 function pad(n, width) {
     n = n + '';
@@ -91,6 +94,9 @@ function updateButtons() {
         fullScreenButton.j().find('i').removeClass('fa-compress');
         fullScreenButton.j().find('i').addClass(document.fullscreenElement ? 'fa-compress' : 'fa-expand');
     }
+    if (noSleepButton) {
+        noSleepButton.setClass(isNoSleep ? 'btn-primary' : 'btn-outline-secondary');
+    }
 }
 
 function fullScreenToggle() {
@@ -99,6 +105,20 @@ function fullScreenToggle() {
     } else {
         document.documentElement.requestFullscreen().then(updateButtons);
     } 
+}
+
+function noSleepToggle() {
+    isNoSleep = !isNoSleep;
+    if (!noSleep) {
+        noSleep = new NoSleep();
+    }
+    if (isNoSleep) {
+        noSleep.enable();
+    }
+    else {
+        noSleep.disable();
+    }
+    updateButtons();
 }
 
 function setCenterOnPosition(value) {
@@ -277,6 +297,11 @@ function initMap(mapInfos) {
             content: '<i class="fas fa-expand"></i>',
             click: fullScreenToggle
         })).addTo(map);
+    } else {
+        (noSleepButton = L.control.overlayButton({
+            content: '<i class="fas fa-sun"></i>',
+            click: noSleepToggle
+        })).addTo(map);
     }
 
     (inboxButton = L.control.overlayButton({
@@ -302,7 +327,7 @@ function initMap(mapInfos) {
     L.control.scale({ maxWidth: 200, imperial: false }).addTo(map);
 
     L.control.overlayButton({
-        content: '<i class="fas fa-question"></i>',
+        content: '<i class="fas fa-bars"></i>',
         click: function () { $('#help').modal('show'); },
         position: 'bottomleft'
     }).addTo(map);
@@ -616,7 +641,11 @@ $(function () {
         }
     });
 
-    
+    if (!document.documentElement.requestFullscreen) {
+        // If fullscreen not available, ensure that height never needs scrolling
+        $('.map').css('height', (window.innerHeight - 30) + 'px');
+        $(window).on('resize', function () { $('.map').css('height', (window.innerHeight - 30) + 'px'); window.scrollTo(0, 0); });
+    }
 
 
 });

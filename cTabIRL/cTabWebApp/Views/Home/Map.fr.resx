@@ -144,6 +144,9 @@
   <data name="Disconnected" xml:space="preserve">
     <value>Déconnecté</value>
   </data>
+  <data name="Exit and return to home" xml:space="preserve">
+    <value>Sortir et revenir à l'accueil</value>
+  </data>
   <data name="Full user manual on GitHub" xml:space="preserve">
     <value>Manuel utilisateur complet sur GitHub</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="Message Content" xml:space="preserve">
     <value>Contenu du message</value>
+  </data>
+  <data name="Prevent sleep mode if full-screen is not available" xml:space="preserve">
+    <value>Empêche la mise en veille si le mode plein écran n'est pas disponible</value>
   </data>
   <data name="Send" xml:space="preserve">
     <value>Envoyer</value>

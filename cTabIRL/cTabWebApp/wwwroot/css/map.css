@@ -1,5 +1,6 @@
 ﻿body {
     height: 100%;
+    background: black;
 }
 .map {
     width: 100%;
@@ -41,4 +42,13 @@ header {
     width: 60vw;
     text-align: center;
     left: 20vw;
+}
+
+@media (min-width: 700px) and (display-mode: fullscreen) {
+    .leaflet-right{
+        margin-right: 15px;
+    }
+    .leaflet-left {
+        margin-left: 15px;
+    }
 }

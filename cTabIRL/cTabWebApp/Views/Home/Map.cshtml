@@ -9,7 +9,7 @@
     <title>cTab</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" />
     <link rel="stylesheet" href="~/css/map.css" asp-append-version="true" />
 </head>
 <body>
@@ -89,7 +89,7 @@
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-body">
-                    <h3>@Localizer["User manual"]</h3>
+                    <h5>@Localizer["User manual"]</h5>
                     <p>@Localizer["Top bar displays connectivity, heading, clock time and MGRS position (meter precision)."]</p>
                     <p>@Localizer["To add a marker on a position: right click/long tap or double click/double tap."]</p>
                     <p>@Localizer["Buttons"]</p>
@@ -98,11 +98,18 @@
                         <li><i class="far fa-envelope"></i> @Localizer["Compose a new text message"]</li>
                         <li><i class="fas fa-location-arrow"></i> @Localizer["Center map on current position, and follow position"]</li>
                         <li><i class="fas fa-expand"></i> @Localizer["Full-screen display (on supported devices)"]</li>
+                        <li><i class="fas fa-sun"></i> @Localizer["Prevent sleep mode if full-screen is not available"]</li>
                     </ul>
                     <p><a href="@Localizer["https://github.com/jetelain/cTab/blob/master/docs/cTabIRL/endUser.md"]">@Localizer["Full user manual on GitHub"]</a></p>
+                    <p>&copy; 2020 - <a asp-controller="Home" asp-action="Privacy">@SharedResource.Privacy</a></p>
                 </div>
-                <div class="modal-footer p-2">
-                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
+                <div class="modal-footer p-2 row">
+                    <div class="col text-left">
+                        <a type="button" class="btn btn-sm btn-outline-danger" asp-controller="Home" asp-action="Index"><i class="fas fa-sign-out-alt"></i> @Localizer["Exit and return to home"]</a>
+                    </div>
+                    <div class="col text-right">
+                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,6 +124,7 @@
     <script src="https://unpkg.com/milstd@0.1.6/milstd.js"></script>
     <script src="https://jetelain.github.io/Arma3Map/js/mapUtils.js"></script>
     <script src="https://jetelain.github.io/Arma3Map/maps/all.js"></script>
+    <script src="~/js/NoSleep.min.js" asp-append-version="true"></script>
     <script>
         var vm = @Json.Serialize(Model);
         var texts = @Json.Serialize(new
