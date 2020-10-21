@@ -9,5 +9,8 @@ if ( _index != -1 ) then {
 	private _msg = (_msgArray select _index);
 	if ( _msg select 2 == 0 ) then {
 		_msg set [2, 1];
+		
+		// remove msg notification
+		cTabRscLayerMailNotification cutText ["", "PLAIN"];
 	};
 };
