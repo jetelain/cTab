@@ -9,6 +9,7 @@ Changelog
   * Helmet Cam : Disabled or Enabled (default)
   * UAV feeds : Disabled or Enabled (default)
   * Bearing/heading : Mils or Degrees (default)
+  * Default map mode : Topographic or Satellite (default)
 * Added ACE integration
   * cTab devices are available from self-interaction menu (Ctrl + Windows by defaut)
   * ACE MicroDAGR as Blue Force Tracking device (can be disabled). It provides a great replacement for cTab MicroDAGR as it provides more features.

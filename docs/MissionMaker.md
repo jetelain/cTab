@@ -24,6 +24,12 @@ You can adjust mod behavior using [CBA settings](https://github.com/CBATeam/CBA_
 * UAV feeds (`ctab_core_uav_mode`) : 
   - Disabled 
   - Enabled (default)
+* Compass unit (`ctab_core_useMils`) : 
+  - Mils 
+  - Degrees (default)
+* Default map mode (`ctab_core_defMapStyle`) : 
+  - Topographic 
+  - Satellite (default)
 
 All settings can be enforced by mission or server.
 

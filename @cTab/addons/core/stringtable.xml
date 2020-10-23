@@ -603,5 +603,32 @@
             <French>Identifiant du groupe</French>
         </Key>
 
+        
+        <Key ID="STR_ctab_core_videoCategory">
+            <English>Video</English>
+            <French>Vidéo</French>
+        </Key>
+        <Key ID="STR_ctab_core_mapCategory">
+            <English>Map and BFT</English>
+            <French>Carte et BFT</French>
+        </Key>
+        <Key ID="STR_ctab_core_defMapStyle">
+            <English>Default map mode</English>
+            <French>Mode par défaut de la carte</French>
+        </Key>
+        <Key ID="STR_ctab_core_defMapStyleDetails">
+            <English>Default cTab devides map mode. Current mode can be changed in game with F6.</English>
+            <French>Mode par défaut de la carte dans les appareils cTab. Le mode actif se modifie avec F6 en jeu.</French>
+        </Key>
+        <Key ID="STR_ctab_core_satStyle">
+            <English>Satellite</English>
+            <French>Satellite</French>
+        </Key>
+        <Key ID="STR_ctab_core_topoStyle">
+            <English>Topographic</English>
+            <French>Topographique</French>
+        </Key>
+
+
     </Package>
 </Project>

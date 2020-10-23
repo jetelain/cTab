@@ -414,4 +414,13 @@ cTab_Tablet_btnACT = ctab_fnc_tablet_btnACT;
 	// add cTab_updatePulse event handler triggered periodically by the server
 	["cTab_updatePulse",cTab_fnc_updateLists] call CBA_fnc_addEventHandler;
 
+	// setup default map style
+	if (GVAR(defMapStyle) == "TOPO") then {
+		["cTab_Tablet_dlg",[["mapType","TOPO"]]] call cTab_fnc_setSettings;
+		["cTab_Android_dlg",[["mapType","TOPO"]]] call cTab_fnc_setSettings;
+		["cTab_FBCB2_dlg",[["mapType","TOPO"]]] call cTab_fnc_setSettings;
+		["cTab_TAD_dlg",[["mapType","TOPO"]]] call cTab_fnc_setSettings;
+		["cTab_MicroDAGR_dlg",[["mapType","TOPO"]]] call cTab_fnc_setSettings;
+	};
+
 }] call CBA_fnc_addEventHandler;
