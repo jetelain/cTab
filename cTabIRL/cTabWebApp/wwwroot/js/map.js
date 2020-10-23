@@ -391,8 +391,11 @@ function createIcon(marker) {
             iconAnchor: [16, 16]
         });
     }
-
-    var sym = new ms.Symbol(marker.symbol, { size: 24, additionalInformation: marker.name });
+    var symOptions = { size: 24, additionalInformation: marker.name };
+    if (marker.kind == 'u' && marker.heading < 360) {
+        symOptions.direction = marker.heading;
+    }
+    var sym = new ms.Symbol(marker.symbol, symOptions);
     return L.icon({
         iconUrl: sym.asCanvas(window.devicePixelRatio).toDataURL(),
         iconSize: [sym.getSize().width, sym.getSize().height],
