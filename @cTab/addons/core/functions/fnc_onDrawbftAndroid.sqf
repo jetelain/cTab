@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
 	This is drawn every frame on the android dialog. fn
 */
@@ -8,13 +9,16 @@ cTabMapWorldPos = [_cntrlScreen] call cTab_fnc_ctrlMapCenter;
 cTabMapScale = ctrlMapScale _cntrlScreen;
 
 [_cntrlScreen,true] call cTab_fnc_drawUserMarkers;
-[_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
+private _drawPlayer = [_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
 
-// draw directional arrow at own location
 _veh = vehicle cTab_player;
 _playerPos = getPosASL _veh;
-_heading = direction _veh;
-_cntrlScreen drawIcon ["\A3\ui_f\data\map\VehicleIcons\iconmanvirtual_ca.paa",cTabMicroDAGRfontColour,_playerPos,cTabTADownIconBaseSize,cTabTADownIconBaseSize,_heading,"", 1,cTabTxtSize,"TahomaB","right"];
+
+// draw directional arrow at own location
+if (_playerDrawn) then {
+	_heading = direction _veh;
+	_cntrlScreen drawIcon ["\A3\ui_f\data\map\VehicleIcons\iconmanvirtual_ca.paa",cTabMicroDAGRfontColour,_playerPos,cTabTADownIconBaseSize,cTabTADownIconBaseSize,_heading,"", 1,cTabTxtSize,"TahomaB","right"];
+};
 
 // update hook information
 if (cTabDrawMapTools) then {

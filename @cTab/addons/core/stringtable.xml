@@ -228,7 +228,6 @@
             <English>Text Messaging System</English>
             <French>Application messagerie</French>
         </Key>
-
         <Key ID="STR_ctab_core_EnemyMenu">
             <English>Enemy SALUTE</English>
             <French>Position Ennemi</French>
@@ -366,7 +365,6 @@
             <English>NW</English>
             <French>NO</French>
         </Key>
-
         <Key ID="STR_ctab_core_RifleMenu">
             <English>Rifle</English>
             <French>ALI / Fusil</French>
@@ -395,7 +393,6 @@
             <English>Mortar</English>
             <French>Mortier</French>
         </Key>
-
         <Key ID="STR_ctab_core_CasualtyMenu">
             <English>Casualty</English>
             <French>Casualty</French>
@@ -424,7 +421,6 @@
             <English>Mass Casualty Incident</English>
             <French>Mass Casualty Incident</French>
         </Key>
-
         <Key ID="STR_ctab_core_HQMenu">
             <English>HQ</English>
             <French>HQ</French>
@@ -441,8 +437,6 @@
             <English>Landing Zone</English>
             <French>Zone de Posée</French>
         </Key>
-
-
         <Key ID="STR_ctab_core_ifMain">
             <English>Toggle Main Interface</English>
             <French>Permuter l'interface principale</French>
@@ -541,7 +535,6 @@
             <English>At each synchronization</English>
             <French>A chaque synchronisation</French>
         </Key>
-
         <Key ID="STR_ctab_core_useAceMicroDagr">
             <English>Add Blue Force Tracking to ACE MicroDAGR</English>
             <French>Ajouter Blue Force Tracking au MicroDAGR de ACE</French>
@@ -550,7 +543,6 @@
             <English>Display Blue Force Tracking informatos on ACE MicroDAGR, and includes personnels equiped with it to tracking</English>
             <French>Affiche les informations Blue Force Tracking sur le MicroDAGR de ACE, et inclus les personnels qui en sont équipés dans le suivi</French>
         </Key>
-
         <Key ID="STR_ctab_core_newMessage">
             <English>New message from %1</English>
             <French>Nouveau message de %1</French>
@@ -575,7 +567,6 @@
             <English>Blue Force Tracking</English>
             <French>Blue Force Tracking</French>
         </Key>
-
         <Key ID="STR_ctab_core_useMils">
             <English>Unit of heading/compass</English>
             <French>Unité de la boussole</French>
@@ -592,8 +583,6 @@
             <English>Degrees (0-360)</English>
             <French>Degrés (0-360)</French>
         </Key>
-
-
         <Key ID="STR_ctab_core_techData">
             <English>Technical Data</English>
             <French>Données techniques</French>
@@ -602,8 +591,6 @@
             <English>Group call sign</English>
             <French>Identifiant du groupe</French>
         </Key>
-
-        
         <Key ID="STR_ctab_core_videoCategory">
             <English>Video</English>
             <French>Vidéo</French>
@@ -628,7 +615,21 @@
             <English>Topographic</English>
             <French>Topographique</French>
         </Key>
-
-
+        <Key ID="STR_ctab_core_useArmaMarker">
+            <English>Player position marker</English>
+            <French>Marqueur position joueur</French>
+        </Key>
+        <Key ID="STR_ctab_core_useArmaMarkerDetails">
+            <English>Player position marker on rugged tablet, Android GD300 and TAD</English>
+            <French>Marqueur de la position du joueur sur la tablette endurcie, Android GD300 et TAD.</French>
+        </Key>
+        <Key ID="STR_ctab_core_useArmaMarker_true">
+            <English>Arma marker with heading</English>
+            <French>Marqueur Arma avec orientation</French>
+        </Key>
+        <Key ID="STR_ctab_core_useArmaMarker_false">
+            <English>NATO symbol</English>
+            <French>Symbole OTAN</French>
+        </Key>
     </Package>
 </Project>

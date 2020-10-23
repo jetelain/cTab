@@ -61,7 +61,7 @@ if ([_player,["ItemMicroDAGR"]] call cTab_fnc_checkGear) then {
 	_actions pushBack [[
         "cTab_microDAGR",
         LLSTRING(ConfigureMicroDAGR),
-        "\cTab\img\icon_Android.paa",
+        "\cTab\img\icon_MicroDAGR.paa",
         _toggleInterface,
         {true},
         _subactions,

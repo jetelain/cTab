@@ -35,9 +35,12 @@ _ctrlScreen = _this select 0;
 _mode = _this select 1;
 _vehicles = [];
 _playerVehicle = vehicle cTab_player;
+private _playerVehicle_marker = [objNull, _playerVehicle] select GVAR(useArmaMarker);
 _playerGroup = group cTab_player;
 _mountedLabels = [];
 _drawText = cTabBFTtxt;
+
+private _mustDrawPlayer = true;
 
 // Anything but MicroDAGR
 if (_mode != 2) then {
@@ -68,9 +71,10 @@ if (_mode != 2) then {
 			};
 			// Draw on anything but TAD
 			call {
-				if (_veh != _playerVehicle) exitWith {
+				if (_veh != _playerVehicle_marker) exitWith {
 					// player is not sitting in this vehicle
 					_ctrlScreen drawIcon [_x select 1,cTabColorBlue,_pos,cTabIconSize,cTabIconSize,0,_text,0,cTabTxtSize,"TahomaB","right"];
+					if ( _veh == _playerVehicle ) then { _mustDrawPlayer = false; };
 				};
 				if (group _veh != _playerGroup) then {
 					// player is not in the same group as this vehicle
@@ -90,7 +94,7 @@ if (_mode != 2) then {
 			_vehIndex = _vehicles find _veh;
 			
 			// Only do this if the vehicle has not been drawn yet, or the player is sitting in the same vehicle as the group leader
-			if (_vehIndex != -1 || {_veh == _playerVehicle}) exitWith {
+			if (_vehIndex != -1 || {_veh == _playerVehicle_marker}) exitWith {
 				if (_drawText) then {
 					// we want to draw text and the group leader is in a vehicle that has already been drawn
 					_text = _x select 3;
@@ -111,6 +115,7 @@ if (_mode != 2) then {
 			_pos = if ( GVAR(bft_mode) == 1) then { getPosASL _veh } else { _x select 5 };
 			_ctrlScreen drawIcon [_x select 1,cTabColorBlue,_pos,cTabIconSize,cTabIconSize,0,_text,0,cTabTxtSize,"TahomaB","right"];
 			_ctrlScreen drawIcon [_x select 2,cTabColorBlue,_pos,cTabGroupOverlayIconSize,cTabGroupOverlayIconSize,0,"",0,cTabTxtSize,"TahomaB","right"];
+			if ( _veh == _playerVehicle ) then { _mustDrawPlayer = false; };
 		};
 	} count cTabBFTgroups;
 };
@@ -138,8 +143,8 @@ if (_mode != 2) then {
 				};
 			};
 		};
-		_pos = if ( GVAR(bft_mode) == 1) then { getPosASL _veh } else { _x select 5 };
-		_dir = if ( GVAR(bft_mode) == 1) then { direction _veh } else { _x select 6 };
+		_pos = getPosASL _veh;
+		_dir = direction _veh;
 		if (_veh != (_x select 0)) exitWith {
 			// the unit _does_ sit in a vehicle
 			_mountedIndex = _mountedLabels find _veh;
@@ -166,11 +171,11 @@ if (_mode != 2) then {
 if (_drawText && !(_mountedLabels isEqualTo [])) then {
 	for "_i" from 0 to (count _mountedLabels - 2) step 2 do {
 		_veh = _mountedLabels select _i;
-		if (_veh != _playerVehicle) then {
+		if (_veh != _playerVehicle_marker) then {
 			_pos = if ( GVAR(bft_mode) == 1) then { getPosASL _veh } else { _x select 5 };
 			_ctrlScreen drawIcon ["\A3\ui_f\data\map\Markers\System\dummy_ca.paa",cTabColorBlue,_pos,cTabIconSize,cTabIconSize,0,_mountedLabels select (_i + 1),0,cTabTxtSize,"TahomaB","left"];
 		};
 	};
 };
 
-true
+_mustDrawPlayer
