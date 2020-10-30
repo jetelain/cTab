@@ -9,6 +9,7 @@ ADDON = true;
 [QGVAR(useMils),       "LIST", [LLSTRING(useMils), LLSTRING(useMilsDetails)], ["cTab", LLSTRING(mapCategory)], [[false, true], [LLSTRING(useMils_false), LLSTRING(useMils_true)], 0]] call CBA_fnc_addSetting;
 [QGVAR(defMapStyle),   "LIST", [LLSTRING(defMapStyle), LLSTRING(defMapStyleDetails)], ["cTab", LLSTRING(mapCategory)], [["SAT", "TOPO"], [LLSTRING(satStyle), LLSTRING(topoStyle)], 0], 0, {}, true] call CBA_fnc_addSetting;
 [QGVAR(useArmaMarker), "LIST", [LLSTRING(useArmaMarker), LLSTRING(useArmaMarkerDetails)], ["cTab", LLSTRING(mapCategory)], [[true, false], [LLSTRING(useArmaMarker_true), LLSTRING(useArmaMarker_false)], 0]] call CBA_fnc_addSetting;
+[QGVAR(gridPrecision), "LIST", [LLSTRING(gridPrecision), LLSTRING(gridPrecisionDetails)], ["cTab", LLSTRING(mapCategory)], [[0, 1, 2], [LLSTRING(gridPrecision0), LLSTRING(gridPrecision1), LLSTRING(gridPrecision2)], 0]] call CBA_fnc_addSetting;
 
 if (isClass (configFile >> "CfgWeapons" >> "ACE_microDAGR")) then {
 	[QGVAR(useAceMicroDagr), "CHECKBOX", [LLSTRING(useAceMicroDagr), LLSTRING(useAceMicroDagrDetails)], ["cTab", LLSTRING(mapCategory)], true, 0, {}, true] call CBA_fnc_addSetting;

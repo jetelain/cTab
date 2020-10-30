@@ -88,4 +88,5 @@ if ( hasInterface ) then {
 	PREP(onTechnicalDataOpen);
 	PREP(sendMessage);
 	PREP(deleteMessages);
+	PREP(gridPosition);
 };

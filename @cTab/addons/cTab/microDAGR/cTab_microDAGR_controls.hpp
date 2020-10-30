@@ -37,7 +37,7 @@
 
 // On-screen element X-coord for left, center and right elements
 #define cTab_GUI_microDAGR_OSD_LEFT_X (cTab_GUI_microDAGR_OSD_EDGE_L)
-#define cTab_GUI_microDAGR_OSD_CENTER_X (cTab_GUI_microDAGR_OSD_EDGE_L + cTab_GUI_microDAGR_OSD_MARGIN + cTab_GUI_microDAGR_OSD_ELEMENT_STD_W)
+#define cTab_GUI_microDAGR_OSD_CENTER_X (cTab_GUI_microDAGR_OSD_EDGE_L + cTab_GUI_microDAGR_OSD_MARGIN + (cTab_GUI_microDAGR_OSD_ELEMENT_STD_W*0.75))
 #define cTab_GUI_microDAGR_OSD_RIGHT_X (cTab_GUI_microDAGR_OSD_EDGE_R - cTab_GUI_microDAGR_OSD_ELEMENT_STD_W)
 
 // On-screen text sizes, hight in pixels
@@ -218,6 +218,7 @@ class cTab_microDAGR_on_screen_time: cTab_RscText_microDAGR
 	style = ST_CENTER;
 	x = pxToScreen_X(cTab_GUI_microDAGR_OSD_CENTER_X);
 	y = pxToScreen_Y(cTab_GUI_microDAGR_OSD_EDGE_T);
+	w = pxToScreen_W(cTab_GUI_microDAGR_OSD_ELEMENT_STD_W*1.5);
 };
 class cTab_microDAGR_on_screen_signalStrength: cTab_microDAGR_on_screen_battery
 {
@@ -236,7 +237,7 @@ class cTab_microDAGR_on_screen_satellite: cTab_microDAGR_on_screen_battery
 class cTab_microDAGR_on_screen_dirDegree: cTab_RscText_microDAGR
 {
 	idc = IDC_CTAB_OSD_DIR_DEGREE;
-	style = ST_RIGHT;
+	style = ST_LEFT;
 	y = pxToScreen_Y(cTab_GUI_microDAGR_OSD_EDGE_B);
 	x = pxToScreen_X(cTab_GUI_microDAGR_OSD_LEFT_X);
 };
@@ -245,6 +246,7 @@ class cTab_microDAGR_on_screen_grid: cTab_microDAGR_on_screen_dirDegree
 	idc = IDC_CTAB_OSD_GRID;
 	style = ST_CENTER;
 	x = pxToScreen_X(cTab_GUI_microDAGR_OSD_CENTER_X);
+	w = pxToScreen_W(cTab_GUI_microDAGR_OSD_ELEMENT_STD_W*1.5);
 };
 class cTab_microDAGR_on_screen_dirOctant: cTab_microDAGR_on_screen_dirDegree
 {
@@ -260,6 +262,7 @@ class cTab_microDAGR_on_screen_hookGrid: cTab_RscText_microDAGR
 	y = pxToScreen_Y(cTab_GUI_microDAGR_OSD_EDGE_B - cTab_GUI_microDAGR_OSD_MARGIN - cTab_GUI_microDAGR_OSD_ELEMENT_STD_H * 4);
 	colorText[] = {1,1,1,0.5};
 	colorBackground[] = {0,0,0,0.25};
+	sizeEx = pxToScreen_H(48);
 };
 class cTab_microDAGR_on_screen_hookElevation: cTab_microDAGR_on_screen_hookGrid
 {

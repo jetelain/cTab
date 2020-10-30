@@ -259,8 +259,9 @@ class cTab_android_on_screen_dirDegree: cTab_android_on_screen_time
 class cTab_android_on_screen_grid: cTab_android_on_screen_dirDegree
 {
 	idc = IDC_CTAB_OSD_GRID;
-	style = ST_RIGHT;
+	style = ST_LEFT;
 	x = pxToScreen_X(cTab_GUI_android_OSD_X(4));
+	w = pxToScreen_W(cTab_GUI_android_OSD_ELEMENT_STD_W*2);
 };
 class cTab_android_on_screen_dirOctant: cTab_android_on_screen_dirDegree
 {
@@ -276,6 +277,7 @@ class cTab_android_on_screen_hookGrid: cTab_RscText_Android
 	y = pxToScreen_Y(cTab_GUI_android_OSD_EDGE_B - cTab_GUI_android_OSD_MARGIN - cTab_GUI_android_OSD_ELEMENT_STD_H * 4);
 	colorText[] = {1,1,1,0.5};
 	colorBackground[] = {0,0,0,0.25};
+	sizeEx = pxToScreen_H(32);
 };
 class cTab_android_on_screen_hookElevation: cTab_android_on_screen_hookGrid
 {

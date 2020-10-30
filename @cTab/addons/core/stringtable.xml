@@ -631,5 +631,25 @@
             <English>NATO symbol</English>
             <French>Symbole OTAN</French>
         </Key>
+        <Key ID="STR_ctab_core_gridPrecision">
+            <English>Coordinates precision</English>
+            <French>Précision coordonnées</French>
+        </Key>
+        <Key ID="STR_ctab_core_gridPrecisionDetails">
+            <English>Coordinates precision</English>
+            <French>Précision coordonnées</French>
+        </Key>
+        <Key ID="STR_ctab_core_gridPrecision0">
+            <English>Default</English>
+            <French>Par défaut</French>
+        </Key>
+        <Key ID="STR_ctab_core_gridPrecision1">
+            <English>10 m</English>
+            <French>10 m</French>
+        </Key>
+        <Key ID="STR_ctab_core_gridPrecision2">
+            <English>1 m</English>
+            <French>1 m</French>
+        </Key>
     </Package>
 </Project>

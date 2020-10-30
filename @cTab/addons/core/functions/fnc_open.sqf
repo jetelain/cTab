@@ -88,7 +88,7 @@ if (_displayName in ["cTab_TAD_dsp","cTab_TAD_dlg"]) then {
 			(_display displayCtrl IDC_CTAB_OSD_TIME) ctrlSetText call cTab_fnc_currentTime;
 			
 			// update grid position
-			(_display displayCtrl IDC_CTAB_OSD_GRID) ctrlSetText format ["%1", mapGridPosition getPosASL _veh];
+			(_display displayCtrl IDC_CTAB_OSD_GRID) ctrlSetText ([getPosASL _veh] call FUNC(gridPosition));
 			
 			// update current heading
 			(_display displayCtrl IDC_CTAB_OSD_DIR_DEGREE) ctrlSetText ([_heading] call FUNC(formatHeading));
