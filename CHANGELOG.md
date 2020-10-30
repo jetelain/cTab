@@ -22,6 +22,7 @@ Changelog
   * Blue Force Tracking
   * User marker / Red Force Tracking
   * Messaging
+* Fix helmet cam conflict with mine detector
 * New maintener : jetelain aka GrueArbre
 
 ### 2.2.2 ###

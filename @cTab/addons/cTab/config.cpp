@@ -118,16 +118,16 @@ class CfgWeapons
 		author = AUTHOR;
 	};
 	
-	class ItemcTabHCam: ItemCore {
+	class CBA_MiscItem;
+	class CBA_MiscItem_ItemInfo;
+	class ItemcTabHCam: CBA_MiscItem {
 		descriptionshort = $STR_ctab_core_HCamShort;
 		descriptionuse = "<t color='#9cf953'>Use: </t>Used to record and stream video";
 		displayname = $STR_ctab_core_HCam;
 		picture = "\cTab\img\cTab_helmetCam_ico.paa";
 		scope = 2;
-		simulation = "ItemMineDetector";
-		detectRange = -1;
 		type = 0;
-		class ItemInfo: InventoryItem_Base_F {
+		class ItemInfo: CBA_MiscItem_ItemInfo {
 			mass = 4;
 		};
 		author = AUTHOR;
