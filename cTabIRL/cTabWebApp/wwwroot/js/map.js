@@ -99,14 +99,6 @@ function updateButtons() {
     }
 }
 
-function fullScreenToggle() {
-    if (document.fullscreenElement) {
-        document.exitFullscreen().then(updateButtons);
-    } else {
-        document.documentElement.requestFullscreen().then(updateButtons);
-    } 
-}
-
 function noSleepToggle() {
     isNoSleep = !isNoSleep;
     if (!noSleep) {
@@ -119,6 +111,20 @@ function noSleepToggle() {
         noSleep.disable();
     }
     updateButtons();
+}
+
+function fullScreenToggle() {
+    if (document.fullscreenElement) {
+        if (isNoSleep) {
+            noSleepToggle();
+        }
+        document.exitFullscreen().then(updateButtons);
+    } else {
+        if (!isNoSleep) { // Mobile chrome now will sleep even in fullscreen mode
+            noSleepToggle();
+        }
+        document.documentElement.requestFullscreen().then(updateButtons);
+    } 
 }
 
 function setCenterOnPosition(value) {
@@ -647,11 +653,12 @@ $(function () {
         }
     });
 
-    if (!document.documentElement.requestFullscreen) {
+    //if (!document.documentElement.requestFullscreen) { 
         // If fullscreen not available, ensure that height never needs scrolling
+        // 100vh is now broken on mobile Firefox... no workaround found for fullscreen at present time
         $('.map').css('height', (window.innerHeight - 30) + 'px');
         $(window).on('resize', function () { $('.map').css('height', (window.innerHeight - 30) + 'px'); window.scrollTo(0, 0); });
-    }
+    //}
 
 
 });
