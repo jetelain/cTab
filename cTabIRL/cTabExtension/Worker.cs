@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -115,11 +116,13 @@ namespace cTabExtension
                     foreach(var e in ae.InnerExceptions)
                     {
                         Extension.ErrorMessage($"{name} failed with {e.GetType().Name} {e.Message}.");
+                        ReportInner(e);
                     }
                 }
                 catch (Exception e)
                 {
                     Extension.ErrorMessage($"{name} failed with {e.GetType().Name} {e.Message}.");
+                    ReportInner(e);
                 }
             }).Unwrap();
         }
@@ -150,6 +153,8 @@ namespace cTabExtension
 
             Extension.DebugMessage($"server={server}, steamId={steamId}, name={name}, key={key}, hostname={uri.DnsSafeHost}");
 
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
+
             var connection = new HubConnectionBuilder()
                 .WithUrl(uri, options =>
                 {
@@ -175,6 +180,7 @@ namespace cTabExtension
                 if (e != null)
                 {
                     Extension.ErrorMessage($"Closed with {e.GetType().Name} {e.Message}.");
+                    ReportInner(e);
                     await Extension.Callback("Disconnected", "");
                 }
             };
@@ -190,8 +196,10 @@ namespace cTabExtension
                     await SayHello(steamId, name, HashKeyForHost(key, uri.DnsSafeHost), connection);
                     return connection;
                 }
-                catch
+                catch(Exception e)
                 {
+                    Extension.ErrorMessage($"Connection failed with {e.GetType().Name} {e.Message}.");
+                    ReportInner(e);
                     if (!token.IsCancellationRequested)
                     {
                         await Task.Delay(5000);
@@ -199,6 +207,15 @@ namespace cTabExtension
                 }
             }
             return null;
+        }
+
+        private static void ReportInner(Exception e)
+        {
+            if (e.InnerException != null)
+            {
+                Extension.ErrorMessage($"+ {e.InnerException.GetType().Name} {e.InnerException.Message}.");
+                ReportInner(e.InnerException);
+            }
         }
 
         private static async Task SayHello(string steamId, string name, string key, HubConnection connection)
