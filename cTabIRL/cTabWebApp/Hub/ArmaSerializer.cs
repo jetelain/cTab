@@ -69,7 +69,7 @@ namespace cTabWebApp.Hubs
             while ((i = str.Peek()) != -1)
             {
                 char c = (char)i;
-                if (char.IsDigit(c) || c == '.')
+                if (char.IsDigit(c) || c == '.' || c == '-')
                 {
                     str.Read();
                     sb.Append(c);
@@ -124,7 +124,7 @@ namespace cTabWebApp.Hubs
                         {
                             data.Add(ReadArray(str));
                         }
-                        else if (char.IsDigit(c))
+                        else if (char.IsDigit(c) || c == '-')
                         {
                             data.Add(ReadNumber(str));
                         }
