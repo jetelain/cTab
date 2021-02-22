@@ -61,6 +61,6 @@ GVAR(deviceLevel) = 0;
 #ifdef DEBUG_BACKEND
 [QGVAR(uri),     "EDITBOX",  [LLSTRING(uri),     LLSTRING(uriDetails)],     ["cTab",LLSTRING(modName)], "http://localhost:5000/hub", 0, {}, true] call CBA_fnc_addSetting;
 #else
-[QGVAR(uri),     "EDITBOX",  [LLSTRING(uri),     LLSTRING(uriDetails)],     ["cTab",LLSTRING(modName)], "http://ctab.plan-ops.fr/hub", 0, {}, true] call CBA_fnc_addSetting;
+[QGVAR(uri),     "EDITBOX",  [LLSTRING(uri),     LLSTRING(uriDetails)],     ["cTab",LLSTRING(modName)], "https://ctab.plan-ops.fr/hub", 0, {}, true] call CBA_fnc_addSetting;
 #endif
 [QGVAR(key),     "EDITBOX",  [LLSTRING(key),     LLSTRING(keyDetails)],     ["cTab",LLSTRING(modName)], "", 0, {}, true] call CBA_fnc_addSetting;
