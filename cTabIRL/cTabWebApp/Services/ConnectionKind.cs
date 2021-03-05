@@ -8,6 +8,7 @@ namespace cTabWebApp
     public enum ConnectionKind
     {
         Arma,
-        Web
+        Web,
+        Spectator
     }
 }

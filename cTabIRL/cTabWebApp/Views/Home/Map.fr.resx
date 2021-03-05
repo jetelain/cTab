@@ -138,6 +138,9 @@
   <data name="Connecting..." xml:space="preserve">
     <value>Connection...</value>
   </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copier</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Supprimer</value>
   </data>
@@ -173,6 +176,12 @@
   </data>
   <data name="Sent" xml:space="preserve">
     <value>Envoyé</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Partager</value>
+  </data>
+  <data name="Share your cTab in read-only mode." xml:space="preserve">
+    <value>Partager votre cTab en lecture seule.</value>
   </data>
   <data name="To" xml:space="preserve">
     <value>À</value>

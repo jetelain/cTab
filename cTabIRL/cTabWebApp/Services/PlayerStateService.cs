@@ -65,6 +65,7 @@ namespace cTabWebApp
                     SteamId = steamId,
                     KeyHostname = keyHostname,
                     Token = GenerateToken(id),
+                    SpectatorToken = GenerateToken(id),
                     LastActivityUtc = DateTime.UtcNow
                 };
                 lock (players)
@@ -97,6 +98,28 @@ namespace cTabWebApp
             rng.GetBytes(random);
             // Includes id to avoid collision
             return id.ToString("X") + "x" + Convert.ToBase64String(random).Replace("+", "-").Replace("/", "_").TrimEnd('=');
+        }
+
+        public IEnumerable<PlayerState> GetUserAuthenticatedStates(string steamId)
+        {
+            List<PlayerState> candidates;
+            lock (players)
+            {
+                candidates = players.Where(p => p.SteamId == steamId && p.IsAuthenticated).ToList();
+            }
+            return players;
+        }
+
+        public PlayerState GetStateBySpectatorToken(string spectatorToken)
+        {
+            if (string.IsNullOrEmpty(spectatorToken))
+            {
+                return null;
+            }
+            lock (players)
+            {
+                return players.FirstOrDefault(p => p.SpectatorToken == spectatorToken);
+            }
         }
     }
 }

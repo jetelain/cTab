@@ -9,5 +9,8 @@ namespace cTabWebApp.Models
     {
         public string Token { get; set; }
         public string InitialMap { get; set; } = "altis";
+
+        public bool IsSpectator { get; set; }
+        public string SpectatorToken { get; internal set; }
     }
 }

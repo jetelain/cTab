@@ -226,11 +226,13 @@ function showMarkerMenu(marker) {
 }
 
 function updateUnread() {
-    var unread = $('#inbox-list').find('i.fa-envelope').length;
-    var span = inboxButton.j().find('span');
-    span.text('' + unread);
-    span.attr('class', unread > 0 ? 'badge badge-danger' : 'badge badge-secondary');
-    inboxButton.setClass(unread > 0 ? 'btn-primary' : 'btn-outline-secondary');
+    if (!vm.isSpectator) {
+        var unread = $('#inbox-list').find('i.fa-envelope').length;
+        var span = inboxButton.j().find('span');
+        span.text('' + unread);
+        span.attr('class', unread > 0 ? 'badge badge-danger' : 'badge badge-secondary');
+        inboxButton.setClass(unread > 0 ? 'btn-primary' : 'btn-outline-secondary');
+    }
 }
 
 function removeAllMarkers() {
@@ -291,8 +293,9 @@ function initMap(mapInfos) {
     map.setView(mapInfos.center, mapInfos.maxZoom);
     map.on('mousedown', function () { setCenterOnPosition(false); });
     map.on('touchstart', function () { setCenterOnPosition(false); });
-    map.on('dblclick contextmenu', function (e) { showMenu(e.latlng, generateMenu(0, e.latlng)); });
-
+    if (!vm.isSpectator) {
+        map.on('dblclick contextmenu', function (e) { showMenu(e.latlng, generateMenu(0, e.latlng)); });
+    }
     (centerOnPositionButton = L.control.overlayButton({
         content: '<i class="fas fa-location-arrow"></i>',
         click: function () { setCenterOnPosition(!centerOnPosition); }
@@ -309,23 +312,23 @@ function initMap(mapInfos) {
             click: noSleepToggle
         })).addTo(map);
     }
+    if (!vm.isSpectator) {
+        (inboxButton = L.control.overlayButton({
+            position: 'topright',
+            content: '<i class="fas fa-inbox"></i>&nbsp;<span class="badge badge-secondary">0</span>',
+            click: function () {
+                $('#inbox').modal('show');
+            }
+        })).addTo(map);
 
-    (inboxButton = L.control.overlayButton({
-        position: 'topright',
-        content: '<i class="fas fa-inbox"></i>&nbsp;<span class="badge badge-secondary">0</span>',
-        click: function () {
-            $('#inbox').modal('show');
-        }
-    })).addTo(map);
-
-    (composeButton = L.control.overlayButton({
-        position: 'topright',
-        content: '<i class="far fa-envelope"></i>',
-        click: function () {
-            $('#compose').modal('show');
-        }
-    })).addTo(map);
-
+        (composeButton = L.control.overlayButton({
+            position: 'topright',
+            content: '<i class="far fa-envelope"></i>',
+            click: function () {
+                $('#compose').modal('show');
+            }
+        })).addTo(map);
+    }
     L.latlngGraticule({
         zoomInterval: [
             { start: 0, end: 10, interval: 1000 }
@@ -624,34 +627,43 @@ $(function () {
         }
     });
 
+    function sayHello() {
+        if (vm.isSpectator) {
+            connection.invoke("SpectatorHello", { spectatorToken: vm.spectatorToken });
+        } else {
+            connection.invoke("WebHello", { token: vm.token });
+        }
+    }
+
     connection.start().then(function () {
         connected();
-        connection.invoke("WebHello", { token: vm.token });
+        sayHello();
     }).catch(connectionLost);
 
     connection.onreconnecting(connectionLost);
     connection.onreconnected(function () {
         connected();
-        connection.invoke("WebHello", { token: vm.token });
+        sayHello();
     });
 
+    if (!vm.isSpectator) {
+        $('#compose-send').on('click', function () {
+            var to = $('#compose-to').val();
+            var body = $('#compose-text').val();
 
-    $('#compose-send').on('click', function () {
-        var to = $('#compose-to').val();
-        var body = $('#compose-text').val();
+            connection.invoke("WebSendMessage", { to: to, body: body });
 
-        connection.invoke("WebSendMessage", { to: to, body: body});
+            $('#compose-text').val('');
+            $('#compose').modal('hide');
+        });
 
-        $('#compose-text').val('');
-        $('#compose').modal('hide');
-    });
-
-    $('#inbox-delete').on('click', function () {
-        if (displayedMessage) {
-            connection.invoke("WebDeleteMessage", { id: displayedMessage.id });
-            clearMessage();
-        }
-    });
+        $('#inbox-delete').on('click', function () {
+            if (displayedMessage) {
+                connection.invoke("WebDeleteMessage", { id: displayedMessage.id });
+                clearMessage();
+            }
+        });
+    }
 
     //if (!document.documentElement.requestFullscreen) { 
         // If fullscreen not available, ensure that height never needs scrolling
@@ -660,5 +672,9 @@ $(function () {
         $(window).on('resize', function () { $('.map').css('height', (window.innerHeight - 30) + 'px'); window.scrollTo(0, 0); });
     //}
 
-
+    $('.btn-copy').on('click', function () {
+        var target = $('#' + $(this).attr('data-copy')).get(0);
+        target.select();
+        document.execCommand("copy");
+    });
 });

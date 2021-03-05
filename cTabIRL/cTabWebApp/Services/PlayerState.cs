@@ -27,5 +27,7 @@ namespace cTabWebApp
         }
 
         internal UpdateMessagesMessage LastUpdateMessages { get; set; }
+        public bool IsAuthenticated { get; internal set; }
+        public string SpectatorToken { get; internal set; }
     }
 }

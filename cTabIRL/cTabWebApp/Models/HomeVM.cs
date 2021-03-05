@@ -11,5 +11,6 @@ namespace cTabWebApp.Models
         public string Error { get; internal set; }
         public string PublicUri { get; internal set; }
         public AuthenticationScheme[] Providers { get; internal set; }
+        public PlayerState CurrentState { get; internal set; }
     }
 }

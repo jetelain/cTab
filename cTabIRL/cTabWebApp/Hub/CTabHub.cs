@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualBasic.CompilerServices;
 using QRCoder;
 
@@ -20,11 +21,13 @@ namespace cTabWebApp
     {
         private readonly PublicUriService _publicUri;
         private readonly IPlayerStateService _service;
+        private readonly ILogger<CTabHub> _logger;
 
-        public CTabHub(PublicUriService publicUri, IPlayerStateService service)
+        public CTabHub(PublicUriService publicUri, IPlayerStateService service, ILogger<CTabHub> logger)
         {
             _publicUri = publicUri;
             _service = service;
+            _logger = logger;
         }
 
         public async Task WebHello(WebHelloMessage message)
@@ -32,7 +35,7 @@ namespace cTabWebApp
             var state = _service.GetStateByToken(message.Token);
             if (state == null)
             {
-                Console.WriteLine($"No state for token '{message.Token}'");
+                _logger.LogWarning($"No state for token '{message.Token}'");
                 return;
             }
 
@@ -43,6 +46,11 @@ namespace cTabWebApp
 
             Interlocked.Increment(ref state.ActiveWebConnections);
 
+            await WebJoin(state);
+        }
+
+        private async Task WebJoin(PlayerState state)
+        {
             await Groups.AddToGroupAsync(Context.ConnectionId, state.WebChannelName);
 
             if (state.LastMission != null)
@@ -67,12 +75,27 @@ namespace cTabWebApp
             }
         }
 
+        public async Task SpectatorHello(SpectatorHelloMessage message)
+        {
+            var state = _service.GetStateBySpectatorToken(message.SpectatorToken);
+            if (state == null)
+            {
+                _logger.LogWarning($"No state for token '{message.SpectatorToken}'");
+                return;
+            }
+
+            Context.Items[nameof(PlayerState)] = state;
+            Context.Items[nameof(ConnectionKind)] = ConnectionKind.Spectator;
+
+            await WebJoin(state);
+        }
+
         public async Task ArmaHello(ArmaHelloMessage message)
         {
             var ua = Context.GetHttpContext().Request.Headers["User-Agent"];
             if (!ua.Any(u => u.Contains("cTabExtension/1.")))
             {
-                Console.WriteLine($"ArmaHello was not sent by Extension, but by '{string.Join(", ", ua)}'");
+                _logger.LogWarning($"ArmaHello was not sent by Extension, but by '{string.Join(", ", ua)}'");
                 return;
             }
 
@@ -107,9 +130,28 @@ namespace cTabWebApp
             return null;
         }
 
-        public async Task ArmaStartMission(ArmaMessage message)
+        private PlayerState GetState(ConnectionKind asked)
         {
             var state = GetState();
+            if (state != null)
+            {
+                var actual = (ConnectionKind)Context.Items[nameof(ConnectionKind)];
+                if (actual != asked)
+                {
+                    _logger.LogWarning($"Bad connection type Expected:{asked}, Actual:{actual}");
+                    // TODO: once carefully tested, always return null !
+                    if (actual == ConnectionKind.Spectator)
+                    {
+                        return null;
+                    }
+                }
+            }
+            return state;
+        }
+
+        public async Task ArmaStartMission(ArmaMessage message)
+        {
+            var state = GetState(ConnectionKind.Arma);
             if (state == null)
             {
                 Console.WriteLine($"No state for ArmaStartMission");
@@ -140,14 +182,14 @@ namespace cTabWebApp
         {
             if (message.Timestamp < DateTime.UtcNow.AddMinutes(-1))
             {
-                Console.WriteLine("  Too old, skip");
+                _logger.LogTrace("Too old, skip");
                 return; // Too old !
             }
 
-            var state = GetState();
+            var state = GetState(ConnectionKind.Arma);
             if (state == null)
             {
-                Console.WriteLine($"No state for ArmaUpdatePosition");
+                _logger.LogWarning($"No state for ArmaUpdatePosition");
                 return;
             }
 
@@ -178,10 +220,10 @@ namespace cTabWebApp
         {
             //Console.WriteLine("ArmaUpdateMarkers " + string.Join(", ", message.Args));
 
-            var state = GetState();
+            var state = GetState(ConnectionKind.Arma);
             if (state == null)
             {
-                Console.WriteLine($"No state for ArmaUpdateMarkers");
+                _logger.LogWarning($"No state for ArmaUpdateMarkers");
                 return;
             }
 
@@ -227,10 +269,10 @@ namespace cTabWebApp
 
         public async Task ArmaUpdateMarkersPosition(ArmaMessage message)
         {
-            var state = GetState();
+            var state = GetState(ConnectionKind.Arma);
             if (state == null)
             {
-                Console.WriteLine($"No state for ArmaUpdateMarkersPosition");
+                _logger.LogWarning($"No state for ArmaUpdateMarkersPosition");
                 return;
             }
 
@@ -350,10 +392,10 @@ namespace cTabWebApp
         {
             //Console.WriteLine("ArmaUpdateMarkers " + string.Join(", ", message.Args));
 
-            var state = GetState();
+            var state = GetState(ConnectionKind.Arma);
             if (state == null)
             {
-                Console.WriteLine($"No state for ArmaUpdateMarkers");
+                _logger.LogWarning($"No state for ArmaUpdateMarkers");
                 return;
             }
 
@@ -387,10 +429,10 @@ namespace cTabWebApp
 
         public void ArmaEndMission(ArmaMessage message)
         {
-            var state = GetState();
+            var state = GetState(ConnectionKind.Arma);
             if (state == null)
             {
-                Console.WriteLine($"No state for ArmaEndMission");
+                _logger.LogWarning($"No state for ArmaEndMission");
                 return;
             }
             Console.WriteLine("ArmaEndMission " + string.Join(", ", message.Args));
@@ -400,10 +442,10 @@ namespace cTabWebApp
 
         public async Task ArmaDevices(ArmaMessage message)
         {
-            var state = GetState();
+            var state = GetState(ConnectionKind.Arma);
             if (state == null)
             {
-                Console.WriteLine($"No state for ArmaDevices");
+                _logger.LogWarning($"No state for ArmaDevices");
                 return;
             }
             Console.WriteLine("ArmaDevices " + string.Join(", ", message.Args));
@@ -424,10 +466,10 @@ namespace cTabWebApp
 
         public async Task WebAddUserMarker(WebAddUserMarkerMessage message)
         {
-            var state = GetState();
+            var state = GetState(ConnectionKind.Web);
             if (state == null)
             {
-                Console.WriteLine($"No state for WebAddUserMarker");
+                _logger.LogWarning($"No state for WebAddUserMarker");
                 return;
             }
             string data = FormattableString.Invariant($"[[{message.X},{message.Y}],{message.Data[0]},{message.Data[1]},{message.Data[2]}]");
@@ -440,10 +482,10 @@ namespace cTabWebApp
 
         public async Task WebSendMessage(WebSendMessageMessage message)
         {
-            var state = GetState();
+            var state = GetState(ConnectionKind.Web);
             if (state == null)
             {
-                Console.WriteLine($"No state for WebSendMessage");
+                _logger.LogWarning($"No state for WebSendMessage");
                 return;
             }
             if (string.IsNullOrEmpty(message.To) || string.IsNullOrEmpty(message.Body) || message.Body.Length > 5000 || message.To.Length > 32)
@@ -456,10 +498,10 @@ namespace cTabWebApp
 
         public async Task WebMessageRead(IdMessage message)
         {
-            var state = GetState();
+            var state = GetState(ConnectionKind.Web);
             if (state == null)
             {
-                Console.WriteLine($"No state for WebMessageRead");
+                _logger.LogWarning($"No state for WebMessageRead");
                 return;
             }
             await Clients.Group(state.ArmaChannelName).SendAsync("Callback", "MessageRead", ToData(message));
@@ -467,10 +509,10 @@ namespace cTabWebApp
 
         public async Task WebDeleteMessage(IdMessage message)
         {
-            var state = GetState();
+            var state = GetState(ConnectionKind.Web);
             if (state == null)
             {
-                Console.WriteLine($"No state for WebDeleteMessage");
+                _logger.LogWarning($"No state for WebDeleteMessage");
                 return;
             }
             await Clients.Group(state.ArmaChannelName).SendAsync("Callback", "DeleteMessage", ToData(message));
@@ -478,10 +520,10 @@ namespace cTabWebApp
 
         public async Task WebDeleteUserMarker(IdMessage message)
         {
-            var state = GetState();
+            var state = GetState(ConnectionKind.Web);
             if (state == null)
             {
-                Console.WriteLine($"No state for DeleteUserMarker");
+                _logger.LogWarning($"No state for DeleteUserMarker");
                 return;
             }
             await Clients.Group(state.ArmaChannelName).SendAsync("Callback", "DeleteUserMarker", ToData(message));
@@ -495,11 +537,12 @@ namespace cTabWebApp
             var state = GetState();
             if (state != null)
             {
-                if ((ConnectionKind)Context.Items[nameof(ConnectionKind)] == ConnectionKind.Arma)
+                var actual = (ConnectionKind)Context.Items[nameof(ConnectionKind)];
+                if (actual == ConnectionKind.Arma)
                 {
                     Interlocked.Decrement(ref state.ActiveArmaConnections);
                 }
-                else
+                else if (actual == ConnectionKind.Web)
                 {
                     Interlocked.Decrement(ref state.ActiveWebConnections);
                 }

@@ -1,4 +1,6 @@
-﻿namespace cTabWebApp
+﻿using System.Collections.Generic;
+
+namespace cTabWebApp
 {
     public class SinglePlayerStateService : IPlayerStateService
     {
@@ -21,6 +23,16 @@
         public PlayerState GetStateByToken(string token)
         {
             return state;
+        }
+
+        public IEnumerable<PlayerState> GetUserAuthenticatedStates(string steamId)
+        {
+            return new[] { state };
+        }
+
+        public PlayerState GetStateBySpectatorToken(string spectatorToken)
+        {
+            return null;
         }
     }
 }

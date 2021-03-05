@@ -45,6 +45,11 @@ namespace cTabWebApp.Controllers
             {
                 vm.Error = SharedResource.InvalidQrCode;
             }
+            var steamId = SteamHelper.GetSteamId(User);
+            if (!string.IsNullOrEmpty(steamId))
+            {
+                vm.CurrentState = _service.GetUserAuthenticatedStates(steamId).OrderByDescending(e => e.LastActivityUtc).FirstOrDefault();
+            }
             return View(vm);
         }
 
@@ -88,12 +93,37 @@ namespace cTabWebApp.Controllers
                 vm.Error = SharedResource.InvalidQrCode;
                 return View(nameof(Index), vm);
             }
+            var steamId = SteamHelper.GetSteamId(User);
+            if (!string.IsNullOrEmpty(steamId) && state.SteamId == steamId)
+            {
+                state.IsAuthenticated = true;
+            }
             return View(new MapVM()
             {
                 Token = state.Token,
-                InitialMap = state.LastMission?.WorldName?.ToLowerInvariant() ?? "altis"
+                InitialMap = state.LastMission?.WorldName?.ToLowerInvariant() ?? "altis",
+                SpectatorToken = state.SpectatorToken
             });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Shared(string t)
+        {
+            var state = _service.GetStateBySpectatorToken(t);
+            if (state == null)
+            {
+                var vm = await CreateHomeVmAsync();
+                vm.Error = SharedResource.InvalidQrCode;
+                return View(nameof(Index), vm);
+            }
+            return View(nameof(Map),new MapVM()
+            {
+                InitialMap = state.LastMission?.WorldName?.ToLowerInvariant() ?? "altis",
+                SpectatorToken = state.SpectatorToken,
+                IsSpectator = true
+            });
+        }
+
 
         private async Task<AuthenticationScheme[]> GetExternalProvidersAsync()
         {

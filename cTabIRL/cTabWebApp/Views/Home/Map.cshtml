@@ -32,6 +32,9 @@
     </header>
     <div class="map" id="map">
     </div>
+
+@if (!Model.IsSpectator)
+{
     <div class="modal" tabindex="-1" role="dialog" id="inbox">
         <div class="modal-dialog mb-0 mt-4 modal-dialog-scrollable">
             <div class="modal-content">
@@ -89,6 +92,16 @@
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-body">
+                    <h5>@Localizer["Share"]</h5>
+                    <p>@Localizer["Share your cTab in read-only mode."]</p>
+                    <div class="input-group mb-3">
+                        <input id="link-ro" class="form-control" type="text" readonly="readonly" value="@Url.Action("Shared", "Home", new { t = Model.SpectatorToken }, Context.Request.Scheme)" />
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary btn-copy" type="button" data-copy="link-ro">@Localizer["Copy"]</button>
+                        </div>
+                    </div>
+
+
                     <h5>@Localizer["User manual"]</h5>
                     <p>@Localizer["Top bar displays connectivity, heading, clock time and MGRS position (meter precision)."]</p>
                     <p>@Localizer["To add a marker on a position: right click/long tap or double click/double tap."]</p>
@@ -114,7 +127,7 @@
             </div>
         </div>
     </div>
-
+}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>

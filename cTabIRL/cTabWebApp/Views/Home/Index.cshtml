@@ -11,6 +11,15 @@
     <p class="alert alert-danger" role="alert">@Model.Error</p>
 }
 
+@if (Model.CurrentState != null)
+{
+<div class="mt-4 alert alert-secondary" role="alert">
+    <h4 class="alert-heading">@Localizer["Active cTab session"]</h4>
+    <p>@Localizer["A cTab session is still available, you may want to connect back."]</p>
+    <p><a class="btn btn-success" asp-action="Map" asp-route-t="@Model.CurrentState.Token">@Localizer["Connect to cTab"]</a></p>
+</div>
+}
+
 <h1 class="text-center">@Localizer["cTab on mobile device"]</h1>
 @if (!string.IsNullOrEmpty(Communauty.Name))
 {
@@ -25,6 +34,7 @@
     <h2>@Localizer["Install cTab IRL mod"]</h2>
     <p>@Localizer["Download the mod from the <a href=\"{0}\">Steam Workshop</a>, or from <a href=\"{1}\">GitHub</a>.", "https://steamcommunity.com/workshop/filedetails/?id=2262009445", "https://github.com/jetelain/cTab"]</p>
 </div>
+
 
 <div class="row mt-4">
 
