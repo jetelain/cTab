@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 
 namespace cTabWebApp
 {
@@ -29,5 +28,6 @@ namespace cTabWebApp
         internal UpdateMessagesMessage LastUpdateMessages { get; set; }
         public bool IsAuthenticated { get; internal set; }
         public string SpectatorToken { get; internal set; }
+        public UpdateMapMarkersMessage LastUpdateMapMarkers { get; internal set; }
     }
 }

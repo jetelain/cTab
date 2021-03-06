@@ -18,3 +18,4 @@ appsettings.Development.json
 /cTabIRL/QrFontBuilder/bin
 /cTabIRL/cTabWebAppTests/obj
 /cTabIRL/cTabWebAppTests/bin
+*.bikey

@@ -5,14 +5,12 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Arma3TacMapLibrary.Arma3;
 using cTabWebApp.Hubs;
 using cTabWebApp.Services;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
-using Microsoft.VisualBasic.CompilerServices;
 using QRCoder;
 
 namespace cTabWebApp
@@ -72,6 +70,10 @@ namespace cTabWebApp
             if (state.LastSetPosition != null)
             {
                 await Clients.Caller.SendAsync("SetPosition", state.LastSetPosition);
+            }
+            if (state.LastUpdateMapMarkers != null)
+            {
+                await Clients.Caller.SendAsync("UpdateMapMarkers", state.LastUpdateMapMarkers);
             }
         }
 
@@ -214,6 +216,96 @@ namespace cTabWebApp
             };
 
             await Clients.Group(state.WebChannelName).SendAsync("SetPosition", state.LastSetPosition);
+        }
+
+        public async Task ArmaUpdateMapMarkers(ArmaMessage message)
+        {
+            var state = GetState(ConnectionKind.Arma);
+            if (state == null)
+            {
+                _logger.LogWarning($"No state for ArmaUpdateMapMarkers");
+                return;
+            }
+            var msg =new UpdateMapMarkersMessage()
+            {
+                Simples = new List<SimpleMapMarker>(),
+                Icons = new List<IconMapMarker>(),
+                Polylines = new List<PolylineMapMarker>()
+            }; 
+
+            var simple = ArmaSerializer.ParseMixedArray(message.Args[0]);
+            foreach(object[] simpleMarker in simple)
+            {
+                var shape = (string)simpleMarker[3];
+                if (string.Equals(shape, "ICON", StringComparison.OrdinalIgnoreCase))
+                {
+                    Arma3MarkerType type;
+                    if (Enum.TryParse((string)simpleMarker[2], true, out type))
+                    {
+                        msg.Icons.Add(new IconMapMarker()
+                        {
+                            Name = (string)simpleMarker[0],
+                            Pos = ((object[])simpleMarker[1]).Cast<double>().ToArray(),
+                            Icon = ToIcon(type, (string)simpleMarker[7]),
+                            Size = ((object[])simpleMarker[4]).Cast<double>().ToArray(),
+                            Dir = (double)simpleMarker[5],
+                            Label = (string)simpleMarker[8],
+                            Alpha = (double)simpleMarker[9]
+                        });
+                    }
+                }
+                else
+                {
+                    msg.Simples.Add(new SimpleMapMarker()
+                    {
+                        Name = (string)simpleMarker[0],
+                        Pos = ((object[])simpleMarker[1]).Cast<double>().ToArray(),
+                        Shape = shape.ToLowerInvariant(),
+                        Size = ((object[])simpleMarker[4]).Cast<double>().ToArray(),
+                        Dir = (double)simpleMarker[5],
+                        Brush = (string)simpleMarker[6],
+                        Color = ToHtmlColor((string)simpleMarker[7]),
+                        Alpha = (double)simpleMarker[9]
+                    });
+                }
+            }
+
+            var poly = ArmaSerializer.ParseMixedArray(message.Args[1]);
+            foreach (object[] polyMarker in poly)
+            {
+                msg.Polylines.Add(new PolylineMapMarker()
+                {
+                    Name = (string)polyMarker[0],
+                    Points = ((object[])polyMarker[1]).Cast<double>().ToArray(),
+                    Brush = (string)polyMarker[2],
+                    Color = ToHtmlColor((string)polyMarker[3]),
+                    Alpha = (double)polyMarker[4]
+                });
+            }
+
+            _logger.LogInformation(JsonSerializer.Serialize(msg));
+
+            state.LastUpdateMapMarkers = msg;
+            await Clients.Group(state.WebChannelName).SendAsync("UpdateMapMarkers", state.LastUpdateMapMarkers);
+        }
+
+        private static string ToIcon(Arma3MarkerType marker, string color)
+        {
+            if (color == "ColorWhite" || marker >= Arma3MarkerType.flag_aaf)
+            {
+                return $"{marker}.png";
+            }
+            return $"{color}/{marker}.png";
+        }
+
+        private static string ToHtmlColor(string strColor)
+        {
+            Arma3MarkerColor color;
+            if (Enum.TryParse(strColor, true, out color))
+            {
+                return color.ToHexa();
+            }
+            return "000000";
         }
 
         public async Task ArmaUpdateMarkers(ArmaMessage message)

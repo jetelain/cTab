@@ -56,6 +56,7 @@ addMissionEventHandler ["ExtensionCallback", {
 GVAR(nextId) = 1;
 GVAR(nextMessageId) = 1;
 GVAR(deviceLevel) = 0;
+GVAR(mapMarkersNeedsUpdate) = true;
 
 [QGVAR(enabled), "CHECKBOX", [LLSTRING(enabled), LLSTRING(enabledDetails)], ["cTab",LLSTRING(modName)], true, 0, {}, true] call CBA_fnc_addSetting;
 #ifdef DEBUG_BACKEND
@@ -64,3 +65,5 @@ GVAR(deviceLevel) = 0;
 [QGVAR(uri),     "EDITBOX",  [LLSTRING(uri),     LLSTRING(uriDetails)],     ["cTab",LLSTRING(modName)], "https://ctab.plan-ops.fr/hub", 0, {}, true] call CBA_fnc_addSetting;
 #endif
 [QGVAR(key),     "EDITBOX",  [LLSTRING(key),     LLSTRING(keyDetails)],     ["cTab",LLSTRING(modName)], "", 0, {}, true] call CBA_fnc_addSetting;
+
+[QGVAR(syncMap), "CHECKBOX", [LLSTRING(syncMap), LLSTRING(syncMapDetails)], ["cTab",LLSTRING(modName)], true] call CBA_fnc_addSetting;

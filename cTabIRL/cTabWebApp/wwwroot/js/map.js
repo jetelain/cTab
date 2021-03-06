@@ -63,6 +63,7 @@ var currentMap = null;
 var currentMapInfos = null;
 var selfMarker = null;
 var existingMarkers = {};
+var existingMapMarkers = {};
 var centerOnPosition = true;
 var centerOnPositionButton = null;
 var fullScreenButton = null;
@@ -463,6 +464,106 @@ function updateMarkers(makers) {
     });
 }
 
+function generateIcon(data) {
+    var url = '/img/markers/' + data.icon;
+    if (data.label.length > 0 || data.dir) {
+        var img = $('<img src="' + url + '" width="32" height="32" />');
+        if (data.dir) {
+            img.css('transform', 'rotate(' + data.dir + 'deg)')
+        }
+        var iconHtml = $('<div></div>').append(
+            $('<div></div>')
+                .addClass('text-marker-content')
+                .css('color', '#' + data.color)
+                .text(data.label)
+                .prepend(img))
+            .html();
+        return new L.DivIcon({
+            className: 'text-marker',
+            html: iconHtml,
+            iconAnchor: [16, 16]
+        });
+    }
+    return L.icon({ iconUrl: url, iconSize: [32, 32], iconAnchor: [16, 16] });
+}
+
+function updateMapMarkers(msg) {
+
+    var markersToKeep = [];
+
+    function process(list, update, create) {
+        list.forEach(function (data) {
+            var marker = existingMapMarkers[data.name];
+            if (marker) {
+                update(data, marker, marker.lastData);
+                marker.lastData = data;
+            }
+            else {
+                marker = create(data);
+                if (marker) {
+                    existingMapMarkers[data.name] = marker;
+                    update(data, marker, { pos: []});
+                    marker.lastData = data;
+                    marker.addTo(currentMap);
+                }
+            }
+            markersToKeep.push(data.name);
+        });
+    }
+
+    function points(items) {
+        console.log(items);
+        var array = [];
+        for (var i = 0; i < items.length; i+=2) {
+            array.push(new L.LatLng(items[i + 1], items[i]));
+        }
+        return array;
+    }
+
+    process(msg.icons,
+        function (m, e, lastData) {
+            if (lastData.pos[1] != m.pos[1] || lastData.pos[0] != m.pos[0]) {
+                e.setLatLng([m.pos[1], m.pos[0]]);
+            }
+            if (lastData.label != m.label || lastData.dir != m.dir || lastData.icon != m.icon) {
+                e.setIcon(generateIcon(m));
+            }
+        },
+        function (m) {
+            return L.marker([m.pos[1], m.pos[0]], { interactive: false });
+        });
+
+    process(msg.simples,
+        function (m, e, lastData) {
+            if (lastData.color != m.color || lastData.alpha != m.alpha) {
+                e.setStyle({ color: '#' + m.color, opacity: m.alpha });
+            }
+        },
+        function (m) {
+            if (m.shape == 'RECTANGLE') {
+                return L.rectangle([[m.pos[1] - m.size[1], m.pos[0] - m.size[0]], [m.pos[1] + m.size[1], m.pos[0] + m.size[0]]]);
+            }
+            return L.circle([m.pos[1], m.pos[0]], { radius: m.size[0] });
+        });
+
+    process(msg.polylines,
+        function (m, e, lastData) {
+            if (lastData.color != m.color || lastData.alpha != m.alpha) {
+                e.setStyle({ color: '#' + m.color, opacity: m.alpha });
+            }
+        },
+        function (m) {
+            return new L.Polyline(points(m.points), { interactive: false });
+        });
+
+    Object.getOwnPropertyNames(existingMapMarkers).forEach(function (name) {
+        if (markersToKeep.indexOf(name) == -1) {
+            existingMapMarkers[name].remove();
+            delete existingMapMarkers[name];
+        }
+    });
+}
+
 function updateMarkersPosition(makers) {
     makers.forEach(function (marker) {
         var existing = existingMarkers[marker.id];
@@ -588,6 +689,15 @@ $(function () {
     connection.on("UpdateMarkers", function (data) {
         try {
             updateMarkers(data.makers);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+
+    connection.on("UpdateMapMarkers", function (data) {
+        try {
+            updateMapMarkers(data);
         }
         catch (e) {
             console.error(e);

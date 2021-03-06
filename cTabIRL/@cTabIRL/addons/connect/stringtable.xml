@@ -72,5 +72,13 @@
             <English>cTab was unable to connect to server.</English>
             <French>cTab n'a pas pu se connecter au serveur.</French>
         </Key>
+        <Key ID="STR_ctab_irl_connect_syncMap">
+            <English>Display map markers</English>
+            <French>Afficher les marqueurs</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_syncMapDetails">
+            <English>Displays on cTab IRL markers from Arma 3 map.</English>
+            <French>Affiche sur CTab IRL les marqueurs de la carte Arma 3.</French>
+        </Key>
     </Package>
 </Project>

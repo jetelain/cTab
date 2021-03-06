@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using Arma3TacMapLibrary;
 using cTabWebApp.Models;
 using cTabWebApp.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -88,6 +86,7 @@ namespace cTabWebApp
             }
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseArma3TacMapStaticFiles();
 
             if (!string.IsNullOrEmpty(Configuration.GetValue<string>("SteamKey")))
             {

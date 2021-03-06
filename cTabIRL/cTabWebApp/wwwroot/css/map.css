@@ -24,9 +24,10 @@ header {
     margin-right:20px;
 }
 .text-marker-content {
-    height: 24px;
+    height: 32px;
     width: max-content;
-    font-size: 10px;
+    font-size: 14px;
+    font-weight: bold;
     vertical-align: middle;
 }
 #statusbar {

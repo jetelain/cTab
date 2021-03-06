@@ -34,4 +34,14 @@ if (!hasInterface) exitWith { };
 	["ctab_userMarkerListUpdated", FUNC(updateMarkers)] call CBA_fnc_addEventHandler;
 	["ctab_messagesUpdated", FUNC(updateMessages)] call CBA_fnc_addEventHandler;
 
+	addMissionEventHandler ["MarkerCreated", {
+		GVAR(mapMarkersNeedsUpdate) = true;
+	}];
+	addMissionEventHandler ["MarkerUpdated", {
+		GVAR(mapMarkersNeedsUpdate) = true;
+	}];
+	addMissionEventHandler ["MarkerDeleted", {
+		GVAR(mapMarkersNeedsUpdate) = true;
+	}];
+
 }] call CBA_fnc_addEventHandler;

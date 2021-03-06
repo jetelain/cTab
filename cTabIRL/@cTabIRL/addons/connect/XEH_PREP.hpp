@@ -9,3 +9,4 @@ PREP(updateMessages);
 PREP(markMessageRead);
 PREP(sendMessage);
 PREP(deleteMessage);
+PREP(updateMapMarkers);

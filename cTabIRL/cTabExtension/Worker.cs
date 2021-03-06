@@ -71,6 +71,7 @@ namespace cTabExtension
                 case "Devices":
                 case "UpdateMessages":
                 case "UpdateMarkers":
+                case "UpdateMapMarkers":
                     Send(function, srv => srv.InvokeAsync("Arma" + function, new ArmaMessage() { Timestamp = DateTime.UtcNow, Args = args }), true);
                     break;
             }
