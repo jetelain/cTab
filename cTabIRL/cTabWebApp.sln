@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cTabWebApp", "cTabWebApp\cT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cTabWebAppTests", "cTabWebAppTests\cTabWebAppTests.csproj", "{AD5021BD-0AA5-4838-B218-79CC5D5C2322}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arma3TacMapLibrary", "..\..\Arma3TacMap\Arma3TacMapLibrary\Arma3TacMapLibrary.csproj", "{77F12DEE-CA54-4BBF-8070-4DA463E12C7C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,14 +31,6 @@ Global
 		{AD5021BD-0AA5-4838-B218-79CC5D5C2322}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD5021BD-0AA5-4838-B218-79CC5D5C2322}.ReleaseCloud|Any CPU.ActiveCfg = Release|Any CPU
 		{AD5021BD-0AA5-4838-B218-79CC5D5C2322}.ReleaseCloud|Any CPU.Build.0 = Release|Any CPU
-		{77F12DEE-CA54-4BBF-8070-4DA463E12C7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{77F12DEE-CA54-4BBF-8070-4DA463E12C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{77F12DEE-CA54-4BBF-8070-4DA463E12C7C}.DebugCloud|Any CPU.ActiveCfg = Debug|Any CPU
-		{77F12DEE-CA54-4BBF-8070-4DA463E12C7C}.DebugCloud|Any CPU.Build.0 = Debug|Any CPU
-		{77F12DEE-CA54-4BBF-8070-4DA463E12C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{77F12DEE-CA54-4BBF-8070-4DA463E12C7C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{77F12DEE-CA54-4BBF-8070-4DA463E12C7C}.ReleaseCloud|Any CPU.ActiveCfg = Release|Any CPU
-		{77F12DEE-CA54-4BBF-8070-4DA463E12C7C}.ReleaseCloud|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
