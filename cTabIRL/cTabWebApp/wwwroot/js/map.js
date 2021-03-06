@@ -535,12 +535,12 @@ function updateMapMarkers(msg) {
 
     process(msg.simples,
         function (m, e, lastData) {
-            if (lastData.color != m.color || lastData.alpha != m.alpha) {
-                e.setStyle({ color: '#' + m.color, opacity: m.alpha });
+            if (lastData.color != m.color || lastData.alpha != m.alpha || lastData.brush != m.brush) {
+                e.setStyle({ stroke: false, fillColor: '#' + m.color, fillOpacity: m.alpha * (m.brush =='SolidFull'?1:0.4) });
             }
         },
         function (m) {
-            if (m.shape == 'RECTANGLE') {
+            if (m.shape == 'rectangle') {
                 return L.rectangle([[m.pos[1] - m.size[1], m.pos[0] - m.size[0]], [m.pos[1] + m.size[1], m.pos[0] + m.size[0]]]);
             }
             return L.circle([m.pos[1], m.pos[0]], { radius: m.size[0] });
