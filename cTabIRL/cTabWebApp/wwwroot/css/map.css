@@ -30,6 +30,12 @@ header {
     font-weight: bold;
     vertical-align: middle;
 }
+.text-marker-content-small {
+    height: 24px;
+    width: max-content;
+    font-size: 10px;
+    vertical-align: middle;
+}
 #statusbar {
     cursor: pointer;
 }

@@ -390,7 +390,7 @@ function createIcon(marker) {
     if (/^img:/.test(marker.symbol)) {
         var iconHtml = $('<div></div>').append(
             $('<div></div>')
-                .addClass('text-marker-content')
+                .addClass('text-marker-content-small')
                 .text(marker.name)
                 .prepend($('<img src="/img/' + marker.symbol.substr(4) + '" width="32" height="32" />&nbsp;')))
             .html();
