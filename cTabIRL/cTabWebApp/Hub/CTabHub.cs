@@ -44,7 +44,14 @@ namespace cTabWebApp
 
             Interlocked.Increment(ref state.ActiveWebConnections);
 
-            await WebJoin(state);
+            try
+            {
+                await WebJoin(state);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(e, "WebJoin failed");
+            }
         }
 
         private async Task WebJoin(PlayerState state)
@@ -63,13 +70,13 @@ namespace cTabWebApp
             {
                 await Clients.Caller.SendAsync("UpdateMarkers", state.LastUpdateMarkers);
             }
-            if (state.LastUpdateMessages != null)
-            {
-                await Clients.Caller.SendAsync("UpdateMessages", state.LastUpdateMessages);
-            }
             if (state.LastSetPosition != null)
             {
                 await Clients.Caller.SendAsync("SetPosition", state.LastSetPosition);
+            }
+            if (state.LastUpdateMessages != null)
+            {
+                await Clients.Caller.SendAsync("UpdateMessages", state.LastUpdateMessages);
             }
             if (state.LastUpdateMapMarkers != null)
             {
@@ -89,7 +96,14 @@ namespace cTabWebApp
             Context.Items[nameof(PlayerState)] = state;
             Context.Items[nameof(ConnectionKind)] = ConnectionKind.Spectator;
 
-            await WebJoin(state);
+            try
+            {
+                await WebJoin(state);
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(e, "WebJoin failed");
+            }
         }
 
         public async Task ArmaHello(ArmaHelloMessage message)
@@ -244,8 +258,8 @@ namespace cTabWebApp
                     {
                         msg.Icons.Add(new IconMapMarker()
                         {
-                            Name = (string)simpleMarker[0],
-                            Pos = ((object[])simpleMarker[1]).Cast<double>().ToArray(),
+                            Name = ShorterName((string)simpleMarker[0]),
+                            Pos = ((object[])simpleMarker[1]).Cast<double>().Take(2).Select(p => Math.Round(p, 1)).ToArray(),
                             Icon = ToIcon(type, (string)simpleMarker[7]),
                             Size = ((object[])simpleMarker[4]).Cast<double>().ToArray(),
                             Dir = (double)simpleMarker[5],
@@ -258,8 +272,8 @@ namespace cTabWebApp
                 {
                     msg.Simples.Add(new SimpleMapMarker()
                     {
-                        Name = (string)simpleMarker[0],
-                        Pos = ((object[])simpleMarker[1]).Cast<double>().ToArray(),
+                        Name = ShorterName((string)simpleMarker[0]),
+                        Pos = ((object[])simpleMarker[1]).Cast<double>().Take(2).Select(p => Math.Round(p, 1)).ToArray(),
                         Shape = shape.ToLowerInvariant(),
                         Size = ((object[])simpleMarker[4]).Cast<double>().ToArray(),
                         Dir = (double)simpleMarker[5],
@@ -275,18 +289,29 @@ namespace cTabWebApp
             {
                 msg.Polylines.Add(new PolylineMapMarker()
                 {
-                    Name = (string)polyMarker[0],
-                    Points = ((object[])polyMarker[1]).Cast<double>().ToArray(),
+                    Name = ShorterName((string)polyMarker[0]),
+                    Points = ((object[])polyMarker[1]).Cast<double>().Select(p => Math.Round(p, 1)).ToArray(),
                     Brush = (string)polyMarker[2],
                     Color = ToHtmlColor((string)polyMarker[3]),
                     Alpha = (double)polyMarker[4]
                 });
             }
 
-            _logger.LogInformation(JsonSerializer.Serialize(msg));
-
             state.LastUpdateMapMarkers = msg;
-            await Clients.Group(state.WebChannelName).SendAsync("UpdateMapMarkers", state.LastUpdateMapMarkers);
+            try
+            {
+                await Clients.Group(state.WebChannelName).SendAsync("UpdateMapMarkers", state.LastUpdateMapMarkers);
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(e, "UpdateMapMarkers failed");
+            }
+        }
+
+        private static string ShorterName(string v)
+        {
+            // Make names shorter to avoid going beyond SignalR limits
+            return v?.Replace("_USER_DEFINED ", "§U");
         }
 
         private static string ToIcon(Arma3MarkerType marker, string color)
@@ -305,7 +330,7 @@ namespace cTabWebApp
             {
                 return color.ToHexa();
             }
-            return "000000";
+            return "000";
         }
 
         public async Task ArmaUpdateMarkers(ArmaMessage message)
@@ -355,7 +380,14 @@ namespace cTabWebApp
             msg.Makers.Sort((a, b) => a.Name.CompareTo(b.Name));
 
             state.LastUpdateMarkers = msg;
-            await Clients.Group(state.WebChannelName).SendAsync("UpdateMarkers", state.LastUpdateMarkers);
+            try
+            {
+                await Clients.Group(state.WebChannelName).SendAsync("UpdateMarkers", state.LastUpdateMarkers);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(e, "UpdateMarkers failed");
+            }
         }
 
 
@@ -406,7 +438,14 @@ namespace cTabWebApp
                 }
             }
 
-            await Clients.Group(state.WebChannelName).SendAsync("UpdateMarkersPosition", msg);
+            try 
+            { 
+                await Clients.Group(state.WebChannelName).SendAsync("UpdateMarkersPosition", msg);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(e, "UpdateMarkersPosition failed");
+            }
         }
 
         private string GetUnitSize(string iconB)
@@ -515,8 +554,14 @@ namespace cTabWebApp
                 });
             }
             state.LastUpdateMessages = msg;
-
-            await Clients.Group(state.WebChannelName).SendAsync("UpdateMessages", state.LastUpdateMessages);
+            try 
+            { 
+                await Clients.Group(state.WebChannelName).SendAsync("UpdateMessages", state.LastUpdateMessages);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(e, "UpdateMessages failed");
+            }
         }
 
         public void ArmaEndMission(ArmaMessage message)
@@ -552,9 +597,6 @@ namespace cTabWebApp
 
             await Clients.Group(state.WebChannelName).SendAsync("Devices", state.LastDevices);
         }
-
-
-
 
         public async Task WebAddUserMarker(WebAddUserMarkerMessage message)
         {
