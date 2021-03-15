@@ -171,7 +171,7 @@ namespace cTabExtension
             };
             connection.Reconnected += async _ => { 
                 Extension.DebugMessage($"Reconnected !");  
-                await SayHello(steamId, name, key, connection);
+                await SayHello(steamId, name, HashKeyForHost(key, uri.DnsSafeHost), connection);
                 foreach(var send in replay)
                 {
                     await send.Item2(connection);
