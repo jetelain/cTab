@@ -165,8 +165,14 @@
   <data name="Inbox with received messages, and sent messages" xml:space="preserve">
     <value>Boite de reception et messages envoyés.</value>
   </data>
+  <data name="MEDEVAC" xml:space="preserve">
+    <value>EVASAN</value>
+  </data>
   <data name="Message Content" xml:space="preserve">
     <value>Contenu du message</value>
+  </data>
+  <data name="Preformated" xml:space="preserve">
+    <value>Préformaté</value>
   </data>
   <data name="Prevent sleep mode if full-screen is not available" xml:space="preserve">
     <value>Empêche la mise en veille si le mode plein écran n'est pas disponible</value>

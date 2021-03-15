@@ -76,14 +76,25 @@
                                 </select>
                             </div>
                         </div>
+                        <div id="compose-form-fields">
+
+                        </div>
                         <div class="form-group mb-0">
                             <textarea id="compose-text" class="form-control" rows="4" placeholder="@Localizer["Message Content"]" maxlength="5000"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer p-2">
-                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Cancel"]</button>
-                    <button type="button" class="btn btn-sm btn-success" id="compose-send">@Localizer["Send"]</button>
+                    <div class="row w-100">
+                        <div class="col-7 text-left p-0">
+                            <button type="button" class="btn btn-sm btn-outline-danger" id="compose-medevac"><i class="fas fa-plus"></i> @Localizer["MEDEVAC"]</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="compose-preformated"><i class="fas fa-edit"></i> @Localizer["Preformated"]</button>
+                        </div>
+                        <div class="col text-right p-0">
+                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Cancel"]</button>
+                            <button type="button" class="btn btn-sm btn-success" id="compose-send">@Localizer["Send"]</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

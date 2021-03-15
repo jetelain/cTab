@@ -1,0 +1,194 @@
+[
+  {
+    "id": "medevac",
+    "title": "EVASAN",
+    "lines": [
+      {
+        "title": "EVASAN",
+        "description": "",
+        "fields": []
+      },
+      {
+        "title": "Line 1",
+        "description": "POSITION UTM",
+        "fields": [
+          { "type": "utm" }
+        ]
+      },
+      {
+        "title": "Line 2",
+        "description": "INDICATIF / FREQUENCE",
+        "fields": [
+          { "type": "callsign" },
+          { "type": "frequency" }
+        ]
+      },
+      {
+        "title": "Line 3",
+        "description": "NOMBRE ET PRIORITE DES BLESSES",
+        "fields": [
+          {
+            "type": "number",
+            "title": "A",
+            "description": "P1 (urgent)"
+          },
+          {
+            "type": "number",
+            "title": "B",
+            "description": "P2 (urgence chir.)"
+          },
+          {
+            "type": "number",
+            "title": "C",
+            "description": "P2 (prioritaire)"
+          }
+        ]
+      },
+      {
+        "title": "Line 4",
+        "description": "EQUIPEMENTS NECESSAIRES",
+        "fields": [
+          {
+            "type": "checkbox",
+            "title": "A",
+            "description": "néant"
+          },
+          {
+            "type": "checkbox",
+            "title": "B",
+            "description": "hélico"
+          },
+          {
+            "type": "checkbox",
+            "title": "C",
+            "description": "désincar."
+          },
+          {
+            "type": "checkbox",
+            "title": "D",
+            "description": "O2"
+          },
+          {
+            "type": "text",
+            "title": "E",
+            "description": "Autres"
+          }
+        ]
+      },
+      {
+        "title": "Line 5",
+        "description": "NOMBRE ET TYPE DE BLESSES",
+        "fields": [
+          {
+            "type": "number",
+            "title": "L",
+            "description": "couché"
+          },
+          {
+            "type": "number",
+            "title": "A",
+            "description": "ambulatoire"
+          },
+          {
+            "type": "number",
+            "title": "E",
+            "description": "accompagnant (obligatoire si enfant)"
+          }
+        ]
+      },
+      {
+        "title": "Line 6",
+        "description": "SECURITE ZONE",
+        "fields": [
+          {
+            "type": "checkbox",
+            "title": "N",
+            "description": "Sure"
+          },
+          {
+            "type": "checkbox",
+            "title": "P",
+            "description": "ennemis possibles"
+          },
+          {
+            "type": "checkbox",
+            "title": "E",
+            "description": "ennemis présent"
+          },
+          {
+            "type": "checkbox",
+            "title": "X",
+            "description": "escorte armée"
+          }
+        ]
+      },
+      {
+        "title": "Line 7",
+        "description": "MARQUAGE ZPH",
+        "fields": [
+          {
+            "type": "checkbox",
+            "title": "A",
+            "description": "cyalum, PN2A"
+          },
+          {
+            "type": "checkbox",
+            "title": "B",
+            "description": "fusée éclair."
+          },
+          {
+            "type": "checkbox",
+            "title": "C",
+            "description": "fumigène"
+          },
+          {
+            "type": "checkbox",
+            "title": "D",
+            "description": "néant"
+          },
+          {
+            "type": "checkbox",
+            "title": "E",
+            "description": "autre moyen"
+          }
+        ]
+      },
+      {
+        "title": "Line 8",
+        "description": "NATIONALITES DES BLESSES",
+        "fields": [
+          {
+            "type": "checkbox",
+            "title": "A",
+            "description": "Militaire FR, OTAN"
+          },
+          {
+            "type": "checkbox",
+            "title": "D",
+            "description": "Civils"
+          },
+          {
+            "type": "checkbox",
+            "title": "E",
+            "description": "Enfants"
+          },
+          {
+            "type": "checkbox",
+            "title": "F",
+            "description": "Prisonnier"
+          }
+        ]
+      },
+      {
+        "title": "Line 9",
+        "description": "DESCRIPTIF DE LA ZONE ZPH",
+        "fields": [
+          {
+            "type": "text",
+            "description": "si différent de Line 1"
+          }
+        ]
+      }
+    ]
+  }
+]

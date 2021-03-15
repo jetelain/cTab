@@ -491,6 +491,23 @@ function updateMapMarkers(msg) {
 
     var markersToKeep = [];
 
+    function rotatePoints(center, points, yaw) {
+        var res = [];
+        var angle = yaw * (Math.PI / 180);
+        for (var i = 0; i < points.length; i++) {
+            var p = points[i];
+            // translate to center
+            var p2 = [p[0] - center[0], p[1] - center[1]];
+            // rotate using matrix rotation
+            var p3 = [Math.cos(angle) * p2[0] - Math.sin(angle) * p2[1], Math.sin(angle) * p2[0] + Math.cos(angle) * p2[1]];
+            // translate back to center
+            var p4 = [p3[0] + center[0], p3[1] + center[1]];
+            // done with that point
+            res.push(p4);
+        }
+        return res;
+    }
+
     function process(list, update, create) {
         list.forEach(function (data) {
             var marker = existingMapMarkers[data.name];
@@ -541,9 +558,17 @@ function updateMapMarkers(msg) {
         },
         function (m) {
             if (m.shape == 'rectangle') {
-                return L.rectangle([[m.pos[1] - m.size[1], m.pos[0] - m.size[0]], [m.pos[1] + m.size[1], m.pos[0] + m.size[0]]]);
+                if (m.dir) {
+                    return L.polygon(rotatePoints([m.pos[1], m.pos[0]],[
+                        [m.pos[1] - m.size[1], m.pos[0] - m.size[0]],
+                        [m.pos[1] - m.size[1], m.pos[0] + m.size[0]],
+                        [m.pos[1] + m.size[1], m.pos[0] + m.size[0]],
+                        [m.pos[1] + m.size[1], m.pos[0] - m.size[0]]
+                    ], m.dir), { interactive: false });
+                }
+                return L.rectangle([[m.pos[1] - m.size[1], m.pos[0] - m.size[0]], [m.pos[1] + m.size[1], m.pos[0] + m.size[0]]], { interactive: false });
             }
-            return L.circle([m.pos[1], m.pos[0]], { radius: m.size[0] });
+            return L.circle([m.pos[1], m.pos[0]], { radius: m.size[0], interactive: false });
         });
 
     process(msg.polylines,
@@ -635,6 +660,134 @@ function updateInbox(messages) {
     });
 
     updateUnread();
+}
+
+var currentPreformated = { id: null };
+var preformatedConfig = [];
+var lastValues = {};
+function closePerformated() {
+    $('#compose-form-fields').empty();
+    $('#compose-medevac').removeClass('btn-danger').addClass('btn-outline-danger');
+    $('#compose-preformated').removeClass('btn-secondary').addClass('btn-outline-secondary');
+    $('#compose-text').prop('readonly', false);
+    currentPreformated = { id: null };
+}
+function generatePreformated() {
+    if (currentPreformated.config) {
+        var data = [];
+        currentPreformated.config.lines.forEach((line, lnum) => {
+            var lineData = line.title ? line.title + ':' : '';
+            line.fields.forEach((field, fnum) => {
+                var id = 'l' + lnum + 'f' + fnum;
+
+                switch (field.type) {
+                    case 'checkbox':
+                        if ($('#' + id).is(':checked')) {
+                            lineData = lineData + ' ' + field.title;
+                            $('#' + id + '-box').addClass('bg-primary text-white');
+                        }
+                        else {
+                            $('#' + id + '-box').removeClass('bg-primary text-white');
+                        }
+                        break;
+                    default:
+                        var value = ('' + $('#' + id).val()).trim();
+                        if (value && value.length > 0) {
+                            lineData = lineData + ' ' + (field.title || '') + value;
+                            $('#' + id + '-box').addClass('bg-primary text-white');
+                        }
+                        else {
+                            $('#' + id + '-box').removeClass('bg-primary text-white');
+                        }
+                        if (field.type == 'callsign' || field.type == 'frequency') {
+                            lastValues[field.type] = value;
+                        }
+                        break;
+                }
+            });
+            data.push(lineData);
+        });
+        $('#compose-text').val(data.join('\n'));
+    }
+}
+
+function showPerformated(id) {
+    if (preformatedConfig.length == 0) {
+        fetch('/js/performat.json?7').then(response => response.json()).then(function (value) { preformatedConfig = value; showPerformated(id); });
+        return;
+    }
+    closePerformated();
+    if (id == 'medevac') {
+        $('#compose-medevac').addClass('btn-danger').removeClass('btn-outline-danger');
+    }
+    else {
+        $('#compose-preformated').addClass('btn-secondary').removeClass('btn-outline-secondary');
+    }
+    $('#compose-text').prop('readonly', true);
+    currentPreformated = { id: id, config: preformatedConfig.find(e => e.id == id) };
+    if (currentPreformated.config) {
+        currentPreformated.config.lines.forEach((line, lnum) => {
+            var fieldsDiv = $('<div class="form-inline" />');
+            line.fields.forEach((field, fnum) => {
+                var id = 'l' + lnum + 'f' + fnum;
+                if (!field.description) {
+                    switch (field.type) {
+                        case 'utm': field.description = 'UTM'; break;
+                        case 'callsign': field.description = 'Indicatif'; break;
+                        case 'frequency': field.description = 'Fréquence'; break;
+                    }
+                }
+                var width = '7em';
+                if (line.fields.length == 1) {
+                    width = '15em';
+                }
+                switch (field.type) {
+                    case 'checkbox':
+                        fieldsDiv.append($('<div class="input-group input-group-sm mb-2 mr-sm-2">')
+                            .append($('<div class="input-group-prepend">').append($('<div class="input-group-text">').attr({ id: id + '-box' })
+                                .append($('<input type="checkbox" />').attr({ id: id })).on('click', generatePreformated)
+                                .append($('<label class="form-check-label ml-1" />').attr({ for: id }).text(field.title))
+                            ))
+                            .append($('<label class="form-control bg-light" />').attr({ for: id }).text(field.description)));
+                        break;
+                    default:
+                        var attr = { id: id, placeholder: field.description, type:'text' };
+                        switch (field.type) {
+                            case 'utm':
+                                attr.value = $('#position').text().trim();
+                                break;
+                            case 'callsign':
+                                attr.value = lastValues['callsign'] || (selfMarker && selfMarker.options.marker ? selfMarker.options.marker.name : '') || '';
+                                break;
+                            case 'frequency':
+                                attr.type = 'number';
+                                attr.step = '0.025';
+                                attr.value = lastValues['frequency'] || '45.000';
+                                break;
+                            case 'number':
+                                attr.type = 'number';
+                                break;
+                        }
+                        fieldsDiv.append($('<div class="input-group input-group-sm mb-2 mr-sm-2">')
+                            .append($('<div class="input-group-prepend">').append($('<label class="input-group-text">').attr({ for: id, id: id + '-box' }).text(field.title)))
+                            .append($('<input type="text" class="form-control" />').attr(attr).css({ width: width })
+                                .on('change', generatePreformated)
+                                .on('keyup', generatePreformated)));
+                    break;
+                }
+            });
+            $('#compose-form-fields').append($('<div class="col" />').text(line.title ? line.title + ': ' + line.description : line.description).append(fieldsDiv));
+        });
+        generatePreformated();
+    } else {
+        var content = $('<div class="mb-2" />');
+        preformatedConfig.forEach(config => {
+            content.append($('<a class="btn btn-sm btn-primary mr-2"></a>').text(config.title).on('click',function () {
+                showPerformated(config.id);
+            }));
+        });
+        $('#compose-form-fields').append(content);
+    }
 }
 
 $(function () {
@@ -763,8 +916,24 @@ $(function () {
 
             connection.invoke("WebSendMessage", { to: to, body: body });
 
+            closePerformated();
             $('#compose-text').val('');
             $('#compose').modal('hide');
+        });
+
+        $('#compose-medevac').on('click', function () {
+            if (currentPreformated.id == 'medevac') {
+                closePerformated();
+            } else {
+                showPerformated('medevac');
+            }
+        });
+        $('#compose-preformated').on('click', function () {
+            if (currentPreformated.id && currentPreformated.id != 'medevac') {
+                closePerformated();
+            } else {
+                showPerformated('list');
+            }
         });
 
         $('#inbox-delete').on('click', function () {
