@@ -9,7 +9,7 @@
         <meta name="description" content="@ViewData["Description"]" />
     }
     <title>
-        @ViewData["Title"] - cTab IRL 
+        @ViewData["Title"] - SIT 1erGTD
         @if (!string.IsNullOrEmpty(Communauty.Name))
         {
             @:- @Communauty.Name
@@ -24,7 +24,8 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">cTab IRL</a>
+                <a href="https://www.1ergtd-reality.fr/"><img src="https://www.1ergtd-reality.fr/files/logos/insigne_gtd.png" width="32" /></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SIT 1erGTD</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -51,7 +52,7 @@
                             @SharedResource.Disconnect
                         </a>
                     }
-                    </div>
+                </div>
             </div>
         </nav>
     </header>
@@ -69,11 +70,12 @@
 
     <footer class="footer text-muted">
         <div class="container">
-            &copy; 2020 - <a asp-controller="Home" asp-action="Privacy">@SharedResource.Privacy</a> 
+            &copy; 2020 - <a asp-controller="Home" asp-action="Privacy">@SharedResource.Privacy</a>
             @if (!string.IsNullOrEmpty(Communauty.Contact))
             {
-                @:- <a href="@Communauty.Contact">@SharedResource.Contact</a>
+            @:- <a href="@Communauty.Contact">@SharedResource.Contact</a>
             }
+            - <a href="https://www.1ergtd-reality.fr/" target="_blank">@SharedResource.ProvidedBy</a>
         </div>
     </footer>
 

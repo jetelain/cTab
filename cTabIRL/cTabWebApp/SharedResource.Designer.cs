@@ -142,6 +142,15 @@ namespace cTabWebApp {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Provided by the 1er GTD.
+        /// </summary>
+        public static string ProvidedBy {
+            get {
+                return ResourceManager.GetString("ProvidedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Blue Force Tracking.
         /// </summary>
         public static string STR_ctab_core_aceMenu {
