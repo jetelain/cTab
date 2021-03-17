@@ -576,4 +576,7 @@
   <data name="Download" xml:space="preserve">
     <value>Download mod</value>
   </data>
+  <data name="ProvidedBy" xml:space="preserve">
+    <value>Provided by the 1er GTD</value>
+  </data>
 </root>

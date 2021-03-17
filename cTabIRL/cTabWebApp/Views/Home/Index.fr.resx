@@ -153,8 +153,8 @@
   <data name="In-game, once the message 'cTab connected to {0}.' appears, open map with key &lt;kbd&gt;m&lt;/kbd&gt; (qwerty keyboard)." xml:space="preserve">
     <value>En jeu, lorsque le message 'cTab connecté à {0}.' apparait, ouvrir la carte du jeu avec &lt;kbd&gt;,&lt;/kbd&gt; (clavier azerty).</value>
   </data>
-  <data name="Install cTab IRL mod" xml:space="preserve">
-    <value>Installer le mod cTab IRL</value>
+  <data name="Install SIT 1erGTD mod" xml:space="preserve">
+    <value>Installer le mod SIT 1erGTD</value>
   </data>
   <data name="Key" xml:space="preserve">
     <value>Clé</value>
