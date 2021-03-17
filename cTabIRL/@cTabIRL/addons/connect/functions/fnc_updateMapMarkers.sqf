@@ -3,12 +3,7 @@
 private _simple = [];
 private _poly = [];
 
-private _markerFilter = { params ["_name"]; !([_name] call EFUNC(tacmap,isTacMapMarker)) };
-
-if (!isNil "mts_markers_fnc_isMtsMarker") then {
-	// Metis Marker are ignored as they won't be displayed on web app, this can help to reduce messages size
-	_markerFilter = { params ["_name"]; !([_name] call EFUNC(tacmap,isTacMapMarker)) && { ([_name] call mts_markers_fnc_isMtsMarker) == 0 } };
-};
+private _markerFilter = FUNC(markerFilter);
 
 {
 	private _markerName = _x;

@@ -33,10 +33,10 @@ namespace cTabWebApp.TacMaps
 
         private void Init()
         {
-            tacMapHub.On<Marker<MapId>>("AddOrUpdateMarker", msg =>
+            tacMapHub.On<Marker<MapId>,bool>("AddOrUpdateMarker", (msg, _) =>
                 armaHub.Clients.Group(armaChannel).SendAsync("Callback", "AddTacMapMarker", MapExporter.GetMarkerData(msg.id, msg.data)));
 
-            tacMapHub.On<Marker<MapId>>("RemoveMarker", msg =>
+            tacMapHub.On<Marker<MapId>,bool>("RemoveMarker", (msg, _) =>
                 armaHub.Clients.Group(armaChannel).SendAsync("Callback", "RemoveTacMapMarker", MapExporter.GetMarkerData(msg.id, msg.data)));
 
             tacMapHub.Reconnected += async info => { await SayHello(); };
@@ -44,7 +44,7 @@ namespace cTabWebApp.TacMaps
 
         private async Task SayHello()
         {
-            await armaHub.Clients.Group(armaChannel).SendAsync("Callback", "RemoveTacMapMarker");
+            await armaHub.Clients.Group(armaChannel).SendAsync("Callback", "ClearTacMapMarkers", "[]");
             await tacMapHub.InvokeAsync("Hello", mapId);
         }
 
@@ -56,7 +56,7 @@ namespace cTabWebApp.TacMaps
 
         public async Task Close()
         {
-            await armaHub.Clients.Group(armaChannel).SendAsync("Callback", "RemoveTacMapMarker");
+            await armaHub.Clients.Group(armaChannel).SendAsync("Callback", "ClearTacMapMarkers", "[]");
             await tacMapHub.StopAsync();
         }
 

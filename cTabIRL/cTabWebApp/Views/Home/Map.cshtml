@@ -114,8 +114,8 @@
                     @if (Model.TacMapEndpoint != null)
                     {
                     <h5>@Localizer["Load a tactical map"]</h5>
-                    <p><button class="btn btn-secondary" id="tacmap-show">@Localizer["Load from {0}", Model.TacMapDomain]</button>
-                       <button class="btn btn-outline-danger d-none" id="tacmap-disable">@Localizer["Unload current map"]</button></p>
+                    <p><button class="btn btn-secondary" id="tacmap-show"><i class="fas fa-link"></i> @Localizer["Load from {0}", Model.TacMapDomain]</button>
+                       <button class="btn btn-outline-danger d-none" id="tacmap-disable"><i class="fas fa-unlink"></i> @Localizer["Unload current map"]</button></p>
                     }
 
                     <h5>@Localizer["User manual"]</h5>
@@ -148,10 +148,11 @@
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-body">
-                    <h5>@Localizer["Load a tactical map"]</h5>
+                    <h5>@Localizer["Choose a tactical map"]</h5>
+                    <p>@Localizer["Tactical map will be displayed on your mobile device and in Arma. Changes made on {0} will be applied in real-time.", Model.TacMapDomain]</p>
                     <div id="tacmap-notconnected" class="d-none">
-                        <p>@Localizer["Not connected: sign-in and then click on refresh button."]</p>
-                        <p><a class="btn btn-secondary" href="@Model.TacMapEndpoint" target="_blank"><i class="fas fa-link"></i> @Localizer["Connect to {0}", Model.TacMapDomain]</a></p>
+                        <p>@Localizer["Please sign-in on {0} and then click on refresh button.", Model.TacMapDomain]</p>
+                        <p><a class="btn btn-secondary" href="@Model.TacMapEndpoint" target="_blank"><i class="fas fa-link"></i> @Localizer["Sign-in on {0}", Model.TacMapDomain]</a></p>
                     </div>
                     <div id="tacmap-list">
                         <p>@Localizer["Loading..."]</p>
@@ -162,7 +163,7 @@
                         <button class="btn btn-sm btn-outline-primary" id="tacmap-refresh"><i class="fas fa-sync-alt"></i> @Localizer["Refresh"]</button>
                     </div>
                     <div class="col text-right">
-                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
+                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Cancel"]</button>
                     </div>
                 </div>
             </div>

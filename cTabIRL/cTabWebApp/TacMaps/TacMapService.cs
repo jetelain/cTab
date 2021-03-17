@@ -37,6 +37,7 @@ namespace cTabWebApp.TacMaps
             {
                 var interconnect = new TacMapInterconnect(state.SyncedTacMapId, TacMapEndpoint + "/MapHub", _armaHub, state.ArmaChannelName);
                 await interconnect.Connect();
+                state.Interconnect = interconnect;
             }
         }
     }

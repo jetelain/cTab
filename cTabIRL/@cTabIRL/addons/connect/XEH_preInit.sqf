@@ -53,7 +53,7 @@ addMissionEventHandler ["ExtensionCallback", {
 		if ( _function == "AddTacMapMarker") exitWith {
 			(parseSimpleArray _data) call EFUNC(tacmap,createLocal);
 		};
-		if ( _function == "DeleteTacMapMarker") exitWith {
+		if ( _function == "RemoveTacMapMarker") exitWith {
 			(parseSimpleArray _data) call EFUNC(tacmap,deleteLocal);
 		};
 		if ( _function == "Disconnected") exitWith {

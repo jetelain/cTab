@@ -1,11 +1,14 @@
 #include "script_component.hpp"
 
 params ['_id', '_x', '_y', '_icon', '_color', '_text', '_rotate'];
-private _marker = createMarkerLocal [ format ['_USER_DEFINED #0/tacmap%1/-1', _id], [_x, _y]];
-_marker setMarkerPosLocal [_x, _y];
-_marker setMarkerShapeLocal 'ICON';
-_marker setMarkerDirLocal _rotate;
-_marker setMarkerColorLocal _color; 
-_marker setMarkerTextLocal _text;
-_marker setMarkerTypeLocal _icon;
-GVAR(allMarkersLocal) pushBack _marker;
+private _name = format ['_USER_DEFINED #0/tacmap%1/-1', _id];
+private _marker = createMarkerLocal [_name, [_x, _y]];
+_name setMarkerPosLocal [_x, _y];
+_name setMarkerShapeLocal 'ICON';
+_name setMarkerDirLocal _rotate;
+_name setMarkerColorLocal _color; 
+_name setMarkerTextLocal _text;
+_name setMarkerTypeLocal _icon;
+if ( _name isEqualTo _marker) then {
+	GVAR(allMarkersLocal) pushBack _marker;
+};

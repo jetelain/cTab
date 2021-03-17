@@ -693,7 +693,7 @@ namespace cTabWebApp
                     TacMapID = message.MapId.TacMapID 
                 };
             }
-            await Clients.Group(state.WebChannelName).SendAsync("WebSyncTacMap", new SyncTacMapMessage() { MapId = state.SyncedTacMapId });
+            await Clients.Group(state.WebChannelName).SendAsync("SyncTacMap", new SyncTacMapMessage() { MapId = state.SyncedTacMapId });
 
             await _tacMapService.UpdateTacMapInterconnect(state);
         }

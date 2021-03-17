@@ -1,23 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Sockets;
 using System.Threading.Tasks;
 using cTabWebApp.Models;
 using cTabWebApp.Services;
+using cTabWebApp.TacMaps;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using QRCoder;
 
 namespace cTabWebApp.Controllers
 {
@@ -25,11 +16,13 @@ namespace cTabWebApp.Controllers
     {
         private readonly PublicUriService _publicUri;
         private readonly IPlayerStateService _service;
+        private readonly TacMapService _tacMap;
 
-        public HomeController(PublicUriService publicUri, IPlayerStateService service)
+        public HomeController(PublicUriService publicUri, IPlayerStateService service, TacMapService tacMap)
         {
             _publicUri = publicUri;
             _service = service;
+            _tacMap = tacMap;
         }
 
         [HttpGet]
@@ -89,23 +82,33 @@ namespace cTabWebApp.Controllers
             var state = _service.GetStateByToken(t);
             if (state == null)
             {
-                var vm = await CreateHomeVmAsync();
-                vm.Error = SharedResource.InvalidQrCode;
-                return View(nameof(Index), vm);
+                var hvm = await CreateHomeVmAsync();
+                hvm.Error = SharedResource.InvalidQrCode;
+                return View(nameof(Index), hvm);
             }
             var steamId = SteamHelper.GetSteamId(User);
             if (!string.IsNullOrEmpty(steamId) && state.SteamId == steamId)
             {
                 state.IsAuthenticated = true;
             }
-            return View(new MapVM()
+            var vm = new MapVM()
             {
                 Token = state.Token,
                 InitialMap = state.LastMission?.WorldName?.ToLowerInvariant() ?? "altis",
                 SpectatorToken = state.SpectatorToken,
-                TacMapDomain = "maps.plan-ops.fr",
-                TacMapEndpoint = "https://localhost:5021"
-            });
+
+            };
+            SetupTacMap(vm);
+            return View(vm);
+        }
+
+        private void SetupTacMap(MapVM vm)
+        {
+            if (!string.IsNullOrEmpty(_tacMap.TacMapEndpoint))
+            {
+                vm.TacMapDomain = new Uri(_tacMap.TacMapEndpoint).Host;
+                vm.TacMapEndpoint = _tacMap.TacMapEndpoint;
+            }
         }
 
         [HttpGet]
@@ -114,16 +117,18 @@ namespace cTabWebApp.Controllers
             var state = _service.GetStateBySpectatorToken(t);
             if (state == null)
             {
-                var vm = await CreateHomeVmAsync();
-                vm.Error = SharedResource.InvalidQrCode;
-                return View(nameof(Index), vm);
+                var hvm = await CreateHomeVmAsync();
+                hvm.Error = SharedResource.InvalidQrCode;
+                return View(nameof(Index), hvm);
             }
-            return View(nameof(Map),new MapVM()
+            var vm = new MapVM()
             {
                 InitialMap = state.LastMission?.WorldName?.ToLowerInvariant() ?? "altis",
                 SpectatorToken = state.SpectatorToken,
                 IsSpectator = true
-            });
+            };
+            SetupTacMap(vm);
+            return View(nameof(Map), vm);
         }
 
 

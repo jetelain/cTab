@@ -807,10 +807,10 @@ function loadTacMapList() {
                 $('#tacmap-list').removeClass('d-none');
                 $('#tacmap-list').empty();
                 data.forEach(entry => {
-                    $('#tacmap-list').append($('<a class="btn btn-outline-primary"></a>').text(entry.label).on('click', function () {
+                    $('#tacmap-list').append($('<a class="btn btn-outline-secondary btn-block text-left"></a>').text(entry.label).on('click', function () {
                         connection.invoke("WebSyncTacMap", { mapId: { tacMapID: entry.id, readToken: entry.readOnlyToken } });
                         $('#tacmaploader').modal('hide');
-                    }));
+                    }).prepend($('<img />').attr({ src: entry.previewHref['256'], class: 'mr-2' }).css({ width: '64px', height: '64px'})));
                 });
             });
         })
@@ -922,7 +922,7 @@ $(function () {
     });
 
     if (vm.tacMapEndpoint && window.Arma3TacMap) {
-        connection.on("WebSyncTacMap", function (data) {
+        connection.on("SyncTacMap", function (data) {
             if (currentTacMapSynced) {
                 $('#tacmap-disable').addClass('d-none');
                 try {
@@ -997,7 +997,8 @@ $(function () {
             $('#tacmap-show').on('click', function () { $('#help').modal('hide'); $('#tacmaploader').modal('show'); loadTacMapList(); });
             $('#tacmap-refresh').on('click', loadTacMapList);
             $('#tacmap-disable').on('click', function () {
-                connection.invoke("WebSyncTacMap", { });
+                connection.invoke("WebSyncTacMap", {});
+                $('#help').modal('hide');
             });
         }
     }
