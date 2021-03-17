@@ -1,5 +1,6 @@
 ﻿using System;
 using Arma3TacMapLibrary.TacMaps;
+using cTabWebApp.TacMaps;
 
 namespace cTabWebApp
 {
@@ -19,6 +20,8 @@ namespace cTabWebApp
         public DateTime LastActivityUtc { get; internal set; }
 
         public MapId SyncedTacMapId { get; internal set; }
+
+        public TacMapInterconnect Interconnect { get; internal set; }
 
         internal int ActiveArmaConnections;
         internal int ActiveWebConnections;

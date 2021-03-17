@@ -8,4 +8,6 @@ PREP(createGlobal);
 PREP(createLocal);
 PREP(clearGlobal);
 PREP(clearLocal);
+PREP(deleteGlobal);
+PREP(deleteLocal);
 PREP(isTacMapMarker);

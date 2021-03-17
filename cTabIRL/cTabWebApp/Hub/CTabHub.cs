@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Arma3TacMapLibrary.Arma3;
 using Arma3TacMapLibrary.TacMaps;
 using cTabWebApp.Services;
+using cTabWebApp.TacMaps;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
@@ -19,12 +20,14 @@ namespace cTabWebApp
         private readonly PublicUriService _publicUri;
         private readonly IPlayerStateService _service;
         private readonly ILogger<CTabHub> _logger;
+        private readonly TacMapService _tacMapService;
 
-        public CTabHub(PublicUriService publicUri, IPlayerStateService service, ILogger<CTabHub> logger)
+        public CTabHub(PublicUriService publicUri, IPlayerStateService service, ILogger<CTabHub> logger, TacMapService tacMapService)
         {
             _publicUri = publicUri;
             _service = service;
             _logger = logger;
+            _tacMapService = tacMapService;
         }
 
         public async Task WebHello(WebHelloMessage message)
@@ -135,6 +138,8 @@ namespace cTabWebApp
             var data = $"[['{new QrFontCode(qrCodeData).GetString().Replace("\n", "','")}'],'{uri}']";
 
             await Clients.Caller.SendAsync("Callback", "Connected", data);
+
+            await _tacMapService.UpdateTacMapInterconnect(state);
         }
 
         private PlayerState GetState()
@@ -689,10 +694,12 @@ namespace cTabWebApp
                 };
             }
             await Clients.Group(state.WebChannelName).SendAsync("WebSyncTacMap", new SyncTacMapMessage() { MapId = state.SyncedTacMapId });
+
+            await _tacMapService.UpdateTacMapInterconnect(state);
         }
 
 
-        public override Task OnDisconnectedAsync(Exception exception)
+        public async override Task OnDisconnectedAsync(Exception exception)
         {
             var state = GetState();
             if (state != null)
@@ -701,13 +708,14 @@ namespace cTabWebApp
                 if (actual == ConnectionKind.Arma)
                 {
                     Interlocked.Decrement(ref state.ActiveArmaConnections);
+                    await _tacMapService.UpdateTacMapInterconnect(state);
                 }
                 else if (actual == ConnectionKind.Web)
                 {
                     Interlocked.Decrement(ref state.ActiveWebConnections);
                 }
             }
-            return base.OnDisconnectedAsync(exception);
+            await base.OnDisconnectedAsync(exception);
         }
     }
 }
