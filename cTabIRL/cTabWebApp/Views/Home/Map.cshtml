@@ -111,7 +111,12 @@
                             <button class="btn btn-secondary btn-copy" type="button" data-copy="link-ro">@Localizer["Copy"]</button>
                         </div>
                     </div>
-
+                    @if (Model.TacMapEndpoint != null)
+                    {
+                    <h5>@Localizer["Load a tactical map"]</h5>
+                    <p><button class="btn btn-secondary" id="tacmap-show">@Localizer["Load from {0}", Model.TacMapDomain]</button>
+                       <button class="btn btn-outline-danger d-none" id="tacmap-disable">@Localizer["Unload current map"]</button></p>
+                    }
 
                     <h5>@Localizer["User manual"]</h5>
                     <p>@Localizer["Top bar displays connectivity, heading, clock time and MGRS position (meter precision)."]</p>
@@ -138,6 +143,31 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="tacmaploader">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5>@Localizer["Load a tactical map"]</h5>
+                    <div id="tacmap-notconnected" class="d-none">
+                        <p>@Localizer["Not connected: sign-in and then click on refresh button."]</p>
+                        <p><a class="btn btn-secondary" href="@Model.TacMapEndpoint" target="_blank"><i class="fas fa-link"></i> @Localizer["Connect to {0}", Model.TacMapDomain]</a></p>
+                    </div>
+                    <div id="tacmap-list">
+                        <p>@Localizer["Loading..."]</p>
+                    </div>
+                </div>
+                <div class="modal-footer p-2 row">
+                    <div class="col text-left">
+                        <button class="btn btn-sm btn-outline-primary" id="tacmap-refresh"><i class="fas fa-sync-alt"></i> @Localizer["Refresh"]</button>
+                    </div>
+                    <div class="col text-right">
+                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -149,6 +179,7 @@
     <script src="https://jetelain.github.io/Arma3Map/js/mapUtils.js"></script>
     <script src="https://jetelain.github.io/Arma3Map/maps/all.js"></script>
     <script src="~/js/NoSleep.min.js" asp-append-version="true"></script>
+    <script src="~/js/arma3TacMap.js" asp-append-version="true"></script>
     <script>
         var vm = @Json.Serialize(Model);
         var texts = @Json.Serialize(new

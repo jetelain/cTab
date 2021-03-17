@@ -102,7 +102,9 @@ namespace cTabWebApp.Controllers
             {
                 Token = state.Token,
                 InitialMap = state.LastMission?.WorldName?.ToLowerInvariant() ?? "altis",
-                SpectatorToken = state.SpectatorToken
+                SpectatorToken = state.SpectatorToken,
+                TacMapDomain = "maps.plan-ops.fr",
+                TacMapEndpoint = "https://localhost:5021"
             });
         }
 

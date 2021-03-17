@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Arma3TacMapLibrary.Arma3;
-using cTabWebApp.Hubs;
+using Arma3TacMapLibrary.TacMaps;
 using cTabWebApp.Services;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.SignalR;
@@ -81,6 +80,10 @@ namespace cTabWebApp
             if (state.LastUpdateMapMarkers != null)
             {
                 await Clients.Caller.SendAsync("UpdateMapMarkers", state.LastUpdateMapMarkers);
+            }
+            if (state.SyncedTacMapId != null)
+            {
+                await Clients.Caller.SendAsync("SyncTacMap", new SyncTacMapMessage() { MapId = state.SyncedTacMapId });
             }
         }
 
@@ -664,6 +667,29 @@ namespace cTabWebApp
         }
 
         //DeleteUserMarker
+        public async Task WebSyncTacMap(SyncTacMapMessage message)
+        {
+            var state = GetState(ConnectionKind.Web);
+            if (state == null)
+            {
+                _logger.LogWarning($"No state for WebSyncTacMap");
+                return;
+            }
+            if (message.MapId == null || message.MapId.TacMapID == 0 || string.IsNullOrEmpty(message.MapId.ReadToken))
+            {
+                state.SyncedTacMapId = null;
+            }
+            else
+            {
+                state.SyncedTacMapId = new MapId() 
+                { 
+                    IsReadOnly = true, 
+                    ReadToken = message.MapId.ReadToken, 
+                    TacMapID = message.MapId.TacMapID 
+                };
+            }
+            await Clients.Group(state.WebChannelName).SendAsync("WebSyncTacMap", new SyncTacMapMessage() { MapId = state.SyncedTacMapId });
+        }
 
 
         public override Task OnDisconnectedAsync(Exception exception)

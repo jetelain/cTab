@@ -1,0 +1,11 @@
+PREP(createIconGlobal);
+PREP(createIconLocal);
+PREP(createLineGlobal);
+PREP(createLineLocal);
+PREP(createMtisGlobal);
+PREP(createMtisLocal);
+PREP(createGlobal);
+PREP(createLocal);
+PREP(clearGlobal);
+PREP(clearLocal);
+PREP(isTacMapMarker);

@@ -47,6 +47,15 @@ addMissionEventHandler ["ExtensionCallback", {
 		if ( _function == "Disconnected") exitWith {
 			systemChat LLSTRING(disconnected);
 		};
+		if ( _function == "ClearTacMapMarkers") exitWith {
+			call EFUNC(tacmap,clearLocal);
+		};
+		if ( _function == "CreateMarker") exitWith {
+			(parseSimpleArray _data) call EFUNC(tacmap,createLocal);
+		};
+		if ( _function == "Disconnected") exitWith {
+			systemChat LLSTRING(disconnected);
+		};
 		if( _function == "Error" ) exitWith {
 			ERROR(_data);
 		};

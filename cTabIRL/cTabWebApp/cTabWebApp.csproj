@@ -20,10 +20,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Arma3TacMapLibrary" Version="1.0.0" />
+    <!--<PackageReference Include="Arma3TacMapLibrary" Version="1.0.0" />-->
     <PackageReference Include="AspNet.Security.OpenId.Steam" Version="5.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="QRCoder" Version="1.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Arma3TacMap\Arma3TacMapLibrary\Arma3TacMapLibrary.csproj" />
   </ItemGroup>
 
   <ItemGroup>
