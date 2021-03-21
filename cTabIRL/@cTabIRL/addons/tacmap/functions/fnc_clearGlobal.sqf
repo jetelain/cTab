@@ -6,6 +6,6 @@
 GVAR(allMarkersGlobal) = [];
 
 {
-	[_x] call mts_markers_fnc_deleteMarker
+	[_y] call mts_markers_fnc_deleteMarker
 } forEach GVAR(allMetisMarkersGlobal);
-GVAR(allMetisMarkersGlobal) = [];
+GVAR(allMetisMarkersGlobal) = createHashMap;

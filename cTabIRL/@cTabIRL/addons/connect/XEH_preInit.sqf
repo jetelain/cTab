@@ -48,13 +48,13 @@ addMissionEventHandler ["ExtensionCallback", {
 			systemChat LLSTRING(disconnected);
 		};
 		if ( _function == "ClearTacMapMarkers") exitWith {
-			call EFUNC(tacmap,clearLocal);
+			call EFUNC(tacmap,clear);
 		};
 		if ( _function == "AddTacMapMarker") exitWith {
-			(parseSimpleArray _data) call EFUNC(tacmap,createLocal);
+			(parseSimpleArray _data) call EFUNC(tacmap,create);
 		};
 		if ( _function == "RemoveTacMapMarker") exitWith {
-			(parseSimpleArray _data) call EFUNC(tacmap,deleteLocal);
+			(parseSimpleArray _data) call EFUNC(tacmap,delete);
 		};
 		if ( _function == "Disconnected") exitWith {
 			systemChat LLSTRING(disconnected);
