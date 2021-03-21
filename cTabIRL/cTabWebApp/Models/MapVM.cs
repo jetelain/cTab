@@ -12,5 +12,9 @@ namespace cTabWebApp.Models
 
         public bool IsSpectator { get; set; }
         public string SpectatorToken { get; internal set; }
+
+        public string TacMapEndpoint { get; set; }
+
+        public string TacMapDomain { get; set; }
     }
 }

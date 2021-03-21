@@ -16,6 +16,13 @@ if (!hasInterface) exitWith { };
 		INFO("Mod is disabled");
 	};
 
+	FUNC(markerFilter) = { params ["_name"]; !([_name] call EFUNC(tacmap,isTacMapMarker)) };
+
+	if (!isNil "mts_markers_fnc_isMtsMarker") then {
+		// Metis Marker are ignored as they won't be displayed on web app, this can help to reduce messages size
+		FUNC(markerFilter) = { params ["_name"]; !([_name] call EFUNC(tacmap,isTacMapMarker)) && { ([_name] call mts_markers_fnc_isMtsMarker) == 0 } };
+	};
+
 	// Connect to server
 	call FUNC(connect);
 
@@ -35,13 +42,22 @@ if (!hasInterface) exitWith { };
 	["ctab_messagesUpdated", FUNC(updateMessages)] call CBA_fnc_addEventHandler;
 
 	addMissionEventHandler ["MarkerCreated", {
-		GVAR(mapMarkersNeedsUpdate) = true;
+		params ['_name'];
+		if ( [_name] call FUNC(markerFilter) ) then {
+			GVAR(mapMarkersNeedsUpdate) = true;
+		};
 	}];
 	addMissionEventHandler ["MarkerUpdated", {
-		GVAR(mapMarkersNeedsUpdate) = true;
+		params ['_name'];
+		if ( [_name] call FUNC(markerFilter) ) then {
+			GVAR(mapMarkersNeedsUpdate) = true;
+		};
 	}];
 	addMissionEventHandler ["MarkerDeleted", {
-		GVAR(mapMarkersNeedsUpdate) = true;
+		params ['_name'];
+		if ( [_name] call FUNC(markerFilter) ) then {
+			GVAR(mapMarkersNeedsUpdate) = true;
+		};
 	}];
 
 }] call CBA_fnc_addEventHandler;

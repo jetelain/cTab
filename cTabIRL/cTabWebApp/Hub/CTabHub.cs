@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Arma3TacMapLibrary.Arma3;
-using cTabWebApp.Hubs;
+using Arma3TacMapLibrary.TacMaps;
 using cTabWebApp.Services;
+using cTabWebApp.TacMaps;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
@@ -20,12 +20,14 @@ namespace cTabWebApp
         private readonly PublicUriService _publicUri;
         private readonly IPlayerStateService _service;
         private readonly ILogger<CTabHub> _logger;
+        private readonly TacMapService _tacMapService;
 
-        public CTabHub(PublicUriService publicUri, IPlayerStateService service, ILogger<CTabHub> logger)
+        public CTabHub(PublicUriService publicUri, IPlayerStateService service, ILogger<CTabHub> logger, TacMapService tacMapService)
         {
             _publicUri = publicUri;
             _service = service;
             _logger = logger;
+            _tacMapService = tacMapService;
         }
 
         public async Task WebHello(WebHelloMessage message)
@@ -82,6 +84,10 @@ namespace cTabWebApp
             {
                 await Clients.Caller.SendAsync("UpdateMapMarkers", state.LastUpdateMapMarkers);
             }
+            if (state.SyncedTacMapId != null)
+            {
+                await Clients.Caller.SendAsync("SyncTacMap", new SyncTacMapMessage() { MapId = state.SyncedTacMapId });
+            }
         }
 
         public async Task SpectatorHello(SpectatorHelloMessage message)
@@ -132,6 +138,8 @@ namespace cTabWebApp
             var data = $"[['{new QrFontCode(qrCodeData).GetString().Replace("\n", "','")}'],'{uri}']";
 
             await Clients.Caller.SendAsync("Callback", "Connected", data);
+
+            await _tacMapService.UpdateTacMapInterconnect(state);
         }
 
         private PlayerState GetState()
@@ -664,9 +672,34 @@ namespace cTabWebApp
         }
 
         //DeleteUserMarker
+        public async Task WebSyncTacMap(SyncTacMapMessage message)
+        {
+            var state = GetState(ConnectionKind.Web);
+            if (state == null)
+            {
+                _logger.LogWarning($"No state for WebSyncTacMap");
+                return;
+            }
+            if (message.MapId == null || message.MapId.TacMapID == 0 || string.IsNullOrEmpty(message.MapId.ReadToken))
+            {
+                state.SyncedTacMapId = null;
+            }
+            else
+            {
+                state.SyncedTacMapId = new MapId() 
+                { 
+                    IsReadOnly = true, 
+                    ReadToken = message.MapId.ReadToken, 
+                    TacMapID = message.MapId.TacMapID 
+                };
+            }
+            await Clients.Group(state.WebChannelName).SendAsync("SyncTacMap", new SyncTacMapMessage() { MapId = state.SyncedTacMapId });
+
+            await _tacMapService.UpdateTacMapInterconnect(state);
+        }
 
 
-        public override Task OnDisconnectedAsync(Exception exception)
+        public async override Task OnDisconnectedAsync(Exception exception)
         {
             var state = GetState();
             if (state != null)
@@ -675,13 +708,14 @@ namespace cTabWebApp
                 if (actual == ConnectionKind.Arma)
                 {
                     Interlocked.Decrement(ref state.ActiveArmaConnections);
+                    await _tacMapService.UpdateTacMapInterconnect(state);
                 }
                 else if (actual == ConnectionKind.Web)
                 {
                     Interlocked.Decrement(ref state.ActiveWebConnections);
                 }
             }
-            return base.OnDisconnectedAsync(exception);
+            await base.OnDisconnectedAsync(exception);
         }
     }
 }

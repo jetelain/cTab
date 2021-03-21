@@ -126,6 +126,9 @@
   <data name="Center map on current position, and follow position" xml:space="preserve">
     <value>Centre la carte sur la position actuelle et suit la position</value>
   </data>
+  <data name="Choose a tactical map" xml:space="preserve">
+    <value>Choisir une carte tactique</value>
+  </data>
   <data name="Close" xml:space="preserve">
     <value>Fermer</value>
   </data>
@@ -165,17 +168,32 @@
   <data name="Inbox with received messages, and sent messages" xml:space="preserve">
     <value>Boite de reception et messages envoyés.</value>
   </data>
+  <data name="Load a tactical map" xml:space="preserve">
+    <value>Charger une carte tactique</value>
+  </data>
+  <data name="Load from {0}" xml:space="preserve">
+    <value>Charger depuis {0}</value>
+  </data>
+  <data name="Loading..." xml:space="preserve">
+    <value>Chargement en cours...</value>
+  </data>
   <data name="MEDEVAC" xml:space="preserve">
     <value>EVASAN</value>
   </data>
   <data name="Message Content" xml:space="preserve">
     <value>Contenu du message</value>
   </data>
+  <data name="Please sign-in on {0} and then click on refresh button." xml:space="preserve">
+    <value>Veulliez vous identifier sur {0} et cliquer sur le bouton actualiser.</value>
+  </data>
   <data name="Preformated" xml:space="preserve">
     <value>Préformaté</value>
   </data>
   <data name="Prevent sleep mode if full-screen is not available" xml:space="preserve">
     <value>Empêche la mise en veille si le mode plein écran n'est pas disponible</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Actualiser</value>
   </data>
   <data name="Send" xml:space="preserve">
     <value>Envoyer</value>
@@ -189,6 +207,12 @@
   <data name="Share your cTab in read-only mode." xml:space="preserve">
     <value>Partager votre cTab en lecture seule.</value>
   </data>
+  <data name="Sign-in on {0}" xml:space="preserve">
+    <value>S'identifier sur {0}</value>
+  </data>
+  <data name="Tactical map will be displayed on your mobile device and in Arma. Changes made on {0} will be applied in real-time." xml:space="preserve">
+    <value>La carte tactique sera affiché sur votre appareil mobile et dans Arma. Les modifications apportées sur {0} seront appliquées en temps réel.</value>
+  </data>
   <data name="To" xml:space="preserve">
     <value>À</value>
   </data>
@@ -197,6 +221,9 @@
   </data>
   <data name="Top bar displays connectivity, heading, clock time and MGRS position (meter precision)." xml:space="preserve">
     <value>La barre haute affiche la connectivité, la boussole numérique, l'heure, et la position MGRS (précision métrique).</value>
+  </data>
+  <data name="Unload current map" xml:space="preserve">
+    <value>Décharger la carte actuelle</value>
   </data>
   <data name="User manual" xml:space="preserve">
     <value>Manuel utilisateur</value>

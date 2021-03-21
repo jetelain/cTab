@@ -6,7 +6,7 @@ class CfgPatches {
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"ctab_irl_main", "ctab_core"};
+        requiredAddons[] = {"ctab_irl_main", "ctab_irl_tacmap", "ctab_core"};
         author = "AUTHOR";
         VERSION_CONFIG;
     };

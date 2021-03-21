@@ -1,4 +1,6 @@
 ﻿using System;
+using Arma3TacMapLibrary.TacMaps;
+using cTabWebApp.TacMaps;
 
 namespace cTabWebApp
 {
@@ -16,6 +18,10 @@ namespace cTabWebApp
         public string ArmaChannelName { get { return "Arma-" + Id; } }
         public string WebChannelName { get { return "WebUI-" + Id; } }
         public DateTime LastActivityUtc { get; internal set; }
+
+        public MapId SyncedTacMapId { get; internal set; }
+
+        public TacMapInterconnect Interconnect { get; internal set; }
 
         internal int ActiveArmaConnections;
         internal int ActiveWebConnections;

@@ -60,6 +60,7 @@ L.control.overlayNotify = function (options) {
 };
 
 var currentMap = null;
+var currentTacMapSynced = null;
 var currentMapInfos = null;
 var selfMarker = null;
 var existingMarkers = {};
@@ -251,6 +252,11 @@ function removeAllMarkers() {
     }
     $('#compose-to').empty();
     knownTo = {};
+    if (currentTacMapSynced) {
+        currentTacMapSynced.close();
+        currentTacMapSynced = null;
+        $('#tacmap-disable').addClass('d-none');
+    }
 }
 
 function clearMessage() {
@@ -268,11 +274,14 @@ function clearInbox() {
     updateUnread();
 }
 
-function initMap(mapInfos) {
+function initMap(mapInfos, worldName) {
     if (mapInfos == currentMapInfos) {
         removeAllMarkers();
         clearInbox();
         return;
+    }
+    if (!mapInfos.worldName) {
+        mapInfos.worldName = worldName;
     }
     if (currentMap != null) {
         removeAllMarkers();
@@ -713,7 +722,7 @@ function generatePreformated() {
 
 function showPerformated(id) {
     if (preformatedConfig.length == 0) {
-        fetch('/js/performat.json?7').then(response => response.json()).then(function (value) { preformatedConfig = value; showPerformated(id); });
+        fetch('/js/performat.json', {cache: 'no-cache'}).then(response => response.json()).then(function (value) { preformatedConfig = value; showPerformated(id); });
         return;
     }
     closePerformated();
@@ -790,11 +799,33 @@ function showPerformated(id) {
     }
 }
 
+function loadTacMapList() {
+    fetch(vm.tacMapEndpoint + '/api/TacMaps?worldName=' + currentMapInfos.worldName, { mode: 'cors', credentials: 'include', cache: 'no-cache', redirect: 'error' })
+        .then(result => {
+            result.json().then(data => {
+                $('#tacmap-notconnected').addClass('d-none');
+                $('#tacmap-list').removeClass('d-none');
+                $('#tacmap-list').empty();
+                data.forEach(entry => {
+                    $('#tacmap-list').append($('<a class="btn btn-outline-secondary btn-block text-left"></a>').text(entry.label).on('click', function () {
+                        connection.invoke("WebSyncTacMap", { mapId: { tacMapID: entry.id, readToken: entry.readOnlyToken } });
+                        $('#tacmaploader').modal('hide');
+                    }).prepend($('<img />').attr({ src: entry.previewHref['256'], class: 'mr-2' }).css({ width: '64px', height: '64px'})));
+                });
+            });
+        })
+        .catch(err => {
+            $('#tacmap-notconnected').removeClass('d-none');
+            $('#tacmap-list').addClass('d-none');
+        });
+}
+
 $(function () {
 
     $('#statusbar').on('click', function () { if (connection.state === signalR.HubConnectionState.Disconnected) { connection.start(); } });
 
-    initMap(Arma3Map.Maps[vm.initialMap || 'altis']); // Starts on altis by default
+    var worldName = vm.initialMap || 'altis';
+    initMap(Arma3Map.Maps[worldName], worldName); // Starts on altis by default
 
     clearMessage();
 
@@ -822,7 +853,7 @@ $(function () {
         try {
             var worldName = missionData.worldName.toLowerCase();
             if (Arma3Map.Maps[worldName]) {
-                initMap(Arma3Map.Maps[worldName]);
+                initMap(Arma3Map.Maps[worldName], worldName);
             } else {
                 // TODO !
             }
@@ -890,6 +921,25 @@ $(function () {
         }
     });
 
+    if (vm.tacMapEndpoint && window.Arma3TacMap) {
+        connection.on("SyncTacMap", function (data) {
+            if (currentTacMapSynced) {
+                $('#tacmap-disable').addClass('d-none');
+                try {
+                    currentTacMapSynced.close();
+                    currentTacMapSynced = null;
+                }
+                catch (e) {
+                    console.error(e);
+                }
+            }
+            if (data.mapId) {
+                $('#tacmap-disable').removeClass('d-none');
+                currentTacMapSynced = Arma3TacMap.connnectReadOnlyMap(currentMap, vm.tacMapEndpoint + '/MapHub', data.mapId, { 'mil': 0.25, 'basic': 1.0, 'line': 1.0 });
+            }
+        });
+    }
+
     function sayHello() {
         if (vm.isSpectator) {
             connection.invoke("SpectatorHello", { spectatorToken: vm.spectatorToken });
@@ -942,6 +992,15 @@ $(function () {
                 clearMessage();
             }
         });
+
+        if (vm.tacMapEndpoint) {
+            $('#tacmap-show').on('click', function () { $('#help').modal('hide'); $('#tacmaploader').modal('show'); loadTacMapList(); });
+            $('#tacmap-refresh').on('click', loadTacMapList);
+            $('#tacmap-disable').on('click', function () {
+                connection.invoke("WebSyncTacMap", {});
+                $('#help').modal('hide');
+            });
+        }
     }
 
     //if (!document.documentElement.requestFullscreen) { 
