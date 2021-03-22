@@ -230,10 +230,12 @@ function showMarkerMenu(marker) {
 function updateUnread() {
     if (!vm.isSpectator) {
         var unread = $('#inbox-list').find('i.fa-envelope').length;
-        var span = inboxButton.j().find('span');
-        span.text('' + unread);
-        span.attr('class', unread > 0 ? 'badge badge-danger' : 'badge badge-secondary');
-        inboxButton.setClass(unread > 0 ? 'btn-primary' : 'btn-outline-secondary');
+        if (inboxButton) {
+            var span = inboxButton.j().find('span');
+            span.text('' + unread);
+            span.attr('class', unread > 0 ? 'badge badge-danger' : 'badge badge-secondary');
+            inboxButton.setClass(unread > 0 ? 'btn-primary' : 'btn-outline-secondary');
+        }
     }
 }
 

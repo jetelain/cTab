@@ -107,7 +107,7 @@ namespace cTabWebApp
             {
                 candidates = players.Where(p => p.SteamId == steamId && p.IsAuthenticated).ToList();
             }
-            return players;
+            return candidates;
         }
 
         public PlayerState GetStateBySpectatorToken(string spectatorToken)
