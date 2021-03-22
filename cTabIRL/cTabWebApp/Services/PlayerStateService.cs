@@ -121,5 +121,21 @@ namespace cTabWebApp
                 return players.FirstOrDefault(p => p.SpectatorToken == spectatorToken);
             }
         }
+        public PlayerStateServiceStats GetStats(bool isAdmin)
+        {
+            lock (players)
+            {
+                return new PlayerStateServiceStats()
+                {
+                    ActiveArmaConnections = players.Sum(p => p.ActiveArmaConnections),
+                    ActiveWebConnections = players.Sum(p => p.ActiveWebConnections),
+                    ActiveTacMapConnections = players.Count(p => p.Interconnect != null),
+                    ActiveSessions = players.Count(p => p.ActiveConnections > 0),
+                    ActiveSessionsWithSteam = players.Count(p => p.ActiveConnections > 0 && p.IsAuthenticated),
+                    ActiveSessionsWithTacMap = players.Count(p => p.ActiveConnections > 0 && p.SyncedTacMapId != null),
+                    TotalSessions = nextId - 1
+                };
+            }
+        }
     }
 }

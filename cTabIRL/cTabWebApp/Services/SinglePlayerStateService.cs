@@ -34,5 +34,10 @@ namespace cTabWebApp
         {
             return null;
         }
+
+        public PlayerStateServiceStats GetStats(bool isAdmin)
+        {
+            return new PlayerStateServiceStats();
+        }
     }
 }

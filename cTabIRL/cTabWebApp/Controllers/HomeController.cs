@@ -178,5 +178,13 @@ namespace cTabWebApp.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Stats()
+        {
+            return View(_service.GetStats(false));
+        }
+
+
     }
 }

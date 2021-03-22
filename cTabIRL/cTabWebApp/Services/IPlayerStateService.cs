@@ -13,5 +13,7 @@ namespace cTabWebApp
         IEnumerable<PlayerState> GetUserAuthenticatedStates(string steamId);
 
         PlayerState GetStateBySpectatorToken(string spectatorToken);
+
+        PlayerStateServiceStats GetStats(bool isAdmin);
     }
 }

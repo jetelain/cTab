@@ -1,0 +1,52 @@
+﻿@model PlayerStateServiceStats
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Stats";
+}
+
+<h1>Stats</h1>
+
+<dl class="row">
+    <dt class="col-sm-4">
+        ActiveArmaConnections
+    </dt>
+    <dd class="col-sm-8">
+        @Model.ActiveArmaConnections
+    </dd>
+    <dt class="col-sm-4">
+        ActiveWebConnections
+    </dt>
+    <dd class="col-sm-8">
+        @Model.ActiveWebConnections
+    </dd>
+    <dt class="col-sm-4">
+        ActiveTacMapConnections
+    </dt>
+    <dd class="col-sm-8">
+        @Model.ActiveTacMapConnections
+    </dd>
+    <dt class="col-sm-4">
+        ActiveSessions
+    </dt>
+    <dd class="col-sm-8">
+        @Model.ActiveSessions
+    </dd>
+    <dt class="col-sm-4">
+        ActiveSessionsWithSteam
+    </dt>
+    <dd class="col-sm-8">
+        @Model.ActiveSessionsWithSteam
+    </dd>
+    <dt class="col-sm-4">
+        ActiveSessionsWithTacMap
+    </dt>
+    <dd class="col-sm-8">
+        @Model.ActiveSessionsWithTacMap
+    </dd>
+    <dt class="col-sm-4">
+        TotalSessions
+    </dt>
+    <dd class="col-sm-8">
+        @Model.TotalSessions
+    </dd>
+</dl>
