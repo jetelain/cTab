@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project name="ctab">
-    <Package name="core">
+   <Package name="core">
         <Key ID="STR_ctab_core_DisplayHide">
             <English>Display/Hide</English>
             <French>Afficher/Masquer</French>
@@ -290,8 +290,8 @@
             <French>Iconnu</French>
         </Key>
         <!-- 
-            Translators: Please ensure NATO APP-6 compliance
-        -->
+                Translators: Please ensure NATO APP-6 compliance
+            -->
         <Key ID="STR_ctab_core_SingularMenu">
             <English>Singular</English>
             <French>1 Personnel</French>
@@ -334,32 +334,32 @@
             <French>Immobile</French>
         </Key>
         <Key ID="STR_ctab_core_North">
-            <English>N </English>
-            <French>N </French>
+            <English>N</English>
+            <French>N</French>
         </Key>
         <Key ID="STR_ctab_core_NorthEast">
             <English>NE</English>
             <French>NE</French>
         </Key>
         <Key ID="STR_ctab_core_East">
-            <English>E </English>
-            <French>E </French>
+            <English>E</English>
+            <French>E</French>
         </Key>
         <Key ID="STR_ctab_core_SouthEast">
             <English>SE</English>
             <French>SE</French>
         </Key>
         <Key ID="STR_ctab_core_South">
-            <English>S </English>
-            <French>S </French>
+            <English>S</English>
+            <French>S</French>
         </Key>
         <Key ID="STR_ctab_core_SouthWest">
             <English>SW</English>
             <French>SO</French>
         </Key>
         <Key ID="STR_ctab_core_West">
-            <English>W </English>
-            <French>O </French>
+            <English>W</English>
+            <French>O</French>
         </Key>
         <Key ID="STR_ctab_core_NorthWest">
             <English>NW</English>
@@ -651,5 +651,552 @@
             <English>1 m</English>
             <French>1 m</French>
         </Key>
-    </Package>
+
+
+
+        <Key ID="STR_ctab_core_medlzMenu">
+            <English>MEDIVAC</English>
+            <French>MÉDIVAC</French>
+        </Key>
+        <Key ID="STR_ctab_core_medlzHint">
+            <English>MEDIVAC LZ</English>
+            <French>MÉDIVAC ZP</French>
+        </Key>
+        <Key ID="STR_ctab_core_deconMenu">
+            <English>Decon</English>
+            <French>Décon</French>
+        </Key>
+        <Key ID="STR_ctab_core_deconHint">
+            <English>Decontamination Site</English>
+            <French>Site de décontamination</French>
+        </Key>
+        <Key ID="STR_ctab_core_fobMenu">
+            <English>FOB</English>
+            <French>Décon</French>
+        </Key>
+        <Key ID="STR_ctab_core_fobHint">
+            <English>Forward Operating Base</English>
+            <French>Base d'opérations avancée</French>
+        </Key>
+        <Key ID="STR_ctab_core_fsbMenu">
+            <English>FSB</English>
+            <French>FSB</French>
+        </Key>
+        <Key ID="STR_ctab_core_fsbHint">
+            <English>Forward Supply Base</English>
+            <French>Base de ravitaillement avancée</French>
+        </Key>
+        <Key ID="STR_ctab_core_fmpMenu">
+            <English>FMP</English>
+            <French>PAM</French>
+        </Key>
+        <Key ID="STR_ctab_core_fmpHint">
+            <English>Forward Maintenance Pointe</English>
+            <French>Point de maintenance avancé</French>
+        </Key>
+        <Key ID="STR_ctab_core_CircleMenu">
+            <English>Circle</English>
+            <French>Cercle</French>
+        </Key>
+        <Key ID="STR_ctab_core_CircleHint">
+            <English>Circle</English>
+            <French>Cercle</French>
+        </Key>
+        <Key ID="STR_ctab_core_DotMenu">
+            <English>Dot</English>
+            <French>Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_DotHint">
+            <English>Dot</English>
+            <French>Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_CircleMenu">
+            <English>Square</English>
+            <French>Carré</French>
+        </Key>
+        <Key ID="STR_ctab_core_CircleHint">
+            <English>Square</English>
+            <French>Carré</French>
+        </Key>
+        <Key ID="STR_ctab_core_TriangleMenu">
+            <English>Triangle</English>
+            <French>Triangle</French>
+        </Key>
+        <Key ID="STR_ctab_core_TriangleHint">
+            <English>Triangle</English>
+            <French>Triangle</French>
+        </Key>
+        <Key ID="STR_ctab_core_IEDMenu">
+            <English>IED</English>
+            <French>EEI</French>
+        </Key>
+        <Key ID="STR_ctab_core_IEDHint">
+            <English>Improvised Explosive Device</English>
+            <French>Engin explosif improvisé</French>
+        </Key>
+        <Key ID="STR_ctab_core_apmMenu">
+            <English>AP Mine</English>
+            <French>Mine AP</French>
+        </Key>
+        <Key ID="STR_ctab_core_apmHint">
+            <English>Anti Personnel Mine</English>
+            <French>Mine antipersonnel</French>
+        </Key>
+        <Key ID="STR_ctab_core_atmMenu">
+            <English>AP Mine</English>
+            <French>Mine Char</French>
+        </Key>
+        <Key ID="STR_ctab_core_atmHint">
+            <English>Anti Tank Mine</English>
+            <French>Mine antichar</French>
+        </Key>
+        <Key ID="STR_ctab_core_apmsMenu">
+            <English>AP Mines</English>
+            <French>Minse AP</French>
+        </Key>
+        <Key ID="STR_ctab_core_apmsHint">
+            <English>Anti Personnel Mine Field</English>
+            <French>Champ de mines antipersonnel</French>
+        </Key>
+        <Key ID="STR_ctab_core_atmsMenu">
+            <English>AP Mines</English>
+            <French>Mines Char</French>
+        </Key>
+        <Key ID="STR_ctab_core_atmsHint">
+            <English>Anti Tank Mine Field</English>
+            <French>Champ de mines antichar</French>
+        </Key>
+        <Key ID="STR_ctab_core_cbrnMenu">
+            <English>CBRN</English>
+            <French>NRBC</French>
+        </Key>
+        <Key ID="STR_ctab_core_cbrnHint">
+            <English>CBRN threat</English>
+            <French>Menaces NRBC</French>
+        </Key>
+        <Key ID="STR_ctab_core_WarningMenu">
+            <English>Warning</English>
+            <French>Avertissement</French>
+        </Key>
+        <Key ID="STR_ctab_core_WarningHint">
+            <English>Warning</English>
+            <French>Avertissement</French>
+        </Key>
+        <Key ID="STR_ctab_core_UnknowMenu">
+            <English>Unknow</English>
+            <French>NRBC</French>
+        </Key>
+        <Key ID="STR_ctab_core_UnknowHint">
+            <English>Unknow</English>
+            <French>Inconnu</French>
+        </Key>
+        <Key ID="STR_ctab_core_StartMenu">
+            <English>Start</English>
+            <French>Démarrer</French>
+        </Key>
+        <Key ID="STR_ctab_core_StartHint">
+            <English>Start</English>
+            <French>Démarrer</French>
+        </Key>
+        <Key ID="STR_ctab_core_EndMenu">
+            <English>End</English>
+            <French>Finir</French>
+        </Key>
+        <Key ID="STR_ctab_core_EndHint">
+            <English>End</English>
+            <French>Finir</French>
+        </Key>
+        <Key ID="STR_ctab_core_JoinMenu">
+            <English>Join</English>
+            <French>Rejoindre</French>
+        </Key>
+        <Key ID="STR_ctab_core_JoinHint">
+            <English>Join</English>
+            <French>Rejoindre</French>
+        </Key>
+        <Key ID="STR_ctab_core_PickupMenu">
+            <English>Pickup</English>
+            <French>Ramasser</French>
+        </Key>
+        <Key ID="STR_ctab_core_PickupHint">
+            <English>Pickup</English>
+            <French>Ramasser</French>
+        </Key>
+        <Key ID="STR_ctab_core_MarkerMenu">
+            <English>Marker</English>
+            <French>Marqueuse</French>
+        </Key>
+        <Key ID="STR_ctab_core_MarkerHint">
+            <English>Marker</English>
+            <French>Marqueuse</French>
+        </Key>
+        <Key ID="STR_ctab_core_ObjectiveMenu">
+            <English>Objective</English>
+            <French>objective</French>
+        </Key>
+        <Key ID="STR_ctab_core_ObjectiveHint">
+            <English>Objective</English>
+            <French>Objective</French>
+        </Key>
+        <Key ID="STR_ctab_core_FlagMenu">
+            <English>Flag</English>
+            <French>Drapeau</French>
+        </Key>
+        <Key ID="STR_ctab_core_FlagHint">
+            <English>Flag</English>
+            <French>Drapeau</French>
+        </Key>
+        <Key ID="STR_ctab_core_DestroyMenu">
+            <English>Destroy</English>
+            <French>Détruire</French>
+        </Key>
+        <Key ID="STR_ctab_core_DestroyHint">
+            <English>Destroy</English>
+            <French>Détruire</French>
+        </Key>
+        <Key ID="STR_ctab_core_ARMAMenu">
+            <English>ARMA</English>
+            <French>Marqueurs ARMA</French>
+        </Key>
+        <Key ID="STR_ctab_core_DangerMenu">
+            <English>Danger</English>
+            <French>Marqueurs de danger</French>
+        </Key>
+        <Key ID="STR_ctab_core_LandMenu">
+            <English>Land</English>
+            <French>Land</French>
+        </Key>
+        <Key ID="STR_ctab_core_RLYMenu">
+            <English>Rally Point</English>
+            <French>Point de ralliement</French>
+        </Key>
+        <Key ID="STR_ctab_core_RLYHint">
+            <English>Rally Point</English>
+            <French>Point de ralliement</French>
+        </Key>
+        <Key ID="STR_ctab_core_CKPMenu">
+            <English>Check Point</English>
+            <French>Point de contrôle</French>
+        </Key>
+        <Key ID="STR_ctab_core_CKPHint">
+            <English>Check Point</English>
+            <French>Point de contrôle</French>
+        </Key>
+        <Key ID="STR_ctab_core_PPMenu">
+            <English>Passage Point</English>
+            <French>Point de passage</French>
+        </Key>
+        <Key ID="STR_ctab_core_PPHint">
+            <English>Passage Point</English>
+            <French>Point de passage</French>
+        </Key>
+        <Key ID="STR_ctab_core_WPMenu">
+            <English>Way Point</English>
+            <French>Point de passage</French>
+        </Key>
+        <Key ID="STR_ctab_core_WPHint">
+            <English>Way Point</English>
+            <French>Point de passage</French>
+        </Key>
+        <Key ID="STR_ctab_core_RPMenu">
+            <English>Release Point</English>
+            <French>Point de sortie</French>
+        </Key>
+        <Key ID="STR_ctab_core_RPHint">
+            <English>Release Point</English>
+            <French>Point de sortie</French>
+        </Key>
+        <Key ID="STR_ctab_core_SPMenu">
+            <English>Start Point</English>
+            <French>Point de départ</French>
+        </Key>
+        <Key ID="STR_ctab_core_SPHint">
+            <English>Start Point</English>
+            <French>Point de départ</French>
+        </Key>
+        <Key ID="STR_ctab_core_APMenu">
+            <English>Action Point</English>
+            <French>Point d'action</French>
+        </Key>
+        <Key ID="STR_ctab_core_APHint">
+            <English>Action Point</English>
+            <French>Point d'action</French>
+        </Key><Key ID="STR_ctab_core_AirMenu">
+            <English>Air</English>
+            <French>Air</French>
+        </Key>
+        <Key ID="STR_ctab_core_AAPMenu">
+            <English>Action Point</English>
+            <French>Point d'action</French>
+        </Key>
+        <Key ID="STR_ctab_core_AAPHint">
+            <English>Action Point</English>
+            <French>Point d'action</French>
+        </Key>
+        <Key ID="STR_ctab_core_ABPMenu">
+            <English>Battle Point</English>
+            <French>Point de combat</French>
+        </Key>
+        <Key ID="STR_ctab_core_ABPHint">
+            <English>Battle Point</English>
+            <French>Point de combat</French>
+        </Key>
+        <Key ID="STR_ctab_core_ACPMenu">
+            <English>Air Control Point</English>
+            <French>Point de contrôle aérien</French>
+        </Key>
+        <Key ID="STR_ctab_core_ACPHint">
+            <English>Air Control Point</English>
+            <French>Point de contrôle aérien</French>
+        </Key>
+        <Key ID="STR_ctab_core_OrbitMenu">
+            <English>Orbit</English>
+            <French>Orbite</French>
+        </Key>
+        <Key ID="STR_ctab_core_OrbitHint">
+            <English>Orbit</English>
+            <French>Orbite</French>
+        </Key>
+        <Key ID="STR_ctab_core_AEPMenu">
+            <English>Egress Point</English>
+            <French>Point de sortie</French>
+        </Key>
+        <Key ID="STR_ctab_core_AEPHint">
+            <English>Egress Point</English>
+            <French>Point de sortie</French>
+        </Key>
+        <Key ID="STR_ctab_core_AIPMenu">
+            <English>Initiation Point</English>
+            <French>Point d'initiation</French>
+        </Key>
+        <Key ID="STR_ctab_core_AIPHint">
+            <English>Intion Point</English>
+            <French>Point d'initiation</French>
+        </Key>
+        <Key ID="STR_ctab_core_PUPMenu">
+            <English>Popup point</English>
+            <French>Point popup</French>
+        </Key>
+        <Key ID="STR_ctab_core_PUPHint">
+            <English>Popup point</English>
+            <French>Point popup</French>
+        </Key>
+        <Key ID="STR_ctab_core_ACKPMenu">
+            <English>Checkpoint</English>
+            <French>Point de contrôle</French>
+        </Key>
+        <Key ID="STR_ctab_core_ACKPHint">
+            <English>Communications Checkpoint</English>
+            <French> Point de contrôle de communication</French>
+        </Key>
+        <Key ID="STR_ctab_core_DownMenu">
+            <English>Downed aircrew</English>
+            <French>Équipage d'équipage abattu</French>
+        </Key>
+        <Key ID="STR_ctab_core_DownHint">
+            <English>Downed aircrew pickup point</English>
+            <French>Point de ramassage d'équipage d'équipage abattu</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_SEAMenu">
+            <English>SEA</English>
+            <French>MER</French>
+        </Key>
+        <Key ID="STR_ctab_core_SEAHint">
+            <English>SEA</English>
+            <French>MER</French>
+        </Key>
+        <Key ID="STR_ctab_core_NRPMenu">
+            <English>Reference Point</English>
+            <French>Point de référence</French>
+        </Key>
+        <Key ID="STR_ctab_core_NRPHint">
+            <English>Reference Point</English>
+            <French>Point de référence</French>
+        </Key>
+        <Key ID="STR_ctab_core_NSPMenu">
+            <English>Special Point</English>
+            <French>Point spécial</French>
+        </Key>
+        <Key ID="STR_ctab_core_NSPHint">
+            <English>Special Point</English>
+            <French>Point spécial</French>
+        </Key>
+        <Key ID="STR_ctab_core_NNPMenu">
+            <English>Navigation Point</English>
+            <French>Point de navigation</French>
+        </Key>
+        <Key ID="STR_ctab_core_NNPHint">
+            <English>Navigation Point</English>
+            <French>Point de navigation</French>
+        </Key>
+        <Key ID="STR_ctab_core_NDPMenu">
+            <English>Dive Point</English>
+            <French>Point de plongée</French>
+        </Key>
+        <Key ID="STR_ctab_core_NDPHint">
+            <English>Dive Point</English>
+            <French>Point de plongée</French>
+        </Key>
+        <Key ID="STR_ctab_core_SurfaceMenu">
+            <English>Surfcae Point</English>
+            <French>Surface Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_SurfaceHint">
+            <English>Surfcae Point</English>
+            <French>Surface Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_NLPMenu">
+            <English>Landing Point</English>
+            <French>Point d'atterrissage</French>
+        </Key>
+        <Key ID="STR_ctab_core_NLPHint">
+            <English>Landing Point</English>
+            <French>Point d'atterrissage</French>
+        </Key>
+        <Key ID="STR_ctab_core_ZonesMenu">
+            <English>Zones</English>
+            <French>Zones</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZIRMenu">
+            <English>LZ Insertion Red</English>
+            <French>Insertion LZ rouge</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZIRHint">
+            <English>Landing Zone Insertion Red</English>
+            <French>Zone d'atterrissage Insertion rouge</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZERMenu">
+            <English>LZ Extraction Red</English>
+            <French>Lz extraction rouge</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZERHint">
+            <English>Landing Zone Extraction Red</English>
+            <French>Extraction de zone d'atterrissage rouge</French>
+        </Key>
+        <Key ID="STR_ctab_core_FLZRMenu">
+            <English>False LZ Insertion Red</English>
+            <French>Faux LZ Insertion rouge</French>
+        </Key>
+        <Key ID="STR_ctab_core_FLZRHint">
+            <English>False Landing Zone Insertion Red</English>
+            <French>Fausse zone d'atterrissage Insertion rouge</French>
+        </Key>
+        <Key ID="STR_ctab_core_DZRMenu">
+            <English>DZ Red</English>
+            <French>Dz rouge</French>
+        </Key>
+        <Key ID="STR_ctab_core_DZRHint">
+            <English>Drop Zone Red</English>
+            <French>Goutte zone rouge</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_LZIGMenu">
+            <English>LZ Insertion Green</English>
+            <French> Insertion lz vert</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZIGHint">
+            <English>Landing Zone Insertion Green</English>
+            <French>Zone d'atterrissage insertion verte</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZEGMenu">
+            <English>LZ Extraction Green</English>
+            <French>Extraction lz vert</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZEGHint">
+            <English>Landing Zone Extraction Green</English>
+            <French>Extraction de zone d'atterrissage vert</French>
+        </Key>
+        <Key ID="STR_ctab_core_FLZGMenu">
+            <English>False LZ Insertion Green</English>
+            <French>Faux LZ Insertion Vert</French>
+        </Key>
+        <Key ID="STR_ctab_core_FLZGHint">
+            <English>False Landing Zone Insertion Green</English>
+            <French>Faux zone d'atterrissage Insertion Vert</French>
+        </Key>
+        <Key ID="STR_ctab_core_DZGMenu">
+            <English>DZ Green</English>
+            <French>Vert dz vert</French>
+        </Key>
+        <Key ID="STR_ctab_core_DZGHint">
+            <English>Drop Zone Green</English>
+            <French>Goutte zone vert</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_LZIBMenu">
+            <English>LZ Insertion Blue</English>
+            <French>Lz insertion bleu</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZIBHint">
+            <English>Landing Zone Insertion Blue</English>
+            <French> Insertion de zone d'atterrissage bleu</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZEBMenu">
+            <English>LZ Extraction Blue</English>
+            <French>Lz extraction bleu</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZEBHint">
+            <English>Landing Zone Extraction Blue</English>
+            <French>Extraction de zone d'atterrissage bleu</French>
+        </Key>
+        <Key ID="STR_ctab_core_FLZBMenu">
+            <English>False LZ Insertion Blue</English>
+            <French>Faux insertion lz bleu</French>
+        </Key>
+        <Key ID="STR_ctab_core_FLZBHint">
+            <English>False Landing Zone Insertion Blue</English>
+            <French>Fausse zone d'atterrissage insertion bleue</French>
+        </Key>
+        <Key ID="STR_ctab_core_DZBMenu">
+            <English>DZ Blue</English>
+            <French>Dz bleu</French>
+        </Key>
+        <Key ID="STR_ctab_core_DZBHint">
+            <English>Drop Zone Blue</English>
+            <French>Goutte zone bleu</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_LZIMenu">
+            <English>LZ Insertion</English>
+            <French>Insertion LZ</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZIHint">
+            <English>Landing Zone Insertion</English>
+            <French> Insertion de la zone d'atterrissage</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZEMenu">
+            <English>LZ Extraction</English>
+            <French>Extraction lz</French>
+        </Key>
+        <Key ID="STR_ctab_core_LZEHint">
+            <English>Landing Zone Extraction</English>
+            <French>Extraction de zone d'atterrissage</French>
+        </Key>
+        <Key ID="STR_ctab_core_FLZMenu">
+            <English>False LZ Insertion</English>
+            <French>FAUX INSERTION LZ</French>
+        </Key>
+        <Key ID="STR_ctab_core_FLZHint">
+            <English>False Landing Zone Insertion</English>
+            <French>False insertion de zone d'atterrissage</French>
+        </Key>
+        <Key ID="STR_ctab_core_DZMenu">
+            <English>DZ</English>
+            <French>DZ</French>
+        </Key>
+        <Key ID="STR_ctab_core_DZHint">
+            <English>Drop Zone</English>
+            <French>Zone de largage</French>
+        </Key>
+
+        <Key ID="STR_ctab_core_GoMenu">
+            <English>Go Codes</English>
+            <French>Go Codes</French>
+        </Key>
+        <Key ID="STR_ctab_core_BeerMenu">
+            <English>Beer</English>
+            <French>Bière</French>
+        </Key>
+   </Package>
 </Project>

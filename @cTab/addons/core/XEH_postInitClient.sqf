@@ -229,6 +229,9 @@ _b = profilenamespace getvariable ['Map_Independent_B',1];
 _a = profilenamespace getvariable ['Map_OPFOR_A',0.8];
 cTabColorGreen = [_r,_g,_b,_a];
 
+cTabColorBlack = [0,0,0,1];
+
+
 // Define Fire-Team colors
 // MAIN,RED,GREEN,BLUE,YELLOW
 cTabColorTeam = [cTabColorBlue,[200/255,0,0,0.8],[0,199/255,0,0.8],[0,0,200/255,0.8],[225/255,225/255,0,0.8]];

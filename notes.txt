@@ -1,0 +1,152 @@
+Main menu
+
+Enemy Salute 11 3301
+Medical 21	3305
+General 31 3306
+Danger 	41	3308
+ARMA	51	3309 *
+Go Codes	61	3310
+Land	71	3311
+Air		81	3312
+Naval	91	3313
+Zones 	101	3314
+lock UAV Cam 2
+Cancel 0
+
+
+Medical ------------------------- 20-29
+20	Casualty				"\A3\ui_f\data\map\markers\military\dot_CA.paa"
+21	CCP (colectionpoint)	
+22	BAS (aid station)		"\A3\ui_f\data\map\markers\military\b_med.paa"
+23	MCI (mass Cas)			"\A3\ui_f\data\map\markers\military\circle_CA.paa"
+24	Medical LZ				"\A3\ui_f\data\map\markers\military\pickup_CA.paa"
+25	Decon Site				
+
+
+General ------------------------- 30-39
+30	HQ			"\A3\ui_f\data\map\markers\military\b_hq.paa"
+31	FOB			"\A3\ui_f\data\map\markers\military\b_installation.paa"
+32	FSB			"\A3\ui_f\data\map\markers\military\b_support.paa"
+33	FMP			"\A3\ui_f\data\map\markers\military\b_maint.paa"
+34	Circle 		"\A3\ui_f\data\map\markers\military\circle_CA.paa"
+35	Dot 		"\A3\ui_f\data\map\markers\military\dot_CA.paa"
+36	Square		"\A3\ui_f\data\map\markers\military\box_CA.paa"
+37	Triangle	"\A3\ui_f\data\map\markers\military\triangle_CA.paa"
+
+
+Danger ------------------------- 40-49
+40	IED
+41	Mine AP
+42	Mine AT
+43	Mines AP
+44	Mines AT
+45	CBRN
+46	Warning		"\A3\ui_f\data\map\markers\military\warning_CA.paa"
+47	Unknow 		"\A3\ui_f\data\map\markers\military\unknown_CA.paa"
+
+
+
+ARMA  ------------------------- 50-59
+50	Start 			"\A3\ui_f\data\map\markers\military\start_CA.paa"
+51	End 			"\A3\ui_f\data\map\markers\military\end_CA.paa"
+52	Join 			"\A3\ui_f\data\map\markers\military\join_CA.paa"
+53	Pickup 			"\A3\ui_f\data\map\markers\military\pickup_CA.paa"
+54	Marker 			"\A3\ui_f\data\map\markers\military\marker_CA.paa"
+55	Objective 		"\A3\ui_f\data\map\markers\military\objective_CA.paa"
+56	Flag 			"\A3\ui_f\data\map\markers\military\flag_CA.paa"
+57	Destroy 		"\A3\ui_f\data\map\markers\military\destroy_CA.paa"
+
+menu-------------------stop
+Land ------------------------- 60-69
+60	Rally Point RLY
+61	Check Point  CKP
+62	Passage Point PP
+63	Way Point WP
+64	Release Point RP
+65	Start SP
+66	Action AP
+
+
+
+Air ------------------------- 70-79
+Action Point
+Battle Point
+Air control point
+Orbit
+Egress Point
+Intion Point
+Pop-up point
+Communications checkpoint
+Downed aircrew pick-up point
+
+
+Sea ------------------------- 80-89
+Reference Point
+Special Point
+Navigation Point
+Dive Point
+Surfcae Point
+Landing Point
+
+
+Zones -------------------- 200's  red green blue black
+LZ inserction 
+LZ Extraction 
+DZ Inserection 
+Fake LZ   		ColorBlack	[0,0,0,1]
+
+				ColorGreen	[0,0.8,0,1]
+				ColorBlue	[0,0,1,1]
+				ColorRed	[0.9,0,0,1]
+
+Go Codes -------------------------
+			Beer ------------------------- 100-109
+
+			--------------------------str stop
+				Budweiser
+				Coors
+				Corona
+				Guinness
+				Hamms
+				Heineken
+				Keystone
+				Miller
+				Pabst
+				Schlitz
+			elements-------------------------110-119
+				Argon
+				Boron
+				Carbon
+				Gold
+				Iron
+				Lead
+				Neon
+				Silver
+				Tin
+				Zinc
+
+			Rivers-------------------------120-129
+				Amazon
+				Congo
+				Mekong
+				Nile
+				Rio
+				Rom
+				Volga
+				Yangtze
+				Yellow
+				Yukon
+			Cartoons-------------------------130-139
+				Batman
+				Daffy
+				Goofy
+				Homer
+				Jerry
+				Rocky
+				Scobby
+				tom
+				Woody
+				Yogi 
+
+
+
