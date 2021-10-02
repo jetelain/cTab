@@ -57,6 +57,10 @@ call {
 		if (_type == 41) exitWith {3308};
 		if (_type == 51) exitWith {3309};
 		if (_type == 61) exitWith {3310};
+		if (_type == 62) exitWith {3315};
+		if (_type == 63) exitWith {3316};
+		if (_type == 64) exitWith {3317};
+		if (_type == 65) exitWith {3318};
 		if (_type == 71) exitWith {3311};
 		if (_type == 81) exitWith {3312};
 		if (_type == 91) exitWith {3313};
@@ -66,7 +70,7 @@ call {
 };
 
 // Hide all menu controls
-{ctrlShow [_x,false];} count [3300,3301,3302,3303,3304,3305,3306,3307,3308,3309,3310,3311,3312,3313,3314];
+{ctrlShow [_x,false];} count [3300,3301,3302,3303,3304,3305,3306,3307,3308,3309,3310,3311,3312,3313,3314,3315,3316,3317,3318];
 
 // Bring the menu control we want to show into position and show it
 if (_idcToShow != 0) then {

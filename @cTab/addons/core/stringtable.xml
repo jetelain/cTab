@@ -14,8 +14,8 @@
             <French>Configurer TAD</French>
         </Key>
         <Key ID="STR_ctab_core_Android">
-            <English>GD300 Android</English>
-            <French>GD300 Android</French>
+            <English>CTAB Android</English>
+            <French>CTAB Android</French>
         </Key>
         <Key ID="STR_ctab_core_AndroidShort">
             <English>GD300 Rugged Wearable Computer</English>
@@ -26,8 +26,8 @@
             <French>Configurer GD300 Android</French>
         </Key>
         <Key ID="STR_ctab_core_MicroDAGR">
-            <English>MicroDAGR</English>
-            <French>MicroDAGR</French>
+            <English>CTAB MicroDAGR</English>
+            <French>CTAB MicroDAGR</French>
         </Key>
         <Key ID="STR_ctab_core_MicroDAGRShort">
             <English>HNV-2930 Micro Defense Advanced GPS Receiver</English>
@@ -42,7 +42,7 @@
             <French>FBCB2</French>
         </Key>
         <Key ID="STR_ctab_core_Tablet">
-            <English>Rugged Tablet</English>
+            <English>CTAB Rugged Tablet</English>
             <French>Tablette endurcie</French>
         </Key>
         <Key ID="STR_ctab_core_TabletShort">
@@ -50,7 +50,7 @@
             <French>Tablette endurcie DK10</French>
         </Key>
         <Key ID="STR_ctab_core_HCam">
-            <English>Helmet Camera</English>
+            <English>CTAB Helmet Camera</English>
             <French>Caméra pour casque</French>
         </Key>
         <Key ID="STR_ctab_core_HCamShort">
@@ -710,11 +710,11 @@
             <English>Dot</English>
             <French>Point</French>
         </Key>
-        <Key ID="STR_ctab_core_CircleMenu">
+        <Key ID="STR_ctab_core_SquareMenu">
             <English>Square</English>
             <French>Carré</French>
         </Key>
-        <Key ID="STR_ctab_core_CircleHint">
+        <Key ID="STR_ctab_core_SquareHint">
             <English>Square</English>
             <French>Carré</French>
         </Key>
@@ -998,13 +998,13 @@
             <French>Point de ramassage d'équipage d'équipage abattu</French>
         </Key>
 
-        <Key ID="STR_ctab_core_SEAMenu">
-            <English>SEA</English>
-            <French>MER</French>
+        <Key ID="STR_ctab_core_NavalMenu">
+            <English>Naval</English>
+            <French>Navale</French>
         </Key>
-        <Key ID="STR_ctab_core_SEAHint">
-            <English>SEA</English>
-            <French>MER</French>
+        <Key ID="STR_ctab_core_NavalHint">
+            <English>Naval</English>
+            <French>Navale</French>
         </Key>
         <Key ID="STR_ctab_core_NRPMenu">
             <English>Reference Point</English>
@@ -1075,7 +1075,7 @@
             <French>Extraction de zone d'atterrissage rouge</French>
         </Key>
         <Key ID="STR_ctab_core_FLZRMenu">
-            <English>False LZ Insertion Red</English>
+            <English>FLZ Insertion Red</English>
             <French>Faux LZ Insertion rouge</French>
         </Key>
         <Key ID="STR_ctab_core_FLZRHint">
@@ -1108,7 +1108,7 @@
             <French>Extraction de zone d'atterrissage vert</French>
         </Key>
         <Key ID="STR_ctab_core_FLZGMenu">
-            <English>False LZ Insertion Green</English>
+            <English>FLZ Insertion Green</English>
             <French>Faux LZ Insertion Vert</French>
         </Key>
         <Key ID="STR_ctab_core_FLZGHint">
@@ -1123,7 +1123,6 @@
             <English>Drop Zone Green</English>
             <French>Goutte zone vert</French>
         </Key>
-
         <Key ID="STR_ctab_core_LZIBMenu">
             <English>LZ Insertion Blue</English>
             <French>Lz insertion bleu</French>
@@ -1141,7 +1140,7 @@
             <French>Extraction de zone d'atterrissage bleu</French>
         </Key>
         <Key ID="STR_ctab_core_FLZBMenu">
-            <English>False LZ Insertion Blue</English>
+            <English>FLZ Insertion Blue</English>
             <French>Faux insertion lz bleu</French>
         </Key>
         <Key ID="STR_ctab_core_FLZBHint">
@@ -1174,7 +1173,7 @@
             <French>Extraction de zone d'atterrissage</French>
         </Key>
         <Key ID="STR_ctab_core_FLZMenu">
-            <English>False LZ Insertion</English>
+            <English>FLZ Insertion</English>
             <French>FAUX INSERTION LZ</French>
         </Key>
         <Key ID="STR_ctab_core_FLZHint">
@@ -1197,6 +1196,18 @@
         <Key ID="STR_ctab_core_BeerMenu">
             <English>Beer</English>
             <French>Bière</French>
+        </Key>
+        <Key ID="STR_ctab_core_ElementsMenu">
+            <English>Elements</English>
+            <French>Éléments</French>
+        </Key>
+        <Key ID="STR_ctab_core_RiversMenu">
+            <English>Rivers</English>
+            <French>Rivières</French>
+        </Key>
+        <Key ID="STR_ctab_core_ToonMenu">
+            <English>Cartoons</English>
+            <French>Les dessins animés</French>
         </Key>
    </Package>
 </Project>

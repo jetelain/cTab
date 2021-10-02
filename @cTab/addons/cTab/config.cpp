@@ -29,7 +29,7 @@ class CfgPatches
 			VERSION_CONFIG;
 			author = "cTab";
 			authors[] = {"Gundy","Riouken","Raspu"};
-			authorUrl = "https://github.com/Riouken/cTab";
+			authorUrl = "https://github.com/DPSO/cTab-1";
 		};
 };
 
@@ -54,12 +54,12 @@ class CfgSettings
 class CfgMods {
 	class PREFIX {
 		dir = "@cTab";
-		name = "cTab - Blue Force Tracking";
+		name = "cTab - Blue Force Tracking DPSO Version";
 		picture = "\cTab\img\cTab_BFT_ico.paa";
 		hidePicture = "True";
 		hideName = "True";
 		actionName = "Website";
-		action = "https://github.com/Riouken/cTab";
+		action = "https://github.com/DPSO/cTab-1";
 		overview = "Commander's Tablet / FBCB2 - Blue Force Tracking\nBattlefield tablet to access real time intel and blue force tracker.";
 		tooltip = "Commander's Tablet / FBCB2 - Blue Force Tracking";
 		author = AUTHOR;
@@ -76,20 +76,23 @@ class CfgMods {
 #include <\cTab\TAD\cTab_TAD_dialog.hpp>
 #include <\cTab\microDAGR\cTab_microDAGR_dialog.hpp>
 
+
 class CfgWeapons
 {
+	class CBA_MiscItem;
+	class CBA_MiscItem_ItemInfo;
 	class ItemCore;
  	class InventoryItem_Base_F;
-	class ItemcTab: ItemCore {
+	class ItemcTab: CBA_MiscItem {
 		descriptionshort = $STR_ctab_core_TabletShort;
 		descriptionuse = "<t color='#9cf953'>Use: </t>Show Commander's Tablet";
 		displayname = $STR_ctab_core_Tablet;
 		picture = "\cTab\img\icon_dk10.paa";
 		model = "\ctab\data\itemDK10.p3d";
 		scope = 2;
-		simulation = "ItemGPS";
-		class ItemInfo {
-			mass = 56;
+		simulation ="Weapon";
+		class ItemInfo: CBA_MiscItem_ItemInfo {
+			mass = 12;
 		};
 		author = AUTHOR;
 	};
@@ -100,8 +103,8 @@ class CfgWeapons
 		displayname = $STR_ctab_core_Android;
 		picture = "\cTab\img\icon_Android.paa";
 		model = "\ctab\data\itemAndroid.p3d";
-		class ItemInfo {
-			mass = 5;
+		class ItemInfo: CBA_MiscItem_ItemInfo {
+			mass = 4;
 		};
 		author = AUTHOR;
 	};
@@ -112,14 +115,12 @@ class CfgWeapons
 		displayname = $STR_ctab_core_MicroDAGR;
 		picture = "\cTab\img\icon_MicroDAGR.paa";
 		model = "\ctab\data\itemMicroDAGR.p3d";
-		class ItemInfo {
-			mass = 6;
+		class ItemInfo: CBA_MiscItem_ItemInfo {
+			mass = 2;
 		};
 		author = AUTHOR;
 	};
-	
-	class CBA_MiscItem;
-	class CBA_MiscItem_ItemInfo;
+
 	class ItemcTabHCam: CBA_MiscItem {
 		descriptionshort = $STR_ctab_core_HCamShort;
 		descriptionuse = "<t color='#9cf953'>Use: </t>Used to record and stream video";

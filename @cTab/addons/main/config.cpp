@@ -8,8 +8,8 @@ class CfgPatches {
         requiredVersion = REQUIRED_VERSION;
         requiredAddons[] = {};
 		author = "cTab Authors";
-		authors[] = {"Gundy","Riouken","Raspu","GrueArbre"};
-		authorUrl = "https://github.com/jetelain/cTab";
+		authors[] = {"Gundy","Riouken","Raspu","GrueArbre","YonV"};
+		authorUrl = "https://github.com/DPSO/cTab-1";
         VERSION_CONFIG;
     };
 };

@@ -20,3 +20,4 @@ if (isClass (configFile >> "CfgWeapons" >> "ACE_microDAGR")) then {
 
 [QGVAR(helmetcam_mode), "LIST", [LLSTRING(helmetcam_mode), LLSTRING(helmetcam_modeDetails)], ["cTab", LLSTRING(videoCategory)], [[0, 1], [LLSTRING(disabled), LLSTRING(enabled)], 1], 0, {}, false] call CBA_fnc_addSetting;
 [QGVAR(uav_mode),       "LIST", [LLSTRING(uav_mode), LLSTRING(uav_modeDetails)], ["cTab", LLSTRING(videoCategory)], [[0, 1], [LLSTRING(disabled), LLSTRING(enabled)], 1], 0, {}, false] call CBA_fnc_addSetting;
+

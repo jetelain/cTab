@@ -1,5 +1,5 @@
 name = "cTab"
-prefix = "ctab"
+prefix = "ctab_DPSO"
 author = "cTab Authors, see https://github.com/jetelain/cTab"
 template = "cba"
 mainprefix = "z"
@@ -8,3 +8,10 @@ sig_version = 3
 files = [
     "mod.cpp"
 ]
+
+
+exclude = ["*.psd", "*.png", "*.tga"]
+
+modname = "{{name}}"
+key_name = "{{prefix}}_{{version}}"
+

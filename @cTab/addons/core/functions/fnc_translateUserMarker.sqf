@@ -62,36 +62,35 @@ _texture1 = call {
 	if (_markerIcon == 203) exitWith {"\cTab\img\FLZ.paa"};
 
 	_color = cTabColorGreen;
-	if (_markerIcon == 20) exitWith {"\A3\ui_f\data\map\markers\military\dot_CA.paa"};
-	if (_markerIcon == 21) exitWith {"\cTab\img\ccp.paa"};
-	if (_markerIcon == 22) exitWith {"\A3\ui_f\data\map\mapcontrol\Hospital_CA.paa"};
-	if (_markerIcon == 23) exitWith {"\A3\ui_f\data\map\markers\military\circle_CA.paa"};
-	if (_markerIcon == 24) exitWith {"\A3\ui_f\data\map\markers\military\pickup_CA.paa"};
-	if (_markerIcon == 25) exitWith {"\cTab\img\DCN.paa"};
-
 	if (_markerIcon == 210) exitWith {"\cTab\img\ILZ.paa"};
 	if (_markerIcon == 211) exitWith {"\cTab\img\ELZ.paa"};
 	if (_markerIcon == 212) exitWith {"\cTab\img\DZ.paa"};
 	if (_markerIcon == 213) exitWith {"\cTab\img\FLZ.paa"};
 
 	_color = cTabColorBlue;
+	if (_markerIcon == 20) exitWith {"\A3\ui_f\data\map\markers\military\dot_CA.paa"};
+	if (_markerIcon == 21) exitWith {"\cTab\img\ccp.paa"};
+	if (_markerIcon == 22) exitWith {"\A3\ui_f\data\map\mapcontrol\Hospital_CA.paa"};
+	if (_markerIcon == 23) exitWith {"\A3\ui_f\data\map\markers\military\circle_CA.paa"};
+	if (_markerIcon == 24) exitWith {"\A3\ui_f\data\map\markers\military\pickup_CA.paa"};
+	if (_markerIcon == 25) exitWith {"\cTab\img\DCN.paa"};
 	if (_markerIcon == 30) exitWith {"\A3\ui_f\data\map\markers\nato\b_hq.paa"};
-	if (_markerIcon == 31) exitWith {"\A3\ui_f\data\map\markers\military\b_installation.paa"};
-	if (_markerIcon == 32) exitWith {"\A3\ui_f\data\map\markers\military\b_support.paa"};
-	if (_markerIcon == 33) exitWith {"\A3\ui_f\data\map\markers\military\b_maint.paa"};
+	if (_markerIcon == 31) exitWith {"\A3\ui_f\data\map\markers\nato\b_installation.paa"};
+	if (_markerIcon == 32) exitWith {"\A3\ui_f\data\map\markers\nato\b_support.paa"};
+	if (_markerIcon == 33) exitWith {"\A3\ui_f\data\map\markers\nato\b_maint.paa"};
 	if (_markerIcon == 34) exitWith {"\A3\ui_f\data\map\markers\military\circle_CA.paa"};
 	if (_markerIcon == 35) exitWith {"\A3\ui_f\data\map\markers\military\dot_CA.paa"};
 	if (_markerIcon == 36) exitWith {"\A3\ui_f\data\map\markers\military\box_CA.paa"};
 	if (_markerIcon == 37) exitWith {"\A3\ui_f\data\map\markers\military\triangle_CA.paa"};
 
-	if (_markerIcon == 40) exitWith {"\A3\ui_f\data\map\markers\nato\IED.paa"};
-	if (_markerIcon == 41) exitWith {"\A3\ui_f\data\map\markers\nato\apm.paa"};
-	if (_markerIcon == 42) exitWith {"\A3\ui_f\data\map\markers\nato\atm.paa"};
-	if (_markerIcon == 43) exitWith {"\A3\ui_f\data\map\markers\nato\apms.paa"};
-	if (_markerIcon == 44) exitWith {"\A3\ui_f\data\map\markers\nato\atms.paa"};
-	if (_markerIcon == 45) exitWith {"\A3\ui_f\data\map\markers\nato\cbrn.paa"};
+	if (_markerIcon == 40) exitWith {"\cTab\img\IED.paa"};
+	if (_markerIcon == 41) exitWith {"\cTab\img\apm.paa"};
+	if (_markerIcon == 42) exitWith {"\cTab\img\atm.paa"};
+	if (_markerIcon == 43) exitWith {"\cTab\img\apms.paa"};
+	if (_markerIcon == 44) exitWith {"\cTab\img\atms.paa"};
+	if (_markerIcon == 45) exitWith {"\cTab\img\cbrn.paa"};
 	if (_markerIcon == 46) exitWith {"\A3\ui_f\data\map\markers\military\warning_CA.paa"};
-	if (_markerIcon == 46) exitWith {"\A3\ui_f\data\map\markers\military\unknown_CA.paa"};
+	if (_markerIcon == 47) exitWith {"\A3\ui_f\data\map\markers\military\unknown_CA.paa"};
 
 	if (_markerIcon == 50) exitWith {"\A3\ui_f\data\map\markers\military\start_CA.paa"};
 	if (_markerIcon == 51) exitWith {"\A3\ui_f\data\map\markers\military\end_CA.paa"};
