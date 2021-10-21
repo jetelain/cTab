@@ -8,31 +8,31 @@ private _vehicle = vehicle _player;
 private _hasItem = false;
 
 private _subactions = {
-	params ["_target","","_params"];
-	_params params ["_type", "_dlg", "_player", "_vehicle"];
-	[
-		[[
-			"dsp",
-			LLSTRING(DisplayHide),
-			"",
-			{
-				params ["", "", "_params"];
-				_params call FUNC(toggleInterface);
-			},
-			{true},
-			_subactions,
-			[0, [_dlg, "_dlg", "_dsp"] call CBA_fnc_replace, _player, _vehicle]
-		] call ace_interact_menu_fnc_createAction, [], _target]
-	]
+    params ["_target","","_params"];
+    _params params ["_type", "_dlg", "_player", "_vehicle"];
+    [
+        [[
+            "dsp",
+            LLSTRING(DisplayHide),
+            "",
+            {
+                params ["", "", "_params"];
+                _params call FUNC(toggleInterface);
+            },
+            {true},
+            _subactions,
+            [0, [_dlg, "_dlg", "_dsp"] call CBA_fnc_replace, _player, _vehicle]
+        ] call ace_interact_menu_fnc_createAction, [], _target]
+    ]
 };
 
 private _toggleInterface = {
-	params ["", "", "_params"];
-	_params call FUNC(toggleInterface);
+    params ["", "", "_params"];
+    _params call FUNC(toggleInterface);
 };
 
 if ([_player,_vehicle,"TAD"] call cTab_fnc_unitInEnabledVehicleSeat) then {
-	_actions pushBack [[
+    _actions pushBack [[
         "cTab_TAD",
         LLSTRING(ConfigureTAD),
         "",
@@ -45,7 +45,7 @@ if ([_player,_vehicle,"TAD"] call cTab_fnc_unitInEnabledVehicleSeat) then {
 };
 
 if ([_player,["ItemAndroid"]] call cTab_fnc_checkGear) then {
-	_actions pushBack [[
+    _actions pushBack [[
         "cTab_Android",
         LLSTRING(ConfigureAndroid),
         "\cTab\img\icon_Android.paa",
@@ -58,7 +58,7 @@ if ([_player,["ItemAndroid"]] call cTab_fnc_checkGear) then {
 };
 
 if ([_player,["ItemMicroDAGR"]] call cTab_fnc_checkGear) then {
-	_actions pushBack [[
+    _actions pushBack [[
         "cTab_microDAGR",
         LLSTRING(ConfigureMicroDAGR),
         "\cTab\img\icon_MicroDAGR.paa",
@@ -70,7 +70,7 @@ if ([_player,["ItemMicroDAGR"]] call cTab_fnc_checkGear) then {
 };
 
 if ([_player,_vehicle,"FBCB2"] call cTab_fnc_unitInEnabledVehicleSeat) then {
-	_actions pushBack [[
+    _actions pushBack [[
         "cTab_FBCB2",
         LLSTRING(FBCB2),
         "",

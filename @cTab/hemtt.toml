@@ -1,0 +1,55 @@
+name = "cTab"
+prefix = "ctab_DPSO"
+author = "cTab Authors, see https://github.com/jetelain/cTab"
+template = "cba"
+mainprefix = "z"
+folder_optionals = true
+sig_version = 3
+files = [
+    "mod.cpp",
+    "cTab_ico.paa"
+]
+
+
+exclude = ["*.psd", "*.png", "*.tga"]
+
+modname = "{{name}}"
+key_name = "{{prefix}}_{{version}}"
+authority = "{{prefix}}_{{version}}-"
+
+
+check = [
+    "!compile_scripts"
+]
+
+postbuild = [
+    "!remove_compiled_scripts"
+]
+
+releasebuild = [
+    "@zip @ctab_{{version}}"
+]
+
+
+[scripts.compile_scripts]
+steps_windows = [
+    "echo 'Compile Arma Scripts'",
+    "ArmaScriptCompiler.exe"
+]
+
+steps_linux = [
+    "echo 'Compiling Arma Scripts does not work yet on Linux'"
+]
+only_release = true
+show_output = false
+
+[scripts.remove_compiled_scripts]
+steps_windows = [
+    "echo 'remove Compiled Scripts'",
+    "powershell -Command Remove-Item './addons/*' -Recurse -Include *.sqfc"
+]
+steps_linux = [
+    "echo 'Compiling Arma Scripts does not work yet on Linux'"
+]
+only_release = true
+show_output = true

@@ -1,5 +1,5 @@
 /*
-	This is drawn every frame on the TAD dialog. fnc
+    This is drawn every frame on the TAD dialog. fnc
 */
 // is disableSerialization really required? If so, not sure this is the right place to call it
 disableSerialization;
@@ -21,9 +21,9 @@ _cntrlScreen drawIcon [cTabPlayerVehicleIcon,cTabTADfontColour,_playerPos,cTabTA
 
 // update hook information
 call {
-	if (cTabDrawMapTools) exitWith {
-		[_display,_cntrlScreen,_playerPos,cTabMapCursorPos,0,true] call cTab_fnc_drawHook;
-	};
-	[_display,_cntrlScreen,_playerPos,cTabMapCursorPos,1,true] call cTab_fnc_drawHook;
+    if (cTabDrawMapTools) exitWith {
+        [_display,_cntrlScreen,_playerPos,cTabMapCursorPos,0,true] call cTab_fnc_drawHook;
+    };
+    [_display,_cntrlScreen,_playerPos,cTabMapCursorPos,1,true] call cTab_fnc_drawHook;
 };
 true

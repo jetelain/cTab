@@ -74,803 +74,803 @@
 
 class cTab_RscButton_TAD_OSB: cTab_RscButtonInv
 {
-	w = pxToScreen_W(134);
-	h = pxToScreen_H(134);
+    w = pxToScreen_W(134);
+    h = pxToScreen_H(134);
 };
 class cTab_RscButton_TAD_OSB01: cTab_RscButton_TAD_OSB
 {
-	x = pxToScreen_X(577);
-	y = pxToScreen_Y(146);
+    x = pxToScreen_X(577);
+    y = pxToScreen_Y(146);
 };
 class cTab_RscButton_TAD_OSB02: cTab_RscButton_TAD_OSB01
 {
-	x = pxToScreen_X(767);
+    x = pxToScreen_X(767);
 };
 class cTab_RscButton_TAD_OSB03: cTab_RscButton_TAD_OSB01
 {
-	x = pxToScreen_X(957);
+    x = pxToScreen_X(957);
 };
 class cTab_RscButton_TAD_OSB04: cTab_RscButton_TAD_OSB01
 {
-	x = pxToScreen_X(1147);
+    x = pxToScreen_X(1147);
 };
 class cTab_RscButton_TAD_OSB05: cTab_RscButton_TAD_OSB01
 {
-	x = pxToScreen_X(1337);
+    x = pxToScreen_X(1337);
 };
 class cTab_RscButton_TAD_OSB06: cTab_RscButton_TAD_OSB
 {
-	x = pxToScreen_X(1782);
-	y = pxToScreen_Y(563);
+    x = pxToScreen_X(1782);
+    y = pxToScreen_Y(563);
 };
 class cTab_RscButton_TAD_OSB07: cTab_RscButton_TAD_OSB06
 {
-	y = pxToScreen_Y(760);
+    y = pxToScreen_Y(760);
 };
 class cTab_RscButton_TAD_OSB08: cTab_RscButton_TAD_OSB06
 {
-	y = pxToScreen_Y(957);
+    y = pxToScreen_Y(957);
 };
 class cTab_RscButton_TAD_OSB09: cTab_RscButton_TAD_OSB06
 {
-	y = pxToScreen_Y(1155);
+    y = pxToScreen_Y(1155);
 };
 class cTab_RscButton_TAD_OSB10: cTab_RscButton_TAD_OSB06
 {
-	y = pxToScreen_Y(1352);
+    y = pxToScreen_Y(1352);
 };
 class cTab_RscButton_TAD_OSB11: cTab_RscButton_TAD_OSB
 {
-	x = pxToScreen_X(1337);
-	y = pxToScreen_Y(1811);
+    x = pxToScreen_X(1337);
+    y = pxToScreen_Y(1811);
 };
 class cTab_RscButton_TAD_OSB12: cTab_RscButton_TAD_OSB11
 {
-	x = pxToScreen_X(1147);
+    x = pxToScreen_X(1147);
 };
 class cTab_RscButton_TAD_OSB13: cTab_RscButton_TAD_OSB11
 {
-	x = pxToScreen_X(957);
+    x = pxToScreen_X(957);
 };
 class cTab_RscButton_TAD_OSB14: cTab_RscButton_TAD_OSB11
 {
-	x = pxToScreen_X(767);
+    x = pxToScreen_X(767);
 };
 class cTab_RscButton_TAD_OSB15: cTab_RscButton_TAD_OSB11
 {
-	x = pxToScreen_X(577);
+    x = pxToScreen_X(577);
 };
 class cTab_RscButton_TAD_OSB16: cTab_RscButton_TAD_OSB
 {
-	x = pxToScreen_X(132);
-	y = pxToScreen_Y(1352);
+    x = pxToScreen_X(132);
+    y = pxToScreen_Y(1352);
 };
 class cTab_RscButton_TAD_OSB17: cTab_RscButton_TAD_OSB16
 {
-	y = pxToScreen_Y(1155);
+    y = pxToScreen_Y(1155);
 };
 class cTab_RscButton_TAD_OSB18: cTab_RscButton_TAD_OSB16
 {
-	y = pxToScreen_Y(957);
+    y = pxToScreen_Y(957);
 };
 class cTab_RscButton_TAD_OSB19: cTab_RscButton_TAD_OSB16
 {
-	y = pxToScreen_Y(760);
+    y = pxToScreen_Y(760);
 };
 class cTab_RscButton_TAD_OSB20: cTab_RscButton_TAD_OSB16
 {
-	y = pxToScreen_Y(563);
+    y = pxToScreen_Y(563);
 };
 class cTab_RscButton_TAD_ADJ_INC: cTab_RscButtonInv
 {
-	x = pxToScreen_X(124);
-	y = pxToScreen_Y(257);
-	w = pxToScreen_W(142);
-	h = pxToScreen_H(119);
+    x = pxToScreen_X(124);
+    y = pxToScreen_Y(257);
+    w = pxToScreen_W(142);
+    h = pxToScreen_H(119);
 };
 class cTab_RscButton_TAD_ADJ_DEC: cTab_RscButton_TAD_ADJ_INC
 {
-	y = pxToScreen_Y(376);
+    y = pxToScreen_Y(376);
 };
 class cTab_RscButton_TAD_DSP_INC: cTab_RscButton_TAD_ADJ_INC
 {
-	x = pxToScreen_X(1782);
+    x = pxToScreen_X(1782);
 };
 class cTab_RscButton_TAD_DSP_DEC: cTab_RscButton_TAD_DSP_INC
 {
-	y = pxToScreen_Y(376);
+    y = pxToScreen_Y(376);
 };
 class cTab_RscButton_TAD_CON_INC: cTab_RscButton_TAD_ADJ_INC
 {
-	y = pxToScreen_Y(1539);
+    y = pxToScreen_Y(1539);
 };
 class cTab_RscButton_TAD_CON_DEC: cTab_RscButton_TAD_CON_INC
 {
-	y = pxToScreen_Y(1658);
+    y = pxToScreen_Y(1658);
 };
 class cTab_RscButton_TAD_BRT_INC: cTab_RscButton_TAD_CON_INC
 {
-	x = pxToScreen_X(1782);
+    x = pxToScreen_X(1782);
 };
 class cTab_RscButton_TAD_BRT_DEC: cTab_RscButton_TAD_BRT_INC
 {
-	y = pxToScreen_Y(1658);
+    y = pxToScreen_Y(1658);
 };
 class cTab_RscButton_TAD_SYM_INC: cTab_RscButtonInv
 {
-	x = pxToScreen_X(1663);
-	y = pxToScreen_Y(1811);
-	w = pxToScreen_W(119);
-	h = pxToScreen_H(142);
+    x = pxToScreen_X(1663);
+    y = pxToScreen_Y(1811);
+    w = pxToScreen_W(119);
+    h = pxToScreen_H(142);
 };
 class cTab_RscButton_TAD_SYM_DEC: cTab_RscButton_TAD_SYM_INC
 {
-	x = pxToScreen_X(1544);
+    x = pxToScreen_X(1544);
 };
 class cTab_RscButton_TAD_DNO: cTab_RscButtonInv
 {
-	x = pxToScreen_X(234);
-	y = pxToScreen_Y(1894);
-	w = pxToScreen_W(142);
-	h = pxToScreen_H(142);
+    x = pxToScreen_X(234);
+    y = pxToScreen_Y(1894);
+    w = pxToScreen_W(142);
+    h = pxToScreen_H(142);
 };
 
 class cTab_RscText_TAD: cTab_RscText
 {
-	style = ST_CENTER;
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W);
-	h = pxToScreen_H(cTab_GUI_TAD_OSD_ELEMENT_STD_H);
-	font = GUI_FONT_MONO;
-	colorText[] = COLOR_NEON_GREEN;
-	sizeEx = pxToScreen_H(cTab_GUI_TAD_OSD_TEXT_STD_SIZE);
-	colorBackground[] = COLOR_BLACK;
-	shadow = 0;
+    style = ST_CENTER;
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W);
+    h = pxToScreen_H(cTab_GUI_TAD_OSD_ELEMENT_STD_H);
+    font = GUI_FONT_MONO;
+    colorText[] = COLOR_NEON_GREEN;
+    sizeEx = pxToScreen_H(cTab_GUI_TAD_OSD_TEXT_STD_SIZE);
+    colorBackground[] = COLOR_BLACK;
+    shadow = 0;
 };
 class cTab_TAD_upDownArrow: cTab_RscPicture
 {
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W);
-	h = pxToScreen_H(cTab_GUI_TAD_OSD_ICON_H);
-	colorText[] = COLOR_NEON_GREEN;
-	colorBackground[] = COLOR_BLACK;
-	text = "\a3\ui_f\data\IGUI\Cfg\Actions\autohover_ca.paa";
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W);
+    h = pxToScreen_H(cTab_GUI_TAD_OSD_ICON_H);
+    colorText[] = COLOR_NEON_GREEN;
+    colorBackground[] = COLOR_BLACK;
+    text = "\a3\ui_f\data\IGUI\Cfg\Actions\autohover_ca.paa";
 };
 class cTab_TAD_RscMapControl: cTab_RscMapControl
 {
-	text = "#(argb,8,8,3)color(1,1,1,1)";
-	x = pxToScreen_X(cTab_GUI_TAD_MAP_X);
-	y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y);
-	w = pxToScreen_W(cTab_GUI_TAD_MAP_W);
-	h = pxToScreen_H(cTab_GUI_TAD_MAP_H);
-	//type = CT_MAP;
-	// allow to zoom out further (defines the maximum map scale, usually 1)
-	scaleMax = 1000;
-	// set initial map scale
-	scaleDefault = "(missionNamespace getVariable 'cTabMapScale') * 0.86 / (safezoneH * 0.8)";
-	// turn on satellite map information (defines the map scale of when to switch to topographical)
-	maxSatelliteAlpha = 10000;
-	alphaFadeStartScale = 10;
-	alphaFadeEndScale = 10;
+    text = "#(argb,8,8,3)color(1,1,1,1)";
+    x = pxToScreen_X(cTab_GUI_TAD_MAP_X);
+    y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y);
+    w = pxToScreen_W(cTab_GUI_TAD_MAP_W);
+    h = pxToScreen_H(cTab_GUI_TAD_MAP_H);
+    //type = CT_MAP;
+    // allow to zoom out further (defines the maximum map scale, usually 1)
+    scaleMax = 1000;
+    // set initial map scale
+    scaleDefault = "(missionNamespace getVariable 'cTabMapScale') * 0.86 / (safezoneH * 0.8)";
+    // turn on satellite map information (defines the map scale of when to switch to topographical)
+    maxSatelliteAlpha = 10000;
+    alphaFadeStartScale = 10;
+    alphaFadeEndScale = 10;
 
-	// Rendering density coefficients
-	ptsPerSquareSea = 8 / cTab_TAD_DLGtoDSP_fctr;		// seas
-	ptsPerSquareTxt = 8 / cTab_TAD_DLGtoDSP_fctr;		// textures
-	ptsPerSquareCLn = 8 / cTab_TAD_DLGtoDSP_fctr;		// count-lines
-	ptsPerSquareExp = 8 / cTab_TAD_DLGtoDSP_fctr;		// exposure
-	ptsPerSquareCost = 8 / cTab_TAD_DLGtoDSP_fctr;		// cost
+    // Rendering density coefficients
+    ptsPerSquareSea = 8 / cTab_TAD_DLGtoDSP_fctr;  // seas
+    ptsPerSquareTxt = 8 / cTab_TAD_DLGtoDSP_fctr;  // textures
+    ptsPerSquareCLn = 8 / cTab_TAD_DLGtoDSP_fctr;  // count-lines
+    ptsPerSquareExp = 8 / cTab_TAD_DLGtoDSP_fctr;  // exposure
+    ptsPerSquareCost = 8 / cTab_TAD_DLGtoDSP_fctr;  // cost
 
-	// Rendering thresholds
-	ptsPerSquareFor = 3 / cTab_TAD_DLGtoDSP_fctr;		// forests
-	ptsPerSquareForEdge = 100 / cTab_TAD_DLGtoDSP_fctr;	// forest edges
-	ptsPerSquareRoad = 1.5 / cTab_TAD_DLGtoDSP_fctr;		// roads
-	ptsPerSquareObj = 4 / cTab_TAD_DLGtoDSP_fctr;		// other objects
+    // Rendering thresholds
+    ptsPerSquareFor = 3 / cTab_TAD_DLGtoDSP_fctr;  // forests
+    ptsPerSquareForEdge = 100 / cTab_TAD_DLGtoDSP_fctr; // forest edges
+    ptsPerSquareRoad = 1.5 / cTab_TAD_DLGtoDSP_fctr;  // roads
+    ptsPerSquareObj = 4 / cTab_TAD_DLGtoDSP_fctr;  // other objects
 
-	/*
-	// replace CustomMark with wedding cake icon
-	class CustomMark
-	{
-		icon = "\cTab\img\icon_wedding_cake_ca.paa";
-		size = 18;
-		importance = 1;
-		coefMin = 1;
-		coefMax = 1;
-		color[] = {1,1,1,1};
-		shadow = 1;
-	};
-	*/
+    /*
+    // replace CustomMark with wedding cake icon
+    class CustomMark
+    {
+        icon = "\cTab\img\icon_wedding_cake_ca.paa";
+        size = 18;
+        importance = 1;
+        coefMin = 1;
+        coefMax = 1;
+        color[] = {1,1,1,1};
+        shadow = 1;
+    };
+    */
 };
 class cTab_TAD_RscMapControl_BLACK: cTab_TAD_RscMapControl
 {
-	font = "TahomaB";
-	sizeEx = 0.0;
-	maxSatelliteAlpha = 0.0;
-	colorBackground[] = {0,0,0,0};
-	colorLevels[] = {0,0,0,0};
-	colorSea[] = {0,0,0,0};
-	colorForest[] = {0,0,0,0};
-	colorRocks[] = {0,0,0,0};
-	colorCountlines[] = {0,0,0,0};
-	colorMainCountlines[] = {0,0,0,0};
-	colorCountlinesWater[] = {0,0,0,0};
-	colorMainCountlinesWater[] = {0,0,0,0};
-	colorPowerLines[] = {0,0,0,0};
-	colorRailWay[] = {0,0,0,0};
-	colorForestBorder[] = {0,0,0,0};
-	colorRocksBorder[] = {0,0,0,0};
-	colorNames[] = {0,0,0,0};
-	colorInactive[] = {0,0,0,0};
-	colorOutside[] = {0,0,0,0};
-	colorText[] = {0,0,0,0};
-	colorGrid[] = {0,0,0,0};
-	colorGridMap[] = {0,0,0,0};
-	colorTracks[] = {0,0,0,0};
-	colorTracksFill[] = {0,0,0,0};
-	colorRoads[] = {0,0,0,0};
-	colorRoadsFill[] = {0,0,0,0};
-	colorMainRoads[] = {0,0,0,0};
-	colorMainRoadsFill[] = {0,0,0,0};
-	ShowCountourInterval = 0;
-	shadow = 0;
-	text = "";
-	alphaFadeStartScale = 0.0;
-	alphaFadeEndScale = 0.0;
-	fontLabel = "TahomaB";
-	sizeExLabel = 0.0;
-	fontGrid = "TahomaB";
-	sizeExGrid = 0.0;
-	fontUnits = "TahomaB";
-	sizeExUnits = 0.0;
-	fontNames = "TahomaB";
-	sizeExNames = 0.0;
-	fontInfo = "TahomaB";
-	sizeExInfo = 0.0;
-	fontLevel = "TahomaB";
-	sizeExLevel = 0.0;
-	stickX[] = {0.0,{ "Gamma",0,0.0 }};
-	stickY[] = {0.0,{ "Gamma",0,0.0 }};
-	ptsPerSquareSea = 10000;
-	ptsPerSquareTxt = 10000;
-	ptsPerSquareCLn = 10000;
-	ptsPerSquareExp = 10000;
-	ptsPerSquareCost = 10000;
-	ptsPerSquareFor = 10000;
-	ptsPerSquareForEdge = 10000;
-	ptsPerSquareRoad = 10000;
-	ptsPerSquareObj = 10000;
-	class Task
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		iconCreated = "";
-		colorCreated[] = {0,0,0,0};
-		iconCanceled = "";
-		colorCanceled[] = {0,0,0,0};
-		iconDone = "";
-		colorDone[] = {0,0,0,0};
-		iconFailed = "";
-		colorFailed[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class CustomMark
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Bunker
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Bush
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class BusStop
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Command
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Cross
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Fortress
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Fuelstation
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Fountain
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Hospital
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Chapel
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Church
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Lighthouse
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Quay
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Rock
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Ruin
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class SmallTree
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Stack
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Tree
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Tourism
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Transmitter
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class ViewTower
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Watertower
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Waypoint
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class WaypointCompleted
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class ActiveMarker
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class PowerSolar
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class PowerWave
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class PowerWind
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
-	class Shipwreck
-	{
-		icon = "";
-		color[] = {0,0,0,0};
-		size = 0;
-		importance = 0;
-		coefMin = 0;
-		coefMax = 0;
-	};
+    font = "TahomaB";
+    sizeEx = 0.0;
+    maxSatelliteAlpha = 0.0;
+    colorBackground[] = {0,0,0,0};
+    colorLevels[] = {0,0,0,0};
+    colorSea[] = {0,0,0,0};
+    colorForest[] = {0,0,0,0};
+    colorRocks[] = {0,0,0,0};
+    colorCountlines[] = {0,0,0,0};
+    colorMainCountlines[] = {0,0,0,0};
+    colorCountlinesWater[] = {0,0,0,0};
+    colorMainCountlinesWater[] = {0,0,0,0};
+    colorPowerLines[] = {0,0,0,0};
+    colorRailWay[] = {0,0,0,0};
+    colorForestBorder[] = {0,0,0,0};
+    colorRocksBorder[] = {0,0,0,0};
+    colorNames[] = {0,0,0,0};
+    colorInactive[] = {0,0,0,0};
+    colorOutside[] = {0,0,0,0};
+    colorText[] = {0,0,0,0};
+    colorGrid[] = {0,0,0,0};
+    colorGridMap[] = {0,0,0,0};
+    colorTracks[] = {0,0,0,0};
+    colorTracksFill[] = {0,0,0,0};
+    colorRoads[] = {0,0,0,0};
+    colorRoadsFill[] = {0,0,0,0};
+    colorMainRoads[] = {0,0,0,0};
+    colorMainRoadsFill[] = {0,0,0,0};
+    ShowCountourInterval = 0;
+    shadow = 0;
+    text = "";
+    alphaFadeStartScale = 0.0;
+    alphaFadeEndScale = 0.0;
+    fontLabel = "TahomaB";
+    sizeExLabel = 0.0;
+    fontGrid = "TahomaB";
+    sizeExGrid = 0.0;
+    fontUnits = "TahomaB";
+    sizeExUnits = 0.0;
+    fontNames = "TahomaB";
+    sizeExNames = 0.0;
+    fontInfo = "TahomaB";
+    sizeExInfo = 0.0;
+    fontLevel = "TahomaB";
+    sizeExLevel = 0.0;
+    stickX[] = {0.0,{ "Gamma",0,0.0 }};
+    stickY[] = {0.0,{ "Gamma",0,0.0 }};
+    ptsPerSquareSea = 10000;
+    ptsPerSquareTxt = 10000;
+    ptsPerSquareCLn = 10000;
+    ptsPerSquareExp = 10000;
+    ptsPerSquareCost = 10000;
+    ptsPerSquareFor = 10000;
+    ptsPerSquareForEdge = 10000;
+    ptsPerSquareRoad = 10000;
+    ptsPerSquareObj = 10000;
+    class Task
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        iconCreated = "";
+        colorCreated[] = {0,0,0,0};
+        iconCanceled = "";
+        colorCanceled[] = {0,0,0,0};
+        iconDone = "";
+        colorDone[] = {0,0,0,0};
+        iconFailed = "";
+        colorFailed[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class CustomMark
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Bunker
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Bush
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class BusStop
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Command
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Cross
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Fortress
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Fuelstation
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Fountain
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Hospital
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Chapel
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Church
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Lighthouse
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Quay
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Rock
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Ruin
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class SmallTree
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Stack
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Tree
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Tourism
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Transmitter
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class ViewTower
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Watertower
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Waypoint
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class WaypointCompleted
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class ActiveMarker
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class PowerSolar
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class PowerWave
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class PowerWind
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
+    class Shipwreck
+    {
+        icon = "";
+        color[] = {0,0,0,0};
+        size = 0;
+        importance = 0;
+        coefMin = 0;
+        coefMax = 0;
+    };
 };
 
 class cTab_TAD_Map_Background: cTab_RscText
 {
-	idc=1;
-	x = pxToScreen_X(cTab_GUI_TAD_MAP_X);
-	y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y);
-	w = pxToScreen_W(cTab_GUI_TAD_MAP_W);
-	h = pxToScreen_H(cTab_GUI_TAD_MAP_H);
-	colorBackground[] = COLOR_BLACK;
+    idc=1;
+    x = pxToScreen_X(cTab_GUI_TAD_MAP_X);
+    y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y);
+    w = pxToScreen_W(cTab_GUI_TAD_MAP_W);
+    h = pxToScreen_H(cTab_GUI_TAD_MAP_H);
+    colorBackground[] = COLOR_BLACK;
 };
 
 class cTab_TAD_background: cTab_RscPicture
 {
-	idc = IDC_CTAB_BACKGROUND;
-	text = ""; // will be set during onLoad event
-	x = GUI_GRID_X;
-	y = GUI_GRID_Y;
-	w = GUI_GRID_W;
-	h = GUI_GRID_H;
+    idc = IDC_CTAB_BACKGROUND;
+    text = ""; // will be set during onLoad event
+    x = GUI_GRID_X;
+    y = GUI_GRID_Y;
+    w = GUI_GRID_W;
+    h = GUI_GRID_H;
 };
 class cTab_TAD_OSD_hookGrid: cTab_RscText_TAD
 {
-	idc = IDC_CTAB_OSD_HOOK_GRID;
-	style = ST_CENTER;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB11_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 4);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB10_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H * 0.5 + cTab_GUI_TAD_OSD_ELEMENT_STD_H * 1);
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 6);
+    idc = IDC_CTAB_OSD_HOOK_GRID;
+    style = ST_CENTER;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB11_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 4);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB10_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H * 0.5 + cTab_GUI_TAD_OSD_ELEMENT_STD_H * 1);
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 6);
 };
 class cTab_TAD_OSD_hookElevation: cTab_TAD_OSD_hookGrid
 {
-	idc = IDC_CTAB_OSD_HOOK_ELEVATION;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB11_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 2);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB10_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H * 0.5 + cTab_GUI_TAD_OSD_ELEMENT_STD_H * 2);
-	w = pxToScreen_W((cTab_GUI_TAD_OSD_ELEMENT_STD_W + 2) * 4);
-	// w = "(((28) * 4) / 2048  *  (safezoneH * 0.8 * 3/4))";
+    idc = IDC_CTAB_OSD_HOOK_ELEVATION;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB11_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 2);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB10_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H * 0.5 + cTab_GUI_TAD_OSD_ELEMENT_STD_H * 2);
+    w = pxToScreen_W((cTab_GUI_TAD_OSD_ELEMENT_STD_W + 2) * 4);
+    // w = "(((28) * 4) / 2048  *  (safezoneH * 0.8 * 3/4))";
 };
 class cTab_TAD_OSD_hookDir: cTab_TAD_OSD_hookGrid
 {
-	idc = IDC_CTAB_OSD_HOOK_DIR;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB11_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 6);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB10_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H * 0.5 + cTab_GUI_TAD_OSD_ELEMENT_STD_H * 0);
-	w = pxToScreen_W((cTab_GUI_TAD_OSD_ELEMENT_STD_W + 4) * 8);
-	// w = "(((30) * 8) / 2048  *  (safezoneH * 0.8 * 3/4))";
+    idc = IDC_CTAB_OSD_HOOK_DIR;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB11_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 6);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB10_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H * 0.5 + cTab_GUI_TAD_OSD_ELEMENT_STD_H * 0);
+    w = pxToScreen_W((cTab_GUI_TAD_OSD_ELEMENT_STD_W + 4) * 8);
+    // w = "(((30) * 8) / 2048  *  (safezoneH * 0.8 * 3/4))";
 };
 class cTab_TAD_OSD_hookToggleIconBackground: cTab_RscText_TAD
 {
-	idc=2;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET - cTab_GUI_TAD_OSD_ELEMENT_STD_W);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB18_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H	 / 2);
+    idc=2;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET - cTab_GUI_TAD_OSD_ELEMENT_STD_W);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB18_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H  / 2);
 };
 class cTab_TAD_OSD_hookToggleIcon: cTab_TAD_upDownArrow
 {
-	idc=3;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET - cTab_GUI_TAD_OSD_ELEMENT_STD_W);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB18_Y - cTab_GUI_TAD_OSD_ICON_H / 2);
+    idc=3;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET - cTab_GUI_TAD_OSD_ELEMENT_STD_W);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB18_Y - cTab_GUI_TAD_OSD_ICON_H / 2);
 };
 class cTab_TAD_OSD_hookToggleText1: cTab_RscText_TAD
 {
-	idc = IDC_CTAB_OSD_HOOK_TGGL1;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB18_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H);
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 4);
+    idc = IDC_CTAB_OSD_HOOK_TGGL1;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB18_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H);
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 4);
 };
 class cTab_TAD_OSD_hookToggleText2: cTab_TAD_OSD_hookToggleText1
 {
-	idc = IDC_CTAB_OSD_HOOK_TGGL2;
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB18_Y);
+    idc = IDC_CTAB_OSD_HOOK_TGGL2;
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB18_Y);
 };
 class cTab_TAD_OSD_currentDirection: cTab_RscText_TAD
 {
-	idc = IDC_CTAB_OSD_DIR_DEGREE;
-	style = ST_RIGHT;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB14_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 4 / 2);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_EDGE_B - cTab_GUI_TAD_OSD_ELEMENT_STD_H * 2);
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 4);
+    idc = IDC_CTAB_OSD_DIR_DEGREE;
+    style = ST_RIGHT;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB14_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 4 / 2);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_EDGE_B - cTab_GUI_TAD_OSD_ELEMENT_STD_H * 2);
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 4);
 };
 class cTab_TAD_OSD_currentElevation: cTab_TAD_OSD_currentDirection
 {
-	idc = IDC_CTAB_OSD_ELEVATION;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB12_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 5 / 2);
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 5);
+    idc = IDC_CTAB_OSD_ELEVATION;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB12_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 5 / 2);
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 5);
 };
 class cTab_TAD_OSD_centerMapText: cTab_RscText_TAD
 {
-	idc=4;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB19_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H / 2);
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3);
-	text = "CTR";
+    idc=4;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB19_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H / 2);
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3);
+    text = "CTR";
 };
 class cTab_TAD_loadingtxt: cTab_RscText_TAD
 {
-	idc = IDC_CTAB_LOADINGTXT;
-	style = ST_CENTER;
-	text = $STR_ctab_core_Loading;
-	x = pxToScreen_X(cTab_GUI_TAD_MAP_X);
-	y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y);
-	w = pxToScreen_W(cTab_GUI_TAD_MAP_W);
-	h = pxToScreen_H(cTab_GUI_TAD_MAP_H);
+    idc = IDC_CTAB_LOADINGTXT;
+    style = ST_CENTER;
+    text = $STR_ctab_core_Loading;
+    x = pxToScreen_X(cTab_GUI_TAD_MAP_X);
+    y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y);
+    w = pxToScreen_W(cTab_GUI_TAD_MAP_W);
+    h = pxToScreen_H(cTab_GUI_TAD_MAP_H);
 };
 class cTab_TAD_OSD_cursor: cTab_RscPicture
 {
-	idc=5;
-	text = "\a3\ui_f\data\IGUI\Cfg\WeaponCursors\cursoraimon_gs.paa";
-		// "\a3\ui_f\data\map\Markers\Military\destroy_ca.paa";
-		// "\a3\ui_f\data\IGUI\Cfg\WeaponCursors\cursoraimon_gs.paa"
-		// "\a3\ui_f\data\map\MarkerBrushes\cross_ca.paa"
-	x = pxToScreen_X(cTab_GUI_TAD_MAP_X + cTab_GUI_TAD_MAP_W / 2 - 128 / 33 * cTab_GUI_TAD_CURSOR / 2);
-	y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y + cTab_GUI_TAD_MAP_H / 2 - 128 / 33 * cTab_GUI_TAD_CURSOR / 2);
-	w = pxToScreen_W(128 / 33 * cTab_GUI_TAD_CURSOR);
-	h = pxToScreen_H(128 / 33 * cTab_GUI_TAD_CURSOR);
-	colorText[] = COLOR_NEON_GREEN;
+    idc=5;
+    text = "\a3\ui_f\data\IGUI\Cfg\WeaponCursors\cursoraimon_gs.paa";
+        // "\a3\ui_f\data\map\Markers\Military\destroy_ca.paa";
+        // "\a3\ui_f\data\IGUI\Cfg\WeaponCursors\cursoraimon_gs.paa"
+        // "\a3\ui_f\data\map\MarkerBrushes\cross_ca.paa"
+    x = pxToScreen_X(cTab_GUI_TAD_MAP_X + cTab_GUI_TAD_MAP_W / 2 - 128 / 33 * cTab_GUI_TAD_CURSOR / 2);
+    y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y + cTab_GUI_TAD_MAP_H / 2 - 128 / 33 * cTab_GUI_TAD_CURSOR / 2);
+    w = pxToScreen_W(128 / 33 * cTab_GUI_TAD_CURSOR);
+    h = pxToScreen_H(128 / 33 * cTab_GUI_TAD_CURSOR);
+    colorText[] = COLOR_NEON_GREEN;
 };
 class cTab_TAD_OSD_navModeOrScale: cTab_RscText_TAD
 {
-	idc = IDC_CTAB_OSD_MAP_SCALE;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_R - cTab_GUI_TAD_OSD_ELEMENT_MODE_W * 4);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_EDGE_T);
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_MODE_W * 4);
-	h = pxToScreen_H(cTab_GUI_TAD_OSD_ELEMENT_MODE_H);
-	sizeEx = pxToScreen_H(cTab_GUI_TAD_OSD_TEXT_MODE_SIZE);
+    idc = IDC_CTAB_OSD_MAP_SCALE;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_R - cTab_GUI_TAD_OSD_ELEMENT_MODE_W * 4);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_EDGE_T);
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_MODE_W * 4);
+    h = pxToScreen_H(cTab_GUI_TAD_OSD_ELEMENT_MODE_H);
+    sizeEx = pxToScreen_H(cTab_GUI_TAD_OSD_TEXT_MODE_SIZE);
 };
 class cTab_TAD_OSD_modeTAD: cTab_RscText_TAD
 {
-	idc=6;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB15_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3 / 2);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_EDGE_B - cTab_GUI_TAD_OSD_ELEMENT_STD_H);
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3);
-	colorText[] = COLOR_BLACK;
-	colorBackground[] = COLOR_NEON_GREEN;
-	text = "TAD";
+    idc=6;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB15_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3 / 2);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_EDGE_B - cTab_GUI_TAD_OSD_ELEMENT_STD_H);
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3);
+    colorText[] = COLOR_BLACK;
+    colorBackground[] = COLOR_NEON_GREEN;
+    text = "TAD";
 };
 class cTab_TAD_OSD_txtToggleIconBg: cTab_RscText_TAD
 {
-	idc=7;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_R - cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB10_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H / 2);
+    idc=7;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_R - cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB10_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H / 2);
 };
 class cTab_TAD_OSD_txtToggleIcon: cTab_TAD_upDownArrow
 {
-	idc=8;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_R - cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB10_Y - cTab_GUI_TAD_OSD_ICON_H / 2);
+    idc=8;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_R - cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB10_Y - cTab_GUI_TAD_OSD_ICON_H / 2);
 };
 class cTab_TAD_OSD_txtToggleText1: cTab_RscText_TAD
 {
-	idc=9;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_R - cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB10_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H);
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3);
-	text = "TXT";
+    idc=9;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_R - cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB10_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H);
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3);
+    text = "TXT";
 };
 class cTab_TAD_OSD_txtToggleText2: cTab_RscText_TAD
 {
-	idc = IDC_CTAB_OSD_TXT_TGGL;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_R - cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB10_Y);
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3);
+    idc = IDC_CTAB_OSD_TXT_TGGL;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_R - cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB10_Y);
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3);
 };
 class cTab_TAD_OSD_time: cTab_RscText_TAD
 {
-	idc = IDC_CTAB_OSD_TIME;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_EDGE_B - cTab_GUI_TAD_OSD_ELEMENT_STD_H);
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 5);
+    idc = IDC_CTAB_OSD_TIME;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_EDGE_B - cTab_GUI_TAD_OSD_ELEMENT_STD_H);
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 5);
 };
 class cTab_TAD_OSD_currentGrid: cTab_RscText_TAD
 {
-	idc = IDC_CTAB_OSD_GRID;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB13_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 6 / 2);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_EDGE_B - cTab_GUI_TAD_OSD_ELEMENT_STD_H * 2);
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 6);
+    idc = IDC_CTAB_OSD_GRID;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_OSB13_X - cTab_GUI_TAD_OSD_ELEMENT_STD_W * 6 / 2);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_EDGE_B - cTab_GUI_TAD_OSD_ELEMENT_STD_H * 2);
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 6);
 };
 class cTab_TAD_OSD_mapToggleIconBg: cTab_RscText_TAD
 {
-	idc=10;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET - cTab_GUI_TAD_OSD_ELEMENT_STD_W);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB20_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H / 2);
+    idc=10;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET - cTab_GUI_TAD_OSD_ELEMENT_STD_W);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB20_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H / 2);
 };
 class cTab_TAD_OSD_mapToggleIcon: cTab_TAD_upDownArrow
 {
-	idc=11;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET - cTab_GUI_TAD_OSD_ELEMENT_STD_W);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB20_Y - cTab_GUI_TAD_OSD_ICON_H / 2);
+    idc=11;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET - cTab_GUI_TAD_OSD_ELEMENT_STD_W);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB20_Y - cTab_GUI_TAD_OSD_ICON_H / 2);
 };
 class cTab_TAD_OSD_mapToggleText1: cTab_RscText_TAD
 {
-	idc=12;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB20_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H);
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3);
-	text = "MAP";
+    idc=12;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB20_Y - cTab_GUI_TAD_OSD_ELEMENT_STD_H);
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 3);
+    text = "MAP";
 };
 class cTab_TAD_OSD_mapToggleText2: cTab_RscText_TAD
 {
-	idc = IDC_CTAB_OSD_MAP_TGGL;
-	x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB20_Y);
-	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 4);
+    idc = IDC_CTAB_OSD_MAP_TGGL;
+    x = pxToScreen_X(cTab_GUI_TAD_OSD_EDGE_L + cTab_GUI_TAD_OSD_OSB_TEXT_OFFSET);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_OSB20_Y);
+    w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W * 4);
 };
 
 // Define areas around the screen as interaction areas to allow screen movement
 class cTab_TAD_movingHandle_T: cTab_RscText_TAD
 {
-	idc=13;
-	moving = 1;
-	colorBackground[] = COLOR_TRANSPARENT;
-	x = pxToScreen_X(0);
-	y = pxToScreen_Y(0);
-	w = pxToScreen_W(GUI_GRID_PX_W);
-	h = pxToScreen_H(cTab_GUI_TAD_MAP_Y);
+    idc=13;
+    moving = 1;
+    colorBackground[] = COLOR_TRANSPARENT;
+    x = pxToScreen_X(0);
+    y = pxToScreen_Y(0);
+    w = pxToScreen_W(GUI_GRID_PX_W);
+    h = pxToScreen_H(cTab_GUI_TAD_MAP_Y);
 };
 class cTab_TAD_movingHandle_B: cTab_TAD_movingHandle_T
 {
-	idc=14;
-	y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y + cTab_GUI_TAD_MAP_H);
-	h = pxToScreen_H(GUI_GRID_PX_H - (cTab_GUI_TAD_MAP_Y + cTab_GUI_TAD_MAP_H));
+    idc=14;
+    y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y + cTab_GUI_TAD_MAP_H);
+    h = pxToScreen_H(GUI_GRID_PX_H - (cTab_GUI_TAD_MAP_Y + cTab_GUI_TAD_MAP_H));
 };
 class cTab_TAD_movingHandle_L: cTab_TAD_movingHandle_T
 {
-	idc=15;
-	y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y);
-	w = pxToScreen_W(cTab_GUI_TAD_MAP_X);
-	h = pxToScreen_H(cTab_GUI_TAD_MAP_H);
+    idc=15;
+    y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y);
+    w = pxToScreen_W(cTab_GUI_TAD_MAP_X);
+    h = pxToScreen_H(cTab_GUI_TAD_MAP_H);
 };
 class cTab_TAD_movingHandle_R: cTab_TAD_movingHandle_L
 {
-	idc=16;
-	x = pxToScreen_X(cTab_GUI_TAD_MAP_X + cTab_GUI_TAD_MAP_W);
-	w = pxToScreen_W(GUI_GRID_PX_W - (cTab_GUI_TAD_MAP_X + cTab_GUI_TAD_MAP_W));
+    idc=16;
+    x = pxToScreen_X(cTab_GUI_TAD_MAP_X + cTab_GUI_TAD_MAP_W);
+    w = pxToScreen_W(GUI_GRID_PX_W - (cTab_GUI_TAD_MAP_X + cTab_GUI_TAD_MAP_W));
 };
 
 // transparent control that gets placed on top of the GUI to adjust brightness
 class cTab_TAD_brightness: cTab_RscText_TAD
 {
-	idc = IDC_CTAB_BRIGHTNESS;
-	x = pxToScreen_X(cTab_GUI_TAD_MAP_X);
-	y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y);
-	w = pxToScreen_W(cTab_GUI_TAD_MAP_W);
-	h = pxToScreen_H(cTab_GUI_TAD_MAP_H);
-	colorBackground[] = COLOR_TRANSPARENT;
+    idc = IDC_CTAB_BRIGHTNESS;
+    x = pxToScreen_X(cTab_GUI_TAD_MAP_X);
+    y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y);
+    w = pxToScreen_W(cTab_GUI_TAD_MAP_W);
+    h = pxToScreen_H(cTab_GUI_TAD_MAP_H);
+    colorBackground[] = COLOR_TRANSPARENT;
 };
 class cTab_TAD_notification: cTab_RscText_TAD {
-	idc = IDC_CTAB_NOTIFICATION;
-	x = pxToScreen_X(cTab_GUI_TAD_MAP_X + (cTab_GUI_TAD_MAP_W * 0.2) / 2);
-	y = pxToScreen_Y(cTab_GUI_TAD_OSD_EDGE_B - cTab_GUI_TAD_OSD_ELEMENT_STD_H * 3);
-	w = pxToScreen_W(cTab_GUI_TAD_MAP_W * 0.8);
-	colorText[] = COLOR_NAVYBLUE;
-	colorBackground[] = COLOR_WHITE;
+    idc = IDC_CTAB_NOTIFICATION;
+    x = pxToScreen_X(cTab_GUI_TAD_MAP_X + (cTab_GUI_TAD_MAP_W * 0.2) / 2);
+    y = pxToScreen_Y(cTab_GUI_TAD_OSD_EDGE_B - cTab_GUI_TAD_OSD_ELEMENT_STD_H * 3);
+    w = pxToScreen_W(cTab_GUI_TAD_MAP_W * 0.8);
+    colorText[] = COLOR_NAVYBLUE;
+    colorBackground[] = COLOR_WHITE;
 };

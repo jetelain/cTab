@@ -152,283 +152,283 @@
 
 class cTab_RscText_Tablet: cTab_RscText
 {
-	style = ST_CENTER;
-	w = pxToScreen_W(cTab_GUI_tablet_OSD_ELEMENT_STD_W);
-	h = pxToScreen_H(cTab_GUI_tablet_OSD_ELEMENT_STD_H);
-	font = GUI_FONT_MONO;
-	colorText[] = COLOR_WHITE;
-	sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE);
-	colorBackground[] = COLOR_TRANSPARENT;
-	shadow = 0;
+    style = ST_CENTER;
+    w = pxToScreen_W(cTab_GUI_tablet_OSD_ELEMENT_STD_W);
+    h = pxToScreen_H(cTab_GUI_tablet_OSD_ELEMENT_STD_H);
+    font = GUI_FONT_MONO;
+    colorText[] = COLOR_WHITE;
+    sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE);
+    colorBackground[] = COLOR_TRANSPARENT;
+    shadow = 0;
 };
 class cTab_RscListbox_Tablet: cTab_RscListbox
 {
-	sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE * 1.2);
+    sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE * 1.2);
 };
 class cTab_RscEdit_Tablet: cTab_RscEdit
 {
-	sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE * 1.2);
+    sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE * 1.2);
 };
 class cTab_RscButton_Tablet: cTab_RscButton
 {
-	font = GUI_FONT_MONO;
-	sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE);
+    font = GUI_FONT_MONO;
+    sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE);
 };
 class cTab_Tablet_background: cTab_RscPicture
 {
-	idc = IDC_CTAB_BACKGROUND;
-	text = "";
-	x = GUI_GRID_X;
-	y = GUI_GRID_Y;
-	w = GUI_GRID_W;
-	h = GUI_GRID_H;
+    idc = IDC_CTAB_BACKGROUND;
+    text = "";
+    x = GUI_GRID_X;
+    y = GUI_GRID_Y;
+    w = GUI_GRID_W;
+    h = GUI_GRID_H;
 };
 class cTab_tablet_header: cTab_RscPicture
 {
-	idc=1;
-	text = "#(argb,8,8,3)color(0,0,0,1)";
-	x = pxToScreen_X(cTab_GUI_tablet_MAP_X);
-	y = pxToScreen_Y(cTab_GUI_tablet_MAP_Y);
-	w = pxToScreen_W(cTab_GUI_tablet_MAP_W);
-	h = pxToScreen_H(cTab_GUI_tablet_OSD_HEADER_H);
+    idc=1;
+    text = "#(argb,8,8,3)color(0,0,0,1)";
+    x = pxToScreen_X(cTab_GUI_tablet_MAP_X);
+    y = pxToScreen_Y(cTab_GUI_tablet_MAP_Y);
+    w = pxToScreen_W(cTab_GUI_tablet_MAP_W);
+    h = pxToScreen_H(cTab_GUI_tablet_OSD_HEADER_H);
 };
 class cTab_Tablet_OSD_battery: cTab_RscPicture
 {
-	idc=2;
-	text = "\cTab\img\icon_battery_ca.paa";
-	x = pxToScreen_X(cTab_GUI_tablet_OSD_X(1));
-	y = pxToScreen_Y(cTab_GUI_tablet_MAP_Y + (cTab_GUI_tablet_OSD_HEADER_H - cTab_GUI_tablet_OSD_ICON_STD_SIZE) / 2);
-	w = pxToScreen_W(cTab_GUI_tablet_OSD_ICON_STD_SIZE);
-	h = pxToScreen_H(cTab_GUI_tablet_OSD_ICON_STD_SIZE);
-	colorText[] = COLOR_WHITE;
+    idc=2;
+    text = "\cTab\img\icon_battery_ca.paa";
+    x = pxToScreen_X(cTab_GUI_tablet_OSD_X(1));
+    y = pxToScreen_Y(cTab_GUI_tablet_MAP_Y + (cTab_GUI_tablet_OSD_HEADER_H - cTab_GUI_tablet_OSD_ICON_STD_SIZE) / 2);
+    w = pxToScreen_W(cTab_GUI_tablet_OSD_ICON_STD_SIZE);
+    h = pxToScreen_H(cTab_GUI_tablet_OSD_ICON_STD_SIZE);
+    colorText[] = COLOR_WHITE;
 };
 class cTab_Tablet_OSD_time: cTab_RscText_Tablet
 {
-	idc = IDC_CTAB_OSD_TIME;
-	style = ST_CENTER;
-	x = pxToScreen_X(cTab_GUI_tablet_OSD_X(4));
-	y = pxToScreen_Y(cTab_GUI_tablet_MAP_Y + (cTab_GUI_tablet_OSD_HEADER_H - cTab_GUI_tablet_OSD_TEXT_STD_SIZE) / 2);
+    idc = IDC_CTAB_OSD_TIME;
+    style = ST_CENTER;
+    x = pxToScreen_X(cTab_GUI_tablet_OSD_X(4));
+    y = pxToScreen_Y(cTab_GUI_tablet_MAP_Y + (cTab_GUI_tablet_OSD_HEADER_H - cTab_GUI_tablet_OSD_TEXT_STD_SIZE) / 2);
 };
 class cTab_Tablet_OSD_signalStrength: cTab_Tablet_OSD_battery
 {
-	idc=3;
-	text = "\cTab\img\icon_signalStrength_ca.paa";
-	x = pxToScreen_X(cTab_GUI_tablet_OSD_X(7) + cTab_GUI_tablet_OSD_ELEMENT_STD_W - cTab_GUI_tablet_OSD_ICON_STD_SIZE * 2);
-	colorText[] = COLOR_WHITE;
+    idc=3;
+    text = "\cTab\img\icon_signalStrength_ca.paa";
+    x = pxToScreen_X(cTab_GUI_tablet_OSD_X(7) + cTab_GUI_tablet_OSD_ELEMENT_STD_W - cTab_GUI_tablet_OSD_ICON_STD_SIZE * 2);
+    colorText[] = COLOR_WHITE;
 };
 class cTab_Tablet_OSD_satellite: cTab_Tablet_OSD_battery
 {
-	idc=4;
-	text = "\a3\ui_f\data\map\Diary\signal_ca.paa";
-	x = pxToScreen_X(cTab_GUI_tablet_OSD_X(7) + cTab_GUI_tablet_OSD_ELEMENT_STD_W - cTab_GUI_tablet_OSD_ICON_STD_SIZE);
-	colorText[] = COLOR_WHITE;
+    idc=4;
+    text = "\a3\ui_f\data\map\Diary\signal_ca.paa";
+    x = pxToScreen_X(cTab_GUI_tablet_OSD_X(7) + cTab_GUI_tablet_OSD_ELEMENT_STD_W - cTab_GUI_tablet_OSD_ICON_STD_SIZE);
+    colorText[] = COLOR_WHITE;
 };
 class cTab_Tablet_OSD_dirDegree: cTab_Tablet_OSD_time
 {
-	idc = IDC_CTAB_OSD_DIR_DEGREE;
-	style = ST_RIGHT;
-	x = pxToScreen_X(cTab_GUI_tablet_OSD_X(2));
+    idc = IDC_CTAB_OSD_DIR_DEGREE;
+    style = ST_RIGHT;
+    x = pxToScreen_X(cTab_GUI_tablet_OSD_X(2));
 };
 class cTab_Tablet_OSD_grid: cTab_Tablet_OSD_dirDegree
 {
-	idc = IDC_CTAB_OSD_GRID;
-	style = ST_RIGHT;
-	x = pxToScreen_X(cTab_GUI_tablet_OSD_X(6));
+    idc = IDC_CTAB_OSD_GRID;
+    style = ST_RIGHT;
+    x = pxToScreen_X(cTab_GUI_tablet_OSD_X(6));
 };
 class cTab_Tablet_OSD_dirOctant: cTab_Tablet_OSD_dirDegree
 {
-	idc = IDC_CTAB_OSD_DIR_OCTANT;
-	style = ST_RIGHT;
-	x = pxToScreen_X(cTab_GUI_tablet_OSD_X(1));
+    idc = IDC_CTAB_OSD_DIR_OCTANT;
+    style = ST_RIGHT;
+    x = pxToScreen_X(cTab_GUI_tablet_OSD_X(1));
 };
 class cTab_Tablet_window_back_TL: cTab_RscPicture
 {
-	text = "\cTab\img\window_2.jpg";
-	x = pxToScreen_X(cTab_GUI_tablet_WINDOW_BACK_L_X);
-	y = pxToScreen_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
-	w = pxToScreen_W(cTab_GUI_tablet_WINDOW_BACK_W);
-	h = pxToScreen_H(cTab_GUI_tablet_WINDOW_BACK_H);
+    text = "\cTab\img\window_2.jpg";
+    x = pxToScreen_X(cTab_GUI_tablet_WINDOW_BACK_L_X);
+    y = pxToScreen_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
+    w = pxToScreen_W(cTab_GUI_tablet_WINDOW_BACK_W);
+    h = pxToScreen_H(cTab_GUI_tablet_WINDOW_BACK_H);
 };
 class cTab_Tablet_window_back_BL: cTab_Tablet_window_back_TL
 {
-	y = pxToScreen_Y(cTab_GUI_tablet_WINDOW_BACK_B_Y);
+    y = pxToScreen_Y(cTab_GUI_tablet_WINDOW_BACK_B_Y);
 };
 class cTab_Tablet_window_back_TR: cTab_Tablet_window_back_TL
 {
-	x = pxToScreen_X(cTab_GUI_tablet_WINDOW_BACK_R_X);
+    x = pxToScreen_X(cTab_GUI_tablet_WINDOW_BACK_R_X);
 };
 class cTab_Tablet_window_back_BR: cTab_Tablet_window_back_TR
 {
-	y = pxToScreen_Y(cTab_GUI_tablet_WINDOW_BACK_B_Y);
+    y = pxToScreen_Y(cTab_GUI_tablet_WINDOW_BACK_B_Y);
 };
 class cTab_Tablet_btnF1: cTab_RscButtonInv
 {
-	x = pxToScreen_X(506);
-	y = pxToScreen_Y(1545);
-	w = pxToScreen_W(52);
-	h = pxToScreen_H(52);
+    x = pxToScreen_X(506);
+    y = pxToScreen_Y(1545);
+    w = pxToScreen_W(52);
+    h = pxToScreen_H(52);
 };
 class cTab_Tablet_btnF2: cTab_Tablet_btnF1
 {
-	x = pxToScreen_X(569);
+    x = pxToScreen_X(569);
 };
 class cTab_Tablet_btnF3: cTab_Tablet_btnF1
 {
-	x = pxToScreen_X(639);
+    x = pxToScreen_X(639);
 };
 class cTab_Tablet_btnF4: cTab_Tablet_btnF1
 {
-	x = pxToScreen_X(703);
+    x = pxToScreen_X(703);
 };
 class cTab_Tablet_btnF5: cTab_Tablet_btnF1
 {
-	x = pxToScreen_X(768);
+    x = pxToScreen_X(768);
 };
 class cTab_Tablet_btnF6: cTab_Tablet_btnF1
 {
-	x = pxToScreen_X(833);
+    x = pxToScreen_X(833);
 };
 class cTab_Tablet_btnFn: cTab_Tablet_btnF1
 {
-	x = pxToScreen_X(970);
+    x = pxToScreen_X(970);
 };
 class cTab_Tablet_btnPower: cTab_Tablet_btnFn
 {
-	x = pxToScreen_X(1034);
+    x = pxToScreen_X(1034);
 };
 class cTab_Tablet_btnBrtDn: cTab_Tablet_btnFn
 {
-	x = pxToScreen_X(1100);
+    x = pxToScreen_X(1100);
 };
 class cTab_Tablet_btnBrtUp: cTab_Tablet_btnFn
 {
-	x = pxToScreen_X(1163);
+    x = pxToScreen_X(1163);
 };
 class cTab_Tablet_btnTrackpad: cTab_Tablet_btnFn
 {
-	x = pxToScreen_X(1262);
-	y = pxToScreen_Y(1550);
-	w = pxToScreen_W(48);
-	h = pxToScreen_H(43);
+    x = pxToScreen_X(1262);
+    y = pxToScreen_Y(1550);
+    w = pxToScreen_W(48);
+    h = pxToScreen_H(43);
 };
 class cTab_Tablet_btnMouse: cTab_Tablet_btnFn
 {
-	x = pxToScreen_X(1401);
-	w = pxToScreen_W(91);
+    x = pxToScreen_X(1401);
+    w = pxToScreen_W(91);
 };
 class cTab_Tablet_btnHome: cTab_Tablet_btnMouse
 {
-	x = pxToScreen_X(897);
-	y = pxToScreen_Y(1534);
-	w = pxToScreen_W(61);
-	h = pxToScreen_H(49);
+    x = pxToScreen_X(897);
+    y = pxToScreen_Y(1534);
+    w = pxToScreen_W(61);
+    h = pxToScreen_H(49);
 };
 class cTab_Tablet_notificationLight
 {
-	x = pxToScreen_X(1353);
-	y = pxToScreen_Y(1557);
-	w = pxToScreen_W(28);
-	h = pxToScreen_H(28);
+    x = pxToScreen_X(1353);
+    y = pxToScreen_Y(1557);
+    w = pxToScreen_W(28);
+    h = pxToScreen_H(28);
 };
 class cTab_Tablet_OSD_hookGrid: cTab_RscText_Tablet
 {
-	idc = IDC_CTAB_OSD_HOOK_GRID;
-	style = ST_CENTER;
-	x = pxToScreen_X(cTab_GUI_tablet_OSD_RIGHT_X);
-	y = pxToScreen_Y(cTab_GUI_tablet_OSD_EDGE_B - cTab_GUI_tablet_OSD_MARGIN - cTab_GUI_tablet_OSD_ELEMENT_STD_H * 4);
-	colorText[] = {1,1,1,0.5};
-	colorBackground[] = {0,0,0,0.25};
+    idc = IDC_CTAB_OSD_HOOK_GRID;
+    style = ST_CENTER;
+    x = pxToScreen_X(cTab_GUI_tablet_OSD_RIGHT_X);
+    y = pxToScreen_Y(cTab_GUI_tablet_OSD_EDGE_B - cTab_GUI_tablet_OSD_MARGIN - cTab_GUI_tablet_OSD_ELEMENT_STD_H * 4);
+    colorText[] = {1,1,1,0.5};
+    colorBackground[] = {0,0,0,0.25};
 };
 class cTab_Tablet_OSD_hookElevation: cTab_Tablet_OSD_hookGrid
 {
-	idc = IDC_CTAB_OSD_HOOK_ELEVATION;
-	y = pxToScreen_Y(cTab_GUI_tablet_OSD_EDGE_B - cTab_GUI_tablet_OSD_MARGIN - cTab_GUI_tablet_OSD_ELEMENT_STD_H * 3);
+    idc = IDC_CTAB_OSD_HOOK_ELEVATION;
+    y = pxToScreen_Y(cTab_GUI_tablet_OSD_EDGE_B - cTab_GUI_tablet_OSD_MARGIN - cTab_GUI_tablet_OSD_ELEMENT_STD_H * 3);
 };
 class cTab_Tablet_OSD_hookDst: cTab_Tablet_OSD_hookGrid
 {
-	idc = IDC_CTAB_OSD_HOOK_DST;
-	y = pxToScreen_Y(cTab_GUI_tablet_OSD_EDGE_B - cTab_GUI_tablet_OSD_MARGIN - cTab_GUI_tablet_OSD_ELEMENT_STD_H * 2);
+    idc = IDC_CTAB_OSD_HOOK_DST;
+    y = pxToScreen_Y(cTab_GUI_tablet_OSD_EDGE_B - cTab_GUI_tablet_OSD_MARGIN - cTab_GUI_tablet_OSD_ELEMENT_STD_H * 2);
 };
 class cTab_Tablet_OSD_hookDir: cTab_Tablet_OSD_hookGrid
 {
-	idc = IDC_CTAB_OSD_HOOK_DIR;
-	y = pxToScreen_Y(cTab_GUI_tablet_OSD_EDGE_B - cTab_GUI_tablet_OSD_MARGIN - cTab_GUI_tablet_OSD_ELEMENT_STD_H);
+    idc = IDC_CTAB_OSD_HOOK_DIR;
+    y = pxToScreen_Y(cTab_GUI_tablet_OSD_EDGE_B - cTab_GUI_tablet_OSD_MARGIN - cTab_GUI_tablet_OSD_ELEMENT_STD_H);
 };
 class cTab_Tablet_loadingtxt: cTab_RscText_Tablet
 {
-	idc = IDC_CTAB_LOADINGTXT;
-	style = ST_CENTER;
-	text = $STR_ctab_core_Loading;
-	x = pxToScreen_X(cTab_GUI_tablet_SCREEN_CONTENT_X);
-	y = pxToScreen_Y(cTab_GUI_tablet_SCREEN_CONTENT_Y);
-	w = pxToScreen_W(cTab_GUI_tablet_SCREEN_CONTENT_W);
-	h = pxToScreen_H(cTab_GUI_tablet_SCREEN_CONTENT_H);
-	colorBackground[] = COLOR_LIGHT_BLUE;
+    idc = IDC_CTAB_LOADINGTXT;
+    style = ST_CENTER;
+    text = $STR_ctab_core_Loading;
+    x = pxToScreen_X(cTab_GUI_tablet_SCREEN_CONTENT_X);
+    y = pxToScreen_Y(cTab_GUI_tablet_SCREEN_CONTENT_Y);
+    w = pxToScreen_W(cTab_GUI_tablet_SCREEN_CONTENT_W);
+    h = pxToScreen_H(cTab_GUI_tablet_SCREEN_CONTENT_H);
+    colorBackground[] = COLOR_LIGHT_BLUE;
 };
 // Define areas around the screen as interaction areas to allow screen movement
 class cTab_Tablet_movingHandle_T: cTab_RscText_Tablet
 {
-	idc=5;
-	moving = 1;
-	colorBackground[] = COLOR_TRANSPARENT;
-	x = pxToScreen_X(0);
-	y = pxToScreen_Y(0);
-	w = pxToScreen_W(GUI_GRID_PX_W);
-	h = pxToScreen_H(cTab_GUI_tablet_MAP_Y);
+    idc=5;
+    moving = 1;
+    colorBackground[] = COLOR_TRANSPARENT;
+    x = pxToScreen_X(0);
+    y = pxToScreen_Y(0);
+    w = pxToScreen_W(GUI_GRID_PX_W);
+    h = pxToScreen_H(cTab_GUI_tablet_MAP_Y);
 };
 class cTab_Tablet_movingHandle_B: cTab_Tablet_movingHandle_T
 {
-	idc=6;
-	y = pxToScreen_Y(cTab_GUI_tablet_MAP_Y + cTab_GUI_tablet_MAP_H);
-	h = pxToScreen_H(GUI_GRID_PX_H - (cTab_GUI_tablet_MAP_Y + cTab_GUI_tablet_MAP_H));
+    idc=6;
+    y = pxToScreen_Y(cTab_GUI_tablet_MAP_Y + cTab_GUI_tablet_MAP_H);
+    h = pxToScreen_H(GUI_GRID_PX_H - (cTab_GUI_tablet_MAP_Y + cTab_GUI_tablet_MAP_H));
 };
 class cTab_Tablet_movingHandle_L: cTab_Tablet_movingHandle_T
 {
-	idc=7;
-	y = pxToScreen_Y(cTab_GUI_tablet_MAP_Y);
-	w = pxToScreen_W(cTab_GUI_tablet_MAP_X);
-	h = pxToScreen_H(cTab_GUI_tablet_MAP_H);
+    idc=7;
+    y = pxToScreen_Y(cTab_GUI_tablet_MAP_Y);
+    w = pxToScreen_W(cTab_GUI_tablet_MAP_X);
+    h = pxToScreen_H(cTab_GUI_tablet_MAP_H);
 };
 class cTab_Tablet_movingHandle_R: cTab_Tablet_movingHandle_L
 {
-	idc=8;
-	x = pxToScreen_X(cTab_GUI_tablet_MAP_X + cTab_GUI_tablet_MAP_W);
-	w = pxToScreen_W(GUI_GRID_PX_W - (cTab_GUI_tablet_MAP_X + cTab_GUI_tablet_MAP_W));
+    idc=8;
+    x = pxToScreen_X(cTab_GUI_tablet_MAP_X + cTab_GUI_tablet_MAP_W);
+    w = pxToScreen_W(GUI_GRID_PX_W - (cTab_GUI_tablet_MAP_X + cTab_GUI_tablet_MAP_W));
 };
 
 // transparent control that gets placed on top of the GUI to adjust brightness
 class cTab_Tablet_brightness: cTab_RscText_Tablet
 {
-	idc = IDC_CTAB_BRIGHTNESS;
-	x = pxToScreen_X(cTab_GUI_tablet_MAP_X);
-	y = pxToScreen_Y(cTab_GUI_tablet_MAP_Y);
-	w = pxToScreen_W(cTab_GUI_tablet_MAP_W);
-	h = pxToScreen_H(cTab_GUI_tablet_MAP_H);
-	colorBackground[] = COLOR_TRANSPARENT;
+    idc = IDC_CTAB_BRIGHTNESS;
+    x = pxToScreen_X(cTab_GUI_tablet_MAP_X);
+    y = pxToScreen_Y(cTab_GUI_tablet_MAP_Y);
+    w = pxToScreen_W(cTab_GUI_tablet_MAP_W);
+    h = pxToScreen_H(cTab_GUI_tablet_MAP_H);
+    colorBackground[] = COLOR_TRANSPARENT;
 };
 class cTab_Tablet_RscMapControl: cTab_RscMapControl
 {
-	text = "#(argb,8,8,3)color(1,1,1,1)";
-	x = pxToScreen_X(cTab_GUI_tablet_SCREEN_CONTENT_X);
-	y = pxToScreen_Y(cTab_GUI_tablet_SCREEN_CONTENT_Y);
-	w = pxToScreen_W(cTab_GUI_tablet_SCREEN_CONTENT_W);
-	h = pxToScreen_H(cTab_GUI_tablet_SCREEN_CONTENT_H);
-	maxSatelliteAlpha = 10000;
-	alphaFadeStartScale = 10;
-	alphaFadeEndScale = 10;
+    text = "#(argb,8,8,3)color(1,1,1,1)";
+    x = pxToScreen_X(cTab_GUI_tablet_SCREEN_CONTENT_X);
+    y = pxToScreen_Y(cTab_GUI_tablet_SCREEN_CONTENT_Y);
+    w = pxToScreen_W(cTab_GUI_tablet_SCREEN_CONTENT_W);
+    h = pxToScreen_H(cTab_GUI_tablet_SCREEN_CONTENT_H);
+    maxSatelliteAlpha = 10000;
+    alphaFadeStartScale = 10;
+    alphaFadeEndScale = 10;
 
-	// Rendering density coefficients
-	ptsPerSquareSea = 8 / (0.86 / GUI_GRID_H);		// seas
-	ptsPerSquareTxt = 8 / (0.86 / GUI_GRID_H);		// textures
-	ptsPerSquareCLn = 8 / (0.86 / GUI_GRID_H);		// count-lines
-	ptsPerSquareExp = 8 / (0.86 / GUI_GRID_H);		// exposure
-	ptsPerSquareCost = 8 / (0.86 / GUI_GRID_H);		// cost
+    // Rendering density coefficients
+    ptsPerSquareSea = 8 / (0.86 / GUI_GRID_H);  // seas
+    ptsPerSquareTxt = 8 / (0.86 / GUI_GRID_H);  // textures
+    ptsPerSquareCLn = 8 / (0.86 / GUI_GRID_H);  // count-lines
+    ptsPerSquareExp = 8 / (0.86 / GUI_GRID_H);  // exposure
+    ptsPerSquareCost = 8 / (0.86 / GUI_GRID_H);  // cost
 
-	// Rendering thresholds
-	ptsPerSquareFor = 3 / (0.86 / GUI_GRID_H);		// forests
-	ptsPerSquareForEdge = 100 / (0.86 / GUI_GRID_H);	// forest edges
-	ptsPerSquareRoad = 1.5 / (0.86 / GUI_GRID_H);		// roads
-	ptsPerSquareObj = 4 / (0.86 / GUI_GRID_H);		// other objects
+    // Rendering thresholds
+    ptsPerSquareFor = 3 / (0.86 / GUI_GRID_H);  // forests
+    ptsPerSquareForEdge = 100 / (0.86 / GUI_GRID_H); // forest edges
+    ptsPerSquareRoad = 1.5 / (0.86 / GUI_GRID_H);  // roads
+    ptsPerSquareObj = 4 / (0.86 / GUI_GRID_H);  // other objects
 };
 class cTab_Tablet_notification: cTab_RscText_Tablet {
     idc = IDC_CTAB_NOTIFICATION;

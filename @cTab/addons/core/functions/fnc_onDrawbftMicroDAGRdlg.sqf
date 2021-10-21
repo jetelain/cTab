@@ -1,5 +1,5 @@
 /*
-	This is drawn every frame on the microDAGR dialog. fnc
+    This is drawn every frame on the microDAGR dialog. fnc
 */
 
 _cntrlScreen = _this select 0;
@@ -21,7 +21,7 @@ _cntrlScreen drawIcon ["\A3\ui_f\data\map\VehicleIcons\iconmanvirtual_ca.paa",cT
 
 // update hook information
 if (cTabDrawMapTools) then {
-	[_display,_cntrlScreen,_playerPos,cTabMapCursorPos,0,false] call cTab_fnc_drawHook;
+    [_display,_cntrlScreen,_playerPos,cTabMapCursorPos,0,false] call cTab_fnc_drawHook;
 };
 
 true

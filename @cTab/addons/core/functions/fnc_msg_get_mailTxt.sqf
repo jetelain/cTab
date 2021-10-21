@@ -1,8 +1,9 @@
+#include "script_component.hpp"
+#include "\cTab\shared\cTab_gui_macros.hpp"
 /*
 	(previously cTab_msg_get_mailTxt in player_init.sqf)
 */
-#include "script_component.hpp"
-#include "\cTab\shared\cTab_gui_macros.hpp"
+
 
 disableSerialization;
 _return = true;

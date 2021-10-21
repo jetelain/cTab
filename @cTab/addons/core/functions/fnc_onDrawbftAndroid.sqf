@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 /*
-	This is drawn every frame on the android dialog. fn
+    This is drawn every frame on the android dialog. fn
 */
 _cntrlScreen = _this select 0;
 _display = ctrlParent _cntrlScreen;
@@ -16,13 +16,13 @@ _playerPos = getPosASL _veh;
 
 // draw directional arrow at own location
 if (_playerDrawn) then {
-	_heading = direction _veh;
-	_cntrlScreen drawIcon ["\A3\ui_f\data\map\VehicleIcons\iconmanvirtual_ca.paa",cTabMicroDAGRfontColour,_playerPos,cTabTADownIconBaseSize,cTabTADownIconBaseSize,_heading,"", 1,cTabTxtSize,"TahomaB","right"];
+    _heading = direction _veh;
+    _cntrlScreen drawIcon ["\A3\ui_f\data\map\VehicleIcons\iconmanvirtual_ca.paa",cTabMicroDAGRfontColour,_playerPos,cTabTADownIconBaseSize,cTabTADownIconBaseSize,_heading,"", 1,cTabTxtSize,"TahomaB","right"];
 };
 
 // update hook information
 if (cTabDrawMapTools) then {
-	[_display,_cntrlScreen,_playerPos,cTabMapCursorPos,0,false] call cTab_fnc_drawHook;
+    [_display,_cntrlScreen,_playerPos,cTabMapCursorPos,0,false] call cTab_fnc_drawHook;
 };
 
 true

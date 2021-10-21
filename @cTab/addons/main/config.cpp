@@ -7,9 +7,9 @@ class CfgPatches {
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
         requiredAddons[] = {};
-		author = "cTab Authors";
-		authors[] = {"Gundy","Riouken","Raspu","GrueArbre","YonV"};
-		authorUrl = "https://github.com/DPSO/cTab-1";
+        author = "cTab Authors";
+        authors[] = {"Gundy","Riouken","Raspu","GrueArbre","YonV"};
+        authorUrl = "https://github.com/DPSO/cTab-1";
         VERSION_CONFIG;
     };
 };

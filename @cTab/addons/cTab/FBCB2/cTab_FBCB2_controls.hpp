@@ -100,199 +100,199 @@
 
 class cTab_RscText_FBCB2: cTab_RscText
 {
-	style = ST_CENTER;
-	w = pxToScreen_W(cTab_GUI_FBCB2_OSD_ELEMENT_STD_W);
-	h = pxToScreen_H(cTab_GUI_FBCB2_OSD_ELEMENT_STD_H);
-	font = GUI_FONT_MONO;
-	colorText[] = COLOR_WHITE;
-	sizeEx = pxToScreen_H(cTab_GUI_FBCB2_OSD_TEXT_STD_SIZE);
-	colorBackground[] = COLOR_TRANSPARENT;
-	shadow = 0;
+    style = ST_CENTER;
+    w = pxToScreen_W(cTab_GUI_FBCB2_OSD_ELEMENT_STD_W);
+    h = pxToScreen_H(cTab_GUI_FBCB2_OSD_ELEMENT_STD_H);
+    font = GUI_FONT_MONO;
+    colorText[] = COLOR_WHITE;
+    sizeEx = pxToScreen_H(cTab_GUI_FBCB2_OSD_TEXT_STD_SIZE);
+    colorBackground[] = COLOR_TRANSPARENT;
+    shadow = 0;
 };
 class cTab_FBCB2_background: cTab_RscPicture
 {
-	idc = IDC_CTAB_BACKGROUND;
-	text = "\cTab\img\FBCB2.paa";
-	x = GUI_GRID_X;
-	y = GUI_GRID_Y;
-	w = GUI_GRID_W;
-	h = GUI_GRID_H;
+    idc = IDC_CTAB_BACKGROUND;
+    text = "\cTab\img\FBCB2.paa";
+    x = GUI_GRID_X;
+    y = GUI_GRID_Y;
+    w = GUI_GRID_W;
+    h = GUI_GRID_H;
 };
 class cTab_FBCB2_header: cTab_RscPicture
 {
-	idc=1;
-	text = "#(argb,8,8,3)color(0,0,0,1)";
-	x = pxToScreen_X(cTab_GUI_FBCB2_MAP_X);
-	y = pxToScreen_Y(cTab_GUI_FBCB2_MAP_Y);
-	w = pxToScreen_W(cTab_GUI_FBCB2_MAP_W);
-	h = pxToScreen_H(cTab_GUI_FBCB2_OSD_HEADER_H);
+    idc=1;
+    text = "#(argb,8,8,3)color(0,0,0,1)";
+    x = pxToScreen_X(cTab_GUI_FBCB2_MAP_X);
+    y = pxToScreen_Y(cTab_GUI_FBCB2_MAP_Y);
+    w = pxToScreen_W(cTab_GUI_FBCB2_MAP_W);
+    h = pxToScreen_H(cTab_GUI_FBCB2_OSD_HEADER_H);
 };
 class cTab_FBCB2_on_screen_battery: cTab_RscPicture
 {
-	idc=2;
-	text = "\cTab\img\icon_battery_ca.paa";
-	x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(1));
-	y = pxToScreen_Y(cTab_GUI_FBCB2_MAP_Y + (cTab_GUI_FBCB2_OSD_HEADER_H - cTab_GUI_FBCB2_OSD_ICON_STD_SIZE) / 2);
-	w = pxToScreen_W(cTab_GUI_FBCB2_OSD_ICON_STD_SIZE);
-	h = pxToScreen_H(cTab_GUI_FBCB2_OSD_ICON_STD_SIZE);
-	colorText[] = COLOR_WHITE;
+    idc=2;
+    text = "\cTab\img\icon_battery_ca.paa";
+    x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(1));
+    y = pxToScreen_Y(cTab_GUI_FBCB2_MAP_Y + (cTab_GUI_FBCB2_OSD_HEADER_H - cTab_GUI_FBCB2_OSD_ICON_STD_SIZE) / 2);
+    w = pxToScreen_W(cTab_GUI_FBCB2_OSD_ICON_STD_SIZE);
+    h = pxToScreen_H(cTab_GUI_FBCB2_OSD_ICON_STD_SIZE);
+    colorText[] = COLOR_WHITE;
 };
 class cTab_FBCB2_on_screen_time: cTab_RscText_FBCB2
 {
-	idc = IDC_CTAB_OSD_TIME;
-	style = ST_CENTER;
-	x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(3));
-	y = pxToScreen_Y(cTab_GUI_FBCB2_MAP_Y + (cTab_GUI_FBCB2_OSD_HEADER_H - cTab_GUI_FBCB2_OSD_TEXT_STD_SIZE) / 2);
+    idc = IDC_CTAB_OSD_TIME;
+    style = ST_CENTER;
+    x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(3));
+    y = pxToScreen_Y(cTab_GUI_FBCB2_MAP_Y + (cTab_GUI_FBCB2_OSD_HEADER_H - cTab_GUI_FBCB2_OSD_TEXT_STD_SIZE) / 2);
 };
 class cTab_FBCB2_on_screen_signalStrength: cTab_FBCB2_on_screen_battery
 {
-	idc=3;
-	text = "\cTab\img\icon_signalStrength_ca.paa";
-	x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(5) + cTab_GUI_FBCB2_OSD_ELEMENT_STD_W - cTab_GUI_FBCB2_OSD_ICON_STD_SIZE * 2);
-	colorText[] = COLOR_WHITE;
+    idc=3;
+    text = "\cTab\img\icon_signalStrength_ca.paa";
+    x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(5) + cTab_GUI_FBCB2_OSD_ELEMENT_STD_W - cTab_GUI_FBCB2_OSD_ICON_STD_SIZE * 2);
+    colorText[] = COLOR_WHITE;
 };
 class cTab_FBCB2_on_screen_satellite: cTab_FBCB2_on_screen_battery
 {
-	idc=4;
-	text = "\a3\ui_f\data\map\Diary\signal_ca.paa";
-	x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(5) + cTab_GUI_FBCB2_OSD_ELEMENT_STD_W - cTab_GUI_FBCB2_OSD_ICON_STD_SIZE);
-	colorText[] = COLOR_WHITE;
+    idc=4;
+    text = "\a3\ui_f\data\map\Diary\signal_ca.paa";
+    x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(5) + cTab_GUI_FBCB2_OSD_ELEMENT_STD_W - cTab_GUI_FBCB2_OSD_ICON_STD_SIZE);
+    colorText[] = COLOR_WHITE;
 };
 class cTab_FBCB2_on_screen_dirDegree: cTab_FBCB2_on_screen_time
 {
-	idc = IDC_CTAB_OSD_DIR_DEGREE;
-	style = ST_RIGHT;
-	x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(2));
+    idc = IDC_CTAB_OSD_DIR_DEGREE;
+    style = ST_RIGHT;
+    x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(2));
 };
 class cTab_FBCB2_on_screen_grid: cTab_FBCB2_on_screen_dirDegree
 {
-	idc = IDC_CTAB_OSD_GRID;
-	style = ST_RIGHT;
-	x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(4));
+    idc = IDC_CTAB_OSD_GRID;
+    style = ST_RIGHT;
+    x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(4));
 };
 class cTab_FBCB2_on_screen_dirOctant: cTab_FBCB2_on_screen_dirDegree
 {
-	idc = IDC_CTAB_OSD_DIR_OCTANT;
-	style = ST_RIGHT;
-	x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(1));
+    idc = IDC_CTAB_OSD_DIR_OCTANT;
+    style = ST_RIGHT;
+    x = pxToScreen_X(cTab_GUI_FBCB2_OSD_X(1));
 };
 class cTab_FBCB2_btnF1: cTab_RscButtonInv
 {
-	x = pxToScreen_X(762);
-	y = pxToScreen_Y(1452);
-	w = pxToScreen_W(70);
-	h = pxToScreen_H(40);
+    x = pxToScreen_X(762);
+    y = pxToScreen_Y(1452);
+    w = pxToScreen_W(70);
+    h = pxToScreen_H(40);
 };
 class cTab_FBCB2_btnF2: cTab_FBCB2_btnF1
 {
-	x = pxToScreen_X(846);
+    x = pxToScreen_X(846);
 };
 class cTab_FBCB2_btnF3: cTab_FBCB2_btnF1
 {
-	x = pxToScreen_X(929);
+    x = pxToScreen_X(929);
 };
 class cTab_FBCB2_btnF4: cTab_FBCB2_btnF1
 {
-	x = pxToScreen_X(1013);
+    x = pxToScreen_X(1013);
 };
 class cTab_FBCB2_btnF5: cTab_FBCB2_btnF1
 {
-	x = pxToScreen_X(1097);
+    x = pxToScreen_X(1097);
 };
 class cTab_FBCB2_btnF6: cTab_FBCB2_btnF1
 {
-	x = pxToScreen_X(1180);
+    x = pxToScreen_X(1180);
 };
 class cTab_FBCB2_btnF7: cTab_FBCB2_btnF1
 {
-	x = pxToScreen_X(1264);
+    x = pxToScreen_X(1264);
 };
 class cTab_FBCB2_btnF8: cTab_FBCB2_btnF1
 {
-	x = pxToScreen_X(1349);
+    x = pxToScreen_X(1349);
 };
 class cTab_FBCB2_btnPWR: cTab_RscButtonInv
 {
-	x = pxToScreen_X(592);
-	y = pxToScreen_Y(603);
-	w = pxToScreen_W(40);
-	h = pxToScreen_H(70);
+    x = pxToScreen_X(592);
+    y = pxToScreen_Y(603);
+    w = pxToScreen_W(40);
+    h = pxToScreen_H(70);
 };
 class cTab_FBCB2_btnBRTplus: cTab_FBCB2_btnPWR
 {
-	y = pxToScreen_Y(680);
+    y = pxToScreen_Y(680);
 };
 class cTab_FBCB2_btnBRTminus: cTab_FBCB2_btnPWR
 {
-	y = pxToScreen_Y(759);
+    y = pxToScreen_Y(759);
 };
 class cTab_FBCB2_btnBLKOUT: cTab_FBCB2_btnPWR
 {
-	y = pxToScreen_Y(839);
+    y = pxToScreen_Y(839);
 };
 class cTab_FBCB2_btnESC: cTab_FBCB2_btnPWR
 {
-	y = pxToScreen_Y(918);
+    y = pxToScreen_Y(918);
 };
 class cTab_FBCB2_btnRight: cTab_FBCB2_btnPWR
 {
-	y = pxToScreen_Y(998);
+    y = pxToScreen_Y(998);
 };
 class cTab_FBCB2_btnUp: cTab_FBCB2_btnPWR
 {
-	y = pxToScreen_Y(1079);
+    y = pxToScreen_Y(1079);
 };
 class cTab_FBCB2_btnDown: cTab_FBCB2_btnPWR
 {
-	y = pxToScreen_Y(1161);
+    y = pxToScreen_Y(1161);
 };
 class cTab_FBCB2_btnENT: cTab_FBCB2_btnPWR
 {
-	y = pxToScreen_Y(1241);
+    y = pxToScreen_Y(1241);
 };
 class cTab_FBCB2_btnFCN: cTab_FBCB2_btnPWR
 {
-	y = pxToScreen_Y(1322);
+    y = pxToScreen_Y(1322);
 };
 class cTab_FBCB2_on_screen_hookGrid: cTab_RscText_FBCB2
 {
-	idc = IDC_CTAB_OSD_HOOK_GRID;
-	style = ST_CENTER;
-	x = pxToScreen_X(cTab_GUI_FBCB2_OSD_RIGHT_X);
-	y = pxToScreen_Y(cTab_GUI_FBCB2_OSD_EDGE_B - cTab_GUI_FBCB2_OSD_MARGIN - cTab_GUI_FBCB2_OSD_ELEMENT_STD_H * 4);
-	colorText[] = {1,1,1,0.5};
-	colorBackground[] = {0,0,0,0.25};
+    idc = IDC_CTAB_OSD_HOOK_GRID;
+    style = ST_CENTER;
+    x = pxToScreen_X(cTab_GUI_FBCB2_OSD_RIGHT_X);
+    y = pxToScreen_Y(cTab_GUI_FBCB2_OSD_EDGE_B - cTab_GUI_FBCB2_OSD_MARGIN - cTab_GUI_FBCB2_OSD_ELEMENT_STD_H * 4);
+    colorText[] = {1,1,1,0.5};
+    colorBackground[] = {0,0,0,0.25};
 };
 class cTab_FBCB2_on_screen_hookElevation: cTab_FBCB2_on_screen_hookGrid
 {
-	idc = IDC_CTAB_OSD_HOOK_ELEVATION;
-	y = pxToScreen_Y(cTab_GUI_FBCB2_OSD_EDGE_B - cTab_GUI_FBCB2_OSD_MARGIN - cTab_GUI_FBCB2_OSD_ELEMENT_STD_H * 3);
+    idc = IDC_CTAB_OSD_HOOK_ELEVATION;
+    y = pxToScreen_Y(cTab_GUI_FBCB2_OSD_EDGE_B - cTab_GUI_FBCB2_OSD_MARGIN - cTab_GUI_FBCB2_OSD_ELEMENT_STD_H * 3);
 };
 class cTab_FBCB2_on_screen_hookDst: cTab_FBCB2_on_screen_hookGrid
 {
-	idc = IDC_CTAB_OSD_HOOK_DST;
-	y = pxToScreen_Y(cTab_GUI_FBCB2_OSD_EDGE_B - cTab_GUI_FBCB2_OSD_MARGIN - cTab_GUI_FBCB2_OSD_ELEMENT_STD_H * 2);
+    idc = IDC_CTAB_OSD_HOOK_DST;
+    y = pxToScreen_Y(cTab_GUI_FBCB2_OSD_EDGE_B - cTab_GUI_FBCB2_OSD_MARGIN - cTab_GUI_FBCB2_OSD_ELEMENT_STD_H * 2);
 };
 class cTab_FBCB2_on_screen_hookDir: cTab_FBCB2_on_screen_hookGrid
 {
-	idc = IDC_CTAB_OSD_HOOK_DIR;
-	y = pxToScreen_Y(cTab_GUI_FBCB2_OSD_EDGE_B - cTab_GUI_FBCB2_OSD_MARGIN - cTab_GUI_FBCB2_OSD_ELEMENT_STD_H);
+    idc = IDC_CTAB_OSD_HOOK_DIR;
+    y = pxToScreen_Y(cTab_GUI_FBCB2_OSD_EDGE_B - cTab_GUI_FBCB2_OSD_MARGIN - cTab_GUI_FBCB2_OSD_ELEMENT_STD_H);
 };
 class cTab_FBCB2_loadingtxt: cTab_RscText_FBCB2
 {
-	idc = IDC_CTAB_LOADINGTXT;
-	style = ST_CENTER;
-	text = $STR_ctab_core_Loading;
-	x = pxToScreen_X(cTab_GUI_FBCB2_SCREEN_CONTENT_X);
-	y = pxToScreen_Y(cTab_GUI_FBCB2_SCREEN_CONTENT_Y);
-	w = pxToScreen_W(cTab_GUI_FBCB2_SCREEN_CONTENT_W);
-	h = pxToScreen_H(cTab_GUI_FBCB2_SCREEN_CONTENT_H);
-	colorBackground[] = COLOR_BLACK;
+    idc = IDC_CTAB_LOADINGTXT;
+    style = ST_CENTER;
+    text = $STR_ctab_core_Loading;
+    x = pxToScreen_X(cTab_GUI_FBCB2_SCREEN_CONTENT_X);
+    y = pxToScreen_Y(cTab_GUI_FBCB2_SCREEN_CONTENT_Y);
+    w = pxToScreen_W(cTab_GUI_FBCB2_SCREEN_CONTENT_W);
+    h = pxToScreen_H(cTab_GUI_FBCB2_SCREEN_CONTENT_H);
+    colorBackground[] = COLOR_BLACK;
 };
 class cTab_FBCB2_notification: cTab_RscText_FBCB2 {
-	idc = IDC_CTAB_NOTIFICATION;
-	x = pxToScreen_X(cTab_GUI_FBCB2_SCREEN_CONTENT_X + (cTab_GUI_FBCB2_SCREEN_CONTENT_W * 0.2) / 2);
-	y = pxToScreen_Y(cTab_GUI_FBCB2_SCREEN_CONTENT_Y + cTab_GUI_FBCB2_SCREEN_CONTENT_H - 2 * cTab_GUI_FBCB2_OSD_TEXT_STD_SIZE);
-	w = pxToScreen_W(cTab_GUI_FBCB2_SCREEN_CONTENT_W * 0.8);
-	colorBackground[] = COLOR_BLACK;
+    idc = IDC_CTAB_NOTIFICATION;
+    x = pxToScreen_X(cTab_GUI_FBCB2_SCREEN_CONTENT_X + (cTab_GUI_FBCB2_SCREEN_CONTENT_W * 0.2) / 2);
+    y = pxToScreen_Y(cTab_GUI_FBCB2_SCREEN_CONTENT_Y + cTab_GUI_FBCB2_SCREEN_CONTENT_H - 2 * cTab_GUI_FBCB2_OSD_TEXT_STD_SIZE);
+    w = pxToScreen_W(cTab_GUI_FBCB2_SCREEN_CONTENT_W * 0.8);
+    colorBackground[] = COLOR_BLACK;
 };
