@@ -297,7 +297,7 @@ function initMap(mapInfos, worldName) {
         crs: mapInfos.CRS,
         doubleClickZoom: false
     });
-    L.tileLayer('https://jetelain.github.io/Arma3Map' + mapInfos.tilePattern, {
+    L.tileLayer('https://mapsdata.plan-ops.fr' + mapInfos.tilePattern, {
         attribution: mapInfos.attribution,
         tileSize: mapInfos.tileSize,
         maxNativeZoom: mapInfos.maxZoom
