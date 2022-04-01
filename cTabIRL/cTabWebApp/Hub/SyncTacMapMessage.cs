@@ -1,4 +1,5 @@
-﻿using Arma3TacMapLibrary.TacMaps;
+﻿using Arma3TacMapLibrary.Maps;
+using Arma3TacMapLibrary.TacMaps;
 
 namespace cTabWebApp
 {

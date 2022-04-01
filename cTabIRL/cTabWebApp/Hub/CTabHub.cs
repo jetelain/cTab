@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Arma3TacMapLibrary.Arma3;
+using Arma3TacMapLibrary.Maps;
 using Arma3TacMapLibrary.TacMaps;
 using cTabWebApp.Services;
 using cTabWebApp.TacMaps;

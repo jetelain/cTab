@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Arma3TacMapLibrary.Hubs;
+﻿using System.Threading.Tasks;
 using Arma3TacMapLibrary.Maps;
-using Arma3TacMapLibrary.TacMaps;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
 
@@ -33,10 +28,10 @@ namespace cTabWebApp.TacMaps
 
         private void Init()
         {
-            tacMapHub.On<Marker<MapId>,bool>("AddOrUpdateMarker", (msg, _) =>
+            tacMapHub.On<TacMapMarker, bool>("AddOrUpdateMarker", (msg, _) =>
                 armaHub.Clients.Group(armaChannel).SendAsync("Callback", "AddTacMapMarker", MapExporter.GetMarkerData(msg.id, msg.data)));
 
-            tacMapHub.On<Marker<MapId>,bool>("RemoveMarker", (msg, _) =>
+            tacMapHub.On<TacMapMarker, bool>("RemoveMarker", (msg, _) =>
                 armaHub.Clients.Group(armaChannel).SendAsync("Callback", "RemoveTacMapMarker", MapExporter.GetMarkerData(msg.id, msg.data)));
 
             tacMapHub.Reconnected += async info => { await SayHello(); };
