@@ -28,11 +28,21 @@ namespace cTabWebApp.TacMaps
 
         private void Init()
         {
-            tacMapHub.On<TacMapMarker, bool>("AddOrUpdateMarker", (msg, _) =>
-                armaHub.Clients.Group(armaChannel).SendAsync("Callback", "AddTacMapMarker", MapExporter.GetMarkerData(msg.id, msg.data)));
+            tacMapHub.On<TacMapMarker, bool>("AddOrUpdateMarker", async (msg, _) =>
+            {
+                foreach(var marker in MapExporter.GetMarkerData(msg.id, msg.data))
+                {
+                    await armaHub.Clients.Group(armaChannel).SendAsync("Callback", "AddTacMapMarker", marker);
+                }
+            });
 
-            tacMapHub.On<TacMapMarker, bool>("RemoveMarker", (msg, _) =>
-                armaHub.Clients.Group(armaChannel).SendAsync("Callback", "RemoveTacMapMarker", MapExporter.GetMarkerData(msg.id, msg.data)));
+            tacMapHub.On<TacMapMarker, bool>("RemoveMarker", async (msg, _) =>
+            {
+                foreach (var marker in MapExporter.GetMarkerData(msg.id, msg.data))
+                {
+                    await armaHub.Clients.Group(armaChannel).SendAsync("Callback", "RemoveTacMapMarker", marker);
+                }
+            });
 
             tacMapHub.Reconnected += async info => { await SayHello(); };
         }

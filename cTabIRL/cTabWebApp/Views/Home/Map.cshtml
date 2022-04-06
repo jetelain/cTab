@@ -33,143 +33,145 @@
     <div class="map" id="map">
     </div>
 
-@if (!Model.IsSpectator)
-{
-    <div class="modal" tabindex="-1" role="dialog" id="inbox">
-        <div class="modal-dialog mb-0 mt-4 modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row h-100">
-                        <div class="col-4 pr-2">
-                            <div class="text-muted" style="font-size: 10px;">@Localizer["Inbox"]</div>
-                            <ul class="nav flex-column nav-pills" id="inbox-list">
-                            </ul>
-                            <div class="border-top mt-1 text-muted" style="font-size: 10px;">@Localizer["Sent"]</div>
-                            <ul class="nav flex-column nav-pills" id="outbox-list">
-                            </ul>
-                        </div>
-                        <div class="col-8 pl-2 border-left">
-                            <h6 id="inbox-title" class="font-weight-bold">
-                            </h6>
-                            <p id="inbox-message">
+    @if (!Model.IsSpectator)
+    {
+        <div class="modal" tabindex="-1" role="dialog" id="inbox">
+            <div class="modal-dialog mb-0 mt-4 modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row h-100">
+                            <div class="col-4 pr-2">
+                                <div class="text-muted" style="font-size: 10px;">@Localizer["Inbox"]</div>
+                                <ul class="nav flex-column nav-pills" id="inbox-list">
+                                </ul>
+                                <div class="border-top mt-1 text-muted" style="font-size: 10px;">@Localizer["Sent"]</div>
+                                <ul class="nav flex-column nav-pills" id="outbox-list">
+                                </ul>
+                            </div>
+                            <div class="col-8 pl-2 border-left">
+                                <h6 id="inbox-title" class="font-weight-bold">
+                                </h6>
+                                <p id="inbox-message">
 
-                            </p>
-                            <div class="text-center"><button type="button" class="btn btn-sm btn-danger" id="inbox-delete">@Localizer["Delete"]</button></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer p-2">
-                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal" tabindex="-1" role="dialog" id="compose">
-        <div class="modal-dialog mb-0 mt-4">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div>
-                        <div class="form-group row">
-                            <label for="compose-to" class="control-label col-2">@Localizer["To"]</label>
-                            <div class="col-10">
-                                <select id="compose-to" class="form-control form-control-sm">
-                                </select>
+                                </p>
+                                <div class="text-center"><button type="button" class="btn btn-sm btn-danger" id="inbox-delete">@Localizer["Delete"]</button></div>
                             </div>
                         </div>
-                        <div id="compose-form-fields">
-
-                        </div>
-                        <div class="form-group mb-0">
-                            <textarea id="compose-text" class="form-control" rows="4" placeholder="@Localizer["Message Content"]" maxlength="5000"></textarea>
-                        </div>
                     </div>
-                </div>
-                <div class="modal-footer p-2">
-                    <div class="row w-100">
-                        <div class="col-7 text-left p-0">
-                            <button type="button" class="btn btn-sm btn-outline-danger" id="compose-medevac"><i class="fas fa-plus"></i> @Localizer["MEDEVAC"]</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" id="compose-preformated"><i class="fas fa-edit"></i> @Localizer["Preformated"]</button>
-                        </div>
-                        <div class="col text-right p-0">
-                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Cancel"]</button>
-                            <button type="button" class="btn btn-sm btn-success" id="compose-send">@Localizer["Send"]</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal" tabindex="-1" role="dialog" id="help">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h5>@Localizer["Share"]</h5>
-                    <p>@Localizer["Share your cTab in read-only mode."]</p>
-                    <div class="input-group mb-3">
-                        <input id="link-ro" class="form-control" type="text" readonly="readonly" value="@Url.Action("Shared", "Home", new { t = Model.SpectatorToken }, Context.Request.Scheme)" />
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary btn-copy" type="button" data-copy="link-ro">@Localizer["Copy"]</button>
-                        </div>
-                    </div>
-                    @if (Model.TacMapEndpoint != null)
-                    {
-                    <h5>@Localizer["Load a tactical map"]</h5>
-                    <p><button class="btn btn-secondary" id="tacmap-show"><i class="fas fa-link"></i> @Localizer["Load from {0}", Model.TacMapDomain]</button>
-                       <button class="btn btn-outline-danger d-none" id="tacmap-disable"><i class="fas fa-unlink"></i> @Localizer["Unload current map"]</button></p>
-                    }
-
-                    <h5>@Localizer["User manual"]</h5>
-                    <p>@Localizer["Top bar displays connectivity, heading, clock time and MGRS position (meter precision)."]</p>
-                    <p>@Localizer["To add a marker on a position: right click/long tap or double click/double tap."]</p>
-                    <p>@Localizer["Buttons"]</p>
-                    <ul>
-                        <li><i class="fas fa-inbox"></i> @Localizer["Inbox with received messages, and sent messages"]</li>
-                        <li><i class="far fa-envelope"></i> @Localizer["Compose a new text message"]</li>
-                        <li><i class="fas fa-location-arrow"></i> @Localizer["Center map on current position, and follow position"]</li>
-                        <li><i class="fas fa-expand"></i> @Localizer["Full-screen display (on supported devices)"]</li>
-                        <li><i class="fas fa-sun"></i> @Localizer["Prevent sleep mode if full-screen is not available"]</li>
-                    </ul>
-                    <p><a href="@Localizer["https://github.com/jetelain/cTab/blob/master/docs/cTabIRL/endUser.md"]">@Localizer["Full user manual on GitHub"]</a></p>
-                    <p>&copy; 2020 - <a asp-controller="Home" asp-action="Privacy">@SharedResource.Privacy</a></p>
-                </div>
-                <div class="modal-footer p-2 row">
-                    <div class="col text-left">
-                        <a type="button" class="btn btn-sm btn-outline-danger" asp-controller="Home" asp-action="Index"><i class="fas fa-sign-out-alt"></i> @Localizer["Exit and return to home"]</a>
-                    </div>
-                    <div class="col text-right">
+                    <div class="modal-footer p-2">
                         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="modal" tabindex="-1" role="dialog" id="compose">
+            <div class="modal-dialog mb-0 mt-4">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div>
+                            <div class="form-group row">
+                                <label for="compose-to" class="control-label col-2">@Localizer["To"]</label>
+                                <div class="col-10">
+                                    <select id="compose-to" class="form-control form-control-sm">
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="compose-form-fields">
 
-    <div class="modal" tabindex="-1" role="dialog" id="tacmaploader">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h5>@Localizer["Choose a tactical map"]</h5>
-                    <p>@Localizer["Tactical map will be displayed on your mobile device and in Arma. Changes made on {0} will be applied in real-time.", Model.TacMapDomain]</p>
-                    <div id="tacmap-notconnected" class="d-none">
-                        <p>@Localizer["Please sign-in on {0} and then click on refresh button.", Model.TacMapDomain]</p>
-                        <p><a class="btn btn-secondary" href="@Model.TacMapEndpoint" target="_blank"><i class="fas fa-link"></i> @Localizer["Sign-in on {0}", Model.TacMapDomain]</a></p>
+                            </div>
+                            <div class="form-group mb-0">
+                                <textarea id="compose-text" class="form-control" rows="4" placeholder="@Localizer["Message Content"]" maxlength="5000"></textarea>
+                            </div>
+                        </div>
                     </div>
-                    <div id="tacmap-list">
-                        <p>@Localizer["Loading..."]</p>
-                    </div>
-                </div>
-                <div class="modal-footer p-2 row">
-                    <div class="col text-left">
-                        <button class="btn btn-sm btn-outline-primary" id="tacmap-refresh"><i class="fas fa-sync-alt"></i> @Localizer["Refresh"]</button>
-                    </div>
-                    <div class="col text-right">
-                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Cancel"]</button>
+                    <div class="modal-footer p-2">
+                        <div class="row w-100">
+                            <div class="col-7 text-left p-0">
+                                <button type="button" class="btn btn-sm btn-outline-danger" id="compose-medevac"><i class="fas fa-plus"></i> @Localizer["MEDEVAC"]</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" id="compose-preformated"><i class="fas fa-edit"></i> @Localizer["Preformated"]</button>
+                            </div>
+                            <div class="col text-right p-0">
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Cancel"]</button>
+                                <button type="button" class="btn btn-sm btn-success" id="compose-send">@Localizer["Send"]</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+        <div class="modal" tabindex="-1" role="dialog" id="help">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h5>@Localizer["Share"]</h5>
+                        <p>@Localizer["Share your cTab in read-only mode."]</p>
+                        <div class="input-group mb-3">
+                            <input id="link-ro" class="form-control" type="text" readonly="readonly" value="@Url.Action("Shared", "Home", new { t = Model.SpectatorToken }, Context.Request.Scheme)" />
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary btn-copy" type="button" data-copy="link-ro">@Localizer["Copy"]</button>
+                            </div>
+                        </div>
+                        @if (Model.TacMapEndpoint != null)
+                        {
+                            <h5>@Localizer["Load a tactical map"]</h5>
+                            <p>
+                                <button class="btn btn-secondary" id="tacmap-show"><i class="fas fa-link"></i> @Localizer["Load from {0}", Model.TacMapDomain]</button>
+                                <button class="btn btn-outline-danger d-none" id="tacmap-disable"><i class="fas fa-unlink"></i> @Localizer["Unload current map"]</button>
+                            </p>
+                        }
+
+                        <h5>@Localizer["User manual"]</h5>
+                        <p>@Localizer["Top bar displays connectivity, heading, clock time and MGRS position (meter precision)."]</p>
+                        <p>@Localizer["To add a marker on a position: right click/long tap or double click/double tap."]</p>
+                        <p>@Localizer["Buttons"]</p>
+                        <ul>
+                            <li><i class="fas fa-inbox"></i> @Localizer["Inbox with received messages, and sent messages"]</li>
+                            <li><i class="far fa-envelope"></i> @Localizer["Compose a new text message"]</li>
+                            <li><i class="fas fa-location-arrow"></i> @Localizer["Center map on current position, and follow position"]</li>
+                            <li><i class="fas fa-expand"></i> @Localizer["Full-screen display (on supported devices)"]</li>
+                            <li><i class="fas fa-sun"></i> @Localizer["Prevent sleep mode if full-screen is not available"]</li>
+                        </ul>
+                        <p><a href="@Localizer["https://github.com/jetelain/cTab/blob/master/docs/cTabIRL/endUser.md"]">@Localizer["Full user manual on GitHub"]</a></p>
+                        <p>&copy; 2020 - <a asp-controller="Home" asp-action="Privacy">@SharedResource.Privacy</a></p>
+                    </div>
+                    <div class="modal-footer p-2 row">
+                        <div class="col text-left">
+                            <a type="button" class="btn btn-sm btn-outline-danger" asp-controller="Home" asp-action="Index"><i class="fas fa-sign-out-alt"></i> @Localizer["Exit and return to home"]</a>
+                        </div>
+                        <div class="col text-right">
+                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="tacmaploader">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h5>@Localizer["Choose a tactical map"]</h5>
+                        <p>@Localizer["Tactical map will be displayed on your mobile device and in Arma. Changes made on {0} will be applied in real-time.", Model.TacMapDomain]</p>
+                        <div id="tacmap-notconnected" class="d-none">
+                            <p>@Localizer["Please sign-in on {0} and then click on refresh button.", Model.TacMapDomain]</p>
+                            <p><a class="btn btn-secondary" href="@Model.TacMapEndpoint" target="_blank"><i class="fas fa-link"></i> @Localizer["Sign-in on {0}", Model.TacMapDomain]</a></p>
+                        </div>
+                        <div id="tacmap-list">
+                            <p>@Localizer["Loading..."]</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer p-2 row">
+                        <div class="col text-left">
+                            <button class="btn btn-sm btn-outline-primary" id="tacmap-refresh"><i class="fas fa-sync-alt"></i> @Localizer["Refresh"]</button>
+                        </div>
+                        <div class="col text-right">
+                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Cancel"]</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -180,6 +182,7 @@
     <script src="https://mapsdata.plan-ops.fr/js/mapUtils.js"></script>
     <script src="https://mapsdata.plan-ops.fr/maps/all.js"></script>
     <script src="~/js/NoSleep.min.js" asp-append-version="true"></script>
+    <script src="https://maps.plan-ops.fr/js/milMissions.js" asp-append-version="true"></script>
     <script src="https://maps.plan-ops.fr/js/arma3TacMap.js" asp-append-version="true"></script>
     <script>
         var vm = @Json.Serialize(Model);
