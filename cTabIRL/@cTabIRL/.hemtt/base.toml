@@ -6,5 +6,6 @@ mainprefix = "z"
 folder_optionals = true
 sig_version = 3
 files = [
-    "mod.cpp"
+    "mod.cpp",
+	"*.dll"
 ]
