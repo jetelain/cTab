@@ -1232,7 +1232,7 @@ class airSub1: cTab_RscControlsGroup
         {
             idc = IDC_USRMN_AAPBTN;
             text = $STR_ctab_core_AAPMenu;
-            toolTip = $STR_ctab_core_AAPtHint;
+            toolTip = $STR_ctab_core_AAPHint;
             x = 0;
             y = MENU_elementY(1);
             w = MENU_W;
@@ -1373,7 +1373,7 @@ class navalSub1: cTab_RscControlsGroup
         {
             idc = IDC_USRMN_NRPBTN;
             text = $STR_ctab_core_NRPMenu;
-            toolTip = $STR_ctab_core_NRPtHint;
+            toolTip = $STR_ctab_core_NRPHint;
             x = 0;
             y = MENU_elementY(1);
             w = MENU_W;
@@ -1397,7 +1397,7 @@ class navalSub1: cTab_RscControlsGroup
         {
             idc = IDC_USRMN_NNPBTN;
             text = $STR_ctab_core_NNPMenu;
-            toolTip = $STR_ctab_coreNNPHint;
+            toolTip = $STR_ctab_core _NNPHint;
             x = 0;
             y = MENU_elementY(3);
             w = MENU_W;
