@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -105,7 +106,12 @@ namespace cTabWebApp
                 Secure = CookieSecurePolicy.SameAsRequest,
                 MinimumSameSitePolicy = SameSiteMode.Lax
             });
-
+            app.UseRequestLocalization(option => {
+                var supportedCultures = new[] { "en-US", "en", "fr-FR", "fr" };
+                option.DefaultRequestCulture = new RequestCulture(supportedCultures[0]);
+                option.AddSupportedCultures(supportedCultures);
+                option.AddSupportedUICultures(supportedCultures);
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
