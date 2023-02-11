@@ -42,7 +42,7 @@ namespace cTabExtension
                 if (serverConnection != null)
                 {
                     cancellationTokenSource.Cancel();
-                    Send("Disconnect", srv => srv.DisposeAsync());
+                    Send("Disconnect", async srv => await srv.DisposeAsync());
                 }
                 cancellationTokenSource = new CancellationTokenSource();
                 var token = cancellationTokenSource.Token;
@@ -159,7 +159,8 @@ namespace cTabExtension
             var connection = new HubConnectionBuilder()
                 .WithUrl(uri, options =>
                 {
-                    options.Headers.Add("User-Agent", "cTabExtension/1.0");
+                    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets;
+                    options.Headers.Add("Extension", "cTabExtension/1.1");
                 })
                 .WithAutomaticReconnect()
                 .Build();

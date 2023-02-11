@@ -102,6 +102,13 @@ namespace cTabWebApp.Controllers
             return View(vm);
         }
 
+        [HttpGet]
+        public Task<IActionResult> EFIS(string t, string mode)
+        {
+            ViewBag.IsClassic = mode != "electronic";
+            return Map(t);
+        }
+
         private void SetupTacMap(MapVM vm)
         {
             if (!string.IsNullOrEmpty(_tacMap.TacMapEndpoint))

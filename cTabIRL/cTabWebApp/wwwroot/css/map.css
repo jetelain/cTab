@@ -62,3 +62,8 @@ header {
 #inbox-message {
     white-space: pre;
 }
+
+i.fas.fa-helicopter {
+    margin-left: -3px;
+    margin-right: -3px;
+}

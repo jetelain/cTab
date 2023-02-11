@@ -115,10 +115,12 @@ namespace cTabWebApp
 
         public async Task ArmaHello(ArmaHelloMessage message)
         {
+            var ext = Context.GetHttpContext().Request.Headers["Extension"];
             var ua = Context.GetHttpContext().Request.Headers["User-Agent"];
-            if (!ua.Any(u => u.Contains("cTabExtension/1.")))
+            Console.WriteLine($"Extension => '{ext}' User-Agent => '{ua}'");
+            if (!ua.Any(u => u.Contains("cTabExtension/1.")) && !ext.Any(u => u.Contains("cTabExtension/1.")))
             {
-                _logger.LogWarning($"ArmaHello was not sent by Extension, but by '{string.Join(", ", ua)}'");
+                _logger.LogWarning($"ArmaHello was not sent by Extension, but by '{ua}' / '{ext}'");
                 return;
             }
 
@@ -179,7 +181,6 @@ namespace cTabWebApp
             var state = GetState(ConnectionKind.Arma);
             if (state == null)
             {
-                Console.WriteLine($"No state for ArmaStartMission");
                 return;
             }
 
@@ -226,7 +227,7 @@ namespace cTabWebApp
             var grp = ArmaSerializer.ParseString(message.Args[5]);
             var vehicle = message.Args.Length > 6 ? ArmaSerializer.ParseString(message.Args[6]) : null; 
 
-            state.LastSetPosition = new SetPositionMessage()
+            var pos = state.LastSetPosition = new SetPositionMessage()
             {
                 X = x,
                 Y = y,
@@ -237,6 +238,16 @@ namespace cTabWebApp
                 Group = grp,
                 Vehicle = vehicle
             };
+
+            if (message.Args.Length > 11)
+            {
+                pos.VhlDir = ArmaSerializer.ParseDoubleArray(message.Args[7]);
+                pos.VhlUp = ArmaSerializer.ParseDoubleArray(message.Args[8]);
+                pos.VhlVel = ArmaSerializer.ParseDoubleArray(message.Args[9]);
+                pos.VhlPos = ArmaSerializer.ParseDoubleArray(message.Args[10]);
+                pos.Wind = ArmaSerializer.ParseDoubleArray(message.Args[11]);
+            }
+
 
             await Clients.Group(state.WebChannelName).SendAsync("SetPosition", state.LastSetPosition);
         }
@@ -581,7 +592,6 @@ namespace cTabWebApp
                 _logger.LogWarning($"No state for ArmaEndMission");
                 return;
             }
-            Console.WriteLine("ArmaEndMission " + string.Join(", ", message.Args));
             state.LastSetPosition = null;
             state.LastMission = null;
         }
@@ -594,16 +604,15 @@ namespace cTabWebApp
                 _logger.LogWarning($"No state for ArmaDevices");
                 return;
             }
-            Console.WriteLine("ArmaDevices " + string.Join(", ", message.Args));
             var deviceLevel = int.Parse(message.Args[0], CultureInfo.InvariantCulture);
             var useMils = bool.Parse(message.Args[1]);
-
+            var vehicleMode = message.Args.Length > 2 ? int.Parse(message.Args[2], CultureInfo.InvariantCulture) : 0;
             state.LastDevices = new DevicesMessage()
             {
                 Level = deviceLevel,
-                UseMils = useMils
+                UseMils = useMils,
+                VehicleMode = vehicleMode
             };
-
             await Clients.Group(state.WebChannelName).SendAsync("Devices", state.LastDevices);
         }
 

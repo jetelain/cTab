@@ -7,5 +7,5 @@ folder_optionals = true
 sig_version = 3
 files = [
     "mod.cpp",
-	"*.dll"
+    "*.dll"
 ]

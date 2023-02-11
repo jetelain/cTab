@@ -1,0 +1,155 @@
+﻿@model MapVM
+@inject IViewLocalizer Localizer
+@inject CommunautyInfos Communauty
+@{
+    var isClassic = (ViewBag.IsClassic as bool?) ?? false;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no" />
+    <title>cTab</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" />
+    <link rel="stylesheet" href="~/css/efis.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <div class="row">
+            <div class="col-2 text-left" id="statusbar">
+                <span class="badge badge-warning" id="statusbadge">&nbsp;&nbsp;</span>
+                <span id="status">@Localizer["Connecting..."]</span>
+            </div>
+            <div class="col-3 text-center" id="heading">
+                ----- -
+            </div>
+            <div class="col-2 text-center" id="date">
+                --:--
+            </div>
+            <div class="col-5 text-center" id="position">
+                ----- - -----
+            </div>
+        </div>
+    </header>
+
+    <div class="efis">
+
+        @if (isClassic)
+        {
+            <div id="classic-box">
+                <div class="classicinstrument heading"><div class="heading box"><img src="~/img/flightindicators/heading_yaw.svg" class="box" alt="" /></div><div class="mechanics box"><img src="~/img/flightindicators/heading_mechanics.svg" class="box" alt="" /><img src="~/img/flightindicators/fi_circle.svg" class="box" alt="" /></div></div>
+                <div class="classicinstrument vario"><img src="~/img/flightindicators/vertical_mechanics.svg" class="box" alt="" /><div class="vario box"><img src="~/img/flightindicators/fi_needle.svg" class="box" alt="" /></div><div class="mechanics box"><img src="~/img/flightindicators/fi_circle.svg" class="box" alt="" /></div></div>
+                <div class="classicinstrument airspeed"><img src="~/img/flightindicators/speed_mechanics.svg" class="box" alt="" /><div class="speed box"><img src="~/img/flightindicators/fi_needle.svg" class="box" alt="" /></div><div class="mechanics box"><img src="~/img/flightindicators/fi_circle.svg" class="box" alt="" /></div></div>
+                <div class="classicinstrument altimeter"><div class="pressure box"><img src="~/img/flightindicators/altitude_pressure.svg" class="box" alt="" /></div><img src="~/img/flightindicators/altitude_ticks.svg" class="box" alt="" /><div class="needleSmall box"><img src="~/img/flightindicators/fi_needle_small.svg" class="box" alt="" /></div><div class="needle box"><img src="~/img/flightindicators/fi_needle.svg" class="box" alt="" /></div><div class="mechanics box"><img src="~/img/flightindicators/fi_circle.svg" class="box" alt="" /></div></div>
+                <div class="classicinstrument attitude"><div class="roll box"><img src="~/img/flightindicators/horizon_back.svg" class="box" alt="" /><div class="pitch box"><img src="~/img/flightindicators/horizon_ball.svg" class="box" alt="" /></div><img src="~/img/flightindicators/horizon_circle.svg" class="box" alt="" /></div><div class="mechanics box"><img src="~/img/flightindicators/horizon_mechanics.svg" class="box" alt="" /><img src="~/img/flightindicators/fi_circle.svg" class="box" alt="" /></div></div>
+            </div>
+        }
+        else
+        {
+            <div id="horizon-box">
+                <div id="horizon-rot">
+                    <div id="horizon-earth">
+                    </div>
+                </div>
+            </div>
+
+            <div id="center-box">
+            </div>
+
+            <table id="rawdata">
+                <tr>
+                    <th>airSpeed</th>
+                    <td><span id="airSpeed"></span> kn</td>
+                </tr>
+                <tr>
+                    <th>groundSpeed</th>
+                    <td><span id="groundSpeed"></span> kn</td>
+                </tr>
+                <tr>
+                    <th>altitude</th>
+                    <td><span id="altitude"></span> ft</td>
+                </tr>
+                <tr>
+                    <th>verticalSpeed</th>
+                    <td><span id="verticalSpeed"></span> ft/min</td>
+                </tr>
+                <tr>
+                    <th>yaw</th>
+                    <td><span id="yaw"></span>°</td>
+                </tr>
+                <tr>
+                    <th>pitch</th>
+                    <td><span id="pitch"></span>°</td>
+                </tr>
+                <tr>
+                    <th>roll</th>
+                    <td><span id="roll"></span>°</td>
+                </tr>
+                <tr>
+                    <th>heading</th>
+                    <td><span id="heading2"></span>°</td>
+                </tr>
+            </table>
+        }
+
+        <div id="not-helicopter">
+            @Localizer["You are not in a helicopter. Embark to enable instruments."]
+        </div>
+
+        <div class="btnbox left">
+            @*<a class="btn btn-outline-secondary">
+                <i class="fas fa-bars"></i>
+            </a>*@
+            <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Map" asp-route-t="@Model.Token">
+                <i class="far fa-map"></i>
+            </a>
+        </div>
+
+        <div class="btnbox right">
+@*            <a class="@(isClassic ? "btn btn-primary" : "btn btn-outline-primary")" asp-controller="Home" asp-action="EFIS" asp-route-t="@Model.Token" asp-route-mode="classic">
+                Classic
+            </a>
+            <a class="@(isClassic ? "btn btn-outline-primary" : "btn btn-primary")" asp-controller="Home" asp-action="EFIS" asp-route-t="@Model.Token" asp-route-mode="electronic">
+                Eletronic
+            </a>*@
+            <button class="btn btn-outline-secondary m-2" id="fullscreen">
+                <i class="fas fa-expand"></i>
+            </button>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@@microsoft/signalr@3.1.4/dist/browser/signalr.min.js"></script>
+    <script src="~/js/NoSleep.min.js" asp-append-version="true"></script>
+    <script>
+        var vm = @Json.Serialize(Model);
+        var texts = @Json.Serialize(new
+               {
+                   Waiting = Localizer["Wait for cTab"].Value,
+                   Disconnected = Localizer["Disconnected"].Value,
+                   Connected = Localizer["Connected"].Value,
+                   NoMessageSelected = SharedResource.STR_ctab_core_NoMessageSelected
+               });
+        var octants = @Json.Serialize(
+            new[] {
+                SharedResource.STR_ctab_core_North,
+                SharedResource.STR_ctab_core_NorthEast,
+                SharedResource.STR_ctab_core_East,
+                SharedResource.STR_ctab_core_SouthEast,
+                SharedResource.STR_ctab_core_South,
+                SharedResource.STR_ctab_core_SouthWest,
+                SharedResource.STR_ctab_core_West,
+                SharedResource.STR_ctab_core_NorthWest,
+                SharedResource.STR_ctab_core_North
+            });
+    </script>
+    <script src="~/js/common.js" asp-append-version="true"></script>
+    <script src="~/js/efis.js" asp-append-version="true"></script>
+</body>
+</html>

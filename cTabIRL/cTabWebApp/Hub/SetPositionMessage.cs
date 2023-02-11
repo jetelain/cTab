@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace cTabWebApp
 {
@@ -12,5 +13,20 @@ namespace cTabWebApp
         public DateTime Timestamp { get; set; }
         public string Group { get; internal set; }
         public string Vehicle { get; internal set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double[] VhlDir { get; internal set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double[] VhlVel { get; internal set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double[] VhlPos { get; internal set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double[] Wind { get; internal set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double[] VhlUp { get; internal set; }
     }
 }
