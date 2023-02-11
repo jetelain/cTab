@@ -71,7 +71,6 @@ var fullScreenButton = null;
 var tempUserPopup = null;
 var userMarkerData = {};
 var connection = null;
-var useMils = true;
 var inboxButton = null;
 var composeButton = null;
 var knownTo = {};
@@ -80,11 +79,7 @@ var displayedMessage = null;
 var noSleepButton = null;
 var isNoSleep = false;
 var noSleep = null;
-
-function pad(n, width) {
-    n = n + '';
-    return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
-}
+var efisMapButton = null;
 
 function updateButtons() {
     centerOnPositionButton.setClass(centerOnPosition ? 'btn-primary' : 'btn-outline-secondary');
@@ -134,17 +129,6 @@ function setCenterOnPosition(value) {
     updateButtons();
 }
 
-function toHeadingUnit(degrees) {
-    var text;
-    if (useMils) {
-        text = '' + Math.trunc(degrees * 6400 / 360);
-    }
-    else {
-        text = '' + degrees + '°';
-    }
-    text += ' ' + octants[Math.round(degrees / 45)];
-    return text;
-}
 
 function bearing(latlng1, latlng2) {
     return ((Math.atan2(latlng2.lng - latlng1.lng, latlng2.lat - latlng1.lat) * 180 / Math.PI) + 360) % 360;
@@ -341,6 +325,7 @@ function initMap(mapInfos, worldName) {
             }
         })).addTo(map);
     }
+
     L.latlngGraticule({
         zoomInterval: [
             { start: 0, end: 10, interval: 1000 }
@@ -352,6 +337,13 @@ function initMap(mapInfos, worldName) {
         click: function () { $('#help').modal('show'); },
         position: 'bottomleft'
     }).addTo(map);
+
+    (efisMapButton = L.control.overlayButton({
+        position: 'bottomleft',
+        content: '<i class="fas fa-helicopter"></i>',
+        click: function () { document.location.href = $('#efislink').attr('href'); },
+    })).addTo(map);
+    efisMapButton.j().attr('title', $('#efislink').text());
 
     currentMap = map;
     currentMapInfos = mapInfos;
@@ -540,7 +532,6 @@ function updateMapMarkers(msg) {
     }
 
     function points(items) {
-        console.log(items);
         var array = [];
         for (var i = 0; i < items.length; i+=2) {
             array.push(new L.LatLng(items[i + 1], items[i]));
@@ -911,6 +902,13 @@ $(function () {
             inboxButton.remove();
             composeButton.remove();
         }
+
+        if (data.vehicleMode == 2) {
+            efisMapButton.addTo(currentMap);
+        }
+        else {
+            efisMapButton.remove();
+        }
         useMils = data.useMils;
     });
 
@@ -1005,16 +1003,7 @@ $(function () {
         }
     }
 
-    //if (!document.documentElement.requestFullscreen) { 
-        // If fullscreen not available, ensure that height never needs scrolling
-        // 100vh is now broken on mobile Firefox... no workaround found for fullscreen at present time
-        $('.map').css('height', (window.innerHeight - 30) + 'px');
-        $(window).on('resize', function () { $('.map').css('height', (window.innerHeight - 30) + 'px'); window.scrollTo(0, 0); });
-    //}
+    setupFullViewHeight('.map');
 
-    $('.btn-copy').on('click', function () {
-        var target = $('#' + $(this).attr('data-copy')).get(0);
-        target.select();
-        document.execCommand("copy");
-    });
+    setupCopyButtons();
 });
