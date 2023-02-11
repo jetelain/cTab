@@ -100,6 +100,13 @@ namespace cTabWebApp
                 app.UseAuthentication();
             }
 
+            app.UseRequestLocalization(option => {
+                var supportedCultures = new[] { "en-US", "en", "fr-FR", "fr" };
+                option.DefaultRequestCulture = new RequestCulture(supportedCultures[0]);
+                option.AddSupportedCultures(supportedCultures);
+                option.AddSupportedUICultures(supportedCultures);
+            });
+
             app.UseCookiePolicy(new CookiePolicyOptions()
             {
                 HttpOnly = HttpOnlyPolicy.Always,
