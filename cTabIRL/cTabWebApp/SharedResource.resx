@@ -579,4 +579,76 @@
   <data name="ProvidedBy" xml:space="preserve">
     <value>Provided by the 1er GTD</value>
   </data>
+  <data name="STR_ctab_core_videoCategory">
+    <value>Video</value>
+  </data>
+  <data name="STR_ctab_core_mapCategory">
+    <value>Map and BFT</value>
+  </data>
+  <data name="STR_ctab_core_defMapStyle">
+    <value>Default map mode</value>
+  </data>
+  <data name="STR_ctab_core_defMapStyleDetails">
+    <value>Default cTab devides map mode. Current mode can be changed in game with F6.</value>
+  </data>
+  <data name="STR_ctab_core_satStyle">
+    <value>Satellite</value>
+  </data>
+  <data name="STR_ctab_core_topoStyle">
+    <value>Topographic</value>
+  </data>
+  <data name="STR_ctab_core_useArmaMarker">
+    <value>Player position marker</value>
+  </data>
+  <data name="STR_ctab_core_useArmaMarkerDetails">
+    <value>Player position marker on rugged tablet, Android GD300 and TAD</value>
+  </data>
+  <data name="STR_ctab_core_useArmaMarker_true">
+    <value>Arma marker with heading</value>
+  </data>
+  <data name="STR_ctab_core_useArmaMarker_false">
+    <value>NATO symbol</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecision">
+    <value>Coordinates precision</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecisionDetails">
+    <value>Coordinates precision</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecision0">
+    <value>Default</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecision1">
+    <value>10 m</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecision2">
+    <value>1 m</value>
+  </data>
+  <data name="STR_ctab_core_DotMenu">
+    <value>Dot with label</value>
+  </data>
+  <data name="STR_ctab_core_CircleMenu">
+    <value>Circle with label</value>
+  </data>
+  <data name="STR_ctab_core_AWithTSMenu">
+    <value>A + Timestamp</value>
+  </data>
+  <data name="STR_ctab_core_BWithTSMenu">
+    <value>B + Timestamp</value>
+  </data>
+  <data name="STR_ctab_core_CWithTSMenu">
+    <value>C + Timestamp</value>
+  </data>
+  <data name="STR_ctab_core_DWithTSMenu">
+    <value>D + Timestamp</value>
+  </data>
+  <data name="STR_ctab_core_EWithTSMenu">
+    <value>E + Timestamp</value>
+  </data>
+  <data name="STR_ctab_core_FWithTSMenu">
+    <value>F + Timestamp</value>
+  </data>
+  <data name="STR_ctab_core_TSMenu">
+    <value>Timestamp only</value>
+  </data>
 </root>

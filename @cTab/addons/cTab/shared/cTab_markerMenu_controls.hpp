@@ -605,7 +605,7 @@ class CasulSub1: cTab_RscControlsGroup
 
 class GenSub1: cTab_RscControlsGroup
 {
-	#define cTab_MENU_MAX_ELEMENTS 3
+	#define cTab_MENU_MAX_ELEMENTS 5
 	idc = 3306;
 	x = MENU_X;
 	y = MENU_Y;
@@ -645,6 +645,144 @@ class GenSub1: cTab_RscControlsGroup
 			sizeEx = MENU_sizeEx;
 			action = "cTabUserSelIcon set [1,31];[1] call cTab_fnc_userMenuSelect;";
 		};
+
+
+		class dotbtn: cTab_MenuItem
+		{
+			idc = IDC_USRMN_LZBTN;
+			text = $STR_ctab_core_DotMenu;
+			x = 0;
+			y = MENU_elementY(3);
+			w = MENU_W;
+			h = MENU_elementH;
+			sizeEx = MENU_sizeEx;
+			action = "cTabUserSelIcon set [1,100];[100] call cTab_fnc_userMenuSelect;";
+		};
+
+		class circlebtn: cTab_MenuItem
+		{
+			idc = IDC_USRMN_LZBTN;
+			text = $STR_ctab_core_CircleMenu;
+			x = 0;
+			y = MENU_elementY(4);
+			w = MENU_W;
+			h = MENU_elementH;
+			sizeEx = MENU_sizeEx;
+			action = "cTabUserSelIcon set [1,101];[100] call cTab_fnc_userMenuSelect;";
+		};
+
+		class exit: cTab_MenuExit
+		{
+			idc = -1;
+			text = $STR_ctab_core_MenuExit;
+			x = 0;
+			y = MENU_elementY(cTab_MENU_MAX_ELEMENTS);
+			w = MENU_W;
+			h = MENU_elementH;
+			sizeEx = MENU_sizeEx;
+			action = "[0] call cTab_fnc_userMenuSelect;";
+		};
+	};
+};
+
+
+class TextMenu: cTab_RscControlsGroup
+{
+	#define cTab_MENU_MAX_ELEMENTS 8
+	idc = 3308;
+	x = MENU_X;
+	y = MENU_Y;
+	w = MENU_W;
+	h = MENU_H(cTab_MENU_MAX_ELEMENTS);
+	class controls
+	{
+		class IGUIBack_2206: cTab_IGUIBack
+		{
+			idc = IDC_USRMN_IGUIBACK_2206;
+			x = 0;
+			y = 0;
+			w = MENU_W;
+			h = MENU_H(cTab_MENU_MAX_ELEMENTS);
+		};
+		class nonebtn: cTab_MenuItem
+		{
+			idc = IDC_USRMN_HQBTN;
+			text = $STR_ctab_core_TSMenu;
+			x = 0;
+			y = MENU_elementY(1);
+			w = MENU_W;
+			h = MENU_elementH;
+			sizeEx = MENU_sizeEx;
+			action = "cTabUserSelIcon set [2,0];[1] call cTab_fnc_userMenuSelect;";
+		};
+		class abtn: cTab_MenuItem
+		{
+			idc = IDC_USRMN_LZBTN;
+			text = $STR_ctab_core_AWithTSMenu;
+			x = 0;
+			y = MENU_elementY(2);
+			w = MENU_W;
+			h = MENU_elementH;
+			sizeEx = MENU_sizeEx;
+			action = "cTabUserSelIcon set [2,1];[1] call cTab_fnc_userMenuSelect;";
+		};
+		class bbtn: cTab_MenuItem
+		{
+			idc = IDC_USRMN_LZBTN;
+			text = $STR_ctab_core_BWithTSMenu;
+			x = 0;
+			y = MENU_elementY(3);
+			w = MENU_W;
+			h = MENU_elementH;
+			sizeEx = MENU_sizeEx;
+			action = "cTabUserSelIcon set [2,2];[1] call cTab_fnc_userMenuSelect;";
+		};
+		class cbtn: cTab_MenuItem
+		{
+			idc = IDC_USRMN_LZBTN;
+			text = $STR_ctab_core_CWithTSMenu;
+			x = 0;
+			y = MENU_elementY(4);
+			w = MENU_W;
+			h = MENU_elementH;
+			sizeEx = MENU_sizeEx;
+			action = "cTabUserSelIcon set [2,3];[1] call cTab_fnc_userMenuSelect;";
+		};
+		class dbtn: cTab_MenuItem
+		{
+			idc = IDC_USRMN_LZBTN;
+			text = $STR_ctab_core_DWithTSMenu;
+			x = 0;
+			y = MENU_elementY(5);
+			w = MENU_W;
+			h = MENU_elementH;
+			sizeEx = MENU_sizeEx;
+			action = "cTabUserSelIcon set [2,4];[1] call cTab_fnc_userMenuSelect;";
+		};
+		class ebtn: cTab_MenuItem
+		{
+			idc = IDC_USRMN_LZBTN;
+			text = $STR_ctab_core_EWithTSMenu;
+			x = 0;
+			y = MENU_elementY(6);
+			w = MENU_W;
+			h = MENU_elementH;
+			sizeEx = MENU_sizeEx;
+			action = "cTabUserSelIcon set [2,5];[1] call cTab_fnc_userMenuSelect;";
+		};
+		class fbtn: cTab_MenuItem
+		{
+			idc = IDC_USRMN_LZBTN;
+			text = $STR_ctab_core_FWithTSMenu;
+			x = 0;
+			y = MENU_elementY(7);
+			w = MENU_W;
+			h = MENU_elementH;
+			sizeEx = MENU_sizeEx;
+			action = "cTabUserSelIcon set [2,6];[1] call cTab_fnc_userMenuSelect;";
+		};
+
+
 		class exit: cTab_MenuExit
 		{
 			idc = -1;

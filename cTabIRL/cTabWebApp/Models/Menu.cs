@@ -291,6 +291,62 @@ namespace cTabWebApp.Models
                             Label = SharedResource.STR_ctab_core_LZMenu,
                             Tooltip = SharedResource.STR_ctab_core_LZHint,
                             Select1 = 31
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_DotMenu,
+                            Select1 = 100,
+                            NextMenu = 131
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_CircleMenu,
+                            Select1 = 101,
+                            NextMenu = 131
+                        }
+                    }
+
+                },
+
+                new Menu()
+                {
+                    MenuId = 131,
+                    Items = new [] {
+
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_TSMenu,
+                            Select2 = 0
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_AWithTSMenu,
+                            Select2 = 1
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_BWithTSMenu,
+                            Select2 = 2
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_CWithTSMenu,
+                            Select2 = 3
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_DWithTSMenu,
+                            Select2 = 4
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_EWithTSMenu,
+                            Select2 = 5
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_FWithTSMenu,
+                            Select2 = 6
                         }
                     }
 

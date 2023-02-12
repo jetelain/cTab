@@ -484,7 +484,7 @@ namespace cTabWebApp
             return "00";
         }
         // https://spatialillusions.com/unitgenerator/
-        private static Dictionary<string, string> icons = new Dictionary<string, string>()
+        private static Dictionary<string, string> icons = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
             // BLUE
             { "\\cTab\\img\\b_mech_inf_wheeled.paa"                  , "10031000001211020051" },
@@ -500,6 +500,8 @@ namespace cTabWebApp
             { "\\A3\\ui_f\\data\\map\\markers\\nato\\b_hq.paa"       , "10031002000000000000" },
             { "\\A3\\ui_f\\data\\map\\markers\\military\\end_CA.paa" , "img:mil_end.png" }, // 10032500001508000000 in theory
             { "\\A3\\ui_f\\data\\map\\markers\\nato\\b_inf.paa"      , "10031000001211000000" },
+            { "\\A3\\ui_f\\data\\map\\markers\\military\\dot_CA.paa", "img:mil_dot_blue.png" },
+            { "\\cTab\\img\\m_circle.paa",                            "img:mil_circle_blue.png" },
 
             // GREEN
             { "\\A3\\ui_f\\data\\map\\markers\\military\\join_CA.paa"   , "img:mil_join.png" },

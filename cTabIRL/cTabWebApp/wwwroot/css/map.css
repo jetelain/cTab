@@ -29,12 +29,17 @@ header {
     font-size: 14px;
     font-weight: bold;
     vertical-align: middle;
+    text-shadow: 0px 0px 4px #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .text-marker-content-small {
     height: 24px;
     width: max-content;
     font-size: 10px;
     vertical-align: middle;
+    font-weight: bold;
+    text-shadow: 0px 0px 4px #fff;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 #statusbar {
     cursor: pointer;

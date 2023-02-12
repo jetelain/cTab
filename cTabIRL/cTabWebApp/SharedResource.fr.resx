@@ -579,4 +579,76 @@
   <data name="ProvidedBy" xml:space="preserve">
     <value>Proposé par le 1er GTD</value>
   </data>
+  <data name="STR_ctab_core_videoCategory">
+    <value>Vidéo</value>
+  </data>
+  <data name="STR_ctab_core_mapCategory">
+    <value>Carte et BFT</value>
+  </data>
+  <data name="STR_ctab_core_defMapStyle">
+    <value>Mode par défaut de la carte</value>
+  </data>
+  <data name="STR_ctab_core_defMapStyleDetails">
+    <value>Mode par défaut de la carte dans les appareils cTab. Le mode actif se modifie avec F6 en jeu.</value>
+  </data>
+  <data name="STR_ctab_core_satStyle">
+    <value>Satellite</value>
+  </data>
+  <data name="STR_ctab_core_topoStyle">
+    <value>Topographique</value>
+  </data>
+  <data name="STR_ctab_core_useArmaMarker">
+    <value>Marqueur position joueur</value>
+  </data>
+  <data name="STR_ctab_core_useArmaMarkerDetails">
+    <value>Marqueur de la position du joueur sur la tablette endurcie, Android GD300 et TAD.</value>
+  </data>
+  <data name="STR_ctab_core_useArmaMarker_true">
+    <value>Marqueur Arma avec orientation</value>
+  </data>
+  <data name="STR_ctab_core_useArmaMarker_false">
+    <value>Symbole OTAN</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecision">
+    <value>Précision coordonnées</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecisionDetails">
+    <value>Précision coordonnées</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecision0">
+    <value>Par défaut</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecision1">
+    <value>10 m</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecision2">
+    <value>1 m</value>
+  </data>
+  <data name="STR_ctab_core_DotMenu">
+    <value>Point avec libellé</value>
+  </data>
+  <data name="STR_ctab_core_CircleMenu">
+    <value>Cercle avec libellé</value>
+  </data>
+  <data name="STR_ctab_core_AWithTSMenu">
+    <value>A + Horodatage</value>
+  </data>
+  <data name="STR_ctab_core_BWithTSMenu">
+    <value>B + Horodatage</value>
+  </data>
+  <data name="STR_ctab_core_CWithTSMenu">
+    <value>C + Horodatage</value>
+  </data>
+  <data name="STR_ctab_core_DWithTSMenu">
+    <value>D + Horodatage</value>
+  </data>
+  <data name="STR_ctab_core_EWithTSMenu">
+    <value>E + Horodatage</value>
+  </data>
+  <data name="STR_ctab_core_FWithTSMenu">
+    <value>F + Horodatage</value>
+  </data>
+  <data name="STR_ctab_core_TSMenu">
+    <value>Horodatage uniquement</value>
+  </data>
 </root>

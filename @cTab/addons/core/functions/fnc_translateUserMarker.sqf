@@ -37,7 +37,7 @@
 private ["_pos","_markerIcon","_texture1","_markerSize","_texture2","_markerDir","_dir","_text","_align"];
 
 _pos = _this select 0;
-
+_text = _this select 4;
 _color = cTabColorRed;
 _markerIcon = _this select 1;
 _texture1 = call {
@@ -63,17 +63,27 @@ _texture1 = call {
 	_color = cTabColorBlue;
 	if (_markerIcon == 30) exitWith {"\A3\ui_f\data\map\markers\nato\b_hq.paa"};
 	if (_markerIcon == 31) exitWith {"\A3\ui_f\data\map\markers\military\end_CA.paa"};
+	if (_markerIcon == 100) exitWith {"\A3\ui_f\data\map\markers\military\dot_CA.paa"};
+	if (_markerIcon == 101) exitWith {"\cTab\img\m_circle.paa"};
 	""
 };
 
 _markerSize = _this select 2;
-_texture2 = call {
-	if (_markerSize == 0) exitWith {""};
-	if (_markerSize == 1) exitWith {"\A3\ui_f\data\map\markers\nato\group_0.paa"};
-	if (_markerSize == 2) exitWith {"\A3\ui_f\data\map\markers\nato\group_1.paa"};
-	if (_markerSize == 3) exitWith {"\A3\ui_f\data\map\markers\nato\group_2.paa"};
-	if (_markerSize == 4) exitWith {"\A3\ui_f\data\map\markers\nato\group_3.paa"};
-	""
+if ( _markerIcon >= 100 ) then {
+	_texture2 = "";
+	if ( _markerSize > 0 ) then {
+		_text = format ["%1-%2", ["A","B","C","D","E","F"] select (_markerSize - 1), _text];
+	};
+}
+else {
+	_texture2 = call {
+		if (_markerSize == 0) exitWith {""};
+		if (_markerSize == 1) exitWith {"\A3\ui_f\data\map\markers\nato\group_0.paa"};
+		if (_markerSize == 2) exitWith {"\A3\ui_f\data\map\markers\nato\group_1.paa"};
+		if (_markerSize == 3) exitWith {"\A3\ui_f\data\map\markers\nato\group_2.paa"};
+		if (_markerSize == 4) exitWith {"\A3\ui_f\data\map\markers\nato\group_3.paa"};
+		""
+	};
 };
 
 _markerDir = _this select 3;
@@ -90,7 +100,7 @@ _dir = call {
 	700
 };
 
-_text = _this select 4;
+
 _align = if ((_dir > 0) && (_dir < 180)) then {"left"} else {"right"};
 
 [_pos,_texture1,_texture2,_dir,_color,_text,_align]

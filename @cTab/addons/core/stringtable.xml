@@ -651,5 +651,41 @@
             <English>1 m</English>
             <French>1 m</French>
         </Key>
+        <Key ID="STR_ctab_core_DotMenu">
+            <English>Dot with label</English>
+            <French>Point avec libellé</French>
+        </Key>
+        <Key ID="STR_ctab_core_CircleMenu">
+            <English>Circle with label</English>
+            <French>Cercle avec libellé</French>
+        </Key>
+        <Key ID="STR_ctab_core_TSMenu">
+            <English>Timestamp only</English>
+            <French>Horodatage uniquement</French>
+        </Key>
+        <Key ID="STR_ctab_core_AWithTSMenu">
+            <English>A + Timestamp</English>
+            <French>A + Horodatage</French>
+        </Key>
+        <Key ID="STR_ctab_core_BWithTSMenu">
+            <English>B + Timestamp</English>
+            <French>B + Horodatage</French>
+        </Key>
+        <Key ID="STR_ctab_core_CWithTSMenu">
+            <English>C + Timestamp</English>
+            <French>C + Horodatage</French>
+        </Key>
+        <Key ID="STR_ctab_core_DWithTSMenu">
+            <English>D + Timestamp</English>
+            <French>D + Horodatage</French>
+        </Key>
+        <Key ID="STR_ctab_core_EWithTSMenu">
+            <English>E + Timestamp</English>
+            <French>E + Horodatage</French>
+        </Key>
+        <Key ID="STR_ctab_core_FWithTSMenu">
+            <English>F + Timestamp</English>
+            <French>F + Horodatage</French>
+        </Key>
     </Package>
 </Project>
