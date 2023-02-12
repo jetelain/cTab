@@ -129,7 +129,7 @@ if (_mode != 2) then {
 		if (group cTab_player != group (_x select 0)) exitWith {};
 		
 		// get the fire-team color
-		_teamColor = cTabColorTeam select (["MAIN","RED","GREEN","BLUE","YELLOW"] find (assignedTeam (_x select 0)));
+		_teamColor = cTabColorTeam select (["MAIN","RED","GREEN","BLUE","YELLOW",""] find (assignedTeam (_x select 0)));
 		
 		if (_mode != 2 && {_veh == _playerVehicle || {_veh in _vehicles}}) exitWith {
 			if (_drawText) then {
