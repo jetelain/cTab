@@ -71,7 +71,7 @@ function updateInstrumentsAeronautic(airSpeed, groundSpeed, altitude, verticalSp
     
 
     $('div.classicinstrument.heading div.heading').css('transform', 'rotate(' + (-heading).toFixed(2) + 'deg)');
-    $('div.classicinstrument.attitude div.roll').css('transform', 'rotate(' + roll.toFixed(2) + 'deg)');
+    $('div.classicinstrument.attitude div.roll').css('transform', 'rotate(' + (-roll).toFixed(2) + 'deg)');
     $('div.classicinstrument.attitude div.roll div.pitch').css('top', (Math.max(Math.min(-pitch,30),-30) * 0.7).toFixed(3) + '%');
     $('div.classicinstrument.vario div.vario').css('transform', 'rotate(' + (Math.max(Math.min(verticalSpeed / 1000, 1.95), -1.95) * 90).toFixed(2) + 'deg)');
     $('div.classicinstrument.airspeed div.speed').css('transform', 'rotate(' + (90 + (Math.max(Math.min(airSpeed, 160), 0) * 2)).toFixed(2) + 'deg)');
