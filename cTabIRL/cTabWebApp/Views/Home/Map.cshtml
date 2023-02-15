@@ -229,7 +229,7 @@
                 SharedResource.STR_ctab_core_NorthWest,
                 SharedResource.STR_ctab_core_North
             });
-        var menus = @Json.Serialize(Menu.CreateMenus().ToDictionary(e => e.MenuId.ToString(), e => e.Items));
+        var menus = @Json.Serialize(Menu.CreateMenus().ToDictionary(e => e.MenuId.ToString(), e => e));
     </script>
     <script src="~/js/common.js" asp-append-version="true"></script>
     <script src="~/js/map.js" asp-append-version="true"></script>

@@ -158,11 +158,15 @@ function generateMenu(id, latlng) {
         a.html(generateLocationInfos(latlng));
         a.appendTo(div);
     }
-    if (id == 13) {
-        div.addClass('ctab-compass');
+    var menu = menus['' + id];
+    if (menu.class) {
+        div.addClass(menu.class);
     }
-
-    menus['' + id].forEach(function (entry) {
+    if (menu.title) {
+        var a = $('<div class="text-center w-100" />').text(menu.title);
+        a.appendTo(div);
+    }
+    menu.items.forEach(function (entry) {
         var a = $('<a class="dropdown-item" href="#"></a>');
         a.text(entry.label);
         a.attr('title', entry.tooltip);

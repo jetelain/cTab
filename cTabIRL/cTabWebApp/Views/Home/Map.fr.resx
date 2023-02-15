@@ -151,7 +151,7 @@
     <value>Déconnecté</value>
   </data>
   <data name="Dismiss alert" xml:space="preserve">
-    <value>Arrêter l'alerte</value>
+    <value>Lever l'alerte</value>
   </data>
   <data name="EFIS" xml:space="preserve">
     <value>EFIS</value>

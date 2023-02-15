@@ -1850,5 +1850,14 @@ namespace cTabWebApp {
                 return ResourceManager.GetString("STR_ctab_core_zoomOutDetails", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Where is the unit moving?.
+        /// </summary>
+        public static string WhereIsTheUnitMoving {
+            get {
+                return ResourceManager.GetString("WhereIsTheUnitMoving", resourceCulture);
+            }
+        }
     }
 }

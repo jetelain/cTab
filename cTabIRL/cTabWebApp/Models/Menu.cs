@@ -9,6 +9,8 @@ namespace cTabWebApp.Models
     {
         public MenuItem[] Items { get; set; }
         public int MenuId { get; set; }
+        public string Class { get; private set; }
+        public string Title { get; private set; }
 
         public static Menu[] CreateMenus()
         {
@@ -204,6 +206,8 @@ namespace cTabWebApp.Models
                 new Menu()
                 {
                     MenuId = 13,
+                    Class = "ctab-compass",
+                    Title = SharedResource.WhereIsTheUnitMoving,
                     Items = new [] {
                         new MenuItem
                         {
