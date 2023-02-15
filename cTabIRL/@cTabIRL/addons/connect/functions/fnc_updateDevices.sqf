@@ -18,12 +18,12 @@ if ([_player,["ItemcTab", "ItemAndroid"]] call cTab_fnc_checkGear) then {
 };
 
 if ( _vehicle != _player) then {
-	if (_player == driver _vehicle || { {_deviceLevel == 2} || {_player == _vehicle call cTab_fnc_getCopilot} }) then {
+	if (_player == driver _vehicle or { {_deviceLevel == 2} or {_player == _vehicle call cTab_fnc_getCopilot} }) then {
 		_vehicleMode = if (_vehicle isKindOf "Helicopter") then { 2 } else { 1 };
 	};
 };
 
-if ( GVAR(deviceLevel) != _deviceLevel || { GVAR(vehicleMode) != _vehicleMode }) then {
+if ( GVAR(deviceLevel) != _deviceLevel or { GVAR(vehicleMode) != _vehicleMode }) then {
 	GVAR(deviceLevel) = _deviceLevel;
 	
 	if ( GVAR(vehicleMode) != _vehicleMode ) then {
