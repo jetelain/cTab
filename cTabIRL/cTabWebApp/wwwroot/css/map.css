@@ -72,3 +72,22 @@ i.fas.fa-helicopter {
     margin-left: -3px;
     margin-right: -3px;
 }
+
+
+.ctab-menu {
+    min-width: 150px;
+}
+    .ctab-menu .dropdown-item {
+        background-repeat: no-repeat;
+        background-size: contain;
+        padding-left: 2rem;
+    }
+
+    .ctab-menu.ctab-compass .dropdown-item {
+        width:33%;
+    }
+    .ctab-menu.ctab-compass {
+        display: flex;
+        flex-wrap: wrap;
+        width: 300px;
+    }

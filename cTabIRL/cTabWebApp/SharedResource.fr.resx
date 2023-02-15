@@ -325,7 +325,7 @@
     <value>Avion</value>
   </data>
   <data name="STR_ctab_core_UnknownMenu" xml:space="preserve">
-    <value>Iconnu</value>
+    <value>Inconnu</value>
   </data>
   <data name="STR_ctab_core_SingularMenu" xml:space="preserve">
     <value>1 Personnel</value>
