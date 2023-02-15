@@ -349,6 +349,15 @@ namespace cTabWebApp {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Combat outpost.
+        /// </summary>
+        public static string STR_ctab_core_CombatOutpost {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_CombatOutpost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Compose &gt;&gt;.
         /// </summary>
         public static string STR_ctab_core_ComposeMessage {
@@ -399,6 +408,15 @@ namespace cTabWebApp {
         public static string STR_ctab_core_ConfigureTAD {
             get {
                 return ResourceManager.GetString("STR_ctab_core_ConfigureTAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Command and control.
+        /// </summary>
+        public static string STR_ctab_core_ControlPointMenu {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_ControlPointMenu", resourceCulture);
             }
         }
         
@@ -718,6 +736,15 @@ namespace cTabWebApp {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à IED.
+        /// </summary>
+        public static string STR_ctab_core_IED {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_IED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Toggle Main Interface.
         /// </summary>
         public static string STR_ctab_core_ifMain {
@@ -831,6 +858,15 @@ namespace cTabWebApp {
         public static string STR_ctab_core_LZMenu {
             get {
                 return ResourceManager.GetString("STR_ctab_core_LZMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Manoeuvre.
+        /// </summary>
+        public static string STR_ctab_core_ManoeuvreMenu {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_ManoeuvreMenu", resourceCulture);
             }
         }
         
@@ -1006,6 +1042,15 @@ namespace cTabWebApp {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Mine.
+        /// </summary>
+        public static string STR_ctab_core_Mine {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_Mine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Mortar.
         /// </summary>
         public static string STR_ctab_core_MortarMenu {
@@ -1087,6 +1132,15 @@ namespace cTabWebApp {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Unspecified outpost.
+        /// </summary>
+        public static string STR_ctab_core_Outpost {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_Outpost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Plane.
         /// </summary>
         public static string STR_ctab_core_PlaneMenu {
@@ -1110,6 +1164,132 @@ namespace cTabWebApp {
         public static string STR_ctab_core_PlatoonMenu {
             get {
                 return ResourceManager.GetString("STR_ctab_core_PlatoonMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à CCP Casualty Collection.
+        /// </summary>
+        public static string STR_ctab_core_PointCCP {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_PointCCP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à CKP - Checkpoint.
+        /// </summary>
+        public static string STR_ctab_core_PointCKP {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_PointCKP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Contact Point.
+        /// </summary>
+        public static string STR_ctab_core_PointContact {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_PointContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Coordinating Point.
+        /// </summary>
+        public static string STR_ctab_core_PointCoord {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_PointCoord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à DET Detainee Collection.
+        /// </summary>
+        public static string STR_ctab_core_PointDET {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_PointDET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à EC Entry Control.
+        /// </summary>
+        public static string STR_ctab_core_PointEC {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_PointEC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à MEDEVAC Pick-Up Point.
+        /// </summary>
+        public static string STR_ctab_core_PointMED {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_PointMED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à PD Point of Departure.
+        /// </summary>
+        public static string STR_ctab_core_PointPD {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_PointPD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à R3P Rearm, Refuel and Resupply.
+        /// </summary>
+        public static string STR_ctab_core_PointR3P {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_PointR3P", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à RLY Rally Point.
+        /// </summary>
+        public static string STR_ctab_core_PointRLY {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_PointRLY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à SOS Distress call.
+        /// </summary>
+        public static string STR_ctab_core_PointSOS {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_PointSOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à SP Start Point.
+        /// </summary>
+        public static string STR_ctab_core_PointSP {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_PointSP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Target reference point.
+        /// </summary>
+        public static string STR_ctab_core_PointTarget {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_PointTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Unspecified Control Point.
+        /// </summary>
+        public static string STR_ctab_core_PointUnspec {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_PointUnspec", resourceCulture);
             }
         }
         
@@ -1308,6 +1488,15 @@ namespace cTabWebApp {
         public static string STR_ctab_core_StationaryMenu {
             get {
                 return ResourceManager.GetString("STR_ctab_core_StationaryMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sustainment.
+        /// </summary>
+        public static string STR_ctab_core_SustainmentMenu {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_SustainmentMenu", resourceCulture);
             }
         }
         

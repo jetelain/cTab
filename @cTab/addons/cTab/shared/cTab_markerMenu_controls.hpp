@@ -1,9 +1,34 @@
+#define CTAB_MENU_ENTRY(label,index,pos,value,next) \
+		class btn##index: cTab_MenuItem \
+		{ \
+			idc = -1; text = label; \
+			x = 0; y = MENU_elementY(index); w = MENU_W; h = MENU_elementH; sizeEx = MENU_sizeEx; \
+			action = QUOTE(cTabUserSelIcon set [ARR_2(pos,value)];[next] call cTab_fnc_userMenuSelect;); \
+		};
+
+#define CTAB_MENU_ENTRY_NAV(label,index,next) \
+		class btn##index: cTab_MenuItem \
+		{ \
+			idc = -1; text = label; \
+			x = 0; y = MENU_elementY(index); w = MENU_W; h = MENU_elementH; sizeEx = MENU_sizeEx; \
+			action = QUOTE([next] call cTab_fnc_userMenuSelect;); \
+		};
+
+#define CTAB_MENU_ENTRY_EXIT(index) CTAB_MENU_ENTRY_NAV($STR_ctab_core_MenuExit,index,0)
+
+#define CTAB_MENU_BACKGROUND(size) \
+		class background : cTab_IGUIBack \
+		{ \
+			idc = -1; \
+			x = 0; y = 0; w = MENU_W; h = MENU_H(size); \
+		};
+
 class MainSubmenu: cTab_RscControlsGroup
 {
 	#ifndef cTab_IS_TABLET
-		#define cTab_MENU_MAX_ELEMENTS 4
+		#define cTab_MENU_MAX_ELEMENTS 7
 	#else
-		#define cTab_MENU_MAX_ELEMENTS 5
+		#define cTab_MENU_MAX_ELEMENTS 8
 	#endif
 	idc = 3300;
 	x = MENU_X;
@@ -53,6 +78,9 @@ class MainSubmenu: cTab_RscControlsGroup
 			sizeEx = MENU_sizeEx;
 			action = "[31] call cTab_fnc_userMenuSelect;";
 		};
+		CTAB_MENU_ENTRY_NAV($STR_ctab_core_ControlPointMenu,4,101)
+		CTAB_MENU_ENTRY_NAV($STR_ctab_core_ManoeuvreMenu,5,102)
+		CTAB_MENU_ENTRY_NAV($STR_ctab_core_SustainmentMenu,6,103)
 		#ifdef cTab_IS_TABLET
 			class lockUavCam: cTab_MenuItem
 			{
@@ -60,7 +88,7 @@ class MainSubmenu: cTab_RscControlsGroup
 				text = $STR_ctab_core_UAVLockMenu;
 				toolTip = $STR_ctab_core_UAVLockHint;
 				x = 0;
-				y = MENU_elementY(4);
+				y = MENU_elementY(7);
 				w = MENU_W;
 				h = MENU_elementH;
 				sizeEx = MENU_sizeEx;
@@ -83,7 +111,7 @@ class MainSubmenu: cTab_RscControlsGroup
 
 class EnemySub1: cTab_RscControlsGroup
 {
-	#define cTab_MENU_MAX_ELEMENTS 8
+	#define cTab_MENU_MAX_ELEMENTS 10
 	idc = 3301;
 	x = MENU_X;
 	y = MENU_Y;
@@ -179,6 +207,8 @@ class EnemySub1: cTab_RscControlsGroup
 			sizeEx = MENU_sizeEx;
 			action = "cTabUserSelIcon set [1,6];[12] call cTab_fnc_userMenuSelect;";
 		};
+		CTAB_MENU_ENTRY($STR_ctab_core_Mine,8,1,14,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_IED,9,1,15,1)
 		class exit: cTab_MenuExit
 		{
 			idc = -1;
@@ -645,48 +675,13 @@ class GenSub1: cTab_RscControlsGroup
 			sizeEx = MENU_sizeEx;
 			action = "cTabUserSelIcon set [1,31];[1] call cTab_fnc_userMenuSelect;";
 		};
-
-
-		class dotbtn: cTab_MenuItem
-		{
-			idc = IDC_USRMN_LZBTN;
-			text = $STR_ctab_core_DotMenu;
-			x = 0;
-			y = MENU_elementY(3);
-			w = MENU_W;
-			h = MENU_elementH;
-			sizeEx = MENU_sizeEx;
-			action = "cTabUserSelIcon set [1,100];[100] call cTab_fnc_userMenuSelect;";
-		};
-
-		class circlebtn: cTab_MenuItem
-		{
-			idc = IDC_USRMN_LZBTN;
-			text = $STR_ctab_core_CircleMenu;
-			x = 0;
-			y = MENU_elementY(4);
-			w = MENU_W;
-			h = MENU_elementH;
-			sizeEx = MENU_sizeEx;
-			action = "cTabUserSelIcon set [1,101];[100] call cTab_fnc_userMenuSelect;";
-		};
-
-		class exit: cTab_MenuExit
-		{
-			idc = -1;
-			text = $STR_ctab_core_MenuExit;
-			x = 0;
-			y = MENU_elementY(cTab_MENU_MAX_ELEMENTS);
-			w = MENU_W;
-			h = MENU_elementH;
-			sizeEx = MENU_sizeEx;
-			action = "[0] call cTab_fnc_userMenuSelect;";
-		};
+		CTAB_MENU_ENTRY($STR_ctab_core_CircleMenu,3,1,100,100)
+		CTAB_MENU_ENTRY($STR_ctab_core_CircleMenu,4,1,101,100)
+		CTAB_MENU_ENTRY_EXIT(cTab_MENU_MAX_ELEMENTS)
 	};
 };
 
-
-class TextMenu: cTab_RscControlsGroup
+class MenuCustomText: cTab_RscControlsGroup
 {
 	#define cTab_MENU_MAX_ELEMENTS 8
 	idc = 3308;
@@ -696,103 +691,76 @@ class TextMenu: cTab_RscControlsGroup
 	h = MENU_H(cTab_MENU_MAX_ELEMENTS);
 	class controls
 	{
-		class IGUIBack_2206: cTab_IGUIBack
-		{
-			idc = IDC_USRMN_IGUIBACK_2206;
-			x = 0;
-			y = 0;
-			w = MENU_W;
-			h = MENU_H(cTab_MENU_MAX_ELEMENTS);
-		};
-		class nonebtn: cTab_MenuItem
-		{
-			idc = IDC_USRMN_HQBTN;
-			text = $STR_ctab_core_TSMenu;
-			x = 0;
-			y = MENU_elementY(1);
-			w = MENU_W;
-			h = MENU_elementH;
-			sizeEx = MENU_sizeEx;
-			action = "cTabUserSelIcon set [2,0];[1] call cTab_fnc_userMenuSelect;";
-		};
-		class abtn: cTab_MenuItem
-		{
-			idc = IDC_USRMN_LZBTN;
-			text = $STR_ctab_core_AWithTSMenu;
-			x = 0;
-			y = MENU_elementY(2);
-			w = MENU_W;
-			h = MENU_elementH;
-			sizeEx = MENU_sizeEx;
-			action = "cTabUserSelIcon set [2,1];[1] call cTab_fnc_userMenuSelect;";
-		};
-		class bbtn: cTab_MenuItem
-		{
-			idc = IDC_USRMN_LZBTN;
-			text = $STR_ctab_core_BWithTSMenu;
-			x = 0;
-			y = MENU_elementY(3);
-			w = MENU_W;
-			h = MENU_elementH;
-			sizeEx = MENU_sizeEx;
-			action = "cTabUserSelIcon set [2,2];[1] call cTab_fnc_userMenuSelect;";
-		};
-		class cbtn: cTab_MenuItem
-		{
-			idc = IDC_USRMN_LZBTN;
-			text = $STR_ctab_core_CWithTSMenu;
-			x = 0;
-			y = MENU_elementY(4);
-			w = MENU_W;
-			h = MENU_elementH;
-			sizeEx = MENU_sizeEx;
-			action = "cTabUserSelIcon set [2,3];[1] call cTab_fnc_userMenuSelect;";
-		};
-		class dbtn: cTab_MenuItem
-		{
-			idc = IDC_USRMN_LZBTN;
-			text = $STR_ctab_core_DWithTSMenu;
-			x = 0;
-			y = MENU_elementY(5);
-			w = MENU_W;
-			h = MENU_elementH;
-			sizeEx = MENU_sizeEx;
-			action = "cTabUserSelIcon set [2,4];[1] call cTab_fnc_userMenuSelect;";
-		};
-		class ebtn: cTab_MenuItem
-		{
-			idc = IDC_USRMN_LZBTN;
-			text = $STR_ctab_core_EWithTSMenu;
-			x = 0;
-			y = MENU_elementY(6);
-			w = MENU_W;
-			h = MENU_elementH;
-			sizeEx = MENU_sizeEx;
-			action = "cTabUserSelIcon set [2,5];[1] call cTab_fnc_userMenuSelect;";
-		};
-		class fbtn: cTab_MenuItem
-		{
-			idc = IDC_USRMN_LZBTN;
-			text = $STR_ctab_core_FWithTSMenu;
-			x = 0;
-			y = MENU_elementY(7);
-			w = MENU_W;
-			h = MENU_elementH;
-			sizeEx = MENU_sizeEx;
-			action = "cTabUserSelIcon set [2,6];[1] call cTab_fnc_userMenuSelect;";
-		};
+		CTAB_MENU_BACKGROUND(cTab_MENU_MAX_ELEMENTS)
+		CTAB_MENU_ENTRY($STR_ctab_core_TSMenu,1,2,0,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_AWithTSMenu,2,2,1,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_BWithTSMenu,3,2,2,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_CWithTSMenu,4,2,3,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_DWithTSMenu,5,2,4,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_EWithTSMenu,6,2,5,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_FWithTSMenu,7,2,6,1)
+		CTAB_MENU_ENTRY_EXIT(cTab_MENU_MAX_ELEMENTS)
+	};
+};
+
+class MenuControlPoint: cTab_RscControlsGroup
+{
+	#define cTab_MENU_MAX_ELEMENTS 9
+	idc = 3309;
+	x = MENU_X;
+	y = MENU_Y;
+	w = MENU_W;
+	h = MENU_H(cTab_MENU_MAX_ELEMENTS);
+	class controls
+	{
+		CTAB_MENU_BACKGROUND(cTab_MENU_MAX_ELEMENTS)
+		CTAB_MENU_ENTRY($STR_ctab_core_PointUnspec,1,1,200,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_PointContact,2,1,102,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_PointCoord,3,1,103,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_PointCKP,4,1,201,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_PointSOS,5,1,202,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_PointEC,6,1,203,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_PointRLY,7,1,204,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_PointSP,8,1,205,1)
+		CTAB_MENU_ENTRY_EXIT(cTab_MENU_MAX_ELEMENTS)
+	};
+};
+
+class MenuManoeuvre: cTab_RscControlsGroup
+{
+	#define cTab_MENU_MAX_ELEMENTS 5
+	idc = 3310;
+	x = MENU_X;
+	y = MENU_Y;
+	w = MENU_W;
+	h = MENU_H(cTab_MENU_MAX_ELEMENTS);
+	class controls
+	{
+		CTAB_MENU_BACKGROUND(cTab_MENU_MAX_ELEMENTS)
+		CTAB_MENU_ENTRY($STR_ctab_core_Outpost,1,1,104,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_CombatOutpost,2,1,105,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_PointTarget,3,1,106,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_PointPD,4,1,206,1)
+		CTAB_MENU_ENTRY_EXIT(cTab_MENU_MAX_ELEMENTS)
+	};
+};
 
 
-		class exit: cTab_MenuExit
-		{
-			idc = -1;
-			text = $STR_ctab_core_MenuExit;
-			x = 0;
-			y = MENU_elementY(cTab_MENU_MAX_ELEMENTS);
-			w = MENU_W;
-			h = MENU_elementH;
-			sizeEx = MENU_sizeEx;
-			action = "[0] call cTab_fnc_userMenuSelect;";
-		};
+class MenuSustainment: cTab_RscControlsGroup
+{
+	#define cTab_MENU_MAX_ELEMENTS 5
+	idc = 3311;
+	x = MENU_X;
+	y = MENU_Y;
+	w = MENU_W;
+	h = MENU_H(cTab_MENU_MAX_ELEMENTS);
+	class controls
+	{
+		CTAB_MENU_BACKGROUND(cTab_MENU_MAX_ELEMENTS)
+		CTAB_MENU_ENTRY($STR_ctab_core_PointCCP,1,1,207,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_PointDET,2,1,208,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_PointMED,3,1,209,1)
+		CTAB_MENU_ENTRY($STR_ctab_core_PointR3P,4,1,210,1)
+		CTAB_MENU_ENTRY_EXIT(cTab_MENU_MAX_ELEMENTS)
 	};
 };

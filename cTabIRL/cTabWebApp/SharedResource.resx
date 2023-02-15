@@ -651,4 +651,67 @@
   <data name="STR_ctab_core_TSMenu">
     <value>Timestamp only</value>
   </data>
+  <data name="STR_ctab_core_ControlPointMenu">
+    <value>Command and control</value>
+  </data>
+  <data name="STR_ctab_core_ManoeuvreMenu">
+    <value>Manoeuvre</value>
+  </data>
+  <data name="STR_ctab_core_SustainmentMenu">
+    <value>Sustainment</value>
+  </data>
+  <data name="STR_ctab_core_Mine">
+    <value>Mine</value>
+  </data>
+  <data name="STR_ctab_core_IED">
+    <value>IED</value>
+  </data>
+  <data name="STR_ctab_core_PointUnspec">
+    <value>Unspecified Control Point</value>
+  </data>
+  <data name="STR_ctab_core_PointContact">
+    <value>Contact Point</value>
+  </data>
+  <data name="STR_ctab_core_PointCoord">
+    <value>Coordinating Point</value>
+  </data>
+  <data name="STR_ctab_core_PointCKP">
+    <value>CKP - Checkpoint</value>
+  </data>
+  <data name="STR_ctab_core_PointSOS">
+    <value>SOS Distress call</value>
+  </data>
+  <data name="STR_ctab_core_PointEC">
+    <value>EC Entry Control</value>
+  </data>
+  <data name="STR_ctab_core_PointRLY">
+    <value>RLY Rally Point</value>
+  </data>
+  <data name="STR_ctab_core_PointSP">
+    <value>SP Start Point</value>
+  </data>
+  <data name="STR_ctab_core_Outpost">
+    <value>Unspecified outpost</value>
+  </data>
+  <data name="STR_ctab_core_CombatOutpost">
+    <value>Combat outpost</value>
+  </data>
+  <data name="STR_ctab_core_PointTarget">
+    <value>Target reference point</value>
+  </data>
+  <data name="STR_ctab_core_PointPD">
+    <value>PD Point of Departure</value>
+  </data>
+  <data name="STR_ctab_core_PointCCP">
+    <value>CCP Casualty Collection</value>
+  </data>
+  <data name="STR_ctab_core_PointDET">
+    <value>DET Detainee Collection</value>
+  </data>
+  <data name="STR_ctab_core_PointMED">
+    <value>MEDEVAC Pick-Up Point</value>
+  </data>
+  <data name="STR_ctab_core_PointR3P">
+    <value>R3P Rearm, Refuel and Resupply</value>
+  </data>
 </root>

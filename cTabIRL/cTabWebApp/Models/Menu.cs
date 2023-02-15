@@ -31,6 +31,21 @@ namespace cTabWebApp.Models
                         {
                             Label = SharedResource.STR_ctab_core_GeneralMenu,
                             NextMenu = 31
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_ControlPointMenu,
+                            NextMenu = 101
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_ManoeuvreMenu,
+                            NextMenu = 102
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_SustainmentMenu,
+                            NextMenu = 103
                         }
                     }
                 },
@@ -75,6 +90,17 @@ namespace cTabWebApp.Models
                         {
                             Label = SharedResource.STR_ctab_core_UnknownMenu,
                             Select1 = 6, NextMenu = 12
+                        },
+
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_Mine,
+                            Select1 = 14
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_IED,
+                            Select1 = 15
                         }
                     }
                 },
@@ -350,7 +376,115 @@ namespace cTabWebApp.Models
                         }
                     }
 
-                }
+                },
+
+
+                new Menu()
+                {
+                    MenuId = 101,
+                    Items = new [] {
+
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PointUnspec,
+                            Select1 = 200
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PointContact,
+                            Select1 = 102
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PointCoord,
+                            Select1 = 103
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PointCKP,
+                            Select1 = 201,
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PointSOS,
+                            Select1 = 202,
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PointEC,
+                            Select1 = 203,
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PointRLY,
+                            Select1 = 204,
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PointSP,
+                            Select1 = 205,
+                        }
+                    }
+
+                },
+
+
+
+                new Menu()
+                {
+                    MenuId = 102,
+                    Items = new [] {
+
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_Outpost,
+                            Select1 = 104
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_CombatOutpost,
+                            Select1 = 105
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PointTarget,
+                            Select1 = 106
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PointPD,
+                            Select1 = 206,
+                        },
+                    }
+
+                },new Menu()
+                {
+                    MenuId = 103,
+                    Items = new [] {
+
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PointCCP,
+                            Select1 = 207
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PointDET,
+                            Select1 = 208
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PointMED,
+                            Select1 = 209
+                        },
+                        new MenuItem
+                        {
+                            Label = SharedResource.STR_ctab_core_PointR3P,
+                            Select1 = 210,
+                        },
+                    }
+
+                },
             };
         }
     }

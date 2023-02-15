@@ -687,5 +687,92 @@
             <English>F + Timestamp</English>
             <French>F + Horodatage</French>
         </Key>
+
+
+        
+        <Key ID="STR_ctab_core_ControlPointMenu">
+            <English>Command and control</English>
+            <French>Commandement</French>
+        </Key>
+        <Key ID="STR_ctab_core_ManoeuvreMenu">
+            <English>Manoeuvre</English>
+            <French>Manoeuvre</French>
+        </Key>
+        <Key ID="STR_ctab_core_SustainmentMenu">
+            <English>Sustainment</English>
+            <French>Logistique</French>
+        </Key>
+        <Key ID="STR_ctab_core_Mine">
+            <English>Mine</English>
+            <French>Mine</French>
+        </Key>
+        <Key ID="STR_ctab_core_IED">
+            <English>IED</English>
+            <French>IED/EEI</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointUnspec">
+            <English>Unspecified Control Point</English>
+            <French>Unspecified Control Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointContact">
+            <English>Contact Point</English>
+            <French>Contact Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointCoord">
+            <English>Coordinating Point</English>
+            <French>Coordinating Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointCKP">
+            <English>CKP - Checkpoint</English>
+            <French>CKP - Checkpoint</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointSOS">
+            <English>SOS Distress call</English>
+            <French>SOS Distress call</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointEC">
+            <English>EC Entry Control</English>
+            <French>EC Entry Control</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointRLY">
+            <English>RLY Rally Point</English>
+            <French>RLY Rally Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointSP">
+            <English>SP Start Point</English>
+            <French>SP Start Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_Outpost">
+            <English>Unspecified outpost</English>
+            <French>Unspecified outpost</French>
+        </Key>
+        <Key ID="STR_ctab_core_CombatOutpost">
+            <English>Combat outpost</English>
+            <French>Combat outpost</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointTarget">
+            <English>Target reference point</English>
+            <French>Target reference point</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointPD">
+            <English>PD Point of Departure</English>
+            <French>PD Point of Departure</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointCCP">
+            <English>CCP Casualty Collection</English>
+            <French>CCP Casualty Collection</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointDET">
+            <English>DET Detainee Collection</English>
+            <French>DET Detainee Collection</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointMED">
+            <English>MEDEVAC Pick-Up Point</English>
+            <French>EVASAN Point récupération</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointR3P">
+            <English>R3P Rearm, Refuel and Resupply</English>
+            <French>R3P Réarmer et ravitailler</French>
+        </Key>
     </Package>
 </Project>
