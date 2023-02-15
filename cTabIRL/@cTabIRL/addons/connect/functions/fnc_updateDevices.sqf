@@ -30,7 +30,7 @@ if ( GVAR(deviceLevel) != _deviceLevel || { GVAR(vehicleMode) != _vehicleMode })
 		// Update PFH speed as EFIS needs more precise data
 		private _index = CBA_common_PFHhandles param [GVAR(updatePFH)];
 		private _pfh = CBA_common_perFrameHandlerArray select _index;
-		private _newDelay = if (_vehicleMode > 0) then { 0.1 } else { 0.25 };
+		private _newDelay = if (_vehicleMode > 1) then { 0.1 } else { 0.25 };
 		INFO_2("Update PFH delay from %1 to %2", _pfh select 1, _newDelay);
 		_pfh set [1, _newDelay];
 	};
