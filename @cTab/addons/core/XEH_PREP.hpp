@@ -89,4 +89,5 @@ if ( hasInterface ) then {
 	PREP(sendMessage);
 	PREP(deleteMessages);
 	PREP(gridPosition);
+	PREP(ticAlert);
 };

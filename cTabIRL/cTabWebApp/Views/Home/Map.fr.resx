@@ -150,6 +150,9 @@
   <data name="Disconnected" xml:space="preserve">
     <value>Déconnecté</value>
   </data>
+  <data name="Dismiss alert" xml:space="preserve">
+    <value>Arrêter l'alerte</value>
+  </data>
   <data name="EFIS" xml:space="preserve">
     <value>EFIS</value>
   </data>
@@ -204,6 +207,9 @@
   <data name="Send" xml:space="preserve">
     <value>Envoyer</value>
   </data>
+  <data name="Send alert" xml:space="preserve">
+    <value>Envoyer l'alerte</value>
+  </data>
   <data name="Sent" xml:space="preserve">
     <value>Envoyé</value>
   </data>
@@ -230,6 +236,9 @@
   </data>
   <data name="Top bar displays connectivity, heading, clock time and MGRS position (meter precision)." xml:space="preserve">
     <value>La barre haute affiche la connectivité, la boussole numérique, l'heure, et la position MGRS (précision métrique).</value>
+  </data>
+  <data name="Troop In Contact ALERT" xml:space="preserve">
+    <value>Alerte TIC (Troop In Contact)</value>
   </data>
   <data name="Unload current map" xml:space="preserve">
     <value>Décharger la carte actuelle</value>

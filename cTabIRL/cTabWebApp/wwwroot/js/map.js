@@ -80,6 +80,10 @@ var noSleepButton = null;
 var isNoSleep = false;
 var noSleep = null;
 var efisMapButton = null;
+var ticButton = null;
+var selfGroupId = null;
+var selfIsInContact = false;
+var groupsInContact = [];
 
 function updateButtons() {
     centerOnPositionButton.setClass(centerOnPosition ? 'btn-primary' : 'btn-outline-secondary');
@@ -148,16 +152,25 @@ function generateMenu(id, latlng) {
     if (id == 0) {
         userMarkerData = {};
     }
-    var div = $('<div style="min-width:150px;"></div>');
+    var div = $('<div class="ctab-menu"></div>');
     if (id == 0) {
         var a = $('<div class="text-center"></div>');
         a.html(generateLocationInfos(latlng));
         a.appendTo(div);
     }
+    if (id == 13) {
+        div.addClass('ctab-compass');
+    }
+
     menus['' + id].forEach(function (entry) {
         var a = $('<a class="dropdown-item" href="#"></a>');
         a.text(entry.label);
         a.attr('title', entry.tooltip);
+        if (entry.preview) {
+            a.css({ 'background-image': 'url(' + entry.preview + ')' });
+        }
+
+        //a.prepend($('<img />').attr({ src: entry.preview, height: 24 }));
         a.on('click', function () {
             if (entry.select1 !== null) userMarkerData.d1 = entry.select1;
             if (entry.select2 !== null) userMarkerData.d2 = entry.select2;
@@ -166,7 +179,7 @@ function generateMenu(id, latlng) {
                 tempUserPopup.setContent(generateMenu(entry.nextMenu, latlng));
             } else {
                 tempUserPopup.remove();
-                connection.invoke('WebAddUserMarker',
+                connection.send('WebAddUserMarker',
                     {
                         x: Math.trunc(latlng.lng),
                         y: Math.trunc(latlng.lat),
@@ -199,7 +212,7 @@ function showMarkerMenu(marker) {
         var a = $('<a class="dropdown-item" href="#"></a>');
         a.text(texts.deleteMarker);
         a.on('click', function () {
-            connection.invoke("WebDeleteUserMarker", { id: marker.options.marker.id });
+            connection.send("WebDeleteUserMarker", { id: marker.options.marker.id });
             tempUserPopup.remove();
             return false;
         });
@@ -345,6 +358,15 @@ function initMap(mapInfos, worldName) {
     })).addTo(map);
     efisMapButton.j().attr('title', $('#efislink').text());
 
+
+    (ticButton = L.control.overlayButton({
+        content: 'TIC',
+        click: function () { $('#tic').modal('show'); },
+        initialClass: 'btn-outline-danger',
+        position: 'topright'
+    })).addTo(map);
+
+
     currentMap = map;
     currentMapInfos = mapInfos;
     selfMarker = null;
@@ -389,7 +411,19 @@ function updatePosition(x, y, heading, grp, veh) {
 }
 
 function createIcon(marker) {
-
+    if (marker.symbol == "img:tic.png") {
+        var iconHtml = $('<div></div>').append(
+            $('<div></div>')
+                .addClass('text-marker-content-small')
+                .text(marker.name)
+                .prepend($('<img src="/img/tic.png" width="56" height="56" />&nbsp;')))
+            .html();
+        return new L.DivIcon({
+            className: 'text-marker',
+            html: iconHtml,
+            iconAnchor: [28, 28]
+        });
+    }
     if (/^img:/.test(marker.symbol)) {
         var iconHtml = $('<div></div>').append(
             $('<div></div>')
@@ -404,13 +438,13 @@ function createIcon(marker) {
             iconAnchor: [16, 16]
         });
     }
-    var symOptions = { size: 24, additionalInformation: marker.name };
+    var symOptions = { size: 24, additionalInformation: marker.name, strokeWidth: 6, outlineWidth:3 };
     if (marker.kind == 'u' && marker.heading < 360) {
         symOptions.direction = marker.heading;
     }
     var sym = new ms.Symbol(marker.symbol, symOptions);
     return L.icon({
-        iconUrl: sym.asCanvas(window.devicePixelRatio).toDataURL(),
+        iconUrl: sym.asCanvas(window.devicePixelRatio*2).toDataURL(),
         iconSize: [sym.getSize().width, sym.getSize().height],
         iconAnchor: [sym.getAnchor().x, sym.getAnchor().y]
     });
@@ -421,6 +455,7 @@ function updateMarkers(makers) {
     var markersToKeep = [];
     var toToKeep = [];
 
+    groupsInContact = [];
     makers.forEach(function (marker) {
         if (!marker.vehicle || !existingMarkers[marker.vehicle]) {
             var existing = existingMarkers[marker.id];
@@ -432,7 +467,11 @@ function updateMarkers(makers) {
                 }
             }
             else {
-                var newMarker = L.marker([marker.y, marker.x], { icon: createIcon(marker), marker: marker }).addTo(currentMap);
+                var newMarker = L.marker([marker.y, marker.x], {
+                    icon: createIcon(marker),
+                    marker: marker,
+                    zIndexOffset: marker.kind == 'u' ? -1000 : 0
+                }).addTo(currentMap);
                 newMarker.on('click', function () { showMarkerMenu(newMarker); });
                 existingMarkers[marker.id] = newMarker;
                 if (marker.kind == 'u') {
@@ -440,6 +479,9 @@ function updateMarkers(makers) {
                 }
             }
             markersToKeep.push(marker.id);
+        }
+        if (marker.kind == 'u' && marker.symbol == "img:tic.png") {
+            groupsInContact.push(marker.group);
         }
         if (marker.kind == 'g') {
             var to = knownTo[marker.id];
@@ -465,6 +507,18 @@ function updateMarkers(makers) {
             delete knownTo[id];
         }
     });
+
+    updateIsInContact();
+}
+
+function updateIsInContact() {
+    var isInContact = groupsInContact.indexOf(selfGroupId) != -1;
+    if (selfIsInContact != isInContact) {
+        selfIsInContact = isInContact;
+        ticButton.setClass(isInContact ? 'btn-danger' : 'btn-outline-danger');
+        $(isInContact ? '#tic-send' : '#tic-dismiss').hide();
+        $(isInContact ? '#tic-dismiss' : '#tic-send').show();
+    }
 }
 
 function generateIcon(data) {
@@ -614,7 +668,7 @@ function displayMessage(link, message) {
         $(link).find('i').removeClass('fa fa-envelope');
         $(link).find('i').addClass('far fa-envelope-open');
         message.state = 1;
-        connection.invoke("WebMessageRead", { id: message.id });
+        connection.send("WebMessageRead", { id: message.id });
     }
     displayedMessage = message;
     updateUnread();
@@ -801,7 +855,7 @@ function loadTacMapList() {
                 $('#tacmap-list').empty();
                 data.forEach(entry => {
                     $('#tacmap-list').append($('<a class="btn btn-outline-secondary btn-block text-left"></a>').text(entry.label).on('click', function () {
-                        connection.invoke("WebSyncTacMap", { mapId: { tacMapID: entry.id, readToken: entry.readOnlyToken } });
+                        connection.send("WebSyncTacMap", { mapId: { tacMapID: entry.id, readToken: entry.readOnlyToken } });
                         $('#tacmaploader').modal('hide');
                     }).prepend($('<img />').attr({ src: entry.previewHref['256'], class: 'mr-2' }).css({ width: '64px', height: '64px'})));
                 });
@@ -861,6 +915,10 @@ $(function () {
     connection.on("SetPosition", function (positionData) {
         updateClock(positionData.date);
         updatePosition(positionData.x, positionData.y, positionData.heading, positionData.group, positionData.vehicle);
+        if (selfGroupId != positionData.group) {
+            selfGroupId = positionData.group;
+            updateIsInContact();
+        }
     });
 
     connection.on("UpdateMarkers", function (data) {
@@ -964,7 +1022,7 @@ $(function () {
             var to = $('#compose-to').val();
             var body = $('#compose-text').val();
 
-            connection.invoke("WebSendMessage", { to: to, body: body });
+            connection.send("WebSendMessage", { to: to, body: body });
 
             closePerformated();
             $('#compose-text').val('');
@@ -988,7 +1046,7 @@ $(function () {
 
         $('#inbox-delete').on('click', function () {
             if (displayedMessage) {
-                connection.invoke("WebDeleteMessage", { id: displayedMessage.id });
+                connection.send("WebDeleteMessage", { id: displayedMessage.id });
                 clearMessage();
             }
         });
@@ -997,10 +1055,18 @@ $(function () {
             $('#tacmap-show').on('click', function () { $('#help').modal('hide'); $('#tacmaploader').modal('show'); loadTacMapList(); });
             $('#tacmap-refresh').on('click', loadTacMapList);
             $('#tacmap-disable').on('click', function () {
-                connection.invoke("WebSyncTacMap", {});
+                connection.send("WebSyncTacMap", {});
                 $('#help').modal('hide');
             });
         }
+
+        $('#tic-send').on('click', function () {
+            connection.send("WebTicAlert", { state: true});
+        });
+        $('#tic-dismiss').on('click', function () {
+            connection.send("WebTicAlert", { state: false });
+        }).hide();
+
     }
 
     setupFullViewHeight('.map');

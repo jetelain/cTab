@@ -28,6 +28,9 @@ addMissionEventHandler ["ExtensionCallback", {
 				[call cTab_fnc_getPlayerEncryptionKey, _markerIndex] call cTab_fnc_deleteUserMarker;
 			};
 		};
+		if( _function == "TicAlert" ) exitWith {
+			(parseSimpleArray _data) call ctab_core_fnc_ticAlert;
+		};
 		if( _function == "SendMessage" ) exitWith {
 			(parseSimpleArray _data) call FUNC(sendMessage);
 		};
