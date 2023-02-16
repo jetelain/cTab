@@ -16,7 +16,7 @@ if ( _previousMarker != -1 ) then {
 // Add "TIC" marker on player position
 if ( _isAlert ) then {
 	private _markerData = [
-		getPos cTab_player,
+		getPosASL cTab_player,
 		90,
 		0,
 		0,

@@ -52,6 +52,7 @@ cTabNotificationCache = [];
 cTab_player = objNull;
 
 GVAR(personnelDevices) = ["ItemcTab", "ItemAndroid", "ItemMicroDAGR"];
+GVAR(leaderDevices) = ["ItemcTab", "ItemAndroid"];
 
 /*
 Figure out the scaling factor based on the current map (island) being played
@@ -366,7 +367,7 @@ cTab_Tablet_btnACT = ctab_fnc_tablet_btnACT;
 		
 		[QGVARMAIN(messagesUpdated)] call CBA_fnc_localEvent;
 
-		if (_msgRecipient == cTab_player && _sender != cTab_player && {_playerEncryptionKey == _msgEncryptionKey} && {[cTab_player,["ItemcTab","ItemAndroid"]] call cTab_fnc_checkGear}) then {
+		if (_msgRecipient == cTab_player && _sender != cTab_player && {_playerEncryptionKey == _msgEncryptionKey} && {[cTab_player,GVAR(leaderDevices)] call cTab_fnc_checkGear}) then {
 			playSound "cTab_phoneVibrate";
 			
 			if (!isNil "cTabIfOpen" && {[cTabIfOpen select 1,"mode"] call cTab_fnc_getSettings == "MESSAGE"}) then {
