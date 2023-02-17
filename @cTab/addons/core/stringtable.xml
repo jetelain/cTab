@@ -298,7 +298,7 @@
         </Key>
         <Key ID="STR_ctab_core_TeamMenu">
             <English>Fireteam Ø</English>
-            <French>Equipe Ø</French>
+            <French>Equipage Ø</French>
         </Key>
         <Key ID="STR_ctab_core_TeamHint">
             <English>3–5 personnels</English>
@@ -306,7 +306,7 @@
         </Key>
         <Key ID="STR_ctab_core_SquadMenu">
             <English>Squad •</English>
-            <French>Groupe •</French>
+            <French>Equipe •</French>
         </Key>
         <Key ID="STR_ctab_core_SquadHint">
             <English>5–10 personnels</English>
@@ -773,6 +773,10 @@
         <Key ID="STR_ctab_core_PointR3P">
             <English>R3P Rearm, Refuel and Resupply</English>
             <French>R3P Réarmer et ravitailler</French>
+        </Key>
+        <Key ID="STR_ctab_core_WhereIsTheUnitMoving">
+            <English>Where is the unit moving?</English>
+            <French>Par où se déplace l'unité ?</French>
         </Key>
     </Package>
 </Project>
