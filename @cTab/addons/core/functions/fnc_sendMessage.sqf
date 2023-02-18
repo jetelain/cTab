@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ["_msgBody", "_recipList"];
+params ["_msgBody", "_recipList", ["_msgId", ""]];
 
 if (_msgBody isEqualTo "") exitWith {false};
 if (_recipList isEqualTo []) exitWith {false};
@@ -17,11 +17,11 @@ private _recipientNames = "";
 	} else {
 		_recipientNames = format ["%1; %2",_recipientNames,name _recip];
 	};
-	["cTab_msg_receive",[_recip,_msgTitle,_msgBody,_playerEncryptionKey,cTab_player]] call CBA_fnc_whereLocalEvent;
+	["cTab_msg_receive",[_recip,_msgTitle,_msgBody,_playerEncryptionKey,cTab_player,_msgId]] call CBA_fnc_whereLocalEvent;
 } forEach _recipList;
 
 private _msgArray = cTab_player getVariable [format ["cTab_messages_%1",_playerEncryptionKey],[]];
-_msgArray pushBack [format ["%1 - %2",_time,_recipientNames],_msgBody,2];
+_msgArray pushBack [format ["%1 - %2",_time,_recipientNames],_msgBody,2,_msgId];
 cTab_player setVariable [format ["cTab_messages_%1",_playerEncryptionKey],_msgArray];
 
 if (!isNil "cTabIfOpen" && {[cTabIfOpen select 1,"mode"] call cTab_fnc_getSettings == "MESSAGE"}) then {

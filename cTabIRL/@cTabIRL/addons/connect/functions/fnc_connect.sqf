@@ -13,7 +13,7 @@ INFO_1("Connect to %1", GVAR(uri));
 "cTabExtension" callExtension ["Connect", [GVAR(uri), getPlayerUID player, profileName, GVAR(key)]];
 
 // Send mission data
-"cTabExtension" callExtension ["StartMission", [worldName, worldSize, date]];
+"cTabExtension" callExtension ["StartMission", [worldName, worldSize, date, serverName, missionName, ctab_sessionId]];
 
 // Setup initial loadout
 call FUNC(updateDevices);

@@ -7,7 +7,7 @@ private _msgArray = cTab_player getVariable [format ["cTab_messages_%1",_playerE
 
 // Allocate an id to each message that do not have already one
 {
-	if ( count _x == 3 ) then {
+	if ( count _x == 3 || { (_x # 3) == "" } ) then {
 		_x pushBack format ['m%1', GVAR(nextMessageId)];
 		GVAR(nextMessageId) = GVAR(nextMessageId) + 1;
 	};

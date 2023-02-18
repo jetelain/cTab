@@ -17,7 +17,8 @@ private _markerFilter = FUNC(markerFilter);
 					markerPolyline _markerName,
 					markerBrush _markerName,
 					markerColor _markerName,
-					_markerAlpha
+					_markerAlpha,
+					markerChannel _markerName
 				];
 			}else {
 				_simple pushBack [
@@ -30,7 +31,8 @@ private _markerFilter = FUNC(markerFilter);
 					markerBrush _markerName,
 					markerColor _markerName,
 					markerText _markerName,
-					_markerAlpha
+					_markerAlpha,
+					markerChannel _markerName
 				];
 			};
 		};

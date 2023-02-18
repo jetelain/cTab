@@ -353,14 +353,11 @@ cTab_Tablet_btnACT = ctab_fnc_tablet_btnACT;
 
 ["cTab_msg_receive",
 	{
-		_msgRecipient = _this select 0;
-		_msgTitle = _this select 1;
-		_msgBody = _this select 2;
-		_msgEncryptionKey = _this select 3;
-		_sender = _this select 4;
+		params ["_msgRecipient","_msgTitle","_msgBody","_msgEncryptionKey","_sender",["_msgId",""]];
+
 		_playerEncryptionKey = call cTab_fnc_getPlayerEncryptionKey;
 		_msgArray = _msgRecipient getVariable [format ["cTab_messages_%1",_msgEncryptionKey],[]];
-		_msgArray pushBack [_msgTitle,_msgBody,0];
+		_msgArray pushBack [_msgTitle,_msgBody,0,_msgId];
 		
 		_msgRecipient setVariable [format ["cTab_messages_%1",_msgEncryptionKey],_msgArray];
 		

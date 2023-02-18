@@ -32,6 +32,10 @@ publicVariable "cTab_helmetClass_has_HCam_server";
 cTab_userMarkerLists = [];
 cTab_userMarkerTransactionId = -1;
 
+// Session ID
+GVARMAIN(sessionId) = ([(floor (random 1000000)) toFixed 0] + systemTimeUTC) joinString '-';
+publicVariable QGVARMAIN(sessionId);
+
 ["CBA_settingsInitialized", {
 	
 	[] spawn {

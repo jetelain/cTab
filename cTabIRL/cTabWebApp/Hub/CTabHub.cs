@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Arma3TacMapLibrary.Arma3;
 using Arma3TacMapLibrary.Maps;
-using Arma3TacMapLibrary.TacMaps;
 using cTabWebApp.Services;
 using cTabWebApp.TacMaps;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -186,13 +185,19 @@ namespace cTabWebApp
             var worldName = ArmaSerializer.ParseString(message.Args[0]);
             var size = ArmaSerializer.ParseDouble(message.Args[1]) ?? 0d;
             var date = ArmaSerializer.ParseIntegerArray(message.Args[2]);
+            var serverName = message.Args.Length > 3 ? ArmaSerializer.ParseString(message.Args[3]) : string.Empty;
+            var missionName = message.Args.Length > 4 ? ArmaSerializer.ParseString(message.Args[4]) : string.Empty;
+            var ctabSessionId = message.Args.Length > 5 ? ArmaSerializer.ParseString(message.Args[5]) : string.Empty;
 
             state.LastMission = new MissionMessage()
             {
                 WorldName = worldName,
                 Size = size,
                 Date = ToDateTime(date),
-                Timestamp = message.Timestamp
+                Timestamp = message.Timestamp,
+                ServerName = serverName,
+                MissionName = missionName,
+                CtabSessionId = ctabSessionId
             };
 
             await Clients.Group(state.WebChannelName).SendAsync("Mission", state.LastMission);
@@ -273,7 +278,8 @@ namespace cTabWebApp
                             Size = ((object[])simpleMarker[4]).Cast<double>().ToArray(),
                             Dir = (double)simpleMarker[5],
                             Label = (string)simpleMarker[8],
-                            Alpha = (double)simpleMarker[9]
+                            Alpha = (double)simpleMarker[9],
+                            Channel = simpleMarker.Length > 10 ? Convert.ToInt32(simpleMarker[10]) : -1
                         });
                     }
                 }
@@ -288,7 +294,8 @@ namespace cTabWebApp
                         Dir = (double)simpleMarker[5],
                         Brush = (string)simpleMarker[6],
                         Color = ToHtmlColor((string)simpleMarker[7]),
-                        Alpha = (double)simpleMarker[9]
+                        Alpha = (double)simpleMarker[9],
+                        Channel = simpleMarker.Length > 10 ? Convert.ToInt32(simpleMarker[10]) : -1
                     });
                 }
             }
@@ -302,7 +309,8 @@ namespace cTabWebApp
                     Points = ((object[])polyMarker[1]).Cast<double>().Select(p => Math.Round(p, 1)).ToArray(),
                     Brush = (string)polyMarker[2],
                     Color = ToHtmlColor((string)polyMarker[3]),
-                    Alpha = (double)polyMarker[4]
+                    Alpha = (double)polyMarker[4],
+                    Channel = polyMarker.Length > 5 ? Convert.ToInt32(polyMarker[5]) : -1
                 });
             }
 

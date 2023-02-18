@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ['_targetId','_msgBody'];
+params ['_targetId', '_msgBody', ['_msgId', '']];
 
 private _playerEncryptionKey = call cTab_fnc_getPlayerEncryptionKey;
 private _time = call cTab_fnc_currentTime;
@@ -14,5 +14,5 @@ if ( _groupIndex != -1 ) then {
 };
 
 if ( count _recipList > 0 ) then {
-	[_msgBody, _recipList] call ctab_core_fnc_sendMessage;
+	[_msgBody, _recipList, _msgId] call ctab_core_fnc_sendMessage;
 };
