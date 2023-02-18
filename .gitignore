@@ -19,3 +19,5 @@ appsettings.Development.json
 /cTabIRL/cTabWebAppTests/obj
 /cTabIRL/cTabWebAppTests/bin
 *.bikey
+/@cTab/releases
+/cTabIRL/@cTabIRL/releases

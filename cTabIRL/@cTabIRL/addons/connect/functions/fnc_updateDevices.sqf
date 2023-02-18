@@ -4,6 +4,7 @@ params ['_player'];
 
 private _vehicle = vehicle _player;
 private _deviceLevel = 0;
+private _vehicleMode = 0;
 
 if ([_player,["ItemcTab", "ItemAndroid"]] call cTab_fnc_checkGear) then {
     _deviceLevel = 3; // BFT + Messaging
@@ -16,9 +17,25 @@ if ([_player,["ItemcTab", "ItemAndroid"]] call cTab_fnc_checkGear) then {
 	};
 };
 
-if ( GVAR(deviceLevel) != _deviceLevel ) then {
-	GVAR(deviceLevel) = _deviceLevel;
-	INFO_1("Device level changed to %1", _deviceLevel);
+if ( _vehicle != _player) then {
+	if ((_player == driver _vehicle) || { _deviceLevel == 2 || {_player == (_vehicle call cTab_fnc_getCopilot)} }) then {
+		_vehicleMode = if (_vehicle isKindOf "Helicopter") then { 2 } else { 1 };
+	};
+};
 
-	"cTabExtension" callExtension ["Devices", [_deviceLevel, ctab_core_useMils]];
+if ( GVAR(deviceLevel) != _deviceLevel || { GVAR(vehicleMode) != _vehicleMode }) then {
+	GVAR(deviceLevel) = _deviceLevel;
+	
+	if ( GVAR(vehicleMode) != _vehicleMode ) then {
+		// Update PFH speed as EFIS needs more precise data
+		private _index = CBA_common_PFHhandles param [GVAR(updatePFH)];
+		private _pfh = CBA_common_perFrameHandlerArray select _index;
+		private _newDelay = if (_vehicleMode > 1) then { 0.1 } else { 0.25 };
+		INFO_2("Update PFH delay from %1 to %2", _pfh select 1, _newDelay);
+		_pfh set [1, _newDelay];
+	};
+	
+	GVAR(vehicleMode) = _vehicleMode;
+	INFO_2("Devices: Device level to %1, Vehicle mode to %2", _deviceLevel, _vehicleMode);
+	"cTabExtension" callExtension ["Devices", [_deviceLevel, ctab_core_useMils, _vehicleMode]];
 };

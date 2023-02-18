@@ -150,6 +150,15 @@
   <data name="Disconnected" xml:space="preserve">
     <value>Déconnecté</value>
   </data>
+  <data name="Dismiss alert" xml:space="preserve">
+    <value>Lever l'alerte</value>
+  </data>
+  <data name="EFIS" xml:space="preserve">
+    <value>EFIS</value>
+  </data>
+  <data name="Electronic flight instrument system for helicopter pilots and co-pilots." xml:space="preserve">
+    <value>Electronic flight instrument system (système d'instruments de vol électronique) pour les pilotes et co-pilotes d'hélicoptère.</value>
+  </data>
   <data name="Exit and return to home" xml:space="preserve">
     <value>Sortir et revenir à l'accueil</value>
   </data>
@@ -198,6 +207,9 @@
   <data name="Send" xml:space="preserve">
     <value>Envoyer</value>
   </data>
+  <data name="Send alert" xml:space="preserve">
+    <value>Envoyer l'alerte</value>
+  </data>
   <data name="Sent" xml:space="preserve">
     <value>Envoyé</value>
   </data>
@@ -210,6 +222,9 @@
   <data name="Sign-in on {0}" xml:space="preserve">
     <value>S'identifier sur {0}</value>
   </data>
+  <data name="Switch to EFIS" xml:space="preserve">
+    <value>Basculer sur l'EFIS</value>
+  </data>
   <data name="Tactical map will be displayed on your mobile device and in Arma. Changes made on {0} will be applied in real-time." xml:space="preserve">
     <value>La carte tactique sera affiché sur votre appareil mobile et dans Arma. Les modifications apportées sur {0} seront appliquées en temps réel.</value>
   </data>
@@ -221,6 +236,9 @@
   </data>
   <data name="Top bar displays connectivity, heading, clock time and MGRS position (meter precision)." xml:space="preserve">
     <value>La barre haute affiche la connectivité, la boussole numérique, l'heure, et la position MGRS (précision métrique).</value>
+  </data>
+  <data name="Troop In Contact ALERT" xml:space="preserve">
+    <value>Alerte TIC (Troop In Contact)</value>
   </data>
   <data name="Unload current map" xml:space="preserve">
     <value>Décharger la carte actuelle</value>

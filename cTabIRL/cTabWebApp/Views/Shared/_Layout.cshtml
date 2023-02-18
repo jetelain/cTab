@@ -16,7 +16,8 @@
         }
     </title>
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/slate/bootstrap.min.css" rel="stylesheet" integrity="sha384-G9YbB4o4U6WS4wCthMOpAeweY4gQJyyx0P3nZbEBHyz+AtNoeasfRChmek1C2iqV" crossorigin="anonymous" />
-    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.6/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" />
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     @RenderSection("Styles", required: false)
 </head>
@@ -70,7 +71,7 @@
 
     <footer class="footer text-muted">
         <div class="container">
-            &copy; 2020 - <a asp-controller="Home" asp-action="Privacy">@SharedResource.Privacy</a>
+            &copy; 2020-2023 - <a asp-controller="Home" asp-action="Privacy">@SharedResource.Privacy</a>
             @if (!string.IsNullOrEmpty(Communauty.Contact))
             {
             @:- <a href="@Communauty.Contact">@SharedResource.Contact</a>

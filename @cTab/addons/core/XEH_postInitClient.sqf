@@ -52,6 +52,7 @@ cTabNotificationCache = [];
 cTab_player = objNull;
 
 GVAR(personnelDevices) = ["ItemcTab", "ItemAndroid", "ItemMicroDAGR"];
+GVAR(leaderDevices) = ["ItemcTab", "ItemAndroid"];
 
 /*
 Figure out the scaling factor based on the current map (island) being played
@@ -230,8 +231,8 @@ _a = profilenamespace getvariable ['Map_OPFOR_A',0.8];
 cTabColorGreen = [_r,_g,_b,_a];
 
 // Define Fire-Team colors
-// MAIN,RED,GREEN,BLUE,YELLOW
-cTabColorTeam = [cTabColorBlue,[200/255,0,0,0.8],[0,199/255,0,0.8],[0,0,200/255,0.8],[225/255,225/255,0,0.8]];
+// MAIN,RED,GREEN,BLUE,YELLOW,(empty)
+cTabColorTeam = [cTabColorBlue,[200/255,0,0,0.8],[0,199/255,0,0.8],[0,0,200/255,0.8],[225/255,225/255,0,0.8],[0,0,0,0]];
 
 // define vehicles that have FBCB2 monitor
 if (isNil "cTab_vehicleClass_has_FBCB2") then {
@@ -363,7 +364,7 @@ cTab_Tablet_btnACT = ctab_fnc_tablet_btnACT;
 		
 		[QGVARMAIN(messagesUpdated)] call CBA_fnc_localEvent;
 
-		if (_msgRecipient == cTab_player && _sender != cTab_player && {_playerEncryptionKey == _msgEncryptionKey} && {[cTab_player,["ItemcTab","ItemAndroid"]] call cTab_fnc_checkGear}) then {
+		if (_msgRecipient == cTab_player && _sender != cTab_player && {_playerEncryptionKey == _msgEncryptionKey} && {[cTab_player,GVAR(leaderDevices)] call cTab_fnc_checkGear}) then {
 			playSound "cTab_phoneVibrate";
 			
 			if (!isNil "cTabIfOpen" && {[cTabIfOpen select 1,"mode"] call cTab_fnc_getSettings == "MESSAGE"}) then {

@@ -29,12 +29,17 @@ header {
     font-size: 14px;
     font-weight: bold;
     vertical-align: middle;
+    text-shadow: 0px 0px 4px #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .text-marker-content-small {
     height: 24px;
     width: max-content;
     font-size: 10px;
     vertical-align: middle;
+    font-weight: bold;
+    text-shadow: 0px 0px 4px #fff;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 #statusbar {
     cursor: pointer;
@@ -62,3 +67,27 @@ header {
 #inbox-message {
     white-space: pre;
 }
+
+i.fas.fa-helicopter {
+    margin-left: -3px;
+    margin-right: -3px;
+}
+
+
+.ctab-menu {
+    min-width: 150px;
+}
+    .ctab-menu .dropdown-item {
+        background-repeat: no-repeat;
+        background-size: contain;
+        padding-left: 2rem;
+    }
+
+    .ctab-menu.ctab-compass .dropdown-item {
+        width:33%;
+    }
+    .ctab-menu.ctab-compass {
+        display: flex;
+        flex-wrap: wrap;
+        width: 300px;
+    }

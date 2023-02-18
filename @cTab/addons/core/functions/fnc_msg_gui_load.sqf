@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
 	(previously cTab_msg_gui_load in player_init.sqf)
 */
@@ -36,7 +37,7 @@ uiNamespace setVariable ['cTab_msg_playerList', _plrList];
 } count _msgArray;
 
 {
-	if ((side _x in _validSides) && {isPlayer _x} && {[_x,["ItemcTab","ItemAndroid"]] call cTab_fnc_checkGear}) then {
+	if ((side _x in _validSides) && {isPlayer _x} && {[_x,GVAR(leaderDevices)] call cTab_fnc_checkGear}) then {
 		_index = _plrlistControl lbAdd format ["%1:%2 (%3)",groupId group _x,[_x] call CBA_fnc_getGroupIndex,name _x];
 		_plrlistControl lbSetData [_index,str _x];
 	};

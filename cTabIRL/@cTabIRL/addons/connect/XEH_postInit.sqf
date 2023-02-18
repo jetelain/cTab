@@ -34,7 +34,7 @@ if (!hasInterface) exitWith { };
 	["vehicle", FUNC(updateDevices)] call CBA_fnc_addPlayerEventHandler;
 
 	// Update position 4 times per second
-	[FUNC(updatePosition), 0.25] call CBA_fnc_addPerFrameHandler;
+	GVAR(updatePFH) = [FUNC(updatePosition), 0.25] call CBA_fnc_addPerFrameHandler;
 
 	// Update markers each time required
 	["ctab_listsUpdated", FUNC(updateMarkers)] call CBA_fnc_addEventHandler;

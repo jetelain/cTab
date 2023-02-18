@@ -9,6 +9,14 @@ _data pushBack date;
 _data pushBack ([group player] call FUNC(getId));
 if ( _vehicle != player ) then {
 	_data pushBack ([_vehicle] call FUNC(getId));
+
+	if ( GVAR(vehicleMode) > 0 ) then {
+		_data pushBack (vectorDir _vehicle);
+		_data pushBack (vectorUp _vehicle);
+		_data pushBack (velocity _vehicle);
+		_data pushBack (getPosASL _vehicle);
+		_data pushBack (wind);
+	};
 };
 
 "cTabExtension" callExtension ["UpdatePosition", _data];

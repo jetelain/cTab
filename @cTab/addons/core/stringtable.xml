@@ -287,7 +287,7 @@
         </Key>
         <Key ID="STR_ctab_core_UnknownMenu">
             <English>Unknown</English>
-            <French>Iconnu</French>
+            <French>Inconnu</French>
         </Key>
         <!-- 
             Translators: Please ensure NATO APP-6 compliance
@@ -298,7 +298,7 @@
         </Key>
         <Key ID="STR_ctab_core_TeamMenu">
             <English>Fireteam Ø</English>
-            <French>Equipe Ø</French>
+            <French>Equipage Ø</French>
         </Key>
         <Key ID="STR_ctab_core_TeamHint">
             <English>3–5 personnels</English>
@@ -306,7 +306,7 @@
         </Key>
         <Key ID="STR_ctab_core_SquadMenu">
             <English>Squad •</English>
-            <French>Groupe •</French>
+            <French>Equipe •</French>
         </Key>
         <Key ID="STR_ctab_core_SquadHint">
             <English>5–10 personnels</English>
@@ -650,6 +650,133 @@
         <Key ID="STR_ctab_core_gridPrecision2">
             <English>1 m</English>
             <French>1 m</French>
+        </Key>
+        <Key ID="STR_ctab_core_DotMenu">
+            <English>Dot with label</English>
+            <French>Point avec libellé</French>
+        </Key>
+        <Key ID="STR_ctab_core_CircleMenu">
+            <English>Circle with label</English>
+            <French>Cercle avec libellé</French>
+        </Key>
+        <Key ID="STR_ctab_core_TSMenu">
+            <English>Timestamp only</English>
+            <French>Horodatage uniquement</French>
+        </Key>
+        <Key ID="STR_ctab_core_AWithTSMenu">
+            <English>A + Timestamp</English>
+            <French>A + Horodatage</French>
+        </Key>
+        <Key ID="STR_ctab_core_BWithTSMenu">
+            <English>B + Timestamp</English>
+            <French>B + Horodatage</French>
+        </Key>
+        <Key ID="STR_ctab_core_CWithTSMenu">
+            <English>C + Timestamp</English>
+            <French>C + Horodatage</French>
+        </Key>
+        <Key ID="STR_ctab_core_DWithTSMenu">
+            <English>D + Timestamp</English>
+            <French>D + Horodatage</French>
+        </Key>
+        <Key ID="STR_ctab_core_EWithTSMenu">
+            <English>E + Timestamp</English>
+            <French>E + Horodatage</French>
+        </Key>
+        <Key ID="STR_ctab_core_FWithTSMenu">
+            <English>F + Timestamp</English>
+            <French>F + Horodatage</French>
+        </Key>
+
+
+        
+        <Key ID="STR_ctab_core_ControlPointMenu">
+            <English>Command and control</English>
+            <French>Commandement</French>
+        </Key>
+        <Key ID="STR_ctab_core_ManoeuvreMenu">
+            <English>Manoeuvre</English>
+            <French>Manoeuvre</French>
+        </Key>
+        <Key ID="STR_ctab_core_SustainmentMenu">
+            <English>Sustainment</English>
+            <French>Logistique</French>
+        </Key>
+        <Key ID="STR_ctab_core_Mine">
+            <English>Mine</English>
+            <French>Mine</French>
+        </Key>
+        <Key ID="STR_ctab_core_IED">
+            <English>IED</English>
+            <French>IED/EEI</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointUnspec">
+            <English>Unspecified Control Point</English>
+            <French>Unspecified Control Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointContact">
+            <English>Contact Point</English>
+            <French>Contact Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointCoord">
+            <English>Coordinating Point</English>
+            <French>Coordinating Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointCKP">
+            <English>CKP - Checkpoint</English>
+            <French>CKP - Checkpoint</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointSOS">
+            <English>SOS Distress call</English>
+            <French>SOS Distress call</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointEC">
+            <English>EC Entry Control</English>
+            <French>EC Entry Control</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointRLY">
+            <English>RLY Rally Point</English>
+            <French>RLY Rally Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointSP">
+            <English>SP Start Point</English>
+            <French>SP Start Point</French>
+        </Key>
+        <Key ID="STR_ctab_core_Outpost">
+            <English>Unspecified outpost</English>
+            <French>Unspecified outpost</French>
+        </Key>
+        <Key ID="STR_ctab_core_CombatOutpost">
+            <English>Combat outpost</English>
+            <French>Combat outpost</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointTarget">
+            <English>Target reference point</English>
+            <French>Target reference point</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointPD">
+            <English>PD Point of Departure</English>
+            <French>PD Point of Departure</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointCCP">
+            <English>CCP Casualty Collection</English>
+            <French>CCP Casualty Collection</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointDET">
+            <English>DET Detainee Collection</English>
+            <French>DET Detainee Collection</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointMED">
+            <English>MEDEVAC Pick-Up Point</English>
+            <French>EVASAN Point récupération</French>
+        </Key>
+        <Key ID="STR_ctab_core_PointR3P">
+            <English>R3P Rearm, Refuel and Resupply</English>
+            <French>R3P Réarmer et ravitailler</French>
+        </Key>
+        <Key ID="STR_ctab_core_WhereIsTheUnitMoving">
+            <English>Where is the unit moving?</English>
+            <French>Par où se déplace l'unité ?</French>
         </Key>
     </Package>
 </Project>

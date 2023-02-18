@@ -103,6 +103,11 @@
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-body">
+
+                        <h5>@Localizer["EFIS"] <span class="badge badge-primary">BETA</span></h5>
+                        <p>@Localizer["Electronic flight instrument system for helicopter pilots and co-pilots."]</p>
+                        <p><a type="button" class="btn btn-secondary" asp-controller="Home" asp-action="EFIS" asp-route-t="@Model.Token" id="efislink"><i class="fas fa-helicopter"></i> @Localizer["Switch to EFIS"]</a></p>
+
                         <h5>@Localizer["Share"]</h5>
                         <p>@Localizer["Share your cTab in read-only mode."]</p>
                         <div class="input-group mb-3">
@@ -132,7 +137,7 @@
                             <li><i class="fas fa-sun"></i> @Localizer["Prevent sleep mode if full-screen is not available"]</li>
                         </ul>
                         <p><a href="@Localizer["https://github.com/jetelain/cTab/blob/master/docs/cTabIRL/endUser.md"]">@Localizer["Full user manual on GitHub"]</a></p>
-                        <p>&copy; 2020 - <a asp-controller="Home" asp-action="Privacy">@SharedResource.Privacy</a></p>
+                        <p>&copy; 2020-2023 - <a asp-controller="Home" asp-action="Privacy">@SharedResource.Privacy</a></p>
                     </div>
                     <div class="modal-footer p-2 row">
                         <div class="col text-left">
@@ -167,6 +172,24 @@
                         <div class="col text-right">
                             <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Cancel"]</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="tic">
+            <div class="modal-dialog mb-0 mt-4 modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Localizer["Troop In Contact ALERT"]</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="@Localizer["Close"]">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer p-2">
+                        <button type="button" class="btn btn-secondary mr-4" data-dismiss="modal">@Localizer["Cancel"]</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" id="tic-send">@Localizer["Send alert"]</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" id="tic-dismiss">@Localizer["Dismiss alert"]</button>
                     </div>
                 </div>
             </div>
@@ -206,8 +229,9 @@
                 SharedResource.STR_ctab_core_NorthWest,
                 SharedResource.STR_ctab_core_North
             });
-        var menus = @Json.Serialize(Menu.CreateMenus().ToDictionary(e => e.MenuId.ToString(), e => e.Items));
+        var menus = @Json.Serialize(Menu.CreateMenus().ToDictionary(e => e.MenuId.ToString(), e => e));
     </script>
+    <script src="~/js/common.js" asp-append-version="true"></script>
     <script src="~/js/map.js" asp-append-version="true"></script>
 </body>
 </html>

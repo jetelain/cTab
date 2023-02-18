@@ -2,7 +2,7 @@
  	Name: cTab_fnc_checkGear
  	
  	Author(s):
-		Gundy
+		GrueArbre
 
  	Description:
 		Check a units gear for certain items
@@ -17,17 +17,7 @@
  	Example:
 		_playerHasCtabItem = [player,["ItemcTab","ItemAndroid","ItemMicroDAGR"]] call cTab_fnc_checkGear;
 */
-
-private ["_unit","_items","_chk_all_items"];
-
-_unit = _this select 0;
-_items = _this select 1;
-
-_chk_all_items = items _unit;
-_chk_all_items append (assignedItems _unit);
-_chk_all_items pushBack (goggles _unit);
-
-// Some "units" don't return assignedItems, for example the Headquater module
-if (isNil "_chk_all_items") exitWith {false};
-
-{_x in _chk_all_items} count _items > 0
+params ["_unit","_items"]; 
+count ((assignedItems _unit) arrayIntersect _items) > 0 || { 
+  count ((items _unit) arrayIntersect _items) > 0
+} 

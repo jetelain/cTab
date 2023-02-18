@@ -15,6 +15,7 @@
 			Index 4: ARRAY  - marker color
 			Index 5: STRING - marker time
 			Index 6: STRING - text alignment
+			Index 7: NUMBER - draw size factor
 	
 	Parameters:
 		0: OBJECT  - Map control to draw BFT icons on
@@ -38,6 +39,7 @@ _cursorMarkerIndex = if (_this select 1) then {[_ctrlScreen,cTabMapCursorPos] ca
 	_texture1 = _markerData select 1;
 	_texture2 = _markerData select 2;
 	_dir = _markerData select 3;
+	private _drawSize = (_markerData select 7);
 	_color = if (_x select 0 != _cursorMarkerIndex) then {_markerData select 4} else {cTabTADhighlightColour};
 	_text = "";
 	if (_dir < 360) then {
@@ -45,9 +47,14 @@ _cursorMarkerIndex = if (_this select 1) then {[_ctrlScreen,cTabMapCursorPos] ca
 		_ctrlScreen drawArrow [_pos, _secondPos, _color];
 	};
 	if (cTabBFTtxt) then {_text = _markerData select 5;};
-	_ctrlScreen drawIcon [_texture1,_color,_pos, cTabIconSize, cTabIconSize, 0, _text, 0, cTabTxtSize,"TahomaB",_markerData select 6];
+	if ( _drawSize > 1 ) then {
+		_ctrlScreen drawIcon [_texture1, _color, _pos, cTabIconSize * _drawSize, cTabIconSize * _drawSize, 0];
+		_ctrlScreen drawIcon ["\A3\ui_f\data\map\Markers\System\dummy_ca.paa", _color, _pos, cTabIconSize, cTabIconSize, 0, _text, 0, cTabTxtSize,"TahomaB",_markerData select 6];
+	} else {
+		_ctrlScreen drawIcon [_texture1,_color,_pos, cTabIconSize, cTabIconSize, 0, _text, 0, cTabTxtSize,"TahomaB",_markerData select 6];
+	};
 	if (_texture2 != "") then {
-		_ctrlScreen drawIcon [_texture2,_color,_pos, cTabGroupOverlayIconSize, cTabGroupOverlayIconSize, 0, "", 0, cTabTxtSize,"TahomaB","right"];
+		_ctrlScreen drawIcon [_texture2,_color,_pos, cTabGroupOverlayIconSize * _drawSize, cTabGroupOverlayIconSize * _drawSize, 0, "", 0, cTabTxtSize,"TahomaB","right"];
 	};
 } count cTabUserMarkerList;
 

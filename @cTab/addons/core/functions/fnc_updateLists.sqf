@@ -62,12 +62,12 @@ if (GVAR(bft_mode) > 0) then {
 	Else, search through the group and use the first member we find equipped with a Tablet or Android for positioning.
 	*/
 	{
-		if ((side _x in _validSides) /*&& {_x != _playerGroup}*/) then {
-			_leader = objNull;
+		if ((side _x in _validSides)) then {
+			private _leader = objNull;
 			call {
-				if ([leader _x,["ItemcTab","ItemAndroid"]] call cTab_fnc_checkGear) exitWith {_leader = leader _x;};
+				if ([leader _x,GVAR(leaderDevices)] call cTab_fnc_checkGear) exitWith {_leader = leader _x;};
 				{
-					if ([_x,["ItemcTab","ItemAndroid"]] call cTab_fnc_checkGear) exitWith {_leader = _x;};
+					if ([_x,GVAR(leaderDevices)] call cTab_fnc_checkGear) exitWith {_leader = _x;};
 				} count units _x;
 			};
 			if !(IsNull _leader) then {
@@ -87,7 +87,7 @@ if (GVAR(bft_mode) > 0) then {
 	Vehciles on our side, that are not empty and that player is not sitting in.
 	*/
 	{
-		if ((side _x in _validSides) && {count (crew _x) > 0} /*&& {_x != _playerVehicle}*/) then {
+		if ((side _x in _validSides) && {count (crew _x) > 0}) then {
 			_groupID = "";
 			_name = "";
 			_customName = _x getVariable ["cTab_groupId",""];
@@ -147,27 +147,27 @@ if (GVAR(helmetcam_mode) == 1) then {
 	Units on our side, that have either helmets that have been specified to include a helmet cam, or ItemCTabHCAM in their inventory.
 	*/
 	{
-		if (side _x in _validSides) then {
+		{
 			if (headgear _x in cTab_helmetClass_has_HCam || {[_x,["ItemcTabHCam"]] call cTab_fnc_checkGear}) then {
-				0 = _cTabHcamlist pushBack _x;
+				_cTabHcamlist pushBack _x;
 			};
-		};
-	} count allUnits;
+		} forEach units _x;
+	} forEach _validSides;
 };
 
 // array to hold interface update commands
 _updateInterface = [];
 
 // replace the global list arrays in the end so that we avoid them being empty unnecessarily
-cTabBFTmembers = [] + _cTabBFTmembers;
-cTabBFTgroups = [] + _cTabBFTgroups;
-cTabBFTvehicles = [] + _cTabBFTvehicles;
+cTabBFTmembers = _cTabBFTmembers;
+cTabBFTgroups = _cTabBFTgroups;
+cTabBFTvehicles = _cTabBFTvehicles;
 if !(cTabUAVlist isEqualTo _cTabUAVlist) then {
-	cTabUAVlist = [] + _cTabUAVlist;
+	cTabUAVlist = _cTabUAVlist;
 	_updateInterface pushBack ["uavListUpdate",true];
 };
 if !(cTabHcamlist isEqualTo _cTabHcamlist) then {
-	cTabHcamlist = [] + _cTabHcamlist;
+	cTabHcamlist = _cTabHcamlist;
 	_updateInterface pushBack ["hCamListUpdate",true];
 };
 

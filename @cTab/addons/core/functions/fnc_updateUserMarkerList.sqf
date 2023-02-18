@@ -18,16 +18,11 @@
 		call cTab_fnc_updateUserMarkerList;
 */
 
-private ["_playerEncryptionKey","_tempList"];
+private _playerEncryptionKey = call cTab_fnc_getPlayerEncryptionKey;
 
-_playerEncryptionKey = call cTab_fnc_getPlayerEncryptionKey;
+private _rawMarkersList = [cTab_userMarkerLists,_playerEncryptionKey,[]] call cTab_fnc_getFromPairs;
 
-_tempList = [];
-{
-	0 = _tempList pushBack [_x select 0,_x select 1 call cTab_fnc_translateUserMarker];
-} count ([cTab_userMarkerLists,_playerEncryptionKey,[]] call cTab_fnc_getFromPairs);
-
-cTabUserMarkerList = _tempList;
+cTabUserMarkerList = _rawMarkersList apply {  [_x select 0, _x select 1 call cTab_fnc_translateUserMarker, _x select 1] };
 
 [QGVARMAIN(userMarkerListUpdated)] call CBA_fnc_localEvent;
 

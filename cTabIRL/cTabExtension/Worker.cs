@@ -42,7 +42,7 @@ namespace cTabExtension
                 if (serverConnection != null)
                 {
                     cancellationTokenSource.Cancel();
-                    Send("Disconnect", srv => srv.DisposeAsync());
+                    Send("Disconnect", async srv => await srv.DisposeAsync());
                 }
                 cancellationTokenSource = new CancellationTokenSource();
                 var token = cancellationTokenSource.Token;
@@ -58,21 +58,27 @@ namespace cTabExtension
         {
             switch (function)
             {
+                // Frequent messages, can be dropped without impact
                 case "UpdatePosition":
                 case "UpdateMarkersPosition":
                     if (!serverConnection.IsCompleted) // Those messages can be dropped if connection is still in progress
                     {
                         return;
                     }
-                    Send(function, srv => srv.InvokeAsync("Arma" + function, new ArmaMessage() { Timestamp = DateTime.UtcNow, Args = args }));
+                    Send(function, srv => srv.SendAsync("Arma" + function, new ArmaMessage() { Timestamp = DateTime.UtcNow, Args = args }));
                     break;
+                // Mission state messages, should wait server to process them, to ensure server state is correct
                 case "StartMission":
                 case "EndMission":
+                    Send(function, srv => srv.InvokeAsync("Arma" + function, new ArmaMessage() { Timestamp = DateTime.UtcNow, Args = args }), true);
+                    break;
+                // Other state messages, the last one has all relevant data
                 case "Devices":
                 case "UpdateMessages":
                 case "UpdateMarkers":
                 case "UpdateMapMarkers":
-                    Send(function, srv => srv.InvokeAsync("Arma" + function, new ArmaMessage() { Timestamp = DateTime.UtcNow, Args = args }), true);
+                default:
+                    Send(function, srv => srv.SendAsync("Arma" + function, new ArmaMessage() { Timestamp = DateTime.UtcNow, Args = args }), true);
                     break;
             }
         }
@@ -159,7 +165,8 @@ namespace cTabExtension
             var connection = new HubConnectionBuilder()
                 .WithUrl(uri, options =>
                 {
-                    options.Headers.Add("User-Agent", "cTabExtension/1.0");
+                    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets;
+                    options.Headers.Add("Extension", "cTabExtension/1.1");
                 })
                 .WithAutomaticReconnect()
                 .Build();
@@ -221,7 +228,7 @@ namespace cTabExtension
 
         private static async Task SayHello(string steamId, string name, string key, HubConnection connection)
         {
-            Extension.DebugMessage($"Send Hello...");
+            Extension.DebugMessage($"Invoke Hello...");
             await connection.InvokeAsync("ArmaHello", new ArmaHelloMessage() { Timestamp = DateTime.UtcNow, SteamId = steamId, PlayerName = name, Key = key });
             Extension.DebugMessage($"Hello done.");
         }

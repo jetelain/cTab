@@ -1,4 +1,6 @@
-﻿namespace cTabWebApp
+﻿using System.Text.Json.Serialization;
+
+namespace cTabWebApp
 {
     public class Marker
     {
@@ -9,6 +11,11 @@
         public string Id { get; internal set; }
         public string Kind { get; internal set; }
         public string Name { get; internal set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Vehicle { get; internal set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Group { get; internal set; }
     }
 }

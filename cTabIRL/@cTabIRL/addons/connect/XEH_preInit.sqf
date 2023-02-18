@@ -28,6 +28,9 @@ addMissionEventHandler ["ExtensionCallback", {
 				[call cTab_fnc_getPlayerEncryptionKey, _markerIndex] call cTab_fnc_deleteUserMarker;
 			};
 		};
+		if( _function == "TicAlert" ) exitWith {
+			(parseSimpleArray _data) call ctab_core_fnc_ticAlert;
+		};
 		if( _function == "SendMessage" ) exitWith {
 			(parseSimpleArray _data) call FUNC(sendMessage);
 		};
@@ -68,6 +71,7 @@ addMissionEventHandler ["ExtensionCallback", {
 GVAR(nextId) = 1;
 GVAR(nextMessageId) = 1;
 GVAR(deviceLevel) = 0;
+GVAR(vehicleMode) = 0;
 GVAR(mapMarkersNeedsUpdate) = true;
 
 [QGVAR(enabled), "CHECKBOX", [LLSTRING(enabled), LLSTRING(enabledDetails)], ["cTab",LLSTRING(modName)], true, 0, {}, true] call CBA_fnc_addSetting;

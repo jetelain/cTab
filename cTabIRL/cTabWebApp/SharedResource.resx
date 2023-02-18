@@ -579,4 +579,142 @@
   <data name="ProvidedBy" xml:space="preserve">
     <value>Provided by the 1er GTD</value>
   </data>
+  <data name="STR_ctab_core_videoCategory" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="STR_ctab_core_mapCategory" xml:space="preserve">
+    <value>Map and BFT</value>
+  </data>
+  <data name="STR_ctab_core_defMapStyle" xml:space="preserve">
+    <value>Default map mode</value>
+  </data>
+  <data name="STR_ctab_core_defMapStyleDetails" xml:space="preserve">
+    <value>Default cTab devides map mode. Current mode can be changed in game with F6.</value>
+  </data>
+  <data name="STR_ctab_core_satStyle" xml:space="preserve">
+    <value>Satellite</value>
+  </data>
+  <data name="STR_ctab_core_topoStyle" xml:space="preserve">
+    <value>Topographic</value>
+  </data>
+  <data name="STR_ctab_core_useArmaMarker" xml:space="preserve">
+    <value>Player position marker</value>
+  </data>
+  <data name="STR_ctab_core_useArmaMarkerDetails" xml:space="preserve">
+    <value>Player position marker on rugged tablet, Android GD300 and TAD</value>
+  </data>
+  <data name="STR_ctab_core_useArmaMarker_true" xml:space="preserve">
+    <value>Arma marker with heading</value>
+  </data>
+  <data name="STR_ctab_core_useArmaMarker_false" xml:space="preserve">
+    <value>NATO symbol</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecision" xml:space="preserve">
+    <value>Coordinates precision</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecisionDetails" xml:space="preserve">
+    <value>Coordinates precision</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecision0" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecision1" xml:space="preserve">
+    <value>10 m</value>
+  </data>
+  <data name="STR_ctab_core_gridPrecision2" xml:space="preserve">
+    <value>1 m</value>
+  </data>
+  <data name="STR_ctab_core_DotMenu" xml:space="preserve">
+    <value>Dot with label</value>
+  </data>
+  <data name="STR_ctab_core_CircleMenu" xml:space="preserve">
+    <value>Circle with label</value>
+  </data>
+  <data name="STR_ctab_core_AWithTSMenu" xml:space="preserve">
+    <value>A + Timestamp</value>
+  </data>
+  <data name="STR_ctab_core_BWithTSMenu" xml:space="preserve">
+    <value>B + Timestamp</value>
+  </data>
+  <data name="STR_ctab_core_CWithTSMenu" xml:space="preserve">
+    <value>C + Timestamp</value>
+  </data>
+  <data name="STR_ctab_core_DWithTSMenu" xml:space="preserve">
+    <value>D + Timestamp</value>
+  </data>
+  <data name="STR_ctab_core_EWithTSMenu" xml:space="preserve">
+    <value>E + Timestamp</value>
+  </data>
+  <data name="STR_ctab_core_FWithTSMenu" xml:space="preserve">
+    <value>F + Timestamp</value>
+  </data>
+  <data name="STR_ctab_core_TSMenu" xml:space="preserve">
+    <value>Timestamp only</value>
+  </data>
+  <data name="STR_ctab_core_ControlPointMenu" xml:space="preserve">
+    <value>Command and control</value>
+  </data>
+  <data name="STR_ctab_core_ManoeuvreMenu" xml:space="preserve">
+    <value>Manoeuvre</value>
+  </data>
+  <data name="STR_ctab_core_SustainmentMenu" xml:space="preserve">
+    <value>Sustainment</value>
+  </data>
+  <data name="STR_ctab_core_Mine" xml:space="preserve">
+    <value>Mine</value>
+  </data>
+  <data name="STR_ctab_core_IED" xml:space="preserve">
+    <value>IED</value>
+  </data>
+  <data name="STR_ctab_core_PointUnspec" xml:space="preserve">
+    <value>Unspecified Control Point</value>
+  </data>
+  <data name="STR_ctab_core_PointContact" xml:space="preserve">
+    <value>Contact Point</value>
+  </data>
+  <data name="STR_ctab_core_PointCoord" xml:space="preserve">
+    <value>Coordinating Point</value>
+  </data>
+  <data name="STR_ctab_core_PointCKP" xml:space="preserve">
+    <value>CKP - Checkpoint</value>
+  </data>
+  <data name="STR_ctab_core_PointSOS" xml:space="preserve">
+    <value>SOS Distress call</value>
+  </data>
+  <data name="STR_ctab_core_PointEC" xml:space="preserve">
+    <value>EC Entry Control</value>
+  </data>
+  <data name="STR_ctab_core_PointRLY" xml:space="preserve">
+    <value>RLY Rally Point</value>
+  </data>
+  <data name="STR_ctab_core_PointSP" xml:space="preserve">
+    <value>SP Start Point</value>
+  </data>
+  <data name="STR_ctab_core_Outpost" xml:space="preserve">
+    <value>Unspecified outpost</value>
+  </data>
+  <data name="STR_ctab_core_CombatOutpost" xml:space="preserve">
+    <value>Combat outpost</value>
+  </data>
+  <data name="STR_ctab_core_PointTarget" xml:space="preserve">
+    <value>Target reference point</value>
+  </data>
+  <data name="STR_ctab_core_PointPD" xml:space="preserve">
+    <value>PD Point of Departure</value>
+  </data>
+  <data name="STR_ctab_core_PointCCP" xml:space="preserve">
+    <value>CCP Casualty Collection</value>
+  </data>
+  <data name="STR_ctab_core_PointDET" xml:space="preserve">
+    <value>DET Detainee Collection</value>
+  </data>
+  <data name="STR_ctab_core_PointMED" xml:space="preserve">
+    <value>MEDEVAC Pick-Up Point</value>
+  </data>
+  <data name="STR_ctab_core_PointR3P" xml:space="preserve">
+    <value>R3P Rearm, Refuel and Resupply</value>
+  </data>
+  <data name="WhereIsTheUnitMoving" xml:space="preserve">
+    <value>Where is the unit moving?</value>
+  </data>
 </root>

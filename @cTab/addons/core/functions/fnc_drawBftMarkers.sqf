@@ -129,7 +129,7 @@ if (_mode != 2) then {
 		if (group cTab_player != group (_x select 0)) exitWith {};
 		
 		// get the fire-team color
-		_teamColor = cTabColorTeam select (["MAIN","RED","GREEN","BLUE","YELLOW"] find (assignedTeam (_x select 0)));
+		_teamColor = cTabColorTeam select (["MAIN","RED","GREEN","BLUE","YELLOW",""] find (assignedTeam (_x select 0)));
 		
 		if (_mode != 2 && {_veh == _playerVehicle || {_veh in _vehicles}}) exitWith {
 			if (_drawText) then {
@@ -172,7 +172,13 @@ if (_drawText && !(_mountedLabels isEqualTo [])) then {
 	for "_i" from 0 to (count _mountedLabels - 2) step 2 do {
 		_veh = _mountedLabels select _i;
 		if (_veh != _playerVehicle_marker) then {
-			_pos = if ( GVAR(bft_mode) == 1) then { getPosASL _veh } else { _x select 5 };
+			_pos = getPosASL _veh; 
+			if ( GVAR(bft_mode) != 1 ) then { 
+				private _index = cTabBFTvehicles findIf { _x select 0 == _veh };
+				if ( _index != -1 ) then {
+					_pos = (cTabBFTvehicles select _index) select 5;
+				};
+			};
 			_ctrlScreen drawIcon ["\A3\ui_f\data\map\Markers\System\dummy_ca.paa",cTabColorBlue,_pos,cTabIconSize,cTabIconSize,0,_mountedLabels select (_i + 1),0,cTabTxtSize,"TahomaB","left"];
 		};
 	};

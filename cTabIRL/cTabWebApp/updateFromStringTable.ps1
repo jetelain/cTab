@@ -6,8 +6,8 @@ foreach($node in $stringtable.selectNodes("Project/Package/Key"))
 {
     $ID = $node.GetAttribute("ID")
 
-    $match = $resxEnglish.SelectSingleNode("root/data[name='$ID']")
-    if (!$match) 
+    $match = $resxEnglish.SelectSingleNode("root/data[@name='"+$ID+"']")
+    if ($match -eq $null) 
     {
         $data = $resxEnglish.CreateElement("data")
         $data.SetAttribute("name", $ID)
@@ -24,8 +24,8 @@ foreach($node in $stringtable.selectNodes("Project/Package/Key"))
     }
 
 
-    $match = $resxFrench.SelectSingleNode("root/data[name='$ID']")
-    if (!$match) 
+    $match = $resxFrench.SelectSingleNode("root/data[@name='"+$ID+"']")
+    if ($match -eq $null) 
     {
         $data = $resxFrench.CreateElement("data")
         $data.SetAttribute("name", $ID)
