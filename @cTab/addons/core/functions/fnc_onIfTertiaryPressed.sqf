@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
 	Function handling IF_Tertiary keydown event
 	Based on player equipment and the vehicle type he might be in, open or close a cTab device as Tertiary interface.
@@ -30,10 +31,10 @@ if !(isNil "cTabIfOpen") then {
 _player = cTab_player;
 _vehicle = vehicle _player;
 _interfaceName = call {
-	if ([_player,["ItemcTab"]] call cTab_fnc_checkGear) exitWith {"cTab_Tablet_dlg"};
-	if ([_player,["ItemAndroid"]] call cTab_fnc_checkGear) exitWith {"cTab_Android_dlg"};
-	if ([_player,["ItemMicroDAGR"]] call cTab_fnc_checkGear) exitWith {
-		cTabMicroDAGRmode = if ([_player,["ItemcTab"]] call cTab_fnc_checkGear) then {0} else {2};
+	if ([_player,GVAR(tabDevices)] call cTab_fnc_checkGear) exitWith {"cTab_Tablet_dlg"};
+	if ([_player,GVAR(androidDevices)] call cTab_fnc_checkGear) exitWith {"cTab_Android_dlg"};
+	if ([_player,GVAR(dagrDevices)] call cTab_fnc_checkGear) exitWith {
+		cTabMicroDAGRmode = if ([_player,GVAR(tabDevices)] call cTab_fnc_checkGear) then {0} else {2};
 		"cTab_microDAGR_dlg"
 	};
 	if ([_player,_vehicle,"TAD"] call cTab_fnc_unitInEnabledVehicleSeat) exitWith {

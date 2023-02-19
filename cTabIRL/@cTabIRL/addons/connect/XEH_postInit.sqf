@@ -23,6 +23,11 @@ if (!hasInterface) exitWith { };
 		FUNC(markerFilter) = { params ["_name"]; !([_name] call EFUNC(tacmap,isTacMapMarker)) && { ([_name] call mts_markers_fnc_isMtsMarker) == 0 } };
 	};
 
+	// Get devices from ctab, if mod is up-to-date
+	if ( !isNil "ctab_core_leaderDevices" ) then {
+		GVAR(trackDevices) = ctab_core_leaderDevices;
+	};
+
 	// Connect to server
 	call FUNC(connect);
 

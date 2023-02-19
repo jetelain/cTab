@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 params ["_interfaceType", "_interfaceName", "_player", "_vehicle"];
 
 if (cTabIfOpenStart) exitWith {false};
@@ -19,7 +20,7 @@ if (_interfaceName == "cTab_TAD_dsp" || _interfaceName == "cTab_TAD_dlg") then {
 	cTabPlayerVehicleIcon = getText (configFile/"CfgVehicles"/typeOf _vehicle/"Icon");
 } else {
 	if (_interfaceName == "cTab_microDAGR_dsp" || _interfaceName == "cTab_microDAGR_dlg") then {
-		cTabMicroDAGRmode = if ([_player,["ItemcTab"]] call cTab_fnc_checkGear) then {0} else {2};
+		cTabMicroDAGRmode = if ([_player,GVAR(tabDevices)] call cTab_fnc_checkGear) then {0} else {2};
 	};
 };
 

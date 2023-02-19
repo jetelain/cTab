@@ -6,7 +6,7 @@ private _vehicle = vehicle _player;
 private _deviceLevel = 0;
 private _vehicleMode = 0;
 
-if ([_player,["ItemcTab", "ItemAndroid"]] call cTab_fnc_checkGear) then {
+if ([_player,GVAR(trackDevices)] call cTab_fnc_checkGear) then {
     _deviceLevel = 3; // BFT + Messaging
 } else {
 	if ([_player,_vehicle,"TAD"] call cTab_fnc_unitInEnabledVehicleSeat) then {

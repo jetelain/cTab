@@ -15,7 +15,7 @@
 		BOOLEAN - If at least one of the items passed in parameter 1 was found or not
  	
  	Example:
-		_playerHasCtabItem = [player,["ItemcTab","ItemAndroid","ItemMicroDAGR"]] call cTab_fnc_checkGear;
+		_playerHasCtabItem = [player,GVAR(personnelDevices)] call cTab_fnc_checkGear;
 */
 params ["_unit","_items"]; 
 count ((assignedItems _unit) arrayIntersect _items) > 0 || { 

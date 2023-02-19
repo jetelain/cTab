@@ -19,7 +19,7 @@
 		BOOLEAN - True if unit is in the front-section of a cTab enabled vehicle, false if not
  	
  	Example:
-		_playerHasCtabItem = [player,["ItemcTab","ItemAndroid","ItemMicroDAGR"]] call cTab_fnc_unitInEnabledVehicleSeat;
+		_playerHasCtabItem = [player,GVAR(personnelDevices)] call cTab_fnc_unitInEnabledVehicleSeat;
 */
 
 private ["_return","_unit","_vehicle","_type","_typeClassList","_cargoIndex","_cargoCompartments","_cargoIsCoDriver","_transportSoldier"];

@@ -44,7 +44,7 @@ if ([_player,_vehicle,"TAD"] call cTab_fnc_unitInEnabledVehicleSeat) then {
     _hasItem = true;
 };
 
-if ([_player,["ItemAndroid"]] call cTab_fnc_checkGear) then {
+if ([_player,GVAR(androidDevices)] call cTab_fnc_checkGear) then {
 	_actions pushBack [[
         "cTab_Android",
         LLSTRING(ConfigureAndroid),
@@ -57,7 +57,7 @@ if ([_player,["ItemAndroid"]] call cTab_fnc_checkGear) then {
     _hasItem = true;
 };
 
-if ([_player,["ItemMicroDAGR"]] call cTab_fnc_checkGear) then {
+if ([_player,GVAR(dagrDevices)] call cTab_fnc_checkGear) then {
 	_actions pushBack [[
         "cTab_microDAGR",
         LLSTRING(ConfigureMicroDAGR),
@@ -82,7 +82,7 @@ if ([_player,_vehicle,"FBCB2"] call cTab_fnc_unitInEnabledVehicleSeat) then {
     _hasItem = true;
 };
 
-if ([_player,["ItemcTab"]] call cTab_fnc_checkGear) then {
+if ([_player,GVAR(tabDevices)] call cTab_fnc_checkGear) then {
     _actions pushBack [[
         "cTab_Tablet",
         LLSTRING(Tablet),

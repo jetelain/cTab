@@ -31,18 +31,16 @@
 		call cTab_fnc_updateLists;
 */
 
-private ["_cTabBFTmembers","_cTabBFTgroups","_cTabBFTvehicles","_cTabUAVlist","_cTabHcamlist","_validSides","_playerEncryptionKey","_playerVehicle","_playerGroup","_updateInterface"];
+private _cTabBFTmembers = []; // members of player's group
+private _cTabBFTgroups = []; // other groups
+private _cTabBFTvehicles = []; // all vehicles
+private _cTabUAVlist =  []; // all remote controllable UAVs
+private _cTabHcamlist = [];  // units with a helmet cam
 
-_cTabBFTmembers = []; // members of player's group
-_cTabBFTgroups = []; // other groups
-_cTabBFTvehicles = []; // all vehicles
-_cTabUAVlist =  []; // all remote controllable UAVs
-_cTabHcamlist = [];  // units with a helmet cam
+private _validSides = call cTab_fnc_getPlayerSides;
 
-_validSides = call cTab_fnc_getPlayerSides;
-
-_playerVehicle = vehicle cTab_player;
-_playerGroup = group cTab_player;
+private _playerVehicle = vehicle cTab_player;
+private _playerGroup = group cTab_player;
 
 TRACE_3("pulse", GVAR(bft_mode), GVAR(uav_mode), GVAR(helmetcam_mode));
 
@@ -148,7 +146,7 @@ if (GVAR(helmetcam_mode) == 1) then {
 	*/
 	{
 		{
-			if (headgear _x in cTab_helmetClass_has_HCam || {[_x,["ItemcTabHCam"]] call cTab_fnc_checkGear}) then {
+			if (headgear _x in cTab_helmetClass_has_HCam || {"ItemcTabHCam" in items _x}) then {
 				_cTabHcamlist pushBack _x;
 			};
 		} forEach units _x;
@@ -156,7 +154,7 @@ if (GVAR(helmetcam_mode) == 1) then {
 };
 
 // array to hold interface update commands
-_updateInterface = [];
+private _updateInterface = [];
 
 // replace the global list arrays in the end so that we avoid them being empty unnecessarily
 cTabBFTmembers = _cTabBFTmembers;

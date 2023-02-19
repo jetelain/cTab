@@ -89,9 +89,10 @@ class CfgWeapons
 		scope = 2;
 		simulation = "ItemGPS";
 		class ItemInfo {
-			mass = 56;
+			mass = 25;
 		};
 		author = AUTHOR;
+		ctab_devicetype = 3;
 	};
 	
 	class ItemAndroid: ItemcTab {
@@ -104,6 +105,7 @@ class CfgWeapons
 			mass = 5;
 		};
 		author = AUTHOR;
+		ctab_devicetype = 2;
 	};
 
 	class ItemMicroDAGR: ItemcTab {
@@ -116,6 +118,7 @@ class CfgWeapons
 			mass = 6;
 		};
 		author = AUTHOR;
+		ctab_devicetype = 1;
 	};
 	
 	class CBA_MiscItem;
@@ -132,6 +135,53 @@ class CfgWeapons
 		};
 		author = AUTHOR;
 	};	
+
+
+	class ItemcTabMisc: CBA_MiscItem {
+		descriptionshort = $STR_ctab_core_TabletShort;
+		descriptionuse = "<t color='#9cf953'>Use: </t>Show Commander's Tablet";
+		displayname = $STR_ctab_core_Tablet;
+		picture = "\cTab\img\icon_dk10.paa";
+		model = "\ctab\data\itemDK10.p3d";
+		scope = 2;
+		type = 0;
+		class ItemInfo : CBA_MiscItem_ItemInfo {
+			mass = 25;
+		};
+		author = AUTHOR;
+		ctab_devicetype = 3;
+	};
+	
+	class ItemAndroidMisc: CBA_MiscItem {
+		descriptionshort = $STR_ctab_core_AndroidShort;
+		descriptionuse = "<t color='#9cf953'>Use: </t>Show Android Based BFT";
+		displayname = $STR_ctab_core_Android;
+		picture = "\cTab\img\icon_Android.paa";
+		model = "\ctab\data\itemAndroid.p3d";
+		scope = 2;
+		type = 0;
+		class ItemInfo : CBA_MiscItem_ItemInfo {
+			mass = 5;
+		};
+		author = AUTHOR;
+		ctab_devicetype = 2;
+	};
+
+	class ItemMicroDAGRMisc: CBA_MiscItem {
+		descriptionshort = $STR_ctab_core_MicroDAGRShort;
+		descriptionuse = "<t color='#9cf953'>Use: </t>Show Android Based BFT";
+		displayname = $STR_ctab_core_MicroDAGR;
+		picture = "\cTab\img\icon_MicroDAGR.paa";
+		model = "\ctab\data\itemMicroDAGR.p3d";
+		scope = 2;
+		type = 0;
+		class ItemInfo : CBA_MiscItem_ItemInfo {
+			mass = 6;
+		};
+		author = AUTHOR;
+		ctab_devicetype = 1;
+	};
+
 };
 
 class CfgNotifications

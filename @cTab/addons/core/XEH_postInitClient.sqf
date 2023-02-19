@@ -51,8 +51,36 @@ cTabHcamlist = [];
 cTabNotificationCache = [];
 cTab_player = objNull;
 
-GVAR(personnelDevices) = ["ItemcTab", "ItemAndroid", "ItemMicroDAGR"];
-GVAR(leaderDevices) = ["ItemcTab", "ItemAndroid"];
+private _start = diag_tickTime;
+private _configs = ("(getNumber (_x >> 'ctab_devicetype') > 0) && {getNumber (_x >> 'scope') > 0}") configClasses (configFile >> "CfgWeapons");
+
+// Unit inventory items that allow access to cTab features
+GVAR(tabDevices) = [];
+GVAR(androidDevices) = [];
+GVAR(dagrDevices) = [];
+{
+	switch(getNumber (_x >> 'ctab_devicetype')) do
+	{
+		case 3: { GVAR(tabDevices) pushBackUnique (configName _x); };
+		case 2: { GVAR(androidDevices) pushBackUnique (configName _x); };
+		case 1: { GVAR(dagrDevices) pushBackUnique (configName _x); };
+	};
+} forEach (_configs);
+
+// Fail-safe
+if (count GVAR(tabDevices) == 0) then {
+	GVAR(tabDevices) = ["ItemcTab"];
+};
+if (count GVAR(androidDevices) == 0) then {
+	GVAR(androidDevices) = ["ItemAndroid"];
+};
+if (count GVAR(dagrDevices) == 0) then {
+	GVAR(dagrDevices) = ["ItemMicroDAGR"];
+};
+INFO_4("Devices detected in %1 sec : %2, %3, %4",(diag_tickTime - _start),GVAR(tabDevices),GVAR(androidDevices),GVAR(dagrDevices));
+
+GVAR(leaderDevices) = GVAR(tabDevices) + GVAR(androidDevices);
+GVAR(personnelDevices) = GVAR(leaderDevices) + GVAR(dagrDevices);
 
 /*
 Figure out the scaling factor based on the current map (island) being played
@@ -234,6 +262,20 @@ cTabColorGreen = [_r,_g,_b,_a];
 // MAIN,RED,GREEN,BLUE,YELLOW,(empty)
 cTabColorTeam = [cTabColorBlue,[200/255,0,0,0.8],[0,199/255,0,0.8],[0,0,200/255,0.8],[225/255,225/255,0,0.8],[0,0,0,0]];
 
+// ************ FBCB2 ************
+
+// Utility function to keep only existing entries
+private _filter_classes = {
+	params ['_config', '_list'];
+	private _result = [];
+	{
+		if (isClass (_config >> _x)) then {
+			_result pushBackUnique _x;
+		};
+	} forEach _list;
+	_result
+};
+
 // define vehicles that have FBCB2 monitor
 if (isNil "cTab_vehicleClass_has_FBCB2") then {
 	if (!isNil "cTab_vehicleClass_has_FBCB2_server") then {
@@ -243,14 +285,9 @@ if (isNil "cTab_vehicleClass_has_FBCB2") then {
 	};
 };
 // strip list of invalid config names and duplicates to save time checking through them later
-_classNames = [];
-{
-	if (isClass (configfile >> "CfgVehicles" >> _x) && _classNames find _x == -1) then {
-		0 = _classNames pushBack _x;
-	};
-} count cTab_vehicleClass_has_FBCB2;
-cTab_vehicleClass_has_FBCB2 = [] + _classNames;
+cTab_vehicleClass_has_FBCB2 = [configfile >> "CfgVehicles", cTab_vehicleClass_has_FBCB2] call _filter_classes;
 
+// ************ TAD ************
 // define vehicles that have TAD
 if (isNil "cTab_vehicleClass_has_TAD") then {
 	if (!isNil "cTab_vehicleClass_has_TAD_server") then {
@@ -260,29 +297,20 @@ if (isNil "cTab_vehicleClass_has_TAD") then {
 	};
 };
 // strip list of invalid config names and duplicates to save time checking through them later
-_classNames = [];
-{
-	if (isClass (configfile >> "CfgVehicles" >> _x) && _classNames find _x == -1) then {
-		0 = _classNames pushBack _x;
-	};
-} count cTab_vehicleClass_has_TAD;
-cTab_vehicleClass_has_TAD = [] + _classNames;
+cTab_vehicleClass_has_TAD = [configfile >> "CfgVehicles", cTab_vehicleClass_has_TAD] call _filter_classes;
 
+// ************ HELMET ************
 // define items that enable head cam
 if (isNil "cTab_helmetClass_has_HCam") then {
 	if (!isNil "cTab_helmetClass_has_HCam_server") then {
 		cTab_helmetClass_has_HCam = cTab_helmetClass_has_HCam_server;
 	} else {
-		cTab_helmetClass_has_HCam = ["H_HelmetB_light","H_Helmet_Kerry","H_HelmetSpecB","H_HelmetO_ocamo","BWA3_OpsCore_Fleck_Camera","BWA3_OpsCore_Schwarz_Camera","BWA3_OpsCore_Tropen_Camera"];
+		cTab_helmetClass_has_HCam = ["BWA3_OpsCore_Fleck_Camera","BWA3_OpsCore_Schwarz_Camera","BWA3_OpsCore_Tropen_Camera"];
 	};
 };
 // strip list of invalid config names and duplicates to save time checking through them later
-_classNames = [];
-{
-	if (isClass (configfile >> "CfgWeapons" >> _x) && _classNames find _x == -1) then {
-		0 = _classNames pushBack _x;
-	};
-} count cTab_helmetClass_has_HCam;
+_classNames = [configfile >> "CfgWeapons", cTab_helmetClass_has_HCam] call _filter_classes;
+
 // iterate through all class names and add child classes, so we end up with a list of helmet classes that have the defined helmet classes as parents
 {
 	_childClasses = "inheritsFrom _x == (configfile >> 'CfgWeapons' >> '" + _x + "')" configClasses (configfile >> "CfgWeapons");
@@ -293,7 +321,16 @@ _classNames = [];
 		};
 	} count _childClasses;
 } forEach _classNames;
+
+// Get helmets with explicit config (automaticly inherited)
+_configs = ("(getNumber (_x >> 'ctab_camera') == 1) && {getNumber (_x >> 'scope') > 0}") configClasses (configFile >> "CfgWeapons");
+{
+	_classNames pushBackUnique configName _x;
+} forEach _configs;
+
 cTab_helmetClass_has_HCam = [] + _classNames;
+
+// ************ ************
 
 // Beginning text and icon size
 cTabTxtFctr = 12;

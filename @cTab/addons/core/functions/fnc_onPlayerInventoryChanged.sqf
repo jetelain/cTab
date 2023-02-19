@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
 	Name: cTab_fnc_onPlayerInventoryChanged
 	
@@ -38,10 +39,10 @@ _itemsToCheck = (_newPlayerInventory select 17) + (_newPlayerInventory select 3)
 // see if we still have the correct device on us
 _playerLostDevice = call {
 	if (_displayName == "cTab_Tablet_dlg") exitWith {
-		!("ItemcTab" in _itemsToCheck)
+		count (_itemsToCheck arrayIntersect GVAR(tabDevices)) == 0
 	};
 	if (_displayName in ["cTab_Android_dlg","cTab_Android_dsp"]) exitWith {
-		!("ItemAndroid" in _itemsToCheck)
+		count (_itemsToCheck arrayIntersect GVAR(androidDevices)) == 0
 	};
 	if (_displayName in ["cTab_microDAGR_dsp","cTab_microDAGR_dlg"]) exitWith {
 		!("ItemMicroDAGR" in _itemsToCheck)
