@@ -184,7 +184,9 @@ cTabSettings = [];
 	["mapScaleDlg",2],
 	["mapTypes",[["SAT",IDC_CTAB_SCREEN],["TOPO",IDC_CTAB_SCREEN_TOPO]]],
 	["mapType","SAT"],
-	["mapTools",true]
+	["mapTools",true],
+	["nightMode",0],
+	["brightness",0.9]
 ]] call BIS_fnc_setToPairs;
 
 /*

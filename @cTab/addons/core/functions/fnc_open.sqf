@@ -35,21 +35,35 @@
 
 #include "\cTab\shared\cTab_gui_macros.hpp"
 
-private ["_interfaceType","_displayName","_player","_vehicle","_playerKilledEhId","_vehicleGetOutEhId"];
-
 if (cTabIfOpenStart || (!isNil "cTabIfOpen")) exitWith {false};
 cTabIfOpenStart = true;
 
-_interfaceType = _this select 0;
-_displayName = _this select 1;
-_player = _this select 2;
-_vehicle = _this select 3;
+params ["_interfaceType","_displayName", "_player", "_vehicle"];
 
-_isDialog = [_displayName] call cTab_fnc_isDialog;
+private _isDialog = [_displayName] call cTab_fnc_isDialog;
+
+private _textures = call {
+		if (_displayName in ["cTab_TAD_dsp","cTab_TAD_dlg"]) exitWith {
+			["\cTab\img\TAD_background_ca.paa","\cTab\img\TAD_background_night_ca.paa"]
+		};
+		if (_displayName in ["cTab_Android_dsp","cTab_Android_dlg"]) exitWith {
+			["\cTab\img\android_gd300_ca.paa","\cTab\img\android_gd300_night_ca.paa"]
+		};
+		if (_displayName in ["cTab_microDAGR_dsp","cTab_microDAGR_dlg"]) exitWith {
+			["\cTab\img\microDAGR_background_ca.paa","\cTab\img\microDAGR_background_night_ca.paa"]
+		};
+		if (_displayName in ["cTab_Tablet_dlg"]) exitWith {
+			["\cTab\img\tablet_background_ca.paa","\cTab\img\tablet_background_night_ca.paa"]
+		};
+		if (_displayName in ["cTab_FBCB2_dlg"]) exitWith {
+			["\cTab\img\FBCB2.paa","\cTab\img\FBCB2.paa"]
+		};
+		["",""]
+	};
 
 cTabIfOpen = [_interfaceType,_displayName,_player,
 	_player addEventHandler ["killed",{[] call cTab_fnc_close}],
-	_vehicle,nil,nil,nil,nil];
+	_vehicle,nil,nil,nil,nil,_textures];
 
 if (_vehicle != _player && (_isDialog || _displayName in ["cTab_TAD_dsp"])) then {
 	cTabIfOpen set [5,
@@ -124,6 +138,10 @@ if (_isDialog) then {
 	while {dialog} do {
  		closeDialog 0;
 	};
+	
+	// XXX: Switching to display would allow to walk even when device is open
+	// (findDisplay 46) createDisplay _displayName;
+
 	createDialog _displayName;
 } else {
 	cTabRscLayer cutRsc [_displayName,"PLAIN",0, false];

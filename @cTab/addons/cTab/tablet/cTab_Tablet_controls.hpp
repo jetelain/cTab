@@ -331,13 +331,6 @@ class cTab_Tablet_btnHome: cTab_Tablet_btnMouse
 	w = pxToScreen_W(61);
 	h = pxToScreen_H(49);
 };
-class cTab_Tablet_notificationLight
-{
-	x = pxToScreen_X(1353);
-	y = pxToScreen_Y(1557);
-	w = pxToScreen_W(28);
-	h = pxToScreen_H(28);
-};
 class cTab_Tablet_OSD_hookGrid: cTab_RscText_Tablet
 {
 	idc = IDC_CTAB_OSD_HOOK_GRID;

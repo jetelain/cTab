@@ -18,9 +18,9 @@
 		[_dispaly] call cTab_fnc_onIfOpen;
 */
 
-private [];
+params ["_display"];
 
-uiNamespace setVariable [cTabIfOpen select 1,_this select 0];
+uiNamespace setVariable [cTabIfOpen select 1,_display];
 
 [] call cTab_fnc_updateInterface;
 

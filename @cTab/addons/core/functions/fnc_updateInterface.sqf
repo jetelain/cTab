@@ -123,21 +123,7 @@ if (isNil "_mode") then {
 			_nightMode = _x select 1;
 			// transform nightMode into boolean
 			_nightMode = if (_nightMode == 1 || {_nightMode == 2 && (sunOrMoon < 0.2)}) then {true} else {false};
-			_background = call {
-				if (_displayName in ["cTab_TAD_dsp","cTab_TAD_dlg"]) exitWith {
-					if (_nightMode) then {"\cTab\img\TAD_background_night_ca.paa"} else {"\cTab\img\TAD_background_ca.paa"};
-				};
-				if (_displayName in ["cTab_Android_dsp","cTab_Android_dlg"]) exitWith {
-					if (_nightMode) then {"\cTab\img\android_background_night_ca.paa"} else {"\cTab\img\android_background_ca.paa"};
-				};
-				if (_displayName in ["cTab_microDAGR_dsp","cTab_microDAGR_dlg"]) exitWith {
-					if (_nightMode) then {"\cTab\img\microDAGR_background_night_ca.paa"} else {"\cTab\img\microDAGR_background_ca.paa"};
-				};
-				if (_displayName in ["cTab_Tablet_dlg"]) exitWith {
-					if (_nightMode) then {"\cTab\img\tablet_background_night_ca.paa"} else {"\cTab\img\tablet_background_ca.paa"};
-				};
-				""
-			};
+			_background = (cTabIfOpen select 9) select _nightMode;
 			if (_background != "") then {
 				(_display displayCtrl IDC_CTAB_BACKGROUND) ctrlSetText _background;
 				// call brightness adjustment if this is outside of interface init

@@ -11,8 +11,8 @@
 // Map position within background, pixel based
 #define cTab_GUI_android_MAP_X (452)
 #define cTab_GUI_android_MAP_Y (713)
-#define cTab_GUI_android_MAP_W (1067)
-#define cTab_GUI_android_MAP_H (622)
+#define cTab_GUI_android_MAP_W (1134)
+#define cTab_GUI_android_MAP_H (624)
 
 // Height of header and footer OSD elements
 #define cTab_GUI_android_OSD_HEADER_H (60)
@@ -202,13 +202,6 @@ class cTab_android_btnPower: cTab_RscButtonInv
 	y = pxToScreen_Y(1407);
 	w = pxToScreen_W(107);
 	h = pxToScreen_H(48);
-};
-class cTab_android_notificationLight
-{
-	x = pxToScreen_X(1793);
-	y = pxToScreen_Y(768);
-	w = pxToScreen_W(61);
-	h = pxToScreen_H(61);
 };
 class cTab_android_header: cTab_RscPicture
 {
