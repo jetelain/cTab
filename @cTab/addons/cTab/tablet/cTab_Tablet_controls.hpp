@@ -29,8 +29,8 @@
 #define pxToGroup_Y(PIXEL) (((PIXEL) - cTab_GUI_tablet_SCREEN_CONTENT_Y) / GUI_GRID_PX_H * GUI_GRID_H)
 
 // Task bar absolute size, pixel based (from source)
-#define cTab_GUI_tablet_TASKBAR_PX_W (1024)
-#define cTab_GUI_tablet_TASKBAR_PX_H (28)
+#define cTab_GUI_tablet_TASKBAR_PX_W (1335)
+#define cTab_GUI_tablet_TASKBAR_PX_H (50)
 
 // Translate task bar size to pixel based size in background
 #define cTab_GUI_tablet_TASKBAR_W (cTab_GUI_tablet_MAP_W)
@@ -41,14 +41,14 @@
 #define cTab_GUI_tablet_TASKBAR_Y (cTab_GUI_tablet_MAP_Y + cTab_GUI_tablet_MAP_H - cTab_GUI_tablet_TASKBAR_H)
 
 // Window background (application windows) absolute size, pixel based (from source)
-#define cTab_GUI_tablet_WINDOW_BACK_PX_W (293)
-#define cTab_GUI_tablet_WINDOW_BACK_PX_H (272)
+#define cTab_GUI_tablet_WINDOW_BACK_PX_W (560)
+#define cTab_GUI_tablet_WINDOW_BACK_PX_H (408)
 
 // Window content (application windows) position within window background, pixel based
-#define cTab_GUI_tablet_WINDOW_CONTENT_PX_X (9)
-#define cTab_GUI_tablet_WINDOW_CONTENT_PX_Y (30)
-#define cTab_GUI_tablet_WINDOW_CONTENT_PX_W (276)
-#define cTab_GUI_tablet_WINDOW_CONTENT_PX_H (232)
+#define cTab_GUI_tablet_WINDOW_CONTENT_PX_X (1)
+#define cTab_GUI_tablet_WINDOW_CONTENT_PX_Y (38)
+#define cTab_GUI_tablet_WINDOW_CONTENT_PX_W (558)
+#define cTab_GUI_tablet_WINDOW_CONTENT_PX_H (369)
 
 // Translate window background size to pixel based position in background (heith is 49 % of tablet screen height)
 #define cTab_GUI_tablet_WINDOW_BACK_H ((cTab_GUI_tablet_SCREEN_CONTENT_H - cTab_GUI_tablet_TASKBAR_H) * 0.49)
@@ -243,7 +243,7 @@ class cTab_Tablet_OSD_dirOctant: cTab_Tablet_OSD_dirDegree
 };
 class cTab_Tablet_window_back_TL: cTab_RscPicture
 {
-	text = "\cTab\img\window_2.jpg";
+	text = "\cTab\img\window_co.paa";
 	x = pxToScreen_X(cTab_GUI_tablet_WINDOW_BACK_L_X);
 	y = pxToScreen_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
 	w = pxToScreen_W(cTab_GUI_tablet_WINDOW_BACK_W);
@@ -260,6 +260,14 @@ class cTab_Tablet_window_back_TR: cTab_Tablet_window_back_TL
 class cTab_Tablet_window_back_BR: cTab_Tablet_window_back_TR
 {
 	y = pxToScreen_Y(cTab_GUI_tablet_WINDOW_BACK_B_Y);
+};
+class cTab_RscText_WindowTitle: cTab_RscText_Tablet
+{
+	style = ST_LEFT;
+	w = pxToScreen_W(cTab_GUI_tablet_WINDOW_BACK_W);
+	h = pxToScreen_H(cTab_GUI_tablet_WINDOW_CONTENT_OFFSET_Y);
+	font = GUI_FONT_NORMAL;
+	colorText[] = COLOR_BLACK;
 };
 class cTab_Tablet_btnF1: cTab_RscButtonInv
 {

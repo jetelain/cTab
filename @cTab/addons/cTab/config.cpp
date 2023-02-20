@@ -55,7 +55,7 @@ class CfgMods {
 	class PREFIX {
 		dir = "@cTab";
 		name = "cTab - Blue Force Tracking";
-		picture = "\cTab\img\cTab_BFT_ico.paa";
+		picture = "\cTab\img\icon_ctabmod.paa";
 		hidePicture = "True";
 		hideName = "True";
 		actionName = "Website";

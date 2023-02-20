@@ -376,7 +376,7 @@ class EnemySub3: cTab_RscControlsGroup
 			};
 		class prompt: cTab_RscText
 		{
-			idc = IDC_USRMN_STNBTN;
+			idc = -1;
 			text = $STR_ctab_core_WhereIsTheUnitMoving;
 			x = 0;
 			y = MENU_elementY(1);

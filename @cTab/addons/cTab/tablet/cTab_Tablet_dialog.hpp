@@ -31,20 +31,12 @@ class cTab_Tablet_dlg {
 		class windowsBG: cTab_RscPicture
 		{
 			idc = IDC_CTAB_WIN_BACK;
-			text = "#(argb,8,8,3)color(0.2,0.431,0.647,1)";
+			text= "\cTab\img\desktop_co.paa";
+			//text= "\cTab\img\desktop_1ergtd_co.paa";
 			x = pxToScreen_X(cTab_GUI_tablet_MAP_X);
 			y = pxToScreen_Y(cTab_GUI_tablet_MAP_Y);
 			w = pxToScreen_W(cTab_GUI_tablet_MAP_W);
 			h = pxToScreen_H(cTab_GUI_tablet_MAP_H);
-		};
-		class windowsBar: cTab_RscPicture
-		{
-			idc = IDC_CTAB_WIN_TASKBAR;
-			text = "\cTab\img\Desktop_bar.jpg";
-			x = pxToScreen_X(cTab_GUI_tablet_TASKBAR_X);
-			y = pxToScreen_Y(cTab_GUI_tablet_TASKBAR_Y);
-			w = pxToScreen_W(cTab_GUI_tablet_TASKBAR_W);
-			h = pxToScreen_H(cTab_GUI_tablet_TASKBAR_H);
 		};
 		class MiniMapBG: cTab_Tablet_window_back_BL
 		{
@@ -108,7 +100,8 @@ class cTab_Tablet_dlg {
 				{
 					style = ST_PICTURE;
 					idc = IDC_CTAB_ACTBFTTXT;
-					text = "\cTab\img\cTab_BFT_ico.paa";
+					text = "\cTab\img\icon_bft_ca.paa";
+					//text = "\cTab\img\icon_map_ca.paa";
 					x = pxToGroup_X(cTab_GUI_tablet_SCREEN_CONTENT_X + cTab_GUI_tablet_DESKTOP_ICON_OFFSET_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_SCREEN_CONTENT_Y + cTab_GUI_tablet_DESKTOP_ICON_OFFSET_Y);
 					w = pxToScreen_W(cTab_GUI_tablet_DESKTOP_ICON_W);
@@ -119,7 +112,7 @@ class cTab_Tablet_dlg {
 				class actUAVtxt: actBFTtxt
 				{
 					idc = IDC_CTAB_ACTUAVTXT;
-					text = "\cTab\img\cTab_UAV_ico.paa";
+					text = "\cTab\img\icon_uav_ca.paa";
 					y = pxToGroup_Y(cTab_GUI_tablet_SCREEN_CONTENT_Y + cTab_GUI_tablet_DESKTOP_ICON_OFFSET_Y * 2 + cTab_GUI_tablet_DESKTOP_ICON_H);
 					action = "['cTab_Tablet_dlg',[['mode','UAV']]] call cTab_fnc_setSettings;";
 					toolTip = $STR_ctab_core_UAVIconHint;
@@ -127,7 +120,7 @@ class cTab_Tablet_dlg {
 				class actVIDtxt: actBFTtxt
 				{
 					idc = IDC_CTAB_ACTVIDTXT;
-					text = "\cTab\img\cTab_HMC_ico.paa";
+					text = "\cTab\img\icon_helmetcam_ca.paa";
 					y = pxToGroup_Y(cTab_GUI_tablet_SCREEN_CONTENT_Y + cTab_GUI_tablet_DESKTOP_ICON_OFFSET_Y * 3 + cTab_GUI_tablet_DESKTOP_ICON_H * 2);
 					action = "['cTab_Tablet_dlg',[['mode','HCAM']]] call cTab_fnc_setSettings;";
 					toolTip = $STR_ctab_core_HelmetCamIconHint;
@@ -135,7 +128,7 @@ class cTab_Tablet_dlg {
 				class actMSGtxt: actBFTtxt
 				{
 					idc = IDC_CTAB_ACTMSGTXT;
-					text = "\cTab\img\Mail_Main_Icon_ico.paa" ;
+					text = "\cTab\img\icon_mail_ca.paa" ;
 					y = pxToGroup_Y(cTab_GUI_tablet_SCREEN_CONTENT_Y + cTab_GUI_tablet_DESKTOP_ICON_OFFSET_Y * 4 + cTab_GUI_tablet_DESKTOP_ICON_H * 3);
 					action = "['cTab_Tablet_dlg',[['mode','MESSAGE']]] call cTab_fnc_setSettings;";
 					toolTip = $STR_ctab_core_MessageIconHint;
@@ -161,17 +154,35 @@ class cTab_Tablet_dlg {
 					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_L_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
 				};
+				class HUAVListTL : cTab_RscText_WindowTitle 
+				{
+					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_L_X);
+					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
+					text = "List of UAV";
+				};
 				class UAVVidBG1: cTab_Tablet_window_back_TR
 				{
 					idc=10;
 					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_R_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
 				};
+				class UAVVidTL1 : cTab_RscText_WindowTitle 
+				{
+					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_R_X);
+					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
+					text = "Video stream - Normal";
+				};
 				class UAVVidBG2: cTab_Tablet_window_back_BR
 				{
 					idc=11;
 					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_R_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_B_Y);
+				};
+				class UAVVidTL2 : cTab_RscText_WindowTitle 
+				{
+					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_R_X);
+					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_B_Y);
+					text = "Video stream - Thermal";
 				};
 				class cTabUAVlist: cTab_RscListbox_Tablet
 				{
@@ -221,11 +232,23 @@ class cTab_Tablet_dlg {
 					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_L_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
 				};
+				class HcamListTL : cTab_RscText_WindowTitle 
+				{
+					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_L_X);
+					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
+					text = "List of helmet cameras";
+				};
 				class HcamVidBG: cTab_Tablet_window_back_TR
 				{
 					idc=13;
 					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_R_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
+				};
+				class HcamVidTL : cTab_RscText_WindowTitle 
+				{
+					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_BACK_R_X);
+					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
+					text = "Video stream";
 				};
 				class cTabHcamList: cTab_RscListbox_Tablet
 				{
