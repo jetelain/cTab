@@ -547,6 +547,24 @@ namespace cTabWebApp
             await Clients.Group(state.WebChannelName).SendAsync("Devices", state.LastDevices);
         }
 
+        public async Task ArmaActionRangeFinder(ArmaMessage message)
+        {
+            var state = GetState(ConnectionKind.Arma);
+            if (state == null)
+            {
+                _logger.LogWarning($"No state for ArmaActionTelemeter");
+                return;
+            }
+            var telemeter = new RangeFinderMessage()
+            {
+                X = ArmaSerializer.ParseDouble(message.Args[0]) ?? 0d,
+                Y = ArmaSerializer.ParseDouble(message.Args[1]) ?? 0d,
+                Z = ArmaSerializer.ParseDouble(message.Args[2]) ?? 0d,
+                Distance = ArmaSerializer.ParseDouble(message.Args[3]) ?? 0d
+            };
+            await Clients.Group(state.WebChannelName).SendAsync("ActionRangeFinder", telemeter);
+        }
+
         public async Task WebAddUserMarker(WebAddUserMarkerMessage message)
         {
             var state = GetState(ConnectionKind.Web);

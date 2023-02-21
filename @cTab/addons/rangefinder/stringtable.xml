@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project name="ctab">
+    <Package name="rangefinder">
+        <Key ID="STR_ctab_rangefinder_rangerfinder">
+            <English>Rangefinder</English>
+            <French>Télémètre</French>
+        </Key>
+        <Key ID="STR_ctab_rangefinder_rangerfinderDetails">
+            <English>Key to measure with rangefinder and transmit data.</English>
+            <French>Touche pour mesurer avec le télémètre et transmettre les données.</French>
+        </Key>
+    </Package>
+</Project>

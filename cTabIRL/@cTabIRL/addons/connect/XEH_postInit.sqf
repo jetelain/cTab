@@ -66,3 +66,8 @@ if (!hasInterface) exitWith { };
 	}];
 
 }] call CBA_fnc_addEventHandler;
+
+["ctab_rangefinder_data", {
+	params ["_position", "_distance"];
+	"cTabExtension" callExtension ["ActionRangeFinder", _position + [_distance]];
+}] call CBA_fnc_addEventHandler;

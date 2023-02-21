@@ -925,6 +925,19 @@ $(function () {
         }
     });
 
+    connection.on("ActionRangeFinder", function (data) {
+        try {
+            setCenterOnPosition(false);
+
+            var latlng = L.latLng(data.y, data.x);
+            showMenu(latlng, generateMenu(0, latlng));
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+
+
     connection.on("UpdateMarkers", function (data) {
         try {
             updateMarkers(data.makers);

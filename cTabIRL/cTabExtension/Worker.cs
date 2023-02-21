@@ -72,13 +72,12 @@ namespace cTabExtension
                 case "EndMission":
                     Send(function, srv => srv.InvokeAsync("Arma" + function, new ArmaMessage() { Timestamp = DateTime.UtcNow, Args = args }), true);
                     break;
-                // Other state messages, the last one has all relevant data
-                case "Devices":
-                case "UpdateMessages":
-                case "UpdateMarkers":
-                case "UpdateMapMarkers":
+                // Other state messages :
+                // if starts with Action, it's a realtime message (does not need replay and should be dispatched quickly)
+                // Otherwise the last one has all relevant data (keep and replay last one if an issue occurs) 
                 default:
-                    Send(function, srv => srv.SendAsync("Arma" + function, new ArmaMessage() { Timestamp = DateTime.UtcNow, Args = args }), true);
+                    Send(function, srv => srv.SendAsync("Arma" + function, new ArmaMessage() { Timestamp = DateTime.UtcNow, Args = args }),
+                        !function.StartsWith("Action", StringComparison.Ordinal));
                     break;
             }
         }
