@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project name="ctab">
+    <Package name="compass">
+
+        <Key ID="STR_ctab_compass_compassCategory">
+            <English>Vehicle compass</English>
+            <French>Boussole véhicules</French>
+        </Key>
+        <Key ID="STR_ctab_compass_enable">
+            <English>Enable compass with marker</English>
+            <French>Activer boussole avec marqueurs</French>
+        </Key>
+        <Key ID="STR_ctab_compass_enableDetails">
+            <English>Display on screen bottom an horizontal compass with markers and their distance</English>
+            <French>Affiche en bas de l'écran une boussole horizontale avec les marqueurs et leur distance</French>
+        </Key>
+    </Package>
+</Project>
