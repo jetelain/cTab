@@ -1,0 +1,2 @@
+PREP(canUseRangefinder);
+PREP(handleRangeFinderKey);

@@ -4,31 +4,17 @@
 if (!hasInterface) exitWith {};
 
 GVAR(lastPosition) = [];
+GVAR(binoculars) = ["Rangefinder", "Laserdesignator", "Laserdesignator_02", "Laserdesignator_02_ghex_F", "Laserdesignator_03", "Laserdesignator_03_ghex_F"];
 
-["cTab","rangerfinder",[LLSTRING(rangerfinder),LLSTRING(rangerfinderDetails)],{
-	if (!(cameraView in ["GUNNER","GROUP"])) exitWith {
-		INFO_1("Wrong camera view: %1",cameraView);
-	};
-
-	// if player is not embarked, he can use rangefinder only if current weapon is a binocular that is a range finder
-	if (vehicle ctab_player == ctab_player && {currentWeapon ctab_player != ""} && {binocular ctab_player == currentWeapon ctab_player}) then {
-		// TODO: check if rangefinder
-	};
-
-	private _camPosition = AGLToASL positionCameraToWorld [0, 0, 1];
-	private _aimLinePos = AGLToASL positionCameraToWorld [0, 0, 5000];
-	private _LIS = lineIntersectsSurfaces [_camPosition, _aimLinePos];
-	private _position = ((_LIS select 0) select 0);
-	private _distance = _camPosition vectorDistance _position;
-
-	[QGVAR(data), [_position, _distance]] call CBA_fnc_localEvent;
-},"",[DIK_T,[false,false,false]],false] call cba_fnc_addKeybind;
+// Vanilla RangeFinder
+addUserActionEventHandler ["gunElevAuto", "Activate", {
+	call FUNC(handleRangeFinderKey);
+}];
 
 // ACE Vector RangeFinder
 ["ace_vector_rangefinderData", { 
 	params ["_distance", "_azimuth", "_inclination"];
 	private _position = (eyePos player) vectorAdd ([_distance, _azimuth, _inclination] call CBA_fnc_polar2vect);
-
 	[QGVAR(data), [_position, _distance]] call CBA_fnc_localEvent;
 }] call CBA_fnc_addEventHandler;
 
@@ -36,7 +22,10 @@ GVAR(lastPosition) = [];
 [QGVAR(data), {
 	params ["_position", "_distance"];
 
+	INFO_1('data %1', _position);
+
 	GVAR(lastPosition) = _position;
+
 	['cTab_Tablet_dlg',[['mode','BFT']]] call cTab_fnc_setSettings;
 	['cTab_Android_dlg',[['mode','BFT']]] call cTab_fnc_setSettings;
 
