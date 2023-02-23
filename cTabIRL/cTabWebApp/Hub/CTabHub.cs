@@ -187,16 +187,49 @@ namespace cTabWebApp
             var worldName = ArmaSerializer.ParseString(message.Args[0]);
             var size = ArmaSerializer.ParseDouble(message.Args[1]) ?? 0d;
             var date = ArmaSerializer.ParseIntegerArray(message.Args[2]);
+            var versionCtab = message.Args.Length > 3 ? ToVersion(ArmaSerializer.ParseString(message.Args[3])) : null;
+            var versionIrl = message.Args.Length > 4 ? ToVersion(ArmaSerializer.ParseString(message.Args[4])) : null;
 
             state.LastMission = new MissionMessage()
             {
                 WorldName = worldName,
                 Size = size,
                 Date = ToDateTime(date),
-                Timestamp = message.Timestamp
+                Timestamp = message.Timestamp,
+                CtabFeatureLevel = GetCtabFeatureLevel(versionCtab),
+                IrlFeatureLevel = GetIrlFeatureLevel(versionIrl),
             };
 
             await Clients.Group(state.WebChannelName).SendAsync("Mission", state.LastMission);
+        }
+
+        private static readonly Version CtabLevel1 = new Version(2, 7);
+
+        private static int GetCtabFeatureLevel(Version versionCtab)
+        {
+            if (versionCtab == null || versionCtab < CtabLevel1)
+            {
+                return 0;
+            }
+            return 1;
+        }
+
+        private static int GetIrlFeatureLevel(Version versionIrl)
+        {
+            if (versionIrl == null)
+            {
+                return 0;
+            }
+            return 1;
+        }
+
+        private Version ToVersion(string v)
+        {
+            if (!string.IsNullOrEmpty(v) && Version.TryParse(v, out var version))
+            {
+                return version;
+            }
+            return null;
         }
 
         private DateTime ToDateTime(int[] date)

@@ -8,5 +8,7 @@ namespace cTabWebApp
         public double Size { get; set; }
         public DateTime Date { get; set; }
         public DateTime Timestamp { get; set; }
+        public int CtabFeatureLevel { get; set; }
+        public int IrlFeatureLevel { get; set; }
     }
 }

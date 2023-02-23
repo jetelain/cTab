@@ -8,6 +8,7 @@
         public int? Select1 { get; set; }
         public int? Select2 { get; set; }
         public int? Select3 { get; set; }
-        public string Preview { get; internal set; }
+        public string Preview { get; set; }
+        public int FeatureLevel { get; set; }
     }
 }

@@ -41,19 +41,22 @@ namespace cTabWebApp.Models
                         {
                             Label = SharedResource.STR_ctab_core_ControlPointMenu,
                             NextMenu = 101,
-                            Preview = "/img/preview/10032500001301000000.png"
+                            Preview = "/img/preview/10032500001301000000.png",
+                            FeatureLevel= 1
                         },
                         new MenuItem
                         {
                             Label = SharedResource.STR_ctab_core_ManoeuvreMenu,
                             NextMenu = 102,
-                            Preview = "/img/preview/10032500001602050000.png"
+                            Preview = "/img/preview/10032500001602050000.png",
+                            FeatureLevel= 1
                         },
                         new MenuItem
                         {
                             Label = SharedResource.STR_ctab_core_SustainmentMenu,
                             NextMenu = 103,
-                            Preview = "/img/preview/10032500003211000000.png"
+                            Preview = "/img/preview/10032500003211000000.png",
+                            FeatureLevel= 1
                         }
                     }
                 },
@@ -111,13 +114,15 @@ namespace cTabWebApp.Models
                         {
                             Label = SharedResource.STR_ctab_core_Mine,
                             Select1 = 14,
-                            Preview = "/img/preview/10061500002101000000.png"
+                            Preview = "/img/preview/10061500002101000000.png",
+                            FeatureLevel= 1
                         },
                         new MenuItem
                         {
                             Label = SharedResource.STR_ctab_core_IED,
                             Select1 = 15,
-                            Preview = "/img/preview/10061500002104000000.png"
+                            Preview = "/img/preview/10061500002104000000.png",
+                            FeatureLevel= 1
                         }
                     }
                 },
@@ -373,14 +378,16 @@ namespace cTabWebApp.Models
                             Label = SharedResource.STR_ctab_core_DotMenu,
                             Select1 = 100,
                             NextMenu = 131,
-                            Preview = "/img/mil_dot_blue.png"
+                            Preview = "/img/mil_dot_blue.png",
+                            FeatureLevel= 1
                         },
                         new MenuItem
                         {
                             Label = SharedResource.STR_ctab_core_CircleMenu,
                             Select1 = 101,
                             NextMenu = 131,
-                            Preview = "/img/mil_circle_blue.png"
+                            Preview = "/img/mil_circle_blue.png",
+                            FeatureLevel= 1
                         }
                     }
 

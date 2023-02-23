@@ -84,6 +84,8 @@ var ticButton = null;
 var selfGroupId = null;
 var selfIsInContact = false;
 var groupsInContact = [];
+var ctabFeatureLevel = 0;
+var irlFeatureLevel = 0;
 
 function updateButtons() {
     centerOnPositionButton.setClass(centerOnPosition ? 'btn-primary' : 'btn-outline-secondary');
@@ -167,6 +169,11 @@ function generateMenu(id, latlng) {
         a.appendTo(div);
     }
     menu.items.forEach(function (entry) {
+
+        if (entry.featureLevel > ctabFeatureLevel) {
+            return;
+        }
+
         var a = $('<a class="dropdown-item" href="#"></a>');
         a.text(entry.label);
         a.attr('title', entry.tooltip);
@@ -326,6 +333,13 @@ function initMap(mapInfos, worldName) {
         })).addTo(map);
     }
     if (!vm.isSpectator) {
+        (ticButton = L.control.overlayButton({
+            content: 'TIC',
+            click: function () { $('#tic').modal('show'); },
+            initialClass: 'btn-outline-danger',
+            position: 'topright'
+        })).addTo(map);
+
         (inboxButton = L.control.overlayButton({
             position: 'topright',
             content: '<i class="fas fa-inbox"></i>&nbsp;<span class="badge badge-secondary">0</span>',
@@ -361,15 +375,6 @@ function initMap(mapInfos, worldName) {
         click: function () { document.location.href = $('#efislink').attr('href'); },
     })).addTo(map);
     efisMapButton.j().attr('title', $('#efislink').text());
-
-
-    (ticButton = L.control.overlayButton({
-        content: 'TIC',
-        click: function () { $('#tic').modal('show'); },
-        initialClass: 'btn-outline-danger',
-        position: 'topright'
-    })).addTo(map);
-
 
     currentMap = map;
     currentMapInfos = mapInfos;
@@ -893,6 +898,12 @@ $(function () {
     function started() {
         $('#status').text(texts.connected);
         $('#statusbadge').attr('class', 'badge badge-success');
+
+        if (ctabFeatureLevel == 0 || irlFeatureLevel == 0) {
+            ticButton.j().hide();
+        } else {
+            ticButton.j().show();
+        }
     }
 
     connection = new signalR.HubConnectionBuilder()
@@ -909,6 +920,8 @@ $(function () {
                 // TODO !
             }
             updateClock(missionData.date);
+            ctabFeatureLevel = missionData.ctabFeatureLevel;
+            irlFeatureLevel = missionData.irlFeatureLevel;
             started();
         }
         catch (e) {
