@@ -58,8 +58,8 @@ _texture1 = call {
 	if (_markerIcon == 11) exitWith {"\cTab\img\o_inf_mat.paa"};
 	if (_markerIcon == 12) exitWith {"\cTab\img\o_inf_mmortar.paa"};
 	if (_markerIcon == 13) exitWith {"\cTab\img\o_inf_aa.paa"};
-	if (_markerIcon == 14) exitWith {"\cTab\img\mil\10061500002101000000.paa"}; // ENI Mine
-	if (_markerIcon == 15) exitWith {"\cTab\img\mil\10061500002104000000.paa"}; // ENI IED
+	if (_markerIcon == 80) exitWith {"\cTab\img\mil\10061500002101000000.paa"}; // ENI Mine
+	if (_markerIcon == 81) exitWith {"\cTab\img\mil\10061500002104000000.paa"}; // ENI IED
 	if (_markerIcon == 90) exitWith {_drawSize = 1.5; "\cTab\img\tic.paa"}; // Troop in contact
 
 	// GREEN

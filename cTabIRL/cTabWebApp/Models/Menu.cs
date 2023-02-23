@@ -113,14 +113,14 @@ namespace cTabWebApp.Models
                         new MenuItem
                         {
                             Label = SharedResource.STR_ctab_core_Mine,
-                            Select1 = 14,
+                            Select1 = 80,
                             Preview = "/img/preview/10061500002101000000.png",
                             FeatureLevel= 1
                         },
                         new MenuItem
                         {
                             Label = SharedResource.STR_ctab_core_IED,
-                            Select1 = 15,
+                            Select1 = 81,
                             Preview = "/img/preview/10061500002104000000.png",
                             FeatureLevel= 1
                         }

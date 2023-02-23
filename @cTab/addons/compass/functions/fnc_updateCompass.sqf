@@ -71,7 +71,7 @@ if ( GVAR(markersHaveChanged) || { (GVAR(previousPosition) vectorDistanceSqr _pl
 		_x params ["_mid","_markerData","_markerRawData"];
 		_markerRawData params ['_markerPosition', '_markerIcon'];
 
-		if ( _markerIcon <= 14 ) then {
+		if ( _markerIcon < 20 ) then {
 			private _distance = [_playerPosition, _markerPosition] call cTab_fnc_distance2D;
 			private _direction = [_playerPosition, _markerPosition] call cTab_fnc_dirTo;
 			private _idc = GVAR(markerToIdc) getOrDefault [_mid, -1];

@@ -235,8 +235,8 @@ class EnemySub1: cTab_RscControlsGroup
 			action = "cTabUserSelIcon set [1,6];[12] call cTab_fnc_userMenuSelect;";
 			textureNoShortcut = "\ctab\img\menu\10061000000000000000.paa";
 		};
-		CTAB_MENU_ENTRY_ICON($STR_ctab_core_Mine,8,1,14,1,10061500002101000000)
-		CTAB_MENU_ENTRY_ICON($STR_ctab_core_IED,9,1,15,1,10061500002104000000)
+		CTAB_MENU_ENTRY_ICON($STR_ctab_core_Mine,8,1,80,1,10061500002101000000)
+		CTAB_MENU_ENTRY_ICON($STR_ctab_core_IED,9,1,81,1,10061500002104000000)
 		class exit: cTab_MenuExit
 		{
 			idc = -1;
