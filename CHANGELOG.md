@@ -1,8 +1,63 @@
 Changelog
 ---------
+### 2.7.0 ###
+* Added vehicle marker compass
+  * In supported vehicles you have an horizontal compass displayed a the screen bottom
+  * Enemy markers are displayed on the compass at the appropriate heading with distance shown in meters
+* Added rangefinder integration
+  * You can use ACE Vector, or game rangefinder, or vehicle rangefinder to get coordinates for a marker
+  * First use the rangefinder, then open the tablet or android device, marker menu will appear at the coordinates 
+  * Then select marker informations 
+  * Compatible with cTab IRL : The menu immediatly pops up on your real life tablet or smartphone
+* Added new markers
+  * Coordination markers have been added
+  * Additions to "Enemy" menu
+    * Mine
+    * IED
+  * Additions to "General" menu
+    * Dot marker with label (A to F)
+    * Circle marker with label (A to F)
+  * New menu "Control point"
+    * Unspecified Control Point
+    * Contact Point
+    * Coordinating Point
+    * CKP - Checkpoint
+    * SOS - Distress call
+    * EC - Entry Control
+    * RLY - Rally Point
+    * SP - Start Point
+  * New menu "Manoeuvre"
+    * Outpost
+    * Combat outpost
+    * Target reference Point
+    * PD - Point of Departure
+  * New menu "Sustainment"
+    * CCP - Casualty Collection point
+    * DET - Detainee Collection point
+    * MED - MEDEVAC Pick-Up Point
+    * R3P - Rearm, Refuel and Resupply Point
+* Added cTab items as basic items
+  * Tablet and Android device are also available as misc items
+  * It will avoid unwanted in-game GPS related features
+  * Original items have been kept for backward compatibility, you may blacklist them in Arsenal
+* Updated user interface of rugged tablet
+  * Interface style have been updated to Windows 10
+* Updated user interface of marker menu
+  * Menu includes images to easily pickup correct marker
+  * Direction marker layout have been change to look as a compass
+* Improved performances
+  * Most used functions are 50% faster
+* (cTab IRL) Added a Troop In Contact alert button
+  * Creates immediatly a special marker your position
+* Fixed Arma 2.10 compatibility
 
-### 2.5.0 [Work in progress] ###
-**This version is still ongoing, breaking changes may occurs.**
+### 2.6.0 ###
+* (cTab IRL) Electronic flight instrument system
+  * Displays real-time instruments on your real life tablet to improve helicopter pilots immersion
+* (cTab IRL) Improved performances
+  * Enforce WebSockets to reduce server load and reduce latency
+
+### 2.5.0 ###
 * Added settings (in CBA Mods Settings)
   * Blue Force Tracking : Disabled, Real time (default) or at each synchronisation
   * Synchronisation rate : 30 seconds by default
