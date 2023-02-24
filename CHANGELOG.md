@@ -42,6 +42,7 @@ Changelog
   * Original items have been kept for backward compatibility, you may blacklist them in Arsenal
 * Updated user interface of rugged tablet
   * Interface style have been updated to Windows 10
+* Updated Android device to Samsung S7 with Kägwerks case
 * Updated user interface of marker menu
   * Menu includes images to easily pickup correct marker
   * Direction marker layout have been change to look as a compass
