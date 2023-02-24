@@ -47,7 +47,7 @@ private _textures = call {
 			["\cTab\img\TAD_background_ca.paa","\cTab\img\TAD_background_night_ca.paa"]
 		};
 		if (_displayName in ["cTab_Android_dsp","cTab_Android_dlg"]) exitWith {
-			["\cTab\img\android_gd300_ca.paa","\cTab\img\android_gd300_night_ca.paa"]
+			["\cTab\img\android_s7_ca.paa","\cTab\img\android_s7_night_ca.paa"]
 		};
 		if (_displayName in ["cTab_microDAGR_dsp","cTab_microDAGR_dlg"]) exitWith {
 			["\cTab\img\microDAGR_background_ca.paa","\cTab\img\microDAGR_background_night_ca.paa"]

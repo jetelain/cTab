@@ -48,7 +48,7 @@ if ([_player,GVAR(androidDevices)] call cTab_fnc_checkGear) then {
 	_actions pushBack [[
         "cTab_Android",
         LLSTRING(ConfigureAndroid),
-        "\cTab\img\icon_Android.paa",
+        "\cTab\img\icon_android_s7_ca.paa",
         _toggleInterface,
         {true},
         _subactions,

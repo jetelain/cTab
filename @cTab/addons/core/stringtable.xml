@@ -14,16 +14,16 @@
             <French>Configurer TAD</French>
         </Key>
         <Key ID="STR_ctab_core_Android">
-            <English>GD300 Android</English>
-            <French>GD300 Android</French>
+            <English>S7 Android</English>
+            <French>S7 Android</French>
         </Key>
         <Key ID="STR_ctab_core_AndroidShort">
-            <English>GD300 Rugged Wearable Computer</English>
-            <French>Téléphone endurci GD300</French>
+			<English>Samsung S7 with Kägwerks case</English>
+			<French>Samsung S7 avec protection Kägwerks</French>
         </Key>
         <Key ID="STR_ctab_core_ConfigureAndroid">
-            <English>Configure GD300 Android</English>
-            <French>Configurer GD300 Android</French>
+            <English>Configure S7 Android</English>
+            <French>Configurer S7 Android</French>
         </Key>
         <Key ID="STR_ctab_core_MicroDAGR">
             <English>MicroDAGR</English>

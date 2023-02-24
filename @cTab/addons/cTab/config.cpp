@@ -22,7 +22,7 @@ class CfgPatches
 	class PREFIX  // cTab
 		{
 			units[] = {Box_cTab_items};
-			weapons[] = {ItemcTab,ItemAndroid,ItemMicroDAGR,ItemcTabHCam};
+			weapons[] = {ItemcTab,ItemAndroid,ItemMicroDAGR,ItemcTabHCam,ItemcTabMisc,ItemAndroidMisc,ItemMicroDAGRMisc};
 			requiredVersion = REQUIRED_VERSION;
 			requiredAddons[] = {"CBA_MAIN","ctab_main","ctab_core"};
 			versionDesc = "cTab";
@@ -99,7 +99,7 @@ class CfgWeapons
 		descriptionshort = $STR_ctab_core_AndroidShort;
 		descriptionuse = "<t color='#9cf953'>Use: </t>Show Android Based BFT";
 		displayname = $STR_ctab_core_Android;
-		picture = "\cTab\img\icon_Android.paa";
+		picture = "\cTab\img\icon_android_s7_ca.paa";
 		model = "\ctab\data\itemAndroid.p3d";
 		class ItemInfo {
 			mass = 5;
@@ -156,7 +156,7 @@ class CfgWeapons
 		descriptionshort = $STR_ctab_core_AndroidShort;
 		descriptionuse = "<t color='#9cf953'>Use: </t>Show Android Based BFT";
 		displayname = $STR_ctab_core_Android;
-		picture = "\cTab\img\icon_Android.paa";
+		picture = "\cTab\img\icon_android_s7_ca.paa";
 		model = "\ctab\data\itemAndroid.p3d";
 		scope = 2;
 		type = 0;
