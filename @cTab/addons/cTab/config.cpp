@@ -21,7 +21,7 @@ class CfgPatches
 {
 	class PREFIX  // cTab
 		{
-			units[] = {Box_cTab_items};
+			units[] = {Box_cTab_items,Box_cTabMisc_items};
 			weapons[] = {ItemcTab,ItemAndroid,ItemMicroDAGR,ItemcTabHCam,ItemcTabMisc,ItemAndroidMisc,ItemMicroDAGRMisc};
 			requiredVersion = REQUIRED_VERSION;
 			requiredAddons[] = {"CBA_MAIN","ctab_main","ctab_core"};
@@ -241,7 +241,7 @@ class CfgVehicles
 
 	class Box_NATO_WpsSpecial_F;
 	class Box_cTab_items : Box_NATO_WpsSpecial_F {
-		displayname = "[cTab] Computer Gear";
+		displayname = "[cTab] Computer Gear (GPS)";
 		icon = "iconCrateLarge";
 		model = "\A3\weapons_F\AmmoBoxes\WpnsBox_large_F";
 		scope = 2;
@@ -260,6 +260,39 @@ class CfgVehicles
 			class _xx_ItemMicroDAGR {
 				count = 25;
 				name = "ItemMicroDAGR";
+			};
+			class _xx_ItemcTabHCam {
+				count = 25;
+				name = "ItemcTabHCam";
+			};
+		};
+	
+	
+		class TransportMagazines {};
+		class TransportWeapons {};
+	
+	};
+
+	class Box_cTabMisc_items : Box_cTab_items {
+		displayname = "[cTab] Computer Gear (Normal)";
+		icon = "iconCrateLarge";
+		model = "\A3\weapons_F\AmmoBoxes\WpnsBox_large_F";
+		scope = 2;
+		transportmaxmagazines = 64;
+		transportmaxweapons = 12;
+
+		class TransportItems {
+			class _xx_ItemcTab {
+				count = 5;
+				name = "ItemcTabMisc";
+			};
+			class _xx_ItemAndroid {
+				count = 15;
+				name = "ItemAndroidMisc";
+			};
+			class _xx_ItemMicroDAGR {
+				count = 25;
+				name = "ItemMicroDAGRMisc";
 			};
 			class _xx_ItemcTabHCam {
 				count = 25;

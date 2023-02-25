@@ -668,7 +668,7 @@ class GenSub1: cTab_RscControlsGroup
 			action = "cTabUserSelIcon set [1,31];[1] call cTab_fnc_userMenuSelect;";
 			textureNoShortcut = "\ctab\img\menu\mil_end.paa";
 		};
-		CTAB_MENU_ENTRY_ICON($STR_ctab_core_CircleMenu,3,1,100,100,mil_dot_blue)
+		CTAB_MENU_ENTRY_ICON($STR_ctab_core_DotMenu,3,1,100,100,mil_dot_blue)
 		CTAB_MENU_ENTRY_ICON($STR_ctab_core_CircleMenu,4,1,101,100,mil_circle_blue)
 		CTAB_MENU_ENTRY_EXIT(cTab_MENU_MAX_ELEMENTS)
 	};
