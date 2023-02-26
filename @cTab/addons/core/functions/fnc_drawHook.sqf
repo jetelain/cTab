@@ -11,8 +11,8 @@
 	Parameters:
 		0: OBJECT  - Display used to write hook direction, distance and grid to
 		0: OBJECT  - Map control to draw arrow on
-		2: ARRAY   - Position A
-		3: ARRAY   - Position B
+		2: ARRAY   - Position A, format PositionASL
+		3: ARRAY   - Position B, format Position2D
 		4: INTEGER - Mode, 0 = Reference is A, 1 = Reference is B
 		5: BOOLEAN - TAD, TRUE = TAD
 
@@ -25,22 +25,23 @@
 
 #include "\cTab\shared\cTab_gui_macros.hpp"
 
-private ["_display","_ctrlScreen","_pos","_secondPos","_dirToSecondPos","_dstToSecondPos"];
+params ["_display","_ctrlScreen","_pos","_secondPos"];
 
-_display = _this select 0;
-_ctrlScreen = _this select 1;
-_pos = _this select 2;
-_secondPos = _this select 3;
 // draw arrow from current position to map centre
-_dirToSecondPos = call {
-	if (_this select 4 == 0) exitWith {
+private _dirToSecondPos =
+	if (_this select 4 == 0) then {
 		_ctrlScreen drawArrow [_pos,_secondPos,cTabMicroDAGRhighlightColour];
-		[_pos,_secondPos] call cTab_fnc_dirTo
+		_pos getDir _secondPos
+	} else {
+		_ctrlScreen drawArrow [_secondPos,_pos,cTabMicroDAGRhighlightColour];
+		_secondPos getDir _pos
 	};
-	_ctrlScreen drawArrow [_secondPos,_pos,cTabMicroDAGRhighlightColour];
-	[_secondPos,_pos] call cTab_fnc_dirTo
-};
-_dstToSecondPos = [_pos,_secondPos] call cTab_fnc_distance2D;
+
+// Distance have been historically computed at terrain level
+// Terrain had a little impact on computed distance, due to potential elevation difference
+// We may introduce an option to have elevation used
+private _dstToSecondPos = _pos distance2D _secondPos;
+
 call {
 	// Call this if we are drawing for a TAD
 	if (_this select 5) exitWith {

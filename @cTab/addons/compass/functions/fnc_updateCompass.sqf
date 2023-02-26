@@ -60,7 +60,7 @@ private _playerPosition = getPosASL ctab_player;
 if ( GVAR(markersHaveChanged) || { (GVAR(previousPosition) vectorDistanceSqr _playerPosition) > 0.04 } ) then { 
 	// updated every >20cm position change, or when markers have changed
 
-	GVAR(previousPosition) = +_playerPosition; // clone value because cTab_fnc_distance2D have side effet
+	GVAR(previousPosition) = _playerPosition;
 	GVAR(markersHaveChanged) = false;
 	
 	//private _start = diag_tickTime;
@@ -72,8 +72,8 @@ if ( GVAR(markersHaveChanged) || { (GVAR(previousPosition) vectorDistanceSqr _pl
 		_markerRawData params ['_markerPosition', '_markerIcon'];
 
 		if ( _markerIcon < 20 ) then {
-			private _distance = [_playerPosition, _markerPosition] call cTab_fnc_distance2D;
-			private _direction = [_playerPosition, _markerPosition] call cTab_fnc_dirTo;
+			private _distance = _playerPosition vectorDistance _markerPosition;
+			private _direction = _playerPosition getDir _markerPosition;
 			private _idc = GVAR(markerToIdc) getOrDefault [_mid, -1];
 			private _posX1 = (if (_direction >= 315) then {_direction-360} else {_direction}) * _dwidth / 180;
 			private _posX2 = (if (_direction < 135) then {_direction+180} else {_direction-180}) * _dwidth / 180;

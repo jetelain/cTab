@@ -25,20 +25,22 @@
 		["bluefor",[21,[[1714.35,5716.82],0,0,0,"12:00",player]],157]call cTab_fnc_addUserMarker;
 */
 
-private ["_encryptionKey","_markerData","_transactionId"];
-
-_encryptionKey = _this select 0;
-_markerData = _this select 1;
-_transactionId = _this select 2; // not set when initiated from client
+params ["_encryptionKey","_markerData",["_transactionId",-1]];
 
 call {
 	// If received on the server
 	if (isServer) exitWith {
-		if (isNil "_transactionId") then {
+		if (_transactionId == -1) then {
 			// Increase transaction ID
 			cTab_userMarkerTransactionId = cTab_userMarkerTransactionId + 1;
 			_transactionId = cTab_userMarkerTransactionId;
 			
+			// Convert to ASL if 2D coordinates
+			private _pos = _markerData select 0;
+			if ( count _pos == 2 ) then {
+				_markerData set [0, ATLToASL [_pos select 0, _pos select 1, 0]];
+			};
+
 			// Add marker data to list
 			[cTab_userMarkerLists,_encryptionKey,[[_transactionId,_markerData]]] call cTab_fnc_addToPairs;
 			
@@ -49,7 +51,7 @@ call {
 			if (hasInterface && {_encryptionKey == call cTab_fnc_getPlayerEncryptionKey}) then {
 				call cTab_fnc_updateUserMarkerList;
 				if ((_markerData select 5) != cTab_player) then {
-					["BFT",format [LLSTRING(newMarker), [_markerData select 0] call FUNC(gridPosition)],20] call cTab_fnc_addNotification;
+					["BFT",format [LLSTRING(newMarker), [_pos] call FUNC(gridPosition)],20] call cTab_fnc_addNotification;
 				} else {
 					["BFT",LLSTRING(markerAdded),3] call cTab_fnc_addNotification;
 				};
@@ -58,7 +60,7 @@ call {
 	};
 
 	// If received on a client, sent by the server
-	if (hasInterface && !isNil "_transactionId") exitWith {
+	if (hasInterface && _transactionId != -1) exitWith {
 		call {
 			if (cTab_userMarkerTransactionId == _transactionId) exitWith {};
 			if (cTab_userMarkerTransactionId != (_transactionId -1)) exitWith {
@@ -66,6 +68,14 @@ call {
 				["Transaction ID check failed! Had %1, received %2. Requesting user marker list.",cTab_userMarkerTransactionId,_transactionId] call bis_fnc_error;
 				[] call cTab_fnc_getUserMarkerList;
 			};
+
+			// Convert to ASL if 2D coordinates (should not happen)
+			private _pos = _markerData select 1 select 0;
+			if ( count _pos == 2 ) then {
+				WARN_2("2D position %1 of marker %2 received from server. Is server using an older version of ctab ?", _pos, _transactionId);
+				(_markerData select 1) set [0, ATLToASL [_pos select 0, _pos select 1, 0]];
+			};
+
 			cTab_userMarkerTransactionId = _transactionId;
 			[cTab_userMarkerLists,_encryptionKey,[_markerData]] call cTab_fnc_addToPairs;
 			// only update the user marker list if the marker was added to the player's side
@@ -74,7 +84,7 @@ call {
 				
 				// add notification if marker was issued by someone else
 				if ((_markerData select 1 select 5) != cTab_player) then {
-					["BFT",format [LLSTRING(newMarker),[_markerData select 1 select 0] call FUNC(gridPosition)],20] call cTab_fnc_addNotification;
+					["BFT",format [LLSTRING(newMarker),[_pos] call FUNC(gridPosition)],20] call cTab_fnc_addNotification;
 				} else {
 					["BFT",LLSTRING(markerAdded),3] call cTab_fnc_addNotification;
 				};

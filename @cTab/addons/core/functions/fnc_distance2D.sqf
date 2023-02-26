@@ -7,6 +7,9 @@
 	Description:
 		Calculate the 2D distance between two positions
 	
+	Obsolete:
+		Use distance2D instead.
+
 	Parameters:
 		0: ARRAY - 2D or 3D position
 		1: ARRAY - 2D or 3D position
@@ -19,6 +22,7 @@
 */
 
 private ["_pos1","_pos2"];
+
 _pos1 = _this select 0;
 _pos2 = _this select 1;
 
