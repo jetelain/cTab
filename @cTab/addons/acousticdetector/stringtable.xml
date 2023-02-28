@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project name="ctab">
+    <Package name="acousticdetector">
+        <Key ID="STR_ctab_acousticdetector_acousticdetector">
+            <English>Acoustic gunshot detector</English>
+            <French>Détecteur acoustique de coup de feu</French>
+        </Key>
+       <Key ID="STR_ctab_acousticdetector_enable">
+            <English>Enable gunshot detector</English>
+            <French>Activer le détecteur de coup de feu</French>
+        </Key>
+        <Key ID="STR_ctab_acousticdetector_enableDetails">
+            <English>Track gunshots using acoustic dector if embarked in an equipped vehicle, display them on map and on the horizontal compass of vehicle.</English>
+            <French>Suit les coups de feu à l'aide d'un détecteur acoustique lorsque le véhicule est équipé, les affiche sur la carte, et sur la boussole horizontale du véhicule.</French>
+        </Key>
+
+       <Key ID="STR_ctab_acousticdetector_timeLimit">
+            <English>Tracking time limit</English>
+            <French>Durée limite de suivi</French>
+        </Key>
+        <Key ID="STR_ctab_acousticdetector_timeLimitDetails">
+            <English>Time during which detected shots are kept and displayed.</English>
+            <French>Durée pendant laquelle les tirs détectés sont conservés et affichés.</French>
+        </Key>
+
+    </Package>
+</Project>
