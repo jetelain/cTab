@@ -9,13 +9,7 @@ if ( _unit == player || { _vehicle == vehicle player } ) exitWith {}; // system 
 private _pos1 = if ( isNull _vehicle ) then { getPosASL _unit } else { getPosASL _vehicle };
 private _pos2 = getPosASL _projectile;
 
-// TODO: Arma 2.12 => private _caliber = GVAR(caliberTypeCache) getOrDefaultCall [_ammo, {[_ammo] call FUNC(computeAmmoCaliberType)}, true];
-
-private _caliber = GVAR(caliberTypeCache) getOrDefault [_ammo,-2];
-if (_caliber == -2) then {
-	_caliber = [_ammo] call FUNC(computeAmmoCaliberType);
-	GVAR(caliberTypeCache) set [_ammo, _caliber];
-}; 
+private _caliber = GVAR(caliberTypeCache) getOrDefaultCall [_ammo, {[_ammo] call FUNC(computeAmmoCaliberType)}, true];
 
 if ( _caliber != -1 ) then {
 	// Register shot for PFH
