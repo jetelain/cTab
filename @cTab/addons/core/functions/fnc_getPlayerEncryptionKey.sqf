@@ -17,4 +17,4 @@
 		_playerEncryptionKey = call cTab_fnc_getPlayerEncryptionKey;
 */
 
-missionNamespace getVariable [format ["cTab_encryptionKey_%1",side cTab_player],""];
+missionNamespace getVariable [format ["cTab_encryptionKey_%1",side cTab_player],""]

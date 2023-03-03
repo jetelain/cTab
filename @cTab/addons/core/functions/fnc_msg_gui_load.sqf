@@ -38,7 +38,7 @@ uiNamespace setVariable ['cTab_msg_playerList', _plrList];
 
 {
 	if ((side _x in _validSides) && {isPlayer _x} && {[_x,GVAR(leaderDevices)] call cTab_fnc_checkGear}) then {
-		_index = _plrlistControl lbAdd format ["%1:%2 (%3)",groupId group _x,[_x] call CBA_fnc_getGroupIndex,name _x];
+		_index = _plrlistControl lbAdd format ["%1:%2 (%3)",groupId group _x,groupId _x,name _x];
 		_plrlistControl lbSetData [_index,str _x];
 	};
 } count _plrList;

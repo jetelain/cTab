@@ -50,7 +50,7 @@ if (GVAR(bft_mode) > 0) then {
 	*/
 	{
 		if ((_x != cTab_player) && {[_x,GVAR(personnelDevices)] call cTab_fnc_checkGear}) then {
-			0 = _cTabBFTmembers pushBack [_x,_x call cTab_fnc_getInfMarkerIcon,"",name _x,str([_x] call CBA_fnc_getGroupIndex), getPosASL _x, direction _x];
+			0 = _cTabBFTmembers pushBack [_x,_x call cTab_fnc_getInfMarkerIcon,"",name _x,str(groupId _x), getPosASL _x, direction _x];
 		};
 	} count units cTab_player;
 
@@ -60,7 +60,7 @@ if (GVAR(bft_mode) > 0) then {
 	Else, search through the group and use the first member we find equipped with a Tablet or Android for positioning.
 	*/
 	{
-		if ((side _x in _validSides)) then {
+		{
 			private _leader = objNull;
 			call {
 				if ([leader _x,GVAR(leaderDevices)] call cTab_fnc_checkGear) exitWith {_leader = leader _x;};
@@ -75,10 +75,10 @@ if (GVAR(bft_mode) > 0) then {
 					if (_groupSize <= 9) exitWith {"\A3\ui_f\data\map\markers\nato\group_1.paa"};
 					"\A3\ui_f\data\map\markers\nato\group_2.paa"
 				};
-				0 = _cTabBFTgroups pushBack [_leader,"\A3\ui_f\data\map\markers\nato\b_inf.paa",_sizeIcon,groupID _x, "", getPosASL _leader];
+				_cTabBFTgroups pushBack [_leader,"\A3\ui_f\data\map\markers\nato\b_inf.paa",_sizeIcon,groupID _x, "", getPosASL _leader];
 			};
-		};
-	} count allGroups;
+		} forEach groups _x;
+	} forEach _validSides;
 
 	/*
 	cTabBFTvehicles --- VEHICLES
@@ -94,7 +94,7 @@ if (GVAR(bft_mode) > 0) then {
 					_name = _customName;
 				};
 				if (group _x == _playerGroup) then {
-					_groupID = str([_x] call CBA_fnc_getGroupIndex)
+					_groupID = str(groupId _x)
 				};
 				_name = groupID group _x;
 			};

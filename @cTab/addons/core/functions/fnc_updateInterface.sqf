@@ -453,7 +453,7 @@ if (isNil "_mode") then {
 				// Populate list of UAVs
 				{
 					if (!(crew _x isEqualTo [])) then {
-						_index = _uavListCtrl lbAdd format ["%1:%2 (%3)",groupId group _x,[_x] call CBA_fnc_getGroupIndex,getText (configfile >> "cfgVehicles" >> typeOf _x >> "displayname")];
+						_index = _uavListCtrl lbAdd format ["%1:%2 (%3)",groupId group _x,groupId _x,getText (configfile >> "cfgVehicles" >> typeOf _x >> "displayname")];
 						_uavListCtrl lbSetData [_index,str _x];
 					};
 				} count cTabUAVlist;
@@ -483,7 +483,7 @@ if (isNil "_mode") then {
 				lbClear _hcamListCtrl;
 				_hcamListCtrl lbSetCurSel -1;
 				{
-					_index = _hcamListCtrl lbAdd format ["%1:%2 (%3)",groupId group _x,[_x] call CBA_fnc_getGroupIndex,name _x];
+					_index = _hcamListCtrl lbAdd format ["%1:%2 (%3)",groupId group _x, groupId _x,name _x];
 					_hcamListCtrl lbSetData [_index,str _x];
 				} count cTabHcamlist;
 				lbSort [_hcamListCtrl, "ASC"];

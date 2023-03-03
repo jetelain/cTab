@@ -7,13 +7,13 @@ if (_recipList isEqualTo []) exitWith {false};
 
 private _playerEncryptionKey = call cTab_fnc_getPlayerEncryptionKey;
 private _time = call cTab_fnc_currentTime;
-private _msgTitle = format ["%1 - %2:%3 (%4)",_time,groupId group cTab_player,[cTab_player] call CBA_fnc_getGroupIndex,name cTab_player];
+private _msgTitle = format ["%1 - %2:%3 (%4)",_time,groupId group cTab_player,groupId cTab_player,name cTab_player];
 private _recipientNames = "";
 
 {
 	private _recip = _x;
 	if (_recipientNames isEqualTo "") then {
-		_recipientNames = format ["%1:%2 (%3)",groupId group _recip,[_recip] call CBA_fnc_getGroupIndex,name _recip];
+		_recipientNames = format ["%1:%2 (%3)",groupId group _recip,groupId _recip,name _recip];
 	} else {
 		_recipientNames = format ["%1; %2",_recipientNames,name _recip];
 	};
