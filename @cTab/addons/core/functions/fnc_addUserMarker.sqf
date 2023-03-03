@@ -72,7 +72,7 @@ call {
 			// Convert to ASL if 2D coordinates (should not happen)
 			private _pos = _markerData select 1 select 0;
 			if ( count _pos == 2 ) then {
-				WARN_2("2D position %1 of marker %2 received from server. Is server using an older version of ctab ?", _pos, _transactionId);
+				WARNING_2("2D position %1 of marker %2 received from server. Is server using an older version of ctab ?", _pos, _transactionId);
 				(_markerData select 1) set [0, ATLToASL [_pos select 0, _pos select 1, 0]];
 			};
 

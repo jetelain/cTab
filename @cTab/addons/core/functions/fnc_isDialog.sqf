@@ -28,4 +28,4 @@ _interfaceName = _this select 0;
 // select the last three characters from the interface name
 _subString = _interfaceName select [(count _interfaceName) - 3];
 
-if (_subString == "dlg") then {true} else {false};
+_subString == "dlg"
