@@ -1,0 +1,3 @@
+[submodule "Arma3TacMap"]
+	path = Arma3TacMap
+	url = https://github.com/jetelain/Arma3TacMap.git

@@ -25,11 +25,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.3" />
     <PackageReference Include="QRCoder" Version="1.4.3" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Arma3TacMap\Arma3TacMapLibrary\Arma3TacMapLibrary.csproj" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<ProjectReference Include="..\..\Arma3TacMap\Arma3TacMapLibrary\Arma3TacMapLibrary.csproj" />
+	</ItemGroup>
   <ItemGroup>
     <Compile Update="SharedResource.Designer.cs">
       <DesignTime>True</DesignTime>

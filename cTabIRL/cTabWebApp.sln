@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30406.217
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cTabWebApp", "cTabWebApp\cTabWebApp.csproj", "{5ABCA27C-EFCC-4515-8577-CF0120D36409}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arma3TacMapLibrary", "..\..\Arma3TacMap\Arma3TacMapLibrary\Arma3TacMapLibrary.csproj", "{B5C88FDB-A83F-40A7-AE4E-564682AE93F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arma3TacMapLibrary", "..\Arma3TacMap\Arma3TacMapLibrary\Arma3TacMapLibrary.csproj", "{FD8AE72B-064A-4C82-AAF5-7A24D2C7BDE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,14 @@ Global
 		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.ReleaseCloud|Any CPU.ActiveCfg = ReleaseCloud|Any CPU
 		{5ABCA27C-EFCC-4515-8577-CF0120D36409}.ReleaseCloud|Any CPU.Build.0 = ReleaseCloud|Any CPU
-		{B5C88FDB-A83F-40A7-AE4E-564682AE93F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5C88FDB-A83F-40A7-AE4E-564682AE93F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5C88FDB-A83F-40A7-AE4E-564682AE93F9}.DebugCloud|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5C88FDB-A83F-40A7-AE4E-564682AE93F9}.DebugCloud|Any CPU.Build.0 = Debug|Any CPU
-		{B5C88FDB-A83F-40A7-AE4E-564682AE93F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5C88FDB-A83F-40A7-AE4E-564682AE93F9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B5C88FDB-A83F-40A7-AE4E-564682AE93F9}.ReleaseCloud|Any CPU.ActiveCfg = Release|Any CPU
-		{B5C88FDB-A83F-40A7-AE4E-564682AE93F9}.ReleaseCloud|Any CPU.Build.0 = Release|Any CPU
+		{FD8AE72B-064A-4C82-AAF5-7A24D2C7BDE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD8AE72B-064A-4C82-AAF5-7A24D2C7BDE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD8AE72B-064A-4C82-AAF5-7A24D2C7BDE4}.DebugCloud|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD8AE72B-064A-4C82-AAF5-7A24D2C7BDE4}.DebugCloud|Any CPU.Build.0 = Debug|Any CPU
+		{FD8AE72B-064A-4C82-AAF5-7A24D2C7BDE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD8AE72B-064A-4C82-AAF5-7A24D2C7BDE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD8AE72B-064A-4C82-AAF5-7A24D2C7BDE4}.ReleaseCloud|Any CPU.ActiveCfg = Release|Any CPU
+		{FD8AE72B-064A-4C82-AAF5-7A24D2C7BDE4}.ReleaseCloud|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
