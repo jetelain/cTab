@@ -64,6 +64,7 @@ var currentTacMapSynced = null;
 var currentMapInfos = null;
 var selfMarker = null;
 var existingMarkers = {};
+var existingShots = {};
 var existingMapMarkers = {};
 var centerOnPosition = true;
 var centerOnPositionButton = null;
@@ -520,6 +521,27 @@ function updateMarkers(makers) {
     updateIsInContact();
 }
 
+
+function updateAcoustic(data) {
+
+    var shotsToKeep = [];
+
+    data.shots.forEach(function (shot) {
+        var sid = ''+shot.id;
+        if (!existingShots[sid]) {
+            existingShots[sid] = L.circle([shot.y, shot.x], {radius: shot.radius, stroke: false, fill: true, fillColor:'red', fillOpacity: 0.2}).addTo(currentMap);
+        }
+        shotsToKeep.push(sid);
+    });
+
+    Object.getOwnPropertyNames(existingShots).forEach(function (id) {
+        if (shotsToKeep.indexOf(id) == -1) {
+            existingShots[id].remove();
+            delete existingShots[id];
+        }
+    });
+}
+
 function updateIsInContact() {
     var isInContact = groupsInContact.indexOf(selfGroupId) != -1;
     if (selfIsInContact != isInContact) {
@@ -954,6 +976,16 @@ $(function () {
     connection.on("UpdateMarkers", function (data) {
         try {
             updateMarkers(data.makers);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+    
+    connection.on("UpdateAcoustic", function (data) {
+        try {
+            console.log(data);
+            updateAcoustic(data);
         }
         catch (e) {
             console.error(e);

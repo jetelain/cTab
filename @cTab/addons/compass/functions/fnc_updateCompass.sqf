@@ -7,10 +7,11 @@ private _ctrlBloc = _control controlsgroupctrl 9000;
 private _shouldDisplay = (cameraView in ["GUNNER", "GROUP"]) && GVAR(enable);
 if ( ctrlShown _ctrlBloc != _shouldDisplay ) then {
 	_ctrlBloc ctrlShow _shouldDisplay;
-	if ( _shouldDisplay && !EGVAR(acousticdetector,isActive) ) then {
+	if ( _shouldDisplay ) then {
 		{
 			_x ctrlShow false;
 		} forEach (uiNamespace getVariable [QGVAR(blocs), []]);
+		GVAR(acousticChanged) = EGVAR(acousticdetector,isActive);
 	};
 };
 if ( !_shouldDisplay ) exitWith { };

@@ -18,6 +18,9 @@ TRACE_3("updateActiveState", GVAR(enable), _isActive, GVAR(isActive));
 
 if ( _isActive != GVAR(isActive) ) then {
 	GVAR(isActive) = _isActive;
+	GVAR(shotsToProcess) = [];
+	GVAR(detectedShots) = [];
+	[QGVAR(update)] call CBA_fnc_localEvent;
 	if ( _isActive ) then {
 		if ( GVAR(pfhHandle) == -1 ) then {
 			LOG("Acoustic gunshot detector is started");
