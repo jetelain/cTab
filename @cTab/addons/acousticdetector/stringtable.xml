@@ -15,12 +15,30 @@
         </Key>
 
        <Key ID="STR_ctab_acousticdetector_timeLimit">
-            <English>Tracking time limit</English>
-            <French>Durée limite de suivi</French>
+            <English>Shot display duration</English>
+            <French>Durée d'affichage des tirs</French>
         </Key>
         <Key ID="STR_ctab_acousticdetector_timeLimitDetails">
             <English>Time during which detected shots are kept and displayed.</English>
             <French>Durée pendant laquelle les tirs détectés sont conservés et affichés.</French>
+        </Key>
+
+       <Key ID="STR_ctab_acousticdetector_countLimit">
+            <English>Limit number of shots displayed</English>
+            <French>Nombre limite de tirs affichés</French>
+        </Key>
+        <Key ID="STR_ctab_acousticdetector_countLimitDetails">
+            <English>Maximum number of detected shots that are kept and displayed.</English>
+            <French>Nombre maximal de tirs détecté conservés et affiché.</French>
+        </Key>
+
+       <Key ID="STR_ctab_acousticdetector_filterDistance">
+            <English>Minimum distance (meters)</English>
+            <French>Distance minimale (mètres)</French>
+        </Key>
+        <Key ID="STR_ctab_acousticdetector_filterDistanceDetails">
+            <English>Shots that are below this distance are ignored.</English>
+            <French>Les tirs qui sont en dessous de cette distance sont ignorés.</French>
         </Key>
 
     </Package>

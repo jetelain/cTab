@@ -13,9 +13,5 @@ private _caliber = GVAR(caliberTypeCache) getOrDefaultCall [_ammo, {[_ammo] call
 
 if ( _caliber != -1 ) then {
 	// Register shot for PFH
-	#ifdef DEBUG_MODE_FULL
-	private _caliberLabel = GVAR(caliberLabel) select _caliber;
-	TRACE_4("FiredMan", _pos1, _pos2, _ammo, _caliberLabel);
-	#endif
 	GVAR(shotsToProcess) pushBack [diag_tickTime, _pos1, _caliber];
 };

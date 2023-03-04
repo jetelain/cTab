@@ -7,6 +7,11 @@ private _ctrlBloc = _control controlsgroupctrl 9000;
 private _shouldDisplay = (cameraView in ["GUNNER", "GROUP"]) && GVAR(enable);
 if ( ctrlShown _ctrlBloc != _shouldDisplay ) then {
 	_ctrlBloc ctrlShow _shouldDisplay;
+	if ( _shouldDisplay && !EGVAR(acousticdetector,isActive) ) then {
+		{
+			_x ctrlShow false;
+		} forEach (uiNamespace getVariable [QGVAR(blocs), []]);
+	};
 };
 if ( !_shouldDisplay ) exitWith { };
 
@@ -100,4 +105,28 @@ if ( GVAR(markersHaveChanged) || { (GVAR(previousPosition) vectorDistanceSqr _pl
 
 	//private _elapsed = diag_tickTime-_start;
 	//INFO_1('Markers updated in %1 msec', _elapsed);
+
+	GVAR(acousticChanged) = EGVAR(acousticdetector,isActive);
 };
+
+if ( GVAR(acousticChanged) ) then {
+	GVAR(acousticChanged) = false;
+	private _blocs = uiNamespace getVariable [QGVAR(blocs), []];
+	if ( count _blocs == 0 ) exitWith {};
+	// 72 values for 5° blocs
+	private _vector=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	{
+		_x params ['','','_point'];
+		private _distance = _playerPosition vectorDistanceSqr _point;
+		if ( _distance > 625 ) then { // 25m strict minimum
+			private _direction = floor ((_playerPosition getDir _point) / 5);
+			//_vector set [(_direction+71) % 72, 1];
+			_vector set [_direction % 72, 1];
+			//_vector set [(_direction+1) % 72, 1];
+		};
+	} forEach EGVAR(acousticdetector,detectedShots);
+	{
+		(_blocs select _forEachIndex) ctrlShow (_x > 0);
+	} forEach _vector;
+};
+

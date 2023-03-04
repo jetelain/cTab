@@ -1,8 +1,9 @@
 #define COMPONENT acousticdetector
 #include "\z\ctab\addons\main\script_mod.hpp"
 
- #define DEBUG_MODE_FULL
+// #define DEBUG_MODE_FULL
  #define DISABLE_COMPILE_CACHE
+#define PROFILER
 
 #ifdef DEBUG_ENABLED_CORE
     #define DEBUG_MODE_FULL

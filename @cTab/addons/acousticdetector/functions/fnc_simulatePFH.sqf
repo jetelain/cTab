@@ -4,8 +4,12 @@ if ( !GVAR(isActive) ) exitWith { };
 
 private _now = diag_tickTime;
 
-// Remove outdated detected shots
 private _count = count GVAR(detectedShots);
+if ( _count > GVAR(shotsCountLimit) ) then {
+	// Prevent having too much shots stored
+	GVAR(detectedShots) = GVAR(detectedShots) select [_count - GVAR(shotsCountLimit), GVAR(shotsCountLimit)];
+};
+// Remove outdated detected shots
 GVAR(detectedShots) = GVAR(detectedShots) select {  _now - (_x select 0) < GVAR(shotsTrackTimeLimit) };
 private _changed = _count != count GVAR(detectedShots);
 
@@ -33,41 +37,33 @@ if ( count GVAR(shotsToProcess) > 0 ) then {
 		if ( (_now - _time) > (_distance / _soundSpeed) ) then {
 			// sound had time to travel to our position
 
-			if ( _distance < _limit ) then {
+			if ( _distance < _limit ) then { // gunshot is at a detectable distance, let's detect him
+				
+				if ( _distance > GVAR(filterDistance) ) then { // if shot is too close, ignore him
+					private _detectedDir = (_position getDir _source) + (random [-2, 0, +2]); // +/- 2°
+					private _detectedDistance = _distance * (random [0.9, 1, 1.1]); // +/- 10%
+					private _point = _position getPos [_detectedDistance, _detectedDir];
 
-				// gunshot is at a detectable distance, let's detect him
-				private _detectedDir = (_position getDir _source) + (random [-2, 0, +2]); // +/- 2°
-				private _detectedDistance = _distance * (random [0.9, 1, 1.1]); // +/- 10%
-				private _point = _position getPos [_detectedDistance, _detectedDir];
-				private _pointA = _position getPos [_detectedDistance + (_distance * 0.1), _detectedDir - 2];
-				private _pointB = _position getPos [_detectedDistance - (_distance * 0.1), _detectedDir - 2];
-				private _pointC = _position getPos [_detectedDistance - (_distance * 0.1), _detectedDir + 2];
-				private _pointD = _position getPos [_detectedDistance + (_distance * 0.1), _detectedDir + 2];
-				private _radius = _point vectorDistance _pointA;
-				private _shotId = GVAR(nextShotId);
-				private _data = [ _now, _shotId, _point, _radius, [_pointA, _pointB, _pointC, _pointD], _caliber];
-				GVAR(detectedShots) pushBack _data;
-				TRACE_1("DetectedShot", _data);
-				_changed = true;
-				GVAR(nextShotId) = GVAR(nextShotId) + 1;
+					// check if an existing shot might have the same source (close distance, to avoid flooding with too much data)
+					private _existing = GVAR(detectedShots) findIf { (_x select 4) == _caliber && { (_x select 2) vectorDistance _point < ((_x select 3) * 0.3) } };
+					if ( _existing == -1 ) then {
+						private _pointA = _position getPos [_detectedDistance + (_distance * 0.1), _detectedDir - 2];
+						private _pointB = _position getPos [_detectedDistance - (_distance * 0.1), _detectedDir - 2];
+						private _pointC = _position getPos [_detectedDistance - (_distance * 0.1), _detectedDir + 2];
+						private _pointD = _position getPos [_detectedDistance + (_distance * 0.1), _detectedDir + 2];
+						private _radius = _point vectorDistance _pointA;
+						private _shotId = GVAR(nextShotId);
+						GVAR(detectedShots) pushBack [ _now, _shotId, _point, _radius, _caliber, [_pointA, _pointB, _pointC, _pointD], _source];
+						_changed = true;
+						GVAR(nextShotId) = GVAR(nextShotId) + 1;
+					} else {
+						// Assume same source
+						(GVAR(detectedShots) select _existing) set [0, _now];
+						// _changed = true; Should we notify this one ?
+					};
 
-#ifdef DEBUG_MODE_FULL
-				private _marker = createMarker [ format ['_USER_DEFINED #0/shot%1A/0', _shotId], _pointA];
-				_marker setMarkerShape 'polyline';
-				_marker setMarkerPolyline ((_pointA select [0,2]) + (_pointB select [0,2]) + (_pointC select [0,2]) +(_pointD select [0,2]) +(_pointA select [0,2]));
-				_marker setMarkerColor "ColorRed"; 
-
-				_marker = createMarker [format ['_USER_DEFINED #0/shot%1C/0', _shotId], _point];
-				_marker setMarkerShape "ELLIPSE";
-				_marker setMarkerColor "ColorRed"; 
-				_marker setMarkerSize [_radius, _radius];
-
-				_marker = createMarker [format ['_USER_DEFINED #0/shot%1R/0', _shotId], _source];
-				_marker setMarkerType "mil_dot";
-				_marker setMarkerColor "ColorBlack"; 
-#endif
+				};
 			};
-
 		} else {
 			// sound did not have time to get to our position
 			if ( _distance < _limit * 1.2 ) then {
@@ -80,11 +76,10 @@ if ( count GVAR(shotsToProcess) > 0 ) then {
 			};
 		};
 	} forEach _shots;
-
-
 };
 
 if ( _changed ) then {
-	TRACE_1("Update", GVAR(detectedShots));
+	TRACE_1("Update", count GVAR(detectedShots));
 	[QGVAR(update)] call CBA_fnc_localEvent;
 };
+

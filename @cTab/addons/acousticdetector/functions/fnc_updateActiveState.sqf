@@ -17,6 +17,7 @@ if ( GVAR(enable) ) then {
 TRACE_3("updateActiveState", GVAR(enable), _isActive, GVAR(isActive));
 
 if ( _isActive != GVAR(isActive) ) then {
+	GVAR(isActive) = _isActive;
 	if ( _isActive ) then {
 		if ( GVAR(pfhHandle) == -1 ) then {
 			LOG("Acoustic gunshot detector is started");

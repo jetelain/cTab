@@ -6,12 +6,11 @@ class CfgPatches {
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"ctab_main","ctab_core","ctab_acousticdetector"};
+        requiredAddons[] = {};
         author = "GrueArbre";
         VERSION_CONFIG;
     };
 };
 
 #include "CfgEventHandlers.hpp"
-#include "HorizontalCompass.hpp"
-#include "RscInGameUI.hpp"
+#include "CfgFunctions.hpp"

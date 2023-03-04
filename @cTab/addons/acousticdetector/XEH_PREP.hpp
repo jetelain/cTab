@@ -1,5 +1,5 @@
-PREP(computeAmmoCaliberType);
-PREP(firedManEH);
-PREP(simulatePFH);
-PREP(updateActiveState);
-PREP(applySettings);
+PREP_RET(computeAmmoCaliberType);
+PREP_VOID_HF(firedManEH);
+PREP_VOID_HF(simulatePFH);
+PREP_VOID(updateActiveState);
+PREP_VOID(applySettings);

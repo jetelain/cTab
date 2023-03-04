@@ -3,6 +3,7 @@
 
 // #define DEBUG_MODE_FULL
 // #define DISABLE_COMPILE_CACHE
+#define PROFILER
 
 #ifdef DEBUG_ENABLED_CORE
     #define DEBUG_MODE_FULL
