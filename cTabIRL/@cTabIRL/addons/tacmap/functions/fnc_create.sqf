@@ -1,6 +1,8 @@
 #include "script_component.hpp"
-if ( GVAR(global) ) then {
-	_this call FUNC(createGlobal);
-} else {
-	_this call FUNC(createLocal);
+params ['_type', '_data'];
+switch (_type) do {
+	case "icon": { _data call FUNC(createIcon); };
+	case "poly": { _data call FUNC(createLine); };
+	case "mtis": { _data call FUNC(createMtis); };
+	default { WARNING_1("Unknown marker type %1", _type); };
 };
