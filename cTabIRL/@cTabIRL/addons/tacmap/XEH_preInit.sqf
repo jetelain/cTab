@@ -11,9 +11,9 @@ GVAR(allMetisMarkers) = createHashMap;
 ["tacmap", {
     params ["_mode"];
 	switch (_mode) do {
-		case "global": { [0] call FUNC(setGlobal); };
-		case "side":   { [1] call FUNC(setGlobal); };
-		case "group" : { [3] call FUNC(setGlobal); };
+		case "global": { if ( IS_ADMIN || isServer ) then { [0] call FUNC(setGlobal); }; };
+		case "side":   { if ( IS_ADMIN || isServer ) then { [1] call FUNC(setGlobal); }; };
+		case "group" : { if ( leader player == player || { IS_ADMIN || isServer } ) then { [3] call FUNC(setGlobal); }; };
 		default       { [-1] call FUNC(setGlobal); };
 	};
-}, "admin"] call CBA_fnc_registerChatCommand;
+}, "all"] call CBA_fnc_registerChatCommand;
