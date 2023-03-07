@@ -16,14 +16,14 @@
 #endif
 
 #ifdef PROFILER
-    #define PREP_RET(fncName)         [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNC(fncName),true,false] call ctab_fnc_compileFunction
-    #define PREP_VOID(fncName)        [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNC(fncName),false,false] call ctab_fnc_compileFunction
-    #define PREP_RET_HF(fncName)      [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNC(fncName),true,true] call ctab_fnc_compileFunction
-    #define PREP_VOID_HF(fncName)     [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNC(fncName),false,true] call ctab_fnc_compileFunction
-    #define PREPMAIN_RET(fncName)     [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNCMAIN(fncName),true,false] call ctab_fnc_compileFunction
-    #define PREPMAIN_VOID(fncName)    [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNCMAIN(fncName),false,false] call ctab_fnc_compileFunction
-    #define PREPMAIN_RET_HF(fncName)  [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNCMAIN(fncName),true,true] call ctab_fnc_compileFunction
-    #define PREPMAIN_VOID_HF(fncName) [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNCMAIN(fncName),false,true] call ctab_fnc_compileFunction
+    #define PREP_RET(fncName)         [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNC(fncName),true,false] call bsp_fnc_compileFunction
+    #define PREP_VOID(fncName)        [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNC(fncName),false,false] call bsp_fnc_compileFunction
+    #define PREP_RET_HF(fncName)      [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNC(fncName),true,true] call bsp_fnc_compileFunction
+    #define PREP_VOID_HF(fncName)     [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNC(fncName),false,true] call bsp_fnc_compileFunction
+    #define PREPMAIN_RET(fncName)     [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNCMAIN(fncName),true,false] call bsp_fnc_compileFunction
+    #define PREPMAIN_VOID(fncName)    [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNCMAIN(fncName),false,false] call bsp_fnc_compileFunction
+    #define PREPMAIN_RET_HF(fncName)  [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNCMAIN(fncName),true,true] call bsp_fnc_compileFunction
+    #define PREPMAIN_VOID_HF(fncName) [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf),QFUNCMAIN(fncName),false,true] call bsp_fnc_compileFunction
 #else
     #define PREP_RET(fncName)         PREP(fncName)
     #define PREP_VOID(fncName)        PREP(fncName)

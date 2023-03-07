@@ -1,1 +1,0 @@
-[ctab_fnc_highFreqReport, 30] call CBA_fnc_addPerFrameHandler; // High freq report every 30 seconds

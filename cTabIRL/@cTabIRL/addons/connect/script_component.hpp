@@ -2,10 +2,10 @@
 #include "\z\ctab_irl\addons\main\script_mod.hpp"
 
 // #define DEBUG_MODE_FULL
- #define DISABLE_COMPILE_CACHE
+// #define DISABLE_COMPILE_CACHE
 // #define DEBUG_SYNCHRONOUS
 // #define DEBUG_BACKEND
-#define PROFILER
+// #define PROFILER
 
 #ifdef DEBUG_ENABLED_CONNECT
     #define DEBUG_MODE_FULL
