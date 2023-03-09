@@ -12,12 +12,20 @@ INFO_1("Connect to %1", GVAR(uri));
 // Connects to server
 "cTabExtension" callExtension ["Connect", [GVAR(uri), getPlayerUID player, profileName, GVAR(key)]];
 
+private _sessionId = "";
+if (!isNil QGVAR(sessionId)) then {
+	// Get server generated Game Session Id
+	_sessionId = QGVAR(sessionId);
+};
+
 private _infos = [
 	worldName, 
 	worldSize, 
 	date,
 	getText (configFile >> "CfgPatches" >> "ctab_main" >> "versionStr"),
-	getText (configFile >> "CfgPatches" >> "ctab_irl_main" >> "versionStr")];
+	getText (configFile >> "CfgPatches" >> "ctab_irl_main" >> "versionStr"),
+	_sessionId,
+	serverName];
 
 INFO_1("StartMission %1", _infos);
 
