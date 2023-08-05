@@ -260,8 +260,8 @@ class cTab_microDAGR_on_screen_hookGrid: cTab_RscText_microDAGR
 	style = ST_CENTER;
 	x = pxToScreen_X(cTab_GUI_microDAGR_OSD_RIGHT_X);
 	y = pxToScreen_Y(cTab_GUI_microDAGR_OSD_EDGE_B - cTab_GUI_microDAGR_OSD_MARGIN - cTab_GUI_microDAGR_OSD_ELEMENT_STD_H * 4);
-	colorText[] = {1,1,1,0.5};
-	colorBackground[] = {0,0,0,0.25};
+	colorText[] = {1,1,1,0.75};
+	colorBackground[] = {0,0,0,0.2=75};
 	sizeEx = pxToScreen_H(48);
 };
 class cTab_microDAGR_on_screen_hookElevation: cTab_microDAGR_on_screen_hookGrid

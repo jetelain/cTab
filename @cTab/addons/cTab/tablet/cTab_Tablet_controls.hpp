@@ -337,8 +337,8 @@ class cTab_Tablet_OSD_hookGrid: cTab_RscText_Tablet
 	style = ST_CENTER;
 	x = pxToScreen_X(cTab_GUI_tablet_OSD_RIGHT_X);
 	y = pxToScreen_Y(cTab_GUI_tablet_OSD_EDGE_B - cTab_GUI_tablet_OSD_MARGIN - cTab_GUI_tablet_OSD_ELEMENT_STD_H * 4);
-	colorText[] = {1,1,1,0.5};
-	colorBackground[] = {0,0,0,0.25};
+	colorText[] = {1,1,1,0.75};
+	colorBackground[] = {0,0,0,0.75};
 };
 class cTab_Tablet_OSD_hookElevation: cTab_Tablet_OSD_hookGrid
 {
