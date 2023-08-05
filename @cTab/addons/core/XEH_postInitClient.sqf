@@ -82,6 +82,8 @@ INFO_4("Devices detected in %1 sec : %2, %3, %4",(diag_tickTime - _start),GVAR(t
 GVAR(leaderDevices) = GVAR(tabDevices) + GVAR(androidDevices);
 GVAR(personnelDevices) = GVAR(leaderDevices) + GVAR(dagrDevices);
 
+GVAR(bftDrawHandlers) = [];
+
 /*
 Figure out the scaling factor based on the current map (island) being played
 Requires the scale of the map control to be at 0.001

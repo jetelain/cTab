@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Arma3TacMapLibrary.Arma3;
 using Arma3TacMapLibrary.Maps;
-using Arma3TacMapLibrary.TacMaps;
 using cTabWebApp.Services;
 using cTabWebApp.TacMaps;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -84,6 +83,10 @@ namespace cTabWebApp
             if (state.LastUpdateMapMarkers != null)
             {
                 await Clients.Caller.SendAsync("UpdateMapMarkers", state.LastUpdateMapMarkers);
+            }
+            if (state.LastUpdateAcoustic != null)
+            {
+                await Clients.Caller.SendAsync("UpdateAcoustic", state.LastUpdateAcoustic);
             }
             if (state.SyncedTacMapId != null)
             {
@@ -444,6 +447,54 @@ namespace cTabWebApp
             }
         }
 
+        public async Task ArmaUpdateAcoustic(ArmaMessage message)
+        {
+            //Console.WriteLine("ArmaUpdateMarkers " + string.Join(", ", message.Args));
+
+            var state = GetState(ConnectionKind.Arma);
+            if (state == null)
+            {
+                _logger.LogWarning($"No state for ArmaUpdateAcoustic");
+                return;
+            }
+
+            var gameTime = ArmaSerializer.ParseDouble(message.Args[0]);
+            var shots = ArmaSerializer.ParseMixedArray(message.Args[1]);
+
+            var msg = new UpdateAcousticMessage()
+            {
+                Timestamp = message.Timestamp,
+                GameTime = gameTime ?? 0,
+                Shots = new List<DetectedShot>(shots.Length)
+            };
+
+            foreach (object[] data in shots)
+            {
+                var time = (double)data[0];
+                var shotid = (int)((double)data[1]);
+                var pos = ((object[])data[2]).Cast<double?>().ToArray();
+                var radius = (double)data[3];
+                var caliber = (double)data[4];
+                msg.Shots.Add(new DetectedShot()
+                {
+                    Time = time,
+                    Id = shotid,
+                    X = pos[0] ?? 0,
+                    Y = pos[1] ?? 0,
+                    Radius = radius,
+                    Caliber = caliber
+                });
+            }
+            state.LastUpdateAcoustic = msg;
+            try
+            {
+                await Clients.Group(state.WebChannelName).SendAsync("UpdateAcoustic", state.LastUpdateAcoustic);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(e, "UpdateAcoustic failed");
+            }
+        }
 
         public async Task ArmaUpdateMarkersPosition(ArmaMessage message)
         {
