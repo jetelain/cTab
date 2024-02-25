@@ -88,7 +88,16 @@ namespace cTabExtension
             {
                 replay.Clear();
             }
-            return await ConnectToServer(ArmaString(args[0]), ArmaString(args[1]), ArmaString(args[2]), ArmaString(args[3]), token);
+            try
+            {
+                return await ConnectToServer(ArmaString(args[0]), ArmaString(args[1]), ArmaString(args[2]), ArmaString(args[3]), token).ConfigureAwait(false);
+            }
+            catch(Exception e)
+            {
+                Extension.ErrorMessage($"Connect failed with {e.GetType().Name} {e.Message}.");
+                ReportInner(e);
+                return null;
+            }
         }
 
         private static void Send(string name, Func<HubConnection, Task> action, bool needsReplayLast = false)
