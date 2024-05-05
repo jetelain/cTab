@@ -19,12 +19,6 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    - name: Restore dependencies
-      run: dotnet restore cTabIRL/cTabWebApp.sln
-
-    - name: Build
-      run: dotnet build --no-restore -c ReleaseCloud cTabIRL/cTabWebApp.sln
-      
     - name: Publish Linux/ReleaseCloud
       run: dotnet publish --no-self-contained -f net8.0 -r linux-x64 -c ReleaseCloud cTabIRL/cTabWebApp/cTabWebApp.csproj -o OutputLinux
     
