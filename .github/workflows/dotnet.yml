@@ -26,13 +26,13 @@ jobs:
       run: dotnet publish --no-self-contained -f net8.0 -r win-x64 -c Release cTabIRL/cTabWebApp/cTabWebApp.csproj -o OutputWindows
       
     - name: Upload OutputLinux
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Linux Server
         path: OutputLinux
 
     - name: Upload OutputWindows
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Windows Server
         path: OutputWindows
