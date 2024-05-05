@@ -1,0 +1,44 @@
+name: .NET Linux
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore cTabIRL/cTabWebApp.sln
+
+    - name: Build
+      run: dotnet build --no-restore -c ReleaseCloud cTabIRL/cTabWebApp.sln
+      
+    - name: Publish Linux/ReleaseCloud
+      run: dotnet publish --no-self-contained -f net8.0 -r linux-x64 -c ReleaseCloud cTabIRL/cTabWebApp/cTabWebApp.csproj -o OutputLinux
+    
+    - name: Publish Windows/
+      run: dotnet publish --no-self-contained -f net8.0 -r win-x64 -c Release cTabIRL/cTabWebApp/cTabWebApp.csproj -o OutputWindows
+      
+    - name: Upload OutputLinux
+      uses: actions/upload-artifact@v3
+      with:
+        name: Linux Server
+        path: OutputLinux
+
+    - name: Upload OutputWindows
+      uses: actions/upload-artifact@v3
+      with:
+        name: Windows Server
+        path: OutputWindows
