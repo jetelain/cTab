@@ -20,13 +20,19 @@ If you have a large communauty, you can host up to 500 players, but server must 
 
 ## Install and configure cTabWebApp
 
+### Install .NET 8 runtime
+
+See https://learn.microsoft.com/en-us/dotnet/core/install/linux
+
 ### Install files
 
 Create a directory for cTabWebApp files with command `sudo mkdir /var/www/ctab`
 
 Ensure that you will be able to upload files with `sudo chown $USER:$USER /var/www/ctab`
 
-Upload files to `/var/www/ctab` with a SFTP client
+Download zip from https://github.com/jetelain/cTab/releases/download/2.7.0.0/cTabIRL_MultiPlayer_Linux_x64.zip
+
+Upload it to the server with a SFTP client, then extract content to `/var/www/ctab` 
 
 Make the server executable with `sudo chmod +x /var/www/ctab/cTabWebApp`
 
