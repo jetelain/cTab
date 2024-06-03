@@ -10,3 +10,5 @@ PREP(markMessageRead);
 PREP(sendMessage);
 PREP(deleteMessage);
 PREP(updateMapMarkers);
+PREP(updateAcoustic);
+
