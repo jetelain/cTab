@@ -21,9 +21,9 @@
 
   <ItemGroup>
     <PackageReference Include="AspNet.Security.OpenId.Steam" Version="7.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.4" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
-    <PackageReference Include="QRCoder" Version="1.5.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.5" />
+    <PackageReference Include="QRCoder" Version="1.6.0" />
   </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Arma3TacMap\Arma3TacMapLibrary\Arma3TacMapLibrary.csproj" />
