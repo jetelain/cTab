@@ -29,6 +29,7 @@ cd ~/build/ctab
 echo "Update git"
 git checkout main
 git pull
+git submodule update --init --recursive --rebase --force
 
 echo "Check config"
 if [ ! -f /opt/ctab/appsettings.Production.json ]; then
