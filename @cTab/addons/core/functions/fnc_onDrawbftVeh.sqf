@@ -10,6 +10,7 @@ _display = ctrlParent _cntrlScreen;
 cTabMapWorldPos = [_cntrlScreen] call cTab_fnc_ctrlMapCenter;
 cTabMapScale = ctrlMapScale _cntrlScreen;
 
+{_this call _x;} forEach GVAR(bftDrawHandlers);
 [_cntrlScreen,true] call cTab_fnc_drawUserMarkers;
 private _drawPlayer = [_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
 
