@@ -42,6 +42,8 @@ fi
 if [ ! -f /etc/systemd/system/kestrel-ctab.service ]; then
 	echo " * Create kestrel-ctab.service"
 	sudo cp cTabIRL/setup/kestrel-ctab.service /etc/systemd/system/kestrel-ctab.service
+	
+	sudo systemctl enable kestrel-ctab
 fi
 
 echo "Build"
