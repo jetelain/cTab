@@ -3,6 +3,10 @@
 # Basic script to install / update a ctab instance on a Linux server
 # Requires dotnet SDK, see https://learn.microsoft.com/en-us/dotnet/core/install/linux, `sudo apt-get install -y dotnet-sdk-8.0` on Ubuntu 24.04 LTS
 
+# Logs         : journalctl -fu kestrel-ctab -n 100
+# Manual Stop  : sudo systemctl stop kestrel-ctab
+# Manual Start : sudo systemctl start kestrel-ctab
+
 if [ ! -d ~/build/ctab ]; then
 	mkdir ~/build
 	cd ~/build
@@ -42,6 +46,8 @@ fi
 if [ ! -f /etc/systemd/system/kestrel-ctab.service ]; then
 	echo " * Create kestrel-ctab.service"
 	sudo cp cTabIRL/setup/kestrel-ctab.service /etc/systemd/system/kestrel-ctab.service
+	
+	sudo systemctl enable kestrel-ctab
 fi
 
 echo "Build"
