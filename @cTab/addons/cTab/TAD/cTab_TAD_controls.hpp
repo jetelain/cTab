@@ -633,10 +633,6 @@ class cTab_TAD_RscMapControl_AIR: cTab_TAD_RscMapControl
 	shadedSea = 0;
 	maxSatelliteAlpha = 0.0;
 	showCountourInterval = 1;
-	altitudeMapColorHigh[] = {1,0,0,0.5};
-	altitudeMapColorMid[] = {0.8,0,0,0.5};
-	altitudeMapColorLow[] = {0,0,0,0};
-	altitudeMapRange = 50;
 	colorBackground[] = {0.25,0.25,0.25,1};
 	colorLevels[] = {0.9,0.9,0.9,1};
 	colorSea[] = {0,0.27,0.50,1};
