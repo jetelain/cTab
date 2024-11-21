@@ -48,6 +48,13 @@ class cTab_TAD_dsp
 			colorGrid[] = {0.1,0.1,0.1,0};
 			colorGridMap[] = {0.1,0.1,0.1,0};
 		};
+		class screenAir: cTab_TAD_RscMapControl_AIR
+		{
+			idc = IDC_CTAB_SCREEN_AIR;
+			onDraw = "nop = _this call cTabOnDrawbftTAD;";
+			// set initial map scale
+			scaleDefault = "missionNamespace getVariable 'cTabMapScale'";
+		};
 	};
 
 	class controls

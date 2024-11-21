@@ -624,6 +624,136 @@ class cTab_TAD_RscMapControl_BLACK: cTab_TAD_RscMapControl
 		coefMax = 0;
 	};
 };
+class cTab_TAD_RscMapControl_AIR: cTab_TAD_RscMapControl
+{
+	drawShaded = 0;
+	sizeEx = 0.04;
+	sizeExGrid = 0.025;
+	sizeExLevel = 0.016;
+	shadedSea = 0;
+	maxSatelliteAlpha = 0.0;
+	showCountourInterval = 1;
+	colorBackground[] = {0.35,0.35,0.35,1};
+	colorLevels[] = {0.9,0.9,0.9,1};
+	colorSea[] = {0,0.27,0.50,1};
+	colorForest[] = {0.3,0.9,0,0.1};
+	colorForestTextured[] = {0.3,0.9,0,0.1};
+	colorCountlines[] = {0.9,0.9,0.9,0.5};
+	colorMainCountlines[] = {0.9,0.9,0.9,1};
+	colorCountlinesWater[] = {0,0.27,0.50,0};
+	colorMainCountlinesWater[] = {0,0.27,0.50,0};
+	colorPowerLines[] = {0,1,0,1};
+	colorForestBorder[] = {0.22,0.50,0,0.1};
+	colorNames[] = {0.9,0.9,0.9,1};
+	colorOutside[] = {0,0.18,0.33,1};
+	colorText[] = {0.9,0.9,0.9,1};
+	colorGrid[] = {0.9,0.9,0.9,1};
+	colorGridMap[] = {0.9,0.9,0.9,0.3};
+	colorTracks[] = {0.91,0.77,0.52,0.6};
+	colorTracksFill[] = {0.91,0.77,0.52,0.6};
+	colorRoads[] = {1,1,0,1};
+	colorRoadsFill[] = {1,1,0,1};
+	colorMainRoads[] = {1,0.48,0.16,1};
+	colorMainRoadsFill[] = {1,0.48,0.16,1};
+	colorTrails[] = {0.58,0.48,0.32,1};
+	colorTrailsFill[] = {0.58,0.48,0.32,1};
+	ptsPerSquareObj = 1.25;
+	widthRailWay = 3;
+	class Bunker: Bunker
+	{
+		color[] = {1,1,1,0.8};
+		size = 24;
+	};
+	class Bush: Bush
+	{
+		color[] = {0,0,0,0};
+	};
+	class Chapel: Chapel
+	{
+		color[] = {1,1,1,0.4};
+		size = 16;
+	};
+	class Church: Church
+	{
+		size = 16;
+	};
+	class Cross: Cross
+	{
+		color[] = {1,1,1,0.8};
+	};
+	class Fountain: Fountain
+	{
+		color[] = {0,0,0,0};
+	};
+	class Fuelstation: Fuelstation
+	{
+		size = 16;
+	};
+	class Hospital: Hospital
+	{
+		size = 16;
+	};
+	class Name: Name
+	{
+		color[] = {1,1,1,0.8};
+	};
+	class Lighthouse: Lighthouse
+	{
+		size = 16;
+	};
+	class Transmitter: Transmitter
+	{
+		size = 16;
+	};
+	class Power: Power
+	{
+		size = 16;
+	};
+	class Powersolar: Powersolar
+	{
+		size = 16;
+	};
+	class Powerwave: Powerwave
+	{
+		size = 16;
+	};
+	class Powerwind: Powerwind
+	{
+		size = 16;
+	};
+	class Quay: Quay
+	{
+		color[] = {0,0,0,0};
+	};
+	class Rock: Rock
+	{
+		color[] = {1,1,1,0.4};
+	};
+	class Ruin: Ruin
+	{
+		color[] = {1,1,1,0.8};
+	};
+	class Shipwreck: Shipwreck
+	{
+		color[] = {1,1,1,0.4};
+	};
+	class Stack: Stack
+	{
+		color[] = {1,1,1,1};
+	};
+	class Tourism: Tourism
+	{
+		color[] = {0,0,0,0};
+	};
+	class ViewTower: ViewTower
+	{
+		color[] = {1,1,1,1};
+	};
+	class Watertower: Watertower
+	{
+		size = 16;
+	};
+};
 
 class cTab_TAD_Map_Background: cTab_RscText
 {

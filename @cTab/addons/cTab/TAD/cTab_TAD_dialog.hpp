@@ -40,6 +40,13 @@ class cTab_TAD_dlg
 			onMouseButtonDblClick = "_ok = [3300,_this] execVM '\cTab\shared\cTab_markerMenu_load.sqf';";
 			onMouseMoving = "cTabCursorOnMap = _this select 3;cTabMapCursorPos = _this select 0 ctrlMapScreenToWorld [_this select 1,_this select 2];";
 		};
+		class screenAir: cTab_TAD_RscMapControl_AIR
+		{
+			idc = IDC_CTAB_SCREEN_AIR;
+			onDraw = "nop = _this call cTabOnDrawbftTADdialog;";
+			onMouseButtonDblClick = "_ok = [3300,_this] execVM '\cTab\shared\cTab_markerMenu_load.sqf';";
+			onMouseMoving = "cTabCursorOnMap = _this select 3;cTabMapCursorPos = _this select 0 ctrlMapScreenToWorld [_this select 1,_this select 2];";
+		};
 	};
 
 	class controls
