@@ -3,9 +3,8 @@
 // By - Riouken
 // http://forums.bistudio.com/member.php?64032-Riouken
 // You may re-use any of this work as long as you provide credit back to me.
-
-#define GUI_GRID_W	(safezoneW * 0.8)
-#define GUI_GRID_H	(GUI_GRID_W * 4/3)
+#define GUI_GRID_H	(safezoneH * 1.4)
+#define GUI_GRID_W	(GUI_GRID_H * 3/4)
 #define GUI_GRID_X	(safezoneX + (safezoneW - GUI_GRID_W) / 2)
 #define GUI_GRID_Y	(safezoneY + (safezoneH - GUI_GRID_H) / 2)
 
