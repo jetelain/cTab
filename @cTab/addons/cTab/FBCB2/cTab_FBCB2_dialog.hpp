@@ -1,4 +1,4 @@
-#define GUI_GRID_H	(safezoneH * 1.4)
+#define GUI_GRID_H	(safezoneH * 1.5)
 #define GUI_GRID_W	(GUI_GRID_H * 3/4)
 #define GUI_GRID_X	(safezoneX + (safezoneW - GUI_GRID_W) / 2)
 #define GUI_GRID_Y	(safezoneY + (safezoneH - GUI_GRID_H) / 2)
