@@ -1,4 +1,4 @@
-dotnet publish cTabExtension\cTabExtension.csproj -r win-x64 -o ".\@cTabIRL"
+dotnet publish cTabExtension\cTabExtension.csproj -c Release -r win-x64 -o ".\@cTabIRL"
 
 cd "@cTabIRL"
 
