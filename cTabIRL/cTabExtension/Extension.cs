@@ -1,82 +1,60 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
+﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace cTabExtension
 {
-    public class Extension
+    public static class Extension
     {
+        private static ExtensionCallback? callback;
         private static bool debugCallback;
-        private static int isInit;
 
-        public static ExtensionCallback callback;
-        public delegate int ExtensionCallback([MarshalAs(UnmanagedType.LPStr)] string name, [MarshalAs(UnmanagedType.LPStr)] string function, [MarshalAs(UnmanagedType.LPStr)] string data);
+        [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        delegate int ExtensionCallback([MarshalAs(UnmanagedType.LPStr)] string name, [MarshalAs(UnmanagedType.LPStr)] string function, [MarshalAs(UnmanagedType.LPStr)] string data);
 
-#if WIN64
-        [DllExport("RVExtensionRegisterCallback", CallingConvention = CallingConvention.Winapi)]
-#else
-        [DllExport("_RVExtensionRegisterCallback@4", CallingConvention = CallingConvention.Winapi)]
-#endif
-        public static void RVExtensionRegisterCallback([MarshalAs(UnmanagedType.FunctionPtr)] ExtensionCallback func)
+
+        [UnmanagedCallersOnly(EntryPoint = "RVExtensionRegisterCallback")]
+        public static void RVExtensionRegisterCallback(nint func)
         {
-            callback = func;
+            callback = Marshal.GetDelegateForFunctionPointer<ExtensionCallback>(func);
         }
 
-#if WIN64
-        [DllExport("RVExtensionVersion", CallingConvention = CallingConvention.Winapi)]
-#else
-        [DllExport("_RVExtensionVersion@8", CallingConvention = CallingConvention.Winapi)]
-#endif
-        public static void RvExtensionVersion(StringBuilder output, int outputSize)
+        [UnmanagedCallersOnly(EntryPoint = "RVExtensionVersion")]
+        public static void RvExtensionVersion(nint output, int outputSize)
         {
-            output.Append("cTabExtension v1.0");
+            Output(output, outputSize, "cTabExtension 2.0");
         }
 
-#if WIN64
-        [DllExport("RVExtension", CallingConvention = CallingConvention.Winapi)]
-#else
-        [DllExport("_RVExtension@12", CallingConvention = CallingConvention.Winapi)]
-#endif
-        public static void RvExtension(StringBuilder output, int outputSize,
-            [MarshalAs(UnmanagedType.LPStr)] string function)
+        private static void Output(nint output, int outputSize, string data)
         {
-            if (function == "Debug")
+            var bytes = Encoding.UTF8.GetBytes(data);
+            Marshal.Copy(bytes, 0, output, Math.Min(bytes.Length, outputSize));
+        }
+
+        [UnmanagedCallersOnly(EntryPoint = "RVExtension")]
+        public static void RvExtension(nint output, int outputSize, nint function)
+        {
+            var functionString = Marshal.PtrToStringUTF8(function);
+            RvExtensionArgsImpl(functionString, new string[0]);
+            Output(output, outputSize, "");
+        }
+
+        [UnmanagedCallersOnly(EntryPoint = "RVExtensionArgs")]
+        public static int RvExtensionArgs(nint output, int outputSize, nint function, nint args, int argCount)
+        {
+            var functionString = Marshal.PtrToStringUTF8(function);
+            var argsString = new string?[argCount];
+            for (int i = 0; i < argCount; i++)
             {
-                debugCallback = true;
+                argsString[i] = Marshal.PtrToStringUTF8(Marshal.ReadIntPtr(args + (i * Marshal.SizeOf<nint>())));
             }
-            EnsureInit();
+
+            RvExtensionArgsImpl(functionString, argsString);
+            Output(output, outputSize, "");
+            return 0;
         }
 
-        private static void EnsureInit()
-        {
-            if (Interlocked.CompareExchange(ref isInit, 1, 0) == 0)
-            {
-                AppDomain.CurrentDomain.AssemblyResolve += Resolve;
-            }
-        }
-
-        private static System.Reflection.Assembly Resolve(object sender, ResolveEventArgs args)
-        {
-            var name = new AssemblyName(args.Name);
-            var path = Path.GetDirectoryName(typeof(Extension).Assembly.Location);
-            var file = Path.Combine(path, name.Name + ".dll");
-            DebugMessage($"Load '{args.Name}' from {file}");
-            return Assembly.LoadFrom(file);
-        }
-
-#if WIN64
-        [DllExport("RVExtensionArgs", CallingConvention = CallingConvention.Winapi)]
-#else
-        [DllExport("_RVExtensionArgs@20", CallingConvention = CallingConvention.Winapi)]
-#endif
-        public static int RvExtensionArgs(StringBuilder output, int outputSize,
-            [MarshalAs(UnmanagedType.LPStr)] string function,
-            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr, SizeParamIndex = 4)] string[] args, int argCount)
+        public static int RvExtensionArgsImpl(string? function, string?[] args)
         {
             var sw = Stopwatch.StartNew();
             try
@@ -90,8 +68,7 @@ namespace cTabExtension
                 {
                     return 0;
                 }
-                EnsureInit();
-                Worker.Message(function, args);
+                Worker.Message(function ?? string.Empty, args);
             }
             catch (AggregateException ae)
             {
@@ -133,6 +110,7 @@ namespace cTabExtension
                 callback("ctab", "Debug", message);
             }
         }
+
         public static void ErrorMessage(string message)
         {
             Trace.TraceError("%1", message);

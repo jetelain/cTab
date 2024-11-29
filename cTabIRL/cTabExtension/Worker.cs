@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.SignalR.Client;
 
@@ -13,8 +7,8 @@ namespace cTabExtension
 {
     public static class Worker
     {
-        private static Task<HubConnection> serverConnection;
-        private static CancellationTokenSource cancellationTokenSource;
+        private static Task<HubConnection?>? serverConnection;
+        private static CancellationTokenSource? cancellationTokenSource;
         private static List<Tuple<string, Func<HubConnection, Task>>> replay = new List<Tuple<string, Func<HubConnection, Task>>>();
 
         /*
@@ -22,7 +16,7 @@ namespace cTabExtension
         private static int i = 0;
         */
 
-        public static void Message(string function,string[] args)
+        public static void Message(string function,string?[] args)
         {
             /*var argsText = string.Join("\",\"", args.Select(a => a.Replace("\\", "\\\\").Replace("\"", "\\\"")));
             sb.AppendLine($"\"{function}\",new[]{{\"{argsText}\"}}");
@@ -39,7 +33,7 @@ namespace cTabExtension
                 {
                     return;
                 }
-                if (serverConnection != null)
+                if (serverConnection != null && cancellationTokenSource != null)
                 {
                     cancellationTokenSource.Cancel();
                     Send("Disconnect", async srv => await srv.DisposeAsync());
@@ -54,14 +48,14 @@ namespace cTabExtension
             }
         }
 
-        private static void Send(string function, string[] args)
+        private static void Send(string function, string?[] args)
         {
             switch (function)
             {
                 // Frequent messages, can be dropped without impact
                 case "UpdatePosition":
                 case "UpdateMarkersPosition":
-                    if (!serverConnection.IsCompleted) // Those messages can be dropped if connection is still in progress
+                    if (!serverConnection?.IsCompleted ?? false) // Those messages can be dropped if connection is still in progress
                     {
                         return;
                     }
@@ -81,8 +75,8 @@ namespace cTabExtension
                     break;
             }
         }
-
-        private static async Task<HubConnection> Connect(string[] args, CancellationToken token)
+        
+        private static async Task<HubConnection?> Connect(string?[] args, CancellationToken token)
         {
             lock (replay)
             {
@@ -102,9 +96,9 @@ namespace cTabExtension
 
         private static void Send(string name, Func<HubConnection, Task> action, bool needsReplayLast = false)
         {
-            serverConnection.ContinueWith(async srv =>
+            serverConnection?.ContinueWith(async srv =>
             {
-                if (srv.Result.State == HubConnectionState.Disconnected)
+                if (srv.Result == null || srv.Result.State == HubConnectionState.Disconnected)
                 {
                     return;
                 }
@@ -153,8 +147,12 @@ namespace cTabExtension
             }
         }
 
-        private static string ArmaString(string str)
+        private static string ArmaString(string? str)
         {
+            if (str == null)
+            {
+                return string.Empty;
+            }
             if (str.StartsWith("\"") && str.EndsWith("\""))
             {
                 return str.Substring(1, str.Length - 2);
@@ -162,13 +160,11 @@ namespace cTabExtension
             return str;
         }
 
-        private static async Task<HubConnection> ConnectToServer(string server, string steamId, string name, string key, CancellationToken token)
+        private static async Task<HubConnection?> ConnectToServer(string server, string steamId, string name, string key, CancellationToken token)
         {
             var uri = new Uri(server);
 
             Extension.DebugMessage($"server={server}, steamId={steamId}, name={name}, key={key}, hostname={uri.DnsSafeHost}");
-
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
 
             var connection = new HubConnectionBuilder()
                 .WithUrl(uri, options =>

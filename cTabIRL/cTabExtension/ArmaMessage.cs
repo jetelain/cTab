@@ -8,7 +8,7 @@ namespace cTabExtension
         {
         }
 
-        public DateTime Timestamp { get; set; }
-        public string[] Args { get; set; }
+        public required DateTime Timestamp { get; set; }
+        public required string?[] Args { get; set; }
     }
 }
