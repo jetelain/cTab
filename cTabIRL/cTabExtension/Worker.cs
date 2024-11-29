@@ -2,6 +2,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace cTabExtension
 {
@@ -167,6 +168,7 @@ namespace cTabExtension
             Extension.DebugMessage($"server={server}, steamId={steamId}, name={name}, key={key}, hostname={uri.DnsSafeHost}");
 
             var connection = new HubConnectionBuilder()
+                .AddJsonProtocol(c => c.PayloadSerializerOptions.TypeInfoResolver = JsonContext.Default)
                 .WithUrl(uri, options =>
                 {
                     options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets;
