@@ -5,14 +5,36 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Prometheus;
 
 namespace cTabWebApp
 {
     internal class PlayerStateService : IPlayerStateService
     {
+        private readonly Gauge ActiveArmaConnections;
+        private readonly Gauge ActiveWebConnections;
+        private readonly Gauge ActiveTacMapConnections;
+        private readonly Gauge ActiveSessions;
+        private readonly Gauge ActiveSessionsWithSteam;
+        private readonly Gauge ActiveSessionsWithTacMap;
+        private readonly Counter TotalSessions;
+
         private static readonly List<PlayerState> players = new List<PlayerState>();
         private static readonly string[] notASteamId = new[] { "_SP_PLAYER_", "_SP_AI_", "" };
         private static int nextId = 1;
+
+        public PlayerStateService(CollectorRegistry registry)
+        {
+            var factory = Metrics.WithCustomRegistry(registry);
+            ActiveArmaConnections = factory.CreateGauge("arma_connected", "Active Arma Connections");
+            ActiveWebConnections = factory.CreateGauge("web_connected", "Active Web Connections");
+            ActiveTacMapConnections = factory.CreateGauge("tacmap_connected", "Active connections to TacMap");
+            ActiveSessions = factory.CreateGauge("sessions_active", "Active sessions");
+            ActiveSessionsWithSteam = factory.CreateGauge("sessions_active_steam", "Sessions connected to Steam");
+            ActiveSessionsWithTacMap = factory.CreateGauge("sessions_active_tacmap", "Sessions connected to TacMap");
+            TotalSessions = factory.CreateCounter("sessions_total", "Total sessions created");
+            registry.AddBeforeCollectCallback(UpdateStats);
+        }
 
         public PlayerState GetStateByToken(string token)
         {
@@ -57,6 +79,8 @@ namespace cTabWebApp
             }
             if (state == null)
             {
+                TotalSessions.Inc();
+
                 var id = Interlocked.Increment(ref nextId);
                 state = new PlayerState()
                 {
@@ -93,9 +117,7 @@ namespace cTabWebApp
 
         private string GenerateToken(int id)
         {
-            var random = new byte[32];
-            var rng = new RNGCryptoServiceProvider();
-            rng.GetBytes(random);
+            var random = RandomNumberGenerator.GetBytes(32);
             // Includes id to avoid collision
             return id.ToString("X") + "x" + Convert.ToBase64String(random).Replace("+", "-").Replace("/", "_").TrimEnd('=');
         }
@@ -135,6 +157,19 @@ namespace cTabWebApp
                     ActiveSessionsWithTacMap = players.Count(p => p.ActiveConnections > 0 && p.SyncedTacMapId != null),
                     TotalSessions = nextId - 1
                 };
+            }
+        }
+
+        private void UpdateStats()
+        {
+            lock (players)
+            {
+                ActiveArmaConnections.Set(players.Sum(p => p.ActiveArmaConnections));
+                ActiveWebConnections.Set(players.Sum(p => p.ActiveWebConnections));
+                ActiveTacMapConnections.Set(players.Count(p => p.Interconnect != null));
+                ActiveSessions.Set(players.Count(p => p.ActiveConnections > 0));
+                ActiveSessionsWithSteam.Set(players.Count(p => p.ActiveConnections > 0 && p.IsAuthenticated));
+                ActiveSessionsWithTacMap.Set(players.Count(p => p.ActiveConnections > 0 && p.SyncedTacMapId != null));
             }
         }
     }
