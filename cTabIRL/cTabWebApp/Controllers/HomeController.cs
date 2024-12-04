@@ -164,7 +164,7 @@ namespace cTabWebApp.Controllers
 
 
         [HttpGet, HttpPost]
-        public IActionResult SignOut()
+        public new IActionResult SignOut()
         {
             return SignOut(new AuthenticationProperties { RedirectUri = "/" },
                 CookieAuthenticationDefaults.AuthenticationScheme);

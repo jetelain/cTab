@@ -93,9 +93,7 @@ namespace cTabWebApp
 
         private string GenerateToken(int id)
         {
-            var random = new byte[32];
-            var rng = new RNGCryptoServiceProvider();
-            rng.GetBytes(random);
+            var random = RandomNumberGenerator.GetBytes(32);
             // Includes id to avoid collision
             return id.ToString("X") + "x" + Convert.ToBase64String(random).Replace("+", "-").Replace("/", "_").TrimEnd('=');
         }
