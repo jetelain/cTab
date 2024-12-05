@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Prometheus;
 
 namespace cTabWebApp
 {
@@ -39,6 +40,16 @@ namespace cTabWebApp
             services.AddControllersWithViews()
                 .AddViewLocalization();
 #if CLOUD
+            services.AddSingleton(Metrics.DefaultRegistry);
+
+            Metrics.SuppressDefaultMetrics(new SuppressDefaultMetricOptions
+            {
+                SuppressProcessMetrics = true,
+                SuppressDebugMetrics = true,
+                SuppressEventCounters = true,
+                SuppressMeters = true
+            });
+
             services.AddSingleton<IPlayerStateService, PlayerStateService>();
 #else
             services.AddSingleton<IPlayerStateService, SinglePlayerStateService>();
@@ -99,6 +110,11 @@ namespace cTabWebApp
             {
                 app.UseAuthentication();
             }
+
+#if CLOUD
+            app.UseMetricServer();
+#endif
+
 
             app.UseCookiePolicy(new CookiePolicyOptions()
             {
