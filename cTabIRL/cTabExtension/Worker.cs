@@ -1,4 +1,4 @@
-﻿using System.Net;
+﻿using System.Net.Http.Headers;
 using System.Text;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -8,26 +8,15 @@ namespace cTabExtension
 {
     public static class Worker
     {
+        private static readonly HttpClient webClient = new HttpClient() { DefaultRequestHeaders = { { "Extension", "cTabExtension/1.1" } } };
         private static Task<HubConnection?>? serverConnection;
         private static CancellationTokenSource? cancellationTokenSource;
         private static List<Tuple<string, Func<HubConnection, Task>>> replay = new List<Tuple<string, Func<HubConnection, Task>>>();
-
-        /*
-        private static StringBuilder sb = new StringBuilder();
-        private static int i = 0;
-        */
+        private static string? screenShotEndpoint;
+        private static string? screenShotToken;
 
         public static void Message(string function,string?[] args)
         {
-            /*var argsText = string.Join("\",\"", args.Select(a => a.Replace("\\", "\\\\").Replace("\"", "\\\"")));
-            sb.AppendLine($"\"{function}\",new[]{{\"{argsText}\"}}");
-
-            i++;
-            if (i % 100 == 0)
-            {
-                File.WriteAllText(Path.Combine(Path.GetTempPath(),"ctab.txt"), sb.ToString());
-            }*/
-
             if (function == "Connect")
             {
                 if (args.Length != 4)
@@ -53,6 +42,9 @@ namespace cTabExtension
         {
             switch (function)
             {
+                case "ScreenShot":
+                    TakeScreenShot(args);
+                    break;
                 // Frequent messages, can be dropped without impact
                 case "UpdatePosition":
                 case "UpdateMarkersPosition":
@@ -76,7 +68,65 @@ namespace cTabExtension
                     break;
             }
         }
-        
+
+        private static void TakeScreenShot(string?[] args)
+        {
+            serverConnection?.ContinueWith(async srv =>
+            {
+                try
+                {
+                    await TakeScreenShotInternal(args);
+                }
+                catch (Exception e)
+                {
+                    Extension.ErrorMessage($"TakeScreenShot failed with {e.GetType().Name} {e.Message}.");
+                    ReportInner(e);
+                    await Extension.Callback("ScreenShotFailed", "");
+                }
+            });
+        }
+
+        private static async Task TakeScreenShotInternal(string?[] args)
+        {
+            var endpoint = screenShotEndpoint;
+            if (string.IsNullOrEmpty(endpoint))
+            {
+                return;
+            }
+
+            var bytes = ScreenShotHelper.TakeScreenShot();
+
+            var data = GetData(args);
+            var content = new MultipartFormDataContent();
+            var byteArrayContent = new ByteArrayContent(bytes);
+            byteArrayContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+            content.Add(byteArrayContent, "file", "screenshot.jpg");
+            content.Add(new StringContent(screenShotToken ?? string.Empty), "token");
+            content.Add(new StringContent(data), "data");
+
+            var response = await webClient.PostAsync(endpoint, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStringAsync();
+                await Extension.Callback("ScreenShotStored", $"['{result}',{data}]");
+            }
+            else
+            {
+                await Extension.Callback("ScreenShotFailed", "");
+            }
+        }
+
+        private static string GetData(string?[] args)
+        {
+            var data = args.Length > 0 ? args[0] : null;
+            if (string.IsNullOrEmpty(data))
+            {
+                data = "[]";
+            }
+            return data;
+        }
+
         private static async Task<HubConnection?> Connect(string?[] args, CancellationToken token)
         {
             lock (replay)
@@ -161,6 +211,13 @@ namespace cTabExtension
             return str;
         }
 
+        private static void EnableScreenShot(string endpoint, string token)
+        {
+            screenShotToken = token;
+            screenShotEndpoint = endpoint;
+            Extension.Callback("ScreenShotEnabled", "");
+        }
+
         private static async Task<HubConnection?> ConnectToServer(string server, string steamId, string name, string key, CancellationToken token)
         {
             var uri = new Uri(server);
@@ -178,6 +235,8 @@ namespace cTabExtension
                 .Build();
 
             connection.On<string, string>("Callback", Extension.Callback);
+            connection.On<string, string>("ScreenShotEnabled", EnableScreenShot);
+
             connection.Reconnecting += async _ => {
                 Extension.DebugMessage($"Reconnecting...");
                 await Extension.Callback("Reconnecting", "");

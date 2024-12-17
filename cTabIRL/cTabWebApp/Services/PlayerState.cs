@@ -36,5 +36,6 @@ namespace cTabWebApp
         public bool IsAuthenticated { get; internal set; }
         public string SpectatorToken { get; internal set; }
         public UpdateMapMarkersMessage LastUpdateMapMarkers { get; internal set; }
+        public string UploadToken { get; internal set; }
     }
 }

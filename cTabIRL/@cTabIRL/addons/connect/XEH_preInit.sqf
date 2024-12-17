@@ -59,6 +59,15 @@ addMissionEventHandler ["ExtensionCallback", {
 		if ( _function == "RemoveTacMapMarker") exitWith {
 			(parseSimpleArray _data) call EFUNC(tacmap,delete);
 		};
+		if ( _function == "ScreenShotStored") exitWith {
+			(parseSimpleArray _data) call FUNC(screenShotStored);
+		};
+		if ( _function == "ScreenShotFailed") exitWith {
+			call FUNC(screenShotFailed);
+		};
+		if ( _function == "ScreenShotEnabled") exitWith {
+			call FUNC(screenShotEnabled);
+		};
 		if ( _function == "Disconnected") exitWith {
 			systemChat LLSTRING(disconnected);
 		};

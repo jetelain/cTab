@@ -80,5 +80,13 @@
             <English>Displays on cTab IRL markers from Arma 3 map.</English>
             <French>Affiche sur CTab IRL les marqueurs de la carte Arma 3.</French>
         </Key>
+        <Key ID="STR_ctab_irl_connect_screenShotFailed">
+            <English>Image capture failed.</English>
+            <French>La prise d'image a échouée.</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_screenShotTaken">
+            <English>Image captured.</English>
+            <French>Image prise.</French>
+        </Key>
     </Package>
 </Project>

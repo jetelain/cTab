@@ -142,6 +142,11 @@ namespace cTabWebApp
 
             await Clients.Caller.SendAsync("Callback", "Connected", data);
 
+            if (!string.IsNullOrEmpty(state.UploadToken))
+            {
+                await Clients.Caller.SendAsync("ScreenShotEnabled", new Uri(new Uri(Context.GetHttpContext().Request.GetEncodedUrl()), "/Image").AbsoluteUri, state.UploadToken);
+            }
+
             await _tacMapService.UpdateTacMapInterconnect(state);
         }
 
