@@ -83,7 +83,7 @@ if (_mode != 2) then {
 			};
 		};
 		_vehicles pushBack _veh;
-	} count cTabBFTvehicles;
+	} forEach cTabBFTvehicles;
 
 	// ------------------ GROUPS ------------------
 	{
@@ -117,7 +117,7 @@ if (_mode != 2) then {
 			_ctrlScreen drawIcon [_x select 2,cTabColorBlue,_pos,cTabGroupOverlayIconSize,cTabGroupOverlayIconSize,0,"",0,cTabTxtSize,"TahomaB","right"];
 			if ( _veh == _playerVehicle ) then { _mustDrawPlayer = false; };
 		};
-	} count cTabBFTgroups;
+	} forEach cTabBFTgroups;
 };
 
 // ------------------ MEMBERS ------------------
@@ -165,7 +165,7 @@ if (_mode != 2) then {
 			_ctrlScreen drawIcon ["\A3\ui_f\data\map\Markers\System\dummy_ca.paa",_teamColor,_pos,cTabIconManSize,cTabIconManSize,0,_x select 4,0,cTabTxtSize,"TahomaB","right"];
 		};
 	};
-} count cTabBFTmembers;
+} forEach cTabBFTmembers;
 
 // ------------------ ADD LABEL TO VEHICLES WITH MOUNTED GROUPS / MEMBERS ------------------
 if (_drawText && !(_mountedLabels isEqualTo [])) then {

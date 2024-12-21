@@ -52,7 +52,7 @@ if (GVAR(bft_mode) > 0) then {
 		if ((_x != cTab_player) && {[_x,GVAR(personnelDevices)] call cTab_fnc_checkGear}) then {
 			_cTabBFTmembers pushBack [_x,_x call cTab_fnc_getInfMarkerIcon,"",name _x,str(groupId _x), getPosASL _x, direction _x];
 		};
-	} count units cTab_player;
+	} forEach units cTab_player;
 
 	/*
 	cTabBFTgroups --- GROUPS
@@ -66,7 +66,7 @@ if (GVAR(bft_mode) > 0) then {
 				if ([leader _x,GVAR(leaderDevices)] call cTab_fnc_checkGear) exitWith {_leader = leader _x;};
 				{
 					if ([_x,GVAR(leaderDevices)] call cTab_fnc_checkGear) exitWith {_leader = _x;};
-				} count units _x;
+				} forEach units _x;
 			};
 			if !(IsNull _leader) then {
 				_groupSize = count units _x;
@@ -125,7 +125,7 @@ if (GVAR(bft_mode) > 0) then {
 				_cTabBFTvehicles pushBack [_x,_iconA,_iconB,_name,_groupID, getPosASL _x, direction _x];
 			};
 		};
-	} count vehicles;
+	} forEach vehicles;
 };
 
 if (GVAR(uav_mode) == 1) then {
@@ -136,7 +136,7 @@ if (GVAR(uav_mode) == 1) then {
 		if (side _x in _validSides) then {
 			_cTabUAVlist pushBack _x;
 		};
-	} count allUnitsUav;
+	} forEach allUnitsUav;
 };
 
 if (GVAR(helmetcam_mode) == 1) then {
