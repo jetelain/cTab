@@ -77,3 +77,4 @@ How to contribute
 -----------------
 Code contributions are welcome.
 - To build and test modifications of @cTab you can use [HEMTT](https://hemtt.dev/index.html), but currently only version [0.7.6](https://github.com/BrettMayson/HEMTT/releases/tag/v0.7.6) is supported. In the future, the code will be updated to support the tool's latest version.
+- @cTabIRL have been upgraded to support latest version of HEMTT
