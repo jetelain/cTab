@@ -1,52 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project name="ctab_irl">
     <Package name="connect">
-        <Key ID="STR_ctab_irl_connect_modName">
-            <English>cTab IRL</English>
-            <French>cTab IRL</French>
+        <Key ID="STR_ctab_irl_connect_connected">
+            <English>cTab connected to %1.</English>
+            <French>cTab est connecté à %1.</French>
         </Key>
-        <Key ID="STR_ctab_irl_connect_enabled">
-            <English>Enable cTab IRL connection</English>
-            <French>Autoriser la connection cTab IRL</French>
+        <Key ID="STR_ctab_irl_connect_connectedQrCode">
+            <English>Use QR Code in diary/map to quick connect.</English>
+            <French>Utiliser le QR Code dans la carte/journal pour se connecter rapidement.</French>
         </Key>
-        <Key ID="STR_ctab_irl_connect_enabledDetails">
-            <English>Enable cTab IRL connection</English>
-            <French>Autoriser la connection cTab IRL</French>
-        </Key>
-        <Key ID="STR_ctab_irl_connect_uri">
-            <English>Server URL</English>
-            <French>URL du serveur</French>
-        </Key>
-        <Key ID="STR_ctab_irl_connect_uriDetails">
-            <English></English>
-            <French></French>
-        </Key>
-        <Key ID="STR_ctab_irl_connect_key">
-            <English>Key</English>
-            <French>Clé</French>
-        </Key>
-        <Key ID="STR_ctab_irl_connect_keyDetails">
-            <English>Key to signin with Steam</English>
-            <French>Clé pour la connection avec Steam</French>
-        </Key>
-        <Key ID="STR_ctab_irl_connect_reconnecting">
-            <English>cTab has lost connection with server. Trying to reconnect...</English>
-            <French>cTab a perdu la connection avec le serveur. Tentative de reconnection en cours...</French>
-        </Key>
-
-        <Key ID="STR_ctab_irl_connect_diaryTitle">
-            <English>Connect a mobile device</English>
-            <French>Connecter un appareil mobile</French>
-        </Key>
-
-        <Key ID="STR_ctab_irl_connect_diaryEntrySignWithSteam">
-            <English>You can open your mobile web browser on %1, sign in with Steam and use key %2.</English>
-            <French>Connecter un appareil mobile</French>
-        </Key>
-
         <Key ID="STR_ctab_irl_connect_diaryEntryMP">
             <English>You can open your mobile web browser on %1, sign in with Steam and use key %2.</English>
             <French>Vous pouvez ouvrir votre navigateur mobile sur %1, se connecter avec Steam et saisir la clé %2.</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_diaryEntryNote">
+            <English>The key and QR Code must remain confidential, do not share with freinds.</English>
+            <French>La clé et le QR Code doivent rester confidentiels, il ne faut pas les partager.</French>
         </Key>
         <Key ID="STR_ctab_irl_connect_diaryEntryScanQrCodeMP">
             <English>Or, you can scan the following QR Code</English>
@@ -56,29 +25,41 @@
             <English>Scan the following QR Code (Key is not available in single-player)</English>
             <French>Scanner le QR Code suivant (La clé n'est pas disponible en jeu solo)</French>
         </Key>
-        <Key ID="STR_ctab_irl_connect_diaryEntryNote">
-            <English>The key and QR Code must remain confidential, do not share with freinds.</English>
-            <French>La clé et le QR Code doivent rester confidentiels, il ne faut pas les partager.</French>
+        <Key ID="STR_ctab_irl_connect_diaryEntrySignWithSteam">
+            <English>You can open your mobile web browser on %1, sign in with Steam and use key %2.</English>
+            <French>Connecter un appareil mobile</French>
         </Key>
-        <Key ID="STR_ctab_irl_connect_connected">
-            <English>cTab connected to %1.</English>
-            <French>cTab est connecté à %1.</French>
-        </Key>
-        <Key ID="STR_ctab_irl_connect_connectedQrCode">
-            <English>Use QR Code in diary/map to quick connect.</English>
-            <French>Utiliser le QR Code dans la carte/journal pour se connecter rapidement.</French>
+        <Key ID="STR_ctab_irl_connect_diaryTitle">
+            <English>Connect a mobile device</English>
+            <French>Connecter un appareil mobile</French>
         </Key>
         <Key ID="STR_ctab_irl_connect_disconnected">
             <English>cTab was unable to connect to server.</English>
             <French>cTab n'a pas pu se connecter au serveur.</French>
         </Key>
-        <Key ID="STR_ctab_irl_connect_syncMap">
-            <English>Display map markers</English>
-            <French>Afficher les marqueurs</French>
+        <Key ID="STR_ctab_irl_connect_enabled">
+            <English>Enable cTab IRL connection</English>
+            <French>Autoriser la connection cTab IRL</French>
         </Key>
-        <Key ID="STR_ctab_irl_connect_syncMapDetails">
-            <English>Displays on cTab IRL markers from Arma 3 map.</English>
-            <French>Affiche sur CTab IRL les marqueurs de la carte Arma 3.</French>
+        <Key ID="STR_ctab_irl_connect_enabledDetails">
+            <English>Enable cTab IRL connection</English>
+            <French>Autoriser la connection cTab IRL</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_key">
+            <English>Key</English>
+            <French>Clé</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_keyDetails">
+            <English>Key to signin with Steam</English>
+            <French>Clé pour la connection avec Steam</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_modName">
+            <English>cTab IRL</English>
+            <French>cTab IRL</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_reconnecting">
+            <English>cTab has lost connection with server. Trying to reconnect...</English>
+            <French>cTab a perdu la connection avec le serveur. Tentative de reconnection en cours...</French>
         </Key>
         <Key ID="STR_ctab_irl_connect_screenShotFailed">
             <English>Image capture failed.</English>
@@ -87,6 +68,14 @@
         <Key ID="STR_ctab_irl_connect_screenShotTaken">
             <English>Image captured.</English>
             <French>Image prise.</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_syncMap">
+            <English>Display map markers</English>
+            <French>Afficher les marqueurs</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_syncMapDetails">
+            <English>Displays on cTab IRL markers from Arma 3 map.</English>
+            <French>Affiche sur CTab IRL les marqueurs de la carte Arma 3.</French>
         </Key>
     </Package>
 </Project>
