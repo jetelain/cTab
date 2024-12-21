@@ -15,7 +15,7 @@
 class cTab_microDAGR_dsp
 {
 	idd = 1776135;
-	movingEnable = true;
+	movingEnable = 1;
 	duration = 10e10;
 	fadeIn = 0;
 	fadeOut = 0;

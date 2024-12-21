@@ -74,7 +74,7 @@ _uavCams = _this select 1;
 			};
 			_cam camSetFov 0.5; // set default zoom
 		};
-		0 = cTabUAVcams pushBack [_uav,_renderTarget,_cam,_camPosMemPt,_camDirMemPt];
+		cTabUAVcams pushBack [_uav,_renderTarget,_cam,_camPosMemPt,_camDirMemPt];
 	};
 } count _uavCams;
 

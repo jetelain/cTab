@@ -7,13 +7,12 @@ class RscPicture;
 
 class GVARMAIN(HorizontalCompass) : RscControlsGroupNoScrollbars
 {
-
     onLoad=QUOTE(_this call FUNC(initCompass));
     onUnload=QUOTE(_this call FUNC(disposeCompass));
-    w = BAR_WIDTH;
-    h = BAR_HEIGHT;
-    x = safezoneX;
-    y = 0.845 * safezoneH + safezoneY;
+    w = QUOTE(BAR_WIDTH);
+    h = QUOTE(BAR_HEIGHT);
+    x = QUOTE(safezoneX);
+    y = QUOTE(0.845 * safezoneH + safezoneY);
 
     class Controls
     {
@@ -29,22 +28,22 @@ class GVARMAIN(HorizontalCompass) : RscControlsGroupNoScrollbars
         class Compass : RscControlsGroupNoScrollbars
         {
             idc=9000;
-            w = BAR_WIDTH;
-            h = BAR_HEIGHT;
+            w = QUOTE(BAR_WIDTH);
+            h = QUOTE(BAR_HEIGHT);
             class Controls
             {
                 class Bar1 : RscControlsGroupNoScrollbars
                 {
                     idc=9001;
-                    w = BAR_WIDTH*2;
-                    h = BAR_HEIGHT;
+                    w = QUOTE(BAR_WIDTH*2);
+                    h = QUOTE(BAR_HEIGHT);
                     class Controls
                     {
                         class Indicator : RscPicture
                         {
                             idc=9101;
-                            w = BAR_WIDTH*2;
-                            h = BAR_HEIGHT;
+                            w = QUOTE(BAR_WIDTH*2);
+                            h = QUOTE(BAR_HEIGHT);
                             text=QPATHTOF(data\ns_ca.paa); // North > East > South
                         };
                     };
@@ -52,7 +51,7 @@ class GVARMAIN(HorizontalCompass) : RscControlsGroupNoScrollbars
                 class Bar2 : Bar1
                 {
                     idc=9002;
-                    x = BAR_WIDTH*2;
+                    x = QUOTE(BAR_WIDTH*2);
                     class Controls : Controls
                     {
                         class Indicator : Indicator
@@ -64,9 +63,9 @@ class GVARMAIN(HorizontalCompass) : RscControlsGroupNoScrollbars
                 class Center : RscPicture
                 {
                     idc=-1;
-                    x = (BAR_WIDTH-BAR_HEIGHT)/2;
-                    w = BAR_HEIGHT;
-                    h = BAR_HEIGHT;
+                    x = QUOTE((BAR_WIDTH-BAR_HEIGHT)/2);
+                    w = QUOTE(BAR_HEIGHT);
+                    h = QUOTE(BAR_HEIGHT);
                     text=QPATHTOF(data\center2_ca.paa); // ^
                 };
             };

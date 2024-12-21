@@ -50,7 +50,7 @@ if (GVAR(bft_mode) > 0) then {
 	*/
 	{
 		if ((_x != cTab_player) && {[_x,GVAR(personnelDevices)] call cTab_fnc_checkGear}) then {
-			0 = _cTabBFTmembers pushBack [_x,_x call cTab_fnc_getInfMarkerIcon,"",name _x,str(groupId _x), getPosASL _x, direction _x];
+			_cTabBFTmembers pushBack [_x,_x call cTab_fnc_getInfMarkerIcon,"",name _x,str(groupId _x), getPosASL _x, direction _x];
 		};
 	} count units cTab_player;
 
@@ -122,7 +122,7 @@ if (GVAR(bft_mode) > 0) then {
 			call {
 				if (_iconA isEqualTo "" && {!(_x isKindOf "Static")} && {!(_x isKindOf "StaticWeapon")}) then {_iconA = "\A3\ui_f\data\map\markers\nato\b_unknown.paa";};
 				if (_iconA isEqualTo "") exitWith {};
-				0 = _cTabBFTvehicles pushBack [_x,_iconA,_iconB,_name,_groupID, getPosASL _x, direction _x];
+				_cTabBFTvehicles pushBack [_x,_iconA,_iconB,_name,_groupID, getPosASL _x, direction _x];
 			};
 		};
 	} count vehicles;
@@ -134,7 +134,7 @@ if (GVAR(uav_mode) == 1) then {
 	*/
 	{
 		if (side _x in _validSides) then {
-			0 = _cTabUAVlist pushBack _x;
+			_cTabUAVlist pushBack _x;
 		};
 	} count allUnitsUav;
 };
