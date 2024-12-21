@@ -23,5 +23,5 @@ switch (_type) do {
 			GVAR(allMetisMarkers) deleteAt _id;
 		};
 	};
-	default { WARNING_1("Unknown marker type %1", _type); };
+	default { WARNING_1("Unknown marker type %1",_type); };
 };
