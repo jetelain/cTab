@@ -17,4 +17,4 @@ jobs:
 
     - name: Build Mod
       run: hemtt build
-      working-directory: @cTab
+      working-directory: "@cTab"
