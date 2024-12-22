@@ -1,4 +1,5 @@
 #include "script_component.hpp"
+#include "\a3\editor_f\Data\Scripts\dikCodes.h"
 
 if (!hasInterface) exitWith { };
 
@@ -71,3 +72,12 @@ if (!hasInterface) exitWith { };
 	params ["_position", "_distance"];
 	"cTabExtension" callExtension ["ActionRangeFinder", _position + [_distance]];
 }] call CBA_fnc_addEventHandler;
+
+
+
+["cTab","photo",["Take a photo",""],{"cTabExtension" callExtension ["ScreenShot",[[
+getPosASL player, // Player position
+AGLToASL positionCameraToWorld [0,0,0], // Camera position
+AGLToASL screenToWorld [0.5, 0.5], // "Cross air" pointed position
+date
+]]]; true},{false},[DIK_P,[false,true,false]],false] call cba_fnc_addKeybind; // CTRL+P to take a photo
