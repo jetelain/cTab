@@ -31,7 +31,7 @@ _data = _this select 0;
 // see if given UAV name is still in the list of valid UAVs
 {
 	if (_data == str _x) exitWith {_uav = _x;};
-} count cTabUAVlist;
+} forEach cTabUAVlist;
 
 // remove exisitng UAV cameras
 [] call cTab_fnc_deleteUAVcam;
@@ -74,9 +74,9 @@ _uavCams = _this select 1;
 			};
 			_cam camSetFov 0.5; // set default zoom
 		};
-		0 = cTabUAVcams pushBack [_uav,_renderTarget,_cam,_camPosMemPt,_camDirMemPt];
+		cTabUAVcams pushBack [_uav,_renderTarget,_cam,_camPosMemPt,_camDirMemPt];
 	};
-} count _uavCams;
+} forEach _uavCams;
 
 // set up event handler
 if !(cTabUAVcams isEqualTo []) exitWith {
@@ -93,7 +93,7 @@ if !(cTabUAVcams isEqualTo []) exitWith {
 						[_cam] call cTab_fnc_deleteUAVcam;
 					};
 				};
-			} count cTabUAVcams;
+			} forEach cTabUAVcams;
 		}];
 	};
 	cTabActUav = _uav;

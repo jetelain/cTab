@@ -4,33 +4,21 @@
 // http://forums.bistudio.com/member.php?64032-Riouken
 // You may re-use any of this work as long as you provide credit back to me.
 
+#include "script_component.hpp"
 
-#define PREFIX cTab
-#define MAJOR 2
-#define MINOR 2
-#define PATCHLVL 2
-#define BUILD 5
-#define VERSION MAJOR.MINOR.PATCHLVL.BUILD
-#define VERSION_AR MAJOR,MINOR,PATCHLVL,BUILD
-#define REQUIRED_VERSION 1.32
-#include "\x\cba\addons\main\script_macros_common.hpp"
-#define AUTHOR "Gundy, Riouken, Raspu"
-
-
-class CfgPatches
+class CfgPatches 
 {
-	class PREFIX  // cTab
-		{
-			units[] = {Box_cTab_items,Box_cTabMisc_items};
-			weapons[] = {ItemcTab,ItemAndroid,ItemMicroDAGR,ItemcTabHCam,ItemcTabMisc,ItemAndroidMisc,ItemMicroDAGRMisc};
-			requiredVersion = REQUIRED_VERSION;
-			requiredAddons[] = {"CBA_MAIN","ctab_main","ctab_core"};
-			versionDesc = "cTab";
-			VERSION_CONFIG;
-			author = "cTab";
-			authors[] = {"Gundy","Riouken","Raspu"};
-			authorUrl = "https://github.com/Riouken/cTab";
-		};
+	class PREFIX
+	{
+		name = QUOTE(COMPONENT);
+		units[] = {"Box_cTab_items","Box_cTabMisc_items"};
+		weapons[] = {"ItemcTab","ItemAndroid","ItemMicroDAGR","ItemcTabHCam","ItemcTabMisc","ItemAndroidMisc","ItemMicroDAGRMisc"};
+        requiredVersion = REQUIRED_VERSION;
+		requiredAddons[] = {"CBA_MAIN","ctab_main","ctab_core"};
+		author = "cTab Authors";
+		authors[] = {"Gundy","Riouken","Raspu","GrueArbre"};
+        VERSION_CONFIG;
+	};
 };
 
 class CfgSettings 
@@ -41,7 +29,7 @@ class CfgSettings
 		{
 			class PREFIX 
 			{
-				main_addon = PREFIX;
+				main_addon = QUOTE(PREFIX);
 				class Dependencies 
 				{
 					CBA[] = {"cba_main", { 1,0,0 },"true"};
@@ -59,10 +47,10 @@ class CfgMods {
 		hidePicture = "True";
 		hideName = "True";
 		actionName = "Website";
-		action = "https://github.com/Riouken/cTab";
+		action = "https://github.com/jetelain/cTab";
 		overview = "Commander's Tablet / FBCB2 - Blue Force Tracking\nBattlefield tablet to access real time intel and blue force tracker.";
 		tooltip = "Commander's Tablet / FBCB2 - Blue Force Tracking";
-		author = AUTHOR;
+		author = "cTab Authors";
 	};
 };
 
@@ -81,9 +69,9 @@ class CfgWeapons
 	class ItemCore;
  	class InventoryItem_Base_F;
 	class ItemcTab: ItemCore {
-		descriptionshort = $STR_ctab_core_TabletShort;
+		descriptionshort = "$STR_ctab_core_TabletShort";
 		descriptionuse = "<t color='#9cf953'>Use: </t>Show Commander's Tablet";
-		displayname = $STR_ctab_core_Tablet;
+		displayname = "$STR_ctab_core_Tablet";
 		picture = "\cTab\img\icon_dk10.paa";
 		model = "\ctab\data\itemDK10.p3d";
 		scope = 2;
@@ -91,56 +79,56 @@ class CfgWeapons
 		class ItemInfo {
 			mass = 25;
 		};
-		author = AUTHOR;
+		author = "cTab Authors";
 		ctab_devicetype = 3;
 	};
 	
 	class ItemAndroid: ItemcTab {
-		descriptionshort = $STR_ctab_core_AndroidShort;
+		descriptionshort = "$STR_ctab_core_AndroidShort";
 		descriptionuse = "<t color='#9cf953'>Use: </t>Show Android Based BFT";
-		displayname = $STR_ctab_core_Android;
+		displayname = "$STR_ctab_core_Android";
 		picture = "\cTab\img\icon_android_s7_ca.paa";
 		model = "\ctab\data\itemAndroid.p3d";
 		class ItemInfo {
 			mass = 5;
 		};
-		author = AUTHOR;
+		author = "cTab Authors";
 		ctab_devicetype = 2;
 	};
 
 	class ItemMicroDAGR: ItemcTab {
-		descriptionshort = $STR_ctab_core_MicroDAGRShort;
+		descriptionshort = "$STR_ctab_core_MicroDAGRShort";
 		descriptionuse = "<t color='#9cf953'>Use: </t>Show Android Based BFT";
-		displayname = $STR_ctab_core_MicroDAGR;
+		displayname = "$STR_ctab_core_MicroDAGR";
 		picture = "\cTab\img\icon_MicroDAGR.paa";
 		model = "\ctab\data\itemMicroDAGR.p3d";
 		class ItemInfo {
 			mass = 6;
 		};
-		author = AUTHOR;
+		author = "cTab Authors";
 		ctab_devicetype = 1;
 	};
 	
 	class CBA_MiscItem;
 	class CBA_MiscItem_ItemInfo;
 	class ItemcTabHCam: CBA_MiscItem {
-		descriptionshort = $STR_ctab_core_HCamShort;
+		descriptionshort = "$STR_ctab_core_HCamShort";
 		descriptionuse = "<t color='#9cf953'>Use: </t>Used to record and stream video";
-		displayname = $STR_ctab_core_HCam;
+		displayname = "$STR_ctab_core_HCam";
 		picture = "\cTab\img\cTab_helmetCam_ico.paa";
 		scope = 2;
 		type = 0;
 		class ItemInfo: CBA_MiscItem_ItemInfo {
 			mass = 4;
 		};
-		author = AUTHOR;
+		author = "cTab Authors";
 	};	
 
 
 	class ItemcTabMisc: CBA_MiscItem {
-		descriptionshort = $STR_ctab_core_TabletShort;
+		descriptionshort = "$STR_ctab_core_TabletShort";
 		descriptionuse = "<t color='#9cf953'>Use: </t>Show Commander's Tablet";
-		displayname = $STR_ctab_core_Tablet;
+		displayname = "$STR_ctab_core_Tablet";
 		picture = "\cTab\img\icon_dk10.paa";
 		model = "\ctab\data\itemDK10.p3d";
 		scope = 2;
@@ -148,14 +136,14 @@ class CfgWeapons
 		class ItemInfo : CBA_MiscItem_ItemInfo {
 			mass = 25;
 		};
-		author = AUTHOR;
+		author = "cTab Authors";
 		ctab_devicetype = 3;
 	};
 	
 	class ItemAndroidMisc: CBA_MiscItem {
-		descriptionshort = $STR_ctab_core_AndroidShort;
+		descriptionshort = "$STR_ctab_core_AndroidShort";
 		descriptionuse = "<t color='#9cf953'>Use: </t>Show Android Based BFT";
-		displayname = $STR_ctab_core_Android;
+		displayname = "$STR_ctab_core_Android";
 		picture = "\cTab\img\icon_android_s7_ca.paa";
 		model = "\ctab\data\itemAndroid.p3d";
 		scope = 2;
@@ -163,14 +151,14 @@ class CfgWeapons
 		class ItemInfo : CBA_MiscItem_ItemInfo {
 			mass = 5;
 		};
-		author = AUTHOR;
+		author = "cTab Authors";
 		ctab_devicetype = 2;
 	};
 
 	class ItemMicroDAGRMisc: CBA_MiscItem {
-		descriptionshort = $STR_ctab_core_MicroDAGRShort;
+		descriptionshort = "$STR_ctab_core_MicroDAGRShort";
 		descriptionuse = "<t color='#9cf953'>Use: </t>Show Android Based BFT";
-		displayname = $STR_ctab_core_MicroDAGR;
+		displayname = "$STR_ctab_core_MicroDAGR";
 		picture = "\cTab\img\icon_MicroDAGR.paa";
 		model = "\ctab\data\itemMicroDAGR.p3d";
 		scope = 2;
@@ -178,7 +166,7 @@ class CfgWeapons
 		class ItemInfo : CBA_MiscItem_ItemInfo {
 			mass = 6;
 		};
-		author = AUTHOR;
+		author = "cTab Authors";
 		ctab_devicetype = 1;
 	};
 
@@ -217,7 +205,7 @@ class CfgNotifications
 		iconPicture = "\cTab\img\icoUnopenedmail.paa";
 		iconText = "";
 		color[] = {1,1,1,1};
-		description = $STR_ctab_core_MessageSent;
+		description = "$STR_ctab_core_MessageSent";
 		duration = 4;
 		priority = 7;
 		difficulty[] = {};

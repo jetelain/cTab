@@ -7,13 +7,13 @@
 
 #include <cTab_TAD_controls.hpp>
 
-#define MENU_sizeEx pxToScreen_H(cTab_GUI_TAD_OSD_TEXT_STD_SIZE)
+#define MENU_sizeEx pxToScreen_H_Value(cTab_GUI_TAD_OSD_TEXT_STD_SIZE)
 #include "\cTab\shared\cTab_markerMenu_macros.hpp"
 
 class cTab_TAD_dlg
 {
 	idd = 1755424;
-	movingEnable = true;
+	movingEnable = 1;
 	onLoad = "_this call cTab_fnc_onIfOpen;";
 	onUnload = "[] call cTab_fnc_onIfclose;";
 	onKeyDown = "_this call cTab_fnc_onIfKeyDown;";
@@ -106,55 +106,55 @@ class cTab_TAD_dlg
 		{
 			idc = IDC_CTAB_BTNMAIN;
 			onMouseButtonUp = "if (_this select 1 == 0) then {['cTab_TAD_dlg'] call cTab_fnc_toggleNightMode} else {if (_this select 1 == 1) then {[] call cTab_fnc_close};}";
-			tooltip = $STR_ctab_core_HomeTADHint;
+			tooltip = "$STR_ctab_core_HomeTADHint";
 		};
 		class btnSymInc: cTab_RscButton_TAD_SYM_INC
 		{
 			idc = IDC_CTAB_BTNUP;
 			action = "call cTab_fnc_txt_size_inc;";
-			tooltip = $STR_ctab_core_IncreaseFontHint;
+			tooltip = "$STR_ctab_core_IncreaseFontHint";
 		};
 		class btnSymDec: cTab_RscButton_TAD_SYM_DEC
 		{
 			idc = IDC_CTAB_BTNDWN;
 			action = "call cTab_fnc_txt_size_dec;";
-			tooltip = $STR_ctab_core_DecreaseFontHint;
+			tooltip = "$STR_ctab_core_DecreaseFontHint";
 		};
 		class btnBrtInc: cTab_RscButton_TAD_BRT_INC
 		{
 			idc=17;
 			action = "['cTab_TAD_dlg'] call cTab_fnc_incBrightness;";
-			tooltip = $STR_ctab_core_IncreaseBrightnessHint;
+			tooltip = "$STR_ctab_core_IncreaseBrightnessHint";
 		};
 		class btnBrtDec: cTab_RscButton_TAD_BRT_DEC
 		{
 			idc=18;
 			action = "['cTab_TAD_dlg'] call cTab_fnc_decBrightness;";
-			tooltip = $STR_ctab_core_DecreaseBrightnessHint;
+			tooltip = "$STR_ctab_core_DecreaseBrightnessHint";
 		};
 		class btnfunction: cTab_RscButton_TAD_OSB10
 		{
 			idc = IDC_CTAB_BTNFN;
 			action = "['cTab_TAD_dlg'] call cTab_fnc_iconText_toggle;";
-			tooltip = $STR_ctab_core_TextOnOffHint;
+			tooltip = "$STR_ctab_core_TextOnOffHint";
 		};
 		class btnMapType: cTab_RscButton_TAD_OSB20
 		{
 			idc=19;
 			action = "['cTab_TAD_dlg'] call cTab_fnc_mapType_toggle;";
-			tooltip = $STR_ctab_core_MapTexturesHint;
+			tooltip = "$STR_ctab_core_MapTexturesHint";
 		};
 		class btnMapTools: cTab_RscButton_TAD_OSB18
 		{
 			idc=20;
 			action = "['cTab_TAD_dlg'] call cTab_fnc_toggleMapTools;";
-			tooltip = $STR_ctab_core_MapToolsHint;
+			tooltip = "$STR_ctab_core_MapToolsHint";
 		};
 		class btnF7: cTab_RscButton_TAD_OSB19
 		{
 			idc=21;
 			action = "['cTab_TAD_dlg'] call cTab_fnc_centerMapOnPlayerPosition;";
-			tooltip = $STR_ctab_core_CenterMapHint;
+			tooltip = "$STR_ctab_core_CenterMapHint";
 		};
 	};
 };

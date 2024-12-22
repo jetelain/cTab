@@ -17,12 +17,12 @@
 
 #include <\cTab\tablet\cTab_Tablet_controls.hpp>
 
-#define MENU_sizeEx pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE)
+#define MENU_sizeEx pxToScreen_H_Value(cTab_GUI_tablet_OSD_TEXT_STD_SIZE)
 #include "\cTab\shared\cTab_markerMenu_macros.hpp"
 
 class cTab_Tablet_dlg {
 	idd = 1775154;
-	movingEnable = true;
+	movingEnable = 1;
 	onLoad = "_this call cTab_fnc_onIfOpen;";
 	onUnload = "[] call cTab_fnc_onIfclose;";
 	onKeyDown = "_this call cTab_fnc_onIfKeyDown;";
@@ -107,7 +107,7 @@ class cTab_Tablet_dlg {
 					w = pxToScreen_W(cTab_GUI_tablet_DESKTOP_ICON_W);
 					h = pxToScreen_H(cTab_GUI_tablet_DESKTOP_ICON_H);
 					action = "['cTab_Tablet_dlg',[['mode','BFT']]] call cTab_fnc_setSettings;";
-					toolTip = $STR_ctab_core_BFTIconHint;
+					toolTip = "$STR_ctab_core_BFTIconHint";
 				};
 				class actUAVtxt: actBFTtxt
 				{
@@ -115,7 +115,7 @@ class cTab_Tablet_dlg {
 					text = "\cTab\img\icon_uav_ca.paa";
 					y = pxToGroup_Y(cTab_GUI_tablet_SCREEN_CONTENT_Y + cTab_GUI_tablet_DESKTOP_ICON_OFFSET_Y * 2 + cTab_GUI_tablet_DESKTOP_ICON_H);
 					action = "['cTab_Tablet_dlg',[['mode','UAV']]] call cTab_fnc_setSettings;";
-					toolTip = $STR_ctab_core_UAVIconHint;
+					toolTip = "$STR_ctab_core_UAVIconHint";
 				};
 				class actVIDtxt: actBFTtxt
 				{
@@ -123,7 +123,7 @@ class cTab_Tablet_dlg {
 					text = "\cTab\img\icon_helmetcam_ca.paa";
 					y = pxToGroup_Y(cTab_GUI_tablet_SCREEN_CONTENT_Y + cTab_GUI_tablet_DESKTOP_ICON_OFFSET_Y * 3 + cTab_GUI_tablet_DESKTOP_ICON_H * 2);
 					action = "['cTab_Tablet_dlg',[['mode','HCAM']]] call cTab_fnc_setSettings;";
-					toolTip = $STR_ctab_core_HelmetCamIconHint;
+					toolTip = "$STR_ctab_core_HelmetCamIconHint";
 				};
 				class actMSGtxt: actBFTtxt
 				{
@@ -131,7 +131,7 @@ class cTab_Tablet_dlg {
 					text = "\cTab\img\icon_mail_ca.paa" ;
 					y = pxToGroup_Y(cTab_GUI_tablet_SCREEN_CONTENT_Y + cTab_GUI_tablet_DESKTOP_ICON_OFFSET_Y * 4 + cTab_GUI_tablet_DESKTOP_ICON_H * 3);
 					action = "['cTab_Tablet_dlg',[['mode','MESSAGE']]] call cTab_fnc_setSettings;";
-					toolTip = $STR_ctab_core_MessageIconHint;
+					toolTip = "$STR_ctab_core_MessageIconHint";
 				};
 			};
 		};
@@ -184,7 +184,7 @@ class cTab_Tablet_dlg {
 					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_B_Y);
 					text = "Video stream - Thermal";
 				};
-				class cTabUAVlist: cTab_RscListbox_Tablet
+				class cTabUAVlist: cTab_RscListBox_Tablet
 				{
 					idc = IDC_CTAB_CTABUAVLIST;
 					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_CONTENT_L_X);
@@ -250,7 +250,7 @@ class cTab_Tablet_dlg {
 					y = pxToGroup_Y(cTab_GUI_tablet_WINDOW_BACK_T_Y);
 					text = "Video stream";
 				};
-				class cTabHcamList: cTab_RscListbox_Tablet
+				class cTabHcamList: cTab_RscListBox_Tablet
 				{
 					idc = IDC_CTAB_CTABHCAMLIST;
 					x = pxToGroup_X(cTab_GUI_tablet_WINDOW_CONTENT_L_X);
@@ -286,13 +286,13 @@ class cTab_Tablet_dlg {
 				class msgframe: cTab_RscFrame
 				{
 					idc=14;
-					text = $STR_ctab_core_InboxTitle;
+					text = "$STR_ctab_core_InboxTitle";
 					x = pxToGroup_X(cTab_GUI_tablet_MESSAGE_MESSAGETEXT_FRAME_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_MESSAGE_MESSAGETEXT_FRAME_Y);
 					w = pxToScreen_W(cTab_GUI_tablet_MESSAGE_MESSAGETEXT_FRAME_W);
 					h = pxToScreen_H(cTab_GUI_tablet_MESSAGE_MESSAGETEXT_FRAME_H);
 				};
-				class msgListbox: cTab_RscListbox_Tablet
+				class msgListbox: cTab_RscListBox_Tablet
 				{
 					idc = IDC_CTAB_MSG_LIST;
 					style = LB_MULTI;
@@ -305,10 +305,10 @@ class cTab_Tablet_dlg {
 				class msgTxt: cTab_RscEdit_Tablet
 				{
 					idc = IDC_CTAB_MSG_CONTENT;
-					htmlControl = true;
+					htmlControl = 1;
 					style = ST_MULTI;
 					lineSpacing = 0.2;
-					text = $STR_ctab_core_NoMessageSelected;
+					text = "$STR_ctab_core_NoMessageSelected";
 					x = pxToGroup_X(cTab_GUI_tablet_MESSAGE_MESSAGETEXT_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_MESSAGE_MESSAGETEXT_Y);
 					w = pxToScreen_W(cTab_GUI_tablet_MESSAGE_MESSAGETEXT_W);
@@ -318,13 +318,13 @@ class cTab_Tablet_dlg {
 				class composeFrame: cTab_RscFrame
 				{
 					idc=15;
-					text = $STR_ctab_core_ComposeMessageHint;
+					text = "$STR_ctab_core_ComposeMessageHint";
 					x = pxToGroup_X(cTab_GUI_tablet_MESSAGE_COMPOSE_FRAME_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_MESSAGE_COMPOSE_FRAME_Y);
 					w = pxToScreen_W(cTab_GUI_tablet_MESSAGE_COMPOSE_FRAME_W);
 					h = pxToScreen_H(cTab_GUI_tablet_MESSAGE_COMPOSE_FRAME_H);
 				};
-				class playerlistbox: cTab_RscListbox_Tablet
+				class playerlistbox: cTab_RscListBox_Tablet
 				{
 					idc = IDC_CTAB_MSG_RECIPIENTS;
 					style = LB_MULTI;
@@ -336,8 +336,8 @@ class cTab_Tablet_dlg {
 				class deletebtn: cTab_RscButton_Tablet
 				{
 					idc = IDC_CTAB_MSG_BTNDELETE;
-					text = $STR_ctab_core_DeleteMessage;
-					tooltip = $STR_ctab_core_DeleteMessageHint;
+					text = "$STR_ctab_core_DeleteMessage";
+					tooltip = "$STR_ctab_core_DeleteMessageHint";
 					x = pxToGroup_X(cTab_GUI_tablet_MESSAGE_BUTTON_DELETE_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_MESSAGE_BUTTON_DELETE_Y);
 					w = pxToScreen_W(cTab_GUI_tablet_MESSAGE_BUTTON_W);
@@ -347,7 +347,7 @@ class cTab_Tablet_dlg {
 				class sendbtn: cTab_RscButton_Tablet
 				{
 					idc = IDC_CTAB_MSG_BTNSEND;
-					text = $STR_ctab_core_SendMessage;
+					text = "$STR_ctab_core_SendMessage";
 					x = pxToGroup_X(cTab_GUI_tablet_MESSAGE_BUTTON_SEND_X);
 					y = pxToGroup_Y(cTab_GUI_tablet_MESSAGE_BUTTON_SEND_Y);
 					w = pxToScreen_W(cTab_GUI_tablet_MESSAGE_BUTTON_W);
@@ -357,7 +357,7 @@ class cTab_Tablet_dlg {
 				class edittxtbox: cTab_RscEdit_Tablet
 				{
 					idc = IDC_CTAB_MSG_COMPOSE;
-					htmlControl = true;
+					htmlControl = 1;
 					style = ST_MULTI;
 					lineSpacing = 0.2;
 					text = "";
@@ -406,74 +406,74 @@ class cTab_Tablet_dlg {
 		class btnF1: cTab_Tablet_btnF1
 		{
 			idc = IDC_CTAB_BTNF1;
-			tooltip = $STR_ctab_core_BFTF1Hint;
+			tooltip = "$STR_ctab_core_BFTF1Hint";
 			action = "['cTab_Tablet_dlg',[['mode','BFT']]] call cTab_fnc_setSettings;";
 		};
 		class btnF2: cTab_Tablet_btnF2
 		{
 			idc = IDC_CTAB_BTNF2;
-			tooltip = $STR_ctab_core_UAVF2Hint;
+			tooltip = "$STR_ctab_core_UAVF2Hint";
 			action = "['cTab_Tablet_dlg',[['mode','UAV']]] call cTab_fnc_setSettings;";
 		};
 		class btnF3: cTab_Tablet_btnF3
 		{
 			idc = IDC_CTAB_BTNF3;
-			tooltip = $STR_ctab_core_HelmetCamF3Hint;
+			tooltip = "$STR_ctab_core_HelmetCamF3Hint";
 			action = "['cTab_Tablet_dlg',[['mode','HCAM']]] call cTab_fnc_setSettings;";
 		};
 		class btnF4: cTab_Tablet_btnF4
 		{
 			idc = IDC_CTAB_BTNF4;
-			tooltip = $STR_ctab_core_MessageF4Hint;
+			tooltip = "$STR_ctab_core_MessageF4Hint";
 			action = "['cTab_Tablet_dlg',[['mode','MESSAGE']]] call cTab_fnc_setSettings;";
 		};
 		class btnF5: cTab_Tablet_btnF5
 		{
 			idc = IDC_CTAB_BTNF5;
-			tooltip = $STR_ctab_core_MapToolsHint;
+			tooltip = "$STR_ctab_core_MapToolsHint";
 			action = "['cTab_Tablet_dlg'] call cTab_fnc_toggleMapTools;";
 		};
 		class btnF6: cTab_Tablet_btnF6
 		{
 			idc = IDC_CTAB_BTNF6;
-			tooltip = $STR_ctab_core_MapTexturesHint;
+			tooltip = "$STR_ctab_core_MapTexturesHint";
 			action = "['cTab_Tablet_dlg'] call cTab_fnc_mapType_toggle;";
 		};
 		class btnF7: cTab_Tablet_btnTrackpad
 		{
 			idc=16;
 			action = "['cTab_Tablet_dlg'] call cTab_fnc_centerMapOnPlayerPosition;";
-			tooltip = $STR_ctab_core_CenterMapHint;
+			tooltip = "$STR_ctab_core_CenterMapHint";
 		};
 		class btnMain: cTab_Tablet_btnHome
 		{
 			idc = IDC_CTAB_BTNMAIN;
-			tooltip = $STR_ctab_core_HomeTabletHint;
+			tooltip = "$STR_ctab_core_HomeTabletHint";
 			action = "['cTab_Tablet_dlg',[['mode','DESKTOP']]] call cTab_fnc_setSettings;";
 		};
 		class btnFN: cTab_Tablet_btnFn
 		{
 			idc = IDC_CTAB_BTNFN;
 			action = "['cTab_Tablet_dlg'] call cTab_fnc_iconText_toggle;";
-			tooltip = $STR_ctab_core_TextOnOffHint;
+			tooltip = "$STR_ctab_core_TextOnOffHint";
 		};
 		class btnOFF: cTab_Tablet_btnPower
 		{
 			idc = IDC_CTAB_BTNOFF;
 			action = "closeDialog 0;";
-			tooltip = $STR_ctab_core_CloseInterfaceHint;
+			tooltip = "$STR_ctab_core_CloseInterfaceHint";
 		};
 		class btnUP: cTab_Tablet_btnBrtUp
 		{
 			idc = IDC_CTAB_BTNUP;
 			action = "call cTab_fnc_txt_size_inc;";
-			tooltip = $STR_ctab_core_IncreaseFontHint;
+			tooltip = "$STR_ctab_core_IncreaseFontHint";
 		};
 		class btnDWN: cTab_Tablet_btnBrtDn
 		{
 			idc = IDC_CTAB_BTNDWN;
 			action = "call cTab_fnc_txt_size_dec;";
-			tooltip = $STR_ctab_core_DecreaseFontHint;
+			tooltip = "$STR_ctab_core_DecreaseFontHint";
 		};
 		class btnACT: cTab_Tablet_btnMouse
 		{

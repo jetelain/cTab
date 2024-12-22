@@ -3,10 +3,11 @@
 #define GUI_GRID_PX_H 2048 // hight in pixels
 
 // Base bacros to convert pixel space to screen space
-#define pxToScreen_X(PIXEL) ((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W + GUI_GRID_X)
-#define pxToScreen_Y(PIXEL) ((PIXEL) / GUI_GRID_PX_H * GUI_GRID_H + GUI_GRID_Y)
-#define pxToScreen_W(PIXEL) ((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W)
-#define pxToScreen_H(PIXEL) ((PIXEL) / GUI_GRID_PX_H * GUI_GRID_H)
+#define pxToScreen_X(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W + GUI_GRID_X)
+#define pxToScreen_Y(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_H * GUI_GRID_H + GUI_GRID_Y)
+#define pxToScreen_W(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W)
+#define pxToScreen_H_Value(PIXEL) ((PIXEL) / GUI_GRID_PX_H * GUI_GRID_H)
+#define pxToScreen_H(PIXEL) QUOTE(pxToScreen_H_Value(PIXEL))
 
 // Map position within background, pixel based
 #define cTab_GUI_TAD_MAP_X (359)
@@ -220,7 +221,7 @@ class cTab_RscText_TAD: cTab_RscText
 	style = ST_CENTER;
 	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W);
 	h = pxToScreen_H(cTab_GUI_TAD_OSD_ELEMENT_STD_H);
-	font = GUI_FONT_MONO;
+	font = QUOTE(GUI_FONT_MONO);
 	colorText[] = COLOR_NEON_GREEN;
 	sizeEx = pxToScreen_H(cTab_GUI_TAD_OSD_TEXT_STD_SIZE);
 	colorBackground[] = COLOR_BLACK;
@@ -252,17 +253,17 @@ class cTab_TAD_RscMapControl: cTab_RscMapControl
 	alphaFadeEndScale = 10;
 
 	// Rendering density coefficients
-	ptsPerSquareSea = 8 / cTab_TAD_DLGtoDSP_fctr;		// seas
-	ptsPerSquareTxt = 8 / cTab_TAD_DLGtoDSP_fctr;		// textures
-	ptsPerSquareCLn = 8 / cTab_TAD_DLGtoDSP_fctr;		// count-lines
-	ptsPerSquareExp = 8 / cTab_TAD_DLGtoDSP_fctr;		// exposure
-	ptsPerSquareCost = 8 / cTab_TAD_DLGtoDSP_fctr;		// cost
+	ptsPerSquareSea = QUOTE(8 / cTab_TAD_DLGtoDSP_fctr);		// seas
+	ptsPerSquareTxt = QUOTE(8 / cTab_TAD_DLGtoDSP_fctr);		// textures
+	ptsPerSquareCLn = QUOTE(8 / cTab_TAD_DLGtoDSP_fctr);		// count-lines
+	ptsPerSquareExp = QUOTE(8 / cTab_TAD_DLGtoDSP_fctr);		// exposure
+	ptsPerSquareCost = QUOTE(8 / cTab_TAD_DLGtoDSP_fctr);		// cost
 
 	// Rendering thresholds
-	ptsPerSquareFor = 3 / cTab_TAD_DLGtoDSP_fctr;		// forests
-	ptsPerSquareForEdge = 100 / cTab_TAD_DLGtoDSP_fctr;	// forest edges
-	ptsPerSquareRoad = 1.5 / cTab_TAD_DLGtoDSP_fctr;		// roads
-	ptsPerSquareObj = 4 / cTab_TAD_DLGtoDSP_fctr;		// other objects
+	ptsPerSquareFor = QUOTE(3 / cTab_TAD_DLGtoDSP_fctr);		// forests
+	ptsPerSquareForEdge = QUOTE(100 / cTab_TAD_DLGtoDSP_fctr);	// forest edges
+	ptsPerSquareRoad = QUOTE(1.5 / cTab_TAD_DLGtoDSP_fctr);		// roads
+	ptsPerSquareObj = QUOTE(4 / cTab_TAD_DLGtoDSP_fctr);		// other objects
 
 	/*
 	// replace CustomMark with wedding cake icon
@@ -769,10 +770,10 @@ class cTab_TAD_background: cTab_RscPicture
 {
 	idc = IDC_CTAB_BACKGROUND;
 	text = ""; // will be set during onLoad event
-	x = GUI_GRID_X;
-	y = GUI_GRID_Y;
-	w = GUI_GRID_W;
-	h = GUI_GRID_H;
+	x = QUOTE(GUI_GRID_X);
+	y = QUOTE(GUI_GRID_Y);
+	w = QUOTE(GUI_GRID_W);
+	h = QUOTE(GUI_GRID_H);
 };
 class cTab_TAD_OSD_hookGrid: cTab_RscText_TAD
 {
@@ -848,7 +849,7 @@ class cTab_TAD_loadingtxt: cTab_RscText_TAD
 {
 	idc = IDC_CTAB_LOADINGTXT;
 	style = ST_CENTER;
-	text = $STR_ctab_core_Loading;
+	text = "$STR_ctab_core_Loading";
 	x = pxToScreen_X(cTab_GUI_TAD_MAP_X);
 	y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y);
 	w = pxToScreen_W(cTab_GUI_TAD_MAP_W);

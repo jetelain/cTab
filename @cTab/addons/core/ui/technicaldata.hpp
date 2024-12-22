@@ -37,7 +37,7 @@ class cTab_TechnicalData_dlg
 		class Title: RscText
 		{
 			idc = IDC_TECHNICALDATA_TITLE;
-			text = $STR_ctab_core_techData;
+			text = "$STR_ctab_core_techData";
 			x = 3.5 * GUI_GRID_W + GUI_GRID_X;
 			y = 8.5 * GUI_GRID_H + GUI_GRID_Y;
 			w = 33 * GUI_GRID_W;
@@ -47,7 +47,7 @@ class cTab_TechnicalData_dlg
 		class CallsignLabel: RscText
 		{
 			idc = IDC_TECHNICALDATA_CALLSIGNLABEL;
-			text = $STR_ctab_core_callSign;
+			text = "$STR_ctab_core_callSign";
 			x = 3.5 * GUI_GRID_W + GUI_GRID_X;
 			y = 10.5 * GUI_GRID_H + GUI_GRID_Y;
 			w = 11 * GUI_GRID_W;
@@ -66,7 +66,7 @@ class cTab_TechnicalData_dlg
 		class OkButton: RscButton
 		{
 			idc = IDC_TECHNICALDATA_OKBUTTON;
-			text = $STR_DISP_OK;
+			text = "$STR_DISP_OK";
 			x = 28.5 * GUI_GRID_W + GUI_GRID_X;
 			y = 16 * GUI_GRID_H + GUI_GRID_Y;
 			w = 8 * GUI_GRID_W;
@@ -75,7 +75,7 @@ class cTab_TechnicalData_dlg
 		class CancelButton: RscButton
 		{
 			idc = IDC_TECHNICALDATA_CANCELBUTTON;
-			text = $STR_DISP_CANCEL;
+			text = "$STR_DISP_CANCEL";
 			x = 3.5 * GUI_GRID_W + GUI_GRID_X;
 			y = 16 * GUI_GRID_H + GUI_GRID_Y;
 			w = 8 * GUI_GRID_W;
