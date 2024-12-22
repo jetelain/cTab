@@ -319,7 +319,7 @@ _classNames = [configfile >> "CfgWeapons", cTab_helmetClass_has_HCam] call _filt
 	{
 		_childClassName = configName _x;
 		if (_classNames find _childClassName == -1) then {
-			0 = _classNames pushBack configName _x;
+			_classNames pushBack configName _x;
 		};
 	} count _childClasses;
 } forEach _classNames;

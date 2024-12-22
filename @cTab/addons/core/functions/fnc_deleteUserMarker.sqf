@@ -45,7 +45,7 @@ call {
 			
 			// if the marker could be found, remove it
 			if (_removeIndex != -1) then {
-				0 = _userMarkerList deleteAt _removeIndex;
+				_userMarkerList deleteAt _removeIndex;
 				[cTab_userMarkerLists,_encryptionKey,_userMarkerList] call cTab_fnc_setToPairs;
 				
 				// Send deleteUserMarker command to all clients
@@ -82,7 +82,7 @@ call {
 			
 			// if the marker could be found, remove it
 			if (_removeIndex != -1) then {
-				0 = _userMarkerList deleteAt _removeIndex;
+				_userMarkerList deleteAt _removeIndex;
 				[cTab_userMarkerLists,_encryptionKey,_userMarkerList] call cTab_fnc_setToPairs;
 				// only update the user marker list if the marker was deleted from the player's side
 				if (_encryptionKey == call cTab_fnc_getPlayerEncryptionKey) then {

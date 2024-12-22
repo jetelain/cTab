@@ -3,9 +3,15 @@ prefix = "ctab"
 author = "cTab Authors, see https://github.com/jetelain/cTab"
 template = "cba"
 mainprefix = "z"
-folder_optionals = true
+folder_optionals = false
 sig_version = 3
-files = [
+
+[version]
+path = "addons/main/script_version.hpp"
+git_hash = 0
+
+[files]
+include = [
     "mod.cpp",
     "ctab_ico.paa"
 ]
