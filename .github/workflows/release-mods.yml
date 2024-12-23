@@ -37,10 +37,17 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: mods
-        path: |
-            "@cTab/releases/ctab-latest.zip"
-            "cTabIRL/@cTabIRL/releases/ctab_irl-latest.zip"
+        path: "@cTab/releases/ctab-latest.zip"
+        
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: mods
+        path: "cTabIRL/@cTabIRL/releases/ctab_irl-latest.zip"
             
+# Created release: @cTab\releases\ctab-latest.zip
+# Created release: cTabIRL\@cTabIRL\releases\ctab_irl-latest.zip
+
 #    - uses: Shopify/upload-to-release@master
 #      with:
 #        name: ctab.zip
