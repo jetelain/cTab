@@ -1,0 +1,45 @@
+name: Mods Release
+
+on:
+  release:
+    types: [ "published" ]
+    
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 9.0.x
+
+    - name: Build Extension
+      run: dotnet publish cTabIRL/cTabExtension/cTabExtension.csproj -c Release -r win-x64 -o "cTabIRL/@cTabIRL"
+
+    - uses: arma-actions/hemtt@v1
+      name: Setup HEMTT
+
+    - name: Build cTabIRL Mod
+      run: hemtt release
+      working-directory: cTabIRL/@cTabIRL
+
+    - name: Build cTab Mod
+      run: hemtt release
+      working-directory: "@cTab"
+
+    - uses: Shopify/upload-to-release@master
+      with:
+        name: ctab.zip
+        path: "@cTab/releases/ctab-latest.zip"
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        content-type: application/zip
+        
+    - uses: Shopify/upload-to-release@master
+      with:
+        name: ctab_irl.zip
+        path: "cTabIRL/@cTabIRL/releases/ctab_irl-latest.zip"
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        content-type: application/zip
+
