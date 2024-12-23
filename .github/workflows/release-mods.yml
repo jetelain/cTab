@@ -1,10 +1,6 @@
 name: Mods Release
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
   release:
     types: [ "published" ]
     
@@ -32,32 +28,18 @@ jobs:
     - name: Build cTab Mod
       run: hemtt release
       working-directory: "@cTab"
-      
-    - name: Upload
-      uses: actions/upload-artifact@v4
-      with:
-        name: ctab-latest
-        path: "@cTab/releases/ctab-latest.zip"
-        
-    - name: Upload
-      uses: actions/upload-artifact@v4
-      with:
-        name: ctab_irl-latest
-        path: "cTabIRL/@cTabIRL/releases/ctab_irl-latest.zip"
-            
-# Created release: @cTab\releases\ctab-latest.zip
-# Created release: cTabIRL\@cTabIRL\releases\ctab_irl-latest.zip
 
-#    - uses: Shopify/upload-to-release@master
-#      with:
-#        name: ctab.zip
-#        path: "@cTab/releases/ctab-latest.zip"
-#        repo-token: ${{ secrets.GITHUB_TOKEN }}
-#        content-type: application/zip
-#    - uses: Shopify/upload-to-release@master
-#      with:
-#        name: ctab_irl.zip
-#        path: "cTabIRL/@cTabIRL/releases/ctab_irl-latest.zip"
-#        repo-token: ${{ secrets.GITHUB_TOKEN }}
-#        content-type: application/zip
+    - uses: Shopify/upload-to-release@master
+      with:
+        name: ctab.zip
+        path: "@cTab/releases/ctab-latest.zip"
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        content-type: application/zip
+        
+    - uses: Shopify/upload-to-release@master
+      with:
+        name: ctab_irl.zip
+        path: "cTabIRL/@cTabIRL/releases/ctab_irl-latest.zip"
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        content-type: application/zip
 
