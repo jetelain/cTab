@@ -36,13 +36,13 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: mods
+        name: ctab-latest
         path: "@cTab/releases/ctab-latest.zip"
         
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: mods
+        name: ctab_irl-latest
         path: "cTabIRL/@cTabIRL/releases/ctab_irl-latest.zip"
             
 # Created release: @cTab\releases\ctab-latest.zip
