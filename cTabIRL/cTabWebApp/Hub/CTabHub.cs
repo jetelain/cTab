@@ -81,6 +81,10 @@ namespace cTabWebApp
             {
                 await Clients.Caller.SendAsync("UpdateMessages", state.LastUpdateMessages);
             }
+            if (state.LastUpdateMessagesTemplates != null)
+            {
+                await Clients.Caller.SendAsync("UpdateMessageTemplates", state.LastUpdateMessagesTemplates);
+            }
             if (state.LastUpdateMapMarkers != null)
             {
                 await Clients.Caller.SendAsync("UpdateMapMarkers", state.LastUpdateMapMarkers);
@@ -718,6 +722,39 @@ namespace cTabWebApp
             }
             await Clients.Group(state.ArmaChannelName).SendAsync("Callback", "TicAlert", message.State ? "[true]" : "[false]");
         }
+
+        public async Task ArmaUpdateMessageTemplates(ArmaMessage message)
+        {
+            var state = GetState(ConnectionKind.Arma);
+            if (state == null)
+            {
+                _logger.LogWarning($"No state for ArmaUpdateMessageTemplates");
+                return;
+            }
+            var msg = new UpdateMessageTemplatesMessage()
+            {
+                Timestamp = message.Timestamp,
+                Templates = new List<MessageTemplate>()
+            };
+            foreach (var entry in message.Args)
+            {
+                var data = ArmaSerializer.ParseMixedArray(entry);
+                msg.Templates.Add(new MessageTemplate(){
+                    Uid = (string)data[0],
+                    Href = (string)data[3]
+                });
+            }
+            state.LastUpdateMessagesTemplates = msg;
+            try
+            {
+                await Clients.Group(state.WebChannelName).SendAsync("UpdateMessageTemplates", state.LastUpdateMessagesTemplates);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(e, "UpdateMessageTemplates failed");
+            }
+        }
+
 
         public async override Task OnDisconnectedAsync(Exception exception)
         {

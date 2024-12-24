@@ -26,3 +26,6 @@ INFO_1("StartMission %1",_infos);
 
 // Setup initial loadout
 call FUNC(updateDevices);
+
+// Send messages templates
+call FUNC(updateMessageTemplates);
