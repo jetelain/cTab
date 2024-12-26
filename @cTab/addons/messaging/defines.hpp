@@ -14,3 +14,8 @@
 #define MSG_FIELD_TYPE_GRID 5
 #define MSG_FIELD_TYPE_CHECKBOX 6
 
+#define pixelScale  0.25
+#define GRID_W (pixelW * pixelGridNoUIScale * pixelScale)
+#define GRID_H (pixelH * pixelGridNoUIScale * pixelScale)
+
+#define FIELD_IDC(_l,_f) (9900000+_l*1000+_f*10)

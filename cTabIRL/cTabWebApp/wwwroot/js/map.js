@@ -1009,6 +1009,16 @@ $(function () {
         }
     });
 
+    connection.on("UpdateMessageTemplates", function (data) {
+        try {
+            // TODO
+            console.info(data.templates);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+
     if (vm.tacMapEndpoint && window.Arma3TacMap) {
         connection.on("SyncTacMap", function (data) {
             if (currentTacMapSynced) {
