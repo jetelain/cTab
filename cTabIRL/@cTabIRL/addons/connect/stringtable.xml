@@ -61,6 +61,14 @@
             <English>cTab has lost connection with server. Trying to reconnect...</English>
             <French>cTab a perdu la connection avec le serveur. Tentative de reconnection en cours...</French>
         </Key>
+        <Key ID="STR_ctab_irl_connect_screenShotFailed">
+            <English>Image capture failed.</English>
+            <French>La prise d'image a échouée.</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_screenShotTaken">
+            <English>Image captured.</English>
+            <French>Image prise.</French>
+        </Key>
         <Key ID="STR_ctab_irl_connect_syncMap">
             <English>Display map markers</English>
             <French>Afficher les marqueurs</French>
@@ -68,14 +76,6 @@
         <Key ID="STR_ctab_irl_connect_syncMapDetails">
             <English>Displays on cTab IRL markers from Arma 3 map.</English>
             <French>Affiche sur CTab IRL les marqueurs de la carte Arma 3.</French>
-        </Key>
-        <Key ID="STR_ctab_irl_connect_uri">
-            <English>Server URL</English>
-            <French>URL du serveur</French>
-        </Key>
-        <Key ID="STR_ctab_irl_connect_uriDetails">
-            <English></English>
-            <French></French>
         </Key>
     </Package>
 </Project>

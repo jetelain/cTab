@@ -39,5 +39,10 @@ namespace cTabWebApp
         {
             return new PlayerStateServiceStats();
         }
+
+        public PlayerState GetStateByUploadToken(string uploadToken)
+        {
+            return null; // No upload in single player
+        }
     }
 }
