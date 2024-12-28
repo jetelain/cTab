@@ -14,8 +14,21 @@
 #define MSG_FIELD_TYPE_GRID 5
 #define MSG_FIELD_TYPE_CHECKBOX 6
 
+#define MSG_ATTACHMENT_GRID 0
+
 #define pixelScale  0.25
 #define GRID_W (pixelW * pixelGridNoUIScale * pixelScale)
 #define GRID_H (pixelH * pixelGridNoUIScale * pixelScale)
 
 #define FIELD_IDC(_l,_f) (9900000+_l*1000+_f*10)
+
+#define IDD_TEMPLATE_DIALOG 990560
+#define IDC_TEXTPREVIEW     990561
+#define IDC_RECIPIENTS   	990562
+#define IDC_BUTTON_SEND     990563
+#define IDC_BUTTON_CANCEL   990564
+#define IDC_ATTACHEMENTS	990565
+
+#define WIDTH_PER_CHAR 2
+
+#define SCROLLBAR_WIDTH 0.021

@@ -1,3 +1,10 @@
 PREPMAIN(registerMessageTemplate);
 PREP(generateTemplateUI);
 PREP(generateTemplateText);
+PREP(updateMessagePreview);
+PREP(getDefaultFieldValue);
+PREP(parseGridPosition);
+PREP(fillRecipientList);
+PREP(displayTemplateUI);
+PREP(sendTemplatedMessage);
+PREP(sendMessage);

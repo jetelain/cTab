@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="ctab">
     <Package name="messaging">
-        
+        <Key ID="STR_ctab_messaging_Attachements">
+            <English>Attachements</English>
+            <French>Pièces jointes</French>
+        </Key>
+        <Key ID="STR_ctab_messaging_Cancel">
+            <English>Cancel</English>
+            <French>Annuler</French>
+        </Key>
+        <Key ID="STR_ctab_messaging_GeneratedMessage">
+            <English>Generated message</English>
+            <French>Message généré</French>
+        </Key>
+        <Key ID="STR_ctab_messaging_MarkerAt">
+            <English>Marker at %1</English>
+            <French>Marqueur à %1</French>
+        </Key>
+        <Key ID="STR_ctab_messaging_Recipient">
+            <English>Recipient</English>
+            <French>Destinataire</French>
+        </Key>
+        <Key ID="STR_ctab_messaging_Send">
+            <English>Send</English>
+            <French>Envoyer</French>
+        </Key>
     </Package>
 </Project>
