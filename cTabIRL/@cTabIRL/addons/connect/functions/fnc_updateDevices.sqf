@@ -38,4 +38,10 @@ if ( GVAR(deviceLevel) != _deviceLevel || { GVAR(vehicleMode) != _vehicleMode })
 	GVAR(vehicleMode) = _vehicleMode;
 	INFO_2("Devices: Device level to %1, Vehicle mode to %2",_deviceLevel,_vehicleMode);
 	"cTabExtension" callExtension ["Devices", [_deviceLevel, ctab_core_useMils, _vehicleMode]];
+
+	if ( _deviceLevel == 3 ) then {
+		// Previous level did not include messaging
+		// Forces an update to ensure all messages are available
+		call FUNC(updateMessages);
+	};
 };

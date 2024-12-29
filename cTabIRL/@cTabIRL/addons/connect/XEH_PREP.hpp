@@ -6,6 +6,7 @@ PREP(updatePosition);
 PREP(onConnected);
 PREP(connect);
 PREP(updateMessages);
+PREP(updateMessageTemplates);
 PREP(markMessageRead);
 PREP(sendMessage);
 PREP(deleteMessage);
