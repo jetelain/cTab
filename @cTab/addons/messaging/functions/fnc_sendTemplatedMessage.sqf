@@ -15,6 +15,7 @@ private _recipList = _plrList select { (str _x) in _selectedData };
 
 if ( count _recipList >  0) then {
 	private _result = [_display] call FUNC(generateTemplateText);
+	GVAR(currentTemplateValues) = []; // Reset the values
 	[_result, _recipList] call FUNC(sendMessage);
 	closeDialog 1;
 };

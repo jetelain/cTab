@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ['_targetId','_msgBody'];
+params ['_targetId','_msgBody',['_data',[]]];
 
 private _playerEncryptionKey = call cTab_fnc_getPlayerEncryptionKey;
 private _time = call cTab_fnc_currentTime;
@@ -14,5 +14,23 @@ if ( _groupIndex != -1 ) then {
 };
 
 if ( count _recipList > 0 ) then {
+
+	if !(isNil "ctab_messaging_fnc_sendMessage") exitWith {
+		// New messaging system is available
+
+		if (count _data == 0) then {
+			// WebApp is not up-to-date, generate new system format
+			_data = ["", null, 0, []];
+		};
+
+		// Data should be ["_title", "_message", "_messageType", "_attachments"];
+		// but to keep compatibility with old version, server has sent ["_title", null, "_messageType", "_attachments"] and _message as _msgBody
+		// so set _message with content of _msgBody to respect the new format
+		_data set [1, _msgBody];
+
+		[_data, _recipList] call ctab_messaging_fnc_sendMessage;
+	};
+
+	// Old messaging system
 	[_msgBody, _recipList] call ctab_core_fnc_sendMessage;
 };

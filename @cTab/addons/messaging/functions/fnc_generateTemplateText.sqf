@@ -7,21 +7,23 @@ if (isNil QGVAR(currentTemplateData)) exitWith {
     ["", MSG_TYPE_GENERIC, []]
 };
 
-GVAR(currentTemplateData) params ["", "_messageType", "", "", "_lines"];
+GVAR(currentTemplateData) params ["", "_messageType", "", "_shortTitle", "", "_lines"];
 
 private _attachement = [];
 private _linesText = [];
-private _title = "";
+private _shortTitle = "";
+private _persistValues = [];
 
 {
     private _lineIndex = _foreachIndex;
     _x params ["_lineTitle", "", "_fields"];
 
     if (_lineIndex == 0) then {
-        _title = _lineTitle;
+        _shortTitle = _lineTitle;
     };
 
     private _fieldsText = [];
+    private _persistFields = [];
 
     {
         private _fieldIndex = _foreachIndex;
@@ -35,7 +37,9 @@ private _title = "";
 
         if ( _fieldType == MSG_FIELD_TYPE_CHECKBOX ) then
         {
-            if ( cbChecked _control ) then {
+            private _checked = cbChecked _control;
+            _persistFields pushBack _checked;
+            if ( _checked ) then {
                 _fieldsText pushBack _fieldTitle;
                 _label ctrlSetBackgroundColor [0.1, 0.21, 0.32, 1];
                 _control ctrlSetBackgroundColor [0.1, 0.21, 0.32, 1];
@@ -47,16 +51,17 @@ private _title = "";
         else
         {
             private _text = ctrlText _control;
+            _persistFields pushBack _text;
             if (_text != "") then {
                 _fieldsText pushBack format ["%1%2", _fieldTitle, _text];
                 _label ctrlSetBackgroundColor [0.1, 0.21, 0.32, 1];
                 _desc ctrlSetText "";
-                if ( _fieldType == MSG_FIELD_TYPE_GRID ) then {
+                if ( _fieldType == MSG_FIELD_TYPE_MARKER ) then {
                     private _parsed=[_text] call FUNC(parseGridPosition);
                     if ( count _parsed == 2 ) then {
                         _parsed params ["_pos", "_precision"];
                         private _center = [(_pos # 0) + ((_precision # 0) / 2),(_pos # 1) + ((_precision # 1) / 2)];
-                        _attachement pushBack [MSG_ATTACHMENT_GRID, format [LLSTRING(MarkerAt), [_center] call EFUNC(core,gridPosition)], _center, _pos, _precision];
+                        _attachement pushBack [MSG_ATTACHMENT_MARKER, format [LLSTRING(MarkerAt), [_center] call EFUNC(core,gridPosition)], _center, _pos, _precision];
                     }; 
                 };
             } else {
@@ -66,6 +71,9 @@ private _title = "";
         };
     } forEach _fields;
     _linesText pushBack format ["%1: %2", _lineTitle, (_fieldsText joinString " ")];
+    _persistValues pushBack _persistFields;
 } forEach _lines;
 
-[_title, _linesText joinString endl, _messageType, _attachement];
+GVAR(currentTemplateValues) = _persistValues;
+
+[_shortTitle, _linesText joinString endl, _messageType, _attachement];

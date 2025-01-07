@@ -11,7 +11,7 @@ _data params ["_title", "_message", "_messageType", "_attachments"];
 // Transform attachement of type grid to markers
 {
 	_x params ["_attachementType"];
-	if ( _attachementType == MSG_ATTACHMENT_GRID) then {
+	if ( _attachementType == MSG_ATTACHMENT_MARKER) then {
 		_x params ["", "", "_center"];
 		private _key = call cTab_fnc_getPlayerEncryptionKey;
 		private _markerData = [_center,if ( _messageType ==  MSG_TYPE_MEDEVAC) then { 209 } else { 100 },0,0, (call cTab_fnc_currentTime) + " " + _title,cTab_player];

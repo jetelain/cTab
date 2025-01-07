@@ -3,14 +3,29 @@
 
 params ["_display", "_data", "_targetControl"];
 
+private _restoreValues = [];
+
+if !(isNil QGVAR(currentTemplateData)) then {
+    if ( QGVAR(currentTemplateData) # 0 == _data # 0 ) then {
+        if !(isNil QGVAR(currentTemplateValues) ) then {
+            // Previous message had the same template and was not sent, restore the values
+            _restoreValues = GVAR(currentTemplateValues);
+        };
+    };
+};
+
 GVAR(currentTemplateData) = _data;
 
-_data params ["", "_messageType", "_title", "", "_lines"];
+_data params ["", "_messageType", "", "_shortTitle", "", "_lines"];
 
 private _maxWidth = ((1 - SCROLLBAR_WIDTH) / GRID_W) - 2; 
 
 {
     private _lineIndex = _foreachIndex;
+    private _restoreFields = [];
+    if ( count _restoreValues > _lineIndex ) then {
+        _restoreFields = _restoreValues select _lineIndex;
+    };
     _x params ["_lineTitle", "_lineDescription", "_fields"];
 
     private _ctrl = _display ctrlCreate ["RscText", -1, _targetControl];
@@ -47,6 +62,9 @@ private _maxWidth = ((1 - SCROLLBAR_WIDTH) / GRID_W) - 2;
                 _ctrl = _display ctrlCreate ["RscCheckBox", _idc + 1, _targetControl];
                 _ctrl ctrlSetPosition [ _posX, _posY, GRID_W * 8, GRID_H * 8 ];
                 _ctrl ctrlAddEventHandler ["CheckedChanged", { [ctrlParent (_this select 0)] call FUNC(updateMessagePreview); }];
+                if ( count _restoreFields > _fieldIndex ) then {
+                    _ctrl ctrlSetChecked (_restoreFields select _fieldIndex);
+                };
                 _ctrl ctrlCommit 0;
 
                 _ctrl = _display ctrlCreate ["RscText", _idc + 2, _targetControl];
@@ -96,8 +114,11 @@ private _maxWidth = ((1 - SCROLLBAR_WIDTH) / GRID_W) - 2;
 
                 _ctrl = _display ctrlCreate ["RscEdit", _idc + 1, _targetControl];
                 _ctrl ctrlSetPosition [ _posX+(GRID_W*(_labelWidth+0.5)), _posY+(GRID_H*0.5), GRID_W * (_fieldWidth-1), GRID_H * 7 ];
-                _ctrl ctrlSetText ([_fieldType] call FUNC(getDefaultFieldValue));
-
+                if ( count _restoreFields > _fieldIndex ) then {
+                    _ctrl ctrlSetText (_restoreFields select _fieldIndex);
+                } else {
+                    _ctrl ctrlSetText ([_fieldType, _messageType] call FUNC(getDefaultFieldValue));
+                };
                 _ctrl ctrlAddEventHandler ["KeyUp", { [ctrlParent (_this select 0)] call FUNC(updateMessagePreview); }];
                 _ctrl ctrlCommit 0;
 
