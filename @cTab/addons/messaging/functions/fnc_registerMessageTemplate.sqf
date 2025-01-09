@@ -1,12 +1,12 @@
 #include "script_component.hpp"
 
-params ["_uid", "_messageType", "_title", "_href", "_lines"];
+params ["_uid", "_messageType", "_title", "_shortTitle", "_href", "_lines"];
 
 if ( _uid in GVAR(templatesByUid) ) exitWith {
     WARNING_1("Template with UID '%1' already exists", _uid);
 };
 
-private _data = [_uid, _messageType, _title, _href, _lines];
+private _data = [_uid, _messageType, _title, _shortTitle, _href, _lines];
 
 GVAR(templatesByUid) set [_uid, _data];
 GVAR(templates) pushBack _data;

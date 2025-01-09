@@ -8,3 +8,4 @@ PREP(fillRecipientList);
 PREP(displayTemplateUI);
 PREP(sendTemplatedMessage);
 PREP(sendMessage);
+PREP(closeTemplateUI);

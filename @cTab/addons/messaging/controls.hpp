@@ -95,7 +95,7 @@ class GVAR(templateFooter) : RscControlsGroupNoScrollbars
 			y = QUOTE(GRID_H * 60);
 			w = QUOTE(0.25 - (GRID_W*4));
 			h = QUOTE(GRID_H * 8);
-			onButtonClick="closeDialog 2;";
+			onButtonClick=QUOTE([_this # 0] call FUNC(closeTemplateUI));
 		};
 	};
 

@@ -26,7 +26,7 @@ _back ctrlSetBackgroundColor [0.2, 0.431, 0.647, 1];
 _back ctrlCommit 0;
 
 private _posY = 0;
-private _targetControl = _display ctrlCreate ["RscControlsGroup", -1];
+private _targetControl = _display ctrlCreate ["RscControlsGroup", IDC_TEMPLATEBLOCK];
 _targetControl ctrlSetPosition [ 0, 0, 1, _height];
 _targetControl ctrlCommit 0;
 

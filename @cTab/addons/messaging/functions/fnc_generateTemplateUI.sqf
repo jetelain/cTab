@@ -6,7 +6,7 @@ params ["_display", "_data", "_targetControl"];
 private _restoreValues = [];
 
 if !(isNil QGVAR(currentTemplateData)) then {
-    if ( QGVAR(currentTemplateData) # 0 == _data # 0 ) then {
+    if ( GVAR(currentTemplateData) # 0 == _data # 0 ) then {
         if !(isNil QGVAR(currentTemplateValues) ) then {
             // Previous message had the same template and was not sent, restore the values
             _restoreValues = GVAR(currentTemplateValues);
@@ -61,10 +61,10 @@ private _maxWidth = ((1 - SCROLLBAR_WIDTH) / GRID_W) - 2;
 
                 _ctrl = _display ctrlCreate ["RscCheckBox", _idc + 1, _targetControl];
                 _ctrl ctrlSetPosition [ _posX, _posY, GRID_W * 8, GRID_H * 8 ];
-                _ctrl ctrlAddEventHandler ["CheckedChanged", { [ctrlParent (_this select 0)] call FUNC(updateMessagePreview); }];
                 if ( count _restoreFields > _fieldIndex ) then {
-                    _ctrl ctrlSetChecked (_restoreFields select _fieldIndex);
+                    _ctrl cbSetChecked (_restoreFields select _fieldIndex);
                 };
+                _ctrl ctrlAddEventHandler ["CheckedChanged", { [ctrlParent (_this select 0)] call FUNC(updateMessagePreview); }];
                 _ctrl ctrlCommit 0;
 
                 _ctrl = _display ctrlCreate ["RscText", _idc + 2, _targetControl];
