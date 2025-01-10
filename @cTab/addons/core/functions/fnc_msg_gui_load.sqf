@@ -10,9 +10,7 @@ _display = uiNamespace getVariable (cTabIfOpen select 1);
 _playerEncryptionKey = call cTab_fnc_getPlayerEncryptionKey;
 _msgArray = cTab_player getVariable [format ["cTab_messages_%1",_playerEncryptionKey],[]];
 _msgControl = _display displayCtrl IDC_CTAB_MSG_LIST;
-_plrlistControl = _display displayCtrl IDC_CTAB_MSG_RECIPIENTS;
 lbClear _msgControl;
-lbClear _plrlistControl;
 _plrList = playableUnits;
 // since playableUnits will return an empty array in single player, add the player if array is empty
 if (_plrList isEqualTo []) then {_plrList pushBack cTab_player};
@@ -36,13 +34,6 @@ uiNamespace setVariable ['cTab_msg_playerList', _plrList];
 	_msgControl lbSetTooltip [_index,_title];
 } count _msgArray;
 
-{
-	if ((side _x in _validSides) && {isPlayer _x} && {[_x,GVAR(leaderDevices)] call cTab_fnc_checkGear}) then {
-		_index = _plrlistControl lbAdd format ["%1:%2 (%3)",groupId group _x,groupId _x,name _x];
-		_plrlistControl lbSetData [_index,str _x];
-	};
-} count _plrList;
-
-lbSort [_plrlistControl, "ASC"];
+[(_display displayCtrl IDC_CTAB_MSG_RECIPIENTS)] call EFUNC(messaging,fillRecipientList);
 
 _return;

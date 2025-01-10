@@ -333,7 +333,7 @@ class cTab_Tablet_dlg {
 					w = pxToScreen_W(cTab_GUI_tablet_MESSAGE_PLAYERLIST_W);
 					h = pxToScreen_H(cTab_GUI_tablet_MESSAGE_PLAYERLIST_H);
 				};
-				class deletebtn: cTab_RscButton_Tablet
+				class deletebtn: cTab_RscButton_Tablet_Danger
 				{
 					idc = IDC_CTAB_MSG_BTNDELETE;
 					text = "$STR_ctab_core_DeleteMessage";

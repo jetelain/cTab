@@ -175,6 +175,11 @@ class cTab_RscButton_Tablet: cTab_RscButton
 	font = QUOTE(GUI_FONT_MONO);
 	sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE);
 };
+class cTab_RscButton_Tablet_Danger: cTab_RscButton_Danger
+{
+	font = QUOTE(GUI_FONT_MONO);
+	sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE);
+};
 class cTab_Tablet_background: cTab_RscPicture
 {
 	idc = IDC_CTAB_BACKGROUND;

@@ -25,5 +25,13 @@
             <English>Send</English>
             <French>Envoyer</French>
         </Key>
+        <Key ID="STR_ctab_messaging_Templates">
+            <English>Templates</English>
+            <French>Modèles</French>
+        </Key>
+        <Key ID="STR_ctab_messaging_MEDEVAC">
+            <English>MEDEVAC</English>
+            <French>EVASAN</French>
+        </Key>
     </Package>
 </Project>

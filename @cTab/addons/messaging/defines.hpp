@@ -1,3 +1,4 @@
+#include "\cTab\shared\cTab_gui_macros.hpp"
 
 // Must be kept in sync with https://github.com/jetelain/Arma3TacMap/blob/main/Arma3TacMapWebApp/Entities/MessageTemplateType.cs
 #define MSG_TYPE_GENERIC 0
@@ -23,6 +24,8 @@
 #define GRID_W (pixelW * pixelGridNoUIScale * pixelScale)
 #define GRID_H (pixelH * pixelGridNoUIScale * pixelScale)
 
+#define IDC_TEMPLATEBUTTON 9800000
+
 #define FIELD_IDC(_l,_f) (9900000+_l*1000+_f*10)
 
 #define IDD_TEMPLATE_DIALOG 990560
@@ -33,6 +36,7 @@
 #define IDC_ATTACHEMENTS	990565
 
 #define IDC_TEMPLATEBLOCK	990566
+#define IDC_TEMPLATELIST	990567
 
 
 

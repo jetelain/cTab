@@ -84,7 +84,7 @@ class GVAR(templateFooter) : RscControlsGroupNoScrollbars
 			y = QUOTE(GRID_H * 60);
 			w = QUOTE(0.25 - (GRID_W*4));
 			h = QUOTE(GRID_H * 8);
-			onButtonClick=QUOTE(_this call FUNC(sendTemplatedMessage));
+			onButtonClick=QUOTE(_this call FUNC(btnSendTemplatedMessage));
 		};
 
 		class cancelButton : cTab_RscButton

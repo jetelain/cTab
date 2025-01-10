@@ -18,7 +18,9 @@ GVAR(currentTemplateData) = _data;
 
 _data params ["", "_messageType", "", "_shortTitle", "", "_lines"];
 
-private _maxWidth = ((1 - SCROLLBAR_WIDTH) / GRID_W) - 2; 
+private _posY = 0;
+//private _maxWidth = ((1 - SCROLLBAR_WIDTH) / GRID_W) - 2; 
+private _maxWidth = ((((ctrlPosition _targetControl) select 2) - SCROLLBAR_WIDTH) / GRID_W) - 2; 
 
 {
     private _lineIndex = _foreachIndex;
