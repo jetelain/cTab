@@ -85,7 +85,7 @@
 #define cTab_GUI_tablet_MESSAGE_MARGIN_OUTER (20)
 #define cTab_GUI_tablet_MESSAGE_MARGIN_INNER (10)
 
-#define cTab_GUI_tablet_MESSAGE_BUTTON_W (150)
+#define cTab_GUI_tablet_MESSAGE_BUTTON_W (200)
 #define cTab_GUI_tablet_MESSAGE_BUTTON_H (50)
 
 #define cTab_GUI_tablet_MESSAGE_MESSAGETEXT_FRAME_X (cTab_GUI_tablet_SCREEN_CONTENT_X + cTab_GUI_tablet_MESSAGE_MARGIN_OUTER)
