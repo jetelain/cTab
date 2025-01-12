@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Arma3TacMapLibrary.Arma3;
 using Arma3TacMapLibrary.Maps;
-using Arma3TacMapLibrary.TacMaps;
+using cTabWebApp.Entities;
 using cTabWebApp.Services;
 using cTabWebApp.TacMaps;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -739,10 +739,8 @@ namespace cTabWebApp
             foreach (var entry in message.Args)
             {
                 var data = ArmaSerializer.ParseMixedArray(entry);
-                msg.Templates.Add(new MessageTemplate(){
-                    Uid = (string)data[0],
-                    Href = (string)data[3]
-                });
+                var template = MessageTemplateImporter.FromArma3(data);
+                msg.Templates.Add(template);
             }
             state.LastUpdateMessagesTemplates = msg;
             try
@@ -754,7 +752,6 @@ namespace cTabWebApp
                 _logger.LogWarning(e, "UpdateMessageTemplates failed");
             }
         }
-
 
         public async override Task OnDisconnectedAsync(Exception exception)
         {
