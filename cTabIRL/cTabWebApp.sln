@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cTabWebApp", "cTabWebApp\cT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arma3TacMapLibrary", "..\Arma3TacMap\Arma3TacMapLibrary\Arma3TacMapLibrary.csproj", "{FD8AE72B-064A-4C82-AAF5-7A24D2C7BDE4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arma3TacMapLibraryTest", "..\Arma3TacMap\Arma3TacMapLibraryTest\Arma3TacMapLibraryTest.csproj", "{38144B60-B977-4B16-99AC-238EAE8D43DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{FD8AE72B-064A-4C82-AAF5-7A24D2C7BDE4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD8AE72B-064A-4C82-AAF5-7A24D2C7BDE4}.ReleaseCloud|Any CPU.ActiveCfg = Release|Any CPU
 		{FD8AE72B-064A-4C82-AAF5-7A24D2C7BDE4}.ReleaseCloud|Any CPU.Build.0 = Release|Any CPU
+		{38144B60-B977-4B16-99AC-238EAE8D43DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38144B60-B977-4B16-99AC-238EAE8D43DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38144B60-B977-4B16-99AC-238EAE8D43DF}.DebugCloud|Any CPU.ActiveCfg = Debug|Any CPU
+		{38144B60-B977-4B16-99AC-238EAE8D43DF}.DebugCloud|Any CPU.Build.0 = Debug|Any CPU
+		{38144B60-B977-4B16-99AC-238EAE8D43DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38144B60-B977-4B16-99AC-238EAE8D43DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38144B60-B977-4B16-99AC-238EAE8D43DF}.ReleaseCloud|Any CPU.ActiveCfg = Release|Any CPU
+		{38144B60-B977-4B16-99AC-238EAE8D43DF}.ReleaseCloud|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

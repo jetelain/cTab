@@ -43,7 +43,7 @@ header {
     margin: 0;
     padding: 0;
     border: 0;
-    transform: rotate(5deg) translateY(0%);
+    transform: rotate(0deg) translateY(0%);
     transition: all 0.1s linear;
 }
 
@@ -64,9 +64,10 @@ header {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60vh;
-    height: 60vh;
+    /*width: 50%;*/
+    height: 50%;
     background-color: rgba(255,255,255,0.5);
+	aspect-ratio:1;
 }
 
 #rawdata {

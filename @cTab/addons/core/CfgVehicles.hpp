@@ -3,7 +3,7 @@ class CfgVehicles {
     class CAManBase: Man {
         class ACE_SelfActions {
             class cTab_Interact {
-                displayName = $STR_ctab_core_aceMenu;
+                displayName = "$STR_ctab_core_aceMenu";
                 condition = QUOTE(true);
                 exceptions[] = {"isNotInside", "isNotSitting"};
                 statement = "";

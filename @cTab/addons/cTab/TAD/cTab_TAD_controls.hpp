@@ -3,10 +3,11 @@
 #define GUI_GRID_PX_H 2048 // hight in pixels
 
 // Base bacros to convert pixel space to screen space
-#define pxToScreen_X(PIXEL) ((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W + GUI_GRID_X)
-#define pxToScreen_Y(PIXEL) ((PIXEL) / GUI_GRID_PX_H * GUI_GRID_H + GUI_GRID_Y)
-#define pxToScreen_W(PIXEL) ((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W)
-#define pxToScreen_H(PIXEL) ((PIXEL) / GUI_GRID_PX_H * GUI_GRID_H)
+#define pxToScreen_X(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W + GUI_GRID_X)
+#define pxToScreen_Y(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_H * GUI_GRID_H + GUI_GRID_Y)
+#define pxToScreen_W(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W)
+#define pxToScreen_H_Value(PIXEL) ((PIXEL) / GUI_GRID_PX_H * GUI_GRID_H)
+#define pxToScreen_H(PIXEL) QUOTE(pxToScreen_H_Value(PIXEL))
 
 // Map position within background, pixel based
 #define cTab_GUI_TAD_MAP_X (359)
@@ -220,7 +221,7 @@ class cTab_RscText_TAD: cTab_RscText
 	style = ST_CENTER;
 	w = pxToScreen_W(cTab_GUI_TAD_OSD_ELEMENT_STD_W);
 	h = pxToScreen_H(cTab_GUI_TAD_OSD_ELEMENT_STD_H);
-	font = GUI_FONT_MONO;
+	font = QUOTE(GUI_FONT_MONO);
 	colorText[] = COLOR_NEON_GREEN;
 	sizeEx = pxToScreen_H(cTab_GUI_TAD_OSD_TEXT_STD_SIZE);
 	colorBackground[] = COLOR_BLACK;
@@ -252,17 +253,17 @@ class cTab_TAD_RscMapControl: cTab_RscMapControl
 	alphaFadeEndScale = 10;
 
 	// Rendering density coefficients
-	ptsPerSquareSea = 8 / cTab_TAD_DLGtoDSP_fctr;		// seas
-	ptsPerSquareTxt = 8 / cTab_TAD_DLGtoDSP_fctr;		// textures
-	ptsPerSquareCLn = 8 / cTab_TAD_DLGtoDSP_fctr;		// count-lines
-	ptsPerSquareExp = 8 / cTab_TAD_DLGtoDSP_fctr;		// exposure
-	ptsPerSquareCost = 8 / cTab_TAD_DLGtoDSP_fctr;		// cost
+	ptsPerSquareSea = QUOTE(8 / cTab_TAD_DLGtoDSP_fctr);		// seas
+	ptsPerSquareTxt = QUOTE(8 / cTab_TAD_DLGtoDSP_fctr);		// textures
+	ptsPerSquareCLn = QUOTE(8 / cTab_TAD_DLGtoDSP_fctr);		// count-lines
+	ptsPerSquareExp = QUOTE(8 / cTab_TAD_DLGtoDSP_fctr);		// exposure
+	ptsPerSquareCost = QUOTE(8 / cTab_TAD_DLGtoDSP_fctr);		// cost
 
 	// Rendering thresholds
-	ptsPerSquareFor = 3 / cTab_TAD_DLGtoDSP_fctr;		// forests
-	ptsPerSquareForEdge = 100 / cTab_TAD_DLGtoDSP_fctr;	// forest edges
-	ptsPerSquareRoad = 1.5 / cTab_TAD_DLGtoDSP_fctr;		// roads
-	ptsPerSquareObj = 4 / cTab_TAD_DLGtoDSP_fctr;		// other objects
+	ptsPerSquareFor = QUOTE(3 / cTab_TAD_DLGtoDSP_fctr);		// forests
+	ptsPerSquareForEdge = QUOTE(100 / cTab_TAD_DLGtoDSP_fctr);	// forest edges
+	ptsPerSquareRoad = QUOTE(1.5 / cTab_TAD_DLGtoDSP_fctr);		// roads
+	ptsPerSquareObj = QUOTE(4 / cTab_TAD_DLGtoDSP_fctr);		// other objects
 
 	/*
 	// replace CustomMark with wedding cake icon
@@ -624,6 +625,136 @@ class cTab_TAD_RscMapControl_BLACK: cTab_TAD_RscMapControl
 		coefMax = 0;
 	};
 };
+class cTab_TAD_RscMapControl_AIR: cTab_TAD_RscMapControl
+{
+	drawShaded = 0;
+	sizeEx = 0.04;
+	sizeExGrid = 0.025;
+	sizeExLevel = 0.016;
+	shadedSea = 0;
+	maxSatelliteAlpha = 0.0;
+	showCountourInterval = 1;
+	colorBackground[] = {0.35,0.35,0.35,1};
+	colorLevels[] = {0.9,0.9,0.9,1};
+	colorSea[] = {0,0.27,0.50,1};
+	colorForest[] = {0.3,0.9,0,0.1};
+	colorForestTextured[] = {0.3,0.9,0,0.1};
+	colorCountlines[] = {0.9,0.9,0.9,0.5};
+	colorMainCountlines[] = {0.9,0.9,0.9,1};
+	colorCountlinesWater[] = {0,0.27,0.50,0};
+	colorMainCountlinesWater[] = {0,0.27,0.50,0};
+	colorPowerLines[] = {0,1,0,1};
+	colorForestBorder[] = {0.22,0.50,0,0.1};
+	colorNames[] = {0.9,0.9,0.9,1};
+	colorOutside[] = {0,0.18,0.33,1};
+	colorText[] = {0.9,0.9,0.9,1};
+	colorGrid[] = {0.9,0.9,0.9,1};
+	colorGridMap[] = {0.9,0.9,0.9,0.3};
+	colorTracks[] = {0.91,0.77,0.52,0.6};
+	colorTracksFill[] = {0.91,0.77,0.52,0.6};
+	colorRoads[] = {1,1,0,1};
+	colorRoadsFill[] = {1,1,0,1};
+	colorMainRoads[] = {1,0.48,0.16,1};
+	colorMainRoadsFill[] = {1,0.48,0.16,1};
+	colorTrails[] = {0.58,0.48,0.32,1};
+	colorTrailsFill[] = {0.58,0.48,0.32,1};
+	ptsPerSquareObj = 1.25;
+	widthRailWay = 3;
+	class Bunker: Bunker
+	{
+		color[] = {1,1,1,0.8};
+		size = 24;
+	};
+	class Bush: Bush
+	{
+		color[] = {0,0,0,0};
+	};
+	class Chapel: Chapel
+	{
+		color[] = {1,1,1,0.4};
+		size = 16;
+	};
+	class Church: Church
+	{
+		size = 16;
+	};
+	class Cross: Cross
+	{
+		color[] = {1,1,1,0.8};
+	};
+	class Fountain: Fountain
+	{
+		color[] = {0,0,0,0};
+	};
+	class Fuelstation: Fuelstation
+	{
+		size = 16;
+	};
+	class Hospital: Hospital
+	{
+		size = 16;
+	};
+	class Name: Name
+	{
+		color[] = {1,1,1,0.8};
+	};
+	class Lighthouse: Lighthouse
+	{
+		size = 16;
+	};
+	class Transmitter: Transmitter
+	{
+		size = 16;
+	};
+	class Power: Power
+	{
+		size = 16;
+	};
+	class Powersolar: Powersolar
+	{
+		size = 16;
+	};
+	class Powerwave: Powerwave
+	{
+		size = 16;
+	};
+	class Powerwind: Powerwind
+	{
+		size = 16;
+	};
+	class Quay: Quay
+	{
+		color[] = {0,0,0,0};
+	};
+	class Rock: Rock
+	{
+		color[] = {1,1,1,0.4};
+	};
+	class Ruin: Ruin
+	{
+		color[] = {1,1,1,0.8};
+	};
+	class Shipwreck: Shipwreck
+	{
+		color[] = {1,1,1,0.4};
+	};
+	class Stack: Stack
+	{
+		color[] = {1,1,1,1};
+	};
+	class Tourism: Tourism
+	{
+		color[] = {0,0,0,0};
+	};
+	class ViewTower: ViewTower
+	{
+		color[] = {1,1,1,1};
+	};
+	class Watertower: Watertower
+	{
+		size = 16;
+	};
+};
 
 class cTab_TAD_Map_Background: cTab_RscText
 {
@@ -639,10 +770,10 @@ class cTab_TAD_background: cTab_RscPicture
 {
 	idc = IDC_CTAB_BACKGROUND;
 	text = ""; // will be set during onLoad event
-	x = GUI_GRID_X;
-	y = GUI_GRID_Y;
-	w = GUI_GRID_W;
-	h = GUI_GRID_H;
+	x = QUOTE(GUI_GRID_X);
+	y = QUOTE(GUI_GRID_Y);
+	w = QUOTE(GUI_GRID_W);
+	h = QUOTE(GUI_GRID_H);
 };
 class cTab_TAD_OSD_hookGrid: cTab_RscText_TAD
 {
@@ -718,7 +849,7 @@ class cTab_TAD_loadingtxt: cTab_RscText_TAD
 {
 	idc = IDC_CTAB_LOADINGTXT;
 	style = ST_CENTER;
-	text = $STR_ctab_core_Loading;
+	text = "$STR_ctab_core_Loading";
 	x = pxToScreen_X(cTab_GUI_TAD_MAP_X);
 	y = pxToScreen_Y(cTab_GUI_TAD_MAP_Y);
 	w = pxToScreen_W(cTab_GUI_TAD_MAP_W);

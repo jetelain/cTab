@@ -3,10 +3,11 @@
 #define GUI_GRID_PX_H 2048 // hight in pixels
 
 // Base macros to convert pixel space to screen space
-#define pxToScreen_X(PIXEL) (PIXEL) / GUI_GRID_PX_W * GUI_GRID_W + GUI_GRID_X
-#define pxToScreen_Y(PIXEL) (PIXEL) / GUI_GRID_PX_H * GUI_GRID_H + GUI_GRID_Y
-#define pxToScreen_W(PIXEL) (PIXEL) / GUI_GRID_PX_W * GUI_GRID_W
-#define pxToScreen_H(PIXEL) (PIXEL) / GUI_GRID_PX_H * GUI_GRID_H
+#define pxToScreen_X(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W + GUI_GRID_X)
+#define pxToScreen_Y(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_H * GUI_GRID_H + GUI_GRID_Y)
+#define pxToScreen_W(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W)
+#define pxToScreen_H_Value(PIXEL) (PIXEL) / GUI_GRID_PX_H * GUI_GRID_H
+#define pxToScreen_H(PIXEL) QUOTE(pxToScreen_H_Value(PIXEL))
 
 // Map position within background, pixel based
 #define cTab_GUI_android_MAP_X (452)
@@ -25,8 +26,8 @@
 #define cTab_GUI_android_SCREEN_CONTENT_H (cTab_GUI_android_MAP_H - cTab_GUI_android_OSD_HEADER_H - cTab_GUI_android_OSD_FOOTER_H)
 
 // Base macros to convert pixel space to screen space, but for groups (same size as map)
-#define pxToGroup_X(PIXEL) (((PIXEL) - cTab_GUI_android_SCREEN_CONTENT_X) / GUI_GRID_PX_W * GUI_GRID_W)
-#define pxToGroup_Y(PIXEL) (((PIXEL) - cTab_GUI_android_SCREEN_CONTENT_Y) / GUI_GRID_PX_H * GUI_GRID_H)
+#define pxToGroup_X(PIXEL) QUOTE(((PIXEL) - cTab_GUI_android_SCREEN_CONTENT_X) / GUI_GRID_PX_W * GUI_GRID_W)
+#define pxToGroup_Y(PIXEL) QUOTE(((PIXEL) - cTab_GUI_android_SCREEN_CONTENT_Y) / GUI_GRID_PX_H * GUI_GRID_H)
 
 // Message element positions in pixels
 #define cTab_GUI_android_MESSAGE_MARGIN_OUTER (20)
@@ -112,15 +113,15 @@
 #define cTab_GUI_android_OSD_MENU_ELEMENT_Y(ITEM) (cTab_GUI_android_OSD_MENU_Y + cTab_GUI_android_OSD_MENU_MARGIN_H + (cTab_GUI_android_OSD_MENU_ELEMENT_H + cTab_GUI_android_OSD_MENU_MARGIN_H) * (ITEM - 1))
 
 // like to pxToGrou, just for the menu
-#define pxToMenu_X(PIXEL) (((PIXEL) - cTab_GUI_android_OSD_MENU_X) / GUI_GRID_PX_W * GUI_GRID_W)
-#define pxToMenu_Y(PIXEL) (((PIXEL) - cTab_GUI_android_OSD_MENU_Y) / GUI_GRID_PX_H * GUI_GRID_H)
+#define pxToMenu_X(PIXEL) QUOTE(((PIXEL) - cTab_GUI_android_OSD_MENU_X) / GUI_GRID_PX_W * GUI_GRID_W)
+#define pxToMenu_Y(PIXEL) QUOTE(((PIXEL) - cTab_GUI_android_OSD_MENU_Y) / GUI_GRID_PX_H * GUI_GRID_H)
 
 class cTab_RscText_Android: cTab_RscText
 {
 	style = ST_CENTER;
 	w = pxToScreen_W(cTab_GUI_android_OSD_ELEMENT_STD_W);
 	h = pxToScreen_H(cTab_GUI_android_OSD_ELEMENT_STD_H);
-	font = GUI_FONT_MONO;
+	font = QUOTE(GUI_FONT_MONO);
 	colorText[] = COLOR_WHITE;
 	sizeEx = pxToScreen_H(cTab_GUI_android_OSD_TEXT_STD_SIZE);
 	colorBackground[] = COLOR_TRANSPARENT;
@@ -145,17 +146,17 @@ class cTab_android_RscMapControl: cTab_RscMapControl
 	alphaFadeEndScale = 10;
 
 	// Rendering density coefficients
-	ptsPerSquareSea = 8 / cTab_android_DLGtoDSP_fctr;		// seas
-	ptsPerSquareTxt = 8 / cTab_android_DLGtoDSP_fctr;		// textures
-	ptsPerSquareCLn = 8 / cTab_android_DLGtoDSP_fctr;		// count-lines
-	ptsPerSquareExp = 8 / cTab_android_DLGtoDSP_fctr;		// exposure
-	ptsPerSquareCost = 8 / cTab_android_DLGtoDSP_fctr;		// cost
+	ptsPerSquareSea = QUOTE(8 / cTab_android_DLGtoDSP_fctr);		// seas
+	ptsPerSquareTxt = QUOTE(8 / cTab_android_DLGtoDSP_fctr);		// textures
+	ptsPerSquareCLn = QUOTE(8 / cTab_android_DLGtoDSP_fctr);		// count-lines
+	ptsPerSquareExp = QUOTE(8 / cTab_android_DLGtoDSP_fctr);		// exposure
+	ptsPerSquareCost = QUOTE(8 / cTab_android_DLGtoDSP_fctr);		// cost
 
 	// Rendering thresholds
-	ptsPerSquareFor = 3 / cTab_android_DLGtoDSP_fctr;		// forests
-	ptsPerSquareForEdge = 100 / cTab_android_DLGtoDSP_fctr;	// forest edges
-	ptsPerSquareRoad = 1.5 / cTab_android_DLGtoDSP_fctr;		// roads
-	ptsPerSquareObj = 4 / cTab_android_DLGtoDSP_fctr;		// other objects
+	ptsPerSquareFor = QUOTE(3 / cTab_android_DLGtoDSP_fctr);		// forests
+	ptsPerSquareForEdge = QUOTE(100 / cTab_android_DLGtoDSP_fctr);	// forest edges
+	ptsPerSquareRoad = QUOTE(1.5 / cTab_android_DLGtoDSP_fctr);		// roads
+	ptsPerSquareObj = QUOTE(4 / cTab_android_DLGtoDSP_fctr);		// other objects
 
 	/*
 	// replace CustomMark with wedding cake icon
@@ -175,10 +176,10 @@ class cTab_android_background: cTab_RscPicture
 {
 	idc = IDC_CTAB_BACKGROUND;
 	text = ""; // will be set during onLoad event
-	x = GUI_GRID_X;
-	y = GUI_GRID_Y;
-	w = GUI_GRID_W;
-	h = GUI_GRID_H;
+	x = QUOTE(GUI_GRID_X);
+	y = QUOTE(GUI_GRID_Y);
+	w = QUOTE(GUI_GRID_W);
+	h = QUOTE(GUI_GRID_H);
 };
 class cTab_android_btnBack: cTab_RscButtonInv
 {
@@ -222,7 +223,7 @@ class cTab_android_on_screen_battery: cTab_RscPicture
 	h = pxToScreen_H(cTab_GUI_android_OSD_ICON_STD_SIZE);
 	colorText[] = COLOR_WHITE;
 };
-class cTab_android_on_screen_time: cTab_RscText_android
+class cTab_android_on_screen_time: cTab_RscText_Android
 {
 	idc = IDC_CTAB_OSD_TIME;
 	style = ST_CENTER;
@@ -268,8 +269,8 @@ class cTab_android_on_screen_hookGrid: cTab_RscText_Android
 	style = ST_CENTER;
 	x = pxToScreen_X(cTab_GUI_android_OSD_X(1));
 	y = pxToScreen_Y(cTab_GUI_android_OSD_EDGE_B - cTab_GUI_android_OSD_MARGIN - cTab_GUI_android_OSD_ELEMENT_STD_H * 4);
-	colorText[] = {1,1,1,0.5};
-	colorBackground[] = {0,0,0,0.25};
+	colorText[] = {1,1,1,0.75};
+	colorBackground[] = {0,0,0,0.75};
 	sizeEx = pxToScreen_H(32);
 };
 class cTab_android_on_screen_hookElevation: cTab_android_on_screen_hookGrid
@@ -287,11 +288,11 @@ class cTab_android_on_screen_hookDir: cTab_android_on_screen_hookGrid
 	idc = IDC_CTAB_OSD_HOOK_DIR;
 	y = pxToScreen_Y(cTab_GUI_android_OSD_EDGE_B - cTab_GUI_android_OSD_MARGIN - cTab_GUI_android_OSD_ELEMENT_STD_H);
 };
-class cTab_android_loadingtxt: cTab_RscText_android
+class cTab_android_loadingtxt: cTab_RscText_Android
 {
 	idc = IDC_CTAB_LOADINGTXT;
 	style = ST_CENTER;
-	text = $STR_ctab_core_Loading;
+	text = "$STR_ctab_core_Loading";
 	x = pxToScreen_X(cTab_GUI_android_SCREEN_CONTENT_X);
 	y = pxToScreen_Y(cTab_GUI_android_SCREEN_CONTENT_Y);
 	w = pxToScreen_W(cTab_GUI_android_SCREEN_CONTENT_W);
@@ -309,7 +310,7 @@ class cTab_android_windowsBG: cTab_RscPicture
 };
 
 // Define areas around the screen as interaction areas to allow screen movement
-class cTab_android_movingHandle_T: cTab_RscText_android
+class cTab_android_movingHandle_T: cTab_RscText_Android
 {
 	idc=5;
 	moving = 1;

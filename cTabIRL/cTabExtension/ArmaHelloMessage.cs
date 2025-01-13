@@ -8,9 +8,9 @@ namespace cTabExtension
         {
         }
 
-        public DateTime Timestamp { get; set; }
-        public string SteamId { get; set; }
-        public string PlayerName { get; set; }
-        public string Key { get; set; }
+        public required DateTime Timestamp { get; set; }
+        public required string SteamId { get; set; }
+        public required string PlayerName { get; set; }
+        public required string Key { get; set; }
     }
 }

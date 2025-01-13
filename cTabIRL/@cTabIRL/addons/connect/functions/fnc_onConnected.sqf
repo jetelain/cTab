@@ -2,7 +2,7 @@
 
 params ['_code','_uri'];
 
-INFO_1('Connected to %1', _uri);
+INFO_1('Connected to %1',_uri);
 
 player createDiarySubject ["cTab", LLSTRING(modName)];  
 
@@ -14,7 +14,7 @@ if ( isMultiplayer ) then {
 } else {
 	_contentItems pushBack LLSTRING(diaryEntryScanQrCodeSP);
 };
-if ( (safezoneW / safezoneH) < 1 ) then {
+if ( (safeZoneW / safeZoneH) < 1 ) then {
 	_contentItems pushBack format['<br /><br /><font face="QRFONT" size="12">%1</font><br /><br />', _code joinString '<br />' ];
 } else {
 	_contentItems pushBack format['<br /><br /><font face="QRFONT" size="14">%1</font><br /><br />', _code joinString '<br />' ];

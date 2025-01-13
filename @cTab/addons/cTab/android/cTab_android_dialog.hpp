@@ -3,9 +3,8 @@
 // By - Riouken
 // http://forums.bistudio.com/member.php?64032-Riouken
 // You may re-use any of this work as long as you provide credit back to me.
-
-#define GUI_GRID_W	(safezoneW * 0.8)
-#define GUI_GRID_H	(GUI_GRID_W * 4/3)
+#define GUI_GRID_H	(safezoneH * 1.4)
+#define GUI_GRID_W	(GUI_GRID_H * 3/4)
 #define GUI_GRID_X	(safezoneX + (safezoneW - GUI_GRID_W) / 2)
 #define GUI_GRID_Y	(safezoneY + (safezoneH - GUI_GRID_H) / 2)
 
@@ -13,12 +12,12 @@
 
 #include <\cTab\android\cTab_android_controls.hpp>
 
-#define MENU_sizeEx pxToScreen_H(27)
+#define MENU_sizeEx pxToScreen_H_Value(27)
 #include "\cTab\shared\cTab_markerMenu_macros.hpp"
 
 class cTab_Android_dlg {
 	idd = 177382;
-	movingEnable = true;
+	movingEnable = 1;
 	onLoad = "_this call cTab_fnc_onIfOpen;";
 	onUnload = "[] call cTab_fnc_onIfclose;";
 	onKeyDown = "_this call cTab_fnc_onIfKeyDown;";
@@ -81,54 +80,54 @@ class cTab_Android_dlg {
 				class btnTextonoff: cTab_RscButton
 				{
 					idc=10;
-					text = $STR_ctab_core_TextOnOff;
+					text = "$STR_ctab_core_TextOnOff";
 					sizeEx = pxToScreen_H(cTab_GUI_android_OSD_TEXT_STD_SIZE);
 					x = pxToMenu_X(cTab_GUI_android_OSD_MENU_ELEMENT_X);
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(1));
 					w = pxToScreen_W(cTab_GUI_android_OSD_MENU_ELEMENT_W);
 					h = pxToScreen_H(cTab_GUI_android_OSD_MENU_ELEMENT_H);
-					tooltip = $STR_ctab_core_TextOnOffHint;
+					tooltip = "$STR_ctab_core_TextOnOffHint";
 					action = "['cTab_Android_dlg'] call cTab_fnc_iconText_toggle;";
 				};
 				class btnIcnSizeup: btnTextonoff
 				{
 					idc=11;
-					text = $STR_ctab_core_SizeUp;
+					text = "$STR_ctab_core_SizeUp";
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(2));
-					tooltip = $STR_ctab_core_SizeUpHint;
+					tooltip = "$STR_ctab_core_SizeUpHint";
 					action = "call cTab_fnc_txt_size_inc;";
 				};
 				class btnIconSizedwn: btnTextonoff
 				{
 					idc=12;
-					text = $STR_ctab_core_SizeDown;
+					text = "$STR_ctab_core_SizeDown";
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(3));
-					tooltip = $STR_ctab_core_SizeDownHint;
+					tooltip = "$STR_ctab_core_SizeDownHint";
 					action = "call cTab_fnc_txt_size_dec;";
 				};
 				class btnF5: btnTextonoff
 				{
 					idc=13;
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(7));
-					text = $STR_ctab_core_MapTools;
-					tooltip = $STR_ctab_core_MapToolsHint;
+					text = "$STR_ctab_core_MapTools";
+					tooltip = "$STR_ctab_core_MapToolsHint";
 					action = "['cTab_Android_dlg'] call cTab_fnc_toggleMapTools;";
 				};
 				class btnF6: btnTextonoff
 				{
 					idc=14;
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(5));
-					text = $STR_ctab_core_MapTextures;
-					tooltip = $STR_ctab_core_MapTexturesHint;
+					text = "$STR_ctab_core_MapTextures";
+					tooltip = "$STR_ctab_core_MapTexturesHint";
 					action = "['cTab_Android_dlg'] call cTab_fnc_mapType_toggle;";
 				};
 				class btnF7: btnTextonoff
 				{
 					idc=15;
 					y = pxToMenu_Y(cTab_GUI_android_OSD_MENU_ELEMENT_Y(6));
-					text = $STR_ctab_core_CenterMap;
+					text = "$STR_ctab_core_CenterMap";
 					action = "['cTab_Android_dlg'] call cTab_fnc_centerMapOnPlayerPosition;";
-					tooltip = $STR_ctab_core_CenterMapHint;
+					tooltip = "$STR_ctab_core_CenterMapHint";
 				};
 			};
 		};
@@ -145,7 +144,7 @@ class cTab_Android_dlg {
 			class Scrollbar {};
 			class controls
 			{
-				class msgListbox: cTab_RscListbox
+				class msgListbox: cTab_RscListBox
 				{
 					idc = IDC_CTAB_MSG_LIST;
 					style = LB_MULTI;
@@ -159,7 +158,7 @@ class cTab_Android_dlg {
 				class msgframe: cTab_RscFrame
 				{
 					idc=16;
-					text = $STR_ctab_core_InboxTitle;
+					text = "$STR_ctab_core_InboxTitle";
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_MESSAGETEXT_FRAME_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_MESSAGETEXT_FRAME_Y);
 					w = pxToScreen_W(cTab_GUI_android_MESSAGE_MESSAGETEXT_FRAME_W);
@@ -168,10 +167,10 @@ class cTab_Android_dlg {
 				class msgTxt: cTab_RscEdit
 				{
 					idc = IDC_CTAB_MSG_CONTENT;
-					htmlControl = true;
+					htmlControl = 1;
 					style = ST_MULTI;
 					lineSpacing = 0.2;
-					text = $STR_ctab_core_NoMessageSelected;
+					text = "$STR_ctab_core_NoMessageSelected";
 					sizeEx = pxToScreen_H(cTab_GUI_android_OSD_TEXT_STD_SIZE);
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_MESSAGETEXT_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_MESSAGETEXT_Y);
@@ -182,8 +181,8 @@ class cTab_Android_dlg {
 				class deletebtn: cTab_RscButton
 				{
 					idc = IDC_CTAB_MSG_BTNDELETE;
-					text = $STR_ctab_core_DeleteMessage;
-					tooltip = $STR_ctab_core_DeleteMessageHint;
+					text = "$STR_ctab_core_DeleteMessage";
+					tooltip = "$STR_ctab_core_DeleteMessageHint";
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_BUTTON_DELETE_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_BUTTON_DELETE_Y);
 					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_W);
@@ -193,8 +192,8 @@ class cTab_Android_dlg {
 				class toCompose: cTab_RscButton
 				{
 					idc=17;
-					text = $STR_ctab_core_ComposeMessage;
-					tooltip = $STR_ctab_core_ComposeMessageHint;
+					text = "$STR_ctab_core_ComposeMessage";
+					tooltip = "$STR_ctab_core_ComposeMessageHint";
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_BUTTON_MODE_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_BUTTON_MODE_Y);
 					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_W);
@@ -219,13 +218,13 @@ class cTab_Android_dlg {
 				class composeFrame: cTab_RscFrame
 				{
 					idc=18;
-					text = $STR_ctab_core_ComposeMessageTitle;
+					text = "$STR_ctab_core_ComposeMessageTitle";
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_COMPOSE_FRAME_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_COMPOSE_FRAME_Y);
 					w = pxToScreen_W(cTab_GUI_android_MESSAGE_COMPOSE_FRAME_W);
 					h = pxToScreen_H(cTab_GUI_android_MESSAGE_COMPOSE_FRAME_H);
 				};
-				class playerlistbox: cTab_RscListbox
+				class playerlistbox: cTab_RscListBox
 				{
 					idc = IDC_CTAB_MSG_RECIPIENTS;
 					style = LB_MULTI;
@@ -238,7 +237,7 @@ class cTab_Android_dlg {
 				class sendbtn: cTab_RscButton
 				{
 					idc = IDC_CTAB_MSG_BTNSEND;
-					text = $STR_ctab_core_SendMessage;
+					text = "$STR_ctab_core_SendMessage";
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_BUTTON_SEND_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_BUTTON_SEND_Y);
 					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_W);
@@ -248,7 +247,7 @@ class cTab_Android_dlg {
 				class edittxtbox: cTab_RscEdit
 				{
 					idc = IDC_CTAB_MSG_COMPOSE;
-					htmlControl = true;
+					htmlControl = 1;
 					style = ST_MULTI;
 					lineSpacing = 0.2;
 					text = "";
@@ -261,8 +260,8 @@ class cTab_Android_dlg {
 				class toRead: cTab_RscButton
 				{
 					idc=19;
-					text = $STR_ctab_core_ReadMessages;
-					tooltip = $STR_ctab_core_ReadMessagesHint;
+					text = "$STR_ctab_core_ReadMessages";
+					tooltip = "$STR_ctab_core_ReadMessagesHint";
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_BUTTON_MODE_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_BUTTON_MODE_Y);
 					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_W);
@@ -298,19 +297,19 @@ class cTab_Android_dlg {
 		{
 			idc = IDC_CTAB_BTNFN;
 			action = "['cTab_Android_dlg'] call cTab_fnc_showMenu_toggle;";
-			tooltip = $STR_ctab_core_MapOptionsHint;
+			tooltip = "$STR_ctab_core_MapOptionsHint";
 		};
 		class btnPower: cTab_android_btnPower
 		{
 			idc = IDC_CTAB_BTNOFF;
 			action = "closeDialog 0;";
-			tooltip = $STR_ctab_core_CloseInterfaceHint;
+			tooltip = "$STR_ctab_core_CloseInterfaceHint";
 		};
 		class btnHome: cTab_android_btnHome
 		{
 			idc = IDC_CTAB_BTNF1;
 			action = "['cTab_Android_dlg'] call cTab_fnc_mode_toggle;";
-			tooltip = $STR_ctab_core_HomeAndroidHint;
+			tooltip = "$STR_ctab_core_HomeAndroidHint";
 		};
 	};
 };

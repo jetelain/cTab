@@ -306,7 +306,7 @@ function initMap(mapInfos, worldName) {
         crs: mapInfos.CRS,
         doubleClickZoom: false
     });
-    L.tileLayer('https://mapsdata.plan-ops.fr' + mapInfos.tilePattern, {
+    L.tileLayer('https://atlas.plan-ops.fr/data/1' + mapInfos.tilePattern, {
         attribution: mapInfos.attribution,
         tileSize: mapInfos.tileSize,
         maxNativeZoom: mapInfos.maxZoom

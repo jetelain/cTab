@@ -3,10 +3,11 @@
 #define GUI_GRID_PX_H 2048 // hight in pixels
 
 // Base macros to convert pixel space to screen space
-#define pxToScreen_X(PIXEL) (PIXEL) / GUI_GRID_PX_W * GUI_GRID_W + GUI_GRID_X
-#define pxToScreen_Y(PIXEL) (PIXEL) / GUI_GRID_PX_H * GUI_GRID_H + GUI_GRID_Y
-#define pxToScreen_W(PIXEL) (PIXEL) / GUI_GRID_PX_W * GUI_GRID_W
-#define pxToScreen_H(PIXEL) (PIXEL) / GUI_GRID_PX_H * GUI_GRID_H
+#define pxToScreen_X(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W + GUI_GRID_X)
+#define pxToScreen_Y(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_H * GUI_GRID_H + GUI_GRID_Y)
+#define pxToScreen_W(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W)
+#define pxToScreen_H_Value(PIXEL) (PIXEL) / GUI_GRID_PX_H * GUI_GRID_H
+#define pxToScreen_H(PIXEL) QUOTE(pxToScreen_H_Value(PIXEL))
 
 // Map position within background, pixel based
 #define cTab_GUI_tablet_MAP_X (257)
@@ -25,8 +26,8 @@
 #define cTab_GUI_tablet_SCREEN_CONTENT_H (cTab_GUI_tablet_MAP_H - cTab_GUI_tablet_OSD_HEADER_H - cTab_GUI_tablet_OSD_FOOTER_H)
 
 // Base macros to convert pixel space to screen space, but for groups (same size as map)
-#define pxToGroup_X(PIXEL) (((PIXEL) - cTab_GUI_tablet_SCREEN_CONTENT_X) / GUI_GRID_PX_W * GUI_GRID_W)
-#define pxToGroup_Y(PIXEL) (((PIXEL) - cTab_GUI_tablet_SCREEN_CONTENT_Y) / GUI_GRID_PX_H * GUI_GRID_H)
+#define pxToGroup_X(PIXEL) QUOTE(((PIXEL) - cTab_GUI_tablet_SCREEN_CONTENT_X) / GUI_GRID_PX_W * GUI_GRID_W)
+#define pxToGroup_Y(PIXEL) QUOTE(((PIXEL) - cTab_GUI_tablet_SCREEN_CONTENT_Y) / GUI_GRID_PX_H * GUI_GRID_H)
 
 // Task bar absolute size, pixel based (from source)
 #define cTab_GUI_tablet_TASKBAR_PX_W (1335)
@@ -155,13 +156,13 @@ class cTab_RscText_Tablet: cTab_RscText
 	style = ST_CENTER;
 	w = pxToScreen_W(cTab_GUI_tablet_OSD_ELEMENT_STD_W);
 	h = pxToScreen_H(cTab_GUI_tablet_OSD_ELEMENT_STD_H);
-	font = GUI_FONT_MONO;
+	font = QUOTE(GUI_FONT_MONO);
 	colorText[] = COLOR_WHITE;
 	sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE);
 	colorBackground[] = COLOR_TRANSPARENT;
 	shadow = 0;
 };
-class cTab_RscListbox_Tablet: cTab_RscListbox
+class cTab_RscListBox_Tablet: cTab_RscListBox
 {
 	sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE * 1.2);
 };
@@ -171,17 +172,17 @@ class cTab_RscEdit_Tablet: cTab_RscEdit
 };
 class cTab_RscButton_Tablet: cTab_RscButton
 {
-	font = GUI_FONT_MONO;
+	font = QUOTE(GUI_FONT_MONO);
 	sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE);
 };
 class cTab_Tablet_background: cTab_RscPicture
 {
 	idc = IDC_CTAB_BACKGROUND;
 	text = "";
-	x = GUI_GRID_X;
-	y = GUI_GRID_Y;
-	w = GUI_GRID_W;
-	h = GUI_GRID_H;
+	x = QUOTE(GUI_GRID_X);
+	y = QUOTE(GUI_GRID_Y);
+	w = QUOTE(GUI_GRID_W);
+	h = QUOTE(GUI_GRID_H);
 };
 class cTab_tablet_header: cTab_RscPicture
 {
@@ -266,7 +267,7 @@ class cTab_RscText_WindowTitle: cTab_RscText_Tablet
 	style = ST_LEFT;
 	w = pxToScreen_W(cTab_GUI_tablet_WINDOW_BACK_W);
 	h = pxToScreen_H(cTab_GUI_tablet_WINDOW_CONTENT_OFFSET_Y);
-	font = GUI_FONT_NORMAL;
+	font = QUOTE(GUI_FONT_NORMAL);
 	colorText[] = COLOR_BLACK;
 };
 class cTab_Tablet_btnF1: cTab_RscButtonInv
@@ -337,8 +338,8 @@ class cTab_Tablet_OSD_hookGrid: cTab_RscText_Tablet
 	style = ST_CENTER;
 	x = pxToScreen_X(cTab_GUI_tablet_OSD_RIGHT_X);
 	y = pxToScreen_Y(cTab_GUI_tablet_OSD_EDGE_B - cTab_GUI_tablet_OSD_MARGIN - cTab_GUI_tablet_OSD_ELEMENT_STD_H * 4);
-	colorText[] = {1,1,1,0.5};
-	colorBackground[] = {0,0,0,0.25};
+	colorText[] = {1,1,1,0.75};
+	colorBackground[] = {0,0,0,0.75};
 };
 class cTab_Tablet_OSD_hookElevation: cTab_Tablet_OSD_hookGrid
 {
@@ -359,7 +360,7 @@ class cTab_Tablet_loadingtxt: cTab_RscText_Tablet
 {
 	idc = IDC_CTAB_LOADINGTXT;
 	style = ST_CENTER;
-	text = $STR_ctab_core_Loading;
+	text = "$STR_ctab_core_Loading";
 	x = pxToScreen_X(cTab_GUI_tablet_SCREEN_CONTENT_X);
 	y = pxToScreen_Y(cTab_GUI_tablet_SCREEN_CONTENT_Y);
 	w = pxToScreen_W(cTab_GUI_tablet_SCREEN_CONTENT_W);
@@ -419,17 +420,17 @@ class cTab_Tablet_RscMapControl: cTab_RscMapControl
 	alphaFadeEndScale = 10;
 
 	// Rendering density coefficients
-	ptsPerSquareSea = 8 / (0.86 / GUI_GRID_H);		// seas
-	ptsPerSquareTxt = 8 / (0.86 / GUI_GRID_H);		// textures
-	ptsPerSquareCLn = 8 / (0.86 / GUI_GRID_H);		// count-lines
-	ptsPerSquareExp = 8 / (0.86 / GUI_GRID_H);		// exposure
-	ptsPerSquareCost = 8 / (0.86 / GUI_GRID_H);		// cost
+	ptsPerSquareSea = QUOTE(8 / (0.86 / GUI_GRID_H));		// seas
+	ptsPerSquareTxt = QUOTE(8 / (0.86 / GUI_GRID_H));		// textures
+	ptsPerSquareCLn = QUOTE(8 / (0.86 / GUI_GRID_H));		// count-lines
+	ptsPerSquareExp = QUOTE(8 / (0.86 / GUI_GRID_H));		// exposure
+	ptsPerSquareCost = QUOTE(8 / (0.86 / GUI_GRID_H));		// cost
 
 	// Rendering thresholds
-	ptsPerSquareFor = 3 / (0.86 / GUI_GRID_H);		// forests
-	ptsPerSquareForEdge = 100 / (0.86 / GUI_GRID_H);	// forest edges
-	ptsPerSquareRoad = 1.5 / (0.86 / GUI_GRID_H);		// roads
-	ptsPerSquareObj = 4 / (0.86 / GUI_GRID_H);		// other objects
+	ptsPerSquareFor = QUOTE(3 / (0.86 / GUI_GRID_H));		// forests
+	ptsPerSquareForEdge = QUOTE(100 / (0.86 / GUI_GRID_H));	// forest edges
+	ptsPerSquareRoad = QUOTE(1.5 / (0.86 / GUI_GRID_H));		// roads
+	ptsPerSquareObj = QUOTE(4 / (0.86 / GUI_GRID_H));		// other objects
 };
 class cTab_Tablet_notification: cTab_RscText_Tablet {
     idc = IDC_CTAB_NOTIFICATION;

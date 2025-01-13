@@ -18,8 +18,8 @@ class cTab_mapSize_dsp {
 		{
 			idc = 1110;
 			type = CT_MAP; // better than map_main, markers are not required and it starts positioned in map center
-			x = safeZoneXAbs + safeZoneWAbs; // positioned outside of view
-			y = safeZoneY + safeZoneH; // positioned outside of view
+			x = "safeZoneXAbs + safeZoneWAbs"; // positioned outside of view
+			y = "safeZoneY + safeZoneH"; // positioned outside of view
 			w = 0.01; // width is not important as we don't use it
 			h = 10; // height is important to be large as it should be more precise when reading back world coordinates
 			scaleMin = 0.001;

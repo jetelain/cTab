@@ -14,7 +14,7 @@ addMissionEventHandler ["ExtensionCallback", {
 			LOG(_data);
 		};
 #endif
-		TRACE_2("ExtensionCallback", _function, _data);
+		TRACE_2("ExtensionCallback",_function,_data);
 		if( _function == "AddUserMarker" ) exitWith {
 			cTabUserSelIcon = parseSimpleArray _data;
 			cTabUserSelIcon pushBack (call cTab_fnc_currentTime);

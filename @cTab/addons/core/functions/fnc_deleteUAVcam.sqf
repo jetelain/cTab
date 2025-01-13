@@ -30,7 +30,7 @@ _camToDelete = if (count _this == 1) then {_this select 0} else {objNull};
 for "_i" from (count cTabUAVcams -1) to 0 step -1 do {
 	_cam = cTabUAVcams select _i select 2;
 	if (isNull _camToDelete || {_cam == _camToDelete}) then {
-		0 = cTabUAVcams deleteAt _i;
+		cTabUAVcams deleteAt _i;
 		_cam cameraEffect ["TERMINATE","BACK"];
 		camDestroy _cam;
 	};

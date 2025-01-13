@@ -410,6 +410,12 @@ namespace cTabWebApp
             {
                 var data = ArmaSerializer.ParseMixedArray(entry);
 
+                if ( data.Length < 8 )
+                {
+                    _logger.LogWarning($"Bad Marker: '{string.Join("', '", data)}'");
+                    continue;
+                }
+
                 var kind = (string)data[0];
                 var id = (string)data[1];
                 var iconA = (string)data[2];
@@ -513,19 +519,26 @@ namespace cTabWebApp
 
             foreach (var entry in message.Args)
             {
-                var data = ArmaSerializer.ParseMixedArray(entry);
-
-                var id = (string)data[0];
-                var pos = ((object[])data[1]).Cast<double?>().ToArray();
-                var dir = (double)data[2];
-
-                msg.Makers.Add(new MarkerPosition()
+                try
                 {
-                    Id = id,
-                    X = pos[0] ?? 0,
-                    Y = pos[1] ?? 0,
-                    Heading = dir
-                });
+                    var data = ArmaSerializer.ParseMixedArray(entry);
+
+                    var id = (string)data[0];
+                    var pos = ((object[])data[1]).Cast<double?>().ToArray();
+                    var dir = (double)data[2];
+
+                    msg.Makers.Add(new MarkerPosition()
+                    {
+                        Id = id,
+                        X = pos[0] ?? 0,
+                        Y = pos[1] ?? 0,
+                        Heading = dir
+                    });
+                }
+                catch (Exception e)
+                {
+                    _logger.LogWarning(e, $"Bad MarkersPosition '{entry}'");
+                }
             }
 
             var lastUpdate = state.LastUpdateMarkers;
@@ -637,6 +650,11 @@ namespace cTabWebApp
             if (state == null)
             {
                 _logger.LogWarning($"No state for ArmaActionTelemeter");
+                return;
+            }
+            if (message.Args.Length < 4)
+            {
+                _logger.LogWarning($"Bad ActionRangeFinder: '{string.Join("', '", message.Args)}'");
                 return;
             }
             var telemeter = new RangeFinderMessage()

@@ -3,10 +3,11 @@
 #define GUI_GRID_PX_H 2048 // hight in pixels
 
 // Base bacros to convert pixel space to screen space
-#define pxToScreen_X(PIXEL) (PIXEL) / GUI_GRID_PX_W * GUI_GRID_W + GUI_GRID_X
-#define pxToScreen_Y(PIXEL) (PIXEL) / GUI_GRID_PX_H * GUI_GRID_H + GUI_GRID_Y
-#define pxToScreen_W(PIXEL) (PIXEL) / GUI_GRID_PX_W * GUI_GRID_W
-#define pxToScreen_H(PIXEL) (PIXEL) / GUI_GRID_PX_H * GUI_GRID_H
+#define pxToScreen_X(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W + GUI_GRID_X)
+#define pxToScreen_Y(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_H * GUI_GRID_H + GUI_GRID_Y)
+#define pxToScreen_W(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W)
+#define pxToScreen_H_Value(PIXEL) (PIXEL) / GUI_GRID_PX_H * GUI_GRID_H
+#define pxToScreen_H(PIXEL) QUOTE(pxToScreen_H_Value(PIXEL))
 
 // Map position within background, pixel based
 #define cTab_GUI_microDAGR_MAP_X (573)
@@ -99,7 +100,7 @@ class cTab_RscText_microDAGR: cTab_RscText
 	style = ST_CENTER;
 	w = pxToScreen_W(cTab_GUI_microDAGR_OSD_ELEMENT_STD_W);
 	h = pxToScreen_H(cTab_GUI_microDAGR_OSD_ELEMENT_STD_H);
-	font = GUI_FONT_MONO;
+	font = QUOTE(GUI_FONT_MONO);
 	colorText[] = COLOR_WHITE;
 	sizeEx = pxToScreen_H(cTab_GUI_microDAGR_OSD_TEXT_STD_SIZE);
 	colorBackground[] = COLOR_TRANSPARENT;
@@ -122,17 +123,17 @@ class cTab_microDAGR_RscMapControl: cTab_RscMapControl
 	alphaFadeEndScale = 10;
 
 	// Rendering density coefficients
-	ptsPerSquareSea = 8 / cTab_microDAGR_DLGtoDSP_fctr;		// seas
-	ptsPerSquareTxt = 8 / cTab_microDAGR_DLGtoDSP_fctr;		// textures
-	ptsPerSquareCLn = 8 / cTab_microDAGR_DLGtoDSP_fctr;		// count-lines
-	ptsPerSquareExp = 8 / cTab_microDAGR_DLGtoDSP_fctr;		// exposure
-	ptsPerSquareCost = 8 / cTab_microDAGR_DLGtoDSP_fctr;		// cost
+	ptsPerSquareSea = QUOTE(8 / cTab_microDAGR_DLGtoDSP_fctr);		// seas
+	ptsPerSquareTxt = QUOTE(8 / cTab_microDAGR_DLGtoDSP_fctr);		// textures
+	ptsPerSquareCLn = QUOTE(8 / cTab_microDAGR_DLGtoDSP_fctr);		// count-lines
+	ptsPerSquareExp = QUOTE(8 / cTab_microDAGR_DLGtoDSP_fctr);		// exposure
+	ptsPerSquareCost = QUOTE(8 / cTab_microDAGR_DLGtoDSP_fctr);		// cost
 
 	// Rendering thresholds
-	ptsPerSquareFor = 3 / cTab_microDAGR_DLGtoDSP_fctr;		// forests
-	ptsPerSquareForEdge = 100 / cTab_microDAGR_DLGtoDSP_fctr;	// forest edges
-	ptsPerSquareRoad = 1.5 / cTab_microDAGR_DLGtoDSP_fctr;		// roads
-	ptsPerSquareObj = 4 / cTab_microDAGR_DLGtoDSP_fctr;		// other objects
+	ptsPerSquareFor = QUOTE(3 / cTab_microDAGR_DLGtoDSP_fctr);		// forests
+	ptsPerSquareForEdge = QUOTE(100 / cTab_microDAGR_DLGtoDSP_fctr);	// forest edges
+	ptsPerSquareRoad = QUOTE(1.5 / cTab_microDAGR_DLGtoDSP_fctr);		// roads
+	ptsPerSquareObj = QUOTE(4 / cTab_microDAGR_DLGtoDSP_fctr);		// other objects
 
 	/*
 	// replace CustomMark with wedding cake icon
@@ -152,10 +153,10 @@ class cTab_microDAGR_background: cTab_RscPicture
 {
 	idc = IDC_CTAB_BACKGROUND;
 	text = ""; // will be set during onLoad event
-	x = GUI_GRID_X;
-	y = GUI_GRID_Y;
-	w = GUI_GRID_W;
-	h = GUI_GRID_H;
+	x = QUOTE(GUI_GRID_X);
+	y = QUOTE(GUI_GRID_Y);
+	w = QUOTE(GUI_GRID_W);
+	h = QUOTE(GUI_GRID_H);
 };
 class cTab_microDAGR_cursor: cTab_RscPicture
 {
@@ -173,34 +174,34 @@ class cTab_microDAGR_cursor: cTab_RscPicture
 class cTab_microDAGR_btnF7: cTab_RscButton_microDAGR_LeftBtn
 {
 	idc=4;
-	tooltip = $STR_ctab_core_CenterMapHint;
+	tooltip = "$STR_ctab_core_CenterMapHint";
 };
 class cTab_microDAGR_btnbrtpls: cTab_RscButton_microDAGR_RightUp
 {
 	idc = IDC_CTAB_BTNUP;
 	action = "call cTab_fnc_txt_size_inc;";
-	tooltip = $STR_ctab_core_IncreaseFontHint;
+	tooltip = "$STR_ctab_core_IncreaseFontHint";
 };
 class cTab_microDAGR_btnbrtmns: cTab_RscButton_microDAGR_RightDown
 {
 	idc = IDC_CTAB_BTNDWN;
 	action = "call cTab_fnc_txt_size_dec;";
-	tooltip = $STR_ctab_core_DecreaseFontHint;
+	tooltip = "$STR_ctab_core_DecreaseFontHint";
 };
 class cTab_microDAGR_btnfunction: cTab_RscButton_microDAGR_RightBtn
 {
 	idc = IDC_CTAB_BTNFN;
-	tooltip = $STR_ctab_core_TextOnOffHint;
+	tooltip = "$STR_ctab_core_TextOnOffHint";
 };
 class cTab_microDAGR_btnMapType: cTab_RscButton_microDAGR_LeftUp
 {
 	idc=5;
-	tooltip = $STR_ctab_core_MapTexturesHint;
+	tooltip = "$STR_ctab_core_MapTexturesHint";
 };
 class cTab_microDAGR_btnMapTools: cTab_RscButton_microDAGR_LeftDown
 {
 	idc=6;
-	tooltip = $STR_ctab_core_MapToolsHint;
+	tooltip = "$STR_ctab_core_MapToolsHint";
 };
 class cTab_microDAGR_on_screen_battery: cTab_RscPicture
 {
@@ -260,8 +261,8 @@ class cTab_microDAGR_on_screen_hookGrid: cTab_RscText_microDAGR
 	style = ST_CENTER;
 	x = pxToScreen_X(cTab_GUI_microDAGR_OSD_RIGHT_X);
 	y = pxToScreen_Y(cTab_GUI_microDAGR_OSD_EDGE_B - cTab_GUI_microDAGR_OSD_MARGIN - cTab_GUI_microDAGR_OSD_ELEMENT_STD_H * 4);
-	colorText[] = {1,1,1,0.5};
-	colorBackground[] = {0,0,0,0.25};
+	colorText[] = {1,1,1,0.75};
+	colorBackground[] = {0,0,0,0.2};
 	sizeEx = pxToScreen_H(48);
 };
 class cTab_microDAGR_on_screen_hookElevation: cTab_microDAGR_on_screen_hookGrid
@@ -283,7 +284,7 @@ class cTab_microDAGR_loadingtxt: cTab_RscText_microDAGR
 {
 	idc = IDC_CTAB_LOADINGTXT;
 	style = ST_CENTER;
-	text = $STR_ctab_core_Loading;
+	text = "$STR_ctab_core_Loading";
 	x = pxToScreen_X(cTab_GUI_microDAGR_SCREEN_CONTENT_X);
 	y = pxToScreen_Y(cTab_GUI_microDAGR_SCREEN_CONTENT_Y);
 	w = pxToScreen_W(cTab_GUI_microDAGR_SCREEN_CONTENT_W);

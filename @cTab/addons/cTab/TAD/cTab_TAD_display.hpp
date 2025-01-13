@@ -15,7 +15,7 @@
 class cTab_TAD_dsp
 {
 	idd = 1775134;
-	movingEnable = true;
+	movingEnable = 1;
 	duration = 10e10;
 	fadeIn = 0;
 	fadeOut = 0;
@@ -47,6 +47,13 @@ class cTab_TAD_dsp
 			// hide grid lines
 			colorGrid[] = {0.1,0.1,0.1,0};
 			colorGridMap[] = {0.1,0.1,0.1,0};
+		};
+		class screenAir: cTab_TAD_RscMapControl_AIR
+		{
+			idc = IDC_CTAB_SCREEN_AIR;
+			onDraw = "nop = _this call cTabOnDrawbftTAD;";
+			// set initial map scale
+			scaleDefault = "missionNamespace getVariable 'cTabMapScale'";
 		};
 	};
 

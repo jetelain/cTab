@@ -1,16 +1,16 @@
-#define GUI_GRID_W	(safezoneW)
-#define GUI_GRID_H	(GUI_GRID_W * 4/3)
+#define GUI_GRID_H	(safezoneH * 1.6)
+#define GUI_GRID_W	(GUI_GRID_H * 3/4)
 #define GUI_GRID_X	(safezoneX + (safezoneW - GUI_GRID_W) / 2)
 #define GUI_GRID_Y	(safezoneY + (safezoneH - GUI_GRID_H) / 2)
 
 #include <\cTab\FBCB2\cTab_FBCB2_controls.hpp>
 
-#define MENU_sizeEx pxToScreen_H(cTab_GUI_FBCB2_OSD_TEXT_STD_SIZE)
+#define MENU_sizeEx pxToScreen_H_Value(cTab_GUI_FBCB2_OSD_TEXT_STD_SIZE)
 #include "\cTab\shared\cTab_markerMenu_macros.hpp"
 
 class cTab_FBCB2_dlg {
 	idd = 1775144;
-	movingEnable = true;
+	movingEnable = 1;
 	onLoad = "_this call cTab_fnc_onIfOpen;";
 	onUnload = "[] call cTab_fnc_onIfclose;";
 	onKeyDown = "_this call cTab_fnc_onIfKeyDown;";
@@ -36,17 +36,17 @@ class cTab_FBCB2_dlg {
 			alphaFadeEndScale = 10;
 
 			// Rendering density coefficients
-			ptsPerSquareSea = 8 / (0.86 / GUI_GRID_H);		// seas
-			ptsPerSquareTxt = 8 / (0.86 / GUI_GRID_H);		// textures
-			ptsPerSquareCLn = 8 / (0.86 / GUI_GRID_H);		// count-lines
-			ptsPerSquareExp = 8 / (0.86 / GUI_GRID_H);		// exposure
-			ptsPerSquareCost = 8 / (0.86 / GUI_GRID_H);		// cost
+			ptsPerSquareSea = QUOTE(8 / (0.86 / GUI_GRID_H));		// seas
+			ptsPerSquareTxt = QUOTE(8 / (0.86 / GUI_GRID_H));		// textures
+			ptsPerSquareCLn = QUOTE(8 / (0.86 / GUI_GRID_H));		// count-lines
+			ptsPerSquareExp = QUOTE(8 / (0.86 / GUI_GRID_H));		// exposure
+			ptsPerSquareCost = QUOTE(8 / (0.86 / GUI_GRID_H));		// cost
 
 			// Rendering thresholds
-			ptsPerSquareFor = 3 / (0.86 / GUI_GRID_H);		// forests
-			ptsPerSquareForEdge = 100 / (0.86 / GUI_GRID_H);	// forest edges
-			ptsPerSquareRoad = 1.5 / (0.86 / GUI_GRID_H);		// roads
-			ptsPerSquareObj = 4 / (0.86 / GUI_GRID_H);		// other objects
+			ptsPerSquareFor = QUOTE(3 / (0.86 / GUI_GRID_H));		// forests
+			ptsPerSquareForEdge = QUOTE(100 / (0.86 / GUI_GRID_H));	// forest edges
+			ptsPerSquareRoad = QUOTE(1.5 / (0.86 / GUI_GRID_H));		// roads
+			ptsPerSquareObj = QUOTE(4 / (0.86 / GUI_GRID_H));		// other objects
 		};
 		class screenTopo: screen
 		{
@@ -67,43 +67,43 @@ class cTab_FBCB2_dlg {
 		{
 			idc = IDC_CTAB_BTNOFF;
 			action = "closeDialog 0;";
-			tooltip = $STR_ctab_core_CloseInterfaceHint;
+			tooltip = "$STR_ctab_core_CloseInterfaceHint";
 		};
 		class btnbrtpls: cTab_FBCB2_btnBRTplus
 		{
 			idc = IDC_CTAB_BTNUP;
 			action = "call cTab_fnc_txt_size_inc;";
-			tooltip = $STR_ctab_core_IncreaseFontHint;
+			tooltip = "$STR_ctab_core_IncreaseFontHint";
 		};
 		class btnbrtmns: cTab_FBCB2_btnBRTminus
 		{
 			idc = IDC_CTAB_BTNDWN;
 			action = "call cTab_fnc_txt_size_dec;";
-			tooltip = $STR_ctab_core_DecreaseFontHint;
+			tooltip = "$STR_ctab_core_DecreaseFontHint";
 		};
 		class btnfunction: cTab_FBCB2_btnFCN
 		{
 			idc = IDC_CTAB_BTNFN;
 			action = "['cTab_FBCB2_dlg'] call cTab_fnc_iconText_toggle;";
-			tooltip = $STR_ctab_core_TextOnOffHint;
+			tooltip = "$STR_ctab_core_TextOnOffHint";
 		};
 		class btnF5: cTab_FBCB2_btnF5
 		{
 			idc = IDC_CTAB_BTNF5;
-			tooltip = $STR_ctab_core_MapToolsHint;
+			tooltip = "$STR_ctab_core_MapToolsHint";
 			action = "['cTab_FBCB2_dlg'] call cTab_fnc_toggleMapTools;";
 		};
 		class btnF6: cTab_FBCB2_btnF6
 		{
 			idc = IDC_CTAB_BTNF6;
-			tooltip = $STR_ctab_core_MapTexturesHint;
+			tooltip = "$STR_ctab_core_MapTexturesHint";
 			action = "['cTab_FBCB2_dlg'] call cTab_fnc_mapType_toggle;";
 		};
 		class btnF7: cTab_FBCB2_btnF7
 		{
 			idc=5;
 			action = "['cTab_FBCB2_dlg'] call cTab_fnc_centerMapOnPlayerPosition;";
-			tooltip = $STR_ctab_core_CenterMapHint;
+			tooltip = "$STR_ctab_core_CenterMapHint";
 		};
 		class hookGrid: cTab_FBCB2_on_screen_hookGrid {};
 		class hookElevation: cTab_FBCB2_on_screen_hookElevation {};

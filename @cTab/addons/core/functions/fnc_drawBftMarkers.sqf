@@ -42,8 +42,8 @@ _drawText = cTabBFTtxt;
 
 private _mustDrawPlayer = true;
 
-// Anything but MicroDAGR
-if (_mode != 2) then {
+// Anything but MicroDAGR, unless overridden by setting
+if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 	// ------------------ VEHICLES ------------------
 	{
 		_veh = _x select 0;
@@ -82,8 +82,8 @@ if (_mode != 2) then {
 				};
 			};
 		};
-		0 = _vehicles pushBack _veh;
-	} count cTabBFTvehicles;
+		_vehicles pushBack _veh;
+	} forEach cTabBFTvehicles;
 
 	// ------------------ GROUPS ------------------
 	{
@@ -105,8 +105,8 @@ if (_mode != 2) then {
 						if (_mountedIndex != -1) then {
 							_mountedLabels set [_mountedIndex + 1,(_mountedLabels select (_mountedIndex + 1)) + "/" + (_text)];
 						} else {
-							0 = _mountedLabels pushBack _veh;
-							0 = _mountedLabels pushBack _text;
+							_mountedLabels pushBack _veh;
+							_mountedLabels pushBack _text;
 						};
 					};
 				};
@@ -117,7 +117,7 @@ if (_mode != 2) then {
 			_ctrlScreen drawIcon [_x select 2,cTabColorBlue,_pos,cTabGroupOverlayIconSize,cTabGroupOverlayIconSize,0,"",0,cTabTxtSize,"TahomaB","right"];
 			if ( _veh == _playerVehicle ) then { _mustDrawPlayer = false; };
 		};
-	} count cTabBFTgroups;
+	} forEach cTabBFTgroups;
 };
 
 // ------------------ MEMBERS ------------------
@@ -138,8 +138,8 @@ if (_mode != 2) then {
 				if (_mountedIndex != -1) then {
 					_mountedLabels set [_mountedIndex + 1,(_mountedLabels select (_mountedIndex + 1)) + "/" + (_x select 4)];
 				} else {
-					0 = _mountedLabels pushBack _veh;
-					0 = _mountedLabels pushBack (_x select 4);
+					_mountedLabels pushBack _veh;
+					_mountedLabels pushBack (_x select 4);
 				};
 			};
 		};
@@ -151,9 +151,9 @@ if (_mode != 2) then {
 			if (_mountedIndex != -1 && _drawText) then {
 				_mountedLabels set [_mountedIndex + 1,(_mountedLabels select (_mountedIndex + 1)) + "/" + (_x select 4)];
 			} else {
-				0 = _mountedLabels pushBack _veh;
+				_mountedLabels pushBack _veh;
 				if  (_drawText) then {
-					0 = _mountedLabels pushBack (_x select 4);
+					_mountedLabels pushBack (_x select 4);
 				};
 				if (_veh != _playerVehicle) then {
 					_ctrlScreen drawIcon ["\A3\ui_f\data\map\VehicleIcons\iconmanvirtual_ca.paa",cTabColorBlue,_pos,cTabIconSize,cTabIconSize,_dir,"",0,cTabTxtSize,"TahomaB","right"];
@@ -165,7 +165,7 @@ if (_mode != 2) then {
 			_ctrlScreen drawIcon ["\A3\ui_f\data\map\Markers\System\dummy_ca.paa",_teamColor,_pos,cTabIconManSize,cTabIconManSize,0,_x select 4,0,cTabTxtSize,"TahomaB","right"];
 		};
 	};
-} count cTabBFTmembers;
+} forEach cTabBFTmembers;
 
 // ------------------ ADD LABEL TO VEHICLES WITH MOUNTED GROUPS / MEMBERS ------------------
 if (_drawText && !(_mountedLabels isEqualTo [])) then {

@@ -11,7 +11,7 @@ Authors, and thanks
 + Everyone else in the 15th MEU SOC and C-L-F for help with support and testing.
 + [Gundy](https://github.com/nsgundy) - Prior maintenance
 + [jetelain aka GrueArbre](https://github.com/jetelain) - cTab maintenance, cTab IRL
-+ [1er GTD members](http://www.1ergtd-reality.fr/) - for help with testing and support
++ [1er GTD members](http://www.1ergtd.fr/) - for help with testing and support
 
 + Bamse - Fixes
 + spyderblack723 - Fixes

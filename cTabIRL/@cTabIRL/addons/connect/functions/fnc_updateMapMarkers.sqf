@@ -37,7 +37,7 @@ private _markerFilter = FUNC(markerFilter);
 			};
 		};
 	} else {
-		TRACE_1("Marker was ignored.", _markerName);
+		TRACE_1("Marker was ignored.",_markerName);
 	};
 } forEach allMapMarkers;
 

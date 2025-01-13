@@ -21,3 +21,5 @@ appsettings.Development.json
 *.bikey
 /@cTab/releases
 /cTabIRL/@cTabIRL/releases
+/cTabIRL/@cTabIRL/.hemttout
+/@cTab/.hemttout

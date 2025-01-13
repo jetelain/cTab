@@ -3,10 +3,11 @@
 #define GUI_GRID_PX_H 2048 // hight in pixels
 
 // Base macros to convert pixel space to screen space
-#define pxToScreen_X(PIXEL) (PIXEL) / GUI_GRID_PX_W * GUI_GRID_W + GUI_GRID_X
-#define pxToScreen_Y(PIXEL) (PIXEL) / GUI_GRID_PX_H * GUI_GRID_H + GUI_GRID_Y
-#define pxToScreen_W(PIXEL) (PIXEL) / GUI_GRID_PX_W * GUI_GRID_W
-#define pxToScreen_H(PIXEL) (PIXEL) / GUI_GRID_PX_H * GUI_GRID_H
+#define pxToScreen_X(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W + GUI_GRID_X)
+#define pxToScreen_Y(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_H * GUI_GRID_H + GUI_GRID_Y)
+#define pxToScreen_W(PIXEL) QUOTE((PIXEL) / GUI_GRID_PX_W * GUI_GRID_W)
+#define pxToScreen_H_Value(PIXEL) (PIXEL) / GUI_GRID_PX_H * GUI_GRID_H
+#define pxToScreen_H(PIXEL) QUOTE(pxToScreen_H_Value(PIXEL))
 
 // Map position within background, pixel based
 #define cTab_GUI_FBCB2_MAP_X (685)
@@ -25,8 +26,8 @@
 #define cTab_GUI_FBCB2_SCREEN_CONTENT_H (cTab_GUI_FBCB2_MAP_H - cTab_GUI_FBCB2_OSD_HEADER_H - cTab_GUI_FBCB2_OSD_FOOTER_H)
 
 // Base macros to convert pixel space to screen space, but for groups (same size as map)
-#define pxToGroup_X(PIXEL) (((PIXEL) - cTab_GUI_FBCB2_SCREEN_CONTENT_X) / GUI_GRID_PX_W * GUI_GRID_W)
-#define pxToGroup_Y(PIXEL) (((PIXEL) - cTab_GUI_FBCB2_SCREEN_CONTENT_Y) / GUI_GRID_PX_H * GUI_GRID_H)
+#define pxToGroup_X(PIXEL) QUOTE(((PIXEL) - cTab_GUI_FBCB2_SCREEN_CONTENT_X) / GUI_GRID_PX_W * GUI_GRID_W)
+#define pxToGroup_Y(PIXEL) QUOTE(((PIXEL) - cTab_GUI_FBCB2_SCREEN_CONTENT_Y) / GUI_GRID_PX_H * GUI_GRID_H)
 
 // Message element positions in pixels
 #define cTab_GUI_FBCB2_MESSAGE_MARGIN_OUTER (10)
@@ -103,7 +104,7 @@ class cTab_RscText_FBCB2: cTab_RscText
 	style = ST_CENTER;
 	w = pxToScreen_W(cTab_GUI_FBCB2_OSD_ELEMENT_STD_W);
 	h = pxToScreen_H(cTab_GUI_FBCB2_OSD_ELEMENT_STD_H);
-	font = GUI_FONT_MONO;
+	font = QUOTE(GUI_FONT_MONO);
 	colorText[] = COLOR_WHITE;
 	sizeEx = pxToScreen_H(cTab_GUI_FBCB2_OSD_TEXT_STD_SIZE);
 	colorBackground[] = COLOR_TRANSPARENT;
@@ -113,10 +114,10 @@ class cTab_FBCB2_background: cTab_RscPicture
 {
 	idc = IDC_CTAB_BACKGROUND;
 	text = "\cTab\img\FBCB2.paa";
-	x = GUI_GRID_X;
-	y = GUI_GRID_Y;
-	w = GUI_GRID_W;
-	h = GUI_GRID_H;
+	x = QUOTE(GUI_GRID_X);
+	y = QUOTE(GUI_GRID_Y);
+	w = QUOTE(GUI_GRID_W);
+	h = QUOTE(GUI_GRID_H);
 };
 class cTab_FBCB2_header: cTab_RscPicture
 {
@@ -260,8 +261,8 @@ class cTab_FBCB2_on_screen_hookGrid: cTab_RscText_FBCB2
 	style = ST_CENTER;
 	x = pxToScreen_X(cTab_GUI_FBCB2_OSD_RIGHT_X);
 	y = pxToScreen_Y(cTab_GUI_FBCB2_OSD_EDGE_B - cTab_GUI_FBCB2_OSD_MARGIN - cTab_GUI_FBCB2_OSD_ELEMENT_STD_H * 4);
-	colorText[] = {1,1,1,0.5};
-	colorBackground[] = {0,0,0,0.25};
+	colorText[] = {1,1,1,0.75};
+	colorBackground[] = {0,0,0,0.75};
 };
 class cTab_FBCB2_on_screen_hookElevation: cTab_FBCB2_on_screen_hookGrid
 {
@@ -282,7 +283,7 @@ class cTab_FBCB2_loadingtxt: cTab_RscText_FBCB2
 {
 	idc = IDC_CTAB_LOADINGTXT;
 	style = ST_CENTER;
-	text = $STR_ctab_core_Loading;
+	text = "$STR_ctab_core_Loading";
 	x = pxToScreen_X(cTab_GUI_FBCB2_SCREEN_CONTENT_X);
 	y = pxToScreen_Y(cTab_GUI_FBCB2_SCREEN_CONTENT_Y);
 	w = pxToScreen_W(cTab_GUI_FBCB2_SCREEN_CONTENT_W);

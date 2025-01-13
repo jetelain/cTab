@@ -1,0 +1,591 @@
+version=54;
+class EditorData
+{
+	moveGridStep=1;
+	angleGridStep=0.2617994;
+	scaleGridStep=1;
+	autoGroupingDist=10;
+	toggles=1;
+	class ItemIDProvider
+	{
+		nextID=13;
+	};
+	class Camera
+	{
+		pos[]={6297.0234,38.317696,719.48865};
+		dir[]={0.57537222,-0.55048859,-0.60497606};
+		up[]={0.37939307,0.83482373,-0.39891294};
+		aside[]={-0.72464734,-1.4737016e-06,-0.68919122};
+	};
+};
+binarizationWanted=0;
+sourceName="ctab";
+addons[]=
+{
+	"A3_Characters_F",
+	"A3_Weapons_F_Rifles_MX",
+	"A3_Weapons_F_Acc",
+	"ace_realisticnames",
+	"ace_scopes",
+	"ace_laserpointer",
+	"A3_Weapons_F",
+	"ace_smallarms",
+	"ace_ballistics",
+	"A3_Weapons_F_Pistols_P07",
+	"A3_Characters_F_Heads",
+	"ace_goggles",
+	"ace_nightvision",
+	"ctab_core",
+	"ace_hearing",
+	"A3_Weapons_F_Items",
+	"ace_medical_engine",
+	"ace_medical_treatment",
+	"ace_attach",
+	"ace_chemlights",
+	"ctab",
+	"A3_Air_F_Heli_Light_01",
+	"A3_Armor_F_Beta_APC_Wheeled_01",
+	"ace_vehicle_damage",
+	"A3_Characters_F_Common",
+	"A3_Drones_F_Soft_F_Gamma_UGV_01",
+	"A3_Drones_F_Air_F_Gamma_UAV_01"
+};
+class AddonsMetaData
+{
+	class List
+	{
+		items=19;
+		class Item0
+		{
+			className="A3_Characters_F";
+			name="Arma 3 Alpha - Characters and Clothing";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item1
+		{
+			className="A3_Weapons_F";
+			name="Arma 3 Alpha - Weapons and Accessories";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item2
+		{
+			className="ace_scopes";
+			name="ACE3 - Scopes";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item3
+		{
+			className="ace_laserpointer";
+			name="ACE3 - Laser Pointer";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item4
+		{
+			className="ace_smallarms";
+			name="ACE3 - Small Arms";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item5
+		{
+			className="ace_ballistics";
+			name="ACE3 - Ballistics";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item6
+		{
+			className="ace_goggles";
+			name="ACE3 - Goggles";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item7
+		{
+			className="ace_nightvision";
+			name="ACE3 - Night Vision";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item8
+		{
+			className="ctab_core";
+			name="core";
+			author="AUTHOR";
+		};
+		class Item9
+		{
+			className="ace_hearing";
+			name="ACE3 - Hearing";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item10
+		{
+			className="ace_medical_engine";
+			name="ACE3 - Medical Engine";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item11
+		{
+			className="ace_medical_treatment";
+			name="ACE3 - Medical Treatment";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item12
+		{
+			className="ace_attach";
+			name="ACE3 - Attach";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item13
+		{
+			className="ace_chemlights";
+			name="ACE3 - Chemlights";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item14
+		{
+			className="ctab";
+			name="cTab";
+			author="cTab Authors";
+		};
+		class Item15
+		{
+			className="A3_Air_F";
+			name="Arma 3 Alpha - Aircraft";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item16
+		{
+			className="A3_Armor_F_Beta";
+			name="Arma 3 Beta - Armored Land Vehicles";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item17
+		{
+			className="ace_vehicle_damage";
+			name="ACE3 - Vehicle Damage";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item18
+		{
+			className="A3_Drones_F";
+			name="Arma 3 Beta - Drones";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+	};
+};
+randomSeed=11715454;
+class ScenarioData
+{
+	author="GrueArbre";
+};
+class Mission
+{
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		wavesForced=1;
+		windForced=1;
+		year=2035;
+		day=28;
+		hour=13;
+		minute=37;
+		startFogDecay=0.014;
+		forecastFogDecay=0.014;
+	};
+	class Entities
+	{
+		items=7;
+		class Item0
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={6320.3906,5.0014391,703.3924};
+					};
+					side="West";
+					flags=7;
+					class Attributes
+					{
+						isPlayer=1;
+						class Inventory
+						{
+							class primaryWeapon
+							{
+								name="arifle_MX_ACO_pointer_F";
+								optics="optic_Aco";
+								flashlight="acc_pointer_IR";
+								firemode="arifle_MX_ACO_pointer_F:Single";
+								class primaryMuzzleMag
+								{
+									name="30Rnd_65x39_caseless_mag";
+									ammoLeft=30;
+								};
+							};
+							class handgun
+							{
+								name="hgun_P07_F";
+								class primaryMuzzleMag
+								{
+									name="16Rnd_9x21_Mag";
+									ammoLeft=17;
+								};
+							};
+							class uniform
+							{
+								typeName="U_B_CombatUniform_mcam";
+								isBackpack=0;
+								class MagazineCargo
+								{
+									items=1;
+									class Item0
+									{
+										name="30Rnd_65x39_caseless_mag";
+										count=2;
+										ammoLeft=30;
+									};
+								};
+								class ItemCargo
+								{
+									items=1;
+									class Item0
+									{
+										name="FirstAidKit";
+										count=1;
+									};
+								};
+							};
+							class vest
+							{
+								typeName="V_PlateCarrier1_rgr";
+								isBackpack=0;
+								class MagazineCargo
+								{
+									items=6;
+									class Item0
+									{
+										name="30Rnd_65x39_caseless_mag";
+										count=7;
+										ammoLeft=30;
+									};
+									class Item1
+									{
+										name="16Rnd_9x21_Mag";
+										count=2;
+										ammoLeft=17;
+									};
+									class Item2
+									{
+										name="SmokeShell";
+										count=1;
+										ammoLeft=1;
+									};
+									class Item3
+									{
+										name="SmokeShellGreen";
+										count=1;
+										ammoLeft=1;
+									};
+									class Item4
+									{
+										name="Chemlight_green";
+										count=2;
+										ammoLeft=1;
+									};
+									class Item5
+									{
+										name="HandGrenade";
+										count=2;
+										ammoLeft=1;
+									};
+								};
+							};
+							class backpack
+							{
+								typeName="B_AssaultPack_mcamo";
+								isBackpack=1;
+								class ItemCargo
+								{
+									items=3;
+									class Item0
+									{
+										name="ItemcTabMisc";
+										count=1;
+									};
+									class Item1
+									{
+										name="ItemAndroidMisc";
+										count=1;
+									};
+									class Item2
+									{
+										name="ItemMicroDAGRMisc";
+										count=1;
+									};
+								};
+							};
+							map="ItemMap";
+							compass="ItemCompass";
+							watch="ItemWatch";
+							radio="ItemRadio";
+							goggles="G_Tactical_Clear";
+							hmd="NVGoggles";
+							headgear="H_HelmetSpecB";
+						};
+					};
+					id=1;
+					type="B_Soldier_F";
+				};
+			};
+			class Attributes
+			{
+			};
+			id=0;
+		};
+		class Item1
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={6312.79,6.7791443,705.0296};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=2;
+			type="B_Heli_Light_01_dynamicLoadout_F";
+		};
+		class Item2
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={6326.3457,7.5393777,703.8374};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=3;
+			type="B_APC_Wheeled_01_cannon_F";
+		};
+		class Item3
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=2;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={6346.5635,5.0014386,697.08142};
+					};
+					side="West";
+					flags=4;
+					class Attributes
+					{
+					};
+					id=7;
+					type="B_UAV_AI";
+				};
+				class Item1
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={6346.5635,7.0907774,697.03485};
+					};
+					side="West";
+					flags=2;
+					class Attributes
+					{
+					};
+					id=8;
+					type="B_UAV_AI";
+					atlOffset=2.0893388;
+				};
+			};
+			class Attributes
+			{
+			};
+			class CrewLinks
+			{
+				class LinkIDProvider
+				{
+					nextID=2;
+				};
+				class Links
+				{
+					items=2;
+					class Item0
+					{
+						linkID=0;
+						item0=7;
+						item1=6;
+						class CustomData
+						{
+							role=1;
+						};
+					};
+					class Item1
+					{
+						linkID=1;
+						item0=8;
+						item1=6;
+						class CustomData
+						{
+							role=2;
+							turretPath[]={0};
+						};
+					};
+				};
+			};
+			id=5;
+		};
+		class Item4
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={6346.5635,7.0893388,696.98486};
+			};
+			side="West";
+			flags=6;
+			class Attributes
+			{
+				reportOwnPosition=1;
+			};
+			id=6;
+			type="B_UGV_01_rcws_F";
+		};
+		class Item5
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=2;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={6338.603,5.0014386,661.81567};
+					};
+					side="West";
+					flags=6;
+					class Attributes
+					{
+					};
+					id=11;
+					type="B_UAV_AI";
+				};
+				class Item1
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={6338.603,5.1519065,661.8161};
+					};
+					side="West";
+					flags=4;
+					class Attributes
+					{
+					};
+					id=12;
+					type="B_UAV_AI";
+					atlOffset=0.15046787;
+				};
+			};
+			class Attributes
+			{
+			};
+			class CrewLinks
+			{
+				class LinkIDProvider
+				{
+					nextID=2;
+				};
+				class Links
+				{
+					items=2;
+					class Item0
+					{
+						linkID=0;
+						item0=11;
+						item1=10;
+						class CustomData
+						{
+							role=1;
+						};
+					};
+					class Item1
+					{
+						linkID=1;
+						item0=12;
+						item1=10;
+						class CustomData
+						{
+							role=2;
+							turretPath[]={0};
+						};
+					};
+				};
+			};
+			id=9;
+			atlOffset=67.729507;
+		};
+		class Item6
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={6338.603,72.879974,661.76611};
+			};
+			side="West";
+			flags=2;
+			class Attributes
+			{
+				reportRemoteTargets=1;
+				reportOwnPosition=1;
+			};
+			id=10;
+			type="B_UAV_01_F";
+			atlOffset=67.729507;
+		};
+	};
+};

@@ -80,6 +80,13 @@ if (count GVAR(dagrDevices) == 0) then {
 INFO_4("Devices detected in %1 sec : %2, %3, %4",(diag_tickTime - _start),GVAR(tabDevices),GVAR(androidDevices),GVAR(dagrDevices));
 
 GVAR(leaderDevices) = GVAR(tabDevices) + GVAR(androidDevices);
+if (GVAR(microDagrGroupBFT)) then {
+	GVAR(leaderDevices) append GVAR(dagrDevices);
+	// If present, add ACE MicroDAGR to leaderDevices, but NOT dagrDevices, since it would allow showing the cTab MicroDAGR dialog without having that item
+	if (isClass (configFile >> "CfgWeapons" >> "ACE_microDAGR")) then {
+		GVAR(leaderDevices) pushBack "ACE_microDAGR";
+	};
+};
 GVAR(personnelDevices) = GVAR(leaderDevices) + GVAR(dagrDevices);
 
 GVAR(bftDrawHandlers) = [];
@@ -212,8 +219,8 @@ cTabTADhighlightColour = [243/255, 243/255, 21/255, 1];
 	["mapScaleDsp",2],
 	["mapScaleDlg",2],
 	["mapScaleMin",1],
-	["mapTypes",[["SAT",IDC_CTAB_SCREEN],["TOPO",IDC_CTAB_SCREEN_TOPO],["BLK",IDC_CTAB_SCREEN_BLACK]]],
-	["mapType","SAT"],
+	["mapTypes",[["SAT",IDC_CTAB_SCREEN],["TOPO",IDC_CTAB_SCREEN_TOPO],["BLK",IDC_CTAB_SCREEN_BLACK],["AIR",IDC_CTAB_SCREEN_AIR]]],
+	["mapType","AIR"],
 	["mapTools",true],
 	["nightMode",0],
 	["brightness",0.8]
@@ -321,7 +328,7 @@ _classNames = [configfile >> "CfgWeapons", cTab_helmetClass_has_HCam] call _filt
 	{
 		_childClassName = configName _x;
 		if (_classNames find _childClassName == -1) then {
-			0 = _classNames pushBack configName _x;
+			_classNames pushBack configName _x;
 		};
 	} count _childClasses;
 } forEach _classNames;

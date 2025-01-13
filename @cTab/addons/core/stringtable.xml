@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project name="ctab">
     <Package name="core">
         <Key ID="STR_ctab_core_DisplayHide">
@@ -534,6 +534,12 @@
         <Key ID="STR_ctab_core_atSync">
             <English>At each synchronization</English>
             <French>A chaque synchronisation</French>
+        </Key>
+        <Key ID="STR_ctab_core_microDagrGroupBFT">
+            <English>Show Group Blue Force Tracking on MicroDAGR</English>
+        </Key>
+        <Key ID="STR_ctab_core_microDagrGroupBFTDetails">
+            <English>Display Blue Force Tracking information of other groups on both ACE and cTab MicroDAGR.\nBy default only BFT for members of the same group is shown on MicroDAGR devices.</English>
         </Key>
         <Key ID="STR_ctab_core_useAceMicroDagr">
             <English>Add Blue Force Tracking to ACE MicroDAGR</English>

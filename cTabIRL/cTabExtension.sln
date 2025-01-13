@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30406.217
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35431.28
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cTabExtension", "cTabExtension\cTabExtension.csproj", "{9161C2CC-F6F3-471E-8F5C-122395215DAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cTabExtension", "cTabExtension\cTabExtension.csproj", "{9161C2CC-F6F3-471E-8F5C-122395215DAF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cTabExtensionTester", "cTabExtensionTester\cTabExtensionTester.csproj", "{C5FC3CB9-569B-4E96-921F-79BBDC31CDCB}"
 EndProject
