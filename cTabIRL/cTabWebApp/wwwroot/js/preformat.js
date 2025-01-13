@@ -1,4 +1,3 @@
-// TEMP - This is a temporary file to hold the preformatting code until it can be integrated into maps.plan-ops.fr.
 class MessageTemplateUI {
     constructor(composeFormFields, composeText, helper, defaultValues) {
         this.bootstrapVersion = 4;
@@ -13,15 +12,22 @@ class MessageTemplateUI {
         this.config = null;
     }
     getText() {
+        return this.getData().text;
+    }
+    getAttachments() {
+        return this.getData().attachments;
+    }
+    getData() {
         if (!this.config) {
-            return '';
+            return { text: '', attachments: [] };
         }
-        var data = [];
+        let attachements = [];
+        let data = [];
         this.config.lines.forEach((line, lnum) => {
-            var lineData = line.title ? line.title + ':' : '';
+            let lineData = line.title ? line.title + ':' : '';
             line.fields.forEach((field, fnum) => {
-                var id = 'l' + lnum + 'f' + fnum;
-                var element = document.getElementById(id);
+                let id = 'l' + lnum + 'f' + fnum;
+                let element = document.getElementById(id);
                 switch (field.type) {
                     case 'checkbox':
                     case 'CheckBox':
@@ -49,13 +55,48 @@ class MessageTemplateUI {
                             case 'Frequency':
                                 this.lastValues[field.type.toLocaleLowerCase()] = value;
                                 break;
+                            case 'Grid':
+                            case 'GridNoMarker':
+                                var attachement = this.createGridAttachment(value, field.type == 'Grid');
+                                if (attachement) {
+                                    attachements.push(attachement);
+                                }
+                                break;
                         }
                         break;
                 }
             });
             data.push(lineData);
         });
-        return data.join('\n');
+        return { text: data.join('\n'), attachments: attachements };
+    }
+    parsePosition(value) {
+        let test = /^[ ]*([0-9]{5})[ ]*-[ ]*([0-9]{5})[ ]*$/.exec(value);
+        if (test) {
+            return { position: [parseInt(test[1]), parseInt(test[2])], precision: [1, 1] };
+        }
+        test = /^[ ]*([0-9]{4})[ ]*-[ ]*([0-9]{4})[ ]*$/.exec(value);
+        if (test) {
+            return { position: [parseInt(test[1]), parseInt(test[2])], precision: [10, 10] };
+        }
+        test = /^[ ]*([0-9]{3})[ ]*-[ ]*([0-9]{3})[ ]*$/.exec(value);
+        if (test) {
+            return { position: [parseInt(test[1]), parseInt(test[2])], precision: [100, 100] };
+        }
+        return null;
+    }
+    createGridAttachment(value, isMarker) {
+        let parsed = this.parsePosition(value);
+        if (!parsed) {
+            return null;
+        }
+        return {
+            type: isMarker ? 'Marker' : 'Grid',
+            label: value,
+            markerCenter: [parsed.position[0] + (parsed.precision[0] / 2), parsed.position[1] + (parsed.precision[1] / 2)],
+            position: parsed.position,
+            positionPrecision: parsed.precision
+        };
     }
     updateComposeText() {
         if (this.config) {

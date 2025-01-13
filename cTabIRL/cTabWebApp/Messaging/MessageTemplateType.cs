@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace cTabWebApp.Entities
+namespace cTabWebApp.Messaging
 {
     public enum MessageTemplateType
     {

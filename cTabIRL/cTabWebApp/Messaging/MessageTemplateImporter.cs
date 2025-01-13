@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace cTabWebApp.Entities
+namespace cTabWebApp.Messaging
 {
     public static class MessageTemplateImporter
     {

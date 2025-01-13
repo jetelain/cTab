@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using cTabWebApp.Entities;
+using cTabWebApp.Messaging;
 
 namespace cTabWebApp
 {

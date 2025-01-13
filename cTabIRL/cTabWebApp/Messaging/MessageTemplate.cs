@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace cTabWebApp.Entities
+namespace cTabWebApp.Messaging
 {
     public class MessageTemplate
     {

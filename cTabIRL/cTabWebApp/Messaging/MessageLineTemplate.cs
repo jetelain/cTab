@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace cTabWebApp.Entities
+namespace cTabWebApp.Messaging
 {
     public class MessageLineTemplate
     {

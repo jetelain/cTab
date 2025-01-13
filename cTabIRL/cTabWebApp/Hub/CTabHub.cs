@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Arma3TacMapLibrary.Arma3;
 using Arma3TacMapLibrary.Maps;
-using cTabWebApp.Entities;
+using cTabWebApp.Messaging;
 using cTabWebApp.Services;
 using cTabWebApp.TacMaps;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -539,20 +539,7 @@ namespace cTabWebApp
 
             foreach (var entry in message.Args)
             {
-                var data = ArmaSerializer.ParseMixedArray(entry);
-
-                var title = (string)data[0];
-                var body = (string)data[1];
-                var msgState = (int)((double?)data[2]);
-                var id = (string)data[3];
-
-                msg.Messages.Add(new Message()
-                {
-                    Id = id,
-                    Title = title,
-                    State = msgState,
-                    Body = body
-                });
+                msg.Messages.Add(Arma3MessagingHelper.MessageFromArma(entry));
             }
             state.LastUpdateMessages = msg;
             try 
@@ -648,7 +635,7 @@ namespace cTabWebApp
             {
                 return;
             }
-            string data = FormattableString.Invariant($"[\"{ArmaSerializer.Escape(message.To)}\",\"{ArmaSerializer.Escape(message.Body)}\"]");
+            string data = Arma3MessagingHelper.ToArmaSimpleArrayString(message);
             await Clients.Group(state.ArmaChannelName).SendAsync("Callback", "SendMessage", data);
         }
 
