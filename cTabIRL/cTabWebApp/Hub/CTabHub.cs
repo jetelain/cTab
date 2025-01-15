@@ -85,6 +85,14 @@ namespace cTabWebApp
             {
                 await Clients.Caller.SendAsync("UpdateMessageTemplates", state.LastUpdateMessagesTemplates);
             }
+            else
+            {
+                // ctab 2.7 and before
+                await Clients.Caller.SendAsync("UpdateMessageTemplates", new UpdateMessageTemplatesMessage()
+                {
+                    Templates = { BuiltinTemplates.GetMedevac() }
+                });
+            }
             if (state.LastUpdateMapMarkers != null)
             {
                 await Clients.Caller.SendAsync("UpdateMapMarkers", state.LastUpdateMapMarkers);
@@ -721,13 +729,10 @@ namespace cTabWebApp
             var msg = new UpdateMessageTemplatesMessage()
             {
                 Timestamp = message.Timestamp,
-                Templates = new List<MessageTemplate>()
             };
             foreach (var entry in message.Args)
             {
-                var data = ArmaSerializer.ParseMixedArray(entry);
-                var template = MessageTemplateImporter.FromArma3(data);
-                msg.Templates.Add(template);
+                msg.Templates.Add(Arma3MessagingHelper.TemplateFromArma(entry));
             }
             state.LastUpdateMessagesTemplates = msg;
             try

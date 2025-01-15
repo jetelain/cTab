@@ -3,10 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using Arma3TacMapLibrary.Arma3;
 
+#nullable enable
+
 namespace cTabWebApp.Messaging
 {
     public static class Arma3MessagingHelper
     {
+        public static MessageTemplate TemplateFromArma(string entry)
+        {
+            return TemplateFromArma(ArmaSerializer.ParseMixedArray(entry));
+        }
+
+        public static MessageTemplate TemplateFromArma(object[] arma3Data)
+        {
+            return new MessageTemplate
+            {
+                Uid = arma3Data[0] as string,
+                Type = (MessageTemplateType)Convert.ToInt32(arma3Data[1]),
+                Title = arma3Data[2] as string,
+                ShortTitle = arma3Data[3] as string,
+                Href = arma3Data[4] as string,
+                JsonHref = (arma3Data[4] as string) + "&format=json",
+                Lines = ((object?[])arma3Data[5]).Cast<object[]>().Select(l => new MessageLineTemplate
+                {
+                    Title = l[0] as string,
+                    Description = l[1] as string,
+                    Fields = ((object?[])l[2]).Cast<object[]>().Select(f => new MessageFieldTemplate
+                    {
+                        Title = f[0] as string,
+                        Description = f[1] as string,
+                        Type = (MessageFieldType)Convert.ToInt32(f[2])
+                    }).ToList()
+                }).ToList()
+            };
+        }
+
         internal static Message MessageFromArma(string entry)
         {
             return MessageFromArma(ArmaSerializer.ParseMixedArray(entry));
@@ -18,14 +49,14 @@ namespace cTabWebApp.Messaging
             {
                 Title = (string)data[0],
                 Body = (string)data[1],
-                State = (int)((double?)data[2]),
+                State = Convert.ToInt32(data[2]),
                 Id = (string)data[3],
             };
-            if (data.Length > 3)
+            if (data.Length > 4)
             {
-                message.MessageType = (MessageTemplateType)(int)((double?)data[4]);
+                message.Type = (MessageTemplateType)Convert.ToInt32(data[4]);
             }
-            if ( data.Length > 4)
+            if (data.Length > 5)
             {
                 message.Attachments = ((object[])data[5])?.Cast<object[]>().Select(AttachmentFromArma).ToList();
             }
@@ -36,7 +67,7 @@ namespace cTabWebApp.Messaging
         {
             var attachment = new MessageAttachment()
             {
-                Type = (MessageAttachmentType)(int)((double?)data[0]),
+                Type = (MessageAttachmentType)Convert.ToInt32(data[0]),
                 Label = (string)data[1],
             };
             if (attachment.Type == MessageAttachmentType.Grid || attachment.Type == MessageAttachmentType.Marker)
@@ -56,13 +87,13 @@ namespace cTabWebApp.Messaging
                 new object[] {
                         message.Title ?? string.Empty,
                         string.Empty,
-                        (int)message.MessageType,
+                        (int)message.Type,
                         ToArma(message.Attachments)
                     }
                 });
         }
 
-        public static object[] ToArma(List<MessageAttachment> attachments)
+        public static object[] ToArma(List<MessageAttachment>? attachments)
         {
             return attachments?.Select(ToArma)?.ToArray() ?? Array.Empty<object>();
         }

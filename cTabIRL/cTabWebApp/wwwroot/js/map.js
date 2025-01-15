@@ -952,7 +952,6 @@ $(function () {
         try {
             preformatedConfig = data.templates;
             preformatedMedevacUid = preformatedConfig.find(e => e.type == "MedicalEvacuation")?.uid;
-            console.info(preformatedConfig);
         }
         catch (e) {
             console.error(e);
@@ -1002,7 +1001,13 @@ $(function () {
             var to = $('#compose-to').val();
             var body = $('#compose-text').val();
 
-            connection.send("WebSendMessage", { to: to, body: body });
+            var msg = { to: to, body: body };
+            if (ctabMessageTemlateUI && ctabMessageTemlateUI.config) {
+                msg.title = ctabMessageTemlateUI.config.shortTitle;
+                msg.type = ctabMessageTemlateUI.config.type;
+                msg.attachments = ctabMessageTemlateUI.getAttachments();
+            }
+            connection.send("WebSendMessage", msg);
 
             closePerformated();
             $('#compose-text').val('');

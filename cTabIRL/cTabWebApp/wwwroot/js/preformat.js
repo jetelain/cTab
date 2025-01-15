@@ -93,7 +93,7 @@ class MessageTemplateUI {
         return {
             type: isMarker ? 'Marker' : 'Grid',
             label: value,
-            markerCenter: [parsed.position[0] + (parsed.precision[0] / 2), parsed.position[1] + (parsed.precision[1] / 2)],
+            markerPosition: [parsed.position[0] + (parsed.precision[0] / 2), parsed.position[1] + (parsed.precision[1] / 2)],
             position: parsed.position,
             positionPrecision: parsed.precision
         };

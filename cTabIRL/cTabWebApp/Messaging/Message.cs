@@ -8,7 +8,7 @@ namespace cTabWebApp.Messaging
         public string Title { get; set; }
         public int State { get; set; }
         public string Body { get; set; }
-        public MessageTemplateType MessageType { get; set; }
+        public MessageTemplateType Type { get; set; }
         public List<MessageAttachment>? Attachments { get; set; }
     }
 }

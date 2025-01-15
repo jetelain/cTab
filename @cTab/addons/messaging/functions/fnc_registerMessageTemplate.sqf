@@ -2,13 +2,13 @@
 
 params ["_uid", "_messageType", "_title", "_shortTitle", "_href", "_lines"];
 
-if ( _uid in GVAR(templatesByUid) ) exitWith {
-    WARNING_1("Template with UID '%1' already exists", _uid);
+if( GVAR(isBuiltinTemplates) ) then {
+    GVAR(templates) = [];
+    GVAR(isBuiltinTemplates) = false;  
 };
 
 private _data = [_uid, _messageType, _title, _shortTitle, _href, _lines];
 
-GVAR(templatesByUid) set [_uid, _data];
 GVAR(templates) pushBack _data;
 
 [QGVAR(templates)] call CBA_fnc_localEvent;
