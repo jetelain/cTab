@@ -741,6 +741,8 @@ function closePerformated() {
     }
     $('#compose-medevac').removeClass('btn-danger').addClass('btn-outline-danger');
     $('#compose-preformated').removeClass('btn-secondary').addClass('btn-outline-secondary');
+    $('#compose-form-templates-help').addClass("d-none");
+    $('#compose-text').removeClass("d-none");
     currentPreformated = { id: null };
 }
 
@@ -791,6 +793,8 @@ function showPerformated(uid) {
             }));
         });
         $('#compose-form-fields').append(content);
+        $('#compose-form-templates-help').removeClass("d-none");
+        $('#compose-text').addClass("d-none");
     }
 }
 

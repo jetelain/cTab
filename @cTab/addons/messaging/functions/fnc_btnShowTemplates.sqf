@@ -40,11 +40,17 @@ private _posY = GRID_H;
 } forEach GVAR(templates);
 
 private _ctrl = _display ctrlCreate ["ctab_RscButton", -1, _targetControl];
-_ctrl ctrlSetPosition [ 0, _posY + (6*GRID_H), _width/2, (10*GRID_H) ];
+_ctrl ctrlSetPosition [ _width/4, _posY + (6*GRID_H), _width/2, (10*GRID_H) ];
 _ctrl ctrlSetText LLSTRING(Cancel);
 _ctrl ctrlAddEventHandler ["ButtonClick", 
 {
 	params ["_ctrl"];
 	[_ctrl, false] call FUNC(closeTemplateUI);
 }];
+_ctrl ctrlCommit 0;
+
+
+_ctrl = _display ctrlCreate ["RscStructuredText", -1, _targetControl];
+_ctrl ctrlSetPosition [ 0, _posY + (18*GRID_H), _width, (10*GRID_H) ];
+_ctrl ctrlSetStructuredText parseText LLSTRING(HowToSetupTemplates);
 _ctrl ctrlCommit 0;

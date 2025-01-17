@@ -33,5 +33,9 @@
             <English>MEDEVAC</English>
             <French>EVASAN</French>
         </Key>
+        <Key ID="STR_ctab_messaging_HowToSetupTemplates">
+            <English>&lt;t align='center' size='0.8'&gt;See &lt;a href='https://ctab.plan-ops.fr/templates'&gt;https://ctab.plan-ops.fr/templates&lt;/a&gt; to create your own templates&lt;/t&gt;</English>
+            <French>&lt;t align='center' size='0.8'&gt;Voir &lt;a href='https://ctab.plan-ops.fr/templates'&gt;https://ctab.plan-ops.fr/templates&lt;/a&gt; pour créer vos propres modèles&lt;/t&gt;</French>
+        </Key>
     </Package>
 </Project>
