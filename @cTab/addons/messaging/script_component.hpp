@@ -1,8 +1,8 @@
 #define COMPONENT messaging
 #include "\z\ctab\addons\main\script_mod.hpp"
 
- #define DEBUG_MODE_FULL
- #define DISABLE_COMPILE_CACHE
+// #define DEBUG_MODE_FULL
+// #define DISABLE_COMPILE_CACHE
 
 #ifdef DEBUG_ENABLED_CORE
     #define DEBUG_MODE_FULL
