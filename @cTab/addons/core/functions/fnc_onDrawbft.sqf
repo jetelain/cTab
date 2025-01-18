@@ -17,7 +17,7 @@ _veh = vehicle cTab_player;
 _playerPos = getPosASL _veh;
 
 // draw directional arrow at own location
-if (_playerDrawn) then {
+if (_drawPlayer) then {
 	_heading = direction _veh;
 	_cntrlScreen drawIcon ["\A3\ui_f\data\map\VehicleIcons\iconmanvirtual_ca.paa",cTabMicroDAGRfontColour,_playerPos,cTabTADownIconBaseSize,cTabTADownIconBaseSize,_heading,"", 1,cTabTxtSize,"TahomaB","right"];
 };
