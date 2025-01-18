@@ -1,0 +1,14 @@
+PREPMAIN(registerMessageTemplate);
+PREP(generateTemplateUI);
+PREP(generateTemplateText);
+PREP(updateMessagePreview);
+PREP(getDefaultFieldValue);
+PREP(parseGridPosition);
+PREP(fillRecipientList);
+PREP(btnSendTemplatedMessage);
+PREP(sendMessage);
+PREP(closeTemplateUI);
+PREP(getSelectedRecipients);
+PREP(btnShowMedevacTemplate);
+PREP(btnShowTemplates);
+PREP(showTemplateUI);

@@ -8,6 +8,7 @@
 #include "script_component.hpp"
 #include "\cTab\shared\cTab_gui_macros.hpp"
 
+
 private _displayName = _this select 0;
 private _display = uiNamespace getVariable _displayName;
 private _msgLbCtrl = _display displayCtrl IDC_CTAB_MSG_LIST;
@@ -19,5 +20,3 @@ if (count _msgLbSelection == 0) exitWith {false};
 
 private _msgTextCtrl = _display displayCtrl IDC_CTAB_MSG_CONTENT;
 _msgTextCtrl ctrlSetText LLSTRING(NoMessageSelected);
-
-true

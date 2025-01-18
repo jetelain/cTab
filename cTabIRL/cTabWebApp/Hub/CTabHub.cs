@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Arma3TacMapLibrary.Arma3;
 using Arma3TacMapLibrary.Maps;
+using cTabWebApp.Messaging;
 using cTabWebApp.Services;
 using cTabWebApp.TacMaps;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -79,6 +80,18 @@ namespace cTabWebApp
             if (state.LastUpdateMessages != null)
             {
                 await Clients.Caller.SendAsync("UpdateMessages", state.LastUpdateMessages);
+            }
+            if (state.LastUpdateMessagesTemplates != null)
+            {
+                await Clients.Caller.SendAsync("UpdateMessageTemplates", state.LastUpdateMessagesTemplates);
+            }
+            else
+            {
+                // ctab 2.7 and before
+                await Clients.Caller.SendAsync("UpdateMessageTemplates", new UpdateMessageTemplatesMessage()
+                {
+                    Templates = { BuiltinTemplates.GetMedevac() }
+                });
             }
             if (state.LastUpdateMapMarkers != null)
             {
@@ -586,20 +599,7 @@ namespace cTabWebApp
 
             foreach (var entry in message.Args)
             {
-                var data = ArmaSerializer.ParseMixedArray(entry);
-
-                var title = (string)data[0];
-                var body = (string)data[1];
-                var msgState = (int)((double?)data[2]);
-                var id = (string)data[3];
-
-                msg.Messages.Add(new Message()
-                {
-                    Id = id,
-                    Title = title,
-                    State = msgState,
-                    Body = body
-                });
+                msg.Messages.Add(Arma3MessagingHelper.MessageFromArma(entry));
             }
             state.LastUpdateMessages = msg;
             try 
@@ -695,7 +695,7 @@ namespace cTabWebApp
             {
                 return;
             }
-            string data = FormattableString.Invariant($"[\"{ArmaSerializer.Escape(message.To)}\",\"{ArmaSerializer.Escape(message.Body)}\"]");
+            string data = Arma3MessagingHelper.ToArmaSimpleArrayString(message);
             await Clients.Group(state.ArmaChannelName).SendAsync("Callback", "SendMessage", data);
         }
 
@@ -768,6 +768,33 @@ namespace cTabWebApp
                 return;
             }
             await Clients.Group(state.ArmaChannelName).SendAsync("Callback", "TicAlert", message.State ? "[true]" : "[false]");
+        }
+
+        public async Task ArmaUpdateMessageTemplates(ArmaMessage message)
+        {
+            var state = GetState(ConnectionKind.Arma);
+            if (state == null)
+            {
+                _logger.LogWarning($"No state for ArmaUpdateMessageTemplates");
+                return;
+            }
+            var msg = new UpdateMessageTemplatesMessage()
+            {
+                Timestamp = message.Timestamp,
+            };
+            foreach (var entry in message.Args)
+            {
+                msg.Templates.Add(Arma3MessagingHelper.TemplateFromArma(entry));
+            }
+            state.LastUpdateMessagesTemplates = msg;
+            try
+            {
+                await Clients.Group(state.WebChannelName).SendAsync("UpdateMessageTemplates", state.LastUpdateMessagesTemplates);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(e, "UpdateMessageTemplates failed");
+            }
         }
 
         public async override Task OnDisconnectedAsync(Exception exception)

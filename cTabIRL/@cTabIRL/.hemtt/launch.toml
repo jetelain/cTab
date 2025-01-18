@@ -7,3 +7,4 @@ parameters=[
 	# It's not possible to use a variable, you will have to change this path to your actual path
 	"-mod=\"C:\\Users\\julien\\source\\repos\\jetelain\\cTab\\@cTab\\.hemttout\\dev\"" 
 ]
+mission = "basic.VR"

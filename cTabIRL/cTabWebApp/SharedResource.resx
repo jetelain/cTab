@@ -127,13 +127,13 @@
     <value>Configure TAD</value>
   </data>
   <data name="STR_ctab_core_Android" xml:space="preserve">
-    <value>GD300 Android</value>
+    <value>S7 Android</value>
   </data>
   <data name="STR_ctab_core_AndroidShort" xml:space="preserve">
-    <value>GD300 Rugged Wearable Computer</value>
+    <value>Samsung S7 with Kägwerks case</value>
   </data>
   <data name="STR_ctab_core_ConfigureAndroid" xml:space="preserve">
-    <value>Configure GD300 Android</value>
+    <value>Configure S7 Android</value>
   </data>
   <data name="STR_ctab_core_MicroDAGR" xml:space="preserve">
     <value>MicroDAGR</value>
@@ -716,5 +716,35 @@
   </data>
   <data name="WhereIsTheUnitMoving" xml:space="preserve">
     <value>Where is the unit moving?</value>
+  </data>
+  <data name="STR_ctab_core_WhereIsTheUnitMoving" xml:space="preserve">
+    <value>Where is the unit moving?</value>
+  </data>
+  <data name="STR_ctab_messaging_Attachements" xml:space="preserve">
+    <value>Attachements</value>
+  </data>
+  <data name="STR_ctab_messaging_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="STR_ctab_messaging_GeneratedMessage" xml:space="preserve">
+    <value>Generated message</value>
+  </data>
+  <data name="STR_ctab_messaging_MarkerAt" xml:space="preserve">
+    <value>Marker at %1</value>
+  </data>
+  <data name="STR_ctab_messaging_Recipient" xml:space="preserve">
+    <value>Recipient</value>
+  </data>
+  <data name="STR_ctab_messaging_Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="STR_ctab_messaging_Templates" xml:space="preserve">
+    <value>Templates</value>
+  </data>
+  <data name="STR_ctab_messaging_MEDEVAC" xml:space="preserve">
+    <value>MEDEVAC</value>
+  </data>
+  <data name="BuiltinMedevacTemplateJson" xml:space="preserve">
+    <value>{"uid":"builtin#2","lines":[{"title":"EVASAN","description":"","fields":[]},{"title":"Line 1","description":"LOCATION","fields":[{"description":"Grid of pickup zone","type":"Grid"}]},{"title":"Line 2","description":"CALL SIGN \u0026 FREQ","fields":[{"description":"Call sign","type":"CallSign"},{"description":"Frequency","type":"Frequency"}]},{"title":"Line 3","description":"NUMBER OF PATIENTS/PRECEDENCE","fields":[{"title":"A","description":"URGENT Hospital under 90 min","type":"Number"},{"title":"B","description":"PRIORITY Hospital under 4 hours","type":"Number"},{"title":"C","description":"ROUTINE Hospital within 24 hours","type":"Number"}]},{"title":"Line 4","description":"SPECIAL EQUIPMENT REQUIRED","fields":[{"title":"A","description":"None","type":"CheckBox"},{"title":"B","description":"Hoist (Winch)","type":"CheckBox"},{"title":"C","description":"Extrication","type":"CheckBox"},{"title":"D","description":"Ventilator","type":"CheckBox"},{"title":"E","description":"Others","type":"Text"}]},{"title":"Line 5","description":"NUMBER TO BE CARRIED LYING/SITTING","fields":[{"title":"L","description":"Litter (Stretcher)","type":"Number"},{"title":"A","description":"Ambulatory (Walking)","type":"Number"},{"title":"E","description":"Escorts (e.g. for child patient)","type":"Number"}]},{"title":"Line 6","description":"SECURITY AT PICKUP ZONE (PZ)","fields":[{"title":"N","description":"No enemy","type":"CheckBox"},{"title":"P","description":"Possible enemy","type":"CheckBox"},{"title":"E","description":"Enemy in area","type":"CheckBox"},{"title":"X","description":"Hot PZ - Armed escort required","type":"CheckBox"}]},{"title":"Line 7","description":"PICKUP ZONE (PZ) MARKING METHOD","fields":[{"title":"A","description":"Panels","type":"CheckBox"},{"title":"B","description":"Pyro","type":"CheckBox"},{"title":"C","description":"Smoke","type":"CheckBox"},{"title":"D","description":"None","type":"CheckBox"},{"title":"E","description":"Other","type":"Text"}]},{"title":"Line 8","description":"NATIONALITY/STATUS","fields":[{"title":"A","description":"Military","type":"Number"},{"title":"D","description":"Civilian","type":"Number"},{"title":"E","description":"PW / Detainee","type":"Number"},{"title":"F","description":"Child","type":"Number"}]},{"title":"Line 9","description":"PICKUP ZONE (PZ) TERRAIN/OBSTACLES","fields":[{"description":"Terrain / obstacles","type":"Text"}]}],"title":"MEDEVAC","description":null,"type":"MedicalEvacuation","href":"https://maps2.plan-ops.fr/MessageTemplates/Details/2?t=gpRXtrNNSpVSQk1HWpZqNsBJXSBnBFuvvXGb3W49SL4","countryCode":"NATO"}</value>
   </data>
 </root>

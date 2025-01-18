@@ -87,6 +87,9 @@ var selfIsInContact = false;
 var groupsInContact = [];
 var ctabFeatureLevel = 0;
 var irlFeatureLevel = 0;
+var preformatedMedevacUid = 'medevac';
+let ctabCurrentDate = null;
+
 
 function updateButtons() {
     centerOnPositionButton.setClass(centerOnPosition ? 'btn-primary' : 'btn-outline-secondary');
@@ -385,8 +388,8 @@ function initMap(mapInfos, worldName) {
 
 
 function updateClock(date) {
-    var dateObj = new Date(date);
-    $('#date').text(pad(dateObj.getUTCHours(), 2) + ':' + pad(dateObj.getUTCMinutes(), 2));
+    ctabCurrentDate = new Date(date);
+    $('#date').text(pad(ctabCurrentDate.getUTCHours(), 2) + ':' + pad(ctabCurrentDate.getUTCMinutes(), 2));
 }
 
 
@@ -752,128 +755,68 @@ function updateInbox(messages) {
 var currentPreformated = { id: null };
 var preformatedConfig = [];
 var lastValues = {};
+let ctabMessageTemlateUI = null;
+
 function closePerformated() {
-    $('#compose-form-fields').empty();
+    if (ctabMessageTemlateUI) {
+        ctabMessageTemlateUI.clear();
+    }
     $('#compose-medevac').removeClass('btn-danger').addClass('btn-outline-danger');
     $('#compose-preformated').removeClass('btn-secondary').addClass('btn-outline-secondary');
-    $('#compose-text').prop('readonly', false);
+    $('#compose-form-templates-help').addClass("d-none");
+    $('#compose-text').removeClass("d-none");
     currentPreformated = { id: null };
 }
-function generatePreformated() {
-    if (currentPreformated.config) {
-        var data = [];
-        currentPreformated.config.lines.forEach((line, lnum) => {
-            var lineData = line.title ? line.title + ':' : '';
-            line.fields.forEach((field, fnum) => {
-                var id = 'l' + lnum + 'f' + fnum;
 
-                switch (field.type) {
-                    case 'checkbox':
-                        if ($('#' + id).is(':checked')) {
-                            lineData = lineData + ' ' + field.title;
-                            $('#' + id + '-box').addClass('bg-primary text-white');
-                        }
-                        else {
-                            $('#' + id + '-box').removeClass('bg-primary text-white');
-                        }
-                        break;
-                    default:
-                        var value = ('' + $('#' + id).val()).trim();
-                        if (value && value.length > 0) {
-                            lineData = lineData + ' ' + (field.title || '') + value;
-                            $('#' + id + '-box').addClass('bg-primary text-white');
-                        }
-                        else {
-                            $('#' + id + '-box').removeClass('bg-primary text-white');
-                        }
-                        if (field.type == 'callsign' || field.type == 'frequency') {
-                            lastValues[field.type] = value;
-                        }
-                        break;
-                }
-            });
-            data.push(lineData);
-        });
-        $('#compose-text').val(data.join('\n'));
+function dateTimeLocalFormat(d) {
+    if (!d) {
+        return "";
     }
+    function pad2Zero(s) {
+        return s.padStart(2, '0');
+    }
+    return `${d.getUTCFullYear()}-${pad2Zero(d.getUTCMonth() + 1)}-${pad2Zero(d.getUTCDate())}T${pad2Zero(d.getUTCHours())}:${pad2Zero(d.getUTCMinutes())}`;
 }
 
-function showPerformated(id) {
-    if (preformatedConfig.length == 0) {
-        fetch('/js/performat.json', {cache: 'no-cache'}).then(response => response.json()).then(function (value) { preformatedConfig = value; showPerformated(id); });
-        return;
+function showPerformated(uid) {
+
+    if (!ctabMessageTemlateUI) {
+        ctabMessageTemlateUI = new MessageTemplateUI(
+            document.getElementById('compose-form-fields'),
+            document.getElementById('compose-text'),
+            {
+                getCurrentLocation: () => $('#position').text(),
+                getCallSign: () => (selfMarker && selfMarker.options.marker ? selfMarker.options.marker.name : null) ?? null,
+                getCurrentDatetime: () => dateTimeLocalFormat(ctabCurrentDate)
+            }
+        );
     }
+
     closePerformated();
-    if (id == 'medevac') {
+
+    if (uid == preformatedMedevacUid) {
         $('#compose-medevac').addClass('btn-danger').removeClass('btn-outline-danger');
     }
     else {
         $('#compose-preformated').addClass('btn-secondary').removeClass('btn-outline-secondary');
     }
-    $('#compose-text').prop('readonly', true);
-    currentPreformated = { id: id, config: preformatedConfig.find(e => e.id == id) };
-    if (currentPreformated.config) {
-        currentPreformated.config.lines.forEach((line, lnum) => {
-            var fieldsDiv = $('<div class="form-inline" />');
-            line.fields.forEach((field, fnum) => {
-                var id = 'l' + lnum + 'f' + fnum;
-                if (!field.description) {
-                    switch (field.type) {
-                        case 'utm': field.description = 'UTM'; break;
-                        case 'callsign': field.description = 'Indicatif'; break;
-                        case 'frequency': field.description = 'Fréquence'; break;
-                    }
-                }
-                var width = '7em';
-                if (line.fields.length == 1) {
-                    width = '15em';
-                }
-                switch (field.type) {
-                    case 'checkbox':
-                        fieldsDiv.append($('<div class="input-group input-group-sm mb-2 mr-sm-2">')
-                            .append($('<div class="input-group-prepend">').append($('<div class="input-group-text">').attr({ id: id + '-box' })
-                                .append($('<input type="checkbox" />').attr({ id: id })).on('click', generatePreformated)
-                                .append($('<label class="form-check-label ml-1" />').attr({ for: id }).text(field.title))
-                            ))
-                            .append($('<label class="form-control bg-light" />').attr({ for: id }).text(field.description)));
-                        break;
-                    default:
-                        var attr = { id: id, placeholder: field.description, type:'text' };
-                        switch (field.type) {
-                            case 'utm':
-                                attr.value = $('#position').text().trim();
-                                break;
-                            case 'callsign':
-                                attr.value = lastValues['callsign'] || (selfMarker && selfMarker.options.marker ? selfMarker.options.marker.name : '') || '';
-                                break;
-                            case 'frequency':
-                                attr.type = 'number';
-                                attr.step = '0.025';
-                                attr.value = lastValues['frequency'] || '45.000';
-                                break;
-                            case 'number':
-                                attr.type = 'number';
-                                break;
-                        }
-                        fieldsDiv.append($('<div class="input-group input-group-sm mb-2 mr-sm-2">')
-                            .append($('<div class="input-group-prepend">').append($('<label class="input-group-text">').attr({ for: id, id: id + '-box' }).text(field.title)))
-                            .append($('<input type="text" class="form-control" />').attr(attr).css({ width: width })
-                                .on('change', generatePreformated)
-                                .on('keyup', generatePreformated)));
-                    break;
-                }
-            });
-            $('#compose-form-fields').append($('<div class="col" />').text(line.title ? line.title + ': ' + line.description : line.description).append(fieldsDiv));
-        });
-        generatePreformated();
+
+    let config = preformatedConfig.find(e => e.uid == uid);
+
+    currentPreformated = { id: uid, config: config };
+
+    if (config) {
+        ctabMessageTemlateUI.setup(config);
     } else {
         var content = $('<div class="mb-2" />');
         preformatedConfig.forEach(config => {
             content.append($('<a class="btn btn-sm btn-primary mr-2"></a>').text(config.title).on('click',function () {
-                showPerformated(config.id);
+                showPerformated(config.uid);
             }));
         });
         $('#compose-form-fields').append(content);
+        $('#compose-form-templates-help').removeClass("d-none");
+        $('#compose-text').addClass("d-none");
     }
 }
 
@@ -1041,6 +984,16 @@ $(function () {
         }
     });
 
+    connection.on("UpdateMessageTemplates", function (data) {
+        try {
+            preformatedConfig = data.templates;
+            preformatedMedevacUid = preformatedConfig.find(e => e.type == "MedicalEvacuation")?.uid;
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+
     if (vm.tacMapEndpoint && window.Arma3TacMap) {
         connection.on("SyncTacMap", function (data) {
             if (currentTacMapSynced) {
@@ -1084,7 +1037,13 @@ $(function () {
             var to = $('#compose-to').val();
             var body = $('#compose-text').val();
 
-            connection.send("WebSendMessage", { to: to, body: body });
+            var msg = { to: to, body: body };
+            if (ctabMessageTemlateUI && ctabMessageTemlateUI.config) {
+                msg.title = ctabMessageTemlateUI.config.shortTitle;
+                msg.type = ctabMessageTemlateUI.config.type;
+                msg.attachments = ctabMessageTemlateUI.getAttachments();
+            }
+            connection.send("WebSendMessage", msg);
 
             closePerformated();
             $('#compose-text').val('');
@@ -1092,14 +1051,14 @@ $(function () {
         });
 
         $('#compose-medevac').on('click', function () {
-            if (currentPreformated.id == 'medevac') {
+            if (currentPreformated.id == preformatedMedevacUid) {
                 closePerformated();
             } else {
-                showPerformated('medevac');
+                showPerformated(preformatedMedevacUid);
             }
         });
         $('#compose-preformated').on('click', function () {
-            if (currentPreformated.id && currentPreformated.id != 'medevac') {
+            if (currentPreformated.id && currentPreformated.id != preformatedMedevacUid) {
                 closePerformated();
             } else {
                 showPerformated('list');

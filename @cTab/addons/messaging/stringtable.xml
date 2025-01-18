@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="ctab">
+    <Package name="messaging">
+        <Key ID="STR_ctab_messaging_Attachements">
+            <English>Attachements</English>
+            <French>Pièces jointes</French>
+        </Key>
+        <Key ID="STR_ctab_messaging_Cancel">
+            <English>Cancel</English>
+            <French>Annuler</French>
+        </Key>
+        <Key ID="STR_ctab_messaging_GeneratedMessage">
+            <English>Generated message</English>
+            <French>Message généré</French>
+        </Key>
+        <Key ID="STR_ctab_messaging_MarkerAt">
+            <English>Marker at %1</English>
+            <French>Marqueur à %1</French>
+        </Key>
+        <Key ID="STR_ctab_messaging_Recipient">
+            <English>Recipient</English>
+            <French>Destinataire</French>
+        </Key>
+        <Key ID="STR_ctab_messaging_Send">
+            <English>Send</English>
+            <French>Envoyer</French>
+        </Key>
+        <Key ID="STR_ctab_messaging_Templates">
+            <English>Templates</English>
+            <French>Modèles</French>
+        </Key>
+        <Key ID="STR_ctab_messaging_MEDEVAC">
+            <English>MEDEVAC</English>
+            <French>EVASAN</French>
+        </Key>
+        <Key ID="STR_ctab_messaging_HowToSetupTemplates">
+            <English>&lt;t align='center' size='0.8'&gt;See &lt;a href='https://ctab.plan-ops.fr/templates'&gt;https://ctab.plan-ops.fr/templates&lt;/a&gt; to create your own templates&lt;/t&gt;</English>
+            <French>&lt;t align='center' size='0.8'&gt;Voir &lt;a href='https://ctab.plan-ops.fr/templates'&gt;https://ctab.plan-ops.fr/templates&lt;/a&gt; pour créer vos propres modèles&lt;/t&gt;</French>
+        </Key>
+    </Package>
+</Project>

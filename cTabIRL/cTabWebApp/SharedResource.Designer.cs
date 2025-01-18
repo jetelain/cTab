@@ -70,6 +70,15 @@ namespace cTabWebApp {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à {&quot;uid&quot;:&quot;builtin#2&quot;,&quot;lines&quot;:[{&quot;title&quot;:&quot;EVASAN&quot;,&quot;description&quot;:&quot;&quot;,&quot;fields&quot;:[]},{&quot;title&quot;:&quot;Line 1&quot;,&quot;description&quot;:&quot;LOCATION&quot;,&quot;fields&quot;:[{&quot;description&quot;:&quot;Grid of pickup zone&quot;,&quot;type&quot;:&quot;Grid&quot;}]},{&quot;title&quot;:&quot;Line 2&quot;,&quot;description&quot;:&quot;CALL SIGN \u0026 FREQ&quot;,&quot;fields&quot;:[{&quot;description&quot;:&quot;Call sign&quot;,&quot;type&quot;:&quot;CallSign&quot;},{&quot;description&quot;:&quot;Frequency&quot;,&quot;type&quot;:&quot;Frequency&quot;}]},{&quot;title&quot;:&quot;Line 3&quot;,&quot;description&quot;:&quot;NUMBER OF PATIENTS/PRECEDENCE&quot;,&quot;fields&quot;:[{&quot;title&quot;:&quot;A&quot;,&quot;description&quot;:&quot;URGENT Hospital under 90 min&quot;,&quot;type&quot;:&quot;Number&quot;},{&quot;title&quot;:&quot;B&quot;,&quot;descr [le reste de la chaîne a été tronqué]&quot;;.
+        /// </summary>
+        public static string BuiltinMedevacTemplateJson {
+            get {
+                return ResourceManager.GetString("BuiltinMedevacTemplateJson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Contact.
         /// </summary>
         public static string Contact {
@@ -160,7 +169,7 @@ namespace cTabWebApp {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à GD300 Android.
+        ///   Recherche une chaîne localisée semblable à S7 Android.
         /// </summary>
         public static string STR_ctab_core_Android {
             get {
@@ -169,7 +178,7 @@ namespace cTabWebApp {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à GD300 Rugged Wearable Computer.
+        ///   Recherche une chaîne localisée semblable à Samsung S7 with Kägwerks case.
         /// </summary>
         public static string STR_ctab_core_AndroidShort {
             get {
@@ -385,7 +394,7 @@ namespace cTabWebApp {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Configure GD300 Android.
+        ///   Recherche une chaîne localisée semblable à Configure S7 Android.
         /// </summary>
         public static string STR_ctab_core_ConfigureAndroid {
             get {
@@ -1816,6 +1825,15 @@ namespace cTabWebApp {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Where is the unit moving?.
+        /// </summary>
+        public static string STR_ctab_core_WhereIsTheUnitMoving {
+            get {
+                return ResourceManager.GetString("STR_ctab_core_WhereIsTheUnitMoving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Zoom In.
         /// </summary>
         public static string STR_ctab_core_zoomIn {
@@ -1848,6 +1866,78 @@ namespace cTabWebApp {
         public static string STR_ctab_core_zoomOutDetails {
             get {
                 return ResourceManager.GetString("STR_ctab_core_zoomOutDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Attachements.
+        /// </summary>
+        public static string STR_ctab_messaging_Attachements {
+            get {
+                return ResourceManager.GetString("STR_ctab_messaging_Attachements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Cancel.
+        /// </summary>
+        public static string STR_ctab_messaging_Cancel {
+            get {
+                return ResourceManager.GetString("STR_ctab_messaging_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Generated message.
+        /// </summary>
+        public static string STR_ctab_messaging_GeneratedMessage {
+            get {
+                return ResourceManager.GetString("STR_ctab_messaging_GeneratedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Marker at %1.
+        /// </summary>
+        public static string STR_ctab_messaging_MarkerAt {
+            get {
+                return ResourceManager.GetString("STR_ctab_messaging_MarkerAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à MEDEVAC.
+        /// </summary>
+        public static string STR_ctab_messaging_MEDEVAC {
+            get {
+                return ResourceManager.GetString("STR_ctab_messaging_MEDEVAC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Recipient.
+        /// </summary>
+        public static string STR_ctab_messaging_Recipient {
+            get {
+                return ResourceManager.GetString("STR_ctab_messaging_Recipient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Send.
+        /// </summary>
+        public static string STR_ctab_messaging_Send {
+            get {
+                return ResourceManager.GetString("STR_ctab_messaging_Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Templates.
+        /// </summary>
+        public static string STR_ctab_messaging_Templates {
+            get {
+                return ResourceManager.GetString("STR_ctab_messaging_Templates", resourceCulture);
             }
         }
         
