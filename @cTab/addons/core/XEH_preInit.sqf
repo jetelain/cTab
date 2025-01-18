@@ -21,3 +21,21 @@ if (isClass (configFile >> "CfgWeapons" >> "ACE_microDAGR")) then {
 
 [QGVAR(helmetcam_mode), "LIST", [LLSTRING(helmetcam_mode), LLSTRING(helmetcam_modeDetails)], ["cTab", LLSTRING(videoCategory)], [[0, 1], [LLSTRING(disabled), LLSTRING(enabled)], 1], 0, {}, false] call CBA_fnc_addSetting;
 [QGVAR(uav_mode),       "LIST", [LLSTRING(uav_mode), LLSTRING(uav_modeDetails)], ["cTab", LLSTRING(videoCategory)], [[0, 1], [LLSTRING(disabled), LLSTRING(enabled)], 1], 0, {}, false] call CBA_fnc_addSetting;
+
+// Main Map settings
+GVAR(drawMainMapHandler) = -1;
+[QGVAR(drawMainMap), "CHECKBOX", [LLSTRING(drawMainMap), LLSTRING(drawMainMapDetails)], ["cTab", LLSTRING(mapCategory)], false, 0, {
+	if (!hasInterface) exitWith {};
+	if ( GVAR(drawMainMap) ) then {
+		GVAR(drawMainMapHandler) = (findDisplay 12 displayCtrl 51) ctrlAddEventHandler ["draw", { 
+			params ["_ctrl"];
+			[_ctrl,false] call cTab_fnc_drawUserMarkers;
+			[_ctrl,0] call cTab_fnc_drawBftMarkers;
+		 }];
+	} else {
+		if ( GVAR(drawMainMapHandler) != -1 ) then {
+			(findDisplay 12 displayCtrl 51) ctrlRemoveEventHandler ["draw", GVAR(drawMainMapHandler)];
+			GVAR(drawMainMapHandler) = -1;
+		};
+	};
+}, false] call CBA_fnc_addSetting;
