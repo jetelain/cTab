@@ -72,7 +72,7 @@ GVAR(nextId) = 1;
 GVAR(nextMessageId) = 1;
 GVAR(deviceLevel) = 0;
 GVAR(vehicleMode) = 0;
-GVAR(mapMarkersNeedsUpdate) = true;
+GVAR(mapMarkersNeedsUpdate) = false;
 GVAR(trackDevices) = ["ItemcTab", "ItemAndroid"];
 
 [QGVAR(enabled), "CHECKBOX", [LLSTRING(enabled), LLSTRING(enabledDetails)], ["cTab",LLSTRING(modName)], true, 0, {}, true] call CBA_fnc_addSetting;
@@ -83,4 +83,4 @@ GVAR(trackDevices) = ["ItemcTab", "ItemAndroid"];
 #endif
 [QGVAR(key),     "EDITBOX",  [LLSTRING(key),     LLSTRING(keyDetails)],     ["cTab",LLSTRING(modName)], "", 0, {}, true] call CBA_fnc_addSetting;
 
-[QGVAR(syncMap), "CHECKBOX", [LLSTRING(syncMap), LLSTRING(syncMapDetails)], ["cTab",LLSTRING(modName)], true] call CBA_fnc_addSetting;
+[QGVAR(syncMap), "CHECKBOX", [LLSTRING(syncMap), LLSTRING(syncMapDetails)], ["cTab",LLSTRING(modName)], true, 0, {GVAR(mapMarkersNeedsUpdate) = GVAR(syncMap);}] call CBA_fnc_addSetting;
