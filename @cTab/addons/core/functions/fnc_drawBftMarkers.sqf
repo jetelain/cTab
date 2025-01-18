@@ -42,8 +42,8 @@ _drawText = cTabBFTtxt;
 
 private _mustDrawPlayer = true;
 
-// Anything but MicroDAGR
-if (_mode != 2) then {
+// Anything but MicroDAGR, unless overridden by setting
+if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 	// ------------------ VEHICLES ------------------
 	{
 		_veh = _x select 0;

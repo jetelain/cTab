@@ -127,13 +127,13 @@
     <value>Configurer TAD</value>
   </data>
   <data name="STR_ctab_core_Android" xml:space="preserve">
-    <value>GD300 Android</value>
+    <value>S7 Android</value>
   </data>
   <data name="STR_ctab_core_AndroidShort" xml:space="preserve">
-    <value>Téléphone endurci GD300</value>
+    <value>Samsung S7 avec protection Kägwerks</value>
   </data>
   <data name="STR_ctab_core_ConfigureAndroid" xml:space="preserve">
-    <value>Configurer GD300 Android</value>
+    <value>Configurer S7 Android</value>
   </data>
   <data name="STR_ctab_core_MicroDAGR" xml:space="preserve">
     <value>MicroDAGR</value>
@@ -331,13 +331,13 @@
     <value>1 Personnel</value>
   </data>
   <data name="STR_ctab_core_TeamMenu" xml:space="preserve">
-    <value>Equipe Ø</value>
+    <value>Equipage Ø</value>
   </data>
   <data name="STR_ctab_core_TeamHint" xml:space="preserve">
     <value>3–5 personnels</value>
   </data>
   <data name="STR_ctab_core_SquadMenu" xml:space="preserve">
-    <value>Groupe •</value>
+    <value>Equipe •</value>
   </data>
   <data name="STR_ctab_core_SquadHint" xml:space="preserve">
     <value>5–10 personnels</value>
@@ -716,5 +716,35 @@
   </data>
   <data name="WhereIsTheUnitMoving" xml:space="preserve">
     <value>Par où se déplace l'unité ?</value>
+  </data>
+  <data name="STR_ctab_core_WhereIsTheUnitMoving" xml:space="preserve">
+    <value>Par où se déplace l'unité ?</value>
+  </data>
+  <data name="STR_ctab_messaging_Attachements" xml:space="preserve">
+    <value>Pièces jointes</value>
+  </data>
+  <data name="STR_ctab_messaging_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="STR_ctab_messaging_GeneratedMessage" xml:space="preserve">
+    <value>Message généré</value>
+  </data>
+  <data name="STR_ctab_messaging_MarkerAt" xml:space="preserve">
+    <value>Marqueur à %1</value>
+  </data>
+  <data name="STR_ctab_messaging_Recipient" xml:space="preserve">
+    <value>Destinataire</value>
+  </data>
+  <data name="STR_ctab_messaging_Send" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="STR_ctab_messaging_Templates" xml:space="preserve">
+    <value>Modèles</value>
+  </data>
+  <data name="STR_ctab_messaging_MEDEVAC" xml:space="preserve">
+    <value>EVASAN</value>
+  </data>
+  <data name="BuiltinMedevacTemplateJson" xml:space="preserve">
+    <value>{"uid":"builtin#1","lines":[{"title":"EVASAN","description":"","fields":[]},{"title":"Line 1","description":"POSITION UTM","fields":[{"description":"Position UTM","type":"Grid"}]},{"title":"Line 2","description":"INDICATIF / FREQUENCE","fields":[{"description":"Indicatif","type":"CallSign"},{"description":"Fr\u00E9quence","type":"Frequency"}]},{"title":"Line 3","description":"NOMBRE ET PRIORITE DES BLESSES","fields":[{"title":"A","description":"P1 (urgent)","type":"Number"},{"title":"B","description":"P2 (urgence chir.)","type":"Number"},{"title":"C","description":"P2 (prioritaire)","type":"Number"}]},{"title":"Line 4","description":"EQUIPEMENTS NECESSAIRES","fields":[{"title":"A","description":"n\u00E9ant","type":"CheckBox"},{"title":"B","description":"h\u00E9lico","type":"CheckBox"},{"title":"C","description":"d\u00E9sincar.","type":"CheckBox"},{"title":"D","description":"O2","type":"CheckBox"},{"title":"E","description":"Autres","type":"Text"}]},{"title":"Line 5","description":"NOMBRE ET TYPE DE BLESSES","fields":[{"title":"L","description":"couch\u00E9","type":"Number"},{"title":"A","description":"ambulatoire","type":"Number"},{"title":"E","description":"accompagnant (obligatoire si enfant)","type":"Number"}]},{"title":"Line 6","description":"SECURITE ZONE","fields":[{"title":"N","description":"Sure","type":"CheckBox"},{"title":"P","description":"ennemis possibles","type":"CheckBox"},{"title":"E","description":"ennemis pr\u00E9sent","type":"CheckBox"},{"title":"X","description":"escorte arm\u00E9e","type":"CheckBox"}]},{"title":"Line 7","description":"MARQUAGE ZPH","fields":[{"title":"A","description":"cyalum, PN2A","type":"CheckBox"},{"title":"B","description":"fus\u00E9e \u00E9clair.","type":"CheckBox"},{"title":"C","description":"fumig\u00E8ne","type":"CheckBox"},{"title":"D","description":"n\u00E9ant","type":"CheckBox"},{"title":"E","description":"autre moyen","type":"Text"}]},{"title":"Line 8","description":"NATIONALITES DES BLESSES","fields":[{"title":"A","description":"Militaire FR/OTAN","type":"Number"},{"title":"D","description":"Civils","type":"Number"},{"title":"E","description":"Prisonnier","type":"Number"},{"title":"F","description":"Enfants","type":"Number"}]},{"title":"Line 9","description":"DESCRIPTIF DE LA ZONE ZPH","fields":[{"description":"si diff\u00E9rent de Line 1","type":"Text"}]}],"title":"EVASAN","description":"(message originally builtin ctab.plan-ops.fr)","type":"MedicalEvacuation","href":"https://maps2.plan-ops.fr/MessageTemplates/Details/1?t=6sRe0JNoF7pGTB_-uw_H5wsvDSgExzPY6ufXqVt_jjE","countryCode":"FR"}</value>
   </data>
 </root>

@@ -46,6 +46,7 @@ if (!hasInterface) exitWith { };
 	["ctab_listsUpdated", FUNC(updateMarkers)] call CBA_fnc_addEventHandler;
 	["ctab_userMarkerListUpdated", FUNC(updateMarkers)] call CBA_fnc_addEventHandler;
 	["ctab_messagesUpdated", FUNC(updateMessages)] call CBA_fnc_addEventHandler;
+	["ctab_messaging_templates", FUNC(updateMessageTemplates)] call CBA_fnc_addEventHandler;
 
 	addMissionEventHandler ["MarkerCreated", {
 		params ['_name'];

@@ -178,14 +178,14 @@ class cTab_Android_dlg {
 					h = pxToScreen_H(cTab_GUI_android_MESSAGE_MESSAGETEXT_H);
 					canModify = 0;
 				};
-				class deletebtn: cTab_RscButton
+				class deletebtn: cTab_RscButton_Danger
 				{
 					idc = IDC_CTAB_MSG_BTNDELETE;
 					text = "$STR_ctab_core_DeleteMessage";
 					tooltip = "$STR_ctab_core_DeleteMessageHint";
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_BUTTON_DELETE_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_BUTTON_DELETE_Y);
-					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_W);
+					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_DELETE_W);
 					h = pxToScreen_H(cTab_GUI_android_MESSAGE_BUTTON_H);
 					action = "['cTab_Android_dlg'] call cTab_fnc_onMsgBtnDelete;";
 				};
@@ -196,7 +196,7 @@ class cTab_Android_dlg {
 					tooltip = "$STR_ctab_core_ComposeMessageHint";
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_BUTTON_MODE_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_BUTTON_MODE_Y);
-					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_W);
+					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_MODE_W);
 					h = pxToScreen_H(cTab_GUI_android_MESSAGE_BUTTON_H);
 					action = "['cTab_Android_dlg',[['mode','COMPOSE']]] call cTab_fnc_setSettings;";
 				};
@@ -240,7 +240,7 @@ class cTab_Android_dlg {
 					text = "$STR_ctab_core_SendMessage";
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_BUTTON_SEND_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_BUTTON_SEND_Y);
-					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_W);
+					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_SEND_W);
 					h = pxToScreen_H(cTab_GUI_android_MESSAGE_BUTTON_H);
 					action = "call cTab_msg_Send;";
 				};
@@ -264,9 +264,29 @@ class cTab_Android_dlg {
 					tooltip = "$STR_ctab_core_ReadMessagesHint";
 					x = pxToGroup_X(cTab_GUI_android_MESSAGE_BUTTON_MODE_X);
 					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_BUTTON_MODE_Y);
-					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_W);
+					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_MODE_W);
 					h = pxToScreen_H(cTab_GUI_android_MESSAGE_BUTTON_H);
 					action = "['cTab_Android_dlg',[['mode','MESSAGE']]] call cTab_fnc_setSettings;";
+				};
+				class MedEvacBtn: cTab_RscButton
+				{
+					idc = IDC_CTAB_MSG_MEDEVAC;
+					text = "$STR_ctab_messaging_MEDEVAC";
+					x = pxToGroup_X(cTab_GUI_android_MESSAGE_COMPOSE_TEXT_X + cTab_GUI_android_MESSAGE_BUTTON_SEND_W + cTab_GUI_android_MESSAGE_MARGIN_INNER);
+					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_BUTTON_SEND_Y);
+					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_SEND_W);
+					h = pxToScreen_H(cTab_GUI_android_MESSAGE_BUTTON_H);
+					onButtonClick = QUOTE(_this call EFUNC(messaging,btnShowMedevacTemplate););
+				};			
+				class TemplatesBtn: cTab_RscButton
+				{
+					idc = IDC_CTAB_MSG_TEMPLATES;
+					text = "$STR_ctab_messaging_Templates";
+					x = pxToGroup_X(cTab_GUI_android_MESSAGE_COMPOSE_TEXT_X);
+					y = pxToGroup_Y(cTab_GUI_android_MESSAGE_BUTTON_SEND_Y);
+					w = pxToScreen_W(cTab_GUI_android_MESSAGE_BUTTON_SEND_W);
+					h = pxToScreen_H(cTab_GUI_android_MESSAGE_BUTTON_H);
+					onButtonClick = QUOTE(_this call EFUNC(messaging,btnShowTemplates););
 				};
 			};
 		};

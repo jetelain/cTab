@@ -80,6 +80,13 @@ if (count GVAR(dagrDevices) == 0) then {
 INFO_4("Devices detected in %1 sec : %2, %3, %4",(diag_tickTime - _start),GVAR(tabDevices),GVAR(androidDevices),GVAR(dagrDevices));
 
 GVAR(leaderDevices) = GVAR(tabDevices) + GVAR(androidDevices);
+if (GVAR(microDagrGroupBFT)) then {
+	GVAR(leaderDevices) append GVAR(dagrDevices);
+	// If present, add ACE MicroDAGR to leaderDevices, but NOT dagrDevices, since it would allow showing the cTab MicroDAGR dialog without having that item
+	if (isClass (configFile >> "CfgWeapons" >> "ACE_microDAGR")) then {
+		GVAR(leaderDevices) pushBack "ACE_microDAGR";
+	};
+};
 GVAR(personnelDevices) = GVAR(leaderDevices) + GVAR(dagrDevices);
 
 /*

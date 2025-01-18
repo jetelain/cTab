@@ -85,7 +85,7 @@
 #define cTab_GUI_tablet_MESSAGE_MARGIN_OUTER (20)
 #define cTab_GUI_tablet_MESSAGE_MARGIN_INNER (10)
 
-#define cTab_GUI_tablet_MESSAGE_BUTTON_W (150)
+#define cTab_GUI_tablet_MESSAGE_BUTTON_W (200)
 #define cTab_GUI_tablet_MESSAGE_BUTTON_H (50)
 
 #define cTab_GUI_tablet_MESSAGE_MESSAGETEXT_FRAME_X (cTab_GUI_tablet_SCREEN_CONTENT_X + cTab_GUI_tablet_MESSAGE_MARGIN_OUTER)
@@ -171,6 +171,11 @@ class cTab_RscEdit_Tablet: cTab_RscEdit
 	sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE * 1.2);
 };
 class cTab_RscButton_Tablet: cTab_RscButton
+{
+	font = QUOTE(GUI_FONT_MONO);
+	sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE);
+};
+class cTab_RscButton_Tablet_Danger: cTab_RscButton_Danger
 {
 	font = QUOTE(GUI_FONT_MONO);
 	sizeEx = pxToScreen_H(cTab_GUI_tablet_OSD_TEXT_STD_SIZE);

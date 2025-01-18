@@ -31,12 +31,3 @@ if ( isNil QGVAR(diaryRecord)) then {
 
 systemChat (format [LLSTRING(connected), _uri]);
 systemChat LLSTRING(connectedQrCode);
-
-// getResolution => [screenW, screenH, viewPortW, viewPortH, aspectRatio, uiScale, fovTop, fovLeft, tripleHead]
-// [5120,1440,1056,792,3.55556,0.55,0.75,2.66667,true]
-
-// [safeZoneW,safeZoneH]
-// [1.61616,1.81818]
-
-// (safezoneW / safezoneH)
-// 0.888889
