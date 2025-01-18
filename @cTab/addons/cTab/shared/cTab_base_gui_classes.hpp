@@ -623,6 +623,14 @@ class cTab_RscButton
 	borderSize = 0;
 };
 
+class cTab_RscButton_Danger : cTab_RscButton {
+
+	colorBackground[] = {0.3, 0, 0, .7};
+	colorBackgroundDisabled[] = { 0.95, 0.95, 0.95, 1 };
+	colorBackgroundActive[] = {0.3, 0, 0, 1};
+	colorFocused[] = {0.3, 0, 0,1};
+};
+
 class cTab_ActiveText
 {
 	access = 0;

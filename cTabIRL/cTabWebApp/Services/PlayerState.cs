@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Arma3TacMapLibrary.Maps;
 using Arma3TacMapLibrary.TacMaps;
+using cTabWebApp.Messaging;
 using cTabWebApp.TacMaps;
 
 namespace cTabWebApp
@@ -36,5 +38,6 @@ namespace cTabWebApp
         public bool IsAuthenticated { get; internal set; }
         public string SpectatorToken { get; internal set; }
         public UpdateMapMarkersMessage LastUpdateMapMarkers { get; internal set; }
+        public UpdateMessageTemplatesMessage LastUpdateMessagesTemplates { get; set; }
     }
 }

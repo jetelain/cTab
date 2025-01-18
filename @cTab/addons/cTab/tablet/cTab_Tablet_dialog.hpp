@@ -277,7 +277,7 @@ class cTab_Tablet_dlg {
 			x = pxToScreen_X(cTab_GUI_tablet_SCREEN_CONTENT_X);
 			y = pxToScreen_Y(cTab_GUI_tablet_SCREEN_CONTENT_Y);
 			w = pxToScreen_W(cTab_GUI_tablet_SCREEN_CONTENT_W);
-			h = pxToScreen_H(cTab_GUI_tablet_SCREEN_CONTENT_H);
+			h = pxToScreen_H(cTab_GUI_tablet_SCREEN_CONTENT_H - cTab_GUI_tablet_TASKBAR_H);
 			class VScrollbar {};
 			class HScrollbar {};
 			class Scrollbar {};
@@ -333,7 +333,7 @@ class cTab_Tablet_dlg {
 					w = pxToScreen_W(cTab_GUI_tablet_MESSAGE_PLAYERLIST_W);
 					h = pxToScreen_H(cTab_GUI_tablet_MESSAGE_PLAYERLIST_H);
 				};
-				class deletebtn: cTab_RscButton_Tablet
+				class deletebtn: cTab_RscButton_Tablet_Danger
 				{
 					idc = IDC_CTAB_MSG_BTNDELETE;
 					text = "$STR_ctab_core_DeleteMessage";
@@ -354,6 +354,28 @@ class cTab_Tablet_dlg {
 					h = pxToScreen_H(cTab_GUI_tablet_MESSAGE_BUTTON_H);
 					action = "call cTab_msg_Send;";
 				};
+				
+				class MedEvacBtn: cTab_RscButton_Tablet
+				{
+					idc = IDC_CTAB_MSG_MEDEVAC;
+					text = "$STR_ctab_messaging_MEDEVAC";
+					x = pxToGroup_X(cTab_GUI_tablet_MESSAGE_MESSAGETEXT_X + cTab_GUI_tablet_MESSAGE_BUTTON_W + cTab_GUI_tablet_MESSAGE_MARGIN_INNER);
+					y = pxToGroup_Y(cTab_GUI_tablet_MESSAGE_BUTTON_SEND_Y);
+					w = pxToScreen_W(cTab_GUI_tablet_MESSAGE_BUTTON_W);
+					h = pxToScreen_H(cTab_GUI_tablet_MESSAGE_BUTTON_H);
+					onButtonClick = QUOTE(_this call EFUNC(messaging,btnShowMedevacTemplate););
+				};			
+				class TemplatesBtn: cTab_RscButton_Tablet
+				{
+					idc = IDC_CTAB_MSG_TEMPLATES;
+					text = "$STR_ctab_messaging_Templates";
+					x = pxToGroup_X(cTab_GUI_tablet_MESSAGE_MESSAGETEXT_X);
+					y = pxToGroup_Y(cTab_GUI_tablet_MESSAGE_BUTTON_SEND_Y);
+					w = pxToScreen_W(cTab_GUI_tablet_MESSAGE_BUTTON_W);
+					h = pxToScreen_H(cTab_GUI_tablet_MESSAGE_BUTTON_H);
+					onButtonClick = QUOTE(_this call EFUNC(messaging,btnShowTemplates););
+				};
+
 				class edittxtbox: cTab_RscEdit_Tablet
 				{
 					idc = IDC_CTAB_MSG_COMPOSE;

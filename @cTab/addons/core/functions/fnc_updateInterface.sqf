@@ -154,7 +154,8 @@ if (isNil "_mode") then {
 					IDC_CTAB_OSD_HOOK_ELEVATION,
 					IDC_CTAB_OSD_HOOK_DST,
 					IDC_CTAB_OSD_HOOK_DIR,
-					IDC_CTAB_NOTIFICATION]
+					IDC_CTAB_NOTIFICATION,
+					990566,990567]
 				};
 				if (_displayName == "cTab_Android_dlg") exitWith {
 					[3300,3301,3302,3303,3304,3305,3306,3307,
@@ -167,7 +168,8 @@ if (isNil "_mode") then {
 					IDC_CTAB_OSD_HOOK_ELEVATION,
 					IDC_CTAB_OSD_HOOK_DST,
 					IDC_CTAB_OSD_HOOK_DIR,
-					IDC_CTAB_NOTIFICATION]
+					IDC_CTAB_NOTIFICATION,
+					990566,990567]
 				};
 				if (_displayName in ["cTab_FBCB2_dlg","cTab_TAD_dlg"]) exitWith {
 					[3300,3301,3302,3303,3304,3305,3306,3307,
