@@ -11,3 +11,6 @@ PREP(markMessageRead);
 PREP(sendMessage);
 PREP(deleteMessage);
 PREP(updateMapMarkers);
+PREP(screenShotStored);
+PREP(screenShotFailed);
+PREP(screenShotEnabled);

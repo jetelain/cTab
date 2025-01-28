@@ -40,10 +40,13 @@ namespace cTabWebApp
                 .AddViewLocalization();
 #if CLOUD
             services.AddSingleton<IPlayerStateService, PlayerStateService>();
+            services.AddSingleton<IImageService, ImageService>();
 #else
             services.AddSingleton<IPlayerStateService, SinglePlayerStateService>();
+            services.AddSingleton<IImageService, NoImageService>();
 #endif
             services.AddSingleton<PublicUriService>();
+
 
             var steamKey = Configuration.GetValue<string>("SteamKey");
             if (!string.IsNullOrEmpty(steamKey))
