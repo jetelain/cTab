@@ -39,5 +39,6 @@ namespace cTabWebApp
         public string SpectatorToken { get; internal set; }
         public UpdateMapMarkersMessage LastUpdateMapMarkers { get; internal set; }
         public UpdateMessageTemplatesMessage LastUpdateMessagesTemplates { get; set; }
+        public UpdateAcousticMessage LastUpdateAcoustic { get; set; }
     }
 }

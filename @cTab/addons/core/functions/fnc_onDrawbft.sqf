@@ -5,11 +5,11 @@
 	(previously in player_init.sqf)
 */
 _cntrlScreen = _this select 0;
-_display = ctrlParent _cntrlScreen;
 
 cTabMapWorldPos = [_cntrlScreen] call cTab_fnc_ctrlMapCenter;
 cTabMapScale = ctrlMapScale _cntrlScreen;
 
+{_this call _x;} forEach GVAR(bftDrawHandlers);
 [_cntrlScreen,true] call cTab_fnc_drawUserMarkers;
 private _drawPlayer = [_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
 
@@ -24,7 +24,7 @@ if (_drawPlayer) then {
 
 // update hook information
 if (cTabDrawMapTools) then {
-	[_display,_cntrlScreen,_playerPos,cTabMapCursorPos,0,false] call cTab_fnc_drawHook;
+	[ctrlParent _cntrlScreen,_cntrlScreen,_playerPos,cTabMapCursorPos,0,false] call cTab_fnc_drawHook;
 };
 
 true

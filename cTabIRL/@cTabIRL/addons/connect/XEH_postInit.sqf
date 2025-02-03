@@ -37,6 +37,7 @@ if (!hasInterface) exitWith { };
 	["loadout", FUNC(updateDevices)] call CBA_fnc_addPlayerEventHandler;
 	["unit", FUNC(updateDevices)] call CBA_fnc_addPlayerEventHandler;
 	["vehicle", FUNC(updateDevices)] call CBA_fnc_addPlayerEventHandler;
+	["turret", FUNC(updateDevices)] call CBA_fnc_addPlayerEventHandler;
 
 	// Update position 4 times per second
 	GVAR(updatePFH) = [FUNC(updatePosition), 0.25] call CBA_fnc_addPerFrameHandler;
@@ -46,22 +47,23 @@ if (!hasInterface) exitWith { };
 	["ctab_userMarkerListUpdated", FUNC(updateMarkers)] call CBA_fnc_addEventHandler;
 	["ctab_messagesUpdated", FUNC(updateMessages)] call CBA_fnc_addEventHandler;
 	["ctab_messaging_templates", FUNC(updateMessageTemplates)] call CBA_fnc_addEventHandler;
+	["ctab_acousticdetector_update",{ GVAR(acousticNeedsUpdate) = true;}] call CBA_fnc_addEventHandler;
 
 	addMissionEventHandler ["MarkerCreated", {
 		params ['_name'];
-		if ( [_name] call FUNC(markerFilter) ) then {
+		if ( GVAR(syncMap) && {[_name] call FUNC(markerFilter)} ) then {
 			GVAR(mapMarkersNeedsUpdate) = true;
 		};
 	}];
 	addMissionEventHandler ["MarkerUpdated", {
 		params ['_name'];
-		if ( [_name] call FUNC(markerFilter) ) then {
+		if ( GVAR(syncMap) && {[_name] call FUNC(markerFilter)} ) then {
 			GVAR(mapMarkersNeedsUpdate) = true;
 		};
 	}];
 	addMissionEventHandler ["MarkerDeleted", {
 		params ['_name'];
-		if ( [_name] call FUNC(markerFilter) ) then {
+		if ( GVAR(syncMap) && {[_name] call FUNC(markerFilter)} ) then {
 			GVAR(mapMarkersNeedsUpdate) = true;
 		};
 	}];
