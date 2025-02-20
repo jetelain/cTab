@@ -1,5 +1,5 @@
 texHeaders.bin
-/.vs
+.vs
 *.pbo
 /cTabIRL/.vs
 /cTabIRL/cTabExtension/bin
@@ -24,3 +24,6 @@ appsettings.Development.json
 /cTabIRL/@cTabIRL/.hemttout
 /@cTab/.hemttout
 /@cTab/.hemtt/missions/~basic.vr
+/generators/App6dGenerator/bin
+/generators/App6dGenerator/obj
+/@cTab/addons/app6d/data/*/*/*.png
