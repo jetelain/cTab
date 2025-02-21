@@ -82,4 +82,4 @@ if ( _g != "00") then {
 	};
 };
 
-result
+_result
