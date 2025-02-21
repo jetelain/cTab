@@ -154,5 +154,17 @@ namespace App6dGenerator
             symbolSvg.Root.SetAttributeValue("height", "256");
             return symbolSvg;
         }
+
+        public XDocument ReinforcedReduced(string value)
+        {
+            var builder = new App6dSymbolIdBuilder();
+            builder.StandardIdentity = App6dStandardIdentity.Friend;
+            builder.SymbolSet = "10";
+            var neutralSymbol = generator.Generate(builder.ToSIDC(), new SymbolIconOptions());
+            var neutralSvg = XDocument.Parse(neutralSymbol.Svg);
+            var ms = generator.Generate(builder.ToSIDC(), new SymbolIconOptions() { ReinforcedReduced = value });
+            return Diff(neutralSvg, XDocument.Parse(ms.Svg), "-50 -50 300 300");
+        }
+
     }
 }

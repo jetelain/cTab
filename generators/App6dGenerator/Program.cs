@@ -74,6 +74,11 @@ namespace App6dGenerator
                 }
             }
 
+            Directory.CreateDirectory(Path.Combine(targetPath, "o"));   
+            ReinforcedReduced(Path.Combine(targetPath, "o\\plus_ca.png"), generator, "(+)");
+            ReinforcedReduced(Path.Combine(targetPath, "o\\minus_ca.png"), generator, "(-)");
+            ReinforcedReduced(Path.Combine(targetPath, "o\\plusminus_ca.png"), generator, "(±)");
+
             await Arma3ToolsHelper.ImageToPAA(consoleProgess, imageToPaa);
             return consoleProgess;
         }
@@ -94,6 +99,11 @@ namespace App6dGenerator
             imageToPaa.Add(Path.Combine(dir, item.Name));
         }
 
+        private static void ReinforcedReduced(string target, IconGenerator generator, string text)
+        {
+            File.WriteAllBytes(target, ToPng(generator.ReinforcedReduced(text).ToString()));
+            imageToPaa.Add(target);
+        }
 
         public static void SaveToPng(string svg, Stream target, float scale = 1f)
         {

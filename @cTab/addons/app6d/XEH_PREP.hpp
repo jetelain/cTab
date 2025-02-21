@@ -1,3 +1,3 @@
 PREP(getSidcImages);
 PREP(getSidcImagesCached);
-PREP(drawSidc);
+PREP(drawMilsymbol);

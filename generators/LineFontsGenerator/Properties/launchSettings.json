@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LineFontsGenerator": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\Julien\\source\\repos\\jetelain\\cTab\\@cTab\\addons\\app6d\\data\\fonts"
+    }
+  }
+}

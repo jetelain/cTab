@@ -27,3 +27,6 @@ appsettings.Development.json
 /generators/App6dGenerator/bin
 /generators/App6dGenerator/obj
 /@cTab/addons/app6d/data/*/*/*.png
+/@cTab/addons/app6d/data/*/*.png
+/generators/LineFontsGenerator/obj
+/generators/LineFontsGenerator/bin
