@@ -5,6 +5,13 @@ if ( !isNil "ace_markers_fnc_initInsertMarker" ) then {
 	["onLoad",_this,"RscDisplayInsertMarker",'GUI'] call (uinamespace getvariable 'BIS_fnc_initDisplay');
 };
 
+if (isNil QGVAR(sets)) then {
+	GVAR(sets) = call compile preprocessFileLineNumbers QPATHTOF(data\app6d.sqf);
+};
+
+GVAR(editingSet) = "";
+GVAR(isFillingLB) = false;
+
 [{
     disableSerialization;
     params ["_display"];
@@ -42,10 +49,15 @@ if ( !isNil "ace_markers_fnc_initInsertMarker" ) then {
 	// Standard identity
 	private _idW = ((_w * 2) - 0.02) / 7;
 	{
-		private _ctrl = _display ctrlCreate ["RscPicture", -1, _grp];
+		private _ctrl = _display ctrlCreate ["RscBackground", 9710 + _x, _grp];
+		_ctrl ctrlSetPosition [(_x*_idW), _y, _idW, _idW];
+		_ctrl ctrlCommit 0;
+
+		_ctrl = _display ctrlCreate ["RscPicture", -1, _grp];
 		_ctrl ctrlSetPosition [(_x*_idW)-(_idW*0.25), _y-(_idW*0.25), _idW*1.5, _idW*1.5];
 		_ctrl ctrlSetText (format [QPATHTOF(data\%1\10\xxxx000000xxxx_ca.paa),_x]);
 		_ctrl ctrlCommit 0;
+
 		_ctrl = _display ctrlCreate [QGVAR(valueButton), 9700 + _x, _grp];
 		_ctrl ctrlSetPosition [(_x*_idW), _y, _idW, _idW];
 		_ctrl ctrlAddEventHandler ["ButtonClick", 
@@ -88,6 +100,31 @@ if ( !isNil "ace_markers_fnc_initInsertMarker" ) then {
 		_y = _y + _fieldH + 0.01;
 	};
 
+	["Icon set", 0, 9905, {
+		params ["_ctrl","_index"];
+		[_ctrl lbData _index, 4] call FUNC(updateEditorSidc);
+	}, GVAR(sets) apply { _x select 1 }, GVAR(sets) apply { _x select 0 }] call _createDropdownField;
+
+	["Echelon", 0, IDC_LB_AMP, {
+		params ["_ctrl","_index"];
+		[_ctrl lbData _index, 8] call FUNC(updateEditorSidc);
+	}, [],[]] call _createDropdownField;
+
+	["Icon", 0, IDC_LB_ICON, {
+		params ["_ctrl","_index"];
+		[_ctrl lbData _index, 10] call FUNC(updateEditorSidc);
+	}, [],[]] call _createDropdownField;
+
+	["Amplifier 1", 0, IDC_LB_MOD1, {
+		params ["_ctrl","_index"];
+		[_ctrl lbData _index, 16] call FUNC(updateEditorSidc);
+	}, [],[]] call _createDropdownField;
+
+	["Amplifier 2", 0, IDC_LB_MOD2, {
+		params ["_ctrl","_index"];
+		[_ctrl lbData _index, 18] call FUNC(updateEditorSidc);
+	}, [],[]] call _createDropdownField;
+
 	["Status", 0, 9910, {
 		params ["_ctrl","_index"];
 		[format ["%1",_index], 6] call FUNC(updateEditorSidc);
@@ -111,10 +148,13 @@ if ( !isNil "ace_markers_fnc_initInsertMarker" ) then {
 		private _config = (configFile >> "CfgMarkers") select _data;
 		GVAR(editorActive) = (configName _config == "ctab_app6d_generic");
     	((findDisplay 54) displayCtrl 9800) ctrlShow GVAR(editorActive);
+		[((findDisplay 54) displayCtrl 101)] call FUNC(updateEditorSelects);
 	}];
 
 	GVAR(editorActive) = (ace_markers_currentMarkerConfigName == "ctab_app6d_generic");
-	_grp ctrlShow GVAR(editorActive);
+	if ( !GVAR(editorActive) ) then {
+		_grp ctrlShow false;
+	};
 
 	// Setup preview on map
 	GVAR(mapEH) = ((displayParent _display) displayCtrl 51 /*IDC_MAP*/)  ctrlAddEventHandler ["Draw", {
@@ -124,5 +164,10 @@ if ( !isNil "ace_markers_fnc_initInsertMarker" ) then {
 		if ( count _idc == 0 ) then { _sidc = DEFAULT_SIDC; };
 		[_mapCtrl, _idc, ace_markers_currentMarkerPosition, GVAR(previewOptions), BASELINE_ICON_SIZE * ace_markers_currentMarkerScale] call FUNC(drawMilsymbol);
 	}]; 
+
+	
+	private _textCtrl = ((findDisplay 54) displayCtrl 101);
+	_textCtrl ctrlAddEventHandler ["EditChanged", FUNC(updateEditorSelects)];
+	[_textCtrl] call FUNC(updateEditorSelects);
 
 }, _this] call CBA_fnc_execNextFrame;

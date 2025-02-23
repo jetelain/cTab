@@ -18,10 +18,73 @@ namespace App6dGenerator
         {
             string targetPath = "C:\\Users\\Julien\\source\\repos\\jetelain\\cTab\\@cTab\\addons\\app6d\\data";
 
-            await Generate(targetPath);
+            using (var writer = File.CreateText(Path.Combine(targetPath, "app6d.sqf")))
+            {
+                writer.WriteLine("[");
+                var first = true;
+                foreach (var set in App6dSymbolDatabase.Default.SymbolSets)
+                {
+                    if (set.MainIcons.Count == 0) continue;
 
+                    if (first)
+                    {
+                        first = false;
+                    }
+                    else
+                    {
+                        writer.WriteLine(",");
+                    }
+                    writer.WriteLine($"[\"{set.Code}\",\"{set.Name}\",");
+                    WriteList(writer, set.Amplifiers, a => a.Code, a => a.Name);
+                    WriteList(writer, set.Modifiers1, a => a.Code, a => a.FirstModifier);
+                    WriteList(writer, set.Modifiers2, a => a.Code, a => a.SecondModifier);
+                    WriteList(writer, set.MainIcons.Where(a => a.IsPointRendering), a => a.Code, GetIconLabel, true);
+                    writer.Write("]");
+                }
+                writer.WriteLine("]");
+            }
+            await Generate(targetPath);
             var x = Directory.GetFiles(targetPath, "*.paa", SearchOption.AllDirectories).Sum(f => new FileInfo(f).Length);
             Console.WriteLine($"Total size: {x/1024.0/1024.0:0.0} MB");
+        }
+
+        public static string? GetIconLabel(App6dMainIcon icon)
+        {
+            if (!string.IsNullOrEmpty(icon.EntitySubtype))
+            {
+                return $"{icon.Entity}>{icon.EntityType}>{icon.EntitySubtype}";
+            }
+            if (!string.IsNullOrEmpty(icon.EntityType))
+            {
+                return $"{icon.Entity}>{icon.EntityType}";
+            }
+            return icon.Entity;
+        }
+
+        private static void WriteList<T>(StreamWriter writer, IEnumerable<T> list, Func<T,string?> code, Func<T, string?> label, bool isLast = false)
+        {
+            var firstAmp = true;
+            writer.WriteLine($"  [ // {typeof(T).Name}");
+            if (!list.Any())
+            {
+                writer.Write($"    [\"00\",\"n/a\"]");
+            }
+            else
+            {
+                foreach (var amp in list)
+                {
+                    if (firstAmp)
+                    {
+                        firstAmp = false;
+                    }
+                    else
+                    {
+                        writer.WriteLine($",");
+                    }
+                    writer.Write($"    [\"{code(amp)}\",\"{label(amp)}\"]");
+                }
+            }
+            writer.WriteLine(isLast ? "]" : "],");
         }
 
         private static async Task<ConsoleProgessRender> Generate(string targetPath)

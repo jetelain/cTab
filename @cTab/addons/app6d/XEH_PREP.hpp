@@ -5,3 +5,4 @@ PREP(initInsertMarker);
 PREP(placeMarker);
 PREP(updateEditorSidc);
 PREP(updatePreviewOptions);
+PREP(updateEditorSelects);

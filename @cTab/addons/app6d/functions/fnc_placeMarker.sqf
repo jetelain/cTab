@@ -12,6 +12,7 @@ if ( !isNil "ace_markers_fnc_placeMarker" ) then {
 		GVAR(editingOptions) set [2, ctrlText (_display displayCtrl 9902)];
 		GVAR(editingOptions) set [3, lbCurSel (_display displayCtrl 9903)];
 		GVAR(editingOptions) set [4, ctrlText (_display displayCtrl 9904)];
+		// TODO: network dispatch
 	 };
 } else {
 	["onUnload",_this,"RscDisplayInsertMarker",'GUI'] call (uinamespace getvariable 'BIS_fnc_initDisplay');
