@@ -26,6 +26,12 @@ namespace LineFontsGenerator
             await Generate("TahomaBLineOne32", 40, 1, 1024);
             await Generate("TahomaBLineTwo32", 40, 2, 1024);
             await Generate("TahomaBLineThree32", 40, 3, 1024);
+
+            await Generate("TahomaBLineZero8", 10, 0, 512);
+            await Generate("TahomaBLineZero16", 20, 0, 512);
+            await Generate("TahomaBLineZero32", 40, 0, 1024);
+
+
         }
 
         private record CharBox(char Char, int X, int Y, int Width, int Height);
@@ -36,10 +42,10 @@ namespace LineFontsGenerator
             var options = new TextOptions(font);
 
             var normalLineHeight = (int)Math.Round(TextMeasurer.MeasureSize(new string(Chars), options).Height)+2;
-            var fontLineHeight = normalLineHeight * 3;
+            var fontLineHeight = normalLineHeight * (lineNumber > 0 ? 3 : 5);
 
             var boxes = new List<CharBox>();
-            var offset = (lineNumber - 1) * normalLineHeight;
+            var offset = lineNumber > 0 ? (lineNumber - 1) * normalLineHeight : 0;
 
             var margin = (int)(realFontSize / 10 * 2);
 
@@ -78,6 +84,11 @@ namespace LineFontsGenerator
                     a.Write((ushort)(box.Y));
                     a.Write((ushort)(box.Width));
                     a.Write((ushort)(box.Height));
+
+                    if ( box.Y + box.Height > imageSize)
+                    {
+                        Console.WriteLine($"{name}: Image too small");
+                    }
                 }
             }
 
