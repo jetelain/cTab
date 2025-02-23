@@ -1,6 +1,9 @@
 #define COMPONENT app6d
 #include "\z\ctab\addons\main\script_mod.hpp"
 
+#define BASELINE_ICON_SIZE 96
+#define DEFAULT_SIDC "10001000000000000000"
+
  #define DEBUG_MODE_FULL
  #define DISABLE_COMPILE_CACHE
 
