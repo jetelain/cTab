@@ -8,14 +8,12 @@ namespace cTabExtension
 {
     public static class Worker
     {
-        private const string ExtensionHeader = "cTabExtension/1.2";
+        public const string ExtensionHeader = "cTabExtension/1.2";
 
-        private static readonly HttpClient webClient = new HttpClient() { DefaultRequestHeaders = { { "Extension", ExtensionHeader } } };
         private static Task<HubConnection?>? serverConnection;
         private static CancellationTokenSource? cancellationTokenSource;
         private static List<Tuple<string, Func<HubConnection, Task>>> replay = new List<Tuple<string, Func<HubConnection, Task>>>();
-        private static string? screenShotEndpoint;
-        private static string? screenShotToken;
+        private static ScreenShotWorker? screenShot;
 
         public static void Message(string function,string?[] args)
         {
@@ -77,7 +75,10 @@ namespace cTabExtension
             {
                 try
                 {
-                    await TakeScreenShotInternal(args);
+                    if (screenShot != null)
+                    {
+                        await screenShot.TakeScreenShotInternal(args);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -86,47 +87,6 @@ namespace cTabExtension
                     await Extension.Callback("ScreenShotFailed", "");
                 }
             });
-        }
-
-        private static async Task TakeScreenShotInternal(string?[] args)
-        {
-            var endpoint = screenShotEndpoint;
-            if (string.IsNullOrEmpty(endpoint))
-            {
-                return;
-            }
-
-            var bytes = ScreenShotHelper.TakeScreenShot();
-
-            var data = GetData(args);
-            var content = new MultipartFormDataContent();
-            var byteArrayContent = new ByteArrayContent(bytes);
-            byteArrayContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
-            content.Add(byteArrayContent, "file", "screenshot.jpg");
-            content.Add(new StringContent(screenShotToken ?? string.Empty), "token");
-            content.Add(new StringContent(data), "data");
-
-            var response = await webClient.PostAsync(endpoint, content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var result = await response.Content.ReadAsStringAsync();
-                await Extension.Callback("ScreenShotStored", $"['{result}',{data}]");
-            }
-            else
-            {
-                await Extension.Callback("ScreenShotFailed", "");
-            }
-        }
-
-        private static string GetData(string?[] args)
-        {
-            var data = args.Length > 0 ? args[0] : null;
-            if (string.IsNullOrEmpty(data))
-            {
-                data = "[]";
-            }
-            return data;
         }
 
         private static async Task<HubConnection?> Connect(string?[] args, CancellationToken token)
@@ -215,8 +175,7 @@ namespace cTabExtension
 
         private static void EnableScreenShot(string endpoint, string token)
         {
-            screenShotToken = token;
-            screenShotEndpoint = endpoint;
+            screenShot = new ScreenShotWorker(endpoint, token);
             Extension.Callback("ScreenShotEnabled", "");
         }
 
