@@ -154,7 +154,7 @@ namespace cTabWebApp
 
             await Clients.Caller.SendAsync("Callback", "Connected", data);
 
-            if (!string.IsNullOrEmpty(state.UploadToken))
+            if (!string.IsNullOrEmpty(state.UploadToken) && ext.Equals("cTabExtension/1.2"))
             {
                 await Clients.Caller.SendAsync("ScreenShotEnabled", new Uri(new Uri(Context.GetHttpContext().Request.GetEncodedUrl()), "/Image").AbsoluteUri, state.UploadToken);
             }

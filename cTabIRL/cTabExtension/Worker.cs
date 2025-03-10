@@ -8,7 +8,9 @@ namespace cTabExtension
 {
     public static class Worker
     {
-        private static readonly HttpClient webClient = new HttpClient() { DefaultRequestHeaders = { { "Extension", "cTabExtension/1.1" } } };
+        private const string ExtensionHeader = "cTabExtension/1.2";
+
+        private static readonly HttpClient webClient = new HttpClient() { DefaultRequestHeaders = { { "Extension", ExtensionHeader } } };
         private static Task<HubConnection?>? serverConnection;
         private static CancellationTokenSource? cancellationTokenSource;
         private static List<Tuple<string, Func<HubConnection, Task>>> replay = new List<Tuple<string, Func<HubConnection, Task>>>();
@@ -229,7 +231,7 @@ namespace cTabExtension
                 .WithUrl(uri, options =>
                 {
                     options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets;
-                    options.Headers.Add("Extension", "cTabExtension/1.1");
+                    options.Headers.Add("Extension", ExtensionHeader);
                 })
                 .WithAutomaticReconnect()
                 .Build();
