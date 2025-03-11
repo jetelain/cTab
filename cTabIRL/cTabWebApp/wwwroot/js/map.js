@@ -534,7 +534,7 @@ function updateIsInContact() {
 }
 
 function generateIcon(data) {
-    var url = (vm.iconBasePath || '/img/markers/') + data.icon;
+    var url = '/img/markers/' + data.icon;
     if (data.label.length > 0 || data.dir) {
         var img = $('<img src="' + url + '" width="32" height="32" />');
         if (data.dir) {

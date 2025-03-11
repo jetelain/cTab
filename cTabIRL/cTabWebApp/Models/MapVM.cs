@@ -16,7 +16,5 @@ namespace cTabWebApp.Models
         public string TacMapEndpoint { get; set; }
 
         public string TacMapDomain { get; set; }
-
-        public string IconBasePath { get; set; } = "https://atlas.plan-ops.fr/data/1/markers/";
     }
 }
