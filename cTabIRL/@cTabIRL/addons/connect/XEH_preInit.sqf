@@ -66,7 +66,7 @@ addMissionEventHandler ["ExtensionCallback", {
 			call FUNC(screenShotFailed);
 		};
 		if ( _function == "ScreenShotEnabled") exitWith {
-			call FUNC(screenShotEnabled);
+			(parseSimpleArray _data) call FUNC(screenShotEnabled);
 		};
 		if ( _function == "Disconnected") exitWith {
 			systemChat LLSTRING(disconnected);
@@ -83,6 +83,7 @@ GVAR(deviceLevel) = 0;
 GVAR(vehicleMode) = 0;
 GVAR(mapMarkersNeedsUpdate) = true;
 GVAR(trackDevices) = ["ItemcTab", "ItemAndroid"];
+GVAR(canTakePhoto) = false;
 
 [QGVAR(enabled), "CHECKBOX", [LLSTRING(enabled), LLSTRING(enabledDetails)], ["cTab",LLSTRING(modName)], true, 0, {}, true] call CBA_fnc_addSetting;
 #ifdef DEBUG_BACKEND

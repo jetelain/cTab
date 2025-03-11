@@ -51,7 +51,7 @@ namespace cTabWebApp.Controllers
             await file.CopyToAsync(mem);
             mem.Position = 0;
 
-            var stored = await _images.SaveImageAsync(state, mem.ToArray(), data);
+            var stored = await _images.SaveImageAsync(state, mem.ToArray(), data, HttpContext.Connection.RemoteIpAddress);
             if (stored == null)
             {
                 return BadRequest();
@@ -66,7 +66,7 @@ namespace cTabWebApp.Controllers
         public IActionResult GetImage(string token)
         {
             var stored = _images.GetImage(token);
-            if (stored == null || stored.IsExpired)
+            if (stored == null)
             {
                 return NotFound();
             }
@@ -78,21 +78,19 @@ namespace cTabWebApp.Controllers
             return File(stream, "image/jpeg");
         }
 
-        // https://ctab.plan-ops.fr/Image/1234567890123456xiHI_x1KzSuaQ6if5JaNk0y_aqbQqeDYs
-
         [HttpGet]
         [Route("Image/{token}.html")]
-        public IActionResult GetImageHtml(string token, int w = ImageService.TargetWidth)
+        public IActionResult GetImageHtml(string token, int h = ImageService.MaxHeight)
         {
             var stored = _images.GetImage(token);
-            if (stored == null || stored.IsExpired)
+            if (stored == null)
             {
                 return NotFound();
             }
             var image = new Uri(new Uri(HttpContext.Request.GetEncodedUrl()), $"/Image/{token}.jpeg").AbsoluteUri;
-            var h = w * ImageService.TargetHeight / ImageService.TargetWidth;
+            var w = h * ImageService.MaxWidth / ImageService.MaxHeight;
 
-            var title = "Some title";
+            var title = $"{stored.TimestampUtc:yyyy-MM-dd HH:mm:ss} Z - {stored.WorldName}";
 
             // Html adapted to Arma 3's RscHTML control
             // See https://community.bistudio.com/wiki/HTML_File_Format
@@ -102,7 +100,6 @@ namespace cTabWebApp.Controllers
 	<title>{HttpUtility.HtmlEncode(title)}</title>
 </head>
 <body>
-<h1 align=""center"">{HttpUtility.HtmlEncode(title)}</h1>
 <p align=""center""><img src=""{image}"" width=""{w}"" height=""{h}"" /></p>
 </body>
 </html>", "text/html");

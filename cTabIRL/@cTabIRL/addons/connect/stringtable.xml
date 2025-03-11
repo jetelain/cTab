@@ -61,13 +61,17 @@
             <English>cTab has lost connection with server. Trying to reconnect...</English>
             <French>cTab a perdu la connection avec le serveur. Tentative de reconnection en cours...</French>
         </Key>
-        <Key ID="STR_ctab_irl_connect_screenShotFailed">
-            <English>Image capture failed.</English>
-            <French>La prise d'image a échouée.</French>
+        <Key ID="STR_ctab_irl_connect_screenShotDetails">
+            <English>Pictures service is available.&lt;br /&gt;&lt;br /&gt;You can take pictures with supported items such as vehicle optics, drones, cameras, and some binoculars.&lt;br /&gt;&lt;br /&gt;Use &lt;font color=&apos;#c48214&apos;&gt;%1&lt;/font&gt; to take a picture (editable from addons commands).</English>
+            <French>Le service photo est disponible.&lt;br /&gt;&lt;br /&gt;Vous pouvez prendre des photos avec les optiques de véhicule, les drones, les appareils photos, et certaines jumelles.&lt;br /&gt;&lt;br /&gt;Utiliser &lt;font color=&apos;#c48214&apos;&gt;%1&lt;/font&gt; pour prendre une photo (modifiable depuis les commandes des addons).</French>
         </Key>
-        <Key ID="STR_ctab_irl_connect_screenShotTaken">
-            <English>Image captured.</English>
-            <French>Image prise.</French>
+        <Key ID="STR_ctab_irl_connect_screenShotFailed">
+            <English>Photo capture failed.</English>
+            <French>La prise de photo a échouée.</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_screenShotTitle">
+            <English>Take pictures</English>
+            <French>Prendre des photos</French>
         </Key>
         <Key ID="STR_ctab_irl_connect_syncMap">
             <English>Display map markers</English>
@@ -76,6 +80,14 @@
         <Key ID="STR_ctab_irl_connect_syncMapDetails">
             <English>Displays on cTab IRL markers from Arma 3 map.</English>
             <French>Affiche sur CTab IRL les marqueurs de la carte Arma 3.</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_uri">
+            <English>Server URL</English>
+            <French>URL du serveur</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_uriDetails">
+            <English></English>
+            <French></French>
         </Key>
     </Package>
 </Project>

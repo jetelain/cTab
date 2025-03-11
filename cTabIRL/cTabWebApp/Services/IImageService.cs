@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 
 #nullable enable
@@ -7,7 +8,7 @@ namespace cTabWebApp.Services
 {
     public interface IImageService
     {
-        Task<PlayerTakenImage?> SaveImageAsync(PlayerState player, byte[] image, string data);
+        Task<PlayerTakenImage?> SaveImageAsync(PlayerState player, byte[] image, string data, IPAddress? remote);
 
         PlayerTakenImage? GetImage(string token);
 

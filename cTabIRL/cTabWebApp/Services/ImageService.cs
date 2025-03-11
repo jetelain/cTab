@@ -1,11 +1,14 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 
@@ -15,20 +18,33 @@ namespace cTabWebApp.Services
 {
     public class ImageService : IImageService
     {
+        internal const int MaxHeight = 720;
+        internal const int MaxWidth = 1280;
+
         private readonly ConcurrentDictionary<string, PlayerTakenImage> images = new ConcurrentDictionary<string, PlayerTakenImage>();
         private readonly SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
 
-        internal const int TargetHeight = 720;
-        internal const int TargetWidth = 1280;
+        private readonly string imageDirectory;
+        private readonly int maxTotalImageCount;
+        private readonly int maxSessionImageCount;
+        private readonly TimeSpan retentionDuration;
 
-        private string imageDirectory = Path.Combine(Path.GetTempPath(), "cTabWebApp", "PlayerTakenImages");
-
-        public ImageService()
+        public ImageService(Microsoft.Extensions.Configuration.IConfiguration config)
         {
+            this.maxTotalImageCount = config.GetValue<int>("Images:MaxTotalImageCount", 15000); // Maximum number of images (typical image size is 300 KB, so 4.5 GB per default)
+            this.maxSessionImageCount = config.GetValue<int>("Images:MaxSessionImageCount", 75); // Maximum number of images per user session
+            this.retentionDuration = config.GetValue<TimeSpan>("Images:RetentionDuration", TimeSpan.FromHours(12)); // Duration to keep images
+            this.imageDirectory = config.GetValue<string>("Images:StorageLocation") ?? Path.Combine(Path.GetTempPath(), "cTabWebApp", "PlayerTakenImages");
+
             Directory.CreateDirectory(imageDirectory);
 
             // Restore images (if server was restarted during a game session)
             RestoreImages();
+        }
+
+        private bool IsExpired(PlayerTakenImage entry)
+        {
+            return entry.TimestampUtc + retentionDuration < DateTime.UtcNow;
         }
 
         private void RestoreImages()
@@ -40,7 +56,7 @@ namespace cTabWebApp.Services
                 try
                 {
                     var entry = JsonSerializer.Deserialize<PlayerTakenImage>(json);
-                    if (entry != null && !entry.IsExpired && entry.Token == token)
+                    if (entry != null && entry.Token == token && !IsExpired(entry))
                     {
                         images.TryAdd(entry.Token, entry);
                     }
@@ -59,17 +75,33 @@ namespace cTabWebApp.Services
 
         public PlayerTakenImage? GetImage(string token)
         {
-            return images.TryGetValue(token, out var entry) ? entry : null;
+            if (images.TryGetValue(token, out var entry) && !IsExpired(entry))
+            {
+                return entry;
+            }
+            return null;
         }
 
-        private List<PlayerTakenImage> TakeExpiredImages()
+        private List<PlayerTakenImage> TakeExpiredImagesLocked()
         {
-            var expired = images.Values.Where(i => i.IsExpired).ToList();
+            // Assume already locked
+            var expired = images.Values.Where(IsExpired).ToList();
+            RemoveEntriesLocked(expired);
+            return expired;
+        }
+
+        private void RemoveEntriesLocked(List<PlayerTakenImage> expired)
+        {
+            // Assume already locked
             foreach (var entry in expired)
             {
                 images.TryRemove(entry.Token, out _);
+
+                if (entry.Player != null)
+                {
+                    entry.Player.Images.Remove(entry);
+                }
             }
-            return expired;
         }
 
         public async Task CleanUp() // TODO: Should be called periodically
@@ -78,28 +110,37 @@ namespace cTabWebApp.Services
             await semaphore.WaitAsync();
             try
             {
-                toremove = TakeExpiredImages();
+                toremove = TakeExpiredImagesLocked();
             }
             finally
             {
                 semaphore.Release();
             }
+            DeleteFiles(toremove);
+        }
+
+        private void DeleteFiles(List<PlayerTakenImage> toremove)
+        {
             foreach (var entry in toremove)
             {
                 DeleteFiles(entry);
             }
         }
 
-        private async Task<PlayerTakenImage> AllocatePlayerTakenImage(PlayerState player, string data)
+        private async Task<PlayerTakenImage?> AllocatePlayerTakenImage(PlayerState player, string data, IPAddress? remote)
         {
             await semaphore.WaitAsync();
             try
             {
-                var token = AllocateToken(player);
-                var entry = new PlayerTakenImage() { Token = token, OwnerSteamId = player.SteamId, Data = data, WorldName = player.LastMission?.WorldName };
+                if (!TryAcquireQuotaLocked(player))
+                {
+                    return null;
+                }
+                var token = AllocateTokenLocked(player);
+                var entry = new PlayerTakenImage() { Token = token, OwnerSteamId = player.SteamId, Data = data, WorldName = player.LastMission?.WorldName, Remote = remote?.ToString(), Player = player };
                 images.TryAdd(token, entry);
+                player.Images.Remove(entry);
                 return entry;
-                // TODO: Should enforce a quota here (per user and globally)
             }
             finally
             {
@@ -107,7 +148,37 @@ namespace cTabWebApp.Services
             }
         }
 
-        private string AllocateToken(PlayerState player)
+        private bool TryAcquireQuotaLocked(PlayerState player)
+        {
+            // Assume already locked
+
+            // Check if the user has exceeded their quota
+            if (player.Images.Count > maxSessionImageCount)
+            {
+                // Remove the oldest images
+                var toRemoveFromUser = player.Images.OrderBy(img => img.TimestampUtc).Take(player.Images.Count - maxTotalImageCount + 1).ToList();
+                RemoveEntriesLocked(toRemoveFromUser);
+                Task.Run(() => DeleteFiles(toRemoveFromUser));
+                return true;
+            }
+
+            // Check if the total image count has been exceeded
+            if (images.Count >= maxTotalImageCount)
+            {
+                // Try to remove expired images
+                var toremove = TakeExpiredImagesLocked();
+                if (toremove.Count > 0)
+                {
+                    // Remove asynchronously
+                    Task.Run(() => DeleteFiles(toremove));
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        }
+
+        private string AllocateTokenLocked(PlayerState player)
         {
             string token;
             do
@@ -118,14 +189,21 @@ namespace cTabWebApp.Services
             return token;
         }
 
-        public async Task<PlayerTakenImage?> SaveImageAsync(PlayerState player, byte[] image, string data)
+        public async Task<PlayerTakenImage?> SaveImageAsync(PlayerState player, byte[] image, string data, IPAddress? remote)
         {
             var identify = await Image.IdentifyAsync(new MemoryStream(image));
             if (!IsValidImage(identify))
             {
                 return null;
             }
-            var id = await AllocatePlayerTakenImage(player, data);
+
+            var id = await AllocatePlayerTakenImage(player, data, remote);
+            if (id == null)
+            {
+                return null;
+            }
+
+            id.Size = image.Length;
 
             await File.WriteAllBytesAsync(GetImagePath(id), image);
 
@@ -137,7 +215,7 @@ namespace cTabWebApp.Services
         private static bool IsValidImage(ImageInfo identify)
         {
             // Check if the image is a JPEG and has the correct dimensions
-            if (identify.Height > TargetHeight || identify.Width > TargetWidth)
+            if (identify.Height > MaxHeight || identify.Width > MaxWidth)
             {
                 return false;
             }

@@ -173,10 +173,10 @@ namespace cTabExtension
             return str;
         }
 
-        private static void EnableScreenShot(string endpoint, string token)
+        private static void EnableScreenShot(ScreenShotOptions options)
         {
-            screenShot = new ScreenShotWorker(endpoint, token);
-            Extension.Callback("ScreenShotEnabled", "");
+            screenShot = new ScreenShotWorker(options);
+            screenShot.Callback();
         }
 
         private static async Task<HubConnection?> ConnectToServer(string server, string steamId, string name, string key, CancellationToken token)
@@ -196,7 +196,7 @@ namespace cTabExtension
                 .Build();
 
             connection.On<string, string>("Callback", Extension.Callback);
-            connection.On<string, string>("ScreenShotEnabled", EnableScreenShot);
+            connection.On<ScreenShotOptions>("ScreenShotEnabled", EnableScreenShot);
 
             connection.Reconnecting += async _ => {
                 Extension.DebugMessage($"Reconnecting...");

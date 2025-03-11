@@ -1,2 +1,7 @@
 #include "script_component.hpp"
-systemChat "DEBUG: Ready to take images";
+
+if ( isNil QGVAR(diaryScreenShotRecord)) then {
+	private _keybind = ((["cTab", "photo"] call CBA_fnc_getKeybind) select 5) call CBA_fnc_localizeKey;
+	GVAR(diaryScreenShotRecord) = player createDiaryRecord ["cTab", [LLSTRING(screenShotTitle), format [LLSTRING(screenShotDetails),_keybind]]];
+};
+GVAR(canTakePhoto) = true;

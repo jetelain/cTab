@@ -156,7 +156,14 @@ namespace cTabWebApp
 
             if (!string.IsNullOrEmpty(state.UploadToken) && ext.Equals("cTabExtension/1.2"))
             {
-                await Clients.Caller.SendAsync("ScreenShotEnabled", new Uri(new Uri(Context.GetHttpContext().Request.GetEncodedUrl()), "/Image").AbsoluteUri, state.UploadToken);
+                await Clients.Caller.SendAsync("ScreenShotEnabled", 
+                    new ScreenShotOptions()
+                    {
+                        Endpoint = new Uri(new Uri(Context.GetHttpContext().Request.GetEncodedUrl()), "/Image").AbsoluteUri,
+                        Token = state.UploadToken,
+                        MaxHeight = ImageService.MaxHeight,
+                        MaxWidth = ImageService.MaxWidth
+                    });
             }
 
             await _tacMapService.UpdateTacMapInterconnect(state);

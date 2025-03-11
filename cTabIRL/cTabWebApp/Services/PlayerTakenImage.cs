@@ -11,13 +11,17 @@ namespace cTabWebApp.Services
 
         public required string Token { get; set; }
 
-        [JsonIgnore]
-        public bool IsExpired => TimestampUtc.AddHours(12) < DateTime.UtcNow;
-
         public string? OwnerSteamId { get; set; }
 
         public string? Data { get; set; }
 
         public string? WorldName { get; set; }
+
+        public string? Remote { get; set; }
+
+        public int Size { get; set; }
+
+        [JsonIgnore]
+        public PlayerState? Player { get; set; }
     }
 }

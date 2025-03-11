@@ -7,26 +7,23 @@ namespace cTabExtension
 {
     internal static class ScreenShotHelper
     {
-        private const int TargetHeight = 720;
-        private const int TargetWidth = 1280;
-
-        internal static byte[] TakeScreenShot()
+        internal static byte[] TakeScreenShot(int targetWidth, int targetHeight)
         {
             GetWindowRect(Process.GetCurrentProcess().MainWindowHandle, out RECT lpRect);
             var screenH = lpRect.Bottom;
             var screenW = lpRect.Right;
 
-            var shotWidth = Math.Min(screenW, TargetWidth * screenH / TargetHeight);
+            var shotWidth = Math.Min(screenW, targetWidth * screenH / targetHeight);
             using var bitmap = new Bitmap(shotWidth, screenH);
             using (var g = Graphics.FromImage(bitmap))
             {
                 g.CopyFromScreen(new Point((screenW - bitmap.Width) / 2, 0), Point.Empty, new Size(bitmap.Width, bitmap.Height));
             }
 
-            using var resized = ResizeBitmap(bitmap, bitmap.Width * TargetHeight / bitmap.Height, TargetHeight);
+            using var resized = ResizeBitmap(bitmap, bitmap.Width * targetHeight / bitmap.Height, targetHeight);
 
             using var ms = new MemoryStream();
-            SaveJpegWithQuality(resized, ms, 90);
+            SaveJpegWithQuality(resized, ms, 95);
             return ms.ToArray();
         }
 
