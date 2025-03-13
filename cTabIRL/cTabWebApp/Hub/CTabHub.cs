@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Arma3TacMapLibrary.Arma3;
 using Arma3TacMapLibrary.Maps;
+using cTabWebApp.Messages;
 using cTabWebApp.Messaging;
 using cTabWebApp.Services;
 using cTabWebApp.TacMaps;
@@ -92,6 +93,10 @@ namespace cTabWebApp
                 {
                     Templates = { BuiltinTemplates.GetMedevac() }
                 });
+            }
+            if (state.LastUpdateSideFeedMessage != null)
+            {
+                await Clients.Caller.SendAsync("UpdateSideFeed", state.LastUpdateSideFeedMessage);
             }
             if (state.LastUpdateMapMarkers != null)
             {
@@ -728,6 +733,37 @@ namespace cTabWebApp
                 return;
             }
             await Clients.Group(state.ArmaChannelName).SendAsync("Callback", "TicAlert", message.State ? "[true]" : "[false]");
+        }
+
+        public async Task ArmaUpdateSideFeed(ArmaMessage message)
+        {
+            var state = GetState(ConnectionKind.Arma);
+            if (state == null)
+            {
+                _logger.LogWarning($"No state for ArmaUpdateMessageTemplates");
+                return;
+            }
+            var msg = new UpdateSideFeedMessage()
+            {
+                Timestamp = message.Timestamp,
+            }; 
+            foreach (var entry in message.Args)
+            {
+                var intelEntry = IntelEntry.Create(entry);
+                if (intelEntry != null)
+                {
+                    msg.Entries.Add(intelEntry);
+                }
+            }
+            state.LastUpdateSideFeedMessage = msg;
+            try
+            {
+                await Clients.Group(state.WebChannelName).SendAsync("UpdateSideFeed", state.LastUpdateSideFeedMessage);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(e, "UpdateSideFeed failed");
+            }
         }
 
         public async Task ArmaUpdateMessageTemplates(ArmaMessage message)

@@ -1,0 +1,1 @@
+#define INTEL_TYPE_IMG 1

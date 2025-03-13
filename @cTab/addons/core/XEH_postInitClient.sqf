@@ -455,6 +455,8 @@ cTab_Tablet_btnACT = ctab_fnc_tablet_btnACT;
 			call cTab_fnc_updateUserMarkerList;
 			// remove msg notification
 			cTabRscLayerMailNotification cutText ["", "PLAIN"];
+			// Notify cTab_player change
+			[QGVARMAIN(player)] call CBA_fnc_localEvent;
 		};
 	}] call BIS_fnc_addStackedEventHandler;
 

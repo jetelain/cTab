@@ -4,7 +4,7 @@ params ['_uri','_data'];
 
 playSound ["cTab_cameraShutter", 2];
 
-INFO_2("Uri=%1 Data=%2",_uri,_data);
+_this call ctab_intel_fnc_addPhoto;
 
 // TODO: Dispatch to regular cTab
 

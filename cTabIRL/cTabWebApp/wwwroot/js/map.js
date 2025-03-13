@@ -303,7 +303,7 @@ function initMap(mapInfos, worldName) {
     }
     var map = L.map('map', {
         minZoom: mapInfos.minZoom,
-        maxZoom: mapInfos.maxZoom + 2,
+        maxZoom: mapInfos.maxZoom + 4,
         maxNativeZoom: mapInfos.maxZoom,
         crs: mapInfos.CRS,
         doubleClickZoom: false
@@ -819,6 +819,26 @@ function loadTacMapList() {
         });
 }
 
+function updateIntel(entries) {
+    entries.forEach(entry => {
+
+        L.marker([entry.location[1], entry.location[0]]).bindPopup("<img src='" + entry.imageUri + "' width='300' />.").addTo(currentMap);
+
+
+
+        if (entry.imageProject) {
+            var corners = entry.imageArea.map(x => [x[1], x[0]]);
+            //L.polygon(plop, { color: 'red' }).addTo(currentMap);
+            // our corners : _worldTopLeft, _worldTopRight, _worldBottomRight, _worldBottomLeft
+            // wanyted : topLeft, topRight, bottomLeft, bottomRight
+            (new L.DistortableImageOverlay(entry.imageUri, { corners: [corners[0], corners[1], corners[3], corners[2]] })).addTo(currentMap);
+        }
+
+
+    });
+}
+
+
 $(function () {
 
     $('#statusbar').on('click', function () { if (connection.state === signalR.HubConnectionState.Disconnected) { connection.start(); } });
@@ -946,6 +966,15 @@ $(function () {
     connection.on("UpdateMessages", function (data) {
         try {
             updateInbox(data.messages);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+
+    connection.on("UpdateSideFeed", function (data) {
+        try {
+            updateIntel(data.entries);
         }
         catch (e) {
             console.error(e);

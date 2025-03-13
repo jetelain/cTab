@@ -1,0 +1,2 @@
+PREP(addPhoto);
+PREP(canTakePhoto);

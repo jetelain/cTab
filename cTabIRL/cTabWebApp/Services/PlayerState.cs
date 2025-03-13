@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Arma3TacMapLibrary.Maps;
+using cTabWebApp.Messages;
 using cTabWebApp.Services;
 using cTabWebApp.TacMaps;
 
@@ -40,5 +41,6 @@ namespace cTabWebApp
         public UpdateMessageTemplatesMessage LastUpdateMessagesTemplates { get; set; }
         public string UploadToken { get; internal set; }
         public List<PlayerTakenImage> Images { get; set; } = new List<PlayerTakenImage>();
+        public UpdateSideFeedMessage LastUpdateSideFeedMessage { get; internal set; }
     }
 }

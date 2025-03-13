@@ -234,6 +234,7 @@
             });
         var menus = @Json.Serialize(Menu.CreateMenus().ToDictionary(e => e.MenuId.ToString(), e => e));
     </script>
+    <script src="~/js/leaflet-distortableimage.js" asp-append-version="true"></script>
     <script src="~/js/common.js" asp-append-version="true"></script>
     <script src="~/js/map.js" asp-append-version="true"></script>
 </body>

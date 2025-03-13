@@ -15,3 +15,4 @@ PREP(screenShotStored);
 PREP(screenShotFailed);
 PREP(screenShotEnabled);
 PREP(takePhoto);
+PREP(updateIntelSideFeed);
