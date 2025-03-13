@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Arma3TacMapLibrary.Maps;
-using cTabWebApp.Messages;
+using cTabWebApp.Messages.IntelFeed;
 using cTabWebApp.Services;
 using cTabWebApp.TacMaps;
 

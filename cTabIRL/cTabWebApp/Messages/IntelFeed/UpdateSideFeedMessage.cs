@@ -2,7 +2,7 @@
 using cTabWebApp.Messaging;
 using System.Collections.Generic;
 
-namespace cTabWebApp.Messages
+namespace cTabWebApp.Messages.IntelFeed
 {
     public class UpdateSideFeedMessage
     {

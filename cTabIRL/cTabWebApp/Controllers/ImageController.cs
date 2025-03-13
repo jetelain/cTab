@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -105,6 +106,44 @@ namespace cTabWebApp.Controllers
 </html>", "text/html");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DownloadIntelFeed(string t)
+        {
+            var state = _service.GetStateByToken(t);
+            if (state == null || state.LastUpdateSideFeedMessage == null)
+            {
+                return NotFound();
+            }
 
+            var memoryStream = new MemoryStream();
+            
+            using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+            {
+                foreach (var img in state.LastUpdateSideFeedMessage.Entries)
+                {
+                    var token = Path.GetFileName(img.ImageUri);
+                    if (!string.IsNullOrEmpty(token))
+                    {
+                        var stored = _images.GetImage(token);
+                        if (stored != null)
+                        {
+                            var entry = archive.CreateEntry($"{img.Id}.jpeg", CompressionLevel.NoCompression);
+                            using (var entryStream = entry.Open())
+                            using (var imageStream = _images.OpenImage(stored))
+                            {
+                                if (imageStream != null)
+                                {
+                                    await imageStream.CopyToAsync(entryStream);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            memoryStream.Position = 0;
+            return File(memoryStream, "application/zip", "IntelFeedImages.zip");
+            
+        }
     }
 }

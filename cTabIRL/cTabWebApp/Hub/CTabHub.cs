@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Arma3TacMapLibrary.Arma3;
 using Arma3TacMapLibrary.Maps;
-using cTabWebApp.Messages;
+using cTabWebApp.Messages.IntelFeed;
 using cTabWebApp.Messaging;
 using cTabWebApp.Services;
 using cTabWebApp.TacMaps;

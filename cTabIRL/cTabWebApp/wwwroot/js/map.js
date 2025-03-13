@@ -88,7 +88,9 @@ var ctabFeatureLevel = 0;
 var irlFeatureLevel = 0;
 var preformatedMedevacUid = 'medevac';
 let ctabCurrentDate = null;
-
+let intelButtom = null;
+let intelItems = {};
+let intelLayer = null;
 
 function updateButtons() {
     centerOnPositionButton.setClass(centerOnPosition ? 'btn-primary' : 'btn-outline-secondary');
@@ -299,6 +301,7 @@ function initMap(mapInfos, worldName) {
     if (currentMap != null) {
         removeAllMarkers();
         clearInbox();
+        clearIntelFeed();
         currentMap.remove();
     }
     var map = L.map('map', {
@@ -360,6 +363,8 @@ function initMap(mapInfos, worldName) {
         })).addTo(map);
     }
 
+
+
     L.latlngGraticule({
         zoomInterval: [
             { start: 0, end: 10, interval: 1000 }
@@ -379,9 +384,26 @@ function initMap(mapInfos, worldName) {
     })).addTo(map);
     efisMapButton.j().attr('title', $('#efislink').text());
 
+    (intelButtom = L.control.overlayButton({
+        position: 'bottomleft',
+        content: '<i class="fas fa-rss"></i>',
+        click: function () {
+            $('#intel-feed').modal('show');
+        }
+    })).addTo(map);
+
+    document.getElementById('intel-feed-markers').addEventListener('change', function() {
+        if (this.checked) {
+            intelLayer.addTo(currentMap);
+        } else {
+            intelLayer.remove();
+        }
+    });
+
     currentMap = map;
     currentMapInfos = mapInfos;
     selfMarker = null;
+    intelLayer = L.layerGroup().addTo(map);
     updateButtons();
 };
 
@@ -819,22 +841,64 @@ function loadTacMapList() {
         });
 }
 
+function clearIntelFeed() {
+    intelItems = {};
+    $('#intel-feed-items').empty();
+}
+
 function updateIntel(entries) {
     entries.forEach(entry => {
 
-        L.marker([entry.location[1], entry.location[0]]).bindPopup("<img src='" + entry.imageUri + "' width='300' />.").addTo(currentMap);
+        if (!intelItems[entry.id]) {
 
+            let item = intelItems[entry.id] = {};
 
+            // Create list item
+            item.listItem = $('<div class="col p-1"></div>');
+            let a = $('<a href="#"></a>');
+            a.on('click', function () {
+                $('#intel-feed').modal('hide');
+                item.popup.openOn(currentMap);
+                return false;
+            });
+            a.append($('<img class="w-100" />').attr('src', entry.imageUri));
+            a.appendTo(item.listItem);
+            item.listItem.prependTo('#intel-feed-items');
 
-        if (entry.imageProject) {
-            var corners = entry.imageArea.map(x => [x[1], x[0]]);
-            //L.polygon(plop, { color: 'red' }).addTo(currentMap);
-            // our corners : _worldTopLeft, _worldTopRight, _worldBottomRight, _worldBottomLeft
-            // wanyted : topLeft, topRight, bottomLeft, bottomRight
-            (new L.DistortableImageOverlay(entry.imageUri, { corners: [corners[0], corners[1], corners[3], corners[2]] })).addTo(currentMap);
+            var btn = $("<button></button>").attr("type", "button").attr("class", "btn btn-sm btn-outline-primary").text("Show on map");
+            btn.on('click', function () {
+                if (entry.isProjected) {
+                    entry.isProjected = false;
+                    item.projected.remove();
+                    btn.removeClass('btn-primary');
+                    btn.addClass('btn-outline-primary');
+                }
+                else {
+                    entry.isProjected = true;
+                    item.projected.addTo(currentMap);
+                    btn.addClass('btn-primary');
+                    btn.removeClass('btn-outline-primary');
+                }
+                return false;
+            });
+
+            let latlng = [entry.location[1], entry.location[0]];
+            let popupContent = $("<div></div>").append($("<img>").attr("src", entry.imageUri).attr("width", "300")).append($("<div></div>").attr("class","mt-1").append(btn))[0];
+            item.popup = L.popup()
+                .setLatLng(latlng)
+                .setContent(popupContent);
+
+            // Create icon marker
+            item.marker = L.marker(latlng).bindPopup(item.popup).addTo(intelLayer);
+
+            // Create projected image if needed
+            if (entry.imageProject) {
+                var corners = entry.imageArea.map(x => [x[1], x[0]]);
+                // our corners : _worldTopLeft, _worldTopRight, _worldBottomRight, _worldBottomLeft
+                // wanyted : topLeft, topRight, bottomLeft, bottomRight
+                item.projected = new L.DistortableImageOverlay(entry.imageUri, { corners: [corners[0], corners[1], corners[3], corners[2]] });
+            }
         }
-
-
     });
 }
 

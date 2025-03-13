@@ -3,10 +3,12 @@ using System.Linq;
 using Arma3TacMapLibrary.Arma3;
 #nullable enable
 
-namespace cTabWebApp.Messages
+namespace cTabWebApp.Messages.IntelFeed
 {
     public class IntelEntry
     {
+        public string? Id { get; set; }
+
         public DateTime DateTime { get; set; }
 
         public double[]? Location { get; set; }
@@ -30,7 +32,7 @@ namespace cTabWebApp.Messages
             {
                 return null;
             }
-            var id = Convert.ToInt32(data[0]);
+            var id = Convert.ToString(data[0]);
             var location = ArmaConverter.ToDoubleArray(data[2]);
             var dateTime = ArmaConverter.ToDateTime(data[3]);
             var imageData = data[4] as object[];
@@ -46,6 +48,7 @@ namespace cTabWebApp.Messages
             var imageCamera = ArmaConverter.ToDoubleArray(imageData[5]);
             return new IntelEntry()
             {
+                Id = id,
                 Location = location,
                 DateTime = dateTime,
                 ImageUri = imageUri,
