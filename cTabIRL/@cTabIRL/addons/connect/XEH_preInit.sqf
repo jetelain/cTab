@@ -71,6 +71,9 @@ addMissionEventHandler ["ExtensionCallback", {
 		if ( _function == "Disconnected") exitWith {
 			systemChat LLSTRING(disconnected);
 		};
+		if ( _function == "DeleteIntel" ) exitWith {
+			(parseSimpleArray _data) call ctab_intel_fnc_removeItem;
+		};
 		if( _function == "Error" ) exitWith {
 			ERROR(_data);
 		};

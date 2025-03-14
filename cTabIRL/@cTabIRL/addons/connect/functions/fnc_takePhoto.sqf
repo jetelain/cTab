@@ -33,7 +33,9 @@ private _worldLeft = AGLToASL screenToWorld [_areaLeft, 0.5];
 
 private _worldWidthRatio = (_worldTopLeft vectorDistance _worldTopRight) / (_worldBottomLeft vectorDistance _worldBottomRight);
 private _worldHeightRatio = (_worldTopLeft vectorDistance _worldBottomLeft) / (_worldTopRight vectorDistance _worldBottomRight);
-private _canBeProjected = _worldWidthRatio > 0.33 && _worldWidthRatio < 3 && _worldHeightRatio > 0.33 && _worldHeightRatio < 3;
+private _canBeProjected = _worldWidthRatio > 0.25 && _worldWidthRatio < 4 && _worldHeightRatio > 0.25 && _worldHeightRatio < 4;
+
+INFO_2("Photo ratio: %1 %2",_worldWidthRatio,_worldHeightRatio);
 
 private _data = [
 	_worldCenter, // "Cross air" pointed position

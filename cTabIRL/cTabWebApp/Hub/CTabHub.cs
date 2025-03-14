@@ -686,6 +686,17 @@ namespace cTabWebApp
             await Clients.Group(state.ArmaChannelName).SendAsync("Callback", "DeleteMessage", ToData(message));
         }
 
+        public async Task WebDeleteIntel(IdMessage message)
+        {
+            var state = GetState(ConnectionKind.Web);
+            if (state == null)
+            {
+                _logger.LogWarning($"No state for WebDeleteIntel");
+                return;
+            }
+            await Clients.Group(state.ArmaChannelName).SendAsync("Callback", "DeleteIntel", ToData(message));
+        }
+        
         public async Task WebDeleteUserMarker(IdMessage message)
         {
             var state = GetState(ConnectionKind.Web);

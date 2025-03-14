@@ -107,6 +107,7 @@ namespace cTabWebApp.Controllers
         }
 
         [HttpGet]
+        [Route("DownloadIntelFeed")]
         public async Task<IActionResult> DownloadIntelFeed(string t)
         {
             var state = _service.GetStateByToken(t);

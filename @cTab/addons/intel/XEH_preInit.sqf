@@ -3,4 +3,4 @@ ADDON = false;
 #include "XEH_PREP.hpp"
 ADDON = true;
 
-GVAR(feeds) = createHashmap;
+GVAR(feed) = [];
