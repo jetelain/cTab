@@ -100,8 +100,10 @@ namespace CTab {
             removeButton.className = 'btn btn-outline-danger btn-sm';
             removeButton.textContent = 'Remove';
             removeButton.addEventListener('click', function () {
-                ui.backend.removeEntry(entry.id);
-                ui.currentMap.closePopup();
+                if (window.confirm("Delete photo ? it will not be possible to restore it.")) {
+                    ui.backend.removeEntry(entry.id);
+                    ui.currentMap.closePopup();
+                }
             });
             btnContainer.appendChild(removeButton);
         }

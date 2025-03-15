@@ -13,3 +13,9 @@ class CfgPatches {
 };
 
 #include "CfgEventHandlers.hpp"
+
+class GVAR(intelTextureDisplay) {
+    onLoad = QUOTE(call FUNC(initTextureDisplay));
+    idd = -1;
+    class Controls {};
+};

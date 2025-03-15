@@ -69,6 +69,10 @@
             <English>Photo capture failed.</English>
             <French>La prise de photo a échouée.</French>
         </Key>
+        <Key ID="STR_ctab_irl_connect_screenShotNotAvailable">
+            <English>Photo capture is not available.</English>
+            <French>La prise de photo n'est pas disponible.</French>
+        </Key>
         <Key ID="STR_ctab_irl_connect_screenShotTitle">
             <English>Take pictures</English>
             <French>Prendre des photos</French>

@@ -8,14 +8,14 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=13;
+		nextID=14;
 	};
 	class Camera
 	{
-		pos[]={6297.0234,38.317696,719.48865};
-		dir[]={0.57534766,-0.55046445,-0.60494953};
-		up[]={0.37935582,0.83485866,-0.39887381};
-		aside[]={-0.72461325,1.4901161e-08,-0.68915588};
+		pos[]={6307.5493,18.083694,695.32794};
+		dir[]={0.81853527,-0.57411265,0.020014875};
+		up[]={0.5739435,0.81877422,0.014033841};
+		aside[]={0.024443846,3.2785101e-07,-0.99970323};
 	};
 };
 binarizationWanted=0;
@@ -48,13 +48,14 @@ addons[]=
 	"ace_vehicle_damage",
 	"A3_Characters_F_Common",
 	"A3_Drones_F_Soft_F_Gamma_UGV_01",
-	"A3_Drones_F_Air_F_Gamma_UAV_01"
+	"A3_Drones_F_Air_F_Gamma_UAV_01",
+	"A3_Structures_F_Civ_InfoBoards"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=18;
+		items=19;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -178,6 +179,13 @@ class AddonsMetaData
 			name="ACE3 - Vehicle Damage";
 			author="ACE-Team";
 			url="https://ace3.acemod.org/";
+		};
+		class Item18
+		{
+			className="A3_Structures_F";
+			name="Arma 3 - Buildings and Structures";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
 		};
 	};
 };
@@ -306,7 +314,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=7;
+		items=8;
 		class Item0
 		{
 			dataType="Group";
@@ -677,6 +685,22 @@ class Mission
 			id=10;
 			type="B_UAV_01_F";
 			atlOffset=67.729507;
+		};
+		class Item7
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={6320.8911,5.9688811,708.19501};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="debugboard";
+			};
+			id=13;
+			type="Land_MapBoard_F";
 		};
 	};
 };

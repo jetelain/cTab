@@ -44,6 +44,8 @@ if (hasInterface) then {
 
 		if ( count _added > 0 ) then {
 			GVAR(feed) append _added;
+			// DEBUG
+			debugboard setObjectTexture [0, ([(_added select -1) select 0] call FUNC(getTextureDisplay))];
 		};
 		if ( count _removedIds > 0 ) then {
 			{

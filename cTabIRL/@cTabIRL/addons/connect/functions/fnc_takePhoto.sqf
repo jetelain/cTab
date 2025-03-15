@@ -6,7 +6,7 @@ if (!([] call ctab_intel_fnc_canTakePhoto)) exitWith {
 
 // Check if service is available
 if (!GVAR(canTakePhoto)) exitWith {
-	systemChat LLSTRING(screenShotFailed);
+	systemChat LLSTRING(screenShotNotAvailable);
 };
 
 private _areaHalfWidth = (safeZoneH * 3 / 4) / 2 * GVAR(photoRation);

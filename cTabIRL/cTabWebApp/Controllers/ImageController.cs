@@ -95,7 +95,8 @@ namespace cTabWebApp.Controllers
 
             // Html adapted to Arma 3's RscHTML control
             // See https://community.bistudio.com/wiki/HTML_File_Format
-            return Content($@"<html>
+            return Content($@"<!DOCTYPE html>
+<html lang=""en"">
 <head>
 	<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"">
 	<title>{HttpUtility.HtmlEncode(title)}</title>
