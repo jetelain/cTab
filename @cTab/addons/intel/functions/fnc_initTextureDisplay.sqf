@@ -4,14 +4,12 @@ params ["_display"];
 
 private _displayID = displayUniqueName _display; 
 private _intelId = parseNumber(_displayID select [count GVAR(texturePrefix)]);
-private _idx = GVAR(feed) findIf { (_x select 0) == _intelId };
+private _entry = GVAR(intels) getOrDefault [_intelId, []];
 
-INFO_3("Intel %1 found at index %2, display %3",_intelId,_idx,_displayID);
+if ( count _entry == 0 ) exitWith { WARNING_2("Intel %1 not found (display %2)",_intelId,_displayID); };
 
-if ( _idx == -1 ) exitWith { INFO_2("Intel %1 not found: %2",_intelId,GVAR(feed)); };
-
-(GVAR(feed) select _idx) params ["","","","","_data"];
-_data params ['_uri'];
+INFO_3("Intel %1: %2 (display %3)",_intelId,_entry,_displayID);
+(_entry select 4) params ['_uri'];
 
 [_displayID, _uri] spawn {  
 	params ['_displayID', '_uri'];
