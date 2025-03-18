@@ -26,7 +26,10 @@ if ( ctab_core_bft_mode == 1 && { diag_tickTime > GVAR(nextMPU) } ) then {
 	[true] call FUNC(updateMarkersPosition);
 };
 
-if ( GVAR(mapMarkersNeedsUpdate) && GVAR(syncMap) ) then {
-	GVAR(mapMarkersNeedsUpdate) = false;
+if ( GVAR(mapMarkersNeedsUpdate) ) then {
 	[] call FUNC(updateMapMarkers);
+};
+
+if ( GVAR(acousticNeedsUpdate) ) then {
+	[] call FUNC(updateAcoustic);
 };

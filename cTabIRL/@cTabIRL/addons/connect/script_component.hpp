@@ -5,6 +5,7 @@
 // #define DISABLE_COMPILE_CACHE
 // #define DEBUG_SYNCHRONOUS
 // #define DEBUG_BACKEND
+// #define PROFILER
 
 #ifdef DEBUG_ENABLED_CONNECT
     #define DEBUG_MODE_FULL

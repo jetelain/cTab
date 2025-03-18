@@ -1,5 +1,7 @@
 #include "script_component.hpp"
 
+GVAR(mapMarkersNeedsUpdate) = false;
+
 private _simple = [];
 private _poly = [];
 
