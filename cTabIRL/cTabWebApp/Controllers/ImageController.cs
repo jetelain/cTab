@@ -4,7 +4,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using cTabWebApp.Services;
+using cTabWebApp.Services.Images;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -17,12 +17,14 @@ namespace cTabWebApp.Controllers
     {
         private readonly IPlayerStateService _service;
         private readonly IImageService _images;
+        private readonly ImageServiceConfig _imageConfig;
         private const int MaxImageSizeInBytes = 1_048_576; // 1 MiB
 
-        public ImageController(IPlayerStateService service, IImageService images)
+        public ImageController(IPlayerStateService service, IImageService images, ImageServiceConfig imageConfig)
         {
             _service = service;
             _images = images;
+            _imageConfig = imageConfig;
         }
 
         [HttpPost]
@@ -81,15 +83,19 @@ namespace cTabWebApp.Controllers
 
         [HttpGet]
         [Route("Image/{token}.html")]
-        public IActionResult GetImageHtml(string token, int h = ImageService.MaxHeight)
+        public IActionResult GetImageHtml(string token, int h = 0)
         {
             var stored = _images.GetImage(token);
             if (stored == null)
             {
                 return NotFound();
             }
+            if (h <= 0)
+            {
+                h = _imageConfig.MaxHeight;
+            }
             var image = new Uri(new Uri(HttpContext.Request.GetEncodedUrl()), $"/Image/{token}.jpeg").AbsoluteUri;
-            var w = h * ImageService.MaxWidth / ImageService.MaxHeight;
+            var w = h * _imageConfig.MaxWidth / _imageConfig.MaxHeight;
 
             var title = $"{stored.TimestampUtc:yyyy-MM-dd HH:mm:ss} Z - {stored.WorldName}";
 
@@ -146,6 +152,40 @@ namespace cTabWebApp.Controllers
             memoryStream.Position = 0;
             return File(memoryStream, "application/zip", "IntelFeedImages.zip");
             
+        }
+
+
+        [HttpGet]
+        [Route("DowloadPlayerTaken")]
+        public async Task<IActionResult> DowloadPlayerTaken(string t)
+        {
+            var state = _service.GetStateByToken(t);
+            if (state == null || state.LastUpdateSideFeedMessage == null)
+            {
+                return NotFound();
+            }
+
+            var memoryStream = new MemoryStream();
+            var num = 1;
+            using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+            {
+                foreach (var stored in state.Images)
+                {
+                    var entry = archive.CreateEntry($"{num}.jpeg", CompressionLevel.NoCompression);
+                    using (var entryStream = entry.Open())
+                    using (var imageStream = _images.OpenImage(stored))
+                    {
+                        if (imageStream != null)
+                        {
+                            await imageStream.CopyToAsync(entryStream);
+                        }
+                    }
+                    num++;
+                }
+            }
+
+            memoryStream.Position = 0;
+            return File(memoryStream, "application/zip", "DowloadPlayerTaken.zip");
         }
     }
 }

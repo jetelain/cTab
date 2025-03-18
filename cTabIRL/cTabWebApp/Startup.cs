@@ -3,6 +3,7 @@ using System.IO;
 using Arma3TacMapLibrary;
 using cTabWebApp.Models;
 using cTabWebApp.Services;
+using cTabWebApp.Services.Images;
 using cTabWebApp.TacMaps;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -78,6 +79,7 @@ namespace cTabWebApp
             }
 
             services.AddSingleton<TacMapService>();
+            services.AddSingleton(Configuration.GetSection("Images").Get<ImageServiceConfig>() ?? new ImageServiceConfig());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

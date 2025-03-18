@@ -3,11 +3,13 @@ using System.Text.Json.Serialization;
 
 #nullable enable
 
-namespace cTabWebApp.Services
+namespace cTabWebApp.Services.Images
 {
     public class PlayerTakenImage
     {
-        public DateTime TimestampUtc { get; set; } = DateTime.UtcNow;
+        public DateTime TimestampUtc { get; set; } = DateTime.MinValue;
+
+        public DateTime ExpiresUtc { get; set; } = DateTime.MinValue;
 
         public required string Token { get; set; }
 

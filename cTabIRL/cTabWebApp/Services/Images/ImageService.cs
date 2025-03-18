@@ -8,19 +8,15 @@ using System.Security.Cryptography;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 
 #nullable enable
 
-namespace cTabWebApp.Services
+namespace cTabWebApp.Services.Images
 {
     public class ImageService : IImageService
     {
-        internal const int MaxHeight = 720;
-        internal const int MaxWidth = 1280;
-
         private readonly ConcurrentDictionary<string, PlayerTakenImage> images = new ConcurrentDictionary<string, PlayerTakenImage>();
         private readonly SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
 
@@ -28,13 +24,17 @@ namespace cTabWebApp.Services
         private readonly int maxTotalImageCount;
         private readonly int maxSessionImageCount;
         private readonly TimeSpan retentionDuration;
+        private readonly int maxHeight;
+        private readonly int maxWidth;
 
-        public ImageService(Microsoft.Extensions.Configuration.IConfiguration config)
+        public ImageService(ImageServiceConfig config)
         {
-            this.maxTotalImageCount = config.GetValue<int>("Images:MaxTotalImageCount", 15000); // Maximum number of images (typical image size is 300 KB, so 4.5 GB per default)
-            this.maxSessionImageCount = config.GetValue<int>("Images:MaxSessionImageCount", 75); // Maximum number of images per user session
-            this.retentionDuration = config.GetValue<TimeSpan>("Images:RetentionDuration", TimeSpan.FromHours(12)); // Duration to keep images
-            this.imageDirectory = config.GetValue<string>("Images:StorageLocation") ?? Path.Combine(Path.GetTempPath(), "cTabWebApp", "PlayerTakenImages");
+            maxTotalImageCount = config.MaxTotalImageCount; // Maximum number of images (typical image size is 300 KB, so 4.5 GB per default)
+            maxSessionImageCount = config.MaxSessionImageCount; // Maximum number of images per user session
+            retentionDuration = config.RetentionDuration; // Duration to keep images
+            imageDirectory = config.StorageLocation ?? Path.Combine(Path.GetTempPath(), "cTabWebApp", "PlayerTakenImages");
+            maxHeight = config.MaxHeight;
+            maxWidth = config.MaxWidth;
 
             Directory.CreateDirectory(imageDirectory);
 
@@ -44,7 +44,7 @@ namespace cTabWebApp.Services
 
         private bool IsExpired(PlayerTakenImage entry)
         {
-            return entry.TimestampUtc + retentionDuration < DateTime.UtcNow;
+            return entry.ExpiresUtc < DateTime.UtcNow;
         }
 
         private void RestoreImages()
@@ -137,7 +137,17 @@ namespace cTabWebApp.Services
                     return null;
                 }
                 var token = AllocateTokenLocked(player);
-                var entry = new PlayerTakenImage() { Token = token, OwnerSteamId = player.SteamId, Data = data, WorldName = player.LastMission?.WorldName, Remote = remote?.ToString(), Player = player };
+                var entry = new PlayerTakenImage() 
+                {
+                    TimestampUtc = DateTime.UtcNow,
+                    ExpiresUtc = DateTime.UtcNow + retentionDuration, 
+                    Token = token, 
+                    OwnerSteamId = player.SteamId,
+                    Data = data, 
+                    WorldName = player.LastMission?.WorldName, 
+                    Remote = remote?.ToString(), 
+                    Player = player 
+                };
                 images.TryAdd(token, entry);
                 player.Images.Remove(entry);
                 return entry;
@@ -212,10 +222,10 @@ namespace cTabWebApp.Services
             return id;
         }
 
-        private static bool IsValidImage(ImageInfo identify)
+        private bool IsValidImage(ImageInfo identify)
         {
             // Check if the image is a JPEG and has the correct dimensions
-            if (identify.Height > MaxHeight || identify.Width > MaxWidth)
+            if (identify.Height > maxHeight || identify.Width > maxWidth)
             {
                 return false;
             }

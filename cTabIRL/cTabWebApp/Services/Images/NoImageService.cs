@@ -2,7 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 
-namespace cTabWebApp.Services
+namespace cTabWebApp.Services.Images
 {
     public class NoImageService : IImageService
     {

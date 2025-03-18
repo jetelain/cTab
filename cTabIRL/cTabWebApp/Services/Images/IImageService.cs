@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 #nullable enable
 
-namespace cTabWebApp.Services
+namespace cTabWebApp.Services.Images
 {
     public interface IImageService
     {

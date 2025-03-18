@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using cTabWebApp.Services.Images;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace cTabWebApp
@@ -13,6 +14,12 @@ namespace cTabWebApp
         private static readonly List<PlayerState> players = new List<PlayerState>();
         private static readonly string[] notASteamId = new[] { "_SP_PLAYER_", "_SP_AI_", "" };
         private static int nextId = 1;
+        private readonly bool isImageServiceAvailable;
+
+        public PlayerStateService(ImageServiceConfig imageServiceConfig)
+        {
+            this.isImageServiceAvailable = imageServiceConfig.MaxTotalImageCount > 0 && imageServiceConfig.MaxSessionImageCount > 0;
+        }
 
         public PlayerState GetStateByToken(string token)
         {
@@ -51,7 +58,7 @@ namespace cTabWebApp
             var allowScreenShot = false;
             if (!notASteamId.Contains(steamId))
             {
-                allowScreenShot = true;
+                allowScreenShot = isImageServiceAvailable;
                 lock (players)
                 {
                     state = players.FirstOrDefault(p => p.SteamId == steamId && p.HashedKey == hashedKey && p.KeyHostname == keyHostname);

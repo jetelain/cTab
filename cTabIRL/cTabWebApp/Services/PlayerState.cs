@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Arma3TacMapLibrary.Maps;
 using cTabWebApp.Messages.IntelFeed;
-using cTabWebApp.Services;
+using cTabWebApp.Services.Images;
 using cTabWebApp.TacMaps;
 
 namespace cTabWebApp

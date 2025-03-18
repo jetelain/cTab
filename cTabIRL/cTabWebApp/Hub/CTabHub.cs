@@ -9,6 +9,7 @@ using Arma3TacMapLibrary.Maps;
 using cTabWebApp.Messages.IntelFeed;
 using cTabWebApp.Messaging;
 using cTabWebApp.Services;
+using cTabWebApp.Services.Images;
 using cTabWebApp.TacMaps;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.SignalR;
@@ -23,13 +24,15 @@ namespace cTabWebApp
         private readonly IPlayerStateService _service;
         private readonly ILogger<CTabHub> _logger;
         private readonly TacMapService _tacMapService;
+        private readonly ImageServiceConfig _imageServiceConfig;
 
-        public CTabHub(PublicUriService publicUri, IPlayerStateService service, ILogger<CTabHub> logger, TacMapService tacMapService)
+        public CTabHub(PublicUriService publicUri, IPlayerStateService service, ILogger<CTabHub> logger, TacMapService tacMapService, ImageServiceConfig imageServiceConfig)
         {
             _publicUri = publicUri;
             _service = service;
             _logger = logger;
             _tacMapService = tacMapService;
+            _imageServiceConfig = imageServiceConfig;
         }
 
         public async Task WebHello(WebHelloMessage message)
@@ -166,8 +169,8 @@ namespace cTabWebApp
                     {
                         Endpoint = new Uri(new Uri(Context.GetHttpContext().Request.GetEncodedUrl()), "/Image").AbsoluteUri,
                         Token = state.UploadToken,
-                        MaxHeight = ImageService.MaxHeight,
-                        MaxWidth = ImageService.MaxWidth
+                        MaxHeight = _imageServiceConfig.MaxHeight,
+                        MaxWidth = _imageServiceConfig.MaxWidth
                     });
             }
 
