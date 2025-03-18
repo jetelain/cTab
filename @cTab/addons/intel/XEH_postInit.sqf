@@ -5,6 +5,10 @@ if ( isServer ) then {
 	GVAR(serverFeeds) = createHashmap;
 	GVAR(nextId) = 1;
 
+	// DEBUG
+	// GVAR(serverFeeds) set ["b", [[1,1,[6333.07,707.478,5],[2035,5,28,13,37],["http://localhost:5000/Image/76561198081226363xbBq-zdmC-AHoXCPN5fahonsqF1n-fmYz",true,353.075,[109.237,79.3909],[[6254.34,748.076,5],[6399.78,765.741,5],[6379.86,683.347,5],[6293.41,672.846,5]],[6338.61,661.818,72.8007]]],[2,1,[6286.53,717.896,5],[2035,5,28,13,37],["http://localhost:5000/Image/76561198081226363xdGl1I62zQO1BOFMhVFYKKj2siZbylW2n",true,317.128,[136.299,140.814],[[6131.77,710.948,5],[6304.94,871.714,5],[6349.26,720.713,5],[6279.07,655.55,5]],[6338.58,661.826,72.801]]]]];
+	// GVAR(nextId) = 10;
+
 	// A player has taken a photo
 	[QGVAR(addIntel), {
 		params ['_player', '_key', '_entryData'];
@@ -51,7 +55,7 @@ if (hasInterface) then {
 		if ( count _added > 0 ) then {
 			GVAR(feed) append _added;
 			// DEBUG
-			debugboard setObjectTexture [0, ([(_added select -1) select 0] call FUNC(getTextureDisplay))];
+			// debugboard setObjectTexture [0, ([(_added select -1) select 0] call FUNC(getTextureDisplay))];
 		};
 		if ( count _removedIds > 0 ) then {
 			{

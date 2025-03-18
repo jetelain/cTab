@@ -4,7 +4,7 @@ var CTab;
 (function (CTab) {
     function generateFeedItem(item, entry, ui) {
         let listItem = document.createElement('div');
-        listItem.className = 'col p-1';
+        listItem.className = 'col p-1 text-center';
         let a = document.createElement('a');
         a.href = '#';
         a.addEventListener('click', (event) => {
@@ -17,6 +17,9 @@ var CTab;
         img.className = 'w-100';
         img.src = entry.imageUri;
         a.appendChild(img);
+        let labelDiv = document.createElement('div');
+        labelDiv.innerText = getIntelLabel(entry);
+        a.appendChild(labelDiv);
         listItem.appendChild(a);
         return listItem;
     }
@@ -30,6 +33,10 @@ var CTab;
         popupImg.width = 300;
         popupLink.appendChild(popupImg);
         popupContent.appendChild(popupLink);
+        let labelDiv = document.createElement('div');
+        labelDiv.className = 'text-center h6';
+        labelDiv.innerText = getIntelLabel(entry);
+        popupContent.appendChild(labelDiv);
         let btnContainer = document.createElement('div');
         btnContainer.className = 'mt-1 d-flex justify-content-between';
         if (entry.imageProject) {
@@ -109,15 +116,19 @@ var CTab;
             if (this.markersCheckbox.checked) {
                 this.intelLayer.addTo(this.currentMap);
             }
-            this.intelButtom = L.control.overlayButton({
-                position: 'bottomleft',
-                content: '<i class="fas fa-rss"></i>',
-                click: function () {
-                    $('#intel-feed').modal('show');
-                }
-            }).addTo(map);
+            this.intelButtom = null;
         }
         updateIntel(entries) {
+            if (!this.intelButtom) {
+                // Generate button only if server have an actual intel feed
+                this.intelButtom = L.control.overlayButton({
+                    position: 'bottomleft',
+                    content: '<i class="fas fa-rss"></i>',
+                    click: function () {
+                        $('#intel-feed').modal('show');
+                    }
+                }).addTo(this.currentMap);
+            }
             let ids = [];
             entries.forEach(entry => {
                 ids.push(entry.id);
@@ -166,4 +177,8 @@ var CTab;
         }
     }
     CTab.IntelUI = IntelUI;
+    function getIntelLabel(entry) {
+        let date = new Date(entry.dateTime);
+        return Math.trunc(entry.location[0]).toString().padStart(5, '0') + ' - ' + Math.trunc(entry.location[1]).toString().padStart(5, '0') + ', ' + date.getUTCHours().toString().padStart(2, '0') + ':' + date.getUTCMinutes().toString().padStart(2, '0');
+    }
 })(CTab || (CTab = {}));

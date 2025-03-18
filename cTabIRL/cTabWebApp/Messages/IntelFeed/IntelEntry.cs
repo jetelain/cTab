@@ -11,18 +11,35 @@ namespace cTabWebApp.Messages.IntelFeed
 
         public DateTime DateTime { get; set; }
 
+        /// <summary>
+        /// Center of image in world coordinates [x,y,z]
+        /// </summary>
         public double[]? Location { get; set; }
 
         public string? ImageUri { get; set; }
 
         public bool ImageProject { get; set; }
 
+        /// <summary>
+        /// Direction of image in world coordinates (degrees, north)
+        /// </summary>
         public double ImageDirection { get; set; }
 
+        /// <summary>
+        /// Size of image in world coordinates (meters) [width, height]
+        /// </summary>
         public double[]? ImageSize { get; set; }
 
+        /// <summary>
+        /// Corners of image in world coordinates
+        /// [worldTopLeft, worldTopRight, worldBottomRight, worldBottomLeft]
+        /// with each corner being [x,y,z]
+        /// </summary>
         public double[][]? ImageArea { get; set; }
 
+        /// <summary>
+        /// Camera position in world coordinates [x,y,z]
+        /// </summary>
         public double[]? ImageCamera { get; set; }
 
         internal static IntelEntry? Create(string entry)
@@ -59,6 +76,5 @@ namespace cTabWebApp.Messages.IntelFeed
                 ImageCamera = imageCamera
             };
         }
-
     }
 }

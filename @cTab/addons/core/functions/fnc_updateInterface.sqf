@@ -155,7 +155,7 @@ if (isNil "_mode") then {
 					IDC_CTAB_OSD_HOOK_DST,
 					IDC_CTAB_OSD_HOOK_DIR,
 					IDC_CTAB_NOTIFICATION,
-					990566,990567]
+					990566,990567,1000000]
 				};
 				if (_displayName == "cTab_Android_dlg") exitWith {
 					[3300,3301,3302,3303,3304,3305,3306,3307,
@@ -169,7 +169,7 @@ if (isNil "_mode") then {
 					IDC_CTAB_OSD_HOOK_DST,
 					IDC_CTAB_OSD_HOOK_DIR,
 					IDC_CTAB_NOTIFICATION,
-					990566,990567]
+					990566,990567,1000000]
 				};
 				if (_displayName in ["cTab_FBCB2_dlg","cTab_TAD_dlg"]) exitWith {
 					[3300,3301,3302,3303,3304,3305,3306,3307,
@@ -280,6 +280,11 @@ if (isNil "_mode") then {
 						_data = [_displayName,"hCam"] call cTab_fnc_getSettings;
 						_btnActCtrl ctrlSetTooltip LLSTRING(toggleFullscreen); 
 						['rendertarget13',_data] spawn cTab_fnc_createHelmetCam;
+					};
+					// ---------- INTEL FEED -----------
+					if (_mode == "INTELFEED") exitWith {
+						_displayItemsToShow = [1000000];
+						[_display] call ctab_intel_fnc_showIntelFeedUI;
 					};
 				};
 				
