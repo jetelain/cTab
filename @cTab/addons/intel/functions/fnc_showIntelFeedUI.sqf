@@ -32,7 +32,7 @@ if ( isNull _targetControl ) then {
 	_ctrl ctrlCommit 0;
 
 	_ctrl = _display ctrlCreate ["cTab_RscButton_Danger", -1, _targetControl];
-	_ctrl ctrlSetText "Delete";
+	_ctrl ctrlSetText LLSTRING(DeleteIntel);
 	_ctrl ctrlSetPosition [0, _height - (8*GRID_H), (_width/3)-GRID_W, GRID_H*8];
 	_ctrl ctrlCommit 0;
 	_ctrl ctrlAddEventHandler ["ButtonClick",

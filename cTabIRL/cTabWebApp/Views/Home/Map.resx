@@ -118,150 +118,150 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Buttons" xml:space="preserve">
-    <value>Boutons</value>
+    <value>Buttons</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Annuler</value>
+    <value>Cancel</value>
   </data>
   <data name="Center map on current position, and follow position" xml:space="preserve">
-    <value>Centre la carte sur la position actuelle et suit la position</value>
+    <value>Center map on current position, and follow position</value>
   </data>
   <data name="Choose a tactical map" xml:space="preserve">
-    <value>Choisir une carte tactique</value>
+    <value>Choose a tactical map</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Fermer</value>
+    <value>Close</value>
   </data>
   <data name="Compose a new text message" xml:space="preserve">
-    <value>Composer un nouveau message.</value>
+    <value>Compose a new text message</value>
   </data>
   <data name="Connected" xml:space="preserve">
-    <value>Connecté</value>
+    <value>Connected</value>
   </data>
   <data name="Connecting..." xml:space="preserve">
-    <value>Connection...</value>
+    <value>Connecting...</value>
   </data>
   <data name="Copy" xml:space="preserve">
-    <value>Copier</value>
+    <value>Copy</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Supprimer</value>
+    <value>Delete</value>
   </data>
   <data name="Delete photo ? It will not be possible to restore it." xml:space="preserve">
-    <value>Supprimer la photo ? Il ne sera pas possible de la restaurer.</value>
+    <value>Delete photo ? It will not be possible to restore it.</value>
   </data>
   <data name="Disconnected" xml:space="preserve">
-    <value>Déconnecté</value>
+    <value>Disconnected</value>
   </data>
   <data name="Dismiss alert" xml:space="preserve">
-    <value>Lever l'alerte</value>
+    <value>Dismiss alert</value>
   </data>
   <data name="Download all" xml:space="preserve">
-    <value>Tout télécharger</value>
+    <value>Download all</value>
   </data>
   <data name="EFIS" xml:space="preserve">
     <value>EFIS</value>
   </data>
   <data name="Electronic flight instrument system for helicopter pilots and co-pilots." xml:space="preserve">
-    <value>Electronic flight instrument system (système d'instruments de vol électronique) pour les pilotes et co-pilotes d'hélicoptère.</value>
+    <value>Electronic flight instrument system for helicopter pilots and co-pilots.</value>
   </data>
   <data name="Exit and return to home" xml:space="preserve">
-    <value>Sortir et revenir à l'accueil</value>
+    <value>Exit and return to home</value>
   </data>
   <data name="Full user manual on GitHub" xml:space="preserve">
-    <value>Manuel utilisateur complet sur GitHub</value>
+    <value>Full user manual on GitHub</value>
   </data>
   <data name="Full-screen display (on supported devices)" xml:space="preserve">
-    <value>Affiche en plein écran (sur appareils compatibles).</value>
+    <value>Full-screen display (on supported devices)</value>
   </data>
   <data name="https://github.com/jetelain/cTab/blob/master/docs/cTabIRL/endUser.md" xml:space="preserve">
-    <value>https://github.com/jetelain/cTab/blob/master/docs/cTabIRL/endUser.fr.md</value>
+    <value>https://github.com/jetelain/cTab/blob/master/docs/cTabIRL/endUser.md</value>
   </data>
   <data name="Imagery Intelligence Feed" xml:space="preserve">
-    <value>Flux de renseignement photo</value>
+    <value>Imagery Intelligence Feed</value>
   </data>
   <data name="Inbox" xml:space="preserve">
-    <value>Boite de réception</value>
+    <value>Inbox</value>
   </data>
   <data name="Inbox with received messages, and sent messages" xml:space="preserve">
-    <value>Boite de reception et messages envoyés.</value>
+    <value>Inbox with received messages, and sent messages</value>
   </data>
   <data name="Load a tactical map" xml:space="preserve">
-    <value>Charger une carte tactique</value>
+    <value>Load a tactical map</value>
   </data>
   <data name="Load from {0}" xml:space="preserve">
-    <value>Charger depuis {0}</value>
+    <value>Load from {0}</value>
   </data>
   <data name="Loading..." xml:space="preserve">
-    <value>Chargement en cours...</value>
+    <value>Loading...</value>
   </data>
   <data name="MEDEVAC" xml:space="preserve">
-    <value>EVASAN</value>
+    <value>MEDEVAC</value>
   </data>
   <data name="Message Content" xml:space="preserve">
-    <value>Contenu du message</value>
+    <value>Message Content</value>
   </data>
   <data name="Please sign-in on {0} and then click on refresh button." xml:space="preserve">
-    <value>Veulliez vous identifier sur {0} et cliquer sur le bouton actualiser.</value>
+    <value>Please sign-in on {0} and then click on refresh button.</value>
   </data>
   <data name="Preformated" xml:space="preserve">
-    <value>Préformaté</value>
+    <value>Preformated</value>
   </data>
   <data name="Prevent sleep mode if full-screen is not available" xml:space="preserve">
-    <value>Empêche la mise en veille si le mode plein écran n'est pas disponible</value>
+    <value>Prevent sleep mode if full-screen is not available</value>
   </data>
   <data name="Refresh" xml:space="preserve">
-    <value>Actualiser</value>
+    <value>Refresh</value>
   </data>
   <data name="See &lt;a href=&quot;{0}&quot;&gt;{0}&lt;/a&gt; to create your own templates." xml:space="preserve">
-    <value>Voir &lt;a href="{0}"&gt;{0}&lt;/a&gt; pour créer vos propres modèles.</value>
+    <value>See &lt;a href="{0}"&gt;{0}&lt;/a&gt; to create your own templates.</value>
   </data>
   <data name="Send" xml:space="preserve">
-    <value>Envoyer</value>
+    <value>Send</value>
   </data>
   <data name="Send alert" xml:space="preserve">
-    <value>Envoyer l'alerte</value>
+    <value>Send alert</value>
   </data>
   <data name="Sent" xml:space="preserve">
-    <value>Envoyé</value>
+    <value>Sent</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Partager</value>
+    <value>Share</value>
   </data>
   <data name="Share your cTab in read-only mode." xml:space="preserve">
-    <value>Partager votre cTab en lecture seule.</value>
+    <value>Share your cTab in read-only mode.</value>
   </data>
   <data name="Show markers on map" xml:space="preserve">
-    <value>Afficher les marqueurs sur la carte</value>
+    <value>Show markers on map</value>
   </data>
   <data name="Sign-in on {0}" xml:space="preserve">
-    <value>S'identifier sur {0}</value>
+    <value>Sign-in on {0}</value>
   </data>
   <data name="Switch to EFIS" xml:space="preserve">
-    <value>Basculer sur l'EFIS</value>
+    <value>Switch to EFIS</value>
   </data>
   <data name="Tactical map will be displayed on your mobile device and in Arma. Changes made on {0} will be applied in real-time." xml:space="preserve">
-    <value>La carte tactique sera affiché sur votre appareil mobile et dans Arma. Les modifications apportées sur {0} seront appliquées en temps réel.</value>
+    <value>Tactical map will be displayed on your mobile device and in Arma. Changes made on {0} will be applied in real-time.</value>
   </data>
   <data name="To" xml:space="preserve">
-    <value>À</value>
+    <value>To</value>
   </data>
   <data name="To add a marker on a position: right click/long tap or double click/double tap." xml:space="preserve">
-    <value>Pour ajouter un marqueur sur une position : clic droit/appui long, ou double clic/double tape.</value>
+    <value>To add a marker on a position: right click/long tap or double click/double tap.</value>
   </data>
   <data name="Top bar displays connectivity, heading, clock time and MGRS position (meter precision)." xml:space="preserve">
-    <value>La barre haute affiche la connectivité, la boussole numérique, l'heure, et la position MGRS (précision métrique).</value>
+    <value>Top bar displays connectivity, heading, clock time and MGRS position (meter precision).</value>
   </data>
   <data name="Troop In Contact ALERT" xml:space="preserve">
-    <value>Alerte TIC (Troop In Contact)</value>
+    <value>Troop In Contact ALERT</value>
   </data>
   <data name="Unload current map" xml:space="preserve">
-    <value>Décharger la carte actuelle</value>
+    <value>Unload current map</value>
   </data>
   <data name="User manual" xml:space="preserve">
-    <value>Manuel utilisateur</value>
+    <value>User manual</value>
   </data>
   <data name="Wait for cTab" xml:space="preserve">
-    <value>En attente de cTab</value>
+    <value>Wait for cTab</value>
   </data>
 </root>

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="ctab">
     <Package name="intel">
+        <Key ID="STR_ctab_intel_IntelFeed">
+            <English>Imagery Intelligence Feed</English>
+            <French>Flux de renseignement photo</French>
+        </Key>
+        <Key ID="STR_ctab_intel_DeleteIntel">
+            <English>Delete</English>
+            <French>Supprimer</French>
+        </Key>
     </Package>
 </Project>

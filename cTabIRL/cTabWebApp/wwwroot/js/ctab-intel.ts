@@ -9,6 +9,12 @@ declare namespace L {
 
 declare function $(selector: string): any;
 
+declare var texts: {
+    showOnMap: string,
+    deletePhoto: string,
+    deletePhotoConfirm: string
+};
+
 namespace CTab {
 
     interface IntelItem {
@@ -90,7 +96,7 @@ namespace CTab {
             let label = document.createElement('label');
             label.className = 'custom-control-label reset-font-size';
             label.htmlFor = checkbox.id;
-            label.textContent = 'Show on map';
+            label.textContent = texts.showOnMap;
 
             switchContainer.appendChild(checkbox);
             switchContainer.appendChild(label);
@@ -109,9 +115,9 @@ namespace CTab {
         if (ui.backend) {
             let removeButton = document.createElement('button');
             removeButton.className = 'btn btn-outline-danger btn-sm';
-            removeButton.textContent = 'Remove';
+            removeButton.textContent = texts.deletePhoto;
             removeButton.addEventListener('click', function () {
-                if (window.confirm("Delete photo ? it will not be possible to restore it.")) {
+                if (window.confirm(texts.deletePhotoConfirm)) {
                     ui.backend.removeEntry(entry.id);
                     ui.currentMap.closePopup();
                 }

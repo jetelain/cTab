@@ -290,6 +290,12 @@ if (isNil "_mode") then {
 				
 				// hide every _displayItems not in _displayItemsToShow
 				{(_display displayCtrl _x) ctrlShow (_x in _displayItemsToShow)} count _displayItems;
+
+				if (_mode == "DESKTOP") then {
+					// if we are in desktop mode, we want to focus on the desktop group
+					// this allows tooltips to be displayed correctly
+					ctrlSetFocus (_display displayCtrl IDC_CTAB_GROUP_DESKTOP);
+				};
 			};
 		};
 		// ------------ SHOW ICON TEXT ------------
