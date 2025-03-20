@@ -10,6 +10,14 @@ if (!GVAR(canTakePhoto)) exitWith {
 };
 
 private _areaHalfWidth = (safeZoneH * 3 / 4) / 2 * GVAR(photoRation);
+
+// Extension will not respect ratio if screen ratio is smaller than the expected ratio
+// For a server configured with 16:9 ratio, the result will depend on user screen ratio :
+// - 4:3, 16:10 : Full image (but not expected ratio) => (safeZoneW/2)
+// - 16:9       : Full image                          => _areaHalfWidth == (safeZoneW/2)
+// - 21:9, 32:9 : Cropped image                       => _areaHalfWidth
+_areaHalfWidth = (safeZoneW/2) min _areaHalfWidth;
+
 private _areaLeft = 0.5 - _areaHalfWidth;
 private _areaRight = 0.5 + _areaHalfWidth;
 private _areaTop = safeZoneY;
@@ -35,7 +43,7 @@ private _worldWidthRatio = (_worldTopLeft vectorDistance _worldTopRight) / (_wor
 private _worldHeightRatio = (_worldTopLeft vectorDistance _worldBottomLeft) / (_worldTopRight vectorDistance _worldBottomRight);
 private _canBeProjected = _worldWidthRatio > 0.25 && _worldWidthRatio < 4 && _worldHeightRatio > 0.25 && _worldHeightRatio < 4;
 
-INFO_2("Photo ratio: %1 %2",_worldWidthRatio,_worldHeightRatio);
+INFO_4("Take a screen shot. Projected image ratio is W=%1 H=%2. AreaWidth=%3 SafeZoneW=%4",_worldWidthRatio,_worldHeightRatio,_areaHalfWidth*2,safeZoneW);
 
 private _data = [
 	_worldCenter, // "Cross air" pointed position

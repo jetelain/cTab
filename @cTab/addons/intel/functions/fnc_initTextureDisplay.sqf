@@ -8,7 +8,6 @@ private _entry = GVAR(intels) getOrDefault [_intelId, []];
 
 if ( count _entry == 0 ) exitWith { WARNING_2("Intel %1 not found (display %2)",_intelId,_displayID); };
 
-INFO_3("Intel %1: %2 (display %3)",_intelId,_entry,_displayID);
 (_entry select 4) params ['_uri'];
 
 [_displayID, _uri] spawn {  

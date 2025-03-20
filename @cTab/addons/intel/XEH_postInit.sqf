@@ -45,7 +45,6 @@ if (hasInterface) then {
 		params ['_key','_added','_removedIds'];
 		// Keep track of all intels (to allow texture to work for all players)
 		{
-			INFO_2("Intel %1: %2",(_x select 0),_x);
 			GVAR(intels) set [(_x select 0), _x];
 		} forEach _added;
 

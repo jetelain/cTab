@@ -3,8 +3,6 @@
 
 params ['_uri','_data'];
 
-INFO_2("Uri=%1 Data=%2",_uri,_data);
-
 private _entryData = [
 	INTEL_TYPE_IMG,
 	_data select 0, // "Cross air" pointed position
@@ -18,7 +16,5 @@ private _entryData = [
 		_data select 6  // Camera position
 	]
 ];
-
-INFO_1("Add %1",_entryData);
 
 [QGVAR(addIntel), [player, call cTab_fnc_getPlayerEncryptionKey,_entryData]] call CBA_fnc_serverEvent;
