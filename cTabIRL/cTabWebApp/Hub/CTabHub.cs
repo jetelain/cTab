@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Arma3TacMapLibrary.Arma3;
 using Arma3TacMapLibrary.Maps;
+using cTabWebApp.Messages;
 using cTabWebApp.Messages.IntelFeed;
 using cTabWebApp.Messaging;
 using cTabWebApp.Services;
@@ -170,7 +171,8 @@ namespace cTabWebApp
                         Endpoint = new Uri(new Uri(Context.GetHttpContext().Request.GetEncodedUrl()), "/Image").AbsoluteUri,
                         Token = state.UploadToken,
                         MaxHeight = _imageServiceConfig.MaxHeight,
-                        MaxWidth = _imageServiceConfig.MaxWidth
+                        MaxWidth = _imageServiceConfig.MaxWidth,
+                        MaxBytes = _imageServiceConfig.MaxImageSizeInBytes
                     });
             }
 

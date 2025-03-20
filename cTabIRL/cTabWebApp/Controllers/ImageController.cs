@@ -18,7 +18,6 @@ namespace cTabWebApp.Controllers
         private readonly IPlayerStateService _service;
         private readonly IImageService _images;
         private readonly ImageServiceConfig _imageConfig;
-        private const int MaxImageSizeInBytes = 1_048_576; // 1 MiB
 
         public ImageController(IPlayerStateService service, IImageService images, ImageServiceConfig imageConfig)
         {
@@ -41,7 +40,7 @@ namespace cTabWebApp.Controllers
             {
                 return BadRequest();
             }
-            if (file.Length > MaxImageSizeInBytes)
+            if (file.Length > _imageConfig.MaxImageSizeInBytes)
             {
                 return BadRequest();
             }

@@ -4,14 +4,30 @@ namespace cTabWebApp.Services.Images
 {
     public class ImageServiceConfig
     {
-        public int MaxTotalImageCount { get; set; } = 15000; // Maximum number of images (typical image size is 300 KB, so 4.5 GB per default)
-        public int MaxSessionImageCount { get; set; } = 75; // Maximum number of images per user session
-        public TimeSpan RetentionDuration { get; set; } = TimeSpan.FromHours(12); // Duration to keep images
-        public string? StorageLocation { get; set; } // Directory to store images
+        /// <summary>
+        /// Maximum number of images (typical 720p image size is 300 KB, so 4.5 GB per default)
+        /// </summary>
+        public int MaxTotalImageCount { get; set; } = 15000;
+
+        /// <summary>
+        /// Maximum number of images per user session
+        /// </summary>
+        public int MaxSessionImageCount { get; set; } = 75;
+
+        /// <summary>
+        /// Duration to keep images
+        /// </summary>
+        public TimeSpan RetentionDuration { get; set; } = TimeSpan.FromHours(12);
+
+        /// <summary>
+        /// Directory to store images
+        /// </summary>
+        public string? StorageLocation { get; set; }
 
         public int MaxHeight { get; set; } = 720;
 
-        public int MaxWidth { get; set; } = 1280;
+        public int MaxWidth { get; set; } = 1280; 
 
+        public int MaxImageSizeInBytes { get; set; } = 1_048_576;
     }
 }

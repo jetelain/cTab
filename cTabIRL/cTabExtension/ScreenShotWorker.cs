@@ -36,7 +36,7 @@ namespace cTabExtension
                 return;
             }
 
-            var bytes = ScreenShotHelper.TakeScreenShot(options.MaxWidth,options.MaxHeight);
+            var bytes = ScreenShotHelper.TakeScreenShot(options.MaxWidth,options.MaxHeight,options.MaxBytes);
 
             var data = GetData(args);
             var content = new MultipartFormDataContent();

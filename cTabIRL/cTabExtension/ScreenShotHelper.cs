@@ -7,7 +7,7 @@ namespace cTabExtension
 {
     internal static class ScreenShotHelper
     {
-        internal static byte[] TakeScreenShot(int targetWidth, int targetHeight)
+        internal static byte[] TakeScreenShot(int targetWidth, int targetHeight, int maxBytes)
         {
             GetWindowRect(Process.GetCurrentProcess().MainWindowHandle, out RECT lpRect);
             var screenH = lpRect.Bottom;
@@ -24,7 +24,24 @@ namespace cTabExtension
 
             using var ms = new MemoryStream();
             SaveJpegWithQuality(resized, ms, 95);
+
+            DowngradeQualityIfTooBig(maxBytes, resized, ms);
+
             return ms.ToArray();
+        }
+
+        private static void DowngradeQualityIfTooBig(int maxBytes, Bitmap resized, MemoryStream ms)
+        {
+            if (maxBytes > 0 && ms.Length > maxBytes)
+            {
+                int quality = 90;
+                while (ms.Length > maxBytes && quality > 50)
+                {
+                    ms.SetLength(0);
+                    SaveJpegWithQuality(resized, ms, quality);
+                    quality -= 10;
+                }
+            }
         }
 
         internal static Bitmap ResizeBitmap(Bitmap originalBitmap, int newWidth, int newHeight)

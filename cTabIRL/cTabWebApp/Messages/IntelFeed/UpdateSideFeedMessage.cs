@@ -1,5 +1,4 @@
 ﻿using System;
-using cTabWebApp.Messaging;
 using System.Collections.Generic;
 
 namespace cTabWebApp.Messages.IntelFeed
