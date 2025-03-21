@@ -1,4 +1,4 @@
-name: .NET Linux
+name: .NET Release
 
 on:
   push:
@@ -23,19 +23,19 @@ jobs:
       run: dotnet publish --no-self-contained -f net8.0 -r linux-x64 -c ReleaseCloud cTabIRL/cTabWebApp/cTabWebApp.csproj -o OutputLinuxX64
       
     - name: Zip Linux x64/ReleaseCloud 
-      run: zip -r ctab-webapp-linux-x64.zip OutputLinuxX64
+      run: zip -r ctab-webapp-linux-x64.zip "OutputLinuxX64/*"
       
     - name: Publish Linux arm64/ReleaseCloud 
       run: dotnet publish --no-self-contained -f net8.0 -r linux-arm64 -c ReleaseCloud cTabIRL/cTabWebApp/cTabWebApp.csproj -o OutputLinuxArm64
 
     - name: Zip Linux arm64/ReleaseCloud 
-      run: zip -r ctab-webapp-linux-arm64.zip OutputLinuxArm64
+      run: zip -r ctab-webapp-linux-arm64.zip "OutputLinuxArm64/*"
 
     - name: Publish Windows/ReleaseSolo
       run: dotnet publish --no-self-contained -f net8.0 -r win-x64 -c Release cTabIRL/cTabWebApp/cTabWebApp.csproj -o OutputWindowsX64
       
     - name: Zip Windows/ReleaseSolo
-      run: zip -r ctab-webapp-single-user-win-x64.zip OutputWindowsX64
+      run: zip -r ctab-webapp-single-user-win-x64.zip "OutputWindowsX64/*"
       
     - uses: Shopify/upload-to-release@master
       with:
