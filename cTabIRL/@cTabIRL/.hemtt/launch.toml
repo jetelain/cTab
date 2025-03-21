@@ -8,3 +8,15 @@ parameters=[
 	"-mod=\"C:\\Users\\julien\\source\\repos\\jetelain\\cTab\\@cTab\\.hemttout\\dev\"" 
 ]
 mission = "basic.VR"
+
+[camera]
+workshop = [
+    "450814997",  # CBA_A3's Workshop ID
+	"463939057",  # ACE3's Workshop ID
+	"2577441180"  # Hate's Digital Camera
+]
+parameters=[
+	# It's not possible to use a variable, you will have to change this path to your actual path
+	"-mod=\"C:\\Users\\julien\\source\\repos\\jetelain\\cTab\\@cTab\\.hemttout\\dev\"" 
+]
+mission = "camera.VR"

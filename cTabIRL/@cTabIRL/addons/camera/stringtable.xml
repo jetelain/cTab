@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="ctab_irl">
+    <Package name="connect">
+        <Key ID="STR_ctab_irl_camera_mode">
+            <English>Hate's Digital Camera Photos</English>
+            <French>Photos de Hate's Digital Camera</French>
+        </Key>
+        <Key ID="STR_ctab_irl_camera_mode0">
+            <English>Store into cTab and profile</English>
+            <French>Stocké dans cTab et le profil</French>
+        </Key>
+        <Key ID="STR_ctab_irl_camera_mode1">
+            <English>Store into cTab only</English>
+            <French>Stocké dans cTab uniquement</French>
+        </Key>
+        <Key ID="STR_ctab_irl_camera_mode2">
+            <English>Store into profile only</English>
+            <French>Stocké dans le profil uniquement</French>
+        </Key>
+        <Key ID="STR_ctab_irl_camera_modeTooltip">
+            <English>Set the way the photos are stored</English>
+            <French>Définir la manière dont les photos sont stockées</French>
+        </Key>
+    </Package>
+</Project>

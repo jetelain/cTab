@@ -88,6 +88,7 @@ GVAR(mapMarkersNeedsUpdate) = true;
 GVAR(trackDevices) = ["ItemcTab", "ItemAndroid"];
 GVAR(canTakePhoto) = false;
 GVAR(photoRation) = 1;
+GVAR(ignoreSound) = false;
 
 [QGVAR(enabled), "CHECKBOX", [LLSTRING(enabled), LLSTRING(enabledDetails)], ["cTab",LLSTRING(modName)], true, 0, {}, true] call CBA_fnc_addSetting;
 #ifdef DEBUG_BACKEND
