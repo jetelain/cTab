@@ -1,0 +1,1 @@
+#include "\z\ctab_irl\addons\camera\script_component.hpp"
