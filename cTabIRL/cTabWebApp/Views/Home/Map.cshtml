@@ -197,6 +197,37 @@
             </div>
         </div>
     }
+
+    <div class="modal" tabindex="-1" role="dialog" id="intel-feed">
+        <div class="modal-dialog modal-xl mb-0 mt-4 modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5>@Localizer["Imagery Intelligence Feed"]</h5>
+                    <div class="container">
+                        <div class="row row-cols-2 row-cols-lg-3 row-cols-xl-4" id="intel-feed-items">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer p-2">
+                    <div class="row w-100">
+                        <div class="col-7 text-left p-0">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="intel-feed-markers" checked="checked" />
+                                <label class="custom-control-label" for="intel-feed-markers">@Localizer["Show markers on map"]</label>
+                            </div>
+                        </div>
+                        <div class="col text-right p-0">
+                            <a class="btn btn-sm btn-outline-secondary" target="_blank" asp-controller="Image" asp-action="DownloadIntelFeed" asp-route-t="@Model.Token"><i class="fas fa-file-archive"></i> @Localizer["Download all"]</a>
+                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -210,6 +241,7 @@
     <script src="https://maps.plan-ops.fr/js/milMissions.js" asp-append-version="true"></script>
     <script src="https://maps.plan-ops.fr/js/arma3TacMap.js" asp-append-version="true"></script>
     <script src="~/js/preformat.js" asp-append-version="true"></script>
+    <script src="~/js/ctab-intel.js" asp-append-version="true"></script>
     <script>
         var vm = @Json.Serialize(Model);
         var texts = @Json.Serialize(new
@@ -218,7 +250,10 @@
                    Disconnected = Localizer["Disconnected"].Value,
                    Connected = Localizer["Connected"].Value,
                    DeleteMarker = Localizer["Delete"].Value,
-                   NoMessageSelected = SharedResource.STR_ctab_core_NoMessageSelected
+                   NoMessageSelected = SharedResource.STR_ctab_core_NoMessageSelected,
+                   ShowOnMap = Localizer["Show on map"].Value,
+                   DeletePhoto = Localizer["Delete"].Value,
+                   DeletePhotoConfirm = Localizer["Delete photo ? It will not be possible to restore it."].Value
                });
         var octants = @Json.Serialize(
             new[] {
@@ -234,6 +269,7 @@
             });
         var menus = @Json.Serialize(Menu.CreateMenus().ToDictionary(e => e.MenuId.ToString(), e => e));
     </script>
+    <script src="~/js/leaflet-distortableimage.js" asp-append-version="true"></script>
     <script src="~/js/common.js" asp-append-version="true"></script>
     <script src="~/js/map.js" asp-append-version="true"></script>
 </body>

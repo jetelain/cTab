@@ -91,3 +91,8 @@ i.fas.fa-helicopter {
         flex-wrap: wrap;
         width: 300px;
     }
+
+.reset-font-size {
+    font-size: 1rem;
+    line-height: 1.5;
+}

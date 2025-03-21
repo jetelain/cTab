@@ -3,6 +3,7 @@ using System.IO;
 using Arma3TacMapLibrary;
 using cTabWebApp.Models;
 using cTabWebApp.Services;
+using cTabWebApp.Services.Images;
 using cTabWebApp.TacMaps;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -40,10 +41,13 @@ namespace cTabWebApp
                 .AddViewLocalization();
 #if CLOUD
             services.AddSingleton<IPlayerStateService, PlayerStateService>();
+            services.AddSingleton<IImageService, ImageService>();
 #else
             services.AddSingleton<IPlayerStateService, SinglePlayerStateService>();
+            services.AddSingleton<IImageService, NoImageService>();
 #endif
             services.AddSingleton<PublicUriService>();
+
 
             var steamKey = Configuration.GetValue<string>("SteamKey");
             if (!string.IsNullOrEmpty(steamKey))
@@ -75,6 +79,7 @@ namespace cTabWebApp
             }
 
             services.AddSingleton<TacMapService>();
+            services.AddSingleton(Configuration.GetSection("Images").Get<ImageServiceConfig>() ?? new ImageServiceConfig());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

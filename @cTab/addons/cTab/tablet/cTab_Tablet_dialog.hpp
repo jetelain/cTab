@@ -133,6 +133,14 @@ class cTab_Tablet_dlg {
 					action = "['cTab_Tablet_dlg',[['mode','MESSAGE']]] call cTab_fnc_setSettings;";
 					toolTip = "$STR_ctab_core_MessageIconHint";
 				};
+				class actINTELtxt: actBFTtxt
+				{
+					idc = IDC_CTAB_ACTMSGTXT;
+					text = "z\ctab\addons\intel\data\feed_ca.paa" ;
+					y = pxToGroup_Y(cTab_GUI_tablet_SCREEN_CONTENT_Y + cTab_GUI_tablet_DESKTOP_ICON_OFFSET_Y * 5 + cTab_GUI_tablet_DESKTOP_ICON_H * 4);
+					action = "['cTab_Tablet_dlg',[['mode','INTELFEED']]] call cTab_fnc_setSettings;";
+					toolTip = "$STR_ctab_intel_IntelFeed";
+				};
 			};
 		};
 		// ---------- UAV -----------

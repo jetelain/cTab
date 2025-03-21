@@ -147,11 +147,17 @@
   <data name="Delete" xml:space="preserve">
     <value>Supprimer</value>
   </data>
+  <data name="Delete photo ? It will not be possible to restore it." xml:space="preserve">
+    <value>Supprimer la photo ? Il ne sera pas possible de la restaurer.</value>
+  </data>
   <data name="Disconnected" xml:space="preserve">
     <value>Déconnecté</value>
   </data>
   <data name="Dismiss alert" xml:space="preserve">
     <value>Lever l'alerte</value>
+  </data>
+  <data name="Download all" xml:space="preserve">
+    <value>Tout télécharger</value>
   </data>
   <data name="EFIS" xml:space="preserve">
     <value>EFIS</value>
@@ -170,6 +176,9 @@
   </data>
   <data name="https://github.com/jetelain/cTab/blob/master/docs/cTabIRL/endUser.md" xml:space="preserve">
     <value>https://github.com/jetelain/cTab/blob/master/docs/cTabIRL/endUser.fr.md</value>
+  </data>
+  <data name="Imagery Intelligence Feed" xml:space="preserve">
+    <value>Flux de renseignement photo</value>
   </data>
   <data name="Inbox" xml:space="preserve">
     <value>Boite de réception</value>
@@ -221,6 +230,9 @@
   </data>
   <data name="Share your cTab in read-only mode." xml:space="preserve">
     <value>Partager votre cTab en lecture seule.</value>
+  </data>
+  <data name="Show markers on map" xml:space="preserve">
+    <value>Afficher les marqueurs sur la carte</value>
   </data>
   <data name="Sign-in on {0}" xml:space="preserve">
     <value>S'identifier sur {0}</value>

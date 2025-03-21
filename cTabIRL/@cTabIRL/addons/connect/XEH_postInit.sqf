@@ -1,4 +1,5 @@
 #include "script_component.hpp"
+#include "\a3\editor_f\Data\Scripts\dikCodes.h"
 
 if (!hasInterface) exitWith { };
 
@@ -46,6 +47,7 @@ if (!hasInterface) exitWith { };
 	["ctab_userMarkerListUpdated", FUNC(updateMarkers)] call CBA_fnc_addEventHandler;
 	["ctab_messagesUpdated", FUNC(updateMessages)] call CBA_fnc_addEventHandler;
 	["ctab_messaging_templates", FUNC(updateMessageTemplates)] call CBA_fnc_addEventHandler;
+	["ctab_intel_feed", FUNC(updateIntelSideFeed)] call CBA_fnc_addEventHandler;
 
 	addMissionEventHandler ["MarkerCreated", {
 		params ['_name'];
@@ -72,3 +74,6 @@ if (!hasInterface) exitWith { };
 	params ["_position", "_distance"];
 	"cTabExtension" callExtension ["ActionRangeFinder", _position + [_distance]];
 }] call CBA_fnc_addEventHandler;
+
+
+["cTab","photo",[LLSTRING(screenShotTitle),""],{call FUNC(takePhoto); true},{false},[DIK_P,[false,true,false]],false] call cba_fnc_addKeybind;

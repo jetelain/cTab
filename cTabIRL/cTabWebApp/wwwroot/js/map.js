@@ -88,7 +88,7 @@ var ctabFeatureLevel = 0;
 var irlFeatureLevel = 0;
 var preformatedMedevacUid = 'medevac';
 let ctabCurrentDate = null;
-
+let ctabIntel = new CTab.IntelUI();
 
 function updateButtons() {
     centerOnPositionButton.setClass(centerOnPosition ? 'btn-primary' : 'btn-outline-secondary');
@@ -303,7 +303,7 @@ function initMap(mapInfos, worldName) {
     }
     var map = L.map('map', {
         minZoom: mapInfos.minZoom,
-        maxZoom: mapInfos.maxZoom + 2,
+        maxZoom: mapInfos.maxZoom + 4,
         maxNativeZoom: mapInfos.maxZoom,
         crs: mapInfos.CRS,
         doubleClickZoom: false
@@ -360,6 +360,8 @@ function initMap(mapInfos, worldName) {
         })).addTo(map);
     }
 
+
+
     L.latlngGraticule({
         zoomInterval: [
             { start: 0, end: 10, interval: 1000 }
@@ -382,6 +384,13 @@ function initMap(mapInfos, worldName) {
     currentMap = map;
     currentMapInfos = mapInfos;
     selfMarker = null;
+
+    ctabIntel.attachToMap(map, {
+        removeEntry: function (id) {
+            connection.send("WebDeleteIntel", { id: id });
+        }
+    });
+
     updateButtons();
 };
 
@@ -819,6 +828,7 @@ function loadTacMapList() {
         });
 }
 
+
 $(function () {
 
     $('#statusbar').on('click', function () { if (connection.state === signalR.HubConnectionState.Disconnected) { connection.start(); } });
@@ -946,6 +956,15 @@ $(function () {
     connection.on("UpdateMessages", function (data) {
         try {
             updateInbox(data.messages);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+
+    connection.on("UpdateSideFeed", function (data) {
+        try {
+            ctabIntel.updateIntel(data.entries);
         }
         catch (e) {
             console.error(e);

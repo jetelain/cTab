@@ -29,3 +29,6 @@ call FUNC(updateDevices);
 
 // Send messages templates
 call FUNC(updateMessageTemplates);
+
+// Send intels
+call FUNC(updateIntelSideFeed);

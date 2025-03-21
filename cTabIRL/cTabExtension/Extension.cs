@@ -22,7 +22,7 @@ namespace cTabExtension
         [UnmanagedCallersOnly(EntryPoint = "RVExtensionVersion")]
         public static void RvExtensionVersion(nint output, int outputSize)
         {
-            Output(output, outputSize, "cTabExtension 2.0");
+            Output(output, outputSize, "cTabExtension 2.1");
         }
 
         private static void Output(nint output, int outputSize, string data)
