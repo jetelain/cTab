@@ -1,5 +1,1 @@
-# cTab IRL User Manual
-
-See http://ctab.plan-ops.fr/ for instructions to connect your mobile device
-
-(TODO)
+[This documentation has been moved to the wiki](https://github.com/jetelain/cTab/wiki/cTab-Connect)
