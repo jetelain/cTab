@@ -19,3 +19,14 @@ class GVAR(intelTextureDisplay) {
     idd = -1;
     class Controls {};
 };
+
+class CfgCommands
+{
+	allowedHTMLLoadURIs[] +=
+	{
+#ifdef USE_LOCALHOST
+		"http://localhost:5000/*",
+#endif
+		"https://ctab.plan-ops.fr/*"
+	};
+};

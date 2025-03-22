@@ -12,15 +12,6 @@ class CfgPatches {
     };
 };
 
-class CfgCommands
-{
-	allowedHTMLLoadURIs[] +=
-	{
-		"http://localhost:5000/*",
-		"https://ctab.plan-ops.fr/*"
-	};
-};
-
 #include "CfgEventHandlers.hpp"
 #include "CfgVehicles.hpp"
 #include "CfgWeapons.hpp"
