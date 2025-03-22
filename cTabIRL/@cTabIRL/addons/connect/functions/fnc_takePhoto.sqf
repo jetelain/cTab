@@ -45,14 +45,24 @@ private _canBeProjected = _worldWidthRatio > 0.25 && _worldWidthRatio < 4 && _wo
 
 INFO_4("Take a screen shot. Projected image ratio is W=%1 H=%2. AreaWidth=%3 SafeZoneW=%4",_worldWidthRatio,_worldHeightRatio,_areaHalfWidth*2,safeZoneW);
 
+private _markerPosition = _worldCenter;
+if ( !_canBeProjected ) then {
+	// If image can't be projected, use the coordinates of the object in front of camera
+	private _camPosition = AGLToASL positionCameraToWorld [0, 0, 1];
+	private _aimLinePos = AGLToASL positionCameraToWorld [0, 0, 5000];
+	private _LIS = lineIntersectsSurfaces [_camPosition, _aimLinePos];
+	_markerPosition = ((_LIS select 0) select 0);
+};
+
 private _data = [
-	_worldCenter, // "Cross air" pointed position
+	_markerPosition, // "Cross air" pointed position
 	date, // In-game date time
 	_canBeProjected, // Image can be diplayed on map without significant distortion
 	_dir, // Image direction
 	[_worldRight vectorDistance _worldLeft, _worldTop vectorDistance _worldBottom], // Image size
 	[_worldTopLeft, _worldTopRight, _worldBottomRight, _worldBottomLeft], // Area on map (to be able to draw polygon)
-	AGLToASL positionCameraToWorld [0,0,0] // Camera position
+	AGLToASL positionCameraToWorld [0,0,0], // Camera position
+	_worldCenter
 ];
 
 "cTabExtension" callExtension ["ScreenShot",[_data]];

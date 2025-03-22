@@ -3,6 +3,7 @@
 
 // #define DEBUG_MODE_FULL
 // #define DISABLE_COMPILE_CACHE
+// #define USE_LOCALHOST
 
 #ifdef DEBUG_ENABLED_CORE
     #define DEBUG_MODE_FULL
