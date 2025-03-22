@@ -1,5 +1,1 @@
-# Manuel utilisateur de cTab IRL
-
-Voir les instructions pour connecter votre appareil mobile sur http://ctab.plan-ops.fr/ 
-
-(TODO)
+[This documentation has been moved to the wiki](https://github.com/jetelain/cTab/wiki/cTab-Connect)
