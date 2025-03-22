@@ -51,7 +51,9 @@ if ( !_canBeProjected ) then {
 	private _camPosition = AGLToASL positionCameraToWorld [0, 0, 1];
 	private _aimLinePos = AGLToASL positionCameraToWorld [0, 0, 5000];
 	private _LIS = lineIntersectsSurfaces [_camPosition, _aimLinePos];
-	_markerPosition = ((_LIS select 0) select 0);
+	if ( count _LIS > 0 ) then {
+		_markerPosition = ((_LIS select 0) select 0);
+	};
 };
 
 private _data = [
