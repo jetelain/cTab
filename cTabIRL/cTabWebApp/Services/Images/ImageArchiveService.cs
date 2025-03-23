@@ -6,6 +6,8 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 
+#nullable enable
+
 namespace cTabWebApp.Services.Images
 {
     public class ImageArchiveService : IImageArchiveService
