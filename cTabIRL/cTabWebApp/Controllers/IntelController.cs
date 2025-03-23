@@ -38,7 +38,7 @@ namespace cTabWebApp.Controllers
         {
             if (archive.Length > MaxArchiveSize)
             {
-                return BadRequest("Archive exceed size limit.");
+                return BadRequest("Archive exceeds size limit.");
             }
 
             var state = _service.GetStateByToken(t);
