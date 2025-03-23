@@ -74,6 +74,9 @@ addMissionEventHandler ["ExtensionCallback", {
 		if ( _function == "DeleteIntel" ) exitWith {
 			(parseSimpleArray _data) call ctab_intel_fnc_removeItem;
 		};
+		if ( _function == "AddPhoto" ) exitWith {
+			(parseSimpleArray _data) call ctab_intel_fnc_addPhoto;
+		};
 		if( _function == "Error" ) exitWith {
 			ERROR(_data);
 		};

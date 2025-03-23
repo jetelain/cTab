@@ -96,3 +96,12 @@ i.fas.fa-helicopter {
     font-size: 1rem;
     line-height: 1.5;
 }
+
+#intel-feed-items {
+
+    min-height:100px;
+}
+
+.fa-file-upload {
+    margin: 0px 2px;
+}

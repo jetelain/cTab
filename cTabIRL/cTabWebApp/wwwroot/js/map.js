@@ -385,7 +385,7 @@ function initMap(mapInfos, worldName) {
     currentMapInfos = mapInfos;
     selfMarker = null;
 
-    ctabIntel.attachToMap(map, {
+    ctabIntel.attachToMap(map, vm.isSpectator ? null : {
         removeEntry: function (id) {
             connection.send("WebDeleteIntel", { id: id });
         }

@@ -78,6 +78,45 @@ var CTab;
         popupContent.appendChild(btnContainer);
         return popupContent;
     }
+    function uploadIntelArchive(file, ui) {
+        if (file.size > 50 * 1024 * 1024) { // 50 MB
+            alert('File size must be below 50 MB');
+            return;
+        }
+        let formData = new FormData();
+        formData.append('archive', file);
+        // Get the anti-forgery token
+        let token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+        formData.append('__RequestVerificationToken', token);
+        fetch(document.querySelector('#intel-archive-upload').action, {
+            method: 'POST',
+            body: formData
+        }).then(response => {
+            if (!response.ok) {
+                console.error(response);
+                if (response.status == 400) {
+                    response.text().then(value => alert(value));
+                }
+                else {
+                    alert(response.statusText);
+                }
+            }
+        }).catch(error => {
+            console.error(error);
+            alert('File upload failed');
+        });
+    }
+    function promptIntelArchive(ui) {
+        let input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.zip,application/zip';
+        input.addEventListener('change', function () {
+            if (input.files.length > 0) {
+                uploadIntelArchive(input.files[0], ui);
+            }
+        });
+        input.click();
+    }
     class IntelUI {
         constructor() {
             this.intelItems = {};
@@ -102,6 +141,10 @@ var CTab;
                 else {
                     self.intelLayer.remove();
                 }
+            });
+            document.getElementById('intel-archive-restore').addEventListener('click', function (ev) {
+                ev.preventDefault();
+                promptIntelArchive(self);
             });
         }
         attachToMap(map, backend) {

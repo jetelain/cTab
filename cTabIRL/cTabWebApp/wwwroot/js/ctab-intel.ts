@@ -128,6 +128,46 @@ namespace CTab {
         return popupContent;
     }
 
+    function uploadIntelArchive(file: File, ui: IntelUI) {
+        if (file.size > 50 * 1024 * 1024) { // 50 MB
+            alert('File size must be below 50 MB');
+            return;
+        }
+        let formData = new FormData();
+        formData.append('archive', file);
+        // Get the anti-forgery token
+        let token = (document.querySelector('input[name="__RequestVerificationToken"]') as HTMLInputElement).value;
+        formData.append('__RequestVerificationToken', token);
+        fetch((document.querySelector('#intel-archive-upload') as HTMLFormElement).action, {
+            method: 'POST',
+            body: formData
+        }).then(response => {
+            if (!response.ok) {
+                console.error(response);
+                if (response.status == 400) {
+                    response.text().then(value => alert(value));
+                } else {
+                    alert(response.statusText);
+                }
+            }
+        }).catch(error => {
+            console.error(error);
+            alert('File upload failed');
+        });
+    }
+
+    function promptIntelArchive(ui: IntelUI) {
+        let input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.zip,application/zip';
+        input.addEventListener('change', function () {
+            if (input.files.length > 0) {
+                uploadIntelArchive(input.files[0], ui);
+            }
+        });
+        input.click();
+    }
+
     export class IntelUI {
 
         intelItems = {};
@@ -160,6 +200,10 @@ namespace CTab {
                     self.intelLayer.remove();
                 }
             });
+            document.getElementById('intel-archive-restore').addEventListener('click', function (ev) {
+                ev.preventDefault();
+                promptIntelArchive(self);
+            });
         }
 
         attachToMap(map: L.Map, backend?: IntelBackend) {
@@ -175,6 +219,8 @@ namespace CTab {
                 this.intelLayer.addTo(this.currentMap);
             }
             this.intelButtom = null;
+
+
         }
 
         updateIntel(entries: IntelEntry[]) {
