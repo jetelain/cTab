@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -114,77 +113,9 @@ namespace cTabWebApp.Controllers
 
         [HttpGet]
         [Route("DownloadIntelFeed")]
-        public async Task<IActionResult> DownloadIntelFeed(string t)
+        public IActionResult DownloadIntelFeed(string t)
         {
-            var state = _service.GetStateByToken(t);
-            if (state == null || state.LastUpdateSideFeedMessage == null)
-            {
-                return NotFound();
-            }
-
-            var memoryStream = new MemoryStream();
-            
-            using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
-            {
-                foreach (var img in state.LastUpdateSideFeedMessage.Entries)
-                {
-                    var token = Path.GetFileName(img.ImageUri);
-                    if (!string.IsNullOrEmpty(token))
-                    {
-                        var stored = _images.GetImage(token);
-                        if (stored != null)
-                        {
-                            var entry = archive.CreateEntry($"{img.Id}.jpeg", CompressionLevel.NoCompression);
-                            using (var entryStream = entry.Open())
-                            using (var imageStream = _images.OpenImage(stored))
-                            {
-                                if (imageStream != null)
-                                {
-                                    await imageStream.CopyToAsync(entryStream);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            memoryStream.Position = 0;
-            return File(memoryStream, "application/zip", "IntelFeedImages.zip");
-            
-        }
-
-
-        [HttpGet]
-        [Route("DowloadPlayerTaken")]
-        public async Task<IActionResult> DowloadPlayerTaken(string t)
-        {
-            var state = _service.GetStateByToken(t);
-            if (state == null || state.LastUpdateSideFeedMessage == null)
-            {
-                return NotFound();
-            }
-
-            var memoryStream = new MemoryStream();
-            var num = 1;
-            using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
-            {
-                foreach (var stored in state.Images)
-                {
-                    var entry = archive.CreateEntry($"{num}.jpeg", CompressionLevel.NoCompression);
-                    using (var entryStream = entry.Open())
-                    using (var imageStream = _images.OpenImage(stored))
-                    {
-                        if (imageStream != null)
-                        {
-                            await imageStream.CopyToAsync(entryStream);
-                        }
-                    }
-                    num++;
-                }
-            }
-
-            memoryStream.Position = 0;
-            return File(memoryStream, "application/zip", "DowloadPlayerTaken.zip");
+            return RedirectToAction(nameof(IntelController.FeedArchive), "Intel", new { t });
         }
     }
 }

@@ -80,6 +80,7 @@ namespace cTabWebApp
 
             services.AddSingleton<TacMapService>();
             services.AddSingleton(Configuration.GetSection("Images").Get<ImageServiceConfig>() ?? new ImageServiceConfig());
+            services.AddSingleton<IImageArchiveService, ImageArchiveService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
