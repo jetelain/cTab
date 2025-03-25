@@ -24,4 +24,7 @@ jobs:
     
     - name: Publish Windows/ReleaseSolo
       run: dotnet publish --no-self-contained -f net8.0 -r win-x64 -c Release cTabIRL/cTabWebApp/cTabWebApp.csproj -o OutputWindows
+
+    - name: Test
+      run: dotnet test -f net8.0 cTabIRL/cTabWebAppTest/cTabWebAppTest.csproj
      

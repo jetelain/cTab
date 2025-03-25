@@ -70,7 +70,7 @@ namespace cTabWebApp
         {
             if (iconA.StartsWith("\\cTab\\img\\mil\\", StringComparison.OrdinalIgnoreCase))
             {
-                return Path.GetFileNameWithoutExtension(iconA).PadRight(20, '0');
+                return Path.GetFileNameWithoutExtension(iconA.Replace('\\','/')).PadRight(20, '0');
             }
             var size = GetUnitSize(iconB);
             string symbol;
