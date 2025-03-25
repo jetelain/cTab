@@ -9,6 +9,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arma3TacMapLibrary", "..\Ar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arma3TacMapLibraryTest", "..\Arma3TacMap\Arma3TacMapLibraryTest\Arma3TacMapLibraryTest.csproj", "{38144B60-B977-4B16-99AC-238EAE8D43DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cTabWebAppTest", "cTabWebAppTest\cTabWebAppTest.csproj", "{1F25D93A-9058-47E1-A692-613D1FF159C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{B8D2384E-08C0-4D68-B4C5-8FE5F1529334}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\ctab.yml = ..\.github\workflows\ctab.yml
+		..\.github\workflows\ctabirl.yml = ..\.github\workflows\ctabirl.yml
+		..\.github\workflows\dotnet.yml = ..\.github\workflows\dotnet.yml
+		..\.github\workflows\release-dotnet.yml = ..\.github\workflows\release-dotnet.yml
+		..\.github\workflows\release-mods.yml = ..\.github\workflows\release-mods.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +52,14 @@ Global
 		{38144B60-B977-4B16-99AC-238EAE8D43DF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38144B60-B977-4B16-99AC-238EAE8D43DF}.ReleaseCloud|Any CPU.ActiveCfg = Release|Any CPU
 		{38144B60-B977-4B16-99AC-238EAE8D43DF}.ReleaseCloud|Any CPU.Build.0 = Release|Any CPU
+		{1F25D93A-9058-47E1-A692-613D1FF159C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F25D93A-9058-47E1-A692-613D1FF159C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F25D93A-9058-47E1-A692-613D1FF159C3}.DebugCloud|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F25D93A-9058-47E1-A692-613D1FF159C3}.DebugCloud|Any CPU.Build.0 = Debug|Any CPU
+		{1F25D93A-9058-47E1-A692-613D1FF159C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F25D93A-9058-47E1-A692-613D1FF159C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F25D93A-9058-47E1-A692-613D1FF159C3}.ReleaseCloud|Any CPU.ActiveCfg = Release|Any CPU
+		{1F25D93A-9058-47E1-A692-613D1FF159C3}.ReleaseCloud|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
