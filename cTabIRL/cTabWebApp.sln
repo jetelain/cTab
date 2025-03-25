@@ -11,6 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arma3TacMapLibraryTest", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cTabWebAppTest", "cTabWebAppTest\cTabWebAppTest.csproj", "{1F25D93A-9058-47E1-A692-613D1FF159C3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{B8D2384E-08C0-4D68-B4C5-8FE5F1529334}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\ctab.yml = ..\.github\workflows\ctab.yml
+		..\.github\workflows\ctabirl.yml = ..\.github\workflows\ctabirl.yml
+		..\.github\workflows\dotnet.yml = ..\.github\workflows\dotnet.yml
+		..\.github\workflows\release-dotnet.yml = ..\.github\workflows\release-dotnet.yml
+		..\.github\workflows\release-mods.yml = ..\.github\workflows\release-mods.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
