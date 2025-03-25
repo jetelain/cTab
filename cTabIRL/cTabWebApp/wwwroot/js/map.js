@@ -207,12 +207,15 @@ function generateMenu(id, latlng) {
     return div.get(0);
 }
 
-function showMenu(latLng, content) {
+function showMenu(latLng,force) {
     if (!tempUserPopup) {
         tempUserPopup = L.popup({ className: 'menupopup' });
+    } else if (tempUserPopup.isOpen() && !force) {
+        console.log('Menu is already opened');
+        return;
     }
     tempUserPopup.setLatLng(latLng);
-    tempUserPopup.setContent(content);
+    tempUserPopup.setContent(generateMenu(0, latLng));
     tempUserPopup.openOn(currentMap);
 }
 
@@ -317,7 +320,7 @@ function initMap(mapInfos, worldName) {
     map.on('mousedown', function () { setCenterOnPosition(false); });
     map.on('touchstart', function () { setCenterOnPosition(false); });
     if (!vm.isSpectator) {
-        map.on('dblclick contextmenu', function (e) { showMenu(e.latlng, generateMenu(0, e.latlng)); });
+        map.on('dblclick contextmenu', function (e) { showMenu(e.latlng, false); });
     }
     (centerOnPositionButton = L.control.overlayButton({
         content: '<i class="fas fa-location-arrow"></i>',
@@ -894,9 +897,7 @@ $(function () {
     connection.on("ActionRangeFinder", function (data) {
         try {
             setCenterOnPosition(false);
-
-            var latlng = L.latLng(data.y, data.x);
-            showMenu(latlng, generateMenu(0, latlng));
+            showMenu(L.latLng(data.y, data.x), true);
         }
         catch (e) {
             console.error(e);
