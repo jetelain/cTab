@@ -31,3 +31,12 @@ if ( isNil QGVAR(diaryRecord)) then {
 
 systemChat (format [LLSTRING(connected), _uri]);
 systemChat LLSTRING(connectedQrCode);
+
+// Setup initial loadout
+[player] call FUNC(updateDevices);
+
+// Send messages templates
+call FUNC(updateMessageTemplates);
+
+// Send intels
+call FUNC(updateIntelSideFeed);
