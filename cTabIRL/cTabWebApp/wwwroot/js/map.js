@@ -763,7 +763,7 @@ function dateTimeLocalFormat(d) {
         return "";
     }
     function pad2Zero(s) {
-        return s.padStart(2, '0');
+        return String(s).padStart(2, '0');
     }
     return `${d.getUTCFullYear()}-${pad2Zero(d.getUTCMonth() + 1)}-${pad2Zero(d.getUTCDate())}T${pad2Zero(d.getUTCHours())}:${pad2Zero(d.getUTCMinutes())}`;
 }
