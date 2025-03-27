@@ -23,12 +23,3 @@ INFO_1("StartMission %1",_infos);
 
 // Send mission data
 "cTabExtension" callExtension ["StartMission", _infos];
-
-// Setup initial loadout
-call FUNC(updateDevices);
-
-// Send messages templates
-call FUNC(updateMessageTemplates);
-
-// Send intels
-call FUNC(updateIntelSideFeed);
