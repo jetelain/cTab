@@ -56,7 +56,7 @@ namespace cTabWebApp.Services.Images
                 try
                 {
                     var entry = JsonSerializer.Deserialize<PlayerTakenImage>(json);
-                    if (entry != null && entry.Token == token && !IsExpired(entry))
+                    if (entry != null && entry.Token == token)
                     {
                         images.TryAdd(entry.Token, entry);
                     }
