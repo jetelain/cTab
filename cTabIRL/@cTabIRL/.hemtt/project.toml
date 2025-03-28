@@ -1,4 +1,4 @@
-name = "cTab IRL"
+name = "cTab Connect"
 prefix = "ctab_irl"
 author = "cTab Authors, see https://github.com/jetelain/cTab"
 template = "cba"
@@ -14,5 +14,5 @@ git_hash = 4
 include = [
     "mod.cpp",
     "*.dll",
-    "icon_ctab_irl.paa"
+    "ctab_irl_icon.paa"
 ]
