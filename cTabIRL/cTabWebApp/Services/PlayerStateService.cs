@@ -146,6 +146,8 @@ namespace cTabWebApp
                     ActiveSessions = players.Count(p => p.ActiveConnections > 0),
                     ActiveSessionsWithSteam = players.Count(p => p.ActiveConnections > 0 && p.IsAuthenticated),
                     ActiveSessionsWithTacMap = players.Count(p => p.ActiveConnections > 0 && p.SyncedTacMapId != null),
+                    ActiveSessionsWithPhotos = players.Count(p => p.ActiveConnections > 0 && p.Images.Count > 0),
+                    ActiveSessionsWithIntel = players.Count(p => p.ActiveConnections > 0 && p.LastUpdateSideFeedMessage != null && p.LastUpdateSideFeedMessage.Entries.Count > 0),
                     TotalSessions = nextId - 1
                 };
             }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace cTabWebApp
+﻿namespace cTabWebApp
 {
     public class PlayerStateServiceStats
     {
@@ -13,7 +8,8 @@ namespace cTabWebApp
         public int ActiveSessionsWithSteam { get; internal set; }
         public int ActiveTacMapConnections { get; internal set; }
         public int ActiveSessionsWithTacMap { get; internal set; }
-
+        public int ActiveSessionsWithIntel { get; internal set; }
+        public int ActiveSessionsWithPhotos { get; internal set; }
         public int TotalSessions { get; internal set; }
     }
 }
