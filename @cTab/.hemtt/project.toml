@@ -1,4 +1,4 @@
-name = "cTab"
+name = "cTab Advanced"
 prefix = "ctab"
 author = "cTab Authors, see https://github.com/jetelain/cTab"
 template = "cba"
@@ -13,5 +13,5 @@ git_hash = 4
 [files]
 include = [
     "mod.cpp",
-    "ctab_ico.paa"
+    "ctab_icon.paa"
 ]
