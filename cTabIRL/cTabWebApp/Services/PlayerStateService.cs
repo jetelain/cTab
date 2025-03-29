@@ -54,7 +54,7 @@ namespace cTabWebApp
 
         public PlayerState GetOrCreateStateBySteamIdAndKey(string steamId, string hashedKey, string keyHostname)
         {
-            if (hashedKey.StartsWith("TEXT:"))
+            if (!string.IsNullOrEmpty(hashedKey) && hashedKey.StartsWith("TEXT:", StringComparison.Ordinal))
             {
                 // Compensate extension workaround for WINE/PROTON
                 hashedKey = HashKeyForHost(hashedKey.Substring(5), keyHostname);
