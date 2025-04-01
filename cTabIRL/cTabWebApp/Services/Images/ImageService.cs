@@ -149,7 +149,7 @@ namespace cTabWebApp.Services.Images
                     Player = player 
                 };
                 images.TryAdd(token, entry);
-                player.Images.Remove(entry);
+                player.Images.Add(entry);
                 return entry;
             }
             finally
