@@ -10,7 +10,7 @@ namespace cTabExtension
         private static bool debugCallback;
 
         [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        delegate int ExtensionCallback([MarshalAs(UnmanagedType.LPStr)] string name, [MarshalAs(UnmanagedType.LPStr)] string function, [MarshalAs(UnmanagedType.LPStr)] string data);
+        public delegate int ExtensionCallback([MarshalAs(UnmanagedType.LPStr)] string name, [MarshalAs(UnmanagedType.LPStr)] string function, [MarshalAs(UnmanagedType.LPStr)] string data);
 
 
         [UnmanagedCallersOnly(EntryPoint = "RVExtensionRegisterCallback")]
@@ -54,7 +54,7 @@ namespace cTabExtension
             return 0;
         }
 
-        public static int RvExtensionArgsImpl(string? function, string?[] args)
+        internal static int RvExtensionArgsImpl(string? function, string?[] args)
         {
             var sw = Stopwatch.StartNew();
             try

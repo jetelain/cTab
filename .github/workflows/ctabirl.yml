@@ -11,11 +11,16 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: recursive
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 9.0.x
+
+    - name: Extension/WebApp integration tests
+      run: dotnet test cTabIRL/cTabIntegrationTest/cTabIntegrationTest.csproj -c ReleaseCloud
 
     - name: Build Extension
       run: dotnet publish cTabIRL/cTabExtension/cTabExtension.csproj -c Release -r win-x64 -o "cTabIRL/@cTabIRL"

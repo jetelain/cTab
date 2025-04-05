@@ -29,7 +29,9 @@
   </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Arma3TacMap\Arma3TacMapLibrary\Arma3TacMapLibrary.csproj" />
+		<InternalsVisibleTo Include="cTabIntegrationTest" />
 	</ItemGroup>
+	
   <ItemGroup>
     <Compile Update="SharedResource.Designer.cs">
       <DesignTime>True</DesignTime>
