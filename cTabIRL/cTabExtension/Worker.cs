@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-using System.Text;
+﻿using System.Text;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
@@ -245,6 +244,10 @@ namespace cTabExtension
 
         private static void ReportInner(Exception e)
         {
+            foreach(var line in e.StackTrace?.Split('\n') ?? Array.Empty<string>())
+            {
+                Extension.ErrorMessage($"@ {line.Trim()}.");
+            }
             if (e.InnerException != null)
             {
                 Extension.ErrorMessage($"+ {e.InnerException.GetType().Name} {e.InnerException.Message}.");
@@ -265,12 +268,22 @@ namespace cTabExtension
             {
                 return string.Empty;
             }
-            return Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                            password: key,
-                            salt: Encoding.UTF8.GetBytes(hostname),
-                            prf: KeyDerivationPrf.HMACSHA256,
-                            iterationCount: 10000,
-                            numBytesRequested: 256 / 8));
+            try
+            {
+                return Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                                password: key,
+                                salt: Encoding.UTF8.GetBytes(hostname),
+                                prf: KeyDerivationPrf.HMACSHA256,
+                                iterationCount: 10000,
+                                numBytesRequested: 256 / 8));
+            }
+            catch(Exception e)
+            {
+                // This is a workaround for WINE/PROTON, which doesn't support the Pbkdf2 method
+                Extension.ErrorMessage($"HashKeyForHost failed with {e.GetType().Name} {e.Message}.");
+                ReportInner(e);
+                return $"TEXT:{key}";
+            }
         }
     }
 }
