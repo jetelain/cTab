@@ -17,6 +17,9 @@ jobs:
       with:
         dotnet-version: 9.0.x
 
+    - name: Extension/WebApp integration tests
+      run: dotnet test cTabIRL/cTabIntegrationTest/cTabIntegrationTest.csproj -c ReleaseCloud
+
     - name: Build Extension
       run: dotnet publish cTabIRL/cTabExtension/cTabExtension.csproj -c Release -r win-x64 -o "cTabIRL/@cTabIRL"
 
