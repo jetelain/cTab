@@ -1,4 +1,4 @@
-﻿[assembly: CollectionBehavior(DisableTestParallelization = true)]
+﻿[assembly: CollectionBehavior(DisableTestParallelization = true)] // Cannot parallelize because extension supports only one connection
 
 namespace cTabIntegrationTest
 {
