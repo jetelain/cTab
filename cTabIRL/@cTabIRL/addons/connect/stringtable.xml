@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="ctab_irl">
     <Package name="connect">
+        <Key ID="STR_ctab_irl_connect_alwaysAllowPhotos">
+            <English>Always allow photos</English>
+            <French>Toujours autoriser les photos</French>
+        </Key>
+        <Key ID="STR_ctab_irl_connect_alwaysAllowPhotosDetails">
+            <English>Allow to take photos even if view or in-game device is not supported.</English>
+            <French>Autorise à prendre des photos même si la vue ou l'appareil en jeu n'est pas supporté.</French>
+        </Key>
         <Key ID="STR_ctab_irl_connect_connected">
             <English>cTab connected to %1.</English>
             <French>cTab est connecté à %1.</French>
