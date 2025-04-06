@@ -1,6 +1,6 @@
 #include "script_component.hpp"	
 
-if (!([] call ctab_intel_fnc_canTakePhoto)) exitWith {
+if (!([] call ctab_intel_fnc_canTakePhoto) && !GVAR(alwaysAllowPhotos)) exitWith {
 	systemChat "Invalid device";
 };
 
