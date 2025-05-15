@@ -207,7 +207,7 @@ function generateMenu(id, latlng) {
     return div.get(0);
 }
 
-function showMenu(latLng,force) {
+function showMenu(latLng, force, content) {
     if (!tempUserPopup) {
         tempUserPopup = L.popup({ className: 'menupopup' });
     } else if (tempUserPopup.isOpen() && !force) {
@@ -215,7 +215,7 @@ function showMenu(latLng,force) {
         return;
     }
     tempUserPopup.setLatLng(latLng);
-    tempUserPopup.setContent(generateMenu(0, latLng));
+    tempUserPopup.setContent(content ? content : generateMenu(0, latLng));
     tempUserPopup.openOn(currentMap);
 }
 
@@ -238,7 +238,7 @@ function showMarkerMenu(marker) {
     else {
         $('<div class="text-center"></div>').text(marker.options.marker.name).appendTo(div);
     }
-    showMenu(marker.getLatLng(), div.get(0));
+    showMenu(marker.getLatLng(), true, div.get(0));
 }
 
 function updateUnread() {
