@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={6296.1763,11.145999,670.84979};
-		dir[]={0.25176793,-0.39123866,0.88520712};
-		up[]={0.10703032,0.92029083,0.37631467};
-		aside[]={0.96187651,2.7706847e-08,-0.27357614};
+		pos[]={6289.9531,42.477097,641.19165};
+		dir[]={0.045276418,-0.69223279,0.72025257};
+		up[]={0.043429319,0.72167432,0.69086909};
+		aside[]={0.99803007,0,-0.062738031};
 	};
 };
 binarizationWanted=0;
@@ -46,6 +46,12 @@ addons[]=
 	"ace_attach",
 	"ace_chemlights",
 	"ctab",
+	"A3_Air_F_Heli_Light_01",
+	"A3_Armor_F_Beta_APC_Wheeled_01",
+	"ace_vehicle_damage",
+	"A3_Characters_F_Common",
+	"A3_Drones_F_Soft_F_Gamma_UGV_01",
+	"A3_Drones_F_Air_F_Gamma_UAV_01",
 	"A3_Characters_F_Orange_Facewear",
 	"ace_optics",
 	"A3_Characters_F_Mark",
@@ -55,7 +61,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=18;
+		items=22;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -154,26 +160,54 @@ class AddonsMetaData
 		};
 		class Item14
 		{
+			className="A3_Air_F";
+			name="Arma 3 Alpha - Aircraft";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item15
+		{
+			className="A3_Armor_F_Beta";
+			name="Arma 3 Beta - Armored Land Vehicles";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item16
+		{
+			className="ace_vehicle_damage";
+			name="ACE3 - Vehicle Damage";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item17
+		{
+			className="A3_Drones_F";
+			name="Arma 3 Beta - Drones";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item18
+		{
 			className="A3_Characters_F_Orange";
 			name="Arma 3 Orange - Characters and Clothing";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item15
+		class Item19
 		{
 			className="ace_optics";
 			name="ACE3 - Optics";
 			author="ACE-Team";
 			url="https://ace3.acemod.org/";
 		};
-		class Item16
+		class Item20
 		{
 			className="A3_Characters_F_Mark";
 			name="Arma 3 Marksmen - Characters and Clothing";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item17
+		class Item21
 		{
 			className="A3_Modules_F_Curator";
 			name="Arma 3 Zeus Update - Scripted Modules";
@@ -214,7 +248,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=7;
+		items=13;
 		class Item0
 		{
 			dataType="Group";
@@ -227,7 +261,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={6295.8833,5.0014391,672.1452};
+						position[]={6295.8872,5.0014391,669.54498};
 					};
 					side="West";
 					flags=7;
@@ -401,6 +435,223 @@ class Mission
 		};
 		class Item1
 		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={6256.9722,6.7791443,700.70319};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=2;
+			type="B_Heli_Light_01_dynamicLoadout_F";
+		};
+		class Item2
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={6340.8184,7.5393777,701.4541};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=3;
+			type="B_APC_Wheeled_01_cannon_F";
+		};
+		class Item3
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=2;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={6346.5635,5.0014386,697.08142};
+					};
+					side="West";
+					flags=4;
+					class Attributes
+					{
+					};
+					id=7;
+					type="B_UAV_AI";
+				};
+				class Item1
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={6346.5635,7.0907774,697.03485};
+					};
+					side="West";
+					flags=2;
+					class Attributes
+					{
+					};
+					id=8;
+					type="B_UAV_AI";
+					atlOffset=2.0893388;
+				};
+			};
+			class Attributes
+			{
+			};
+			class CrewLinks
+			{
+				class LinkIDProvider
+				{
+					nextID=2;
+				};
+				class Links
+				{
+					items=2;
+					class Item0
+					{
+						linkID=0;
+						item0=7;
+						item1=6;
+						class CustomData
+						{
+							role=1;
+						};
+					};
+					class Item1
+					{
+						linkID=1;
+						item0=8;
+						item1=6;
+						class CustomData
+						{
+							role=2;
+							turretPath[]={0};
+						};
+					};
+				};
+			};
+			id=5;
+		};
+		class Item4
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={6389.5098,7.0893388,668.50812};
+			};
+			side="West";
+			flags=6;
+			class Attributes
+			{
+				reportOwnPosition=1;
+			};
+			id=6;
+			type="B_UGV_01_rcws_F";
+		};
+		class Item5
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=2;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={6338.603,5.0014386,661.81567};
+					};
+					side="West";
+					flags=6;
+					class Attributes
+					{
+					};
+					id=11;
+					type="B_UAV_AI";
+				};
+				class Item1
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={6338.603,5.1519065,661.8161};
+					};
+					side="West";
+					flags=4;
+					class Attributes
+					{
+					};
+					id=12;
+					type="B_UAV_AI";
+					atlOffset=0.15046787;
+				};
+			};
+			class Attributes
+			{
+			};
+			class CrewLinks
+			{
+				class LinkIDProvider
+				{
+					nextID=2;
+				};
+				class Links
+				{
+					items=2;
+					class Item0
+					{
+						linkID=0;
+						item0=11;
+						item1=10;
+						class CustomData
+						{
+							role=1;
+						};
+					};
+					class Item1
+					{
+						linkID=1;
+						item0=12;
+						item1=10;
+						class CustomData
+						{
+							role=2;
+							turretPath[]={0};
+						};
+					};
+				};
+			};
+			id=9;
+			atlOffset=67.729507;
+		};
+		class Item6
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={6423.7251,72.879974,729.46576};
+			};
+			side="West";
+			flags=2;
+			class Attributes
+			{
+				reportRemoteTargets=1;
+				reportOwnPosition=1;
+			};
+			id=10;
+			type="B_UAV_01_F";
+			atlOffset=67.729507;
+		};
+		class Item7
+		{
 			dataType="Group";
 			side="West";
 			class Entities
@@ -492,12 +743,12 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item2
+		class Item8
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={6293.0371,5.1867056,672.83569};
+				position[]={6296.1592,5.1867056,672.20978};
 			};
 			side="Empty";
 			flags=4;
@@ -507,7 +758,7 @@ class Mission
 			id=15;
 			type="Box_cTab_items";
 		};
-		class Item3
+		class Item9
 		{
 			dataType="Group";
 			side="West";
@@ -519,7 +770,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={6300.3745,5.0014391,705.51239};
+						position[]={6304.1421,5.0014391,705.47699};
 					};
 					side="West";
 					flags=7;
@@ -754,7 +1005,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item4
+		class Item10
 		{
 			dataType="Group";
 			side="West";
@@ -766,7 +1017,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={6296.042,5.0014391,673.89014};
+						position[]={6317.2739,5.0014391,705.51898};
 					};
 					side="West";
 					flags=7;
@@ -847,7 +1098,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item5
+		class Item11
 		{
 			dataType="Group";
 			side="West";
@@ -940,7 +1191,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item6
+		class Item12
 		{
 			dataType="Logic";
 			class PositionInfo
