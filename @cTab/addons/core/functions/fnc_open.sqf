@@ -62,7 +62,9 @@ private _textures = call {
 	};
 
 cTabIfOpen = [_interfaceType,_displayName,_player,
-	_player addEventHandler ["killed",{[] call cTab_fnc_close}],
+	_player addEventHandler ["killed",{
+		[] call cTab_fnc_close;
+		[_this, true, false] call cTab_fnc_setBftState}],
 	_vehicle,nil,nil,nil,nil,_textures];
 
 if (_vehicle != _player && (_isDialog || _displayName in ["cTab_TAD_dsp"])) then {
@@ -78,6 +80,12 @@ if (_displayName in ["cTab_TAD_dsp","cTab_TAD_dlg"]) then {
 			_display = uiNamespace getVariable (cTabIfOpen select 1);
 			_veh = vehicle cTab_player;
 			_playerPos = getPosASL _veh;
+			_heading = direction _veh;
+			_lastKnownPosition = [_veh] call cTab_fnc_getBftLastKnownTracking;
+			if (!(_lastKnownPosition select 0)) then {
+				_playerPos = _lastKnownPosition select 2;
+				// only position is disable so no: _heading = _lastKnownPosition select 4;
+			};
 		
 			// update time
 			(_display displayCtrl IDC_CTAB_OSD_TIME) ctrlSetText call cTab_fnc_currentTime;
@@ -97,12 +105,19 @@ if (_displayName in ["cTab_TAD_dsp","cTab_TAD_dlg"]) then {
 		addMissionEventHandler ["Draw3D",{
 			_display = uiNamespace getVariable (cTabIfOpen select 1);
 			_veh = vehicle cTab_player;
+			_playerPos = getPosASL _veh;
 			_heading = direction _veh;
+			_lastKnownPosition = [_veh] call cTab_fnc_getBftLastKnownTracking;
+			if (!(_lastKnownPosition select 0)) then {
+				_playerPos = _lastKnownPosition select 2;
+				// only position is disable so no: _heading = _lastKnownPosition select 4;
+			};
+
 			// update time
 			(_display displayCtrl IDC_CTAB_OSD_TIME) ctrlSetText call cTab_fnc_currentTime;
 			
 			// update grid position
-			(_display displayCtrl IDC_CTAB_OSD_GRID) ctrlSetText ([getPosASL _veh] call FUNC(gridPosition));
+			(_display displayCtrl IDC_CTAB_OSD_GRID) ctrlSetText ([_playerPos] call FUNC(gridPosition));
 			
 			// update current heading
 			(_display displayCtrl IDC_CTAB_OSD_DIR_DEGREE) ctrlSetText ([_heading] call FUNC(formatHeading));

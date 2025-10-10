@@ -15,10 +15,15 @@ private _drawPlayer = [_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
 
 _veh = vehicle cTab_player;
 _playerPos = getPosASL _veh;
+_heading = direction _veh;
+_lastKnownPosition = [_veh] call cTab_fnc_getBftLastKnownTracking;
+if (!(_lastKnownPosition select 0)) then {
+	_playerPos = _lastKnownPosition select 2;
+	// only position is disable so no: _heading = _lastKnownPosition select 4;
+};
 
 // draw directional arrow at own location
 if (_drawPlayer) then {
-	_heading = direction _veh;
 	_cntrlScreen drawIcon ["\A3\ui_f\data\map\VehicleIcons\iconmanvirtual_ca.paa",cTabMicroDAGRfontColour,_playerPos,cTabTADownIconBaseSize,cTabTADownIconBaseSize,_heading,"", 1,cTabTxtSize,"TahomaB","right"];
 };
 

@@ -50,9 +50,16 @@ if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 		_iconB = _x select 2;
 		_text = if (_drawText) then {_x select 3} else {""};
 		_groupID = _x select 4;
+		
 		_pos = if ( GVAR(bft_mode) == 1) then { getPosASL _veh } else { _x select 5 };
 		_dir = if ( GVAR(bft_mode) == 1) then { direction _veh } else { _x select 6 };
-		
+
+		_lastKnownPosition = [_veh] call cTab_fnc_getBftLastKnownTracking;
+		if (!(_lastKnownPosition select 0)) then {
+			_pos = if ( GVAR(bft_mode) == 1) then { _lastKnownPosition select 2 } else { _x select 5 };
+			_dir = if ( GVAR(bft_mode) == 1) then { _lastKnownPosition select 3 } else { _x select 6 };
+		};
+
 		call {
 			if (_mode == 1 && {_iconB != "" && {_veh != _playerVehicle}}) exitWith {
 				// Drawing on TAD && vehicle is an air contact
@@ -72,7 +79,6 @@ if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 			// Draw on anything but TAD
 			call {
 				if (_veh != _playerVehicle_marker) exitWith {
-					// player is not sitting in this vehicle
 					_ctrlScreen drawIcon [_x select 1,cTabColorBlue,_pos,cTabIconSize,cTabIconSize,0,_text,0,cTabTxtSize,"TahomaB","right"];
 					if ( _veh == _playerVehicle ) then { _mustDrawPlayer = false; };
 				};
@@ -113,6 +119,12 @@ if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 			};
 			_text = if (_drawText) then {_x select 3} else {""};
 			_pos = if ( GVAR(bft_mode) == 1) then { getPosASL _veh } else { _x select 5 };
+
+			_lastKnownPosition = [_veh] call cTab_fnc_getBftLastKnownTracking;
+			if (!(_lastKnownPosition select 0)) then {
+				_pos = if ( GVAR(bft_mode) == 1) then { _lastKnownPosition select 2 } else { _x select 5 };
+			};
+
 			_ctrlScreen drawIcon [_x select 1,cTabColorBlue,_pos,cTabIconSize,cTabIconSize,0,_text,0,cTabTxtSize,"TahomaB","right"];
 			_ctrlScreen drawIcon [_x select 2,cTabColorBlue,_pos,cTabGroupOverlayIconSize,cTabGroupOverlayIconSize,0,"",0,cTabTxtSize,"TahomaB","right"];
 			if ( _veh == _playerVehicle ) then { _mustDrawPlayer = false; };
@@ -145,6 +157,13 @@ if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 		};
 		_pos = getPosASL _veh;
 		_dir = direction _veh;
+		_lastKnownPosition = [_veh] call cTab_fnc_getBftLastKnownTracking;
+		if (!(_lastKnownPosition select 0)) then {
+			_pos = _lastKnownPosition select 2;
+			_dir = _lastKnownPosition select 3;
+		};
+
+
 		if (_veh != (_x select 0)) exitWith {
 			// the unit _does_ sit in a vehicle
 			_mountedIndex = _mountedLabels find _veh;
@@ -173,6 +192,10 @@ if (_drawText && !(_mountedLabels isEqualTo [])) then {
 		_veh = _mountedLabels select _i;
 		if (_veh != _playerVehicle_marker) then {
 			_pos = getPosASL _veh; 
+			_lastKnownPosition = [_veh] call cTab_fnc_getBftLastKnownTracking;
+			if (!(_lastKnownPosition select 0)) then {
+				_pos = _lastKnownPosition select 2;
+			};
 			if ( GVAR(bft_mode) != 1 ) then { 
 				private _index = cTabBFTvehicles findIf { _x select 0 == _veh };
 				if ( _index != -1 ) then {

@@ -12,6 +12,11 @@ cTabMapScale = ctrlMapScale _cntrlScreen;
 _veh = vehicle cTab_player;
 _playerPos = getPosASL _veh;
 _heading = direction _veh;
+_lastKnownPosition = [_veh] call cTab_fnc_getBftLastKnownTracking;
+if (!(_lastKnownPosition select 0)) then {
+	_playerPos = _lastKnownPosition select 2;
+	// only position is disable so no: _heading = _lastKnownPosition select 4;
+};
 
 [_cntrlScreen,false] call cTab_fnc_drawUserMarkers;
 [_cntrlScreen,cTabMicroDAGRmode] call cTab_fnc_drawBftMarkers;
