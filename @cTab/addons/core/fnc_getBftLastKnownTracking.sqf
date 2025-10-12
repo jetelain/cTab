@@ -6,7 +6,7 @@
 		S3ler
 
  	Description:
-		Get last known BFT position and direction for an object
+		Get the state of the BFT tracking and last known BFT position and direction for an object
 
 	Parameters:
 		0: OBJECT  - player or vehicle to get last known BFT tracking for
