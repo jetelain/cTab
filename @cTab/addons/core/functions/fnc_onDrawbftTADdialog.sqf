@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
 	This is drawn every frame on the TAD dialog. fnc
 */
@@ -17,10 +18,9 @@ cTabMapScale = ctrlMapScale _cntrlScreen;
 _veh = vehicle cTab_player;
 _playerPos = getPosASL _veh;
 _heading = direction _veh;
-_lastKnownPosition = [_veh] call cTab_fnc_getBftLastKnownTracking;
-if (!(_lastKnownPosition select 0)) then {
-	_playerPos = _lastKnownPosition select 2;
-	// only position is disable so no: _heading = _lastKnownPosition select 4;
+if (!(_veh getVariable [QGVAR(enabled),true])) then {
+    _lastKnownTracking = _veh getVariable [QGVAR(lastKnownTracking), [ [0, 0, 0], 0, "000000"]];
+    _playerPos = _lastKnownTracking select 0;
 };
 
 _cntrlScreen drawIcon [cTabPlayerVehicleIcon,cTabTADfontColour,_playerPos,cTabTADownIconScaledSize,cTabTADownIconScaledSize,_heading,"", 1,cTabTxtSize,"TahomaB","right"];
