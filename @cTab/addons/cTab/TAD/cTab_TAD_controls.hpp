@@ -73,8 +73,6 @@
 #define cTab_GUI_TAD_OSD_OSB19_Y (cTab_GUI_TAD_OSD_OSB07_Y)
 #define cTab_GUI_TAD_OSD_OSB20_Y (cTab_GUI_TAD_OSD_OSB06_Y)
 
-// Predefine Name class to fix: error[L-C04]: class's parent is not present
-class Name;
 
 class cTab_RscButton_TAD_OSB: cTab_RscButtonInv
 {
