@@ -79,13 +79,9 @@ if (_displayName in ["cTab_TAD_dsp","cTab_TAD_dlg"]) then {
 		addMissionEventHandler ["Draw3D",{
 			_display = uiNamespace getVariable (cTabIfOpen select 1);
 			_veh = vehicle cTab_player;
-			_playerPos = getPosASL _veh;
+            _playerPos = [_veh] call cTab_fnc_getPlayerPosition;
 			_heading = direction _veh;
-            if (!(_veh getVariable [QGVAR(enabled),true])) then {
-                _lastKnownTracking = _veh getVariable [QGVAR(lastKnownTracking), [ [0, 0, 0], 0, "000000"]];
-                _playerPos = _lastKnownTracking select 0;
-            };
-		
+
 			// update time
 			(_display displayCtrl IDC_CTAB_OSD_TIME) ctrlSetText call cTab_fnc_currentTime;
 			
@@ -104,14 +100,8 @@ if (_displayName in ["cTab_TAD_dsp","cTab_TAD_dlg"]) then {
 		addMissionEventHandler ["Draw3D",{
 			_display = uiNamespace getVariable (cTabIfOpen select 1);
 			_veh = vehicle cTab_player;
+            _playerPos = [_veh] call cTab_fnc_getPlayerPosition;
             _heading = direction _veh;
-            params["_playerPos"];
-            if (_veh getVariable [QGVAR(enabled),true]) then {
-                _playerPos = getPosASL _veh;
-            } else {
-                _lastKnownTracking = _veh getVariable [QGVAR(lastKnownTracking), [ [0, 0, 0], 0, "000000"]];
-                _playerPos = _lastKnownTracking select 0;
-            };
 
 			// update time
 			(_display displayCtrl IDC_CTAB_OSD_TIME) ctrlSetText call cTab_fnc_currentTime;

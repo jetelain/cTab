@@ -15,12 +15,8 @@ private _drawPlayer = [_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
 
 // current position
 _veh = vehicle cTab_player;
-_playerPos = getPosASL _veh;
+_playerPos = [_veh] call cTab_fnc_getPlayerPosition;
 _heading = direction _veh;
-if (!(_veh getVariable [QGVAR(enabled),true])) then {
-    _lastKnownTracking = _veh getVariable [QGVAR(lastKnownTracking), [ [0, 0, 0], 0, "000000"]];
-    _playerPos = _lastKnownTracking select 0;
-};
 
 if (_drawPlayer) then {
 	_cntrlScreen drawIcon ["\A3\ui_f\data\map\VehicleIcons\iconmanvirtual_ca.paa",cTabMicroDAGRfontColour,_playerPos,cTabTADownIconBaseSize,cTabTADownIconBaseSize,_heading,"", 1,cTabTxtSize,"TahomaB","right"];

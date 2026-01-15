@@ -13,12 +13,8 @@ private _drawPlayer = [_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
 
 // current position
 _veh = vehicle cTab_player;
-_playerPos = getPosASL _veh;
+_playerPos = [_veh] call cTab_fnc_getPlayerPosition;
 _heading = direction _veh;
-if (!(_veh getVariable [QGVAR(enabled),true])) then {
-    _lastKnownTracking = _veh getVariable [QGVAR(lastKnownTracking), [ [0, 0, 0], 0, "000000"]];
-    _playerPos = _lastKnownTracking select 0;
-};
 
 // draw directional arrow at own location
 if (_drawPlayer) then {
