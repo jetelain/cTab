@@ -22,7 +22,7 @@
 
 params ["_bftObject", "_lastKnownTracking"];
 if (isNil "_lastKnownTracking") then {
-    _bftObject setVariable [QGVAR(lastKnownTracking), [(getPosASL _bftObject), (direction _bftObject), (mapGridPosition _bftObject)], true];
+    _bftObject setVariable [QGVAR(lastKnownTracking), [(getPosASL _bftObject), (direction _bftObject), [_bftObject] call FUNC(gridPosition)], true];
 } else {
     _bftObject setVariable [QGVAR(lastKnownTracking), _lastKnownTracking, true];
 };
