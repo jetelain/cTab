@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
 	This is drawn every frame on the tablet helmet cam screen. fnc
 */
@@ -12,8 +13,12 @@ _pos = getPosASL _camHost;
 [_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
 
 // draw icon at own location
+// current position
 _veh = vehicle cTab_player;
-_cntrlScreen drawIcon ["\A3\ui_f\data\map\VehicleIcons\iconmanvirtual_ca.paa",cTabMicroDAGRfontColour,getPosASL _veh,cTabTADownIconBaseSize,cTabTADownIconBaseSize,direction _veh,"", 1,cTabTxtSize,"TahomaB","right"];
+_playerPos = [_veh] call cTab_fnc_getPlayerPosition;
+_heading = direction _veh;
+
+_cntrlScreen drawIcon ["\A3\ui_f\data\map\VehicleIcons\iconmanvirtual_ca.paa",cTabMicroDAGRfontColour,_playerPos,cTabTADownIconBaseSize,cTabTADownIconBaseSize,_heading,"", 1,cTabTxtSize,"TahomaB","right"];
 
 // draw icon at helmet cam location
 _cntrlScreen drawIcon ["\A3\ui_f\data\map\VehicleIcons\iconmanvirtual_ca.paa",cTabTADhighlightColour,_pos,cTabTADownIconBaseSize,cTabTADownIconBaseSize,direction _camHost,"",0,cTabTxtSize,"TahomaB","right"];

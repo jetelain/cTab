@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
 	This is drawn every frame on the microDAGR dialog. fnc
 */
@@ -10,7 +11,7 @@ cTabMapScale = ctrlMapScale _cntrlScreen;
 
 // current position
 _veh = vehicle cTab_player;
-_playerPos = getPosASL _veh;
+_playerPos = [_veh] call cTab_fnc_getPlayerPosition;
 _heading = direction _veh;
 
 [_cntrlScreen,false] call cTab_fnc_drawUserMarkers;

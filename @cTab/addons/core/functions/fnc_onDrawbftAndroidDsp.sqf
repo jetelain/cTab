@@ -5,8 +5,10 @@
 _cntrlScreen = _this select 0;
 _display = ctrlParent _cntrlScreen;
 
+// current position
 _veh = vehicle cTab_player;
-_playerPos = getPosASL _veh;
+_playerPos = [_veh] call cTab_fnc_getPlayerPosition;
+_heading = direction _veh;
 
 // change scale of map and centre to player position
 _cntrlScreen ctrlMapAnimAdd [0, cTabMapScale, _playerPos];
@@ -17,7 +19,6 @@ private _drawPlayer = [_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
 
 if (_drawPlayer) then {
 	// draw directional arrow at own location
-	_heading = direction _veh;
 	_cntrlScreen drawIcon ["\A3\ui_f\data\map\VehicleIcons\iconmanvirtual_ca.paa",cTabMicroDAGRfontColour,_playerPos,cTabTADownIconBaseSize,cTabTADownIconBaseSize,_heading,"", 1,cTabTxtSize,"TahomaB","right"];
 };
 
