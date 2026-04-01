@@ -166,7 +166,7 @@ namespace cTabWebApp.Services.Images
             if (player.Images.Count > maxSessionImageCount)
             {
                 // Remove the oldest images
-                var toRemoveFromUser = player.Images.OrderBy(img => img.TimestampUtc).Take(player.Images.Count - maxTotalImageCount + 1).ToList();
+                var toRemoveFromUser = player.Images.OrderBy(img => img.TimestampUtc).Take(player.Images.Count - maxSessionImageCount + 1).ToList();
                 RemoveEntriesLocked(toRemoveFromUser);
                 Task.Run(() => DeleteFiles(toRemoveFromUser));
                 return true;
