@@ -132,7 +132,7 @@ namespace cTabIntegrationTest
             ExtensionDispatch.RvExtensionArgs("StartMission", new string[] { "\"malden\"", "12800", "[2035,6,24,12,0]", "3.0", "3.0" });
             await Task.Delay(500);
             ExtensionDispatch.RvExtensionArgs("UpdateMarkers", new[] { "[\"g\",\"o11\",\"\\A3\\ui_f\\data\\map\\markers\\nato\\b_inf.paa\",\"\\A3\\ui_f\\data\\map\\markers\\nato\\group_2.paa\",\"SP04\",\"\",[6177.97,9262.54,169.726],0,\"\"]" });
-            await Task.Delay(100);
+            await Task.Delay(500);
 
             // Assert
             // Session must have been created
