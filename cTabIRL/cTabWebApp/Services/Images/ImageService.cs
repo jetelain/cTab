@@ -162,11 +162,11 @@ namespace cTabWebApp.Services.Images
         {
             // Assume already locked
 
-            // Check if the user has exceeded their quota
-            if (player.Images.Count > maxSessionImageCount)
+            // If the user is at or over their per-session quota, preemptively evict oldest images to make room
+            if (player.Images.Count >= maxSessionImageCount)
             {
                 // Remove the oldest images
-                var toRemoveFromUser = player.Images.OrderBy(img => img.TimestampUtc).Take(player.Images.Count - maxTotalImageCount + 1).ToList();
+                var toRemoveFromUser = player.Images.OrderBy(img => img.TimestampUtc).Take(player.Images.Count - maxSessionImageCount + 1).ToList();
                 RemoveEntriesLocked(toRemoveFromUser);
                 Task.Run(() => DeleteFiles(toRemoveFromUser));
                 return true;
