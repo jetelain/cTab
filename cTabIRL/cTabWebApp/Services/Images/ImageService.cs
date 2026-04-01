@@ -162,7 +162,7 @@ namespace cTabWebApp.Services.Images
         {
             // Assume already locked
 
-            // Check if the user has exceeded their quota
+            // If the user is at or over their per-session quota, preemptively evict oldest images to make room
             if (player.Images.Count >= maxSessionImageCount)
             {
                 // Remove the oldest images
