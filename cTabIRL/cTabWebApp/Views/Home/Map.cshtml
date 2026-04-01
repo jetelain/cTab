@@ -199,6 +199,28 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="recording">
+            <div class="modal-dialog mb-0 mt-4">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h5>@Localizer["Session Recording"]</h5>
+                        <p id="recording-status-text">@Localizer["Not recording."]</p>
+                        <div id="recording-download-section" class="d-none">
+                            <p>@Localizer["Recording saved. You can download it or open the replay viewer."]</p>
+                            <div class="mb-2">
+                                <a id="recording-download-link" href="#" class="btn btn-sm btn-primary"><i class="fas fa-download"></i> @Localizer["Download recording"]</a>
+                                <a href="@Url.Action("Replay", "Home")" target="_blank" class="btn btn-sm btn-secondary ml-1"><i class="fas fa-play"></i> @Localizer["Open replay viewer"]</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer p-2">
+                        <button type="button" class="btn btn-sm btn-danger" id="recording-record-btn"><i class="fas fa-circle"></i> @Localizer["Start recording"]</button>
+                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
 
     <div class="modal" tabindex="-1" role="dialog" id="intel-feed">
@@ -291,5 +313,9 @@
     <script src="~/js/leaflet-distortableimage.js" asp-append-version="true"></script>
     <script src="~/js/common.js" asp-append-version="true"></script>
     <script src="~/js/map.js" asp-append-version="true"></script>
+    @if (!Model.IsSpectator)
+    {
+        <script src="~/js/session-record.js" asp-append-version="true"></script>
+    }
 </body>
 </html>

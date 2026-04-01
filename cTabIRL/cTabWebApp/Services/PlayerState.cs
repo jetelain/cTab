@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Arma3TacMapLibrary.Maps;
 using cTabWebApp.Messages.IntelFeed;
+using cTabWebApp.Recording;
 using cTabWebApp.Services.Images;
 using cTabWebApp.TacMaps;
 
@@ -42,5 +43,7 @@ namespace cTabWebApp
         public string UploadToken { get; internal set; }
         public List<PlayerTakenImage> Images { get; set; } = new List<PlayerTakenImage>();
         public UpdateSideFeedMessage LastUpdateSideFeedMessage { get; internal set; }
+        public ActiveRecording CurrentRecording { get; internal set; }
+        public SessionRecording LastRecording { get; internal set; }
     }
 }

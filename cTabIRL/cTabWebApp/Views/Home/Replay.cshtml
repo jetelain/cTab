@@ -1,0 +1,113 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no" />
+    <title>cTab Replay</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
+    <link rel="stylesheet" href="~/css/map.css" asp-append-version="true" />
+    <style>
+        body { margin: 0; padding: 0; overflow: hidden; }
+        #replay-controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 46px;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            border-top: 1px solid #dee2e6;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            gap: 6px;
+        }
+        #replay-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 2000;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #replay-overlay .card {
+            min-width: 380px;
+        }
+        #replay-timeline {
+            flex: 1;
+            min-width: 80px;
+        }
+        #replay-time {
+            font-size: 0.8em;
+            white-space: nowrap;
+            min-width: 120px;
+        }
+        #replay-recording-name {
+            font-size: 0.75em;
+            color: #666;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="replay-overlay">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-play-circle"></i> cTab Replay</h5>
+                <p class="card-text text-muted">Load a session recording file (<code>.json</code>) exported from cTab.</p>
+                <div class="form-group">
+                    <label for="replay-file">Recording file</label>
+                    <input type="file" class="form-control-file" id="replay-file" accept=".json" />
+                </div>
+            </div>
+            <div class="card-footer text-muted text-right">
+                <a href="/" class="btn btn-sm btn-outline-secondary">Back to cTab</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="map" id="map"></div>
+
+    <div id="replay-controls" class="d-none">
+        <button id="replay-play-btn" class="btn btn-sm btn-primary" title="Play / Pause">
+            <i class="fas fa-play"></i>
+        </button>
+        <input type="range" id="replay-timeline" min="0" max="1000" value="0" step="1" class="custom-range" />
+        <span id="replay-time" class="text-monospace">00:00:00 / 00:00:00</span>
+        <span id="replay-clock" class="badge badge-secondary ml-1" title="In-game time">--:--</span>
+        <select id="replay-speed" class="form-control form-control-sm" style="width:auto;" title="Playback speed">
+            <option value="0.5">0.5×</option>
+            <option value="1" selected>1×</option>
+            <option value="2">2×</option>
+            <option value="4">4×</option>
+            <option value="8">8×</option>
+            <option value="16">16×</option>
+        </select>
+        <span id="replay-recording-name" class="ml-2"></span>
+        <button id="replay-load-btn" class="btn btn-sm btn-outline-secondary ml-auto" title="Load another file">
+            <i class="fas fa-folder-open"></i>
+        </button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/milsymbol@2.0.0/dist/milsymbol.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/milstd@0.1.6/milstd.js"></script>
+    <script src="https://atlas.plan-ops.fr/js/legacy-map-utils.js"></script>
+    <script src="https://atlas.plan-ops.fr/data/1/maps/all.js"></script>
+    <script src="~/js/leaflet-distortableimage.js" asp-append-version="true"></script>
+    <script src="~/js/replay.js" asp-append-version="true"></script>
+</body>
+</html>

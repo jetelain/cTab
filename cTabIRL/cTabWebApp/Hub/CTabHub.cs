@@ -9,6 +9,7 @@ using Arma3TacMapLibrary.Maps;
 using cTabWebApp.Messages;
 using cTabWebApp.Messages.IntelFeed;
 using cTabWebApp.Messaging;
+using cTabWebApp.Recording;
 using cTabWebApp.Services;
 using cTabWebApp.Services.Images;
 using cTabWebApp.TacMaps;
@@ -210,6 +211,11 @@ namespace cTabWebApp
             return state;
         }
 
+        private void AppendToRecording(PlayerState state, string type, object data)
+        {
+            state.CurrentRecording?.Append(type, data);
+        }
+
         public async Task ArmaStartMission(ArmaMessage message)
         {
             var state = GetState(ConnectionKind.Arma);
@@ -235,6 +241,7 @@ namespace cTabWebApp
             };
 
             await Clients.Group(state.WebChannelName).SendAsync("Mission", state.LastMission);
+            AppendToRecording(state, "Mission", state.LastMission);
         }
 
         private static readonly Version CtabLevel1 = new Version(2, 7);
@@ -317,6 +324,7 @@ namespace cTabWebApp
 
 
             await Clients.Group(state.WebChannelName).SendAsync("SetPosition", state.LastSetPosition);
+            AppendToRecording(state, "SetPosition", state.LastSetPosition);
         }
 
         public async Task ArmaUpdateMapMarkers(ArmaMessage message)
@@ -384,10 +392,12 @@ namespace cTabWebApp
                 });
             }
 
+            msg.Timestamp = message.Timestamp;
             state.LastUpdateMapMarkers = msg;
             try
             {
                 await Clients.Group(state.WebChannelName).SendAsync("UpdateMapMarkers", state.LastUpdateMapMarkers);
+                AppendToRecording(state, "UpdateMapMarkers", state.LastUpdateMapMarkers);
             }
             catch(Exception e)
             {
@@ -477,6 +487,7 @@ namespace cTabWebApp
             try
             {
                 await Clients.Group(state.WebChannelName).SendAsync("UpdateMarkers", state.LastUpdateMarkers);
+                AppendToRecording(state, "UpdateMarkers", state.LastUpdateMarkers);
             }
             catch (Exception e)
             {
@@ -542,6 +553,7 @@ namespace cTabWebApp
             try 
             { 
                 await Clients.Group(state.WebChannelName).SendAsync("UpdateMarkersPosition", msg);
+                AppendToRecording(state, "UpdateMarkersPosition", msg);
             }
             catch (Exception e)
             {

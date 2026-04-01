@@ -198,5 +198,11 @@ namespace cTabWebApp.Controllers
         {
             return Redirect("https://github.com/jetelain/cTab/wiki/Message-Templates-Documentation");
         }
+
+        [HttpGet]
+        public IActionResult Replay()
+        {
+            return View();
+        }
     }
 }
