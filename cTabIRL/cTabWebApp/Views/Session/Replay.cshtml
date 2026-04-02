@@ -1,3 +1,5 @@
+@model cTabWebApp.Models.ReplayVM
+@inject IViewLocalizer Localizer
 @{
     Layout = null;
 }
@@ -12,66 +14,40 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" />
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
     <link rel="stylesheet" href="~/css/map.css" asp-append-version="true" />
-    <style>
-        body { margin: 0; padding: 0; overflow: hidden; }
-        #replay-controls {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 46px;
-            z-index: 1000;
-            background: rgba(255,255,255,0.95);
-            border-top: 1px solid #dee2e6;
-            display: flex;
-            align-items: center;
-            padding: 0 8px;
-            gap: 6px;
-        }
-        #replay-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: 2000;
-            background: rgba(0,0,0,0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #replay-overlay .card {
-            min-width: 380px;
-        }
-        #replay-timeline {
-            flex: 1;
-            min-width: 80px;
-        }
-        #replay-time {
-            font-size: 0.8em;
-            white-space: nowrap;
-            min-width: 120px;
-        }
-        #replay-recording-name {
-            font-size: 0.75em;
-            color: #666;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 300px;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/replay.css" asp-append-version="true" />
 </head>
 <body>
     <div id="replay-overlay">
         <div class="card shadow">
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-play-circle"></i> cTab Replay</h5>
-                <p class="card-text text-muted">Load a session recording file (<code>.json</code>) exported from cTab.</p>
+                <p class="card-text text-muted">@Localizer["Load a session recording file (<code>.json</code>) exported from cTab."]</p>
                 <div class="form-group">
-                    <label for="replay-file">Recording file</label>
+                    <label for="replay-file">@Localizer["Recording file"]</label>
                     <input type="file" class="form-control-file" id="replay-file" accept=".json" />
                 </div>
+                @if (Model.Recordings.Count > 0)
+                {
+                    <hr />
+                    <h6>@Localizer["Previous sessions"]</h6>
+                    <table class="table">
+                        @foreach (var r in Model.Recordings)
+                        {
+                            var downloadUrl = Url.Action("DownloadStored", "Session", new { id = r.Token });
+                            <tr>
+                                <td>@(r.WorldName ?? "?")</td>
+                                <td>@r.RecordingStart.ToString("yyyy-MM-dd HH:mm") UTC</td>
+                                <td>
+                                    <a href="@downloadUrl" class="btn btn-sm btn-outline-secondary mr-1" title="@Localizer["Download"]"><i class="fas fa-download"></i></a>
+                                     <button class="btn btn-sm btn-outline-secondary" data-replay-src="@downloadUrl" title="@Localizer["Open in viewer"]"><i class="fas fa-play"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
             </div>
             <div class="card-footer text-muted text-right">
-                <a href="/" class="btn btn-sm btn-outline-secondary">Back to cTab</a>
+                <a class="btn btn-sm btn-outline-secondary" asp-controller="Home" asp-action="Index"><i class="fas fa-sign-out-alt"></i> @Localizer["Exit and return to home"]</a>
             </div>
         </div>
     </div>
@@ -79,22 +55,23 @@
     <div class="map" id="map"></div>
 
     <div id="replay-controls" class="d-none">
-        <button id="replay-play-btn" class="btn btn-sm btn-primary" title="Play / Pause">
+        <button id="replay-play-btn" class="btn btn-sm btn-primary" title="@Localizer["Play / Pause"]">
             <i class="fas fa-play"></i>
         </button>
         <input type="range" id="replay-timeline" min="0" max="1000" value="0" step="1" class="custom-range" />
         <span id="replay-time" class="text-monospace">00:00:00 / 00:00:00</span>
-        <span id="replay-clock" class="badge badge-secondary ml-1" title="In-game time">--:--</span>
-        <select id="replay-speed" class="form-control form-control-sm" style="width:auto;" title="Playback speed">
+        <span id="replay-clock" class="badge badge-secondary ml-1" title="@Localizer["In-game time"]">--:--</span>
+        <select id="replay-speed" class="form-control form-control-sm" style="width:auto;" title="@Localizer["Playback speed"]">
             <option value="0.5">0.5×</option>
             <option value="1" selected>1×</option>
             <option value="2">2×</option>
             <option value="4">4×</option>
             <option value="8">8×</option>
             <option value="16">16×</option>
+            <option value="32">32×</option>
         </select>
         <span id="replay-recording-name" class="ml-2"></span>
-        <button id="replay-load-btn" class="btn btn-sm btn-outline-secondary ml-auto" title="Load another file">
+        <button id="replay-load-btn" class="btn btn-sm btn-outline-secondary ml-auto" title="@Localizer["Load another file"]">
             <i class="fas fa-folder-open"></i>
         </button>
     </div>

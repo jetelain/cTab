@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
+using cTabWebApp.Models;
 using cTabWebApp.Recording;
-using cTabWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cTabWebApp.Controllers
@@ -10,6 +13,7 @@ namespace cTabWebApp.Controllers
     public class SessionController : Controller
     {
         private readonly IPlayerStateService _service;
+        private readonly IRecordingService _recordingService;
 
         private static readonly JsonSerializerOptions _downloadOptions = new JsonSerializerOptions
         {
@@ -17,9 +21,10 @@ namespace cTabWebApp.Controllers
             WriteIndented = false
         };
 
-        public SessionController(IPlayerStateService service)
+        public SessionController(IPlayerStateService service, IRecordingService recordingService)
         {
             _service = service;
+            _recordingService = recordingService;
         }
 
         [HttpGet]
@@ -75,7 +80,7 @@ namespace cTabWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Stop(string t)
+        public async Task<IActionResult> Stop(string t)
         {
             var state = _service.GetStateByToken(t);
             if (state == null)
@@ -89,17 +94,22 @@ namespace cTabWebApp.Controllers
             }
 
             var worldName = state.LastMission?.WorldName ?? "unknown";
-            var events = active.Events;
             var recording = new SessionRecording
             {
                 WorldName = worldName,
                 RecordingStart = active.StartedAt,
                 RecordingEnd = DateTime.UtcNow,
-                Events = events
+                Events = active.Events
             };
 
             state.LastRecording = recording;
             state.CurrentRecording = null;
+
+            if (!string.IsNullOrEmpty(state.SteamId) && state.IsAuthenticated)
+            {
+                await _recordingService.SaveAsync(state.SteamId, recording);
+            }
+
             return Ok(new { isRecording = false, hasRecording = true });
         }
 
@@ -120,6 +130,56 @@ namespace cTabWebApp.Controllers
             var bytes = JsonSerializer.SerializeToUtf8Bytes(recording, _downloadOptions);
             var filename = $"ctab-session-{recording.RecordingStart:yyyyMMdd-HHmmss}.json";
             return File(bytes, "application/json", filename);
+        }
+
+        [HttpGet]
+        public IActionResult History(string t)
+        {
+            var state = _service.GetStateByToken(t);
+            if (state == null || string.IsNullOrEmpty(state.SteamId))
+            {
+                return Ok(Array.Empty<object>());
+            }
+            var recordings = _recordingService.GetByUser(state.SteamId);
+            return Ok(recordings.Select(r => new
+            {
+                id = r.Token,
+                worldName = r.WorldName,
+                recordingStart = r.RecordingStart,
+                recordingEnd = r.RecordingEnd
+            }));
+        }
+
+        [HttpGet]
+        public IActionResult Replay()
+        {
+            var steamId = SteamHelper.GetSteamId(User);
+            var recordings = string.IsNullOrEmpty(steamId)
+                ? (IReadOnlyList<StoredRecording>)[]
+                : _recordingService.GetByUser(steamId);
+            return View(new ReplayVM { Recordings = recordings });
+        }
+
+        [HttpGet]
+        public IActionResult DownloadStored(string id)
+        {
+            var steamId = SteamHelper.GetSteamId(User);
+            if (string.IsNullOrEmpty(steamId))
+            {
+                return NotFound();
+            }
+            var stored = _recordingService.GetByUser(steamId).FirstOrDefault(r => r.Token == id);
+            if (stored == null)
+            {
+                return NotFound();
+            }
+            var stream = _recordingService.OpenRecording(stored);
+            if (stream == null)
+            {
+                return NotFound();
+            }
+            var filename = $"ctab-session-{stored.RecordingStart:yyyyMMdd-HHmmss}.json";
+            return File(stream, "application/json", filename);
         }
     }
 }

@@ -422,4 +422,12 @@
         $('#map').css('height', (window.innerHeight - 46) + 'px');
     });
 
+    $('[data-replay-src]').on('click', function () {
+        var replaySrc = $(this).data('replay-src');
+        fetch(replaySrc)
+            .then(function (r) { return r.json(); })
+            .then(function (data) { loadRecording(data); })
+            .catch(function (e) { console.error('Failed to load recording', e); });
+    });
+
 }());
