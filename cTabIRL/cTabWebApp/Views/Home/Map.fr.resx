@@ -276,6 +276,9 @@
   <data name="Start recording" xml:space="preserve">
     <value>Démarrer l'enregistrement</value>
   </data>
+  <data name="Stop recording" xml:space="preserve">
+    <value>Arrêter l'enregistrement</value>
+  </data>
   <data name="Switch to EFIS" xml:space="preserve">
     <value>Basculer sur l'EFIS</value>
   </data>
