@@ -48,7 +48,7 @@ namespace cTabWebApp
 #else
             services.AddSingleton<IPlayerStateService, SinglePlayerStateService>();
             services.AddSingleton<IImageService, NoImageService>();
-            services.AddSingleton<IRecordingService, NoRecordingService>();
+            services.AddSingleton<IRecordingStorageService, NoRecordingStorageService>();
 #endif
             services.AddSingleton<PublicUriService>();
 
