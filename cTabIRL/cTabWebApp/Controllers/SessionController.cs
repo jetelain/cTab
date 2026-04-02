@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using cTabWebApp.Models;
-using cTabWebApp.Recording;
+using cTabWebApp.Services.Recording;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cTabWebApp.Controllers
@@ -13,7 +13,7 @@ namespace cTabWebApp.Controllers
     public class SessionController : Controller
     {
         private readonly IPlayerStateService _service;
-        private readonly IRecordingService _recordingService;
+        private readonly IRecordingStorageService _recordingService;
 
         private static readonly JsonSerializerOptions _downloadOptions = new JsonSerializerOptions
         {
@@ -21,7 +21,7 @@ namespace cTabWebApp.Controllers
             WriteIndented = false
         };
 
-        public SessionController(IPlayerStateService service, IRecordingService recordingService)
+        public SessionController(IPlayerStateService service, IRecordingStorageService recordingService)
         {
             _service = service;
             _recordingService = recordingService;

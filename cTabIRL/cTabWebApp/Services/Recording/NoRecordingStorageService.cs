@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
+
 #nullable enable
 
-namespace cTabWebApp.Recording
+namespace cTabWebApp.Services.Recording
 {
-    public class NoRecordingService : IRecordingService
+    public class NoRecordingStorageService : IRecordingStorageService
     {
         public Task<StoredRecording?> SaveAsync(string steamId, SessionRecording recording)
             => Task.FromResult<StoredRecording?>(null);

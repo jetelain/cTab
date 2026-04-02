@@ -6,16 +6,16 @@ using Microsoft.Extensions.Logging;
 
 #nullable enable
 
-namespace cTabWebApp.Recording
+namespace cTabWebApp.Services.Recording
 {
-    internal sealed class RecordingCleanupService : BackgroundService
+    internal sealed class RecordingStorageCleanupService : BackgroundService
     {
         private static readonly TimeSpan Interval = TimeSpan.FromHours(1);
 
-        private readonly IRecordingService _recordingService;
-        private readonly ILogger<RecordingCleanupService> _logger;
+        private readonly IRecordingStorageService _recordingService;
+        private readonly ILogger<RecordingStorageCleanupService> _logger;
 
-        public RecordingCleanupService(IRecordingService recordingService, ILogger<RecordingCleanupService> logger)
+        public RecordingStorageCleanupService(IRecordingStorageService recordingService, ILogger<RecordingStorageCleanupService> logger)
         {
             _recordingService = recordingService;
             _logger = logger;

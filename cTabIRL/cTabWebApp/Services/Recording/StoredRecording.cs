@@ -2,7 +2,7 @@ using System;
 
 #nullable enable
 
-namespace cTabWebApp.Recording
+namespace cTabWebApp.Services.Recording
 {
     public class StoredRecording
     {

@@ -9,11 +9,12 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 #nullable enable
 
-namespace cTabWebApp.Recording
+namespace cTabWebApp.Services.Recording
 {
-    public class RecordingService : IRecordingService
+    public class RecordingStorageService : IRecordingStorageService
     {
         // Per-user list, populated lazily on first access
         private readonly ConcurrentDictionary<string, List<StoredRecording>> _userIndex = new();
@@ -30,7 +31,7 @@ namespace cTabWebApp.Recording
             WriteIndented = false
         };
 
-        public RecordingService(RecordingServiceConfig config)
+        public RecordingStorageService(RecordingStorageServiceConfig config)
         {
             _retentionDuration = config.RetentionDuration;
             _maxSessionRecordingCount = config.MaxSessionRecordingCount;

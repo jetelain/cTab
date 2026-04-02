@@ -9,7 +9,6 @@ using Arma3TacMapLibrary.Maps;
 using cTabWebApp.Messages;
 using cTabWebApp.Messages.IntelFeed;
 using cTabWebApp.Messaging;
-using cTabWebApp.Recording;
 using cTabWebApp.Services;
 using cTabWebApp.Services.Images;
 using cTabWebApp.TacMaps;

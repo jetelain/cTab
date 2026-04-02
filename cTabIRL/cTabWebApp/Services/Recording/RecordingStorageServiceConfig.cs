@@ -1,8 +1,8 @@
 using System;
 
-namespace cTabWebApp.Recording
+namespace cTabWebApp.Services.Recording
 {
-    public class RecordingServiceConfig
+    public class RecordingStorageServiceConfig
     {
         /// <summary>Duration to keep stored recordings.</summary>
         public TimeSpan RetentionDuration { get; set; } = TimeSpan.FromDays(5);

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace cTabWebApp.Recording
+namespace cTabWebApp.Services.Recording
 {
     public class SessionRecording
     {

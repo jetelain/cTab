@@ -1,4 +1,4 @@
-namespace cTabWebApp.Recording
+namespace cTabWebApp.Services.Recording
 {
     public class SessionEvent
     {
