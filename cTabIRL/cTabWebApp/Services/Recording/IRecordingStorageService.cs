@@ -10,7 +10,7 @@ namespace cTabWebApp.Services.Recording
     public interface IRecordingStorageService
     {
         Task<StoredRecording?> SaveAsync(string steamId, SessionRecording recording);
-        IReadOnlyList<StoredRecording> GetByUser(string steamId);
+        Task<IReadOnlyList<StoredRecording>> GetByUserAsync(string steamId);
         Stream? OpenRecording(StoredRecording stored);
         Task CleanUpAsync();
     }

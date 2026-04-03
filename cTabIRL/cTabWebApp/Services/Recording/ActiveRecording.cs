@@ -22,6 +22,14 @@ namespace cTabWebApp.Services.Recording
             }
         }
 
+        public List<SessionEvent> TakeSnapshot()
+        {
+            lock (_events)
+            {
+                return new List<SessionEvent>(_events);
+            }
+        }
+
         public void Append(string type, object data)
         {
             lock (_events)

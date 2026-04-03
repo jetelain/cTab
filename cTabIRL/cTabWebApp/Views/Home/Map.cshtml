@@ -117,31 +117,28 @@
                         <p>@Localizer["Electronic flight instrument system for helicopter pilots and co-pilots."]</p>
                         <p><a type="button" class="btn btn-secondary" asp-controller="Home" asp-action="EFIS" asp-route-t="@Model.Token" id="efislink"><i class="fas fa-helicopter"></i> @Localizer["Switch to EFIS"]</a></p>
                         
-                        @if (!Model.IsSpectator)
-                        {
-                            <hr />
-                            <h5>@Localizer["Session Recording"]</h5>
-                            <p id="recording-status-text" class="d-none">@Localizer["Recording in progress... Stop recording to be able to download the file."]</p>
-                            <div id="recording-download-section" class="d-none mb-2">
-                                <p>@Localizer["Recording finished."]</p>
-                                @if(Model.IsAuthenticated)
-                                {
-                                    <p>@Localizer["You are authenticated with Steam, recording will be stored on ctab for few days."]</p>
-                                }
-                                else
-                                {
-                                    <p>@Localizer["Download file before starting a new recording or closing ctab. You will not be able to download it later."]</p>
-                                }
-                                <div class="mb-2">
-                                    <a id="recording-download-link" asp-controller="Session" asp-action="Download" asp-route-t="@Model.Token" class="btn btn-sm btn-primary"><i class="fas fa-download"></i> @Localizer["Download recording"]</a>
-                                    <a asp-controller="Session" asp-action="Replay" target="_blank" class="btn btn-sm btn-secondary ml-1"><i class="fas fa-play"></i> @Localizer["Open replay viewer"]</a>
-                                </div>
+                        <hr />
+                        <h5>@Localizer["Session Recording"]</h5>
+                        <p id="recording-status-text" class="d-none">@Localizer["Recording in progress... Stop recording to be able to download the file."]</p>
+                        <div id="recording-download-section" class="d-none mb-2">
+                            <p>@Localizer["Recording finished."]</p>
+                            @if(Model.IsAuthenticated)
+                            {
+                                <p>@Localizer["You are authenticated with Steam, recording will be stored on ctab for few days."]</p>
+                            }
+                            else
+                            {
+                                <p>@Localizer["Download file before starting a new recording or closing ctab. You will not be able to download it later."]</p>
+                            }
+                            <div class="mb-2">
+                                <a id="recording-download-link" asp-controller="Session" asp-action="Download" asp-route-t="@Model.Token" class="btn btn-sm btn-primary"><i class="fas fa-download"></i> @Localizer["Download recording"]</a>
+                                <a asp-controller="Session" asp-action="Replay" target="_blank" class="btn btn-sm btn-secondary ml-1"><i class="fas fa-play"></i> @Localizer["Open replay viewer"]</a>
                             </div>
-                            <p>
-                                <button type="button" class="btn btn-danger" id="recording-start-btn"><i class="fas fa-circle"></i> @Localizer["Start recording"]</button>
-                                <button type="button" class="btn btn-warning d-none" id="recording-stop-btn"><i class="fas fa-stop"></i> @Localizer["Stop recording"]</button>
-                            </p>
-                        }
+                        </div>
+                        <p>
+                            <button type="button" class="btn btn-danger" id="recording-start-btn"><i class="fas fa-circle"></i> @Localizer["Start recording"]</button>
+                            <button type="button" class="btn btn-warning d-none" id="recording-stop-btn"><i class="fas fa-stop"></i> @Localizer["Stop recording"]</button>
+                        </p>
                         
                         <hr />
                         <h5>@Localizer["Share"]</h5>

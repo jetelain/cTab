@@ -88,14 +88,14 @@ namespace cTabWebApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult History(string t)
+        public async Task<IActionResult> History(string t)
         {
             var state = _service.GetStateByToken(t);
             if (state == null || string.IsNullOrEmpty(state.SteamId))
             {
                 return Ok(Array.Empty<object>());
             }
-            var recordings = _recordingService.GetByUser(state.SteamId);
+            var recordings = await _recordingService.GetByUserAsync(state.SteamId);
             return Ok(recordings.Select(r => new
             {
                 id = r.Token,
@@ -106,24 +106,24 @@ namespace cTabWebApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Replay()
+        public async Task<IActionResult> Replay()
         {
             var steamId = SteamHelper.GetSteamId(User);
             var recordings = string.IsNullOrEmpty(steamId)
                 ? (IReadOnlyList<StoredRecording>)[]
-                : _recordingService.GetByUser(steamId);
+                : (await _recordingService.GetByUserAsync(steamId));
             return View(new ReplayVM { Recordings = recordings });
         }
 
         [HttpGet]
-        public IActionResult DownloadStored(string id)
+        public async Task<IActionResult> DownloadStored(string id)
         {
             var steamId = SteamHelper.GetSteamId(User);
             if (string.IsNullOrEmpty(steamId))
             {
                 return NotFound();
             }
-            var stored = _recordingService.GetByUser(steamId).FirstOrDefault(r => r.Token == id);
+            var stored = (await _recordingService.GetByUserAsync(steamId)).FirstOrDefault(r => r.Token == id);
             if (stored == null)
             {
                 return NotFound();

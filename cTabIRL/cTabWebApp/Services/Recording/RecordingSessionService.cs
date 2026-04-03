@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 #nullable enable
@@ -57,7 +58,7 @@ namespace cTabWebApp.Services.Recording
                 WorldName = worldName,
                 RecordingStart = active.StartedAt,
                 RecordingEnd = DateTime.UtcNow,
-                Events = active.Events
+                Events = active.TakeSnapshot()
             };
 
             state.LastRecording = recording;

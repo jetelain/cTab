@@ -194,7 +194,7 @@ namespace cTabWebAppTest.Recording
                 return Task.FromResult<StoredRecording?>(null);
             }
 
-            public IReadOnlyList<StoredRecording> GetByUser(string steamId) => [];
+            public Task<IReadOnlyList<StoredRecording>> GetByUserAsync(string steamId) => Task.FromResult<IReadOnlyList<StoredRecording>>([]);
 
             public Stream? OpenRecording(StoredRecording stored) => null;
 

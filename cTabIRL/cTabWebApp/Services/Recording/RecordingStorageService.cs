@@ -78,7 +78,7 @@ namespace cTabWebApp.Services.Recording
                     try
                     {
                         var entry = JsonSerializer.Deserialize<StoredRecording>(File.ReadAllText(file), _jsonOptions);
-                        if (entry != null && entry.Token == token && entry.SteamId == steamId && !IsExpired(entry))
+                        if (entry != null && entry.Token == token && entry.SteamId == steamId && !IsExpired(entry) && File.Exists(DataPath(steamId, token)))
                         {
                             recordings.Add(entry);
                         }
@@ -124,19 +124,36 @@ namespace cTabWebApp.Services.Recording
             }
 
             Directory.CreateDirectory(UserDirectory(steamId));
-            await File.WriteAllTextAsync(MetaPath(steamId, entry.Token), JsonSerializer.Serialize(entry, _jsonOptions));
+            try
+            {
+                await File.WriteAllTextAsync(MetaPath(steamId, entry.Token), JsonSerializer.Serialize(entry, _jsonOptions));
 
-            await using var fileStream = File.Create(DataPath(steamId, entry.Token));
-            await using var gzStream = new GZipStream(fileStream, CompressionLevel.Optimal);
-            await JsonSerializer.SerializeAsync(gzStream, recording, _jsonOptions);
-
+                await using var fileStream = File.Create(DataPath(steamId, entry.Token));
+                await using var gzStream = new GZipStream(fileStream, CompressionLevel.Optimal);
+                await JsonSerializer.SerializeAsync(gzStream, recording, _jsonOptions);
+            }
+            catch
+            {
+                // If writing fails, clean up any metadata or data files that may have been created, and remove from index
+                await _semaphore.WaitAsync();
+                try
+                {
+                    _userIndex[steamId].Remove(entry);
+                }
+                finally
+                {
+                    _semaphore.Release();
+                }
+                DeleteFilesNoLock(steamId, entry.Token);
+                throw;
+            }
             return entry;
         }
 
-        public IReadOnlyList<StoredRecording> GetByUser(string steamId)
+        public async Task<IReadOnlyList<StoredRecording>> GetByUserAsync(string steamId)
         {
             ValidateSteamId(steamId);
-            _semaphore.Wait();
+            await _semaphore.WaitAsync();
             try
             {
                 EnsureUserLoadedLocked(steamId);
