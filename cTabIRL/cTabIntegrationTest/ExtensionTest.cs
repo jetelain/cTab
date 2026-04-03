@@ -133,10 +133,7 @@ namespace cTabIntegrationTest
             await Task.Delay(100);
 
             var state = await GetState("76561234567890126", "123456");
-            Assert.NotNull(Get(state, s => s.LastUpdateMarkers));
-            Console.WriteLine($"state={state}");
-            Console.WriteLine($"state={state?.LastUpdateMarkers}");
-            Console.WriteLine($"state={state?.LastUpdateMarkers?.Makers}");
+            Assert.NotNull(await Get(state, s => s.LastUpdateMarkers));
             var marker = Assert.Single(state.LastUpdateMarkers.Makers);
             Assert.Equal("o11", marker.Id);
             Assert.Equal("SP04", marker.Name);
@@ -170,7 +167,7 @@ namespace cTabIntegrationTest
             // Assert
             // Session must have been created
             var state = await GetState("76561234567890127", "123456");
-            Assert.NotNull(Get(state , s => s.LastUpdateMessages));
+            Assert.NotNull(await Get(state , s => s.LastUpdateMessages));
             var msg = Assert.Single(state.LastUpdateMessages.Messages);
             Assert.Equal("title", msg.Title);
             Assert.Equal("content", msg.Body);
@@ -203,7 +200,7 @@ namespace cTabIntegrationTest
             // Assert
             // Session must have been created
             var state = await GetState("76561234567890128", "123456");
-            Assert.NotNull(Get(state, s => s.LastUpdateMarkers));
+            Assert.NotNull(await Get(state, s => s.LastUpdateMarkers));
             var marker = Assert.Single(state.LastUpdateMarkers.Makers);
             Assert.Equal("o11", marker.Id);
             Assert.Equal(6170, marker.X);
@@ -235,7 +232,7 @@ namespace cTabIntegrationTest
             // Assert
             // Session must have been created
             var state = await GetState("76561234567890129", "123456");
-            Assert.NotNull(Get(state, s => s.LastDevices));
+            Assert.NotNull(await Get(state, s => s.LastDevices));
             Assert.Equal(1, state.LastDevices.Level);
             Assert.True(state.LastDevices.UseMils);
             Assert.Equal(0, state.LastDevices.VehicleMode);
@@ -265,7 +262,7 @@ namespace cTabIntegrationTest
             // Assert
             // Session must have been created
             var state = await GetState("76561234567890131", "123456");
-            Assert.NotNull(Get(state, s => s.LastUpdateSideFeedMessage));
+            Assert.NotNull(await Get(state, s => s.LastUpdateSideFeedMessage));
             var entry = Assert.Single(state.LastUpdateSideFeedMessage.Entries);
             Assert.Equal("1", entry.Id);
             Assert.Equal([6313.14, 705.207, 5.73917], entry.Location);
@@ -298,7 +295,7 @@ namespace cTabIntegrationTest
             // Assert
             // Session must have been created
             var state = await GetState("76561234567890132", "123456");
-            Assert.NotNull(Get(state, s => s.LastUpdateMessagesTemplates));
+            Assert.NotNull(await Get(state, s => s.LastUpdateMessagesTemplates));
             var template = Assert.Single(state.LastUpdateMessagesTemplates.Templates);
             Assert.Equal("builtin#2", template.Uid);
         }
