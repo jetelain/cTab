@@ -6,6 +6,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,8 +15,11 @@ using System.Threading.Tasks;
 
 namespace cTabWebApp.Services.Recording
 {
-    public class RecordingStorageService : IRecordingStorageService
+    public partial class RecordingStorageService : IRecordingStorageService
     {
+        [GeneratedRegex(@"^\d+$")]
+        private static partial Regex SteamIdRegex();
+
         // Per-user list, populated lazily on first access
         private readonly ConcurrentDictionary<string, List<StoredRecording>> _userIndex = new();
         private readonly HashSet<string> _loadedUsers = new();
@@ -38,6 +42,14 @@ namespace cTabWebApp.Services.Recording
             _storageDirectory = config.StorageLocation
                 ?? Path.Combine(Path.GetTempPath(), "cTabWebApp", "SessionRecordings");
             Directory.CreateDirectory(_storageDirectory);
+        }
+
+        private static void ValidateSteamId(string steamId)
+        {
+            if (string.IsNullOrEmpty(steamId) || !SteamIdRegex().IsMatch(steamId))
+            {
+                throw new ArgumentException("steamId must be a numeric Steam64 ID.", nameof(steamId));
+            }
         }
 
         private bool IsExpired(StoredRecording entry) => entry.ExpiresUtc < DateTime.UtcNow;
@@ -87,6 +99,7 @@ namespace cTabWebApp.Services.Recording
 
         public async Task<StoredRecording?> SaveAsync(string steamId, SessionRecording recording)
         {
+            ValidateSteamId(steamId);
             StoredRecording entry;
             await _semaphore.WaitAsync();
             try
@@ -122,6 +135,7 @@ namespace cTabWebApp.Services.Recording
 
         public IReadOnlyList<StoredRecording> GetByUser(string steamId)
         {
+            ValidateSteamId(steamId);
             _semaphore.Wait();
             try
             {
@@ -139,6 +153,7 @@ namespace cTabWebApp.Services.Recording
 
         public Stream? OpenRecording(StoredRecording stored)
         {
+            ValidateSteamId(stored.SteamId);
             var path = DataPath(stored.SteamId, stored.Token);
             if (!File.Exists(path))
             {

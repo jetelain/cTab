@@ -1,5 +1,7 @@
 using System;
 
+#nullable enable
+
 namespace cTabWebApp.Services.Recording
 {
     public class RecordingStorageServiceConfig
