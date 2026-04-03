@@ -383,6 +383,7 @@ var CTab;
             initReplayMap(mapInfos, worldName);
         }
         updateTimeDisplay();
+        applyEventsUntil(0);
     }
     // ---- UI wiring ----
     document.addEventListener('DOMContentLoaded', function () {

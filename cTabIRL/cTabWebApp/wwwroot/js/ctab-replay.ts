@@ -523,6 +523,7 @@ namespace CTab {
             initReplayMap(mapInfos, worldName);
         }
         updateTimeDisplay();
+        applyEventsUntil(0);
     }
 
     // ---- UI wiring ----
