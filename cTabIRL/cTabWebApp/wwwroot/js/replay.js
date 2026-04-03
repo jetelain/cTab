@@ -41,22 +41,28 @@
     // ---- Rendering (adapted from map.js) ----
     function createIcon(marker) {
         if (marker.symbol === 'img:tic.png') {
-            var iconHtml = $('<div></div>').append(
-                $('<div></div>')
-                    .addClass('text-marker-content-small')
-                    .text(marker.name)
-                    .prepend($('<img src="/img/tic.png" width="56" height="56" />&nbsp;')))
-                .html();
-            return new L.DivIcon({ className: 'text-marker', html: iconHtml, iconAnchor: [28, 28] });
+            var inner = document.createElement('div');
+            inner.className = 'text-marker-content-small';
+            var img = document.createElement('img');
+            img.src = '/img/tic.png';
+            img.width = 56;
+            img.height = 56;
+            inner.appendChild(img);
+            inner.appendChild(document.createTextNode('\u00a0'));
+            inner.appendChild(document.createTextNode(marker.name));
+            return new L.DivIcon({ className: 'text-marker', html: inner.outerHTML, iconAnchor: [28, 28] });
         }
         if (/^img:/.test(marker.symbol)) {
-            var iconHtml = $('<div></div>').append(
-                $('<div></div>')
-                    .addClass('text-marker-content-small')
-                    .text(marker.name)
-                    .prepend($('<img src="/img/' + marker.symbol.substr(4) + '" width="32" height="32" />&nbsp;')))
-                .html();
-            return new L.DivIcon({ className: 'text-marker', html: iconHtml, iconAnchor: [16, 16] });
+            var inner = document.createElement('div');
+            inner.className = 'text-marker-content-small';
+            var img = document.createElement('img');
+            img.src = '/img/' + marker.symbol.substr(4);
+            img.width = 32;
+            img.height = 32;
+            inner.appendChild(img);
+            inner.appendChild(document.createTextNode('\u00a0'));
+            inner.appendChild(document.createTextNode(marker.name));
+            return new L.DivIcon({ className: 'text-marker', html: inner.outerHTML, iconAnchor: [16, 16] });
         }
         var symOptions = { size: 24, additionalInformation: marker.name, strokeWidth: 6, outlineWidth: 3 };
         if (marker.kind === 'u' && marker.heading < 360) {
@@ -73,16 +79,17 @@
     function generateIcon(data) {
         var url = '/img/markers/' + data.icon;
         if (data.label.length > 0 || data.dir) {
-            var img = $('<img src="' + url + '" width="32" height="32" />');
-            if (data.dir) { img.css('transform', 'rotate(' + data.dir + 'deg)'); }
-            var iconHtml = $('<div></div>').append(
-                $('<div></div>')
-                    .addClass('text-marker-content')
-                    .css('color', '#' + data.color)
-                    .text(data.label)
-                    .prepend(img))
-                .html();
-            return new L.DivIcon({ className: 'text-marker', html: iconHtml, iconAnchor: [16, 16] });
+            var inner = document.createElement('div');
+            inner.className = 'text-marker-content';
+            inner.style.color = '#' + data.color;
+            var img = document.createElement('img');
+            img.src = url;
+            img.width = 32;
+            img.height = 32;
+            if (data.dir) { img.style.transform = 'rotate(' + data.dir + 'deg)'; }
+            inner.appendChild(img);
+            inner.appendChild(document.createTextNode(data.label));
+            return new L.DivIcon({ className: 'text-marker', html: inner.outerHTML, iconAnchor: [16, 16] });
         }
         return L.icon({ iconUrl: url, iconSize: [32, 32], iconAnchor: [16, 16] });
     }
@@ -121,7 +128,7 @@
 
     function updateClock(date) {
         var d = new Date(date);
-        $('#replay-clock').text(pad(d.getUTCHours(), 2) + ':' + pad(d.getUTCMinutes(), 2));
+        document.getElementById('replay-clock').textContent = pad(d.getUTCHours(), 2) + ':' + pad(d.getUTCMinutes(), 2);
     }
 
     function updatePosition(x, y, heading, grp, veh) {
@@ -314,13 +321,13 @@
         isPlaying = true;
         lastTickTime = Date.now();
         tickInterval = setInterval(tick, 100);
-        $('#replay-play-btn').html('<i class="fas fa-pause"></i>');
+        document.getElementById('replay-play-btn').innerHTML = '<i class="fas fa-pause"></i>';
     }
 
     function pause() {
         isPlaying = false;
         if (tickInterval) { clearInterval(tickInterval); tickInterval = null; }
-        $('#replay-play-btn').html('<i class="fas fa-play"></i>');
+        document.getElementById('replay-play-btn').innerHTML = '<i class="fas fa-play"></i>';
     }
 
     function seekTo(ms) {
@@ -347,8 +354,8 @@
     }
 
     function updateTimeDisplay() {
-        $('#replay-time').text(formatDuration(currentPlaybackMs) + ' / ' + formatDuration(replayDuration));
-        $('#replay-timeline').val(replayDuration > 0 ? Math.round(currentPlaybackMs / replayDuration * 1000) : 0);
+        document.getElementById('replay-time').textContent = formatDuration(currentPlaybackMs) + ' / ' + formatDuration(replayDuration);
+        document.getElementById('replay-timeline').value = replayDuration > 0 ? Math.round(currentPlaybackMs / replayDuration * 1000) : 0;
     }
 
     // ---- Recording loader ----
@@ -360,10 +367,12 @@
         lastAppliedEventIndex = 0;
         currentWorldName = null;
 
-        $('#replay-overlay').addClass('d-none');
-        $('#replay-controls').removeClass('d-none');
-        $('#replay-recording-name').text(json.worldName + '  —  ' + new Date(json.recordingStart).toUTCString());
-        $('#replay-timeline').attr('max', 1000).val(0);
+        document.getElementById('replay-overlay').classList.add('d-none');
+        document.getElementById('replay-controls').classList.remove('d-none');
+        document.getElementById('replay-recording-name').textContent = json.worldName + '  —  ' + new Date(json.recordingStart).toUTCString();
+        var timeline = document.getElementById('replay-timeline');
+        timeline.max = 1000;
+        timeline.value = 0;
 
         // Initialize map on first Mission event, then apply up to start
         var missionEvent = json.events.find(function (e) { return e.type === 'Mission'; });
@@ -378,12 +387,12 @@
     }
 
     // ---- UI wiring ----
-    $(function () {
+    document.addEventListener('DOMContentLoaded', function () {
         // Initial map (blank altis)
         var defaultMap = Arma3Map.Maps['altis'];
         initReplayMap(defaultMap, 'altis');
 
-        $('#replay-file').on('change', function () {
+        document.getElementById('replay-file').addEventListener('change', function () {
             var file = this.files[0];
             if (!file) { return; }
             var reader = new FileReader();
@@ -397,37 +406,38 @@
             reader.readAsText(file);
         });
 
-        $('#replay-play-btn').on('click', function () {
+        document.getElementById('replay-play-btn').addEventListener('click', function () {
             if (isPlaying) { pause(); } else { play(); }
         });
 
-        $('#replay-timeline').on('input', function () {
+        document.getElementById('replay-timeline').addEventListener('input', function () {
             if (!replayData) { return; }
             seekTo(parseInt(this.value) / 1000 * replayDuration);
         });
 
-        $('#replay-speed').on('change', function () {
+        document.getElementById('replay-speed').addEventListener('change', function () {
             replaySpeed = parseFloat(this.value);
         });
 
-        $('#replay-load-btn').on('click', function () {
+        document.getElementById('replay-load-btn').addEventListener('click', function () {
             pause();
-            $('#replay-overlay').removeClass('d-none');
-            $('#replay-controls').addClass('d-none');
+            document.getElementById('replay-overlay').classList.remove('d-none');
+            document.getElementById('replay-controls').classList.add('d-none');
         });
 
-        $(window).on('resize', function () {
-            $('#map').css('height', (window.innerHeight - 46) + 'px');
+        window.addEventListener('resize', function () {
+            document.getElementById('map').style.height = (window.innerHeight - 46) + 'px';
         });
-        $('#map').css('height', (window.innerHeight - 46) + 'px');
-    });
+        document.getElementById('map').style.height = (window.innerHeight - 46) + 'px';
 
-    $('[data-replay-src]').on('click', function () {
-        var replaySrc = $(this).data('replay-src');
-        fetch(replaySrc)
-            .then(function (r) { return r.json(); })
-            .then(function (data) { loadRecording(data); })
-            .catch(function (e) { console.error('Failed to load recording', e); });
+        document.querySelectorAll('[data-replay-src]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                fetch(el.dataset.replaySrc)
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) { loadRecording(data); })
+                    .catch(function (e) { console.error('Failed to load recording', e); });
+            });
+        });
     });
 
 }());
