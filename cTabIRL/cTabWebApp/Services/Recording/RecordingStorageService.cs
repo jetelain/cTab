@@ -1,0 +1,266 @@
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text.Json;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
+
+
+#nullable enable
+
+namespace cTabWebApp.Services.Recording
+{
+    public partial class RecordingStorageService : IRecordingStorageService
+    {
+        [GeneratedRegex(@"^\d+$")]
+        private static partial Regex SteamIdRegex();
+
+        // Per-user list, populated lazily on first access
+        private readonly ConcurrentDictionary<string, List<StoredRecording>> _userIndex = new();
+        private readonly HashSet<string> _loadedUsers = new();
+        private readonly SemaphoreSlim _semaphore = new(1, 1);
+
+        private readonly string _storageDirectory;
+        private readonly TimeSpan _retentionDuration;
+        private readonly int _maxSessionRecordingCount;
+
+        private static readonly JsonSerializerOptions _jsonOptions = new()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = false
+        };
+
+        public RecordingStorageService(RecordingStorageServiceConfig config)
+        {
+            _retentionDuration = config.RetentionDuration;
+            _maxSessionRecordingCount = config.MaxSessionRecordingCount;
+            _storageDirectory = config.StorageLocation
+                ?? Path.Combine(Path.GetTempPath(), "cTabWebApp", "SessionRecordings");
+            Directory.CreateDirectory(_storageDirectory);
+        }
+
+        private static void ValidateSteamId(string steamId)
+        {
+            if (string.IsNullOrEmpty(steamId) || !SteamIdRegex().IsMatch(steamId))
+            {
+                throw new ArgumentException("steamId must be a numeric Steam64 ID.", nameof(steamId));
+            }
+        }
+
+        private bool IsExpired(StoredRecording entry) => entry.ExpiresUtc < DateTime.UtcNow;
+
+        private string UserDirectory(string steamId) => Path.Combine(_storageDirectory, steamId);
+        private string MetaPath(string steamId, string token) => Path.Combine(UserDirectory(steamId), token + ".json");
+        private string DataPath(string steamId, string token) => Path.Combine(UserDirectory(steamId), token + ".json.gz");
+
+        /// <summary>
+        /// Loads the user's recording metadata from disk into the in-memory index.
+        /// Must be called while holding <see cref="_semaphore"/>.
+        /// </summary>
+        private void EnsureUserLoadedLocked(string steamId)
+        {
+            if (_loadedUsers.Contains(steamId))
+            {
+                return;
+            }
+            var recordings = new List<StoredRecording>();
+            var userDir = UserDirectory(steamId);
+            if (Directory.Exists(userDir))
+            {
+                foreach (var file in Directory.EnumerateFiles(userDir, "*.json"))
+                {
+                    var token = Path.GetFileNameWithoutExtension(file);
+                    try
+                    {
+                        var entry = JsonSerializer.Deserialize<StoredRecording>(File.ReadAllText(file), _jsonOptions);
+                        if (entry != null && entry.Token == token && entry.SteamId == steamId && !IsExpired(entry) && File.Exists(DataPath(steamId, token)))
+                        {
+                            recordings.Add(entry);
+                        }
+                        else
+                        {
+                            DeleteFilesNoLock(steamId, token);
+                        }
+                    }
+                    catch
+                    {
+                        DeleteFilesNoLock(steamId, token);
+                    }
+                }
+            }
+            _userIndex[steamId] = recordings;
+            _loadedUsers.Add(steamId);
+        }
+
+        public async Task<StoredRecording?> SaveAsync(string steamId, SessionRecording recording)
+        {
+            ValidateSteamId(steamId);
+            StoredRecording entry;
+            await _semaphore.WaitAsync();
+            try
+            {
+                EnsureUserLoadedLocked(steamId);
+                EnforceUserQuotaLocked(steamId);
+                var token = AllocateTokenLocked(steamId);
+                entry = new StoredRecording
+                {
+                    Token = token,
+                    SteamId = steamId,
+                    WorldName = recording.WorldName,
+                    RecordingStart = recording.RecordingStart,
+                    RecordingEnd = recording.RecordingEnd,
+                    ExpiresUtc = DateTime.UtcNow + _retentionDuration
+                };
+                _userIndex[steamId].Add(entry);
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
+
+            Directory.CreateDirectory(UserDirectory(steamId));
+            try
+            {
+                await File.WriteAllTextAsync(MetaPath(steamId, entry.Token), JsonSerializer.Serialize(entry, _jsonOptions));
+
+                await using var fileStream = File.Create(DataPath(steamId, entry.Token));
+                await using var gzStream = new GZipStream(fileStream, CompressionLevel.Optimal);
+                await JsonSerializer.SerializeAsync(gzStream, recording, _jsonOptions);
+            }
+            catch
+            {
+                // If writing fails, clean up any metadata or data files that may have been created, and remove from index
+                await _semaphore.WaitAsync();
+                try
+                {
+                    _userIndex[steamId].Remove(entry);
+                }
+                finally
+                {
+                    _semaphore.Release();
+                }
+                DeleteFilesNoLock(steamId, entry.Token);
+                throw;
+            }
+            return entry;
+        }
+
+        public async Task<IReadOnlyList<StoredRecording>> GetByUserAsync(string steamId)
+        {
+            ValidateSteamId(steamId);
+            await _semaphore.WaitAsync();
+            try
+            {
+                EnsureUserLoadedLocked(steamId);
+                return _userIndex[steamId]
+                    .Where(r => !IsExpired(r))
+                    .OrderByDescending(r => r.RecordingStart)
+                    .ToList();
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
+        }
+
+        public Stream? OpenRecording(StoredRecording stored)
+        {
+            ValidateSteamId(stored.SteamId);
+            var path = DataPath(stored.SteamId, stored.Token);
+            if (!File.Exists(path))
+            {
+                return null;
+            }
+            return new GZipStream(File.OpenRead(path), CompressionMode.Decompress);
+        }
+
+        public async Task CleanUpAsync()
+        {
+            if (!Directory.Exists(_storageDirectory))
+            {
+                return;
+            }
+            var toDelete = new List<(string steamId, string token)>();
+            await _semaphore.WaitAsync();
+            try
+            {
+                foreach (var userDir in Directory.EnumerateDirectories(_storageDirectory))
+                {
+                    var steamId = Path.GetFileName(userDir);
+                    EnsureUserLoadedLocked(steamId);
+                    var recordings = _userIndex[steamId];
+                    var expired = recordings.Where(IsExpired).ToList();
+                    foreach (var e in expired)
+                    {
+                        recordings.Remove(e);
+                        toDelete.Add((steamId, e.Token));
+                    }
+                }
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
+            foreach (var (steamId, token) in toDelete)
+            {
+                DeleteFilesNoLock(steamId, token);
+            }
+        }
+
+        private void EnforceUserQuotaLocked(string steamId)
+        {
+            var recordings = _userIndex[steamId];
+            if (recordings.Count >= _maxSessionRecordingCount)
+            {
+                var toRemove = recordings
+                    .OrderBy(r => r.RecordingStart)
+                    .Take(recordings.Count - _maxSessionRecordingCount + 1)
+                    .ToList();
+                foreach (var e in toRemove)
+                {
+                    recordings.Remove(e);
+                    DeleteFilesNoLock(steamId, e.Token);
+                }
+            }
+        }
+
+        private string AllocateTokenLocked(string steamId)
+        {
+            var recordings = _userIndex[steamId];
+            string token;
+            do
+            {
+                token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(18))
+                    .Replace('+', '-').Replace('/', '_').TrimEnd('=');
+            }
+            while (recordings.Any(r => r.Token == token));
+            return token;
+        }
+
+        private void DeleteFilesNoLock(string steamId, string token)
+        {
+            DeleteFileSafe(MetaPath(steamId, token));
+            DeleteFileSafe(DataPath(steamId, token));
+        }
+
+        private static void DeleteFileSafe(string path)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+            }
+            catch
+            {
+                // Ignore failures, e.g. due to file locks. Cleanup will be retried on next access or during the next cleanup run.
+            }
+        }
+    }
+}

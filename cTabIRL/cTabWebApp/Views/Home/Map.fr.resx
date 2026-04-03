@@ -279,4 +279,34 @@
   <data name="Wait for cTab" xml:space="preserve">
     <value>En attente de cTab</value>
   </data>
+  <data name="Download file before starting a new recording or closing ctab. You will not be able to download it later." xml:space="preserve">
+    <value>Téléchargez le fichier avant de démarrer un nouvel enregistrement ou de fermer ctab. Vous ne pourrez pas le télécharger ultérieurement.</value>
+  </data>
+  <data name="Download recording" xml:space="preserve">
+    <value>Télécharger l'enregistrement</value>
+  </data>
+  <data name="Open replay viewer" xml:space="preserve">
+    <value>Ouvrir le lecteur de replay</value>
+  </data>
+  <data name="Recording" xml:space="preserve">
+    <value>Enregistrement</value>
+  </data>
+  <data name="Recording finished." xml:space="preserve">
+    <value>Enregistrement terminé.</value>
+  </data>
+  <data name="Recording in progress... Stop recording to be able to download the file." xml:space="preserve">
+    <value>Enregistrement en cours... Arrêtez l'enregistrement pour pouvoir télécharger le fichier.</value>
+  </data>
+  <data name="Session Recording" xml:space="preserve">
+    <value>Enregistrement de session</value>
+  </data>
+  <data name="Start recording" xml:space="preserve">
+    <value>Démarrer l'enregistrement</value>
+  </data>
+  <data name="Stop recording" xml:space="preserve">
+    <value>Arrêter l'enregistrement</value>
+  </data>
+  <data name="You are authenticated with Steam, recording will be stored on ctab for few days." xml:space="preserve">
+    <value>Vous êtes authentifié avec Steam, l'enregistrement sera stocké sur ctab pendant quelques jours.</value>
+  </data>
 </root>

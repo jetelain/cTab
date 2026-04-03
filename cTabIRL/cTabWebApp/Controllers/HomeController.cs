@@ -95,8 +95,8 @@ namespace cTabWebApp.Controllers
             {
                 Token = state.Token,
                 InitialMap = state.LastMission?.WorldName?.ToLowerInvariant() ?? "altis",
-                SpectatorToken = state.SpectatorToken,
-
+                IsAuthenticated = state.IsAuthenticated,
+                SpectatorToken = state.SpectatorToken
             };
             SetupTacMap(vm);
             return View(vm);

@@ -4,6 +4,7 @@ using Arma3TacMapLibrary;
 using cTabWebApp.Models;
 using cTabWebApp.Services;
 using cTabWebApp.Services.Images;
+using cTabWebApp.Services.Recording;
 using cTabWebApp.TacMaps;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -42,10 +43,16 @@ namespace cTabWebApp
 #if CLOUD
             services.AddSingleton<IPlayerStateService, PlayerStateService>();
             services.AddSingleton<IImageService, ImageService>();
+            services.AddSingleton<IRecordingStorageService, RecordingStorageService>();
+            services.AddHostedService<RecordingStorageCleanupService>();
 #else
             services.AddSingleton<IPlayerStateService, SinglePlayerStateService>();
             services.AddSingleton<IImageService, NoImageService>();
+            services.AddSingleton<IRecordingStorageService, NoRecordingStorageService>();
 #endif
+            services.AddSingleton<IRecordingSessionService, RecordingSessionService>();
+            services.AddHostedService<RecordingTimeoutBackgroundService>();
+
             services.AddSingleton<PublicUriService>();
 
 
@@ -80,6 +87,7 @@ namespace cTabWebApp
 
             services.AddSingleton<TacMapService>();
             services.AddSingleton(Configuration.GetSection("Images").Get<ImageServiceConfig>() ?? new ImageServiceConfig());
+            services.AddSingleton(Configuration.GetSection("Recordings").Get<RecordingStorageServiceConfig>() ?? new RecordingStorageServiceConfig());
             services.AddSingleton<IImageArchiveService, ImageArchiveService>();
         }
 
