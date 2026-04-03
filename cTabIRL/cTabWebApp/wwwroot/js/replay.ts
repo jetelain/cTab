@@ -1,37 +1,174 @@
 /// <reference path="../../d.ts/leaflet.d.ts" />
+
+declare var Arma3Map: {
+    Maps: { [key: string]: any };
+};
+
+declare namespace ms {
+    interface SymbolOptions {
+        size?: number;
+        additionalInformation?: string;
+        strokeWidth?: number;
+        outlineWidth?: number;
+        direction?: number;
+    }
+    class Symbol {
+        constructor(sidc: string, options: SymbolOptions);
+        asCanvas(scale?: number): HTMLCanvasElement;
+        getSize(): { width: number; height: number };
+        getAnchor(): { x: number; y: number };
+    }
+}
+
+declare namespace L {
+    function latlngGraticule(options?: any): any;
+    interface MapOptions {
+        maxNativeZoom?: number;
+    }
+    interface MarkerOptions {
+        marker?: any;
+    }
+}
+
 // cTab Session Replay Engine
-var CTab;
-(function (CTab) {
+namespace CTab {
+
+    interface MapInfos {
+        worldName?: string;
+        minZoom: number;
+        maxZoom: number;
+        CRS: L.CRS;
+        tilePattern: string;
+        attribution: string;
+        tileSize: number;
+        center: L.LatLngExpression;
+    }
+
+    interface ReplayMarker {
+        id: string;
+        x: number;
+        y: number;
+        symbol: string;
+        name: string;
+        kind: string;
+        heading: number;
+        vehicle?: string;
+    }
+
+    interface MarkerPositionData {
+        id: string;
+        x: number;
+        y: number;
+        heading: number;
+    }
+
+    interface IconMapMarkerData {
+        name: string;
+        pos: number[];
+        icon: string;
+        size: number[];
+        dir?: number;
+        label: string;
+        color: string;
+    }
+
+    interface SimpleMapMarkerData {
+        name: string;
+        pos: number[];
+        size: number[];
+        shape: string;
+        dir?: number;
+        color: string;
+        alpha: number;
+        brush: string;
+    }
+
+    interface PolylineMapMarkerData {
+        name: string;
+        points: number[];
+        color: string;
+        alpha: number;
+    }
+
+    interface UpdateMapMarkersData {
+        timestamp: string;
+        icons: IconMapMarkerData[];
+        simples: SimpleMapMarkerData[];
+        polylines: PolylineMapMarkerData[];
+    }
+
+    interface MissionData {
+        worldName: string;
+        date: string;
+        timestamp: string;
+    }
+
+    interface SetPositionData {
+        x: number;
+        y: number;
+        heading: number;
+        date: string;
+        timestamp: string;
+        group: string;
+        vehicle?: string;
+    }
+
+    interface UpdateMarkersData {
+        timestamp: string;
+        makers: ReplayMarker[];
+    }
+
+    interface UpdateMarkersPositionData {
+        timestamp: string;
+        makers: MarkerPositionData[];
+    }
+
+    interface SessionEvent {
+        type: string;
+        data: MissionData | SetPositionData | UpdateMarkersData | UpdateMarkersPositionData | UpdateMapMarkersData;
+    }
+
+    interface SessionRecording {
+        worldName: string;
+        recordingStart: string;
+        recordingEnd: string;
+        events: SessionEvent[];
+    }
+
     // ---- Map / rendering state ----
-    let currentMap = null;
-    let currentMapInfos = null;
-    let selfMarker = null;
-    let existingMarkers = {};
-    let existingMapMarkers = {};
+    let currentMap: L.Map = null;
+    let currentMapInfos: MapInfos = null;
+    let selfMarker: L.Marker = null;
+    let existingMarkers: { [id: string]: L.Marker } = {};
+    let existingMapMarkers: { [name: string]: any } = {};
     let useMils = false;
-    let currentWorldName = null;
+    let currentWorldName: string = null;
+
     // ---- Playback state ----
-    let replayData = null;
+    let replayData: SessionRecording = null;
     let isPlaying = false;
     let replaySpeed = 1.0;
     let currentPlaybackMs = 0;
     let lastAppliedEventIndex = 0;
     let replayDuration = 0;
-    let tickInterval = null;
-    let lastTickTime = null;
+    let tickInterval: number = null;
+    let lastTickTime: number = null;
+
     // ---- Utility (copied from common.js) ----
-    function pad(n, width) {
+    function pad(n: number, width: number): string {
         let s = n + '';
         return s.length >= width ? s : new Array(width - s.length + 1).join('0') + s;
     }
-    function toHeadingUnit(degrees) {
+
+    function toHeadingUnit(degrees: number): string {
         if (useMils) {
             return '' + Math.trunc(degrees * 6400 / 360);
         }
         return '' + degrees.toFixed(2) + '°';
     }
+
     // ---- Rendering (adapted from map.js) ----
-    function createIcon(marker) {
+    function createIcon(marker: { symbol: string; name: string; kind: string; heading: number }): L.Icon | L.DivIcon {
         if (marker.symbol === 'img:tic.png') {
             let inner = document.createElement('div');
             inner.className = 'text-marker-content-small';
@@ -56,7 +193,7 @@ var CTab;
             inner.appendChild(document.createTextNode(marker.name));
             return new L.DivIcon({ className: 'text-marker', html: inner.outerHTML, iconAnchor: [16, 16] });
         }
-        let symOptions = { size: 24, additionalInformation: marker.name, strokeWidth: 6, outlineWidth: 3 };
+        let symOptions: ms.SymbolOptions = { size: 24, additionalInformation: marker.name, strokeWidth: 6, outlineWidth: 3 };
         if (marker.kind === 'u' && marker.heading < 360) {
             symOptions.direction = marker.heading;
         }
@@ -67,7 +204,8 @@ var CTab;
             iconAnchor: [sym.getAnchor().x, sym.getAnchor().y]
         });
     }
-    function generateIcon(data) {
+
+    function generateIcon(data: IconMapMarkerData): L.Icon | L.DivIcon {
         let url = '/img/markers/' + data.icon;
         if (data.label.length > 0 || data.dir) {
             let inner = document.createElement('div');
@@ -77,33 +215,25 @@ var CTab;
             img.src = url;
             img.width = 32;
             img.height = 32;
-            if (data.dir) {
-                img.style.transform = 'rotate(' + data.dir + 'deg)';
-            }
+            if (data.dir) { img.style.transform = 'rotate(' + data.dir + 'deg)'; }
             inner.appendChild(img);
             inner.appendChild(document.createTextNode(data.label));
             return new L.DivIcon({ className: 'text-marker', html: inner.outerHTML, iconAnchor: [16, 16] });
         }
         return L.icon({ iconUrl: url, iconSize: [32, 32], iconAnchor: [16, 16] });
     }
-    function removeAllMarkers() {
+
+    function removeAllMarkers(): void {
         Object.keys(existingMarkers).forEach(function (id) { existingMarkers[id].remove(); });
         existingMarkers = {};
         Object.keys(existingMapMarkers).forEach(function (name) { existingMapMarkers[name].remove(); });
         existingMapMarkers = {};
-        if (selfMarker) {
-            selfMarker.remove();
-            selfMarker = null;
-        }
+        if (selfMarker) { selfMarker.remove(); selfMarker = null; }
     }
-    function initReplayMap(mapInfos, worldName) {
-        if (!mapInfos.worldName) {
-            mapInfos.worldName = worldName;
-        }
-        if (currentMap) {
-            removeAllMarkers();
-            currentMap.remove();
-        }
+
+    function initReplayMap(mapInfos: MapInfos, worldName: string): void {
+        if (!mapInfos.worldName) { mapInfos.worldName = worldName; }
+        if (currentMap) { removeAllMarkers(); currentMap.remove(); }
         let map = L.map('map', {
             minZoom: mapInfos.minZoom,
             maxZoom: mapInfos.maxZoom + 4,
@@ -124,30 +254,29 @@ var CTab;
         currentWorldName = worldName;
         selfMarker = null;
     }
-    function updateClock(date) {
+
+    function updateClock(date: string): void {
         let d = new Date(date);
         document.getElementById('replay-clock').textContent = pad(d.getUTCHours(), 2) + ':' + pad(d.getUTCMinutes(), 2);
     }
-    function updatePosition(x, y, heading, grp, veh) {
+
+    function updatePosition(x: number, y: number, heading: number, grp: string, veh: string): void {
         let marker = existingMarkers[veh || grp];
         if (marker) {
-            if (selfMarker && !selfMarker.options.marker) {
-                selfMarker.remove();
-            }
+            if (selfMarker && !selfMarker.options.marker) { selfMarker.remove(); }
             selfMarker = marker;
             marker.setLatLng([y, x]);
-        }
-        else {
+        } else {
             if (selfMarker && !selfMarker.options.marker) {
                 selfMarker.setLatLng([y, x]);
-            }
-            else {
+            } else {
                 selfMarker = L.marker([y, x], { icon: createIcon({ symbol: '10031000001211000000', name: '', kind: 'u', heading: heading }) }).addTo(currentMap);
             }
         }
     }
-    function updateMarkers(makers) {
-        let markersToKeep = [];
+
+    function updateMarkers(makers: ReplayMarker[]): void {
+        let markersToKeep: string[] = [];
         makers.forEach(function (marker) {
             if (!marker.vehicle || !existingMarkers[marker.vehicle]) {
                 let existing = existingMarkers[marker.id];
@@ -157,8 +286,7 @@ var CTab;
                         existing.options.marker = marker;
                         existing.setIcon(createIcon(marker));
                     }
-                }
-                else {
+                } else {
                     let newMarker = L.marker([marker.y, marker.x], {
                         icon: createIcon(marker),
                         marker: marker,
@@ -176,18 +304,19 @@ var CTab;
             }
         });
     }
-    function updateMarkersPosition(makers) {
+
+    function updateMarkersPosition(makers: MarkerPositionData[]): void {
         makers.forEach(function (marker) {
             let existing = existingMarkers[marker.id];
-            if (existing) {
-                existing.setLatLng([marker.y, marker.x]);
-            }
+            if (existing) { existing.setLatLng([marker.y, marker.x]); }
         });
     }
-    function updateMapMarkers(msg) {
-        let markersToKeep = [];
-        function rotatePoints(center, points, yaw) {
-            let res = [], angle = yaw * (Math.PI / 180);
+
+    function updateMapMarkers(msg: UpdateMapMarkersData): void {
+        let markersToKeep: string[] = [];
+
+        function rotatePoints(center: number[], points: number[][], yaw: number): number[][] {
+            let res: number[][] = [], angle = yaw * (Math.PI / 180);
             for (let i = 0; i < points.length; i++) {
                 let p = points[i];
                 let p2 = [p[0] - center[0], p[1] - center[1]];
@@ -196,22 +325,27 @@ var CTab;
             }
             return res;
         }
-        function latLngPoints(items) {
-            let array = [];
+
+        function latLngPoints(items: number[]): L.LatLng[] {
+            let array: L.LatLng[] = [];
             for (let i = 0; i < items.length; i += 2) {
                 array.push(new L.LatLng(items[i + 1], items[i]));
             }
             return array;
         }
-        function process(list, update, create) {
+
+        function process<T extends { name: string }>(
+            list: T[],
+            update: (data: T, existing: any, lastData: any) => void,
+            create: (data: T) => L.Layer | null
+        ): void {
             list.forEach(function (data) {
                 let marker = existingMapMarkers[data.name];
                 if (marker) {
                     update(data, marker, marker.lastData);
                     marker.lastData = data;
-                }
-                else {
-                    let newMarker = create(data);
+                } else {
+                    let newMarker = create(data) as any;
                     if (newMarker) {
                         existingMapMarkers[data.name] = newMarker;
                         update(data, newMarker, { pos: [] });
@@ -222,48 +356,54 @@ var CTab;
                 markersToKeep.push(data.name);
             });
         }
-        process(msg.icons, function (m, e, lastData) {
-            if (lastData.pos[1] !== m.pos[1] || lastData.pos[0] !== m.pos[0]) {
-                e.setLatLng([m.pos[1], m.pos[0]]);
-            }
-            if (lastData.label !== m.label || lastData.dir !== m.dir || lastData.icon !== m.icon) {
-                e.setIcon(generateIcon(m));
-            }
-        }, function (m) { return L.marker([m.pos[1], m.pos[0]], { interactive: false }); });
-        process(msg.simples, function (m, e, lastData) {
-            if (lastData.color !== m.color || lastData.alpha !== m.alpha || lastData.brush !== m.brush) {
-                e.setStyle({ stroke: false, fillColor: '#' + m.color, fillOpacity: m.alpha * (m.brush === 'SolidFull' ? 1 : 0.4) });
-            }
-        }, function (m) {
-            if (m.shape === 'rectangle') {
-                if (m.dir) {
-                    return L.polygon(rotatePoints([m.pos[1], m.pos[0]], [
-                        [m.pos[1] - m.size[1], m.pos[0] - m.size[0]], [m.pos[1] - m.size[1], m.pos[0] + m.size[0]],
-                        [m.pos[1] + m.size[1], m.pos[0] + m.size[0]], [m.pos[1] + m.size[1], m.pos[0] - m.size[0]]
-                    ], m.dir), { interactive: false });
+
+        process(msg.icons,
+            function (m, e, lastData) {
+                if (lastData.pos[1] !== m.pos[1] || lastData.pos[0] !== m.pos[0]) { e.setLatLng([m.pos[1], m.pos[0]]); }
+                if (lastData.label !== m.label || lastData.dir !== m.dir || lastData.icon !== m.icon) { e.setIcon(generateIcon(m)); }
+            },
+            function (m) { return L.marker([m.pos[1], m.pos[0]], { interactive: false }); });
+
+        process(msg.simples,
+            function (m, e, lastData) {
+                if (lastData.color !== m.color || lastData.alpha !== m.alpha || lastData.brush !== m.brush) {
+                    e.setStyle({ stroke: false, fillColor: '#' + m.color, fillOpacity: m.alpha * (m.brush === 'SolidFull' ? 1 : 0.4) });
                 }
-                return L.rectangle([[m.pos[1] - m.size[1], m.pos[0] - m.size[0]], [m.pos[1] + m.size[1], m.pos[0] + m.size[0]]], { interactive: false });
-            }
-            return L.circle([m.pos[1], m.pos[0]], { radius: m.size[0], interactive: false });
-        });
-        process(msg.polylines, function (m, e, lastData) {
-            if (lastData.color !== m.color || lastData.alpha !== m.alpha) {
-                e.setStyle({ color: '#' + m.color, opacity: m.alpha });
-            }
-        }, function (m) { return new L.Polyline(latLngPoints(m.points), { interactive: false }); });
+            },
+            function (m) {
+                if (m.shape === 'rectangle') {
+                    if (m.dir) {
+                        return L.polygon(
+                            rotatePoints([m.pos[1], m.pos[0]], [
+                                [m.pos[1] - m.size[1], m.pos[0] - m.size[0]], [m.pos[1] - m.size[1], m.pos[0] + m.size[0]],
+                                [m.pos[1] + m.size[1], m.pos[0] + m.size[0]], [m.pos[1] + m.size[1], m.pos[0] - m.size[0]]
+                            ], m.dir) as any,
+                            { interactive: false });
+                    }
+                    return L.rectangle(
+                        [[m.pos[1] - m.size[1], m.pos[0] - m.size[0]], [m.pos[1] + m.size[1], m.pos[0] + m.size[0]]] as any,
+                        { interactive: false });
+                }
+                return L.circle([m.pos[1], m.pos[0]], { radius: m.size[0], interactive: false });
+            });
+
+        process(msg.polylines,
+            function (m, e, lastData) {
+                if (lastData.color !== m.color || lastData.alpha !== m.alpha) { e.setStyle({ color: '#' + m.color, opacity: m.alpha }); }
+            },
+            function (m) { return new L.Polyline(latLngPoints(m.points), { interactive: false }); });
+
         Object.keys(existingMapMarkers).forEach(function (name) {
-            if (markersToKeep.indexOf(name) === -1) {
-                existingMapMarkers[name].remove();
-                delete existingMapMarkers[name];
-            }
+            if (markersToKeep.indexOf(name) === -1) { existingMapMarkers[name].remove(); delete existingMapMarkers[name]; }
         });
     }
+
     // ---- Event application ----
-    function applyEvent(evt) {
+    function applyEvent(evt: SessionEvent): void {
         try {
             switch (evt.type) {
                 case 'Mission': {
-                    let d = evt.data;
+                    let d = evt.data as MissionData;
                     let worldName = d.worldName.toLowerCase();
                     if (Arma3Map.Maps[worldName] && worldName !== currentWorldName) {
                         initReplayMap(Arma3Map.Maps[worldName], worldName);
@@ -272,47 +412,44 @@ var CTab;
                     break;
                 }
                 case 'SetPosition': {
-                    let d = evt.data;
+                    let d = evt.data as SetPositionData;
                     updateClock(d.date);
                     updatePosition(d.x, d.y, d.heading, d.group, d.vehicle);
                     break;
                 }
                 case 'UpdateMarkers': {
-                    let d = evt.data;
+                    let d = evt.data as UpdateMarkersData;
                     updateMarkers(d.makers);
                     break;
                 }
                 case 'UpdateMarkersPosition': {
-                    let d = evt.data;
+                    let d = evt.data as UpdateMarkersPositionData;
                     updateMarkersPosition(d.makers);
                     break;
                 }
                 case 'UpdateMapMarkers': {
-                    updateMapMarkers(evt.data);
+                    updateMapMarkers(evt.data as UpdateMapMarkersData);
                     break;
                 }
             }
-        }
-        catch (e) {
+        } catch (e) {
             console.error('applyEvent error', evt.type, e);
         }
     }
-    function applyEventsUntil(targetMs) {
+
+    function applyEventsUntil(targetMs: number): void {
         while (lastAppliedEventIndex < replayData.events.length) {
             let evt = replayData.events[lastAppliedEventIndex];
-            let evtMs = new Date(evt.data.timestamp).getTime() - new Date(replayData.recordingStart).getTime();
-            if (evtMs > targetMs) {
-                break;
-            }
+            let evtMs = new Date((evt.data as any).timestamp).getTime() - new Date(replayData.recordingStart).getTime();
+            if (evtMs > targetMs) { break; }
             applyEvent(evt);
             lastAppliedEventIndex++;
         }
     }
+
     // ---- Playback engine ----
-    function tick() {
-        if (!isPlaying || !replayData) {
-            return;
-        }
+    function tick(): void {
+        if (!isPlaying || !replayData) { return; }
         let now = Date.now();
         let elapsed = (now - lastTickTime) * replaySpeed;
         lastTickTime = now;
@@ -323,24 +460,22 @@ var CTab;
             pause();
         }
     }
-    function play() {
-        if (!replayData || isPlaying) {
-            return;
-        }
+
+    function play(): void {
+        if (!replayData || isPlaying) { return; }
         isPlaying = true;
         lastTickTime = Date.now();
         tickInterval = setInterval(tick, 100);
         document.getElementById('replay-play-btn').innerHTML = '<i class="fas fa-pause"></i>';
     }
-    function pause() {
+
+    function pause(): void {
         isPlaying = false;
-        if (tickInterval) {
-            clearInterval(tickInterval);
-            tickInterval = null;
-        }
+        if (tickInterval) { clearInterval(tickInterval); tickInterval = null; }
         document.getElementById('replay-play-btn').innerHTML = '<i class="fas fa-play"></i>';
     }
-    function seekTo(ms) {
+
+    function seekTo(ms: number): void {
         let wasPlaying = isPlaying;
         pause();
         currentPlaybackMs = Math.max(0, Math.min(ms, replayDuration));
@@ -353,98 +488,98 @@ var CTab;
             currentMap.setView(savedCenter, savedZoom, { animate: false });
         }
         updateTimeDisplay();
-        if (wasPlaying) {
-            play();
-        }
+        if (wasPlaying) { play(); }
     }
-    function formatDuration(ms) {
+
+    function formatDuration(ms: number): string {
         let s = Math.floor(ms / 1000);
         let m = Math.floor(s / 60);
         let h = Math.floor(m / 60);
         return pad(h, 2) + ':' + pad(m % 60, 2) + ':' + pad(s % 60, 2);
     }
-    function updateTimeDisplay() {
+
+    function updateTimeDisplay(): void {
         document.getElementById('replay-time').textContent = formatDuration(currentPlaybackMs) + ' / ' + formatDuration(replayDuration);
-        document.getElementById('replay-timeline').value = String(replayDuration > 0 ? Math.round(currentPlaybackMs / replayDuration * 1000) : 0);
+        (document.getElementById('replay-timeline') as HTMLInputElement).value = String(replayDuration > 0 ? Math.round(currentPlaybackMs / replayDuration * 1000) : 0);
     }
+
     // ---- Recording loader ----
-    function loadRecording(json) {
+    function loadRecording(json: SessionRecording): void {
         pause();
         replayData = json;
         replayDuration = new Date(json.recordingEnd).getTime() - new Date(json.recordingStart).getTime();
         currentPlaybackMs = 0;
         lastAppliedEventIndex = 0;
         currentWorldName = null;
+
         document.getElementById('replay-overlay').classList.add('d-none');
         document.getElementById('replay-controls').classList.remove('d-none');
         document.getElementById('replay-recording-name').textContent = json.worldName + '  —  ' + new Date(json.recordingStart).toUTCString();
-        let timeline = document.getElementById('replay-timeline');
+        let timeline = document.getElementById('replay-timeline') as HTMLInputElement;
         timeline.max = '1000';
         timeline.value = '0';
+
         let missionEvent = json.events.find(function (e) { return e.type === 'Mission'; });
         if (missionEvent) {
             applyEvent(missionEvent);
-        }
-        else {
+        } else {
             let worldName = (json.worldName || 'altis').toLowerCase();
             let mapInfos = Arma3Map.Maps[worldName] || Arma3Map.Maps['altis'];
             initReplayMap(mapInfos, worldName);
         }
         updateTimeDisplay();
     }
+
     // ---- UI wiring ----
     document.addEventListener('DOMContentLoaded', function () {
         let defaultMap = Arma3Map.Maps['altis'];
         initReplayMap(defaultMap, 'altis');
+
         document.getElementById('replay-file').addEventListener('change', function () {
-            let file = this.files[0];
-            if (!file) {
-                return;
-            }
+            let file = (this as HTMLInputElement).files[0];
+            if (!file) { return; }
             let reader = new FileReader();
             reader.onload = function (e) {
                 try {
-                    loadRecording(JSON.parse(e.target.result));
-                }
-                catch (err) {
-                    alert('Failed to load recording: ' + err.message);
+                    loadRecording(JSON.parse(e.target.result as string));
+                } catch (err) {
+                    alert('Failed to load recording: ' + (err as Error).message);
                 }
             };
             reader.readAsText(file);
         });
+
         document.getElementById('replay-play-btn').addEventListener('click', function () {
-            if (isPlaying) {
-                pause();
-            }
-            else {
-                play();
-            }
+            if (isPlaying) { pause(); } else { play(); }
         });
+
         document.getElementById('replay-timeline').addEventListener('input', function () {
-            if (!replayData) {
-                return;
-            }
-            seekTo(parseInt(this.value) / 1000 * replayDuration);
+            if (!replayData) { return; }
+            seekTo(parseInt((this as HTMLInputElement).value) / 1000 * replayDuration);
         });
+
         document.getElementById('replay-speed').addEventListener('change', function () {
-            replaySpeed = parseFloat(this.value);
+            replaySpeed = parseFloat((this as HTMLSelectElement).value);
         });
+
         document.getElementById('replay-load-btn').addEventListener('click', function () {
             pause();
             document.getElementById('replay-overlay').classList.remove('d-none');
             document.getElementById('replay-controls').classList.add('d-none');
         });
+
         window.addEventListener('resize', function () {
             document.getElementById('map').style.height = (window.innerHeight - 46) + 'px';
         });
         document.getElementById('map').style.height = (window.innerHeight - 46) + 'px';
+
         document.querySelectorAll('[data-replay-src]').forEach(function (el) {
             el.addEventListener('click', function () {
-                fetch(el.dataset.replaySrc)
+                fetch((el as HTMLElement).dataset.replaySrc)
                     .then(function (r) { return r.json(); })
                     .then(function (data) { loadRecording(data); })
                     .catch(function (e) { console.error('Failed to load recording', e); });
             });
         });
     });
-})(CTab || (CTab = {}));
+}
