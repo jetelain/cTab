@@ -290,9 +290,10 @@ var CTab;
         }
     }
     function applyEventsUntil(targetMs) {
+        let recordingStartMs = new Date(replayData.recordingStart).getTime();
         while (lastAppliedEventIndex < replayData.events.length) {
             let evt = replayData.events[lastAppliedEventIndex];
-            let evtMs = new Date(evt.data.timestamp).getTime() - new Date(replayData.recordingStart).getTime();
+            let evtMs = new Date(evt.data.timestamp).getTime() - recordingStartMs;
             if (evtMs > targetMs) {
                 break;
             }

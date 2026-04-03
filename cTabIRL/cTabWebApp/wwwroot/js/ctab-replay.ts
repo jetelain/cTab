@@ -433,9 +433,10 @@ namespace CTab {
     }
 
     function applyEventsUntil(targetMs: number): void {
+        let recordingStartMs = new Date(replayData.recordingStart).getTime();
         while (lastAppliedEventIndex < replayData.events.length) {
             let evt = replayData.events[lastAppliedEventIndex];
-            let evtMs = new Date((evt.data as any).timestamp).getTime() - new Date(replayData.recordingStart).getTime();
+            let evtMs = new Date((evt.data as any).timestamp).getTime() - recordingStartMs;
             if (evtMs > targetMs) { break; }
             applyEvent(evt);
             lastAppliedEventIndex++;

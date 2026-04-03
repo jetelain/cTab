@@ -87,7 +87,7 @@ namespace cTabWebApp.Services.Recording
                             DeleteFilesNoLock(steamId, token);
                         }
                     }
-                    catch (JsonException)
+                    catch
                     {
                         DeleteFilesNoLock(steamId, token);
                     }
@@ -244,10 +244,23 @@ namespace cTabWebApp.Services.Recording
 
         private void DeleteFilesNoLock(string steamId, string token)
         {
-            var meta = MetaPath(steamId, token);
-            if (File.Exists(meta)) File.Delete(meta);
-            var data = DataPath(steamId, token);
-            if (File.Exists(data)) File.Delete(data);
+            DeleteFileSafe(MetaPath(steamId, token));
+            DeleteFileSafe(DataPath(steamId, token));
+        }
+
+        private static void DeleteFileSafe(string path)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+            }
+            catch
+            {
+                // Ignore failures, e.g. due to file locks. Cleanup will be retried on next access or during the next cleanup run.
+            }
         }
     }
 }
