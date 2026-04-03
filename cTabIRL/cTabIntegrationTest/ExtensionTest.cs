@@ -134,6 +134,9 @@ namespace cTabIntegrationTest
 
             var state = await GetState("76561234567890126", "123456");
             Assert.NotNull(Get(state, s => s.LastUpdateMarkers));
+            Console.WriteLine($"state={state}");
+            Console.WriteLine($"state={state?.LastUpdateMarkers}");
+            Console.WriteLine($"state={state?.LastUpdateMarkers?.Makers}");
             var marker = Assert.Single(state.LastUpdateMarkers.Makers);
             Assert.Equal("o11", marker.Id);
             Assert.Equal("SP04", marker.Name);
