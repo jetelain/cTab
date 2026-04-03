@@ -367,7 +367,7 @@ var CTab;
         currentPlaybackMs = 0;
         lastAppliedEventIndex = 0;
         currentWorldName = null;
-        document.getElementById('replay-overlay').classList.add('d-none');
+        $('#replay-overlay').modal('hide');
         document.getElementById('replay-controls').classList.remove('d-none');
         document.getElementById('replay-recording-name').textContent = json.worldName + '  —  ' + new Date(json.recordingStart).toUTCString();
         let timeline = document.getElementById('replay-timeline');
@@ -386,6 +386,7 @@ var CTab;
     }
     // ---- UI wiring ----
     document.addEventListener('DOMContentLoaded', function () {
+        $('#replay-overlay').modal('show');
         let defaultMap = Arma3Map.Maps['altis'];
         initReplayMap(defaultMap, 'altis');
         document.getElementById('replay-file').addEventListener('change', function () {
@@ -423,7 +424,7 @@ var CTab;
         });
         document.getElementById('replay-load-btn').addEventListener('click', function () {
             pause();
-            document.getElementById('replay-overlay').classList.remove('d-none');
+            $('#replay-overlay').modal('show');
             document.getElementById('replay-controls').classList.add('d-none');
         });
         window.addEventListener('resize', function () {

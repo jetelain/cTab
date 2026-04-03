@@ -117,34 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-	  <data name="Exit and return to home" xml:space="preserve">
-		<value>Sortir et revenir à l'accueil</value>
-	  </data>
-	  <data name="Load a session recording file (&lt;code&gt;.json&lt;/code&gt;) exported from cTab." xml:space="preserve">
-		<value>Charger un fichier d'enregistrement de session (&lt;code&gt;.json&lt;/code&gt;) exporté depuis cTab.</value>
-	  </data>
-	  <data name="Recording file" xml:space="preserve">
-		<value>Fichier d'enregistrement</value>
-	  </data>
-	  <data name="Previous sessions" xml:space="preserve">
-		<value>Sessions précédentes</value>
-	  </data>
-	  <data name="Download" xml:space="preserve">
-		<value>Télécharger</value>
-	  </data>
-	  <data name="Open in viewer" xml:space="preserve">
-		<value>Ouvrir dans le lecteur</value>
-	  </data>
-	  <data name="Play / Pause" xml:space="preserve">
-		<value>Lecture / Pause</value>
-	  </data>
-	  <data name="In-game time" xml:space="preserve">
-		<value>Heure en jeu</value>
-	  </data>
-	  <data name="Playback speed" xml:space="preserve">
-		<value>Vitesse de lecture</value>
-	  </data>
-	  <data name="Load another file" xml:space="preserve">
-		<value>Charger un autre fichier</value>
-	  </data>
-	</root>
+  <data name="Exit and return to home" xml:space="preserve">
+    <value>Sortir et revenir à l'accueil</value>
+  </data>
+  <data name="Load a session recording file (&lt;code&gt;.json&lt;/code&gt;) exported from cTab." xml:space="preserve">
+    <value>Charger un fichier d'enregistrement de session (&lt;code&gt;.json&lt;/code&gt;) exporté depuis cTab.</value>
+  </data>
+  <data name="Recording file" xml:space="preserve">
+    <value>Fichier d'enregistrement</value>
+  </data>
+  <data name="Previous sessions" xml:space="preserve">
+    <value>Sessions précédentes</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+  <data name="Open in viewer" xml:space="preserve">
+    <value>Ouvrir dans le lecteur</value>
+  </data>
+  <data name="Play / Pause" xml:space="preserve">
+    <value>Lecture / Pause</value>
+  </data>
+  <data name="In-game time" xml:space="preserve">
+    <value>Heure en jeu</value>
+  </data>
+  <data name="Playback speed" xml:space="preserve">
+    <value>Vitesse de lecture</value>
+  </data>
+  <data name="Load another file" xml:space="preserve">
+    <value>Charger un autre fichier</value>
+  </data>
+  <data name="To record a session, open cTab, click on the menu button &lt;i class=&quot;fas fa-bars&quot;&gt;&lt;/i&gt; and then on &quot;&lt;i class=&quot;fas fa-circle&quot;&gt;&lt;/i&gt; Start recording&quot;." xml:space="preserve">
+    <value>Pour enregistrer une session, ouvrir cTab, cliquer sur le bouton menu &lt;i class="fas fa-bars"&gt;&lt;/i&gt; et ensuite sur "&lt;i class="fas fa-circle"&gt;&lt;/i&gt; Démarrer l'enregistrement".</value>
+  </data>
+  <data name="Note: Data is only stored for a few days. Download the file to store the data longer." xml:space="preserve">
+    <value>Remarque : Les données ne sont conservées que quelques jours.Téléchargez le fichier pour conserver les données plus longtemps.</value>
+  </data>
+</root>

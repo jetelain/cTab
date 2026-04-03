@@ -4,6 +4,8 @@ declare var Arma3Map: {
     Maps: { [key: string]: any };
 };
 
+declare function $(selector: string): { modal(action: string): void };
+
 declare namespace ms {
     interface SymbolOptions {
         size?: number;
@@ -505,7 +507,7 @@ namespace CTab {
         lastAppliedEventIndex = 0;
         currentWorldName = null;
 
-        document.getElementById('replay-overlay').classList.add('d-none');
+        $('#replay-overlay').modal('hide');
         document.getElementById('replay-controls').classList.remove('d-none');
         document.getElementById('replay-recording-name').textContent = json.worldName + '  —  ' + new Date(json.recordingStart).toUTCString();
         let timeline = document.getElementById('replay-timeline') as HTMLInputElement;
@@ -525,6 +527,7 @@ namespace CTab {
 
     // ---- UI wiring ----
     document.addEventListener('DOMContentLoaded', function () {
+        $('#replay-overlay').modal('show');
         let defaultMap = Arma3Map.Maps['altis'];
         initReplayMap(defaultMap, 'altis');
 
@@ -557,7 +560,7 @@ namespace CTab {
 
         document.getElementById('replay-load-btn').addEventListener('click', function () {
             pause();
-            document.getElementById('replay-overlay').classList.remove('d-none');
+            $('#replay-overlay').modal('show');
             document.getElementById('replay-controls').classList.add('d-none');
         });
 

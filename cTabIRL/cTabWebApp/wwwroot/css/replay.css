@@ -19,23 +19,9 @@
     gap: 6px;
 }
 
-#replay-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 2000;
-    background: rgba(0,0,0,0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+body.modal-open {
+    padding-right: 0 !important;
 }
-
-    #replay-overlay .card {
-        min-width: 380px;
-    }
-
 #replay-timeline {
     flex: 1;
     min-width: 80px;

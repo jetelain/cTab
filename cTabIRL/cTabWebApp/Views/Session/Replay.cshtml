@@ -17,37 +17,44 @@
     <link rel="stylesheet" href="~/css/replay.css" asp-append-version="true" />
 </head>
 <body>
-    <div id="replay-overlay">
-        <div class="card shadow">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-play-circle"></i> cTab Replay</h5>
-                <p class="card-text text-muted">@Localizer["Load a session recording file (<code>.json</code>) exported from cTab."]</p>
-                <div class="form-group">
-                    <label for="replay-file">@Localizer["Recording file"]</label>
-                    <input type="file" class="form-control-file" id="replay-file" accept=".json" />
+    <div class="modal" id="replay-overlay" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-play-circle"></i> cTab Replay</h5>
                 </div>
-                @if (Model.Recordings.Count > 0)
-                {
-                    <hr />
-                    <h6>@Localizer["Previous sessions"]</h6>
-                    <table class="table">
-                        @foreach (var r in Model.Recordings)
-                        {
-                            var downloadUrl = Url.Action("DownloadStored", "Session", new { id = r.Token });
-                            <tr>
-                                <td>@(r.WorldName ?? "?")</td>
-                                <td>@r.RecordingStart.ToString("yyyy-MM-dd HH:mm") UTC</td>
-                                <td>
-                                    <a href="@downloadUrl" class="btn btn-sm btn-outline-secondary mr-1" title="@Localizer["Download"]"><i class="fas fa-download"></i></a>
-                                     <button class="btn btn-sm btn-outline-secondary" data-replay-src="@downloadUrl" title="@Localizer["Open in viewer"]"><i class="fas fa-play"></i></button>
-                                </td>
-                            </tr>
-                        }
-                    </table>
-                }
-            </div>
-            <div class="card-footer text-muted text-right">
-                <a class="btn btn-sm btn-outline-secondary" asp-controller="Home" asp-action="Index"><i class="fas fa-sign-out-alt"></i> @Localizer["Exit and return to home"]</a>
+                <div class="modal-body">
+                    <p class="text-muted">@Localizer["Load a session recording file (<code>.json</code>) exported from cTab."]</p>
+                    <p class="text-muted">@Localizer["To record a session, open cTab, click on the menu button <i class=\"fas fa-bars\"></i> and then on \"<i class=\"fas fa-circle\"></i> Start recording\"."]</p>
+
+                    <div class="form-group">
+                        <label for="replay-file">@Localizer["Recording file"]</label>
+                        <input type="file" class="form-control-file" id="replay-file" accept=".json" />
+                    </div>
+                    @if (Model.Recordings.Count > 0)
+                    {
+                        <hr />
+                        <h6>@Localizer["Previous sessions"]</h6>
+                        <table class="table">
+                            @foreach (var r in Model.Recordings)
+                            {
+                                var downloadUrl = Url.Action("DownloadStored", "Session", new { id = r.Token });
+                                <tr>
+                                    <td>@(r.WorldName ?? "?")</td>
+                                    <td>@r.RecordingStart.ToString("yyyy-MM-dd HH:mm") UTC</td>
+                                    <td>
+                                        <a href="@downloadUrl" class="btn btn-sm btn-outline-secondary mr-1" title="@Localizer["Download"]"><i class="fas fa-download"></i></a>
+                                         <button class="btn btn-sm btn-outline-secondary" data-replay-src="@downloadUrl" title="@Localizer["Open in viewer"]"><i class="fas fa-play"></i></button>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                        <p><span class="text-muted">@Localizer["Note: Data is only stored for a few days. Download the file to store the data longer."]</span></p>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-sm btn-outline-secondary" asp-controller="Home" asp-action="Index"><i class="fas fa-sign-out-alt"></i> @Localizer["Exit and return to home"]</a>
+                </div>
             </div>
         </div>
     </div>
@@ -59,7 +66,7 @@
             <i class="fas fa-play"></i>
         </button>
         <input type="range" id="replay-timeline" min="0" max="1000" value="0" step="1" class="custom-range" />
-        <span id="replay-time" class="text-monospace">00:00:00 / 00:00:00</span>
+        <span id="replay-time" class="text-monospace d-none d-md-inline">00:00:00 / 00:00:00</span>
         <span id="replay-clock" class="badge badge-secondary ml-1" title="@Localizer["In-game time"]">--:--</span>
         <select id="replay-speed" class="form-control form-control-sm" style="width:auto;" title="@Localizer["Playback speed"]">
             <option value="0.5">0.5×</option>
@@ -74,6 +81,9 @@
         <button id="replay-load-btn" class="btn btn-sm btn-outline-secondary ml-auto" title="@Localizer["Load another file"]">
             <i class="fas fa-folder-open"></i>
         </button>
+        <a id="replay-load-btn" class="btn btn-sm btn-outline-secondary ml-auto" title="@Localizer["Exit and return to home"]" asp-action="Index" asp-controller="Home">
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
