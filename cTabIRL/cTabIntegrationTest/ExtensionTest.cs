@@ -171,7 +171,7 @@ namespace cTabIntegrationTest
             // Session must have been created
             var token = await GetToken("76561234567890127", "123456");
             var state = _webapp.Get<IPlayerStateService>().GetStateByToken(token.Token);
-            Assert.NotNull(state.LastUpdateMessages);
+            Assert.NotNull(Get(state , s => s.LastUpdateMessages));
             var msg = Assert.Single(state.LastUpdateMessages.Messages);
             Assert.Equal("title", msg.Title);
             Assert.Equal("content", msg.Body);
@@ -324,6 +324,23 @@ namespace cTabIntegrationTest
             }
             Assert.Fail("Too many failed attempts");
             return new KeyLoginResult(KeyLoginState.UnknownPlayer, string.Empty);
+        }
+
+        private async Task<T> Get<T>(PlayerState state, Func<PlayerState, T> get) where T : class
+        {
+            var attempt = 0;
+            while (attempt < 100)
+            {
+                var value = get(state);
+                if (value != null)
+                {
+                    return value;
+                }
+                await Task.Delay(50);
+                attempt++;
+            }
+            Assert.Fail("Too many failed attempts");
+            return null;
         }
     }
 }
