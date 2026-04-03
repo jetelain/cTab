@@ -14,8 +14,5 @@ namespace cTabWebApp.Services.Recording
 
         /// <summary>Maximum number of stored recordings per Steam user.</summary>
         public int MaxSessionRecordingCount { get; set; } = 20;
-
-        /// <summary>Maximum total number of stored recordings across all users.</summary>
-        public int MaxTotalRecordingCount { get; set; } = 2000;
     }
 }
