@@ -170,5 +170,13 @@ namespace cTabWebApp
                 return players.FirstOrDefault(p => p.UploadToken == uploadToken);
             }
         }
+
+        public IEnumerable<PlayerState> GetStatesWithActiveRecording()
+        {
+            lock (players)
+            {
+                return players.Where(p => p.CurrentRecording != null).ToList();
+            }
+        }
     }
 }

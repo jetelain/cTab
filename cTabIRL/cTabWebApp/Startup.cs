@@ -50,6 +50,9 @@ namespace cTabWebApp
             services.AddSingleton<IImageService, NoImageService>();
             services.AddSingleton<IRecordingStorageService, NoRecordingStorageService>();
 #endif
+            services.AddSingleton<IRecordingSessionService, RecordingSessionService>();
+            services.AddHostedService<RecordingTimeoutBackgroundService>();
+
             services.AddSingleton<PublicUriService>();
 
 

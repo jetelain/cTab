@@ -7,6 +7,8 @@ namespace cTabWebApp.Services.Recording
     {
         public DateTime StartedAt { get; } = DateTime.UtcNow;
 
+        public DateTime LastEventAt { get; private set; } = DateTime.UtcNow;
+
         private readonly List<SessionEvent> _events = new List<SessionEvent>();
 
         public List<SessionEvent> Events => _events;
@@ -16,6 +18,7 @@ namespace cTabWebApp.Services.Recording
             lock (_events)
             {
                 _events.Add(new SessionEvent { Type = type, Data = data });
+                LastEventAt = DateTime.UtcNow;
             }
         }
     }

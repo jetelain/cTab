@@ -14,6 +14,7 @@ namespace cTabWebApp.Controllers
     {
         private readonly IPlayerStateService _service;
         private readonly IRecordingStorageService _recordingService;
+        private readonly IRecordingSessionService _recordingSessionService;
 
         private static readonly JsonSerializerOptions _downloadOptions = new JsonSerializerOptions
         {
@@ -21,10 +22,11 @@ namespace cTabWebApp.Controllers
             WriteIndented = false
         };
 
-        public SessionController(IPlayerStateService service, IRecordingStorageService recordingService)
+        public SessionController(IPlayerStateService service, IRecordingStorageService recordingService, IRecordingSessionService recordingSessionService)
         {
             _service = service;
             _recordingService = recordingService;
+            _recordingSessionService = recordingSessionService;
         }
 
         [HttpGet]
@@ -50,33 +52,8 @@ namespace cTabWebApp.Controllers
             {
                 return NotFound();
             }
-            if (state.CurrentRecording != null)
-            {
-                return Ok(new { isRecording = true });
-            }
-
-            var recording = new ActiveRecording();
-
-            // Bootstrap current state into recording
-            if (state.LastMission != null)
-            {
-                recording.Append("Mission", state.LastMission);
-            }
-            if (state.LastUpdateMarkers != null)
-            {
-                recording.Append("UpdateMarkers", state.LastUpdateMarkers);
-            }
-            if (state.LastUpdateMapMarkers != null)
-            {
-                recording.Append("UpdateMapMarkers", state.LastUpdateMapMarkers);
-            }
-            if (state.LastSetPosition != null)
-            {
-                recording.Append("SetPosition", state.LastSetPosition);
-            }
-
-            state.CurrentRecording = recording;
-            return Ok(new { isRecording = true });
+            _recordingSessionService.StartRecording(state);
+            return Ok(new { isRecording = state.CurrentRecording != null });
         }
 
         [HttpPost]
@@ -87,30 +64,8 @@ namespace cTabWebApp.Controllers
             {
                 return NotFound();
             }
-            var active = state.CurrentRecording;
-            if (active == null)
-            {
-                return Ok(new { isRecording = false, hasRecording = state.LastRecording != null });
-            }
-
-            var worldName = state.LastMission?.WorldName ?? "unknown";
-            var recording = new SessionRecording
-            {
-                WorldName = worldName,
-                RecordingStart = active.StartedAt,
-                RecordingEnd = DateTime.UtcNow,
-                Events = active.Events
-            };
-
-            state.LastRecording = recording;
-            state.CurrentRecording = null;
-
-            if (!string.IsNullOrEmpty(state.SteamId) && state.IsAuthenticated)
-            {
-                await _recordingService.SaveAsync(state.SteamId, recording);
-            }
-
-            return Ok(new { isRecording = false, hasRecording = true });
+            await _recordingSessionService.StopRecordingAsync(state);
+            return Ok(new { isRecording = false, hasRecording = state.LastRecording != null });
         }
 
         [HttpGet]
