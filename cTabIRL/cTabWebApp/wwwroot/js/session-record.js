@@ -13,15 +13,20 @@
         document.getElementById('recording-download-section').classList.toggle('d-none', isRecording || !status.hasRecording);
     }
 
+    function getAntiForgeryToken() {
+        var input = document.querySelector('input[name="__RequestVerificationToken"]');
+        return input ? input.value : '';
+    }
+
     function startRecording() {
-        fetch('/Session/Start?t=' + vm.token, { method: 'POST' })
+        fetch('/Session/Start?t=' + vm.token, { method: 'POST', headers: { 'RequestVerificationToken': getAntiForgeryToken() } })
             .then(function (r) { return r.json(); })
             .then(function (status) { updateRecordingUI(status); })
             .catch(function (e) { console.error('Start recording failed', e); });
     }
 
     function stopRecording() {
-        fetch('/Session/Stop?t=' + vm.token, { method: 'POST' })
+        fetch('/Session/Stop?t=' + vm.token, { method: 'POST', headers: { 'RequestVerificationToken': getAntiForgeryToken() } })
             .then(function (r) { return r.json(); })
             .then(function (status) { updateRecordingUI(status); })
             .catch(function (e) { console.error('Stop recording failed', e); });

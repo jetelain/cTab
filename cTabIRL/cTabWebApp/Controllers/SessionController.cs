@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace cTabWebApp.Controllers
 {
-    [IgnoreAntiforgeryToken]
     public class SessionController : Controller
     {
         private readonly IPlayerStateService _service;
@@ -45,6 +44,7 @@ namespace cTabWebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Start(string t)
         {
             var state = _service.GetStateByToken(t);
@@ -57,6 +57,7 @@ namespace cTabWebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Stop(string t)
         {
             var state = _service.GetStateByToken(t);

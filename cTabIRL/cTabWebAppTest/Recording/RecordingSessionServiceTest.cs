@@ -42,7 +42,7 @@ namespace cTabWebAppTest.Recording
 
             service.StartRecording(state);
 
-            Assert.Empty(state.CurrentRecording!.Events);
+            Assert.Empty(state.CurrentRecording!.TakeSnapshot());
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace cTabWebAppTest.Recording
 
             service.StartRecording(state);
 
-            Assert.Contains(state.CurrentRecording!.Events, e => e.Type == "Mission");
+            Assert.Contains(state.CurrentRecording!.TakeSnapshot(), e => e.Type == "Mission");
         }
 
         [Fact]
@@ -70,7 +70,7 @@ namespace cTabWebAppTest.Recording
 
             service.StartRecording(state);
 
-            var types = state.CurrentRecording!.Events.Select(e => e.Type).ToList();
+            var types = state.CurrentRecording!.TakeSnapshot().Select(e => e.Type).ToList();
             Assert.Contains("Mission", types);
             Assert.Contains("UpdateMarkers", types);
             Assert.Contains("UpdateMapMarkers", types);

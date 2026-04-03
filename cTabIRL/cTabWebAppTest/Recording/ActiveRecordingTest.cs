@@ -33,9 +33,11 @@ namespace cTabWebAppTest.Recording
 
             recording.Append("TestEvent", data);
 
-            Assert.Single(recording.Events);
-            Assert.Equal("TestEvent", recording.Events[0].Type);
-            Assert.Equal(data, recording.Events[0].Data);
+            var events = recording.TakeSnapshot();
+
+            Assert.Single(events);
+            Assert.Equal("TestEvent", events[0].Type);
+            Assert.Equal(data, events[0].Data);
         }
 
         [Fact]
@@ -59,10 +61,12 @@ namespace cTabWebAppTest.Recording
             recording.Append("Event2", "data2");
             recording.Append("Event3", "data3");
 
-            Assert.Equal(3, recording.Events.Count);
-            Assert.Equal("Event1", recording.Events[0].Type);
-            Assert.Equal("Event2", recording.Events[1].Type);
-            Assert.Equal("Event3", recording.Events[2].Type);
+            var events = recording.TakeSnapshot();
+
+            Assert.Equal(3, events.Count);
+            Assert.Equal("Event1", events[0].Type);
+            Assert.Equal("Event2", events[1].Type);
+            Assert.Equal("Event3", events[2].Type);
         }
 
         [Fact]
@@ -88,7 +92,9 @@ namespace cTabWebAppTest.Recording
             foreach (var t in threads) t.Start();
             foreach (var t in threads) t.Join();
 
-            Assert.Equal(threadCount * eventsPerThread, recording.Events.Count);
+            var events = recording.TakeSnapshot();
+
+            Assert.Equal(threadCount * eventsPerThread, events.Count);
         }
     }
 }

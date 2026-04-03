@@ -11,17 +11,6 @@ namespace cTabWebApp.Services.Recording
 
         private readonly List<SessionEvent> _events = new List<SessionEvent>();
 
-        public IReadOnlyList<SessionEvent> Events
-        {
-            get
-            {
-                lock (_events)
-                {
-                    return _events.ToArray();
-                }
-            }
-        }
-
         public List<SessionEvent> TakeSnapshot()
         {
             lock (_events)
