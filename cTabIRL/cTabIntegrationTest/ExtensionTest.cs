@@ -39,7 +39,7 @@ namespace cTabIntegrationTest
             Assert.Contains("'http://localhost:5000/'", connected);
 
             // Session must have been created
-            var token = _webapp.Get<IPlayerStateService>().GetTokenBySteamIdAndKey("76561234567890123", "123456");
+            var token = await GetToken("76561234567890123", "123456");
             Assert.Equal(KeyLoginState.Ok, token.State);
 
             // Mission information must be set
@@ -74,7 +74,7 @@ namespace cTabIntegrationTest
 
             // Assert
             // Session must have been created
-            var token = _webapp.Get<IPlayerStateService>().GetTokenBySteamIdAndKey("76561234567890124", "123456");
+            var token = await GetToken("76561234567890124", "123456");
             var state = _webapp.Get<IPlayerStateService>().GetStateByToken(token.Token);
             Assert.NotNull(state.LastSetPosition);
             Assert.Equal(new DateTime(2035, 6, 24, 12, 1, 0, DateTimeKind.Utc), state.LastSetPosition.Date);
@@ -108,7 +108,7 @@ namespace cTabIntegrationTest
 
             // Assert
             // Session must have been created
-            var token = _webapp.Get<IPlayerStateService>().GetTokenBySteamIdAndKey("76561234567890125", "123456");
+            var token = await GetToken("76561234567890125", "123456");
             var state = _webapp.Get<IPlayerStateService>().GetStateByToken(token.Token);
             Assert.Null(state.LastMission);
         }
@@ -132,11 +132,9 @@ namespace cTabIntegrationTest
             ExtensionDispatch.RvExtensionArgs("StartMission", new string[] { "\"malden\"", "12800", "[2035,6,24,12,0]", "3.0", "3.0" });
             await Task.Delay(500);
             ExtensionDispatch.RvExtensionArgs("UpdateMarkers", new[] { "[\"g\",\"o11\",\"\\A3\\ui_f\\data\\map\\markers\\nato\\b_inf.paa\",\"\\A3\\ui_f\\data\\map\\markers\\nato\\group_2.paa\",\"SP04\",\"\",[6177.97,9262.54,169.726],0,\"\"]" });
-            await Task.Delay(500);
+            await Task.Delay(100);
 
-            // Assert
-            // Session must have been created
-            var token = _webapp.Get<IPlayerStateService>().GetTokenBySteamIdAndKey("76561234567890126", "123456");
+            var token = await GetToken("76561234567890126", "123456");
             var state = _webapp.Get<IPlayerStateService>().GetStateByToken(token.Token);
             Assert.NotNull(state.LastUpdateMarkers);
             var marker = Assert.Single(state.LastUpdateMarkers.Makers);
@@ -147,7 +145,6 @@ namespace cTabIntegrationTest
             Assert.Equal(0, marker.Heading);
             Assert.Equal("10031000131211000000", marker.Symbol);
         }
-
 
         [Fact]
         public async Task UpdateMessages()
@@ -172,7 +169,7 @@ namespace cTabIntegrationTest
 
             // Assert
             // Session must have been created
-            var token = _webapp.Get<IPlayerStateService>().GetTokenBySteamIdAndKey("76561234567890127", "123456");
+            var token = await GetToken("76561234567890127", "123456");
             var state = _webapp.Get<IPlayerStateService>().GetStateByToken(token.Token);
             Assert.NotNull(state.LastUpdateMessages);
             var msg = Assert.Single(state.LastUpdateMessages.Messages);
@@ -206,7 +203,7 @@ namespace cTabIntegrationTest
 
             // Assert
             // Session must have been created
-            var token = _webapp.Get<IPlayerStateService>().GetTokenBySteamIdAndKey("76561234567890128", "123456");
+            var token = await GetToken("76561234567890128", "123456");
             var state = _webapp.Get<IPlayerStateService>().GetStateByToken(token.Token);
             Assert.NotNull(state.LastUpdateMarkers);
             var marker = Assert.Single(state.LastUpdateMarkers.Makers);
@@ -239,7 +236,7 @@ namespace cTabIntegrationTest
 
             // Assert
             // Session must have been created
-            var token = _webapp.Get<IPlayerStateService>().GetTokenBySteamIdAndKey("76561234567890129", "123456");
+            var token = await GetToken("76561234567890129", "123456");
             var state = _webapp.Get<IPlayerStateService>().GetStateByToken(token.Token);
             Assert.NotNull(state.LastDevices);
             Assert.Equal(1, state.LastDevices.Level);
@@ -270,7 +267,7 @@ namespace cTabIntegrationTest
 
             // Assert
             // Session must have been created
-            var token = _webapp.Get<IPlayerStateService>().GetTokenBySteamIdAndKey("76561234567890131", "123456");
+            var token = await GetToken("76561234567890131", "123456");
             var state = _webapp.Get<IPlayerStateService>().GetStateByToken(token.Token);
             Assert.NotNull(state.LastUpdateSideFeedMessage);
             var entry = Assert.Single(state.LastUpdateSideFeedMessage.Entries);
@@ -304,11 +301,29 @@ namespace cTabIntegrationTest
 
             // Assert
             // Session must have been created
-            var token = _webapp.Get<IPlayerStateService>().GetTokenBySteamIdAndKey("76561234567890132", "123456");
+            var token = await GetToken("76561234567890132", "123456");
             var state = _webapp.Get<IPlayerStateService>().GetStateByToken(token.Token);
             Assert.NotNull(state.LastUpdateMessagesTemplates);
             var template = Assert.Single(state.LastUpdateMessagesTemplates.Templates);
             Assert.Equal("builtin#2", template.Uid);
+        }
+
+        private async Task<KeyLoginResult> GetToken(string steamId, string key)
+        {
+            var service = _webapp.Get<IPlayerStateService>();
+            var attempt = 0;
+            while (attempt < 100)
+            {
+                var token = service.GetTokenBySteamIdAndKey(steamId, key);
+                if (token != null && token.State == KeyLoginState.Ok)
+                {
+                    return token;
+                }
+                await Task.Delay(50);
+                attempt++;
+            }
+            Assert.Fail("Too many failed attempts");
+            return new KeyLoginResult(KeyLoginState.UnknownPlayer, string.Empty);
         }
     }
 }
