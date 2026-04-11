@@ -129,11 +129,12 @@ namespace cTabWebApp.Controllers
             {
                 return NotFound();
             }
-            var stream = _recordingService.OpenRecording(stored);
+            var stream = _recordingService.OpenRawRecording(stored);
             if (stream == null)
             {
                 return NotFound();
             }
+            Response.Headers.ContentEncoding = "gzip";
             var filename = $"ctab-session-{stored.RecordingStart:yyyyMMdd-HHmmss}.json";
             return File(stream, "application/json", filename);
         }

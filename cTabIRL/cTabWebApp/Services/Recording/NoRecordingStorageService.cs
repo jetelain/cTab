@@ -16,6 +16,8 @@ namespace cTabWebApp.Services.Recording
 
         public Stream? OpenRecording(StoredRecording stored) => null;
 
+        public Stream? OpenRawRecording(StoredRecording stored) => null;
+
         public Task CleanUpAsync() => Task.CompletedTask;
     }
 }
