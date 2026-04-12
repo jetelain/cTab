@@ -17,9 +17,9 @@ namespace cTabWebApp.Services.Recording
         private static long[] CreateRateLimitTicks()
         {
             var ticks = new long[Enum.GetValues<EventType>().Length];
-            ticks[(int)EventType.SetPosition]           = (long)(4.5 * Stopwatch.Frequency); // The typical rate of this message is 0.25 sec
-            ticks[(int)EventType.UpdateMarkersPosition] = (long)(4.5 * Stopwatch.Frequency); // The typical rate of this message is 1.5 sec
-            ticks[(int)EventType.UpdateMapMarkers]      = (long)(4.5 * Stopwatch.Frequency); // This message is "on demand", but custom scripts can make it really frequent (up to 0.25 sec)
+            ticks[(int)EventType.SetPosition]           = (long)(1 * Stopwatch.Frequency); // The typical rate of this message is 0.25 sec
+            ticks[(int)EventType.UpdateMarkersPosition] = (long)(1 * Stopwatch.Frequency); // The typical rate of this message is 1.5 sec, rate limiting is only a safe guard
+            ticks[(int)EventType.UpdateMapMarkers]      = (long)(5 * Stopwatch.Frequency); // This message is "on demand", but custom scripts can make it really frequent (up to 0.25 sec) and this message is massive 
             return ticks;
         }
 
