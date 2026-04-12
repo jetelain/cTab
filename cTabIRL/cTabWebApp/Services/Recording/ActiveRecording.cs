@@ -62,7 +62,7 @@ namespace cTabWebApp.Services.Recording
                         if (RateLimitKeepLatest[idx])
                         {
                             // We intentionnaly keep the timestamp of the original event to preserve the timing of the first update to avoid weird "jumps" in the UI
-                            // This kind of event is not regulary sent, so to avoid data loss, we update the existing event with the latest data.
+                            // This kind of event is not regularly sent, so to avoid data loss, we update the existing event with the latest data.
                             _events[_lastRecordedEventIndex[idx]].Data = data;
                         }
                         return;

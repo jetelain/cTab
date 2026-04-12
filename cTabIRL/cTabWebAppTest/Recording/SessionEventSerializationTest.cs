@@ -26,7 +26,7 @@ namespace cTabWebAppTest.Recording
         /// <summary>Serialise and return the raw JSON string for inspection.</summary>
         private static string Serialize(EventType type, RecordableMessageBase data)
         {
-            var evt = new SessionEvent { Type = type, Data = data };
+            var evt = new SessionEvent { Type = type, Data = data, TimestampMs = 1 };
             return JsonSerializer.Serialize(evt, ProductionOptions);
         }
 
@@ -40,7 +40,7 @@ namespace cTabWebAppTest.Recording
         [InlineData(EventType.UpdateMapMarkers,      "UpdateMapMarkers")]
         public void Serialize_Type_IsPascalCaseMemberName_NotIntegerNotCamelCase(EventType eventType, string expectedName)
         {
-            var json = Serialize(eventType, null);
+            var json = Serialize(eventType, new RecordableMessageBase());
 
             Assert.Contains($"\"type\":\"{expectedName}\"", json);    // exact member name, as a string
             Assert.DoesNotContain($"\"type\":{(int)eventType}", json); // not an integer
@@ -58,12 +58,9 @@ namespace cTabWebAppTest.Recording
         [Fact]
         public void Serialize_TopLevelProperties_AreCamelCase()
         {
-            var json = Serialize(EventType.Mission, null);
+            var json = Serialize(EventType.Mission, new RecordableMessageBase());
 
-            Assert.Contains("\"type\":", json);
-            Assert.Contains("\"data\":", json);
-            Assert.DoesNotContain("\"Type\":", json);
-            Assert.DoesNotContain("\"Data\":", json);
+            Assert.Equal("{\"type\":\"Mission\",\"data\":{},\"time\":1}", json);
         }
 
         // ── Mission ────────────────────────────────────────────────────────────
@@ -83,13 +80,7 @@ namespace cTabWebAppTest.Recording
 
             var json = Serialize(EventType.Mission, msg);
 
-            Assert.Contains("\"type\":\"Mission\"",         json);
-            Assert.Contains("\"worldName\":\"altis\"",      json);
-            Assert.Contains("\"size\":20480",               json);
-            Assert.Contains("\"ctabFeatureLevel\":1",       json);
-            Assert.Contains("\"irlFeatureLevel\":0",        json);
-            Assert.DoesNotContain("\"WorldName\"",          json);
-            Assert.DoesNotContain("\"Size\"",               json);
+            Assert.Equal("{\"type\":\"Mission\",\"data\":{\"worldName\":\"altis\",\"size\":20480,\"date\":\"2024-06-01T08:30:00Z\",\"ctabFeatureLevel\":1,\"irlFeatureLevel\":0},\"time\":1}", json);
         }
 
         // ── SetPosition ────────────────────────────────────────────────────────

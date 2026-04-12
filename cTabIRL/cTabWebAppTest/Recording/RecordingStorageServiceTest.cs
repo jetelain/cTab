@@ -43,7 +43,7 @@ namespace cTabWebAppTest.Recording
                 WorldName = worldName,
                 RecordingStart = start ?? now.AddMinutes(-10),
                 RecordingEnd = now,
-                Events = [new SessionEvent { Type = EventType.Mission, Data = new MissionMessage() { WorldName = worldName } }]
+                Events = [new SessionEvent { Type = EventType.Mission, Data = new MissionMessage() { WorldName = worldName }, TimestampMs = 1 }]
             };
         }
 
