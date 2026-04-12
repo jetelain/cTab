@@ -33,8 +33,10 @@ if (!File.Exists(filePath))
 }
 
 var fileSize = new FileInfo(filePath).Length;
-Console.WriteLine($"Analyzing : {filePath}");
-Console.WriteLine($"File size : {fileSize:N0} bytes ({fileSize / 1024.0 / 1024.0:F2} MiB)");
+Console.WriteLine("# cTab Recording Analyzer");
+Console.WriteLine();
+Console.WriteLine($"- **File**: `{filePath}`");
+Console.WriteLine($"- **Size**: {fileSize:N0} bytes ({fileSize / 1024.0 / 1024.0:F2} MiB)");
 Console.WriteLine();
 
 // ---- Parse ----------------------------------------------------------------
@@ -46,14 +48,18 @@ var worldName      = root.TryGetProperty("worldName",      out var wnProp) ? wnP
 var recordingStart = root.TryGetProperty("recordingStart", out var rsProp) ? rsProp.GetString()  : null;
 var recordingEnd   = root.TryGetProperty("recordingEnd",   out var reProp) ? reProp.GetString()  : null;
 
-Console.WriteLine($"World     : {worldName}");
-Console.WriteLine($"Start     : {recordingStart}");
-Console.WriteLine($"End       : {recordingEnd}");
+Console.WriteLine("## Recording Metadata");
+Console.WriteLine();
+Console.WriteLine("| Property | Value |");
+Console.WriteLine("|----------|-------|");
+Console.WriteLine($"| World    | {worldName} |");
+Console.WriteLine($"| Start    | {recordingStart} |");
+Console.WriteLine($"| End      | {recordingEnd} |");
 if (DateTime.TryParse(recordingStart, null, DateTimeStyles.RoundtripKind, out var startDt) &&
     DateTime.TryParse(recordingEnd,   null, DateTimeStyles.RoundtripKind, out var endDt))
 {
     var dur = endDt - startDt;
-    Console.WriteLine($"Duration  : {(int)dur.TotalHours:D2}:{dur.Minutes:D2}:{dur.Seconds:D2}");
+    Console.WriteLine($"| Duration | {(int)dur.TotalHours:D2}:{dur.Minutes:D2}:{dur.Seconds:D2} |");
 }
 Console.WriteLine();
 
@@ -152,36 +158,46 @@ foreach (var evt in root.GetProperty("events").EnumerateArray())
 int totalEvents = countByType.Values.Sum();
 
 // ---- Report: event counts -------------------------------------------------
-Console.WriteLine("=== Event Counts ===");
-Console.WriteLine($"  {"Type",-28} {"Count",8}   {"% of total"}");
-Console.WriteLine($"  {new string('-', 50)}");
+Console.WriteLine("## Event Counts");
+Console.WriteLine();
+Console.WriteLine("| Type | Count | % of Total |");
+Console.WriteLine("|------|------:|-----------:|");
 foreach (var (type, count) in countByType.OrderByDescending(x => x.Value))
 {
-    Console.WriteLine($"  {type,-28} {count,8:N0}   {(double)count / totalEvents,6:P1}");
+    Console.WriteLine($"| {type} | {count:N0} | {(double)count / totalEvents:P1} |");
 }
-Console.WriteLine($"  {"TOTAL",-28} {totalEvents,8:N0}");
+Console.WriteLine($"| **TOTAL** | **{totalEvents:N0}** | |");
 Console.WriteLine();
 
 // ---- Report: timestamp format ---------------------------------------------
-Console.WriteLine("=== Timestamp Format ===");
-Console.WriteLine($"  Legacy  data.timestamp string : {legacyTimestampCount,8:N0}");
-Console.WriteLine($"  New     event.time long       : {newTimestampCount,8:N0}");
-Console.WriteLine($"  None / not applicable         : {noTimestampCount,8:N0}");
+Console.WriteLine("## Timestamp Format");
+Console.WriteLine();
+Console.WriteLine("| Format | Count |");
+Console.WriteLine("|--------|------:|");
+Console.WriteLine($"| Legacy `data.timestamp` string | {legacyTimestampCount:N0} |");
+Console.WriteLine($"| New `event.time` long | {newTimestampCount:N0} |");
+Console.WriteLine($"| None / not applicable | {noTimestampCount:N0} |");
+Console.WriteLine();
 
 if (legacyTimestampCount > 0)
 {
     long savedBytes = legacyTimestampBytes - newTimestampBytes;
+    Console.WriteLine("### Timestamp Byte Savings");
     Console.WriteLine();
-    Console.WriteLine($"  Bytes used by legacy \"timestamp\":\"...\" fields : {legacyTimestampBytes,10:N0}");
-    Console.WriteLine($"  Bytes used by new    \"time\":<long>   fields   : {newTimestampBytes,10:N0}  (estimated)");
-    Console.WriteLine($"  Gross savings                                  : {savedBytes,10:N0}  ({(double)savedBytes / fileSize,6:P2} of file)");
+    Console.WriteLine("| Description | Bytes | % of File |");
+    Console.WriteLine("|-------------|------:|----------:|");
+    Console.WriteLine($"| Legacy `data.timestamp` fields | {legacyTimestampBytes:N0} | |");
+    Console.WriteLine($"| New `event.time` fields (estimated) | {newTimestampBytes:N0} | |");
+    Console.WriteLine($"| **Gross savings** | **{savedBytes:N0}** | **{(double)savedBytes / fileSize:P2}** |");
+    Console.WriteLine();
 }
 Console.WriteLine();
 
 // ---- Report: rate-limiting simulation ------------------------------------
-Console.WriteLine("=== Rate-Limiting Simulation ===");
-Console.WriteLine($"  {"Type",-28} {"Threshold",10} {"Total",8} {"Kept",8} {"Dropped",8} {"Updated",8}   {"Reduction":9}");
-Console.WriteLine($"  {new string('-', 87)}");
+Console.WriteLine("## Rate-Limiting Simulation");
+Console.WriteLine();
+Console.WriteLine("| Type | Threshold (s) | Total | Kept | Dropped | Updated | Reduction |");
+Console.WriteLine("|------|:-------------:|------:|-----:|--------:|--------:|----------:|");
 
 int totalRawRl = 0, totalKeptRl = 0, totalDroppedRl = 0, totalUpdatedRl = 0;
 
@@ -189,7 +205,7 @@ foreach (var (type, stats) in rateLimitStats.OrderBy(x => x.Key))
 {
     int total    = stats.Kept + stats.Dropped + stats.Updated;
     double red   = total > 0 ? (double)(stats.Dropped + stats.Updated) / total : 0;
-    Console.WriteLine($"  {type,-28} {rateLimitMs[type]/1000.0,10:N1} {total,8:N0} {stats.Kept,8:N0} {stats.Dropped,8:N0} {stats.Updated,8:N0}   {red,9:P1}");
+    Console.WriteLine($"| {type} | {rateLimitMs[type]/1000.0:N1} | {total:N0} | {stats.Kept:N0} | {stats.Dropped:N0} | {stats.Updated:N0} | {red:P1} |");
     totalRawRl     += total;
     totalKeptRl    += stats.Kept;
     totalDroppedRl += stats.Dropped;
@@ -198,25 +214,30 @@ foreach (var (type, stats) in rateLimitStats.OrderBy(x => x.Key))
 if (rateLimitStats.Count > 1)
 {
     double totalRed = totalRawRl > 0 ? (double)(totalDroppedRl + totalUpdatedRl) / totalRawRl : 0;
-    Console.WriteLine($"  {new string('-', 87)}");
-    Console.WriteLine($"  {"TOTAL (rate-limited types)",-28} {"",10} {totalRawRl,8:N0} {totalKeptRl,8:N0} {totalDroppedRl,8:N0} {totalUpdatedRl,8:N0}   {totalRed,9:P1}");
+    Console.WriteLine($"| **TOTAL (rate-limited types)** | | {totalRawRl:N0} | {totalKeptRl:N0} | {totalDroppedRl:N0} | {totalUpdatedRl:N0} | {totalRed:P1} |");
 }
 
 if (totalDroppedRl + totalUpdatedRl > 0)
 {
     long totalRlSavedBytes = exactDroppedBytes + exactUpdatedBytes;
     Console.WriteLine();
-    Console.WriteLine($"  Exact JSON bytes of dropped events     : {exactDroppedBytes,14:N0} ({(double)exactDroppedBytes / fileSize,7:P2} of file)");
-    Console.WriteLine($"  Exact JSON bytes of updated events     : {exactUpdatedBytes,14:N0} ({(double)exactUpdatedBytes / fileSize,7:P2} of file)");
-    Console.WriteLine($"  Total exact savings from rate limiting : {totalRlSavedBytes,14:N0} ({(double)totalRlSavedBytes / fileSize,7:P2} of file)");
+    Console.WriteLine("### Byte Savings from Rate Limiting");
     Console.WriteLine();
-    Console.WriteLine($"  (array separators ~2 bytes/event excluded; actual savings slightly higher)");
+    Console.WriteLine("| Description | Bytes | % of File |");
+    Console.WriteLine("|-------------|------:|----------:|");
+    Console.WriteLine($"| Exact JSON bytes of dropped events | {exactDroppedBytes:N0} | {(double)exactDroppedBytes / fileSize:P2} |");
+    Console.WriteLine($"| Exact JSON bytes of updated events | {exactUpdatedBytes:N0} | {(double)exactUpdatedBytes / fileSize:P2} |");
+    Console.WriteLine($"| **Total exact savings** | **{totalRlSavedBytes:N0}** | **{(double)totalRlSavedBytes / fileSize:P2}** |");
+    Console.WriteLine();
+    Console.WriteLine("> Array separators (~2 bytes/event) excluded; actual savings slightly higher.");
 }
 
 Console.WriteLine();
-Console.WriteLine("  Kept    = first event in the window, written to the recording list");
-Console.WriteLine("  Dropped = event within window, silently discarded");
-Console.WriteLine("  Updated = event within window, existing entry overwritten in-place (keep-latest)");
+Console.WriteLine("---");
+Console.WriteLine();
+Console.WriteLine("- **Kept** = first event in the window, written to the recording list");
+Console.WriteLine("- **Dropped** = event within window, silently discarded");
+Console.WriteLine("- **Updated** = event within window, existing entry overwritten in-place (keep-latest)");
 
 // Exact recording size impact
 
