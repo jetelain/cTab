@@ -53,7 +53,7 @@ namespace cTabWebAppTest.Recording
 
             service.StartRecording(state);
 
-            Assert.Contains(state.CurrentRecording!.TakeSnapshot(), e => e.Type == "Mission");
+            Assert.Contains(state.CurrentRecording!.TakeSnapshot(), e => e.Type == EventType.Mission);
         }
 
         [Fact]
@@ -71,10 +71,10 @@ namespace cTabWebAppTest.Recording
             service.StartRecording(state);
 
             var types = state.CurrentRecording!.TakeSnapshot().Select(e => e.Type).ToList();
-            Assert.Contains("Mission", types);
-            Assert.Contains("UpdateMarkers", types);
-            Assert.Contains("UpdateMapMarkers", types);
-            Assert.Contains("SetPosition", types);
+            Assert.Contains(EventType.Mission, types);
+            Assert.Contains(EventType.UpdateMarkers, types);
+            Assert.Contains(EventType.UpdateMapMarkers, types);
+            Assert.Contains(EventType.SetPosition, types);
         }
 
         // ── StopRecordingAsync ────────────────────────────────────────────────
@@ -175,7 +175,7 @@ namespace cTabWebAppTest.Recording
             var service = CreateService();
             var state = new PlayerState { LastMission = new MissionMessage { WorldName = "altis" } };
             service.StartRecording(state);
-            state.CurrentRecording!.Append("SetPosition", new object());
+            state.CurrentRecording!.Append(EventType.SetPosition, new SetPositionMessage());
 
             await service.StopRecordingAsync(state);
 

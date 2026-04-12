@@ -26,19 +26,19 @@ namespace cTabWebApp.Services.Recording
 
             if (state.LastMission != null)
             {
-                recording.Append("Mission", state.LastMission);
+                recording.Append(EventType.Mission, state.LastMission);
             }
             if (state.LastUpdateMarkers != null)
             {
-                recording.Append("UpdateMarkers", state.LastUpdateMarkers);
+                recording.Append(EventType.UpdateMarkers, state.LastUpdateMarkers);
             }
             if (state.LastUpdateMapMarkers != null)
             {
-                recording.Append("UpdateMapMarkers", state.LastUpdateMapMarkers);
+                recording.Append(EventType.UpdateMapMarkers, state.LastUpdateMapMarkers);
             }
             if (state.LastSetPosition != null)
             {
-                recording.Append("SetPosition", state.LastSetPosition);
+                recording.Append(EventType.SetPosition, state.LastSetPosition);
             }
 
             state.CurrentRecording = recording;

@@ -95,7 +95,7 @@ namespace CTab {
     }
 
     interface UpdateMapMarkersData {
-        timestamp: string;
+        timestamp?: string; // Legacy format, moved to SessionEvent level for new recordings
         icons: IconMapMarkerData[];
         simples: SimpleMapMarkerData[];
         polylines: PolylineMapMarkerData[];
@@ -104,7 +104,7 @@ namespace CTab {
     interface MissionData {
         worldName: string;
         date: string;
-        timestamp: string;
+        timestamp?: string; // Legacy format, moved to SessionEvent level for new recordings
     }
 
     interface SetPositionData {
@@ -112,23 +112,24 @@ namespace CTab {
         y: number;
         heading: number;
         date: string;
-        timestamp: string;
+        timestamp?: string; // Legacy format, moved to SessionEvent level for new recordings
         group: string;
         vehicle?: string;
     }
 
     interface UpdateMarkersData {
-        timestamp: string;
+        timestamp?: string; // Legacy format, moved to SessionEvent level for new recordings
         makers: ReplayMarker[];
     }
 
     interface UpdateMarkersPositionData {
-        timestamp: string;
+        timestamp?: string; // Legacy format, moved to SessionEvent level for new recordings
         makers: MarkerPositionData[];
     }
 
     interface SessionEvent {
         type: string;
+        time?: number; // JavaScript timestamp in msec. New format, preferred for performance (avoid parsing date strings), but optional for backward compatibility with old recordings
         data: MissionData | SetPositionData | UpdateMarkersData | UpdateMarkersPositionData | UpdateMapMarkersData;
     }
 
@@ -436,7 +437,9 @@ namespace CTab {
         let recordingStartMs = new Date(replayData.recordingStart).getTime();
         while (lastAppliedEventIndex < replayData.events.length) {
             let evt = replayData.events[lastAppliedEventIndex];
-            let evtMs = new Date((evt.data as any).timestamp).getTime() - recordingStartMs;
+            let evtMs = evt.time !== undefined
+                ? evt.time - recordingStartMs
+                : new Date(evt.data.timestamp).getTime() - recordingStartMs;
             if (evtMs > targetMs) { break; }
             applyEvent(evt);
             lastAppliedEventIndex++;
