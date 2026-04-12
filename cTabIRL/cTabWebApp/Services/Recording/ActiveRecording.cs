@@ -18,7 +18,7 @@ namespace cTabWebApp.Services.Recording
         {
             var ticks = new long[Enum.GetValues<EventType>().Length];
             ticks[(int)EventType.SetPosition]           = (long)(1 * Stopwatch.Frequency); // The typical rate of this message is 0.25 sec
-            ticks[(int)EventType.UpdateMarkersPosition] = (long)(1 * Stopwatch.Frequency); // The typical rate of this message is 1.5 sec, rate limiting is only a safe guard
+            ticks[(int)EventType.UpdateMarkersPosition] = (long)(1 * Stopwatch.Frequency); // The typical rate of this message is 1.5 sec, rate limiting is only a safeguard
             ticks[(int)EventType.UpdateMapMarkers]      = (long)(5 * Stopwatch.Frequency); // This message is "on demand", but custom scripts can make it really frequent (up to 0.25 sec) and this message is massive 
             return ticks;
         }
@@ -61,7 +61,7 @@ namespace cTabWebApp.Services.Recording
                     {
                         if (RateLimitKeepLatest[idx])
                         {
-                            // We intentionnaly keep the timestamp of the original event to preserve the timing of the first update to avoid weird "jumps" in the UI
+                            // We intentionally keep the timestamp of the original event to preserve the timing of the first update to avoid weird "jumps" in the UI
                             // This kind of event is not regularly sent, so to avoid data loss, we update the existing event with the latest data.
                             _events[_lastRecordedEventIndex[idx]].Data = data;
                         }

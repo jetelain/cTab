@@ -12,9 +12,9 @@ using System.Text.Json;
 //  3. Timestamp format breakdown (legacy data.timestamp string vs new event.time long)
 //     with an estimate of the JSON byte savings the new format provides
 //  4. Rate-limiting simulation that mirrors ActiveRecording.Append logic:
-//       SetPosition           4.5 s → drop
-//       UpdateMarkersPosition 4.5 s → drop
-//       UpdateMapMarkers      4.5 s → update-in-place (keep-latest)
+//       SetPosition           1 s → drop
+//       UpdateMarkersPosition 1 s → drop
+//       UpdateMapMarkers      5 s → update-in-place (keep-latest)
 // ---------------------------------------------------------------------------
 
 CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;

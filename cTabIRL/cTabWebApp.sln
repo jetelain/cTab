@@ -204,12 +204,12 @@ Global
 		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.Release|x64.Build.0 = Release|Any CPU
 		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.Release|x86.ActiveCfg = Release|Any CPU
 		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.Release|x86.Build.0 = Release|Any CPU
-		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.ReleaseCloud|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.ReleaseCloud|Any CPU.Build.0 = Debug|Any CPU
-		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.ReleaseCloud|x64.ActiveCfg = Debug|Any CPU
-		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.ReleaseCloud|x64.Build.0 = Debug|Any CPU
-		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.ReleaseCloud|x86.ActiveCfg = Debug|Any CPU
-		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.ReleaseCloud|x86.Build.0 = Debug|Any CPU
+		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.ReleaseCloud|Any CPU.ActiveCfg = Release|Any CPU
+		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.ReleaseCloud|Any CPU.Build.0 = Release|Any CPU
+		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.ReleaseCloud|x64.ActiveCfg = Release|Any CPU
+		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.ReleaseCloud|x64.Build.0 = Release|Any CPU
+		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.ReleaseCloud|x86.ActiveCfg = Release|Any CPU
+		{FA7674B5-7363-437D-BEF8-C995D9032EBA}.ReleaseCloud|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
