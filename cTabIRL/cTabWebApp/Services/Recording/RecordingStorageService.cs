@@ -179,6 +179,17 @@ namespace cTabWebApp.Services.Recording
             return new GZipStream(File.OpenRead(path), CompressionMode.Decompress);
         }
 
+        public Stream? OpenRawRecording(StoredRecording stored)
+        {
+            ValidateSteamId(stored.SteamId);
+            var path = DataPath(stored.SteamId, stored.Token);
+            if (!File.Exists(path))
+            {
+                return null;
+            }
+            return File.OpenRead(path);
+        }
+
         public async Task CleanUpAsync()
         {
             if (!Directory.Exists(_storageDirectory))

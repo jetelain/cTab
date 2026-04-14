@@ -1,8 +1,15 @@
+using System;
+using System.Text.Json.Serialization;
+
 namespace cTabWebApp.Services.Recording
 {
     public class SessionEvent
     {
-        public string Type { get; set; }
-        public object Data { get; set; }
+        public required EventType Type { get; set; }
+
+        public required RecordableMessageBase Data { get; set; }
+
+        [JsonPropertyName("time")]
+        public required long TimestampMs { get; set; }
     }
 }

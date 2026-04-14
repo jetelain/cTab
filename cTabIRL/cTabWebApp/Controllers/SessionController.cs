@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -70,7 +71,7 @@ namespace cTabWebApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Download(string t)
+        public async Task<IActionResult> Download(string t)
         {
             var state = _service.GetStateByToken(t);
             if (state == null)
@@ -83,9 +84,13 @@ namespace cTabWebApp.Controllers
                 return NotFound();
             }
 
-            var bytes = JsonSerializer.SerializeToUtf8Bytes(recording, _downloadOptions);
             var filename = $"ctab-session-{recording.RecordingStart:yyyyMMdd-HHmmss}.json";
-            return File(bytes, "application/json", filename);
+            Response.ContentType = "application/json";
+            Response.Headers.ContentEncoding = "gzip";
+            Response.Headers.ContentDisposition = $"attachment; filename=\"{filename}\"";
+            await using var gzip = new GZipStream(Response.Body, CompressionLevel.Optimal, leaveOpen: true);
+            await JsonSerializer.SerializeAsync(gzip, recording, _downloadOptions);
+            return new EmptyResult();
         }
 
         [HttpGet]
@@ -129,11 +134,12 @@ namespace cTabWebApp.Controllers
             {
                 return NotFound();
             }
-            var stream = _recordingService.OpenRecording(stored);
+            var stream = _recordingService.OpenRawRecording(stored);
             if (stream == null)
             {
                 return NotFound();
             }
+            Response.Headers.ContentEncoding = "gzip";
             var filename = $"ctab-session-{stored.RecordingStart:yyyyMMdd-HHmmss}.json";
             return File(stream, "application/json", filename);
         }

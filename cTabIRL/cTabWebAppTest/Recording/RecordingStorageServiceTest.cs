@@ -1,4 +1,5 @@
 using System.Text.Json;
+using cTabWebApp;
 using cTabWebApp.Services.Recording;
 
 namespace cTabWebAppTest.Recording
@@ -42,7 +43,7 @@ namespace cTabWebAppTest.Recording
                 WorldName = worldName,
                 RecordingStart = start ?? now.AddMinutes(-10),
                 RecordingEnd = now,
-                Events = [new SessionEvent { Type = "Mission", Data = worldName }]
+                Events = [new SessionEvent { Type = EventType.Mission, Data = new MissionMessage() { WorldName = worldName }, TimestampMs = 1 }]
             };
         }
 

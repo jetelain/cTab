@@ -293,7 +293,9 @@ var CTab;
         let recordingStartMs = new Date(replayData.recordingStart).getTime();
         while (lastAppliedEventIndex < replayData.events.length) {
             let evt = replayData.events[lastAppliedEventIndex];
-            let evtMs = new Date(evt.data.timestamp).getTime() - recordingStartMs;
+            let evtMs = evt.time !== undefined
+                ? evt.time - recordingStartMs
+                : new Date(evt.data.timestamp).getTime() - recordingStartMs;
             if (evtMs > targetMs) {
                 break;
             }
