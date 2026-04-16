@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 // ---------------------------------------------------------------------------
 // cTab Recording Analyzer
@@ -69,7 +70,7 @@ var rateLimitMs = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCas
 {
     ["SetPosition"]           = 1_000,
     ["UpdateMarkersPosition"] = 1_000,
-    ["UpdateMapMarkers"]      = 5_000,
+    ["UpdateMapMarkers"]      = 1_000,
 };
 // Types whose last event is updated in-place rather than dropped
 var keepLatest = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "UpdateMapMarkers" };
@@ -86,6 +87,19 @@ var rateLimitStats          = new Dictionary<string, RateLimitStats>(StringCompa
 var lastTimestampByType     = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
 long exactDroppedBytes      = 0;  // raw JSON bytes of events that are silently discarded
 long exactUpdatedBytes      = 0;  // raw JSON bytes of events whose data is merged in-place (not re-added to list)
+
+// Pattern to strip the legacy data.timestamp field before content comparison
+var dedupNormPattern        = new Regex(@"""timestamp""\s*:\s*""[^""]*""");
+string? lastUpdateMapMarkersNorm = null;
+int  dedupTotal             = 0;
+int  dedupDropped           = 0;
+long dedupDroppedBytes      = 0;
+
+// Combined (dedup → rate-limit) simulation for UpdateMapMarkers
+double? comboLastTs         = null;  // timestamp of the last event that opened a new rate-limit window
+int     comboRlUpdated      = 0;     // passed dedup, within rate-limit window → data updated in-place
+int     comboKept           = 0;     // passed dedup and rate limit → new recording entry
+long    comboRlUpdatedBytes = 0;     // exact bytes of combo rate-limited events
 
 // ---- Walk events ----------------------------------------------------------
 foreach (var evt in root.GetProperty("events").EnumerateArray())
@@ -151,6 +165,40 @@ foreach (var evt in root.GetProperty("events").EnumerateArray())
         {
             stats.Kept++;
             lastTimestampByType[type] = tsMs.Value;
+        }
+    }
+
+    // ---- Simulate content-based deduplication of UpdateMapMarkers ----------
+    if (string.Equals(type, "UpdateMapMarkers", StringComparison.OrdinalIgnoreCase))
+    {
+        dedupTotal++;
+        // Normalise: get data JSON and strip the timestamp field (legacy format)
+        // so that two events with identical map markers but different timestamps compare equal.
+        var dataNorm    = evt.TryGetProperty("data", out var dedupData)
+            ? dedupNormPattern.Replace(dedupData.GetRawText(), "")
+            : "";
+        var evtRawBytes = (long)Encoding.UTF8.GetByteCount(evt.GetRawText());
+
+        if (dataNorm == lastUpdateMapMarkersNorm)
+        {
+            // Dedup hit: skip entirely, never reaches rate limiting
+            dedupDropped++;
+            dedupDroppedBytes += evtRawBytes;
+        }
+        else
+        {
+            lastUpdateMapMarkersNorm = dataNorm;
+            // Combined: event passed dedup → now apply rate-limit on top
+            if (tsMs.HasValue && comboLastTs.HasValue && (tsMs.Value - comboLastTs.Value) < rateLimitMs["UpdateMapMarkers"])
+            {
+                comboRlUpdated++;           // data updated in-place, no new recording entry
+                comboRlUpdatedBytes += evtRawBytes;
+            }
+            else
+            {
+                comboKept++;                // new recording entry
+                if (tsMs.HasValue) { comboLastTs = tsMs.Value; }
+            }
         }
     }
 }
@@ -233,6 +281,64 @@ if (totalDroppedRl + totalUpdatedRl > 0)
 }
 
 Console.WriteLine();
+
+// ---- Report: content-based deduplication of UpdateMapMarkers -------------
+Console.WriteLine("## UpdateMapMarkers Deduplication Simulation");
+Console.WriteLine();
+Console.WriteLine("Mirrors the equality check added to `CTabHub`: an event whose `data` is identical");
+Console.WriteLine("to the previous `UpdateMapMarkers` event is skipped entirely (not recorded).");
+Console.WriteLine();
+Console.WriteLine("| Description | Count | % of Total |" );
+Console.WriteLine("|-------------|------:|-----------:|" );
+Console.WriteLine($"| Total UpdateMapMarkers events    | {dedupTotal:N0}   | |");
+Console.WriteLine($"| Unique (would be emitted)        | {dedupTotal - dedupDropped:N0}   | {(dedupTotal > 0 ? (double)(dedupTotal - dedupDropped) / dedupTotal : 0):P1} |");
+Console.WriteLine($"| Duplicate (would be skipped)     | {dedupDropped:N0}   | {(dedupTotal > 0 ? (double)dedupDropped / dedupTotal : 0):P1} |");
+Console.WriteLine();
+if (dedupDropped > 0)
+{
+    Console.WriteLine("### Byte Savings from Deduplication");
+    Console.WriteLine();
+    Console.WriteLine("| Description | Bytes | % of File |");
+    Console.WriteLine("|-------------|------:|----------:|");
+    Console.WriteLine($"| Exact JSON bytes of duplicate events | {dedupDroppedBytes:N0} | {(double)dedupDroppedBytes / fileSize:P2} |");
+    Console.WriteLine();
+    Console.WriteLine("> Array separators (~2 bytes/event) excluded; actual savings slightly higher.");
+    Console.WriteLine();
+}
+
+// ---- Report: combined effect (UpdateMapMarkers only) ---------------------
+if (dedupTotal > 0)
+{
+    var rlStats = rateLimitStats.GetValueOrDefault("UpdateMapMarkers");
+
+    // Events not tracked by the rate-limit sim (no timestamp) always become new entries
+    int rlTracked      = rlStats != null ? rlStats.Kept + rlStats.Updated : 0;
+    int rlNewEntries   = (rlStats?.Kept ?? 0) + (dedupTotal - rlTracked);
+    long rlSavedBytes  = exactUpdatedBytes;  // UpdateMapMarkers is the only keepLatest type
+
+    int  dedupNewEntries  = dedupTotal - dedupDropped;
+
+    int  comboTracked     = comboKept + comboRlUpdated;
+    int  comboNewEntries  = comboKept + (dedupNewEntries - comboTracked); // +untracked (no timestamp)
+    long comboSavedBytes  = dedupDroppedBytes + comboRlUpdatedBytes;
+
+    Console.WriteLine("## Combined Effect: Rate Limiting + Deduplication (UpdateMapMarkers)");
+    Console.WriteLine();
+    Console.WriteLine("Recording-entry count and exact byte savings for each combination of the two optimisations.");
+    Console.WriteLine();
+    Console.WriteLine("| Scenario | New recording entries | vs No Opt | Bytes saved | % of File |");
+    Console.WriteLine("|----------|----------------------:|----------:|------------:|----------:|");
+    Console.WriteLine($"| No optimisation                   | {dedupTotal:N0} | — | 0 | 0.00 % |");
+    Console.WriteLine($"| Rate limiting only ({rateLimitMs["UpdateMapMarkers"]/1000.0:N1} s window) | {rlNewEntries:N0} | {(double)(dedupTotal - rlNewEntries) / dedupTotal:P1} | {rlSavedBytes:N0} | {(double)rlSavedBytes / fileSize:P2} |");
+    Console.WriteLine($"| Deduplication only (content)      | {dedupNewEntries:N0} | {(double)dedupDropped / dedupTotal:P1} | {dedupDroppedBytes:N0} | {(double)dedupDroppedBytes / fileSize:P2} |");
+    Console.WriteLine($"| Both (dedup first → rate limit)   | {comboNewEntries:N0} | {(double)(dedupTotal - comboNewEntries) / dedupTotal:P1} | {comboSavedBytes:N0} | {(double)comboSavedBytes / fileSize:P2} |");
+    Console.WriteLine();
+    Console.WriteLine("> **New recording entries** = distinct slots added to the recording array.");
+    Console.WriteLine("> In rate-limit mode, within-window events update the last slot in-place (no new entry).");
+    Console.WriteLine("> **Bytes saved** = exact JSON bytes of events not written as new recording entries.");
+    Console.WriteLine();
+}
+
 Console.WriteLine("---");
 Console.WriteLine();
 Console.WriteLine("- **Kept** = first event in the window, written to the recording list");
