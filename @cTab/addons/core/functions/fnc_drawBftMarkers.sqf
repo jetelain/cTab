@@ -21,7 +21,7 @@
 		1: INTEGER - Mode, 0 = draw normal, 1 = draw for TAD, 2 = draw for MicroDAGR
 		2: ARRAY   - (Optional) Pre-computed visible bounds [minX,maxX,minY,maxY] from cTab_fnc_ctrlMapVisibleBounds 	
  	Returns:
-		BOOLEAN - Always TRUE
+		BOOLEAN - TRUE if the caller should draw the player icon, FALSE otherwise
  	
  	Example:
 		[_ctrlScreen,0] call cTab_fnc_drawBftMarkers;
@@ -137,7 +137,7 @@ if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 	_veh = vehicle (_x select 0);
 	
 	call {
-		// make sure the unit is still alive and in the same team
+		// make sure the unit object is valid and in the same team
 		if (isNull (_x select 0) || {group cTab_player != group (_x select 0)}) exitWith {};
 		
 		// get the fire-team color
