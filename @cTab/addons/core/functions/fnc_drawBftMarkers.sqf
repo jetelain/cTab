@@ -77,7 +77,9 @@ if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 			call {
 				if (_veh != _playerVehicle_marker) exitWith {
 					// player is not sitting in this vehicle
-					_ctrlScreen drawIcon [_x select 1,cTabColorBlue,_pos,cTabIconSize,cTabIconSize,0,_text,0,cTabTxtSize,"TahomaB","right"];
+					if (_x select 1 != "") then {
+						_ctrlScreen drawIcon [_x select 1,cTabColorBlue,_pos,cTabIconSize,cTabIconSize,0,_text,0,cTabTxtSize,"TahomaB","right"];
+					};
 					if ( _veh == _playerVehicle ) then { _mustDrawPlayer = false; };
 				};
 				if (group _veh != _playerGroup) then {
@@ -119,8 +121,12 @@ if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 			_text = if (_drawText) then {_x select 3} else {""};
 			_pos = if ( GVAR(bft_mode) == 1) then { getPosASL _veh } else { _x select 5 };
 			if !((_pos select 0) >= _visMinX && (_pos select 0) <= _visMaxX && (_pos select 1) >= _visMinY && (_pos select 1) <= _visMaxY) exitWith {};
-			_ctrlScreen drawIcon [_x select 1,cTabColorBlue,_pos,cTabIconSize,cTabIconSize,0,_text,0,cTabTxtSize,"TahomaB","right"];
-			_ctrlScreen drawIcon [_x select 2,cTabColorBlue,_pos,cTabGroupOverlayIconSize,cTabGroupOverlayIconSize,0,"",0,cTabTxtSize,"TahomaB","right"];
+			if (_x select 1 != "") then {
+				_ctrlScreen drawIcon [_x select 1,cTabColorBlue,_pos,cTabIconSize,cTabIconSize,0,_text,0,cTabTxtSize,"TahomaB","right"];
+			};
+			if (_x select 2 != "") then {
+				_ctrlScreen drawIcon [_x select 2,cTabColorBlue,_pos,cTabGroupOverlayIconSize,cTabGroupOverlayIconSize,0,"",0,cTabTxtSize,"TahomaB","right"];
+			};
 			if ( _veh == _playerVehicle ) then { _mustDrawPlayer = false; };
 		};
 	} forEach cTabBFTgroups;
@@ -131,8 +137,8 @@ if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 	_veh = vehicle (_x select 0);
 	
 	call {
-		// make sure we are still in the same team
-		if (group cTab_player != group (_x select 0)) exitWith {};
+		// make sure the unit is still alive and in the same team
+		if (isNull (_x select 0) || {group cTab_player != group (_x select 0)}) exitWith {};
 		
 		// get the fire-team color
 		_teamColor = cTabColorTeam select (["MAIN","RED","GREEN","BLUE","YELLOW",""] find (assignedTeam (_x select 0)));
@@ -167,7 +173,9 @@ if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 				};
 			};
 		};
-		_ctrlScreen drawIcon [_x select 1,_teamColor,_pos,cTabIconManSize,cTabIconManSize,_dir,"",0,cTabTxtSize,"TahomaB","right"];
+		if (_x select 1 != "") then {
+			_ctrlScreen drawIcon [_x select 1,_teamColor,_pos,cTabIconManSize,cTabIconManSize,_dir,"",0,cTabTxtSize,"TahomaB","right"];
+		};
 		if (_drawText) then {
 			_ctrlScreen drawIcon ["\A3\ui_f\data\map\Markers\System\dummy_ca.paa",_teamColor,_pos,cTabIconManSize,cTabIconManSize,0,_x select 4,0,cTabTxtSize,"TahomaB","right"];
 		};

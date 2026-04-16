@@ -53,14 +53,16 @@ _cursorMarkerIndex = if (_this select 1) then {[_ctrlScreen,cTabMapCursorPos] ca
 			_ctrlScreen drawArrow [_pos, _secondPos, _color];
 		};
 		if (cTabBFTtxt) then {_text = _markerData select 5;};
-		if ( _drawSize > 1 ) then {
-			_ctrlScreen drawIcon [_texture1, _color, _pos, cTabIconSize * _drawSize, cTabIconSize * _drawSize, 0];
-			_ctrlScreen drawIcon ["\A3\ui_f\data\map\Markers\System\dummy_ca.paa", _color, _pos, cTabIconSize, cTabIconSize, 0, _text, 0, cTabTxtSize,"TahomaB",_markerData select 6];
-		} else {
-			_ctrlScreen drawIcon [_texture1,_color,_pos, cTabIconSize, cTabIconSize, 0, _text, 0, cTabTxtSize,"TahomaB",_markerData select 6];
-		};
-		if (_texture2 != "") then {
-			_ctrlScreen drawIcon [_texture2,_color,_pos, cTabGroupOverlayIconSize * _drawSize, cTabGroupOverlayIconSize * _drawSize, 0, "", 0, cTabTxtSize,"TahomaB","right"];
+		if (_texture1 != "") then {
+			if ( _drawSize > 1 ) then {
+				_ctrlScreen drawIcon [_texture1, _color, _pos, cTabIconSize * _drawSize, cTabIconSize * _drawSize, 0];
+				_ctrlScreen drawIcon ["\A3\ui_f\data\map\Markers\System\dummy_ca.paa", _color, _pos, cTabIconSize, cTabIconSize, 0, _text, 0, cTabTxtSize,"TahomaB",_markerData select 6];
+			} else {
+				_ctrlScreen drawIcon [_texture1,_color,_pos, cTabIconSize, cTabIconSize, 0, _text, 0, cTabTxtSize,"TahomaB",_markerData select 6];
+			};
+			if (_texture2 != "") then {
+				_ctrlScreen drawIcon [_texture2,_color,_pos, cTabGroupOverlayIconSize * _drawSize, cTabGroupOverlayIconSize * _drawSize, 0, "", 0, cTabTxtSize,"TahomaB","right"];
+			};
 		};
 	};
 } count cTabUserMarkerList;
