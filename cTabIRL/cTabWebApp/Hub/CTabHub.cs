@@ -392,6 +392,13 @@ namespace cTabWebApp
                 });
             }
 
+            if (msg.Equals(state.LastUpdateMapMarkers))
+            {
+                // Arma can send many times the same map markers due to the limited checking it does on its side (performance concerns) 
+                // Avoid sending to web (and recording) if not changed
+                return;
+            }
+
             msg.Timestamp = message.Timestamp;
             state.LastUpdateMapMarkers = msg;
             try
