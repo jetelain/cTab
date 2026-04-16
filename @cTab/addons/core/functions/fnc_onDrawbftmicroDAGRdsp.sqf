@@ -12,8 +12,9 @@ _heading = direction _veh;
 _cntrlScreen ctrlMapAnimAdd [0, cTabMapScale, _playerPos];
 ctrlMapAnimCommit _cntrlScreen;
 
-[_cntrlScreen,false] call cTab_fnc_drawUserMarkers;
-[_cntrlScreen,cTabMicroDAGRmode] call cTab_fnc_drawBftMarkers;
+private _visBounds = [_cntrlScreen] call cTab_fnc_ctrlMapVisibleBounds;
+[_cntrlScreen,false,_visBounds] call cTab_fnc_drawUserMarkers;
+[_cntrlScreen,cTabMicroDAGRmode,_visBounds] call cTab_fnc_drawBftMarkers;
 
 // draw directional arrow at own location
 _cntrlScreen drawIcon ["\A3\ui_f\data\map\VehicleIcons\iconmanvirtual_ca.paa",cTabMicroDAGRfontColour,_playerPos,cTabTADownIconBaseSize,cTabTADownIconBaseSize,_heading,"", 1,cTabTxtSize,"TahomaB","right"];

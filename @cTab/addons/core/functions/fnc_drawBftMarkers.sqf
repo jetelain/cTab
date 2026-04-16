@@ -3,7 +3,7 @@
  	Name: cTab_fnc_drawBftMarkers
  	
  	Author(s):
-		Gundy, Riouken
+		Gundy, Riouken, GrueArbre
 
  	Description:
 		Draw BFT markers
@@ -19,7 +19,7 @@
 	Parameters:
 		0: OBJECT  - Map control to draw BFT icons on
 		1: INTEGER - Mode, 0 = draw normal, 1 = draw for TAD, 2 = draw for MicroDAGR
- 	
+		2: ARRAY   - (Optional) Pre-computed visible bounds [minX,maxX,minY,maxY] from cTab_fnc_ctrlMapVisibleBounds 	
  	Returns:
 		BOOLEAN - Always TRUE
  	
@@ -40,6 +40,9 @@ _playerGroup = group cTab_player;
 _mountedLabels = [];
 _drawText = cTabBFTtxt;
 
+// Use pre-computed visible world bounds if provided, otherwise compute now
+(if (count _this > 2) then {_this select 2} else {[_ctrlScreen, 100] call cTab_fnc_ctrlMapVisibleBounds}) params ["_visMinX","_visMaxX","_visMinY","_visMaxY"];
+
 private _mustDrawPlayer = true;
 
 // Anything but MicroDAGR, unless overridden by setting
@@ -53,6 +56,7 @@ if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 		_pos = if ( GVAR(bft_mode) == 1) then { getPosASL _veh } else { _x select 5 };
 		_dir = if ( GVAR(bft_mode) == 1) then { direction _veh } else { _x select 6 };
 		
+		if ((_pos select 0) >= _visMinX && (_pos select 0) <= _visMaxX && (_pos select 1) >= _visMinY && (_pos select 1) <= _visMaxY) then {
 		call {
 			if (_mode == 1 && {_iconB != "" && {_veh != _playerVehicle}}) exitWith {
 				// Drawing on TAD && vehicle is an air contact
@@ -81,6 +85,7 @@ if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 					_ctrlScreen drawIcon ["\A3\ui_f\data\map\Markers\System\dummy_ca.paa",cTabColorBlue,_pos,cTabIconSize,cTabIconSize,0,_text,0,cTabTxtSize,"TahomaB","right"];
 				};
 			};
+		};
 		};
 		_vehicles pushBack _veh;
 	} forEach cTabBFTvehicles;
@@ -113,6 +118,7 @@ if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 			};
 			_text = if (_drawText) then {_x select 3} else {""};
 			_pos = if ( GVAR(bft_mode) == 1) then { getPosASL _veh } else { _x select 5 };
+			if !((_pos select 0) >= _visMinX && (_pos select 0) <= _visMaxX && (_pos select 1) >= _visMinY && (_pos select 1) <= _visMaxY) exitWith {};
 			_ctrlScreen drawIcon [_x select 1,cTabColorBlue,_pos,cTabIconSize,cTabIconSize,0,_text,0,cTabTxtSize,"TahomaB","right"];
 			_ctrlScreen drawIcon [_x select 2,cTabColorBlue,_pos,cTabGroupOverlayIconSize,cTabGroupOverlayIconSize,0,"",0,cTabTxtSize,"TahomaB","right"];
 			if ( _veh == _playerVehicle ) then { _mustDrawPlayer = false; };
@@ -145,6 +151,7 @@ if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 		};
 		_pos = getPosASL _veh;
 		_dir = direction _veh;
+		if !((_pos select 0) >= _visMinX && (_pos select 0) <= _visMaxX && (_pos select 1) >= _visMinY && (_pos select 1) <= _visMaxY) exitWith {};
 		if (_veh != (_x select 0)) exitWith {
 			// the unit _does_ sit in a vehicle
 			_mountedIndex = _mountedLabels find _veh;
@@ -179,7 +186,9 @@ if (_drawText && !(_mountedLabels isEqualTo [])) then {
 					_pos = (cTabBFTvehicles select _index) select 5;
 				};
 			};
-			_ctrlScreen drawIcon ["\A3\ui_f\data\map\Markers\System\dummy_ca.paa",cTabColorBlue,_pos,cTabIconSize,cTabIconSize,0,_mountedLabels select (_i + 1),0,cTabTxtSize,"TahomaB","left"];
+			if ((_pos select 0) >= _visMinX && (_pos select 0) <= _visMaxX && (_pos select 1) >= _visMinY && (_pos select 1) <= _visMaxY) then {
+				_ctrlScreen drawIcon ["\A3\ui_f\data\map\Markers\System\dummy_ca.paa",cTabColorBlue,_pos,cTabIconSize,cTabIconSize,0,_mountedLabels select (_i + 1),0,cTabTxtSize,"TahomaB","left"];
+			};
 		};
 	};
 };

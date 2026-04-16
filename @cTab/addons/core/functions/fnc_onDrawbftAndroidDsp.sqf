@@ -12,8 +12,9 @@ _playerPos = getPosASL _veh;
 _cntrlScreen ctrlMapAnimAdd [0, cTabMapScale, _playerPos];
 ctrlMapAnimCommit _cntrlScreen;
 
-[_cntrlScreen,false] call cTab_fnc_drawUserMarkers;
-private _drawPlayer = [_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
+private _visBounds = [_cntrlScreen] call cTab_fnc_ctrlMapVisibleBounds;
+[_cntrlScreen,false,_visBounds] call cTab_fnc_drawUserMarkers;
+private _drawPlayer = [_cntrlScreen,0,_visBounds] call cTab_fnc_drawBftMarkers;
 
 if (_drawPlayer) then {
 	// draw directional arrow at own location
