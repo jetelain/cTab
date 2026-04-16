@@ -15,7 +15,7 @@ using System.Text.RegularExpressions;
 //  4. Rate-limiting simulation that mirrors ActiveRecording.Append logic:
 //       SetPosition           1 s → drop
 //       UpdateMarkersPosition 1 s → drop
-//       UpdateMapMarkers      5 s → update-in-place (keep-latest)
+//       UpdateMapMarkers      1 s → update-in-place (keep-latest)
 // ---------------------------------------------------------------------------
 
 CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
