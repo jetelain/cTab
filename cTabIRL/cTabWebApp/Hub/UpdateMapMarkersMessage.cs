@@ -17,9 +17,9 @@ namespace cTabWebApp
             { 
                 return false; 
             }
-            return (Simples?.SequenceEqual(other.Simples) ?? other.Simples is null)
-                && (Polylines?.SequenceEqual(other.Polylines) ?? other.Polylines is null)
-                && (Icons?.SequenceEqual(other.Icons) ?? other.Icons is null);
+            return ((Simples is null && other.Simples is null) || (Simples is not null && other.Simples is not null && Simples.SequenceEqual(other.Simples)))
+                && ((Polylines is null && other.Polylines is null) || (Polylines is not null && other.Polylines is not null && Polylines.SequenceEqual(other.Polylines)))
+                && ((Icons is null && other.Icons is null) || (Icons is not null && other.Icons is not null && Icons.SequenceEqual(other.Icons)));
         }
 
         public override bool Equals(object? obj) => Equals(obj as UpdateMapMarkersMessage);

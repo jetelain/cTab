@@ -25,7 +25,24 @@ namespace cTabWebApp
 
         public override bool Equals(object? obj) => Equals(obj as PolylineMapMarker);
 
-        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Brush, Color);
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Name);
+            hash.Add(Alpha);
+            hash.Add(Brush);
+            hash.Add(Color);
+
+            if (Points != null)
+            {
+                foreach (var point in Points)
+                {
+                    hash.Add(point);
+                }
+            }
+
+            return hash.ToHashCode();
+        }
 #nullable disable
     }
 }

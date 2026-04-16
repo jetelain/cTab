@@ -31,8 +31,34 @@ namespace cTabWebApp
 
         public override bool Equals(object? obj) => Equals(obj as SimpleMapMarker);
 
-        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Dir, Shape, Brush, Color);
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Name);
+            hash.Add(Alpha);
+            hash.Add(Dir);
+            hash.Add(Shape);
+            hash.Add(Brush);
+            hash.Add(Color);
 
+            if (Size is not null)
+            {
+                foreach (var value in Size)
+                {
+                    hash.Add(value);
+                }
+            }
+
+            if (Pos is not null)
+            {
+                foreach (var value in Pos)
+                {
+                    hash.Add(value);
+                }
+            }
+
+            return hash.ToHashCode();
+        }
 #nullable disable
     }
 }
