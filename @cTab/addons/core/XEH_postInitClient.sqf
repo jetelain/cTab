@@ -433,8 +433,9 @@ cTab_Tablet_btnACT = ctab_fnc_tablet_btnACT;
 	if (GVAR(useAceMicroDagr) && {isClass (configFile >> "CfgWeapons" >> "ACE_microDAGR")}) then {
 		ace_microdagr_miniMapDrawHandlers pushBack {
 			params ["_ctrl"];
-			[_ctrl,false] call cTab_fnc_drawUserMarkers;
-			[_ctrl,2] call cTab_fnc_drawBftMarkers;
+			private _visBounds = [_cntrlScreen] call cTab_fnc_ctrlMapVisibleBounds;
+			[_ctrl,false,_visBounds] call cTab_fnc_drawUserMarkers;
+			[_ctrl,2,_visBounds] call cTab_fnc_drawBftMarkers;
 		};
 		GVAR(personnelDevices) pushBack "ACE_microDAGR";
 	};
