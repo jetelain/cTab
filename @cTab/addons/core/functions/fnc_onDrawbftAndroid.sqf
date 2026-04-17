@@ -12,6 +12,8 @@ private _visBounds = [_cntrlScreen] call cTab_fnc_ctrlMapVisibleBounds;
 [_cntrlScreen,true,_visBounds] call cTab_fnc_drawUserMarkers;
 private _drawPlayer = [_cntrlScreen,0,_visBounds] call cTab_fnc_drawBftMarkers;
 
+if (isNil "cTab_player" || {isNull cTab_player}) exitWith {};
+
 _veh = vehicle cTab_player;
 _playerPos = getPosASL _veh;
 
@@ -22,7 +24,7 @@ if (_drawPlayer) then {
 };
 
 // update hook information
-if (cTabDrawMapTools) then {
+if (!isNil "cTabDrawMapTools" && {cTabDrawMapTools}) then {
 	[_display,_cntrlScreen,_playerPos,cTabMapCursorPos,0,false] call cTab_fnc_drawHook;
 };
 

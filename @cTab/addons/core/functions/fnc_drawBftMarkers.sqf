@@ -29,7 +29,9 @@
 
 private ["_ctrlScreen","_mode","_veh","_iconB","_text","_groupID","_pos","_dir","_vehicles","_vehIndex","_mountedLabels","_mountedIndex","_drawText","_playerVehicle","_playerGroup","_teamColor"];
 
-if (GVAR(bft_mode) == 0) exitWith { };
+if (GVAR(bft_mode) == 0) exitWith { false };
+
+if (isNil "cTabBFTvehicles" || {isNil "cTabBFTgroups"} || {isNil "cTabBFTmembers"}) exitWith { true };
 
 _ctrlScreen = _this select 0;
 _mode = _this select 1;
@@ -141,7 +143,8 @@ if (GVAR(microDagrGroupBFT) || {_mode != 2}) then {
 		if (isNull (_x select 0) || {group cTab_player != group (_x select 0)}) exitWith {};
 		
 		// get the fire-team color
-		_teamColor = cTabColorTeam select (["MAIN","RED","GREEN","BLUE","YELLOW",""] find (assignedTeam (_x select 0)));
+		private _teamIndex = ["MAIN","RED","GREEN","BLUE","YELLOW",""] find (assignedTeam (_x select 0));
+		_teamColor = cTabColorTeam select (if (_teamIndex >= 0) then {_teamIndex} else {0});
 		
 		if (_mode != 2 && {_veh == _playerVehicle || {_veh in _vehicles}}) exitWith {
 			if (_drawText) then {

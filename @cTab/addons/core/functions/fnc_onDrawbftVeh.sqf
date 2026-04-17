@@ -13,6 +13,8 @@ cTabMapScale = ctrlMapScale _cntrlScreen;
 [_cntrlScreen,true] call cTab_fnc_drawUserMarkers;
 private _drawPlayer = [_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
 
+if (isNil "cTab_player" || {isNull cTab_player}) exitWith {};
+
 // draw directional arrow at own location
 _veh = vehicle cTab_player;
 _playerPos = getPosASL _veh;

@@ -5,6 +5,8 @@
 _cntrlScreen = _this select 0;
 _display = ctrlParent _cntrlScreen;
 
+if (isNil "cTab_player" || {isNull cTab_player}) exitWith {};
+
 _veh = vehicle cTab_player;
 _playerPos = getPosASL _veh;
 

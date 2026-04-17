@@ -14,6 +14,8 @@ private _visBounds = [_cntrlScreen] call cTab_fnc_ctrlMapVisibleBounds;
 [_cntrlScreen,true,_visBounds] call cTab_fnc_drawUserMarkers;
 [_cntrlScreen,1,_visBounds] call cTab_fnc_drawBftMarkers;
 
+if (isNil "cTab_player" || {isNull cTab_player}) exitWith {};
+
 // draw vehicle icon at own location
 _veh = vehicle cTab_player;
 _playerPos = getPosASL _veh;

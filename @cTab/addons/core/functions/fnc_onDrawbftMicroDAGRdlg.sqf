@@ -5,8 +5,11 @@
 _cntrlScreen = _this select 0;
 _display = ctrlParent _cntrlScreen;
 
+
 cTabMapWorldPos = [_cntrlScreen] call cTab_fnc_ctrlMapCenter;
 cTabMapScale = ctrlMapScale _cntrlScreen;
+
+if (isNil "cTab_player" || {isNull cTab_player}) exitWith {};
 
 // current position
 _veh = vehicle cTab_player;

@@ -29,6 +29,8 @@
 		[_ctrlScreen, false] call cTab_fnc_drawUserMarkers;
 */
 
+if (isNil "cTabUserMarkerList") exitWith { true };
+
 private ["_ctrlScreen","_arrowLength","_pos","_secondPos","_texture1","_texture2","_dir","_color","_text","_align","_cursorMarkerIndex","_markerData"];
 
 _ctrlScreen = _this select 0;
@@ -45,7 +47,7 @@ _cursorMarkerIndex = if (_this select 1) then {[_ctrlScreen,cTabMapCursorPos] ca
 		_texture1 = _markerData select 1;
 		_texture2 = _markerData select 2;
 		_dir = _markerData select 3;
-		private _drawSize = (_markerData select 7);
+		private _drawSize = if (count _markerData > 7) then {_markerData select 7} else {1};
 		_color = if (_x select 0 != _cursorMarkerIndex) then {_markerData select 4} else {cTabTADhighlightColour};
 		_text = "";
 		if (_dir < 360) then {
