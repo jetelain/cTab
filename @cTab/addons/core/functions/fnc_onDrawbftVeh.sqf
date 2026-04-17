@@ -10,10 +10,10 @@ _display = ctrlParent _cntrlScreen;
 cTabMapWorldPos = [_cntrlScreen] call cTab_fnc_ctrlMapCenter;
 cTabMapScale = ctrlMapScale _cntrlScreen;
 
+if (isNil "cTab_player" || {isNull cTab_player}) exitWith {};
+
 [_cntrlScreen,true] call cTab_fnc_drawUserMarkers;
 private _drawPlayer = [_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
-
-if (isNil "cTab_player" || {isNull cTab_player}) exitWith {};
 
 // draw directional arrow at own location
 _veh = vehicle cTab_player;

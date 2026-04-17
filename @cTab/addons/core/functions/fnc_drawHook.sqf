@@ -10,7 +10,7 @@
 
 	Parameters:
 		0: OBJECT  - Display used to write hook direction, distance and grid to
-		0: OBJECT  - Map control to draw arrow on
+		1: OBJECT  - Map control to draw arrow on
 		2: ARRAY   - Position A, format PositionASL
 		3: ARRAY   - Position B, format Position2D
 		4: INTEGER - Mode, 0 = Reference is A, 1 = Reference is B
