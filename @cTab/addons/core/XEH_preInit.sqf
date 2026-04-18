@@ -29,7 +29,7 @@ GVAR(drawMainMapHandler) = -1;
 	if ( GVAR(drawMainMap) ) then {
 		GVAR(drawMainMapHandler) = (findDisplay 12 displayCtrl 51) ctrlAddEventHandler ["draw", { 
 			params ["_ctrl"];
-			private _visBounds = [_cntrlScreen] call cTab_fnc_ctrlMapVisibleBounds;
+			private _visBounds = [_ctrl] call cTab_fnc_ctrlMapVisibleBounds;
 			[_ctrl,false,_visBounds] call cTab_fnc_drawUserMarkers;
 			[_ctrl,0,_visBounds] call cTab_fnc_drawBftMarkers;
 		 }];
