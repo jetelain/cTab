@@ -29,7 +29,7 @@
 
 private ["_ctrlScreen","_mode","_veh","_iconB","_text","_groupID","_pos","_dir","_vehicles","_vehIndex","_mountedLabels","_mountedIndex","_drawText","_playerVehicle","_playerGroup","_teamColor"];
 
-if (GVAR(bft_mode) == 0) exitWith { false };
+if (GVAR(bft_mode) == 0) exitWith { true };
 
 if (isNil "cTabBFTvehicles" || {isNil "cTabBFTgroups"} || {isNil "cTabBFTmembers"}) exitWith { true };
 
