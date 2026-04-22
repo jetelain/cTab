@@ -15,4 +15,5 @@ class CfgPatches {
 #include "CfgEventHandlers.hpp"
 #include "CfgVehicles.hpp"
 #include "CfgWeapons.hpp"
+#include "CfgFunctions.hpp"
 #include "ui\technicaldata.hpp"

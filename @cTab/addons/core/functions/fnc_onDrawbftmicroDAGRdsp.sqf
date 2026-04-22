@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
 	This is drawn every frame on the microDAGR display. fnc
 */
@@ -6,8 +7,9 @@ _display = ctrlParent _cntrlScreen;
 
 // current position
 _veh = vehicle cTab_player;
-_playerPos = getPosASL _veh;
+_playerPos = [_veh] call cTab_fnc_getPlayerPosition;
 _heading = direction _veh;
+
 // change scale of map and centre to player position
 _cntrlScreen ctrlMapAnimAdd [0, cTabMapScale, _playerPos];
 ctrlMapAnimCommit _cntrlScreen;

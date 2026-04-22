@@ -24,6 +24,7 @@ PREPMAIN(getCopilot);
 PREPMAIN(getFromPairs);
 PREPMAIN(getInfMarkerIcon);
 PREPMAIN(getPlayerEncryptionKey);
+PREPMAIN(getPlayerPosition);
 PREPMAIN(getPlayerSides);
 PREPMAIN(getSettings);
 PREPMAIN(getUserMarkerList);
