@@ -2,7 +2,7 @@
 	Name: cTab_fnc_drawUserMarkers
 	
 	Author(s):
-		Gundy, Riouken
+		Gundy, Riouken, GrueArbre
 
 	Description:
 		Draw userMarkers held in cTabUserMarkerList to map control
@@ -20,41 +20,52 @@
 	Parameters:
 		0: OBJECT  - Map control to draw BFT icons on
 		1: BOOLEAN - Highlight marker under cursor
+		2: ARRAY   - (Optional) Pre-computed visible bounds [minX,maxX,minY,maxY] from cTab_fnc_ctrlMapVisibleBounds
 	
 	Returns:
 		BOOLEAN - Always TRUE
 	
 	Example:
-		[_ctrlScreen] call cTab_fnc_drawUserMarkers;
+		[_ctrlScreen, false] call cTab_fnc_drawUserMarkers;
 */
+
+if (isNil "cTabUserMarkerList") exitWith { true };
 
 private ["_ctrlScreen","_arrowLength","_pos","_secondPos","_texture1","_texture2","_dir","_color","_text","_align","_cursorMarkerIndex","_markerData"];
 
 _ctrlScreen = _this select 0;
 _arrowLength = cTabUserMarkerArrowSize * ctrlMapScale _ctrlScreen;
 _cursorMarkerIndex = if (_this select 1) then {[_ctrlScreen,cTabMapCursorPos] call cTab_fnc_findUserMarker} else {-1};
+
+// Use pre-computed visible world bounds if provided, otherwise compute now
+(if (count _this > 2) then {_this select 2} else {[_ctrlScreen, 100] call cTab_fnc_ctrlMapVisibleBounds}) params ["_visMinX","_visMaxX","_visMinY","_visMaxY"];
+
 {
 	_markerData = _x select 1;
 	_pos = _markerData select 0;
-	_texture1 = _markerData select 1;
-	_texture2 = _markerData select 2;
-	_dir = _markerData select 3;
-	private _drawSize = (_markerData select 7);
-	_color = if (_x select 0 != _cursorMarkerIndex) then {_markerData select 4} else {cTabTADhighlightColour};
-	_text = "";
-	if (_dir < 360) then {
-		_secondPos = [_pos,_arrowLength,_dir] call BIS_fnc_relPos;
-		_ctrlScreen drawArrow [_pos, _secondPos, _color];
-	};
-	if (cTabBFTtxt) then {_text = _markerData select 5;};
-	if ( _drawSize > 1 ) then {
-		_ctrlScreen drawIcon [_texture1, _color, _pos, cTabIconSize * _drawSize, cTabIconSize * _drawSize, 0];
-		_ctrlScreen drawIcon ["\A3\ui_f\data\map\Markers\System\dummy_ca.paa", _color, _pos, cTabIconSize, cTabIconSize, 0, _text, 0, cTabTxtSize,"TahomaB",_markerData select 6];
-	} else {
-		_ctrlScreen drawIcon [_texture1,_color,_pos, cTabIconSize, cTabIconSize, 0, _text, 0, cTabTxtSize,"TahomaB",_markerData select 6];
-	};
-	if (_texture2 != "") then {
-		_ctrlScreen drawIcon [_texture2,_color,_pos, cTabGroupOverlayIconSize * _drawSize, cTabGroupOverlayIconSize * _drawSize, 0, "", 0, cTabTxtSize,"TahomaB","right"];
+	if ((_pos select 0) >= _visMinX && (_pos select 0) <= _visMaxX && (_pos select 1) >= _visMinY && (_pos select 1) <= _visMaxY) then {
+		_texture1 = _markerData select 1;
+		_texture2 = _markerData select 2;
+		_dir = _markerData select 3;
+		private _drawSize = if (count _markerData > 7) then {_markerData select 7} else {1};
+		_color = if (_x select 0 != _cursorMarkerIndex) then {_markerData select 4} else {cTabTADhighlightColour};
+		_text = "";
+		if (_dir < 360) then {
+			_secondPos = [_pos,_arrowLength,_dir] call BIS_fnc_relPos;
+			_ctrlScreen drawArrow [_pos, _secondPos, _color];
+		};
+		if (cTabBFTtxt) then {_text = _markerData select 5;};
+		if (_texture1 != "") then {
+			if ( _drawSize > 1 ) then {
+				_ctrlScreen drawIcon [_texture1, _color, _pos, cTabIconSize * _drawSize, cTabIconSize * _drawSize, 0];
+				_ctrlScreen drawIcon ["\A3\ui_f\data\map\Markers\System\dummy_ca.paa", _color, _pos, cTabIconSize, cTabIconSize, 0, _text, 0, cTabTxtSize,"TahomaB",_markerData select 6];
+			} else {
+				_ctrlScreen drawIcon [_texture1,_color,_pos, cTabIconSize, cTabIconSize, 0, _text, 0, cTabTxtSize,"TahomaB",_markerData select 6];
+			};
+			if (_texture2 != "") then {
+				_ctrlScreen drawIcon [_texture2,_color,_pos, cTabGroupOverlayIconSize * _drawSize, cTabGroupOverlayIconSize * _drawSize, 0, "", 0, cTabTxtSize,"TahomaB","right"];
+			};
+		};
 	};
 } count cTabUserMarkerList;
 

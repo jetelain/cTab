@@ -7,6 +7,7 @@ PREPMAIN(close);
 PREPMAIN(createHelmetCam);
 PREPMAIN(createUavCam);
 PREPMAIN(ctrlMapCenter);
+PREPMAIN(ctrlMapVisibleBounds);
 PREPMAIN(currentTime);
 PREPMAIN(degreeToOctant);
 PREPMAIN(deleteHelmetCam);

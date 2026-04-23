@@ -8,8 +8,11 @@ _display = ctrlParent _cntrlScreen;
 cTabMapWorldPos = [_cntrlScreen] call cTab_fnc_ctrlMapCenter;
 cTabMapScale = ctrlMapScale _cntrlScreen;
 
-[_cntrlScreen,true] call cTab_fnc_drawUserMarkers;
-private _drawPlayer = [_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
+if (isNil "cTab_player" || {isNull cTab_player}) exitWith {};
+
+private _visBounds = [_cntrlScreen] call cTab_fnc_ctrlMapVisibleBounds;
+[_cntrlScreen,true,_visBounds] call cTab_fnc_drawUserMarkers;
+private _drawPlayer = [_cntrlScreen,0,_visBounds] call cTab_fnc_drawBftMarkers;
 
 _veh = vehicle cTab_player;
 _playerPos = getPosASL _veh;

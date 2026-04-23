@@ -10,6 +10,8 @@ disableSerialization;
 _cntrlScreen = _this select 0;
 _display = ctrlParent _cntrlScreen;
 
+if (isNil "cTab_player" || {isNull cTab_player}) exitWith {};
+
 // current position
 _veh = vehicle cTab_player;
 _playerPos = getPosASL _veh;
@@ -18,8 +20,9 @@ _heading = direction _veh;
 _cntrlScreen ctrlMapAnimAdd [0, cTabMapScale, _playerPos];
 ctrlMapAnimCommit _cntrlScreen;
 
-[_cntrlScreen,false] call cTab_fnc_drawUserMarkers;
-[_cntrlScreen,1] call cTab_fnc_drawBftMarkers;
+private _visBounds = [_cntrlScreen] call cTab_fnc_ctrlMapVisibleBounds;
+[_cntrlScreen,false,_visBounds] call cTab_fnc_drawUserMarkers;
+[_cntrlScreen,1,_visBounds] call cTab_fnc_drawBftMarkers;
 
 // draw vehicle icon at own location
 _cntrlScreen drawIcon [cTabPlayerVehicleIcon,cTabTADfontColour,_playerPos,cTabTADownIconBaseSize,cTabTADownIconBaseSize,_heading,"", 1,cTabTxtSize,"TahomaB","right"];
