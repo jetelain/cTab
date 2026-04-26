@@ -40,13 +40,13 @@ Messaging is a low priority feature compared to other game features. The new sys
 
 Channel identifier is a formatted string, starting with encryption key.
 
-Each group have an integer identifier assigned by server stored as a public variable `ctab_id` (`QGVARMAIN(id)` with macro). Group identifiers are assigned **on demand**: when a message is first sent to a channel involving a group that has no `ctab_id` yet, the server increments a global counter `ctab_core_nextGroupId` and assigns the new value as the group's `ctab_id` (public variable, immediately visible on all machines). The decimal string representation is used in the channel identifier (e.g. group `42` → `"42"`, no zero-padding).
+Each group has an integer identifier assigned by the server stored as a public variable `ctab_id` (`QGVARMAIN(id)` with macro). Group identifiers are assigned **on demand**: when a message is first sent to a channel involving a group that has no `ctab_id` yet, the server increments a global counter `ctab_core_nextGroupId` and assigns the new value as the group's `ctab_id` (public variable, immediately visible on all machines). The decimal string representation is used in the channel identifier (e.g. group `42` → `"42"`, no zero-padding).
 
 Note: group identifier assignation is implemented in the `core` addon, to allow re-use for other features.
 
 For players, the Steam Id is used as identifier (`getPlayerUID`) to ensure re-using the same channel across connections.
 
-Format par channel type:
+Format per channel type:
 - Side channel : `{key}_s`
 - Custom channel : `{key}_c_{id}`
   - `id` is an integer identifier assigned by server
@@ -78,7 +78,7 @@ Group to group (type `2`)
 |     2 | Group   | Group with the lower identifier (group object)                     |
 |     3 | Group   | Group with the higher identifier (group object)                    |
 
-Note: Server might re-order groups, as identifier might have not yet assigned.
+Note: The server might re-order groups, as identifiers might not have been assigned yet.
 
 Player to player (type `3`)
 | Index | Type    | Description                                                        |
@@ -162,7 +162,7 @@ Hashmap `ctab_messaging_playerChannels` (`QGVAR(playerChannels)` with macro) wit
   - [2] : If channel is custom, array of members, empty array otherwise
   - [3] : Unread message count
 
-Note: The "All" channel is a special case, when a message is received it's added in the target channel, and in the "All" channel.
+Note: The "All" channel is a special case: when a message is received it's added to the target channel, and to the "All" channel.
 
 ### Channel membership
 
@@ -181,20 +181,20 @@ For a P2P channel messages are delivered to both players, regardless of having a
 
 Channel list will be computed on demand, as it's not required to dispatch messages, but only for user interface. Most of time the interface will not be displayed.
 
-For G2G and P2P channels, once a message have been exchanged the channel remains. Meaning that even if one of the side has no more leader device, the channel still appears (for eligible/unfiltered players).
+For G2G and P2P channels, once a message has been exchanged the channel remains. Meaning that even if one of the side has no more leader device, the channel still appears (for eligible/unfiltered players).
 
 ### Send workflow
 
-- Player send a `ctab_messaging_sendMessage` CBA event to the server
+- Player sends a `ctab_messaging_sendMessage` CBA event to the server
   - Channel metadata (always; includes group objects or player UIDs as applicable — the client does not need to resolve the channel identifier itself)
   - Message payload (with placeholder id `-1`)
 - Server assigns `ctab_id` to any group in the channel that lacks one (increments `ctab_core_nextGroupId`, sets public variable on all machines)
 - Server computes the authoritative channel identifier from metadata; creates a channel entry if none exists yet
 - Server increments `ctab_messaging_nextMessageId` and assigns it as the message id
 - If the message has a Marker attachment, creates the user marker on the server using `cTab_fnc_addUserMarker`.
-- Server add message to channel
+- Server adds message to channel
 - Server sends a `ctab_messaging_messagesReceived` CBA event to all **current members of the channel** (for Side and G2G channels: filtered to players with a `leaderDevices` item and the correct encryption key; for P2P channels: both players are included regardless of device, consistent with the membership rules above)
-- Each member creates channel entry if it does not yet exist, and adds message to the list (target channel, and "All" channel)
+- Each member creates a channel entry if it does not yet exist, and adds message to the list (target channel, and "All" channel)
 - Each member triggers the `ctab_messagesUpdated` CBA local event (`QGVARMAIN(messagesUpdated)` with macro)
 
 ### Player joining
@@ -215,17 +215,17 @@ To leave a custom channel, same workflow is used but with `[<channelMetadata>, 0
 For other channels, member list is computed. Player membership can change (join in progress, group change, side change will imply group change). Detection is done client-side via CBA events (like in cTabIRL Connect): `group` (side or group), `loadout` (for devices).
 
 When joining is detected (Side or G2G):
-- Player send a `ctab_messaging_channelRequest` with `[<channelMetadata>, 1, player]` CBA event to the server
-- If player has the appropriate encryption key and membership, server starts sending to player existing messages (see below).
+- Player sends a `ctab_messaging_channelRequest` with `[<channelMetadata>, 1, player]` CBA event to the server
+- If the player has the appropriate encryption key and membership, the server starts sending existing messages to the player (see below).
 
 When leaving is detected (Side or G2G):
 - Player removes the entry in `ctab_messaging_playerChannels`. Messages copied into the "All" channel are kept; the initial channel identifier stored in each message entry remains valid as a historical reference.
 
 When a player joins a channel, server needs to send existing message to player. To limit network usage, server will send chunks at each server frame.
 - Event `ctab_messaging_messagesReceived` is sent to the client, with one or more message payloads (number is configurable)
-- When player receive the event, it creates the channel entry if it does not exists. It adds the message, if it does not already exists in the channel.
+- When the player receives the event, it creates the channel entry if it does not exist. It adds the message, if it does not already exist in the channel.
 - Once the server finished sending messages, it sends the `ctab_messaging_messagesDone` event to the client.
-- When player receive the event , it creates the channel entry if it does not exists (empty channel). Then it sorts the message array by message identifier, and update the unread count.
+- When the player receives the event, it creates the channel entry if it does not exist (empty channel). Then it sorts the message array by message identifier, and updates the unread count.
 
 ### Custom channel creation
 
@@ -237,13 +237,13 @@ To create a new custom channel:
 
 ### Message delete workflow
 
-A player can request delete of a message he sent (enforced by UI, as server cannot known an event sender identity).
+A player can request deletion of a message they sent (enforced by UI, as the server cannot know the event sender's identity).
 
 - Player send a `ctab_messaging_removeMessage` CBA event to the server
   - Channel identifier
   - Message identifier
 - Server send a `ctab_messaging_messageRemoved` CBA event to all **current members of the channel** (filtered: only players with a `leaderDevices` item and the correct encryption key, to avoid unnecessary traffic to ineligible machines)
-- Each member remove the message from the channel, and from the "All" channel.
+- Each member removes the message from the channel, and from the "All" channel.
 
 ### Events
 
@@ -279,7 +279,7 @@ Arguments:
 
 #### Server → Client `ctab_messaging_messagesReceived`
 
-This event usually contains one message payload, but it can contains multiple message payloads when player is joining a channel to reduce number of network calls.
+This event usually contains one message payload, but it can contain multiple message payloads when a player is joining a channel to reduce the number of network calls.
 
 Arguments:  
   - [0] Channel identifier
@@ -323,7 +323,7 @@ No legacy seems required (at core/messaging level) :
 
 The web application will have to work with all previous version of cTab/cTabIRL Connect.
 
-The messaging interface will depends on ctab version:
+The messaging interface will depend on the cTab version:
 - `2.9` and upper : Channel system
 - otherwise : Legacy system
 
@@ -372,7 +372,7 @@ Equivalent to the legacy `WebSendMessage` but with an added `ChannelId` field:
 | Property | Type | Description |
 |---|---|---|
 | `ChannelId` | string | Target channel identifier (≤ 64 chars) |
-| `Body` | string | Message body text (≤ 5 000 chars) |
+| `Body` | string | Message body text (≤ 2 000 chars) |
 | `Title` | string | Template title (optional) |
 | `Type` | `MessageTemplateType` | Template type enum |
 | `Attachments` | `List<MessageAttachment>` | Grid/marker attachments (optional) |
