@@ -54,8 +54,8 @@ Format par channel type:
   - `group1` is the group with the lower identifier
   - `group2` is the group with the higher identifier
 - Player to player channel : `{key}_p_{player1}_{player2}`
-  - `player1` is the player with the lower identifier
-  - `player2` is the player with the higher identifier
+  - `player1` is the player whose identifier (`getPlayerUID`) is lower using lexicographic string comparison
+  - `player2` is the player whose identifier (`getPlayerUID`) is higher using lexicographic string comparison
 - All (exists only player side) : `{key}_all`
 
 Channel metadata is an array used for channel related event:
@@ -102,7 +102,7 @@ Each message payload is an array:
 |-------|---------|--------------------------------------------------------------------|
 |     0 | Integer | Message id (integer, globally unique and monotonically increasing) |
 |     1 | Array   | Message timestamp (result of `date`)                               |
-|     2 | String  | Message title (Sender name, with optionnal template suffix)        |
+|     2 | String  | Message title (Sender name, with optional template suffix)         |
 |     3 | String  | Message body (2000 chars max)                                      |
 |     4 | Integer | Message type (see `defines.hpp`)                                   |
 |     5 | String  | Message sender (player identifier)                                 |
@@ -169,13 +169,13 @@ Note: The "All" channel is a special case, when a message is received it's added
 #### Members of a channel
 
 Except for custom channels, members of a channel is computed :
-- Side : All members of side(s) (`units <side>`)
+- Side : All players on the side(s) (for example, `allPlayers select {side _x == <side>}`)
 - Group to group (G2G) : Members of both groups (`units <group>`)
 - Player to player (P2P) : Both players (need lookup of `allPlayers` then test `getPlayerUID`)
 
 For side and G2G channels, members are filtered, they must have a leader device (`ctab_core_leaderDevices`, `GVAR(leaderDevices)`) in their inventory and be a player (`isPlayer`). The channel and its messages are preserved on the server regardless; when a player re-equips a device they receive the backlog via the normal join flow.
 
-For a P2P channel messages are delivred to both players, regardless of having a leader device. 
+For a P2P channel messages are delivered to both players, regardless of having a leader device. 
 
 #### Channels of current player
 
@@ -222,7 +222,7 @@ When leaving is detected (Side or G2G):
 - Player removes the entry in `ctab_messaging_playerChannels`. Messages copied into the "All" channel are kept; the initial channel identifier stored in each message entry remains valid as a historical reference.
 
 When a player joins a channel, server needs to send existing message to player. To limit network usage, server will send chunks at each server frame.
-- Event `ctab_messaging_messagesReceived` is sent to the client, with one or message paylaods (number is configurable)
+- Event `ctab_messaging_messagesReceived` is sent to the client, with one or more message payloads (number is configurable)
 - When player receive the event, it creates the channel entry if it does not exists. It adds the message, if it does not already exists in the channel.
 - Once the server finished sending messages, it sends the `ctab_messaging_messagesDone` event to the client.
 - When player receive the event , it creates the channel entry if it does not exists (empty channel). Then it sorts the message array by message identifier, and update the unread count.
@@ -275,7 +275,7 @@ Arguments:
 Arguments:  
   - [0] Channel identifier
   - [1] Channel metadata
-  - [2] Status: `1` (joined) or `0` (leaved)
+  - [2] Status: `1` (joined) or `0` (left)
 
 #### Server → Client `ctab_messaging_messagesReceived`
 
@@ -313,9 +313,9 @@ Arguments:
 ### Legacy support
 
 No legacy seems required (at core/messaging level) :
-- `ctab_core_fnc_sendMessage` : No existing call found on GitHub (except ourself).
-- `ctab_messaging_fnc_sendMessage` : No existing call found on GitHub (except ourself).
-- `cTab_messages_*` : No existing call found on GitHub (except cTab/ourself).
+- `ctab_core_fnc_sendMessage` : No existing call found on GitHub (except ourselves).
+- `ctab_messaging_fnc_sendMessage` : No existing call found on GitHub (except ourselves).
+- `cTab_messages_*` : No existing call found on GitHub (except cTab/ourselves).
 
 ## cTabIRL Connect/cTabWebApp impacts
 
