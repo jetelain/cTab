@@ -81,18 +81,21 @@ __declspec(dllexport) void __stdcall RVExtensionVersion(char *output, int output
 {
     EnsureLoaded();
     if (g_Version) g_Version(output, outputSize);
+    else if (outputSize > 0) output[0] = '\0';
 }
 
 __declspec(dllexport) void __stdcall RVExtension(char *output, int outputSize, const char *function)
 {
     EnsureLoaded();
     if (g_Ext) g_Ext(output, outputSize, function);
+	else if (outputSize > 0) output[0] = '\0';
 }
 
 __declspec(dllexport) int __stdcall RVExtensionArgs(char *output, int outputSize, const char *function, const char **args, int argCount)
 {
     EnsureLoaded();
     if (g_ExtArgs) return g_ExtArgs(output, outputSize, function, args, argCount);
+    else if (outputSize > 0) output[0] = '\0';
     return 0;
 }
 
