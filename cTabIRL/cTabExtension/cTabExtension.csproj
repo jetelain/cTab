@@ -1,20 +1,47 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	  <TargetFramework>net9.0-windows</TargetFramework>
-	  <ImplicitUsings>enable</ImplicitUsings>
-	  <Nullable>enable</Nullable>
-	  <PublishAot>true</PublishAot>
-	  <IsAotCompatible>true</IsAotCompatible>
-	  <AssemblyName>cTabExtension_x64</AssemblyName>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PublishAot>true</PublishAot>
+		<IsAotCompatible>true</IsAotCompatible>
+		<AssemblyName>cTabExtension_x64</AssemblyName>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.0" />
-    <PackageReference Include="System.Drawing.Common" Version="9.0.0" />
-  </ItemGroup>
+	<PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x86'">
+		<AssemblyName>cTabExtension_x86</AssemblyName>
+	</PropertyGroup>
 
-  <!-- dotnet publish -r win-x64 -o ../@cTabIRL -->
+	<Target Name="BuildAndCopyX86Proxy" AfterTargets="Publish" Condition="'$(RuntimeIdentifier)' == 'win-x86'">
+		<!-- Locate the Visual Studio installation that has the VC tools -->
+		<Exec Command="&quot;%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe&quot; -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath" ConsoleToMSBuild="true">
+			<Output TaskParameter="ConsoleOutput" PropertyName="VSInstallPath" />
+		</Exec>
 
+		<!-- Configure: generate an x86 NMake project in obj\proxy-cmake -->
+		<Exec
+			WorkingDirectory="$(MSBuildProjectDirectory)"
+			Command="cmd /c &quot;&quot;$(VSInstallPath)\VC\Auxiliary\Build\vcvars32.bat&quot; &amp;&amp; cmake -S proxy -B obj\proxy-cmake -G &quot;NMake Makefiles&quot; -DCMAKE_BUILD_TYPE=Release&quot;" />
+
+		<!-- Build: compile the proxy DLL -->
+		<Exec
+			WorkingDirectory="$(MSBuildProjectDirectory)"
+			Command="cmd /c &quot;&quot;$(VSInstallPath)\VC\Auxiliary\Build\vcvars32.bat&quot; &amp;&amp; cmake --build obj\proxy-cmake --config Release&quot;" />
+
+		<!-- Copy the built DLL to the publish directory -->
+		<Copy SourceFiles="$(MSBuildProjectDirectory)\obj\proxy-cmake\cTabExtension.dll"
+			  DestinationFolder="$(PublishDir)" />
+	</Target>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="10.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.0" />
+		<PackageReference Include="System.Drawing.Common" Version="10.0.0" />
+	</ItemGroup>
+
+	<!-- 
+  dotnet publish -r win-x64 -o ../@cTabIRL 
+  dotnet publish -r win-x86 -o ../@cTabIRL 
+  -->
 </Project>
