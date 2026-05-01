@@ -1,3 +1,4 @@
+dotnet publish "$PSScriptRoot\cTabIRL\cTabExtension\cTabExtension.csproj" -c Release -r win-x86 -o "$PSScriptRoot\cTabIRL\@cTabIRL"
 dotnet publish "$PSScriptRoot\cTabIRL\cTabExtension\cTabExtension.csproj" -c Release -r win-x64 -o "$PSScriptRoot\cTabIRL\@cTabIRL"
 
 # Workshop release dot not have the git hash (git hash is only for Github releases)
