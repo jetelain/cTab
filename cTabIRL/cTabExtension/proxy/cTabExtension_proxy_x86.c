@@ -66,7 +66,13 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
     }
     else if (fdwReason == DLL_PROCESS_DETACH)
     {
+        g_Version = NULL;
+        g_Ext = NULL;
+        g_ExtArgs = NULL;
+        g_RegCb = NULL;
+
         if (g_hImpl) FreeLibrary(g_hImpl);
+        g_hImpl   = NULL;
     }
     return TRUE;
 }
