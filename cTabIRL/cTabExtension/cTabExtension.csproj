@@ -19,6 +19,15 @@
 			<Output TaskParameter="ConsoleOutput" PropertyName="VSInstallPath" />
 		</Exec>
 
+		<!-- Trim trailing whitespace/newlines from vswhere output -->
+		<PropertyGroup>
+			<VSInstallPath>$(VSInstallPath.Trim())</VSInstallPath>
+		</PropertyGroup>
+
+		<!-- Fail with a clear message if VS/VC tools were not found -->
+		<Error Condition="'$(VSInstallPath)' == ''"
+			   Text="Visual Studio with VC Tools (Microsoft.VisualStudio.Component.VC.Tools.x86.x64) was not found. Install it to build the x86 proxy DLL." />
+
 		<!-- Configure: generate an x86 NMake project in obj\proxy-cmake -->
 		<Exec
 			WorkingDirectory="$(MSBuildProjectDirectory)"
