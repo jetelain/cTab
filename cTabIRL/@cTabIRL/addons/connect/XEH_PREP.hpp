@@ -16,3 +16,5 @@ PREP(screenShotFailed);
 PREP(screenShotEnabled);
 PREP(takePhoto);
 PREP(updateIntelSideFeed);
+PREP(updateAcoustic);
+

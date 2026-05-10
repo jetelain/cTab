@@ -13,6 +13,7 @@ cTabMapScale = ctrlMapScale _cntrlScreen;
 if (isNil "cTab_player" || {isNull cTab_player}) exitWith {};
 
 private _visBounds = [_cntrlScreen] call cTab_fnc_ctrlMapVisibleBounds;
+{_this call _x;} forEach GVAR(bftDrawHandlers);
 [_cntrlScreen,true,_visBounds] call cTab_fnc_drawUserMarkers;
 private _drawPlayer = [_cntrlScreen,0,_visBounds] call cTab_fnc_drawBftMarkers;
 

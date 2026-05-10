@@ -45,5 +45,6 @@ namespace cTabWebApp
         public UpdateSideFeedMessage LastUpdateSideFeedMessage { get; internal set; }
         public ActiveRecording CurrentRecording { get; internal set; }
         public SessionRecording LastRecording { get; internal set; }
+        public UpdateAcousticMessage LastUpdateAcoustic { get; set; }
     }
 }

@@ -89,6 +89,8 @@ if (GVAR(microDagrGroupBFT)) then {
 };
 GVAR(personnelDevices) = GVAR(leaderDevices) + GVAR(dagrDevices);
 
+GVAR(bftDrawHandlers) = [];
+
 /*
 Figure out the scaling factor based on the current map (island) being played
 Requires the scale of the map control to be at 0.001
