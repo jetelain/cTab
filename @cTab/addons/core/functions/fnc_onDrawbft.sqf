@@ -5,13 +5,17 @@
 	(previously in player_init.sqf)
 */
 _cntrlScreen = _this select 0;
+_display = ctrlParent _cntrlScreen;
 
 cTabMapWorldPos = [_cntrlScreen] call cTab_fnc_ctrlMapCenter;
 cTabMapScale = ctrlMapScale _cntrlScreen;
 
+if (isNil "cTab_player" || {isNull cTab_player}) exitWith {};
+
+private _visBounds = [_cntrlScreen] call cTab_fnc_ctrlMapVisibleBounds;
 {_this call _x;} forEach GVAR(bftDrawHandlers);
-[_cntrlScreen,true] call cTab_fnc_drawUserMarkers;
-private _drawPlayer = [_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
+[_cntrlScreen,true,_visBounds] call cTab_fnc_drawUserMarkers;
+private _drawPlayer = [_cntrlScreen,0,_visBounds] call cTab_fnc_drawBftMarkers;
 
 _veh = vehicle cTab_player;
 _playerPos = getPosASL _veh;
@@ -24,7 +28,7 @@ if (_drawPlayer) then {
 
 // update hook information
 if (cTabDrawMapTools) then {
-	[ctrlParent _cntrlScreen,_cntrlScreen,_playerPos,cTabMapCursorPos,0,false] call cTab_fnc_drawHook;
+	[_display,_cntrlScreen,_playerPos,cTabMapCursorPos,0,false] call cTab_fnc_drawHook;
 };
 
 true

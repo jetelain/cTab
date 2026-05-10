@@ -59,8 +59,23 @@ addMissionEventHandler ["ExtensionCallback", {
 		if ( _function == "RemoveTacMapMarker") exitWith {
 			(parseSimpleArray _data) call EFUNC(tacmap,delete);
 		};
+		if ( _function == "ScreenShotStored") exitWith {
+			(parseSimpleArray _data) call FUNC(screenShotStored);
+		};
+		if ( _function == "ScreenShotFailed") exitWith {
+			call FUNC(screenShotFailed);
+		};
+		if ( _function == "ScreenShotEnabled") exitWith {
+			(parseSimpleArray _data) call FUNC(screenShotEnabled);
+		};
 		if ( _function == "Disconnected") exitWith {
 			systemChat LLSTRING(disconnected);
+		};
+		if ( _function == "DeleteIntel" ) exitWith {
+			(parseSimpleArray _data) call ctab_intel_fnc_removeItem;
+		};
+		if ( _function == "AddPhoto" ) exitWith {
+			(parseSimpleArray _data) call ctab_intel_fnc_addPhoto;
 		};
 		if( _function == "Error" ) exitWith {
 			ERROR(_data);
@@ -74,6 +89,9 @@ GVAR(deviceLevel) = 0;
 GVAR(vehicleMode) = 0;
 GVAR(mapMarkersNeedsUpdate) = false;
 GVAR(trackDevices) = ["ItemcTab", "ItemAndroid"];
+GVAR(canTakePhoto) = false;
+GVAR(photoRation) = 1;
+GVAR(ignoreSound) = false;
 
 [QGVAR(enabled), "CHECKBOX", [LLSTRING(enabled), LLSTRING(enabledDetails)], ["cTab",LLSTRING(modName)], true, 0, {}, true] call CBA_fnc_addSetting;
 #ifdef DEBUG_BACKEND
@@ -83,4 +101,7 @@ GVAR(trackDevices) = ["ItemcTab", "ItemAndroid"];
 #endif
 [QGVAR(key),     "EDITBOX",  [LLSTRING(key),     LLSTRING(keyDetails)],     ["cTab",LLSTRING(modName)], "", 0, {}, true] call CBA_fnc_addSetting;
 
+[QGVAR(syncMap), "CHECKBOX", [LLSTRING(syncMap), LLSTRING(syncMapDetails)], ["cTab",LLSTRING(modName)], true] call CBA_fnc_addSetting;
+
+[QGVAR(alwaysAllowPhotos), "CHECKBOX", [LLSTRING(alwaysAllowPhotos), LLSTRING(alwaysAllowPhotosDetails)], ["cTab",LLSTRING(modName)], false] call CBA_fnc_addSetting;
 [QGVAR(syncMap), "CHECKBOX", [LLSTRING(syncMap), LLSTRING(syncMapDetails)], ["cTab",LLSTRING(modName)], true, 0, {GVAR(mapMarkersNeedsUpdate) = GVAR(syncMap);}] call CBA_fnc_addSetting;

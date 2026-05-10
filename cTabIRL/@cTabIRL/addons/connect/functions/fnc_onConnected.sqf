@@ -21,13 +21,22 @@ if ( (safeZoneW / safeZoneH) < 1 ) then {
 };
 _contentItems pushBack LLSTRING(diaryEntryNote);
 
-private _content = [LLSTRING(diaryTitle), _contentItems joinString ''];
+GVAR(diaryContent) = [LLSTRING(diaryTitle), _contentItems joinString ''];
 
 if ( isNil QGVAR(diaryRecord)) then {
-	GVAR(diaryRecord) = player createDiaryRecord ["cTab", _content];
+	GVAR(diaryRecord) = player createDiaryRecord ["cTab", GVAR(diaryContent)];
 } else {
-	player setDiaryRecordText [["cTab", GVAR(diaryRecord)], _content];
+	player setDiaryRecordText [["cTab", GVAR(diaryRecord)], GVAR(diaryContent)];
 };
 
 systemChat (format [LLSTRING(connected), _uri]);
 systemChat LLSTRING(connectedQrCode);
+
+// Setup initial loadout
+[player] call FUNC(updateDevices);
+
+// Send messages templates
+call FUNC(updateMessageTemplates);
+
+// Send intels
+call FUNC(updateIntelSideFeed);

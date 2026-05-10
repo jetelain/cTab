@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Text;
+﻿using System.Text;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,26 +7,15 @@ namespace cTabExtension
 {
     public static class Worker
     {
+        public const string ExtensionHeader = "cTabExtension/1.2";
+
         private static Task<HubConnection?>? serverConnection;
         private static CancellationTokenSource? cancellationTokenSource;
         private static List<Tuple<string, Func<HubConnection, Task>>> replay = new List<Tuple<string, Func<HubConnection, Task>>>();
-
-        /*
-        private static StringBuilder sb = new StringBuilder();
-        private static int i = 0;
-        */
+        private static ScreenShotWorker? screenShot;
 
         public static void Message(string function,string?[] args)
         {
-            /*var argsText = string.Join("\",\"", args.Select(a => a.Replace("\\", "\\\\").Replace("\"", "\\\"")));
-            sb.AppendLine($"\"{function}\",new[]{{\"{argsText}\"}}");
-
-            i++;
-            if (i % 100 == 0)
-            {
-                File.WriteAllText(Path.Combine(Path.GetTempPath(),"ctab.txt"), sb.ToString());
-            }*/
-
             if (function == "Connect")
             {
                 if (args.Length != 4)
@@ -53,6 +41,9 @@ namespace cTabExtension
         {
             switch (function)
             {
+                case "ScreenShot":
+                    TakeScreenShot(args);
+                    break;
                 // Frequent messages, can be dropped without impact
                 case "UpdatePosition":
                 case "UpdateMarkersPosition":
@@ -76,7 +67,27 @@ namespace cTabExtension
                     break;
             }
         }
-        
+
+        private static void TakeScreenShot(string?[] args)
+        {
+            serverConnection?.ContinueWith(async srv =>
+            {
+                try
+                {
+                    if (screenShot != null)
+                    {
+                        await screenShot.TakeScreenShotInternal(args);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Extension.ErrorMessage($"TakeScreenShot failed with {e.GetType().Name} {e.Message}.");
+                    ReportInner(e);
+                    await Extension.Callback("ScreenShotFailed", "");
+                }
+            });
+        }
+
         private static async Task<HubConnection?> Connect(string?[] args, CancellationToken token)
         {
             lock (replay)
@@ -161,6 +172,12 @@ namespace cTabExtension
             return str;
         }
 
+        private static void EnableScreenShot(ScreenShotOptions options)
+        {
+            screenShot = new ScreenShotWorker(options);
+            screenShot.Callback();
+        }
+
         private static async Task<HubConnection?> ConnectToServer(string server, string steamId, string name, string key, CancellationToken token)
         {
             var uri = new Uri(server);
@@ -172,12 +189,14 @@ namespace cTabExtension
                 .WithUrl(uri, options =>
                 {
                     options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets;
-                    options.Headers.Add("Extension", "cTabExtension/1.1");
+                    options.Headers.Add("Extension", ExtensionHeader);
                 })
                 .WithAutomaticReconnect()
                 .Build();
 
             connection.On<string, string>("Callback", Extension.Callback);
+            connection.On<ScreenShotOptions>("ScreenShotEnabled", EnableScreenShot);
+
             connection.Reconnecting += async _ => {
                 Extension.DebugMessage($"Reconnecting...");
                 await Extension.Callback("Reconnecting", "");
@@ -225,6 +244,10 @@ namespace cTabExtension
 
         private static void ReportInner(Exception e)
         {
+            foreach(var line in e.StackTrace?.Split('\n') ?? Array.Empty<string>())
+            {
+                Extension.ErrorMessage($"@ {line.Trim()}.");
+            }
             if (e.InnerException != null)
             {
                 Extension.ErrorMessage($"+ {e.InnerException.GetType().Name} {e.InnerException.Message}.");
@@ -245,12 +268,22 @@ namespace cTabExtension
             {
                 return string.Empty;
             }
-            return Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                            password: key,
-                            salt: Encoding.UTF8.GetBytes(hostname),
-                            prf: KeyDerivationPrf.HMACSHA256,
-                            iterationCount: 10000,
-                            numBytesRequested: 256 / 8));
+            try
+            {
+                return Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                                password: key,
+                                salt: Encoding.UTF8.GetBytes(hostname),
+                                prf: KeyDerivationPrf.HMACSHA256,
+                                iterationCount: 10000,
+                                numBytesRequested: 256 / 8));
+            }
+            catch(Exception e)
+            {
+                // This is a workaround for WINE/PROTON, which doesn't support the Pbkdf2 method
+                Extension.ErrorMessage($"HashKeyForHost failed with {e.GetType().Name} {e.Message}.");
+                ReportInner(e);
+                return $"TEXT:{key}";
+            }
         }
     }
 }

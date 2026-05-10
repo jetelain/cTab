@@ -784,5 +784,13 @@
             <English>Where is the unit moving?</English>
             <French>Par où se déplace l'unité ?</French>
         </Key>
+        <Key ID="STR_ctab_core_drawMainMap">
+            <English>Add Blue Force Tracking to game map</English>
+            <French>Ajouter le Blue Force Tracking à la carte du jeu</French>
+        </Key>
+        <Key ID="STR_ctab_core_drawMainMapDetails">
+            <English>Displays Blue Force Tracking symbols from cTab on standard game map</English>
+            <French>Affiche les symboles Blue Force Tracking sur la carte standard du jeu</French>
+        </Key>
     </Package>
 </Project>

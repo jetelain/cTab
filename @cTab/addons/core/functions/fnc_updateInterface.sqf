@@ -155,7 +155,7 @@ if (isNil "_mode") then {
 					IDC_CTAB_OSD_HOOK_DST,
 					IDC_CTAB_OSD_HOOK_DIR,
 					IDC_CTAB_NOTIFICATION,
-					990566,990567]
+					990566,990567,1000000]
 				};
 				if (_displayName == "cTab_Android_dlg") exitWith {
 					[3300,3301,3302,3303,3304,3305,3306,3307,
@@ -169,7 +169,7 @@ if (isNil "_mode") then {
 					IDC_CTAB_OSD_HOOK_DST,
 					IDC_CTAB_OSD_HOOK_DIR,
 					IDC_CTAB_NOTIFICATION,
-					990566,990567]
+					990566,990567,1000000]
 				};
 				if (_displayName in ["cTab_FBCB2_dlg","cTab_TAD_dlg"]) exitWith {
 					[3300,3301,3302,3303,3304,3305,3306,3307,
@@ -281,10 +281,21 @@ if (isNil "_mode") then {
 						_btnActCtrl ctrlSetTooltip LLSTRING(toggleFullscreen); 
 						['rendertarget13',_data] spawn cTab_fnc_createHelmetCam;
 					};
+					// ---------- INTEL FEED -----------
+					if (_mode == "INTELFEED") exitWith {
+						_displayItemsToShow = [1000000];
+						[_display] call ctab_intel_fnc_showIntelFeedUI;
+					};
 				};
 				
 				// hide every _displayItems not in _displayItemsToShow
 				{(_display displayCtrl _x) ctrlShow (_x in _displayItemsToShow)} count _displayItems;
+
+				if (_mode == "DESKTOP") then {
+					// if we are in desktop mode, we want to focus on the desktop group
+					// this allows tooltips to be displayed correctly
+					ctrlSetFocus (_display displayCtrl IDC_CTAB_GROUP_DESKTOP);
+				};
 			};
 		};
 		// ------------ SHOW ICON TEXT ------------

@@ -39,5 +39,19 @@ namespace cTabWebApp
         {
             return new PlayerStateServiceStats();
         }
+
+        public PlayerState GetStateByUploadToken(string uploadToken)
+        {
+            return null; // No upload in single player
+        }
+
+        public IEnumerable<PlayerState> GetStatesWithActiveRecording()
+        {
+            if (state.CurrentRecording != null)
+            {
+                return new[] { state };
+            }
+            return System.Array.Empty<PlayerState>();
+        }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Arma3TacMapLibrary.Maps;
-using Arma3TacMapLibrary.TacMaps;
-using cTabWebApp.Messaging;
+using cTabWebApp.Messages.IntelFeed;
+using cTabWebApp.Services.Images;
+using cTabWebApp.Services.Recording;
 using cTabWebApp.TacMaps;
 
 namespace cTabWebApp
@@ -39,6 +40,11 @@ namespace cTabWebApp
         public string SpectatorToken { get; internal set; }
         public UpdateMapMarkersMessage LastUpdateMapMarkers { get; internal set; }
         public UpdateMessageTemplatesMessage LastUpdateMessagesTemplates { get; set; }
+        public string UploadToken { get; internal set; }
+        public List<PlayerTakenImage> Images { get; set; } = new List<PlayerTakenImage>();
+        public UpdateSideFeedMessage LastUpdateSideFeedMessage { get; internal set; }
+        public ActiveRecording CurrentRecording { get; internal set; }
+        public SessionRecording LastRecording { get; internal set; }
         public UpdateAcousticMessage LastUpdateAcoustic { get; set; }
     }
 }

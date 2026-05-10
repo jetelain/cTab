@@ -14,6 +14,10 @@ namespace cTabWebApp
 
         PlayerState GetStateBySpectatorToken(string spectatorToken);
 
+        PlayerState GetStateByUploadToken(string uploadToken);
+
         PlayerStateServiceStats GetStats(bool isAdmin);
+
+        IEnumerable<PlayerState> GetStatesWithActiveRecording();
     }
 }

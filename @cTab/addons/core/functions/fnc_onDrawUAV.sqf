@@ -8,8 +8,11 @@ _cntrlScreen = _this select 0;
 _display = ctrlParent _cntrlScreen;
 _pos = getPosASL cTabActUav;
 
-[_cntrlScreen,false] call cTab_fnc_drawUserMarkers;
-[_cntrlScreen,0] call cTab_fnc_drawBftMarkers;
+if (isNil "cTab_player" || {isNull cTab_player}) exitWith {};
+
+private _visBounds = [_cntrlScreen] call cTab_fnc_ctrlMapVisibleBounds;
+[_cntrlScreen,false,_visBounds] call cTab_fnc_drawUserMarkers;
+[_cntrlScreen,0,_visBounds] call cTab_fnc_drawBftMarkers;
 
 // draw icon at own location
 _veh = vehicle cTab_player;

@@ -3,13 +3,8 @@ using System.Collections.Generic;
 
 namespace cTabWebApp
 {
-    internal class UpdateMarkersMessagePosition
+    internal class UpdateMarkersMessagePosition : RecordableMessageBase
     {
-        public UpdateMarkersMessagePosition()
-        {
-        }
-
-        public DateTime Timestamp { get; set; }
         public List<MarkerPosition> Makers { get; set; }
     }
 }

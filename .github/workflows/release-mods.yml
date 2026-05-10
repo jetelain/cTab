@@ -13,9 +13,12 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 10.0.x
 
-    - name: Build Extension
+    - name: Build Extension (win-x86)
+      run: dotnet publish cTabIRL/cTabExtension/cTabExtension.csproj -c Release -r win-x86 -o "cTabIRL/@cTabIRL"
+
+    - name: Build Extension (win-x64)
       run: dotnet publish cTabIRL/cTabExtension/cTabExtension.csproj -c Release -r win-x64 -o "cTabIRL/@cTabIRL"
 
     - uses: arma-actions/hemtt@v1

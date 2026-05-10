@@ -19,7 +19,7 @@ namespace cTabWebApp {
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class SharedResource {
@@ -156,6 +156,15 @@ namespace cTabWebApp {
         public static string ProvidedBy {
             get {
                 return ResourceManager.GetString("ProvidedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Replay.
+        /// </summary>
+        public static string Replay {
+            get {
+                return ResourceManager.GetString("Replay", resourceCulture);
             }
         }
         

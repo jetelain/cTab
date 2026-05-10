@@ -1,0 +1,43 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#replay-controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 46px;
+    z-index: 1000;
+    background: rgba(255,255,255,0.95);
+    border-top: 1px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    gap: 6px;
+}
+
+body.modal-open {
+    padding-right: 0 !important;
+}
+#replay-timeline {
+    flex: 1;
+    min-width: 80px;
+}
+
+#replay-time {
+    font-size: 0.8em;
+    white-space: nowrap;
+    min-width: 120px;
+}
+
+#replay-recording-name {
+    font-size: 0.75em;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}

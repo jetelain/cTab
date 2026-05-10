@@ -23,6 +23,11 @@ if [ ! -d /var/www/ctab ]; then
 	sudo chown www-data:www-data /var/www/ctab
 fi
 
+if [ ! -d /var/www/ctab/images ]; then
+	sudo mkdir /var/www/ctab/images
+	sudo chown www-data:www-data /var/www/ctab/images
+fi
+
 if [ ! -d /var/www/aspnet-keys ]; then
 	sudo mkdir /var/www/aspnet-keys
 	sudo chown www-data:www-data /var/www/aspnet-keys

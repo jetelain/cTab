@@ -4,8 +4,8 @@ cTab+
 *Created by Riouken*
 
 Documentation
-- For users, see [Install and Key bindings](docs/EndUser.md)
-- For mission makers, see [Mission Makers and Server Settings](docs/MissionMaker.md)
+- For users, see [Install and Key bindings](https://github.com/jetelain/cTab/wiki/User-Documentation)
+- For mission makers, see [Mission Makers and Server Settings](https://github.com/jetelain/cTab/wiki/Mission-Makers-Documentation)
 - [Contributors and special thanks](AUTHORS.md)
 - [Changelog](CHANGELOG.md)
 - [License](LICENSE) : GNU GPL v2
@@ -26,7 +26,7 @@ Features
 + This system is available to only one side at a time, there is a mission configurable parameter to choose sides
 + None of the markers or icons show on maps, need one of the devices to view
 + Settings for mission makers to adjust features, and make them more realistic
-+ cTab on your mobile device with additional [cTab IRL](docs/cTabIRL/README.md) mod
++ cTab on your mobile device with additional [cTab Connect](https://github.com/jetelain/cTab/wiki/cTab-Connect) mod
 
 Known Issues
 ------------

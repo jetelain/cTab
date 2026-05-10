@@ -1871,7 +1871,6 @@ class cTab_RscMapControl
 		coefMax = 4;
 		color[] = {0,0,0,1};
 	};
-
 	class ActiveMarker
 	{
 		//icon = "\A3\ui_f\data\map\mapcontrol\custommark_ca.paa";
@@ -1881,6 +1880,15 @@ class cTab_RscMapControl
 		coefMax = 1;
 		color[] = {0,0,0,1};
 	};
+	class Name
+	{
+		icon = "";
+		color[] = {0,0,0,0};
+		size = 0;
+		importance = 0;
+		coefMin = 0;
+		coefMax = 0;
+    };
 };
 
 class RscButtonMenu;

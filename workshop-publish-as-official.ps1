@@ -1,0 +1,3 @@
+$basePath = Get-ItemPropertyValue -Path "HKCU:\Software\Bohemia Interactive\Publisher" -Name "path"
+& "$basePath\PublisherCmd.exe" update /id:2262006564 /changeNote:"(release notes will be available in a few minutes)" /path:"$PSScriptRoot\@cTab\.hemttout\release"
+& "$basePath\PublisherCmd.exe" update /id:2262009445 /changeNote:"(release notes will be available in a few minutes)" /path:"$PSScriptRoot\cTabIRL\@cTabIRL\.hemttout\release"

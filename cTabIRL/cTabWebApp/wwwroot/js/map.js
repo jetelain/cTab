@@ -89,7 +89,7 @@ var ctabFeatureLevel = 0;
 var irlFeatureLevel = 0;
 var preformatedMedevacUid = 'medevac';
 let ctabCurrentDate = null;
-
+let ctabIntel = new CTab.IntelUI();
 
 function updateButtons() {
     centerOnPositionButton.setClass(centerOnPosition ? 'btn-primary' : 'btn-outline-secondary');
@@ -208,12 +208,15 @@ function generateMenu(id, latlng) {
     return div.get(0);
 }
 
-function showMenu(latLng, content) {
+function showMenu(latLng, force, content) {
     if (!tempUserPopup) {
         tempUserPopup = L.popup({ className: 'menupopup' });
+    } else if (tempUserPopup.isOpen() && !force) {
+        console.log('Menu is already opened');
+        return;
     }
     tempUserPopup.setLatLng(latLng);
-    tempUserPopup.setContent(content);
+    tempUserPopup.setContent(content ? content : generateMenu(0, latLng));
     tempUserPopup.openOn(currentMap);
 }
 
@@ -236,7 +239,7 @@ function showMarkerMenu(marker) {
     else {
         $('<div class="text-center"></div>').text(marker.options.marker.name).appendTo(div);
     }
-    showMenu(marker.getLatLng(), div.get(0));
+    showMenu(marker.getLatLng(), true, div.get(0));
 }
 
 function updateUnread() {
@@ -304,7 +307,7 @@ function initMap(mapInfos, worldName) {
     }
     var map = L.map('map', {
         minZoom: mapInfos.minZoom,
-        maxZoom: mapInfos.maxZoom + 2,
+        maxZoom: mapInfos.maxZoom + 4,
         maxNativeZoom: mapInfos.maxZoom,
         crs: mapInfos.CRS,
         doubleClickZoom: false
@@ -318,7 +321,7 @@ function initMap(mapInfos, worldName) {
     map.on('mousedown', function () { setCenterOnPosition(false); });
     map.on('touchstart', function () { setCenterOnPosition(false); });
     if (!vm.isSpectator) {
-        map.on('dblclick contextmenu', function (e) { showMenu(e.latlng, generateMenu(0, e.latlng)); });
+        map.on('dblclick contextmenu', function (e) { showMenu(e.latlng, false); });
     }
     (centerOnPositionButton = L.control.overlayButton({
         content: '<i class="fas fa-location-arrow"></i>',
@@ -361,6 +364,8 @@ function initMap(mapInfos, worldName) {
         })).addTo(map);
     }
 
+
+
     L.latlngGraticule({
         zoomInterval: [
             { start: 0, end: 10, interval: 1000 }
@@ -383,6 +388,13 @@ function initMap(mapInfos, worldName) {
     currentMap = map;
     currentMapInfos = mapInfos;
     selfMarker = null;
+
+    ctabIntel.attachToMap(map, vm.isSpectator ? null : {
+        removeEntry: function (id) {
+            connection.send("WebDeleteIntel", { id: id });
+        }
+    });
+
     updateButtons();
 };
 
@@ -773,7 +785,7 @@ function dateTimeLocalFormat(d) {
         return "";
     }
     function pad2Zero(s) {
-        return s.padStart(2, '0');
+        return String(s).padStart(2, '0');
     }
     return `${d.getUTCFullYear()}-${pad2Zero(d.getUTCMonth() + 1)}-${pad2Zero(d.getUTCDate())}T${pad2Zero(d.getUTCHours())}:${pad2Zero(d.getUTCMinutes())}`;
 }
@@ -841,6 +853,7 @@ function loadTacMapList() {
         });
 }
 
+
 $(function () {
 
     $('#statusbar').on('click', function () { if (connection.state === signalR.HubConnectionState.Disconnected) { connection.start(); } });
@@ -906,9 +919,7 @@ $(function () {
     connection.on("ActionRangeFinder", function (data) {
         try {
             setCenterOnPosition(false);
-
-            var latlng = L.latLng(data.y, data.x);
-            showMenu(latlng, generateMenu(0, latlng));
+            showMenu(L.latLng(data.y, data.x), true);
         }
         catch (e) {
             console.error(e);
@@ -978,6 +989,15 @@ $(function () {
     connection.on("UpdateMessages", function (data) {
         try {
             updateInbox(data.messages);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+
+    connection.on("UpdateSideFeed", function (data) {
+        try {
+            ctabIntel.updateIntel(data.entries);
         }
         catch (e) {
             console.error(e);

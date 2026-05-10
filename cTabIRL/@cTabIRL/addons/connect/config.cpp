@@ -48,3 +48,16 @@ class CfgFontFamilies
 		};
 	};
 };
+
+
+class CfgSounds
+{
+	sounds[] = {};
+	class cTab_cameraShutter
+	{
+		// filename, volume, pitch
+		sound[] = {"\z\ctab_irl\addons\connect\data\camerashutter.wss",1,1};
+		// subtitle delay in seconds, subtitle text 
+		titles[] = {};
+	};
+};

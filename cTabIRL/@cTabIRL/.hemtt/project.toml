@@ -1,4 +1,4 @@
-name = "cTab IRL"
+name = "cTab Connect"
 prefix = "ctab_irl"
 author = "cTab Authors, see https://github.com/jetelain/cTab"
 template = "cba"
@@ -8,11 +8,11 @@ sig_version = 3
 
 [version]
 path = "addons/main/script_version.hpp"
-git_hash = 0
+git_hash = 4
 
 [files]
 include = [
     "mod.cpp",
     "*.dll",
-    "icon_ctab_irl.paa"
+    "ctab_irl_icon.paa"
 ]

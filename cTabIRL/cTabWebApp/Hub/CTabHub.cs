@@ -6,8 +6,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Arma3TacMapLibrary.Arma3;
 using Arma3TacMapLibrary.Maps;
+using cTabWebApp.Messages;
+using cTabWebApp.Messages.IntelFeed;
 using cTabWebApp.Messaging;
 using cTabWebApp.Services;
+using cTabWebApp.Services.Images;
+using cTabWebApp.Services.Recording;
 using cTabWebApp.TacMaps;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.SignalR;
@@ -22,13 +26,15 @@ namespace cTabWebApp
         private readonly IPlayerStateService _service;
         private readonly ILogger<CTabHub> _logger;
         private readonly TacMapService _tacMapService;
+        private readonly ImageServiceConfig _imageServiceConfig;
 
-        public CTabHub(PublicUriService publicUri, IPlayerStateService service, ILogger<CTabHub> logger, TacMapService tacMapService)
+        public CTabHub(PublicUriService publicUri, IPlayerStateService service, ILogger<CTabHub> logger, TacMapService tacMapService, ImageServiceConfig imageServiceConfig)
         {
             _publicUri = publicUri;
             _service = service;
             _logger = logger;
             _tacMapService = tacMapService;
+            _imageServiceConfig = imageServiceConfig;
         }
 
         public async Task WebHello(WebHelloMessage message)
@@ -92,6 +98,10 @@ namespace cTabWebApp
                 {
                     Templates = { BuiltinTemplates.GetMedevac() }
                 });
+            }
+            if (state.LastUpdateSideFeedMessage != null)
+            {
+                await Clients.Caller.SendAsync("UpdateSideFeed", state.LastUpdateSideFeedMessage);
             }
             if (state.LastUpdateMapMarkers != null)
             {
@@ -158,6 +168,19 @@ namespace cTabWebApp
 
             await Clients.Caller.SendAsync("Callback", "Connected", data);
 
+            if (!string.IsNullOrEmpty(state.UploadToken) && ext.Equals("cTabExtension/1.2"))
+            {
+                await Clients.Caller.SendAsync("ScreenShotEnabled", 
+                    new ScreenShotOptions()
+                    {
+                        Endpoint = new Uri(new Uri(Context.GetHttpContext().Request.GetEncodedUrl()), "/Image").AbsoluteUri,
+                        Token = state.UploadToken,
+                        MaxHeight = _imageServiceConfig.MaxHeight,
+                        MaxWidth = _imageServiceConfig.MaxWidth,
+                        MaxBytes = _imageServiceConfig.MaxImageSizeInBytes
+                    });
+            }
+
             await _tacMapService.UpdateTacMapInterconnect(state);
         }
 
@@ -192,6 +215,11 @@ namespace cTabWebApp
             return state;
         }
 
+        private void AppendToRecording(PlayerState state, EventType type, RecordableMessageBase data)
+        {
+            state.CurrentRecording?.Append(type, data);
+        }
+
         public async Task ArmaStartMission(ArmaMessage message)
         {
             var state = GetState(ConnectionKind.Arma);
@@ -217,6 +245,7 @@ namespace cTabWebApp
             };
 
             await Clients.Group(state.WebChannelName).SendAsync("Mission", state.LastMission);
+            AppendToRecording(state, EventType.Mission, state.LastMission);
         }
 
         private static readonly Version CtabLevel1 = new Version(2, 7);
@@ -299,6 +328,7 @@ namespace cTabWebApp
 
 
             await Clients.Group(state.WebChannelName).SendAsync("SetPosition", state.LastSetPosition);
+            AppendToRecording(state, EventType.SetPosition, state.LastSetPosition);
         }
 
         public async Task ArmaUpdateMapMarkers(ArmaMessage message)
@@ -366,10 +396,19 @@ namespace cTabWebApp
                 });
             }
 
+            if (msg.Equals(state.LastUpdateMapMarkers))
+            {
+                // Arma can send many times the same map markers due to the limited checking it does on its side (performance concerns) 
+                // Avoid sending to web (and recording) if not changed
+                return;
+            }
+
+            msg.Timestamp = message.Timestamp;
             state.LastUpdateMapMarkers = msg;
             try
             {
                 await Clients.Group(state.WebChannelName).SendAsync("UpdateMapMarkers", state.LastUpdateMapMarkers);
+                AppendToRecording(state, EventType.UpdateMapMarkers, state.LastUpdateMapMarkers);
             }
             catch(Exception e)
             {
@@ -459,6 +498,7 @@ namespace cTabWebApp
             try
             {
                 await Clients.Group(state.WebChannelName).SendAsync("UpdateMarkers", state.LastUpdateMarkers);
+                AppendToRecording(state, EventType.UpdateMarkers, state.LastUpdateMarkers);
             }
             catch (Exception e)
             {
@@ -572,6 +612,7 @@ namespace cTabWebApp
             try 
             { 
                 await Clients.Group(state.WebChannelName).SendAsync("UpdateMarkersPosition", msg);
+                AppendToRecording(state, EventType.UpdateMarkersPosition, msg);
             }
             catch (Exception e)
             {
@@ -721,6 +762,17 @@ namespace cTabWebApp
             await Clients.Group(state.ArmaChannelName).SendAsync("Callback", "DeleteMessage", ToData(message));
         }
 
+        public async Task WebDeleteIntel(IdMessage message)
+        {
+            var state = GetState(ConnectionKind.Web);
+            if (state == null)
+            {
+                _logger.LogWarning($"No state for WebDeleteIntel");
+                return;
+            }
+            await Clients.Group(state.ArmaChannelName).SendAsync("Callback", "DeleteIntel", ToData(message));
+        }
+        
         public async Task WebDeleteUserMarker(IdMessage message)
         {
             var state = GetState(ConnectionKind.Web);
@@ -768,6 +820,37 @@ namespace cTabWebApp
                 return;
             }
             await Clients.Group(state.ArmaChannelName).SendAsync("Callback", "TicAlert", message.State ? "[true]" : "[false]");
+        }
+
+        public async Task ArmaUpdateSideFeed(ArmaMessage message)
+        {
+            var state = GetState(ConnectionKind.Arma);
+            if (state == null)
+            {
+                _logger.LogWarning($"No state for ArmaUpdateMessageTemplates");
+                return;
+            }
+            var msg = new UpdateSideFeedMessage()
+            {
+                Timestamp = message.Timestamp,
+            }; 
+            foreach (var entry in message.Args)
+            {
+                var intelEntry = IntelEntry.Create(entry);
+                if (intelEntry != null)
+                {
+                    msg.Entries.Add(intelEntry);
+                }
+            }
+            state.LastUpdateSideFeedMessage = msg;
+            try
+            {
+                await Clients.Group(state.WebChannelName).SendAsync("UpdateSideFeed", state.LastUpdateSideFeedMessage);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(e, "UpdateSideFeed failed");
+            }
         }
 
         public async Task ArmaUpdateMessageTemplates(ArmaMessage message)
