@@ -101,7 +101,6 @@ GVAR(ignoreSound) = false;
 #endif
 [QGVAR(key),     "EDITBOX",  [LLSTRING(key),     LLSTRING(keyDetails)],     ["cTab",LLSTRING(modName)], "", 0, {}, true] call CBA_fnc_addSetting;
 
-[QGVAR(syncMap), "CHECKBOX", [LLSTRING(syncMap), LLSTRING(syncMapDetails)], ["cTab",LLSTRING(modName)], true] call CBA_fnc_addSetting;
+[QGVAR(syncMap), "CHECKBOX", [LLSTRING(syncMap), LLSTRING(syncMapDetails)], ["cTab",LLSTRING(modName)], true, 0, {GVAR(mapMarkersNeedsUpdate) = GVAR(syncMap);}] call CBA_fnc_addSetting;
 
 [QGVAR(alwaysAllowPhotos), "CHECKBOX", [LLSTRING(alwaysAllowPhotos), LLSTRING(alwaysAllowPhotosDetails)], ["cTab",LLSTRING(modName)], false] call CBA_fnc_addSetting;
-[QGVAR(syncMap), "CHECKBOX", [LLSTRING(syncMap), LLSTRING(syncMapDetails)], ["cTab",LLSTRING(modName)], true, 0, {GVAR(mapMarkersNeedsUpdate) = GVAR(syncMap);}] call CBA_fnc_addSetting;
